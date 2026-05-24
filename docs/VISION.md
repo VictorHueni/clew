@@ -12,12 +12,12 @@ Engineers building with agents generate strategy, market intelligence, requireme
 
 ## The World We're Building
 
-Every product has a queryable, agent-native memory of its full architecture — business, market, domain, and specs — where strategy is as legible as code and survives every refactor.
+Every product has a queryable, agent-native memory of its full architecture, where strategy is as legible as code and survives every refactor.
 
 ## What We Are NOT
 
 - **Not a project or ticketing tool** — we manage *what must be true*, not *what's in progress*. Delivery accounting belongs elsewhere.
-- **Not five disconnected tools** — strategy, market, requirements, and domain live in one connected graph, not a Miro board plus a Notion page plus a DOORS install.
+- **Not five disconnected tools** — strategy, market, requirements, and domain live in one connected graph.
 - **Not a cloud SaaS** — the repo is the source of truth.
 - **Not a multi-user collaboration platform** — single-writer per repo, by design.
 - **Not a generic knowledge-graph framework** — the metamodel is opinionated and complete.
