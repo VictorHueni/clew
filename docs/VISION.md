@@ -28,7 +28,7 @@ Every product has a queryable, agent-native memory of its full architecture, whe
 
 ## Linked Artefacts
 
-- **Personas**: [P-01 Ava, agent-first product engineer](business/personas.md).
+- **Personas**: [P-01 Ava, agent-first product engineer](business/01a-personas.md).
 - **Objectives**: _TODO_.
 - **Value propositions**: _TODO_.
 

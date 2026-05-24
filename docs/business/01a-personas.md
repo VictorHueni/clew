@@ -201,7 +201,7 @@ Ava is a solo founder or small-team product engineer who has stopped writing mos
 |---|---|
 | Evidence type | proto-persona (assumption) |
 | Sample | none yet; persona derived from the project author's own workflow and the audience defined in `VISION.md`. |
-| Sources | `docs/VISION.md` (this repo); `docs/architecture/decisions/0001-metamodel-persistence-layer.md` motivation section. |
+| Sources | `docs/VISION.md` (this repo); `docs/architecture/decisions/adr-0001-metamodel-persistence-layer.md` motivation section. |
 | Created | 2026-05-24 |
 | Last validated | n/a |
 | Next review | 2026-08-22 (≤90 days, per Lean UX validate-or-retire discipline) |
@@ -214,3 +214,4 @@ Ava is a solo founder or small-team product engineer who has stopped writing mos
 - 2026-05-24 · Scaffold · Created `personas.md` with template, backlog, and `§Personas` section per the `business-persona` skill.
 - 2026-05-24 · Fill-One · P-01 Ava (agent-first product engineer) added as proto-persona, Primary, Tier 1. Next review 2026-08-22.
 - 2026-05-24 · Backlog · Refined Tier 2 to one persona (the product partner). Removed the "onboarding agent" entry (captured as a design constraint in P-01's §System Needs, not a separate persona). Added P-N2 (the free-form wiki author) to the negative roster.
+- 2026-05-24 · Rename · File moved from `personas.md` to `01a-personas.md` to match the homemade-claude-kit metamodel path rule (`docs/business/01a-personas.md`).
