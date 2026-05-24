@@ -95,8 +95,7 @@ _TODO_ (quality attributes with persona-specific rationale: speed, accuracy, tra
 
 | ID | Name | Role | Cooper type | Surface | Key job outcome | Status |
 |---|---|---|---|---|---|---|
-| P-02 _TODO_ | _TODO_ | Onboarding agent (new model or new session) | Secondary | clew CLI + `snapshot/` YAML | Pick up the product mid-flight with no human context | Backlog |
-| P-03 _TODO_ | _TODO_ | Non-engineering co-founder or first hire | Secondary | `snapshot/` YAML reviewed in git | Read-only review of architectural state | Backlog |
+| P-02 _TODO_ | _TODO_ | The product partner (non-engineering co-founder, designer, or domain expert) | Secondary | `snapshot/` YAML in git; marimo notebooks (read-only) | Shared understanding of what the product does and why, without running clew commands | Backlog |
 
 ### §Tier 3 · Tertiary
 
@@ -104,17 +103,20 @@ _TODO_ (quality attributes with persona-specific rationale: speed, accuracy, tra
 |---|---|---|---|---|---|---|
 | (none yet) | | | | | | |
 
+> **Note.** The "onboarding agent" (a new Claude or Codex session picking up a project) is intentionally *not* listed as a persona. It is a design constraint already captured in P-01's §System Needs (composability with Bash, schema legibility, deterministic IDs). Treating the agent as a separate persona would dilute Cooper's "max one primary per surface" discipline.
+
 ### §Negative personas
 
 | ID | Name | Role | Cooper type | Surface | Key job outcome | Status |
 |---|---|---|---|---|---|---|
-| P-N1 _TODO_ | _TODO_ | Enterprise programme manager | Negative | n/a | Sprint accounting + ticket lifecycle (clew is not built for this) | Backlog |
+| P-N1 _TODO_ | _TODO_ | The enterprise programme manager | Negative | n/a | Sprint accounting, ticket lifecycle, and Gantt charts. Explicitly not clew's purpose. | Backlog |
+| P-N2 _TODO_ | _TODO_ | The free-form wiki author | Negative | n/a | Author unrestricted markdown with no referential or schema constraints. clew enforces structure on purpose. | Backlog |
 
 ### §Out of scope
 
 - **Multi-human real-time collaborators.** Single-writer per repo by design; concurrent editing is a v3+ concern.
 - **End consumers of the products built with clew.** Those personas live *inside* the agent's project, modelled by clew, not as users of clew itself.
-- **Non-technical stakeholders without shell access.** Read access via YAML in git is the intended channel; no GUI in v1 or v2.
+- **Stakeholders with no repo access at all.** Read access via YAML in git is the intended channel. No Slack-only or email-only delivery surface in v1 or v2.
 
 ---
 
@@ -211,3 +213,4 @@ Ava is a solo founder or small-team product engineer who has stopped writing mos
 
 - 2026-05-24 · Scaffold · Created `personas.md` with template, backlog, and `§Personas` section per the `business-persona` skill.
 - 2026-05-24 · Fill-One · P-01 Ava (agent-first product engineer) added as proto-persona, Primary, Tier 1. Next review 2026-08-22.
+- 2026-05-24 · Backlog · Refined Tier 2 to one persona (the product partner). Removed the "onboarding agent" entry (captured as a design constraint in P-01's §System Needs, not a separate persona). Added P-N2 (the free-form wiki author) to the negative roster.

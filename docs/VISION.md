@@ -28,10 +28,13 @@ Every product has a queryable, agent-native memory of its full architecture, whe
 
 ## Linked Artefacts
 
-_TODO_. No downstream artefacts minted yet. Personas (P-NN), objectives (OBJ-NN), and value propositions (VP-NN) will be linked here as the metamodel is populated.
+- **Personas**: [P-01 Ava, agent-first product engineer](business/personas.md).
+- **Objectives**: _TODO_.
+- **Value propositions**: _TODO_.
 
 ## Changelog
 
 - 2026-05-24 · Initial vision · Repo seeded with metamodel design (ADR-0001).
 - 2026-05-24 · Reposition · Framed as agent-native requirements management (RM lineage), distinct from project management.
 - 2026-05-24 · Broaden · Scope made explicit across business architecture, market intelligence, product specs, domain, and requirements as one connected metamodel, not RM alone.
+- 2026-05-24 · Link · P-01 (Ava, agent-first product engineer) added to Linked Artefacts.
