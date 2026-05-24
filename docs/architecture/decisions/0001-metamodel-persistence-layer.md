@@ -49,7 +49,7 @@ the tool layer, not by the agent's memory.
 - Must enforce ID relationships (FK semantics between artefact types)
 - Must enable cross-artefact queries (e.g. effort per epic, KRs per objective)
 - IDs must be generated deterministically by the persistence layer, never by an LLM
-- Must be usable by AI agents (Claude, Codex) as a deterministic tool layer via MCP
+- Must be usable by AI agents (Claude, Codex) as a deterministic tool layer
 - Must be Python-native to integrate with marimo as the analysis interface
 - Must work for a solo founder / AI-only MVP with zero infrastructure overhead
 - Must not lock data in a proprietary cloud service
