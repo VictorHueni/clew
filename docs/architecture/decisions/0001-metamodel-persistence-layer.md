@@ -141,15 +141,40 @@ snapshot/ (YAML export, git-tracked)
 - `metamodel-cli` package must be developed and maintained
 - DuckDB is a Python dependency; projects without Python cannot use the query layer
 
+### Concurrency model
+
+clew v1 is **single-writer per repository**. This is a deliberate scope
+decision, not an oversight:
+
+- Concurrent CLI invocations on the same machine are serialised via an OS
+  file lock (`flock`) on the DuckDB file. The second process waits rather
+  than racing; no data is lost.
+- YAML snapshot files are written via temp file + atomic `rename(2)` to
+  eliminate partial-write windows.
+- On startup, the CLI reconciles DB-vs-YAML drift: if the DB is ahead of
+  the YAML (which can happen if a process crashes between DB commit and
+  YAML rename), the YAML is regenerated from the DB. This makes the dual-
+  write self-healing without requiring a true distributed transaction.
+
+Cross-machine concurrency — two humans editing the same metamodel from
+different checkouts, CI writing while a human writes, or a web UI
+operating alongside the CLI — is **explicitly out of scope** for v1 and
+v2. That use case requires a real database server with its own
+concurrency control and conflict resolution, which is the v3 target.
+Bolting distributed coordination onto a local-file CLI is not attempted.
+
 ### Upgrade path
 
 ```
 MVP    CLI (Bash tool in Claude Code / Codex) → DuckDB
 v2     MCP server wrapping the same crud.py core → dedicated MCP clients
-v3     FastAPI wrapping the same crud.py core → HTTP / multi-user / mobile
+v3     FastAPI + Postgres wrapping the same crud.py core → HTTP / multi-user / mobile
 ```
 
-The `crud.py` core never changes between versions. Only the interface layer grows.
+The `crud.py` core never changes between versions. Only the interface
+layer grows. The jump from v2 → v3 is the one that lifts the
+single-writer constraint; v1 → v2 is a transport change, not a
+concurrency change.
 
 ## Pros and Cons of the Options
 
