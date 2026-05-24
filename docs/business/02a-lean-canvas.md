@@ -59,7 +59,7 @@ Each bullet passes the "so that" test: feature *so that* outcome.
 - **Concrete win 1.** Ask "which X serves Y?" inside the agent session and get an answer in under 30 seconds, **so that** flow is not broken to go hunt context.
 - **Concrete win 2.** Rename, delete, or refactor an artefact and have every broken reference caught at write-time, **so that** drift is impossible instead of silently common.
 - **Concrete win 3.** BIZBOK / BABOK / Strategyzer / Sommerville disciplines wired in as first-class typed artefacts with skill-mediated authoring, **so that** methodology becomes the substrate, not a checklist a tired engineer skips.
-- **Anti-promise (what clew is not).** Not a markdown linter, not a knowledge graph for everyone, not a BPMN tool, not a SaaS. clew is a persistence + integrity layer for the agent-first product workflow.
+- **Anti-promise (what clew is not).** Not a knowledge graph for everyone, not a BPMN tool, not a SaaS. The cosmetic layer of docs linting (formatting, prose, dead links) is bundled via [util-docs-lint](https://github.com/VictorHueni/homemade-claude-kit/tree/claude/metamodel-personal-skills-naecw/util-docs-lint); clew's differentiator is the *semantic* layer above that: broken artefact references, missing required relationships, drift a markdown linter cannot see.
 
 **Soft-links:** VS-_TODO_ · VPC-_TODO_.
 
@@ -71,7 +71,7 @@ Each solution bullet maps to one specific problem.
 - **For PR-1 (silent failure).** Write-time integrity enforcement, so a violation surfaces at the moment it is introduced ([OBJ-02 KR-02.2](04b-objectives.md#obj-02--the-architectural-substrate-is-trustworthy-enough-that-agents-depend-on-it)) rather than weeks later when a downstream reader notices.
 - **For PR-2 (flow-breaking lookups).** An agent-facing query surface so cross-artefact questions resolve inside the session, targeting [OBJ-01 KR-01.3](04b-objectives.md#obj-01--ava-ships-coherent-product-thinking-at-agent-speed) (< 30 s).
 - **For PR-3 (methodology drift).** A companion skill catalogue ([homemade-claude-kit](https://github.com/VictorHueni/homemade-claude-kit)) that encodes each methodology as authoring discipline the agent invokes when filling an artefact.
-- **Cross-cutting.** Markdown-first export so artefacts remain human-readable and grep-able in the repo, with no proprietary file format walls.
+- **Cross-cutting.** Markdown-first export so artefacts remain human-readable and grep-able in the repo, with no proprietary file format walls. Cosmetic docs linting (formatting, prose, dead links) bundled via [util-docs-lint](https://github.com/VictorHueni/homemade-claude-kit/tree/claude/metamodel-personal-skills-naecw/util-docs-lint), layered beneath clew's semantic integrity checks.
 
 **Soft-links:** FBS-_TODO_ · C-_TODO_.
 
@@ -157,3 +157,4 @@ Result: CS-1 traces through every block. No orphan segments.
 | Date | Block(s) | Evidence | Cascading effects |
 |---|---|---|---|
 | 2026-05-24 | All 9 blocks scaffolded + filled (Lean Canvas variant). | Drafted from VISION.md, P-01 (Ava), OBJ-01/02/03. All bullets Assumed; no Tested or Validated yet. | [VISION.md](../VISION.md) Linked Artefacts should backfill `Value propositions` slot to reference §3 UVP of this canvas. [04b-objectives.md](04b-objectives.md) Linked-from slots can backfill VP-_TODO_ entries. [01a-personas.md](01a-personas.md) §Frustrations gains a backlink target (PR-1, PR-2, PR-3). |
+| 2026-05-24 | §3 UVP anti-promise rewritten; §4 Solution cross-cutting bullet extended. | Author clarification: util-docs-lint (dprint + Vale + markdown-link-check) will be bundled into the clew CLI, so "not a markdown linter" was inaccurate. Reframed as: cosmetic linting bundled, semantic integrity is the differentiator. | None outside the canvas; the rewrite tightens the boundary statement, it does not change Problem, Customer Segments, or Key Metrics. |
