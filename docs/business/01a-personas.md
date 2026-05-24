@@ -148,11 +148,11 @@ Ava is a solo founder or small-team product engineer who has stopped writing mos
 
 #### §Goals
 
-1. **When** I'm starting a new product idea, **I want** every strategic artefact (vision, personas, capabilities, market context) to live in one structured place from day one, **so I can** let the agent build on a coherent foundation instead of re-deriving context every session.
-2. **When** the agent invents a feature or makes an architectural decision, **I want** the trace from that decision back to the persona, capability, and objective it serves, **so I can** sanity-check the work without re-reading the whole repo.
-3. **When** I refactor the product (new capability, new persona, dropped epic), **I want** broken references to surface immediately, **so** drift does not compound into silent incoherence.
-4. **When** I onboard another agent or another human into the project, **I want** the full architecture queryable in one place, **so** they can pick up the product mid-flight without me re-explaining.
-5. **When** I review what shipped this week, **I want** to ask cross-cutting questions (which requirements serve a given goal, which epics touch a particular domain area), **so** strategy stays connected to delivery instead of drifting apart.
+1. **When** I'm starting a new product idea, **I want** every strategic artefact (vision, personas, capabilities, market context) to live in one structured place from day one, **so I can** let the agent build on a coherent foundation instead of re-deriving context every session. *(Tested · N=1)*
+2. **When** the agent invents a feature, I review what shipped, or I revisit a claim weeks later, **I want** to trace from any artefact to its ancestors, descendants, and grounding evidence (the personas it serves, the KRs it rolls up to, the external sources or URLs that back its claims), **so I can** sanity-check work, audit decisions, and reconnect strategy to delivery without re-reading the whole repo. *(Tested · N=1)*
+3. **When** I refactor the product (new capability, new persona, dropped epic, renamed structure), **I want** broken references to surface at write-time, **so** drift does not compound into silent incoherence weeks later. *(Tested · N=1)*
+4. **When** I onboard another agent or another human into the project, **I want** the full architecture queryable in one place, **so** they can pick up the product mid-flight without me re-explaining. *(Tested · N=1)*
+5. **When** I start a new agent session for a specific task (PRD authoring, test design, ops runbook), **I want** to give the agent exactly the slice of the metamodel relevant to that task (VISION+BMC for orientation, glossary+domain model for PRD, test strategy for QA), **so** the agent has the right context without wading through every artefact in the repo. *(Tested · N=1)*
 
 #### §Scenarios
 
@@ -162,11 +162,11 @@ Ava is a solo founder or small-team product engineer who has stopped writing mos
 
 #### §Frustrations
 
-- The agent invents identifiers that collide with existing ones, or forgets the canonical identifier and uses a paraphrase ("the surgery-scheduling persona" instead of the actual ID), making cross-references unreliable.
-- Project-management tools (Jira, Linear) want to track tickets, not requirements; importing strategic artefacts there turns them into to-do items and loses the *why*.
-- After a refactor, broken references sit silently in the docs for weeks until something downstream catches fire.
-- Strategy documents written in week one become unread fossils by week three because nothing keeps them connected to the work that gets shipped.
-- Onboarding a second agent (or human) means re-explaining the architecture from scratch because there is no shared place to read it.
+Ordered by priority per the [wave-1 P-01 validation synthesis](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md).
+
+1. **No reliable traceability matrix or documentation relationship graph that comes directly from the documents themselves.** Cross-artefact questions (which capability serves P-01, which KRs roll up to OBJ-02, which features land in epic E-02) cannot be answered without the LLM scoping IDs from files and joining them in its head. Cross-artefact analytics (effort estimation, quantitative models) are blocked for the same reason. Even the existence of broken references is invisible without bespoke grep. *(Tested · N=1, founder-as-instance)*
+2. **No confidence in integrity-check or audit when relying solely on the LLM.** The LLM silently renumbers items while updating an artefact; it forgets or paraphrases canonical IDs instead of using them; downstream references rot. Determinism is the missing primitive: same input, same output, every time, with an audit trail anyone (human or future agent) can replay. *(Tested · N=1, founder-as-instance)*
+3. **Changing structure, name, or ID has massive blast radius across existing docs.** A folder rename, an artefact renumber, or a schema refactor means scanning every file for references and either fixing them by hand or trusting the agent to find them all (which is the audit-confidence problem above). Even after a careful pass, dead links keep surfacing weeks later. *(Tested · N=1, founder-as-instance)*
 
 #### §Key Tasks
 
@@ -178,12 +178,13 @@ Ava is a solo founder or small-team product engineer who has stopped writing mos
 
 #### §System Needs
 
-- **Responsiveness.** Every interaction returns fast enough that the agent's flow does not break.
-- **Repeatability.** The same input always produces the same record, so changes that show up in code review are real changes, not noise.
-- **Immediate feedback on broken links.** When a reference breaks, the failure surfaces the moment it happens, with enough detail for the agent to fix it without guesswork.
-- **Scriptable end-to-end.** Every action can be chained into the agent's existing workflow without manual confirmation steps.
-- **Works without an account or network connection.** No login, no external service. The project itself is the source of truth.
-- **Discoverable structure.** The architecture's shape is fully describable from one place, so a new collaborator (agent or human) can pick it up without a guided tour.
+- **Responsiveness.** Every interaction returns fast enough that the agent's flow does not break. *(Assumed)*
+- **Repeatability.** The same input always produces the same record, so changes that show up in code review are real changes, not noise. *(Tested · N=1)*
+- **Immediate feedback on broken links.** When a reference breaks, the failure surfaces the moment it happens, with enough detail for the agent to fix it without guesswork. *(Tested · N=1)*
+- **Scriptable end-to-end.** Every action can be chained into the agent's existing workflow without manual confirmation steps. *(Tested · N=1)*
+- **Works without an account or network connection.** No login, no external service. The project itself is the source of truth. *(Tested · N=1)*
+- **Discoverable structure.** The architecture's shape is fully describable from one place, so a new collaborator (agent or human) can pick it up without a guided tour. *(Tested · N=1)*
+- **Local-first as unit economics.** Every context fetch is a file read (zero token cost), not an API roundtrip (N tokens per fetch). For an agent-first workflow running many sessions per week, the per-fetch cost difference between local files and MCP-mediated tools is a real economic factor, not a preference. *(Tested · N=1)*
 
 #### §Stakeholder Profile
 
@@ -199,13 +200,13 @@ Ava is a solo founder or small-team product engineer who has stopped writing mos
 
 | Field | Value |
 |---|---|
-| Evidence type | proto-persona (assumption) |
-| Sample | none yet; persona derived from the project author's own workflow and the audience defined in `VISION.md`. |
-| Sources | `docs/VISION.md` (this repo); `docs/architecture/decisions/adr-0001-metamodel-persistence-layer.md` motivation section. |
+| Evidence type | Partially researched. Wave 1 complete (N=1, founder-as-instance). External validation pending. |
+| Sample | 1 interview · Victor Hueni (founder, self-identified P-01 instance) · 2026-05-24. Wave 2 target: 2 to 4 external interviews, including at least one non-product role (QA / DevOps / SRE) to test the "any builder using agents" generalisation finding. |
+| Sources | [`docs/VISION.md`](../VISION.md); [`docs/architecture/decisions/adr-0001-metamodel-persistence-layer.md`](../architecture/decisions/adr-0001-metamodel-persistence-layer.md) motivation; [`docs/business/discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md`](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md) (wave-1 synthesis with full per-hypothesis verdicts and verbatim quotes). |
 | Created | 2026-05-24 |
-| Last validated | n/a |
-| Next review | 2026-08-22 (≤90 days, per Lean UX validate-or-retire discipline) |
-| Conversion plan | Validate via 3–5 interviews with solo founders or small-team engineers actively shipping with Claude Code or Codex as primary co-author. Promote to research-grounded once notes are filed and key claims (frustrations, goals, snapshot fields) are confirmed or revised. |
+| Last validated | 2026-05-24 (wave 1, N=1, founder-as-instance; promotion to research-grounded requires external N ≥ 3). |
+| Next review | 2026-08-22 (wave 2 deadline per [OBJ-03 KR-03.2](04b-objectives.md#obj-03--validate-the-core-hypotheses-before-scaling)). |
+| Conversion plan | Wave 1 (N=1, founder) complete; §Frustrations rewritten, §Goals + §System Needs extended per synthesis. Wave 2 to run 2 to 4 external interviews with agent-first builders (at least one non-product role mandatory). Promote to research-grounded once external N ≥ 3 confirms or refines the wave-1 findings. |
 
 ---
 
@@ -216,3 +217,4 @@ Ava is a solo founder or small-team product engineer who has stopped writing mos
 - 2026-05-24 · Backlog · Refined Tier 2 to one persona (the product partner). Removed the "onboarding agent" entry (captured as a design constraint in P-01's §System Needs, not a separate persona). Added P-N2 (the free-form wiki author) to the negative roster.
 - 2026-05-24 · Rename · File moved from `personas.md` to `01a-personas.md` to match the homemade-claude-kit metamodel path rule (`docs/business/01a-personas.md`).
 - 2026-05-24 · De-tech · Reframed P-01 sections (Scenarios, Frustrations, Key Tasks, System Needs, Engagement strategy) and the backlog surface columns in user-intent language. Removed clew-implementation specifics (YAML, FK error messages, CLI syntax, snapshot folder, marimo) so the persona describes who the user is and what they want, not how the product delivers it.
+- 2026-05-24 · Synthesis cascade · Applied [wave-1 P-01 validation synthesis](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md). §Frustrations rewritten as F1 (no traceability graph from documents) > F2 (no integrity / audit confidence with LLM alone; determinism is key) > F3 (refactor blast radius); methodology-skip dropped as it did not make the interviewee's top 3. §Goals consolidated from 5 to 5 items with new selective-compositional-context goal added; existing items marked Tested (N=1) where confirmed. §System Needs gained local-first-as-unit-economics item; existing items marked Tested (N=1) where confirmed (Responsiveness remains Assumed, not directly tested in wave 1). §Research Grounding partially promoted from proto-persona to "wave 1 complete (N=1 internal)"; wave 2 plans 2 to 4 external interviews including ≥1 non-product role.
