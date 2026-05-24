@@ -38,7 +38,7 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 - **Timeframe:** clew v1 MVP
 - **Owner:** Victor Hueni (founder)
 - **Why it matters:** P-01 Ava's bottleneck is keeping the *why* and the *who-for* coherent across artefacts as the agent moves fast. This objective is her core win and the proof clew earns daily use.
-- **Linked from:** VP-_TODO_ · VS-_TODO_ · [P-01 Ava](01a-personas.md#p-01--ava-the-agent-first-product-engineer)
+- **Linked from:** [Lean Canvas UVP](02a-lean-canvas.md#3-unique-value-proposition--confidence-assumed) · VS-_TODO_ · [P-01 Ava](01a-personas.md#p-01--ava-the-agent-first-product-engineer)
 
 | ID | Key Result | Baseline | Target | Measurement method | Confidence |
 |---|---|---|---|---|---|
@@ -53,7 +53,7 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 - **Timeframe:** clew v1 MVP
 - **Owner:** Victor Hueni (founder)
 - **Why it matters:** VISION's North Star ("end-to-end traceability across the architecture") is the system-level outcome. This objective makes it measurable and breaks it into observable behaviours.
-- **Linked from:** VP-_TODO_ · VS-_TODO_ · [VISION North Star](../VISION.md#north-star-metric) · [P-01 §System Needs](01a-personas.md#system-needs)
+- **Linked from:** [Lean Canvas UVP](02a-lean-canvas.md#3-unique-value-proposition--confidence-assumed) · VS-_TODO_ · [VISION North Star](../VISION.md#north-star-metric) · [P-01 §System Needs](01a-personas.md#system-needs)
 
 | ID | Key Result | Baseline | Target | Measurement method | Confidence |
 |---|---|---|---|---|---|
@@ -68,7 +68,7 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 - **Timeframe:** clew v1 MVP
 - **Owner:** Victor Hueni (founder)
 - **Why it matters:** Every artefact in the project today (VISION's audience claim, P-01's frustrations and goals) is assumption-based. Locking in a substrate without validating the underlying hypotheses risks building a tool for a persona that does not exist outside the author's head.
-- **Linked from:** VP-_TODO_ · [P-01 §Research Grounding](01a-personas.md#research-grounding) (proto, next review 2026-08-22)
+- **Linked from:** [Lean Canvas UVP](02a-lean-canvas.md#3-unique-value-proposition--confidence-assumed) · [P-01 §Research Grounding](01a-personas.md#research-grounding) (proto, next review 2026-08-22)
 
 | ID | Key Result | Baseline | Target | Measurement method | Confidence |
 |---|---|---|---|---|---|
@@ -88,3 +88,4 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 | Date | Change | Evidence | Effects |
 |---|---|---|---|
 | 2026-05-24 | Scaffold + fill: OBJ-01 (Customer), OBJ-02 (Process), OBJ-03 (Learning) added. All KRs marked Assumed; no Tested or Validated yet. | Drafted from VISION.md and P-01 (Ava). | VISION.md Linked Artefacts should be backfilled to reference OBJ-01/02/03. |
+| 2026-05-24 | Linked-from slots: VP-_TODO_ replaced with [Lean Canvas UVP](02a-lean-canvas.md#3-unique-value-proposition--confidence-assumed) on all three objectives. | Lean Canvas v1 scaffolded. | None; VS-_TODO_ still outstanding until value-streams artefact lands. |
