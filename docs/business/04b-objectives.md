@@ -20,7 +20,7 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 - [`docs/VISION.md`](../VISION.md): the north star these objectives operationalise.
 - [`docs/business/01a-personas.md`](01a-personas.md): the personas whose outcomes these objectives serve.
 
-**Upstream gaps to backfill:** BMC value propositions (`VP-NN`) and value streams (`VS-N.M`) are not yet defined. Soft-link slots referencing them are marked `_TODO_` and should be wired up when those artefacts land.
+**Upstream gaps to backfill:** BMC value propositions (`VP-NN`) and value streams (`VS-N.M`) are not yet defined. Soft-link slots referencing them are marked `_TODO_` and should be wired up when those artefacts land. Capabilities are now defined in [`03a-capability-map.md`](03a-capability-map.md); each OBJ below carries a `Realised by:` line mapping its KRs to L1 capabilities.
 
 ## Confidence Legend
 
@@ -39,6 +39,7 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 - **Owner:** Victor Hueni (founder)
 - **Why it matters:** P-01 Ava's bottleneck is keeping the *why* and the *who-for* coherent across artefacts as the agent moves fast. This objective is her core win and the proof clew earns daily use.
 - **Linked from:** [Lean Canvas UVP](02a-lean-canvas.md#3-unique-value-proposition--confidence-assumed) · VS-_TODO_ · [P-01 Ava](01a-personas.md#p-01--ava-the-agent-first-product-engineer)
+- **Realised by:** KR-01.1 → [C1.1 Methodology-mediated artefact creation](03a-capability-map.md#c11--methodology-mediated-artefact-creation) + [C2.1 Stable identifier generation](03a-capability-map.md#c21--stable-identifier-generation). KR-01.2 → [C1.2 Selective context loading](03a-capability-map.md#c12--selective-context-loading). KR-01.3 → [C3.1 Ad-hoc cross-artefact query surface](03a-capability-map.md#c31--ad-hoc-cross-artefact-query-surface) + [C3.2 Pre-built traceability views](03a-capability-map.md#c32--pre-built-traceability-views). KR-01.4 → broader C1 + C3 outcome; no single capability.
 
 | ID | Key Result | Baseline | Target | Measurement method | Confidence |
 |---|---|---|---|---|---|
@@ -54,6 +55,7 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 - **Owner:** Victor Hueni (founder)
 - **Why it matters:** VISION's North Star ("end-to-end traceability across the architecture") is the system-level outcome. This objective makes it measurable and breaks it into observable behaviours.
 - **Linked from:** [Lean Canvas UVP](02a-lean-canvas.md#3-unique-value-proposition--confidence-assumed) · VS-_TODO_ · [VISION North Star](../VISION.md#north-star-metric) · [P-01 §System Needs](01a-personas.md#system-needs) · [ADR-0001](../architecture/decisions/adr-0001-metamodel-persistence-layer.md) · [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md)
+- **Realised by:** KR-02.1 + KR-02.2 + KR-02.3 → [C4.1 Write-time reference validation](03a-capability-map.md#c41--write-time-reference-validation) (the differentiator capability that makes write-time enforcement structural rather than aspirational), with [C2.2 Schema enforcement](03a-capability-map.md#c22--schema-enforcement) and [C4.2 Drift detection](03a-capability-map.md#c42--drift-detection) as supporting capabilities. KR-02.4 → [C2.4 Deterministic structural export](03a-capability-map.md#c24--deterministic-structural-export) + [C2.1 Stable identifier generation](03a-capability-map.md#c21--stable-identifier-generation).
 
 | ID | Key Result | Baseline | Target | Measurement method | Confidence |
 |---|---|---|---|---|---|
@@ -69,6 +71,7 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 - **Owner:** Victor Hueni (founder)
 - **Why it matters:** Every artefact in the project today (VISION's audience claim, P-01's frustrations and goals) is assumption-based. Locking in a substrate without validating the underlying hypotheses risks building a tool for a persona that does not exist outside the author's head.
 - **Linked from:** [Lean Canvas UVP](02a-lean-canvas.md#3-unique-value-proposition--confidence-assumed) · [P-01 §Research Grounding](01a-personas.md#research-grounding) (partially researched, wave 1 complete 2026-05-24, next review 2026-08-22) · [Wave-1 synthesis](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md)
+- **Realised by:** OBJ-03 is a research / validation objective; its KRs (persona conversion, interview programme, dogfood adoption, frustration labelling) are activities, not capabilities. No `Realised by:` mapping; capabilities serve OBJ-01 and OBJ-02 outcomes that OBJ-03 then validates.
 
 | ID | Key Result | Baseline | Target | Measurement method | Confidence |
 |---|---|---|---|---|---|
@@ -91,3 +94,4 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 | 2026-05-24 | Linked-from slots: VP-_TODO_ replaced with [Lean Canvas UVP](02a-lean-canvas.md#3-unique-value-proposition--confidence-assumed) on all three objectives. | Lean Canvas v1 scaffolded. | None; VS-_TODO_ still outstanding until value-streams artefact lands. |
 | 2026-05-24 | OBJ-02 §Linked from: added [ADR-0001](../architecture/decisions/adr-0001-metamodel-persistence-layer.md) and [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md). | ADR-0002 drafted; ADR-0001 was already in the repo and is the parent decision. | OBJ-02 KR-02.1/02.2/02.3 instrumentation hangs off the binding model defined in ADR-0002. |
 | 2026-05-24 | Wave-1 synthesis cascade: OBJ-02 KR-02.1 target tightened from ≥ 99% to 100% at write time (per the wave-1 magic-wand finding that any tolerance below 100% is a tolerance for silent rot, which is the exact anti-pattern the substrate exists to prevent); confidence shifted to Tested (N=1, user-stated trust criterion). OBJ-03 KR-03.2 baseline updated from 0 to 1 of 3 to 5 interviews; target sharpened to specify ≥ 1 non-product role for wave 2; confidence Tested (N=1). OBJ-03 §Linked from updated to reflect partial promotion of P-01 from proto-persona to wave-1-complete. | [Wave-1 P-01 validation synthesis](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md) (N=1, founder-as-instance). | Persona, Lean Canvas, and OBJ doc are now mutually consistent on wave-1 status. KR-03.1 (proto-to-research-grounded promotion) NOT updated: persona is "partially researched", not fully "research-grounded"; full promotion requires external N ≥ 3. KR-03.4 (frustrations confirmed/refuted labelling) NOT updated this commit: deferred until wave 2 broadens the labelling base. |
+| 2026-05-24 | Capability backlinks wired. §Upstream gaps note added: capabilities now defined in 03a-capability-map.md and each OBJ carries a `Realised by:` line mapping KRs to L1 capabilities. OBJ-01 `Realised by:` added (KR-01.1 → C1.1+C2.1; KR-01.2 → C1.2; KR-01.3 → C3.1+C3.2; KR-01.4 → broader C1+C3 outcome). OBJ-02 `Realised by:` added (KR-02.1+02.2+02.3 → C4.1 with C2.2+C4.2 supporting; KR-02.4 → C2.4+C2.1). OBJ-03 `Realised by:` records that the OKR is a research / validation objective whose KRs are activities rather than capabilities. | [03a-capability-map.md](03a-capability-map.md) committed earlier today. | None outside this commit; backlink wiring only. KR targets and confidence levels unchanged. |
