@@ -53,7 +53,7 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 - **Timeframe:** clew v1 MVP
 - **Owner:** Victor Hueni (founder)
 - **Why it matters:** VISION's North Star ("end-to-end traceability across the architecture") is the system-level outcome. This objective makes it measurable and breaks it into observable behaviours.
-- **Linked from:** [Lean Canvas UVP](02a-lean-canvas.md#3-unique-value-proposition--confidence-assumed) · VS-_TODO_ · [VISION North Star](../VISION.md#north-star-metric) · [P-01 §System Needs](01a-personas.md#system-needs)
+- **Linked from:** [Lean Canvas UVP](02a-lean-canvas.md#3-unique-value-proposition--confidence-assumed) · VS-_TODO_ · [VISION North Star](../VISION.md#north-star-metric) · [P-01 §System Needs](01a-personas.md#system-needs) · [ADR-0001](../architecture/decisions/adr-0001-metamodel-persistence-layer.md) · [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md)
 
 | ID | Key Result | Baseline | Target | Measurement method | Confidence |
 |---|---|---|---|---|---|
@@ -89,3 +89,4 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 |---|---|---|---|
 | 2026-05-24 | Scaffold + fill: OBJ-01 (Customer), OBJ-02 (Process), OBJ-03 (Learning) added. All KRs marked Assumed; no Tested or Validated yet. | Drafted from VISION.md and P-01 (Ava). | VISION.md Linked Artefacts should be backfilled to reference OBJ-01/02/03. |
 | 2026-05-24 | Linked-from slots: VP-_TODO_ replaced with [Lean Canvas UVP](02a-lean-canvas.md#3-unique-value-proposition--confidence-assumed) on all three objectives. | Lean Canvas v1 scaffolded. | None; VS-_TODO_ still outstanding until value-streams artefact lands. |
+| 2026-05-24 | OBJ-02 §Linked from: added [ADR-0001](../architecture/decisions/adr-0001-metamodel-persistence-layer.md) and [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md). | ADR-0002 drafted; ADR-0001 was already in the repo and is the parent decision. | OBJ-02 KR-02.1/02.2/02.3 instrumentation hangs off the binding model defined in ADR-0002. |

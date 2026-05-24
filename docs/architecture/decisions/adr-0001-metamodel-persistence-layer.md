@@ -409,3 +409,7 @@ This ADR does not specify the full DuckDB schema or command signatures in detail
 Those belong in the implementation plan for `clew` v0.1, scoped to the
 first two entity types (functionalities + epics) to validate the pattern before
 generalising to all five metamodel layers.
+
+### Related decisions
+
+- [ADR-0002 Bind metamodel artefacts to narrative files via a typed layout convention](adr-0002-artefact-file-binding.md) extends `schema.py` (per-type `file_layout`, `default_path`, `parent_type`) and `cli.py` (`clew layout`, `clew where`, validation inside `clew new`).
