@@ -29,12 +29,12 @@ Every product has a queryable, agent-native memory of its full architecture, whe
 ## Linked Artefacts
 
 - **Personas**: [P-01 Ava, agent-first product engineer](business/01a-personas.md).
-- **Objectives**: _TODO_.
+- **Objectives**: [OBJ-01, OBJ-02, OBJ-03](business/04b-objectives.md).
 - **Value propositions**: _TODO_.
 
 ## Changelog
 
 - 2026-05-24 · Initial vision · Repo seeded with metamodel design (ADR-0001).
 - 2026-05-24 · Reposition · Framed as agent-native requirements management (RM lineage), distinct from project management.
-- 2026-05-24 · Broaden · Scope made explicit across business architecture, market intelligence, product specs, domain, and requirements as one connected metamodel, not RM alone.
-- 2026-05-24 · Link · P-01 (Ava, agent-first product engineer) added to Linked Artefacts.
+- 2026-05-24 · Broaden · Five-pillar scope: business architecture, market intelligence, product specs, domain, requirements.
+- 2026-05-24 · Link · P-01 (Ava) and OBJ-01/02/03 added to Linked Artefacts.
