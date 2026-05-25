@@ -122,22 +122,72 @@ erDiagram
     VISION { string file PK }
     PERSONA { string P_NN PK }
     CAPABILITY_MAP { string C_NM PK }
-    VALUE_STREAM { string VS_NM PK; string P_NN FK; string C_NM FK }
-    BUSINESS_PROCESS { string slug PK; string VS_NM FK }
-    BMC { string id PK; string P_NN FK }
+    VALUE_STREAM {
+        string VS_NM PK
+        string P_NN FK
+        string C_NM FK
+    }
+    BUSINESS_PROCESS {
+        string slug PK
+        string VS_NM FK
+    }
+    BMC {
+        string id PK
+        string P_NN FK
+    }
     QUANTITATIVE_MODEL { string slug PK }
-    OBJECTIVE { string OBJ_NN PK; string VS_NM FK; string P_NN FK }
-    KEY_RESULT { string KR_NNM PK; string OBJ_NN FK }
-    FBS { string C_NM_FXX PK; string C_NM FK }
-    EPIC { string E_NN PK; string C_NM_FXX FK; string VS_NM FK }
+    OBJECTIVE {
+        string OBJ_NN PK
+        string VS_NM FK
+        string P_NN FK
+    }
+    KEY_RESULT {
+        string KR_NNM PK
+        string OBJ_NN FK
+    }
+    FBS {
+        string C_NM_FXX PK
+        string C_NM FK
+    }
+    EPIC {
+        string E_NN PK
+        string C_NM_FXX FK
+        string VS_NM FK
+    }
     ADR { string ADR_NNNN PK }
-    QUALITY_ATTRIBUTES { string QA_XXNN PK; string ADR_NNNN FK; string P_NN FK }
-    PRD { string PRD_NNNN PK; string E_NN FK; string QA_XXNN FK; string ADR_NNNN FK }
-    IMPLEMENTATION_PLAN { string Plan_NNNN PK; string PRD_NNNN FK }
-    BOUNDED_CONTEXT { string BC_NN PK; string C_NM FK; string subdomain_type }
-    GLOSSARY_TERM { string BC_NN_GT_NN PK; string BC_NN FK }
-    DOMAIN_MODEL { string BC_NN_AGG_NN PK; string BC_NN FK; string C_NM_FXX FK }
-    DOMAIN_EVENT { string BC_NN_EVT_NN PK; string BC_NN_AGG_NN FK }
+    QUALITY_ATTRIBUTES {
+        string QA_XXNN PK
+        string ADR_NNNN FK
+        string P_NN FK
+    }
+    PRD {
+        string PRD_NNNN PK
+        string E_NN FK
+        string QA_XXNN FK
+        string ADR_NNNN FK
+    }
+    IMPLEMENTATION_PLAN {
+        string Plan_NNNN PK
+        string PRD_NNNN FK
+    }
+    BOUNDED_CONTEXT {
+        string BC_NN PK
+        string C_NM FK
+        string subdomain_type
+    }
+    GLOSSARY_TERM {
+        string BC_NN_GT_NN PK
+        string BC_NN FK
+    }
+    DOMAIN_MODEL {
+        string BC_NN_AGG_NN PK
+        string BC_NN FK
+        string C_NM_FXX FK
+    }
+    DOMAIN_EVENT {
+        string BC_NN_EVT_NN PK
+        string BC_NN_AGG_NN FK
+    }
 
     PERSONA ||--o{ VALUE_STREAM : "triggers"
     PERSONA ||--o{ BMC : "Customer Segments"
