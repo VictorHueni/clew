@@ -2,7 +2,7 @@
 title: Introduce a persistence layer for the strategic-architecture metamodel
 status: draft
 owner: Victor Hueni
-last_reviewed: 2026-05-22
+last_reviewed: 2026-05-25
 review_interval: 90d
 ---
 
@@ -65,6 +65,7 @@ the tool layer, not by the agent's memory.
 - **E.** Structured YAML source files + DuckDB materialized query layer
 - **F.** Local MCP server exposing CRUD tools over DuckDB, with YAML export for git
 - **G.** CLI tool (adr-tools style) over DuckDB, with YAML export for git
+- **H.** Graph database (Neo4j / property graph) over the artefact FK graph, with YAML export for git
 
 ## Decision Outcome
 
@@ -119,6 +120,10 @@ snapshot/ (YAML export, git-tracked)
   └── Deterministic: same DB state always produces same YAML
 ```
 
+**Graph database rejected (option H).** The metamodel has 19 artefact types with a fixed, typed schema and bounded FK traversal depth (≤ 5 hops: persona → value stream → FBS functionality → epic → PRD). Relational SQL with recursive CTEs covers all required graph-style queries without a graph engine, server process, or JVM dependency. The "semantic layer" benefit cited in Neo4j literature is a query-composition concern (helping agents write better queries) addressable at the CLI layer, not a storage-tier concern. See §H in Pros and Cons for full analysis.
+
+**Semantic / vector search deferred to v2.** At MVP scale the query problem is exact-ID reference resolution (a reference problem), not fuzzy similarity retrieval (a retrieval problem). DuckDB VSS extension is the designated v2 addition when artefact count warrants "find similar capabilities" queries; no separate vector database is required. PageIndex-style document retrieval indexing adds nothing to a schema-enforced, SQL-queryable artefact set.
+
 ### Positive Consequences
 
 - IDs are DB sequences: deterministic, collision-free, never LLM-generated
@@ -168,6 +173,8 @@ Bolting distributed coordination onto a local-file CLI is not attempted.
 ```
 MVP    CLI (Bash tool in Claude Code / Codex) → DuckDB
 v2     MCP server wrapping the same crud.py core → dedicated MCP clients
+       + DuckDB VSS extension for vector similarity search over artefact text fields
+         (enables "find similar capabilities" queries; same .db file, no separate vector DB)
 v3     FastAPI + Postgres wrapping the same crud.py core → HTTP / multi-user / mobile
 ```
 
@@ -339,6 +346,25 @@ See Decision Outcome above.
 - `clew` package must be developed and maintained
 - DuckDB is a Python dependency
 
+### H. Graph database (Neo4j / property graph)
+
+A property graph database storing all artefact types as nodes and cross-references as typed edges, queried via Cypher or a similar graph query language.
+
+#### Positive
+
+- Native graph traversal syntax expressive for multi-hop path queries
+- Built-in graph algorithms (PageRank, shortest path, betweenness) available via Graph Data Science library
+- No explicit JOIN syntax; traversal is implicit in the query
+
+#### Negative
+
+- **Wrong problem domain.** The metamodel has a fixed, typed schema (19 artefact types with known FK relationships). Graph databases win on variable-schema entities, dynamic traversal depth, and pattern discovery — none of which apply here.
+- Maximum traversal depth in clew is 5 hops (persona → value stream → FBS functionality → epic → PRD). DuckDB WITH RECURSIVE CTEs handle this in milliseconds without a graph engine.
+- Requires a server process (JVM for Neo4j): conflicts with the local-first, zero-infrastructure constraint stated in Decision Drivers.
+- Not Python-native; poor fit with the marimo analysis layer.
+- The "semantic layer" benefit cited in Neo4j literature (helping LLMs write better graph queries) is a query-composition concern addressable at the CLI layer without changing the storage tier.
+- Schema and migration discipline still required; graph schema evolution is no simpler than relational migration.
+
 ## Implementation Notes
 
 ### Package structure
@@ -410,6 +436,27 @@ Those belong in the implementation plan for `clew` v0.1, scoped to the
 first two entity types (functionalities + epics) to validate the pattern before
 generalising to all five metamodel layers.
 
+### Graph traversal strategy
+
+Impact analysis (`clew impact <ID>`) and lineage views (`clew trace <ID>`) are reachability queries on the artefact FK graph. These map directly to DuckDB recursive CTEs — no graph engine required. Example structure for a reverse-impact query (find all artefacts referencing a given ID):
+
+```sql
+WITH RECURSIVE impact(id, artefact_type, depth) AS (
+  -- base: direct references to the target
+  SELECT source_id, source_type, 1
+  FROM artefact_references WHERE target_id = ?
+  UNION ALL
+  -- recursive: references to those referencing artefacts
+  SELECT r.source_id, r.source_type, i.depth + 1
+  FROM artefact_references r JOIN impact i ON r.target_id = i.id
+  WHERE i.depth < 10  -- guard; max real depth ≤ 5
+)
+SELECT * FROM impact ORDER BY depth;
+```
+
+Maximum traversal depth in the clew metamodel is bounded at 5 hops. The guard of 10 provides safety without being a practical constraint. The traceability matrix (`clew matrix`) is a multi-way cross-join across the artefact types, not a recursive traversal — DuckDB's columnar engine handles this efficiently.
+
 ### Related decisions
 
 - [ADR-0002 Bind metamodel artefacts to narrative files via a typed layout convention](adr-0002-artefact-file-binding.md) extends `schema.py` (per-type `file_layout`, `default_path`, `parent_type`) and `cli.py` (`clew layout`, `clew where`, validation inside `clew new`).
+- [ADR-0003 Schema design — typed property graph over DuckDB](adr-0003-schema-design-typed-property-graph.md) specifies the internal schema: universal `artefacts` node registry + typed `artefact_references` edge table + per-type property tables.
