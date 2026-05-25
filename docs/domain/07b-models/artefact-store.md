@@ -12,7 +12,7 @@ review_interval: 180d
 
 **Bounded context:** [BC-01 Artefact Store](../02b-bounded-contexts.md#bc-01--artefact-store)
 **Subdomain type:** Core — clew's competitive differentiator; the integrity guarantee lives here ([rationale](../02b-bounded-contexts.md#bc-01--artefact-store))
-**Ubiquitous language:** _TODO_ — `docs/domain/02c-glossary.md` does not exist yet; entity / VO / event names should be reconciled to `BC-01.GT-NN` terms once the glossary is authored (see [§Open Items](#open-items))
+**Ubiquitous language:** [Glossary — BC-01 Artefact Store](../02c-glossary.md#bc-01-artefact-store) — 15 terms (GT-01 through GT-15); every entity, VO, and event name in this model is reconciled to its glossary term in the per-section "Glossary term" field below
 
 > "An aggregate is a cluster of associated objects that we treat as a unit for the purpose of data changes. Each aggregate has a root and a boundary." — Evans, *Domain-Driven Design* (2003), Chapter 8
 
@@ -140,7 +140,7 @@ stateDiagram-v2
 
 ### Artefact · BC-01.ENT-01
 
-**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Glossary term:** [Artefact · BC-01.GT-01](../02c-glossary.md#artefact--bc-01gt-01)
 **Aggregate:** BC-01.AGG-01 (Artefact)
 
 **Identity:** `business_id` (e.g. `P-01`, `C1.2`, `OBJ-03`) — assigned at registration by the application from the `id_sequences` counter for the artefact type; immutable thereafter.
@@ -170,7 +170,7 @@ stateDiagram-v2
 
 ### ArtefactReference · BC-01.ENT-02
 
-**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Glossary term:** [Relationship · BC-01.GT-06](../02c-glossary.md#relationship--bc-01gt-06) — *note: the glossary term is "Relationship" but the class name is `ArtefactReference`; deliberate divergence to avoid ORM/SQL reserved-word collisions, documented in the glossary entry's code-convention note*
 **Aggregate:** BC-01.AGG-02 (ArtefactReference)
 
 **Identity:** the triple `(source_business_id, relationship, target_business_id)` is the logical key; a surrogate `pk` exists for efficient joins but bears no business meaning.
@@ -197,7 +197,7 @@ stateDiagram-v2
 
 ### FileBinding · BC-01.ENT-03
 
-**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Glossary term:** [File binding · BC-01.GT-07](../02c-glossary.md#file-binding--bc-01gt-07)
 **Aggregate:** BC-01.AGG-03 (FileBinding)
 
 **Identity:** `artefact_id` — one binding per artefact; the binding's identity is borrowed from the artefact it binds.
@@ -228,7 +228,7 @@ stateDiagram-v2
 
 ### BusinessId · BC-01.VO-01
 
-**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Glossary term:** [Business ID · BC-01.GT-03](../02c-glossary.md#business-id--bc-01gt-03)
 **Used by:** AGG-01 (Artefact), AGG-02 (ArtefactReference for source/target), AGG-03 (FileBinding for artefact)
 
 **Attributes** (all immutable):
@@ -246,7 +246,7 @@ stateDiagram-v2
 
 ### SectionAnchor · BC-01.VO-02
 
-**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Glossary term:** [Section anchor · BC-01.GT-08](../02c-glossary.md#section-anchor--bc-01gt-08)
 **Used by:** AGG-03 (FileBinding)
 
 **Attributes** (all immutable):
@@ -273,7 +273,7 @@ Example: `P-01` + heading "P-01 · Ava the agent-first product engineer" → `p-
 
 ### ArtefactType · BC-01.VO-03
 
-**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Glossary term:** [Artefact type · BC-01.GT-02](../02c-glossary.md#artefact-type--bc-01gt-02)
 **Used by:** AGG-01 (Artefact)
 
 **Attributes** (all immutable):
@@ -290,7 +290,7 @@ Example: `P-01` + heading "P-01 · Ava the agent-first product engineer" → `p-
 
 ### FileLayout · BC-01.VO-04
 
-**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Glossary term:** [Layout · BC-01.GT-09](../02c-glossary.md#layout--bc-01gt-09) — *note: the glossary term is the bare "Layout" but the class name is kept as `FileLayout` for code clarity; documented in the glossary entry's code-convention note*
 **Used by:** AGG-03 (FileBinding — indirectly via `ARTEFACT_TYPE_CONFIGS`)
 
 **Attributes** (all immutable):
@@ -307,7 +307,7 @@ Example: `P-01` + heading "P-01 · Ava the agent-first product engineer" → `p-
 
 ### IdCounter · BC-01.VO-05
 
-**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Glossary term:** sub-concept of [Business ID · BC-01.GT-03](../02c-glossary.md#business-id--bc-01gt-03) — *not a top-level glossary term; the application-managed counter that mints the next Business ID is documented in GT-03's code-convention note rather than as its own entry*
 **Used by:** AGG-01 (Artefact — referenced by `register()` to mint the next `BusinessId`)
 
 **Attributes** (all immutable per snapshot):
@@ -686,7 +686,7 @@ SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY dept
 
 | OI-ID  | Type           | Summary                                                                                                                                                | Source anchor                | Source heading                                | Resolution path                                                                                                                       | Priority | Status | Owner   | Due / Review date | Tracker ref |
 | :----- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------- | :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ | :------- | :----- | :------ | :---------------- | :---------- |
-| OI-001 | doc-gap        | Glossary `docs/domain/02c-glossary.md` does not exist; every entity / VO / event in this model carries `_TODO_ — BC-01.GT-NN` for its glossary-term link. | #ubiquitous-language         | Domain Model — BC-01 Artefact Store (header)  | Run the `domain-glossary` skill against BC-01 to seed `GT-NN` terms (artefact, business ID, relationship, file binding, snapshot, …); then replace every `_TODO_ — BC-01.GT-NN` placeholder in this file with the actual term ID. | high     | open   | victor  | 2026-06-15        | _TBD_       |
+| OI-001 | doc-gap        | Glossary `docs/domain/02c-glossary.md` does not exist; every entity / VO / event in this model carries `_TODO_ — BC-01.GT-NN` for its glossary-term link. | #ubiquitous-language         | Domain Model — BC-01 Artefact Store (header)  | Run the `domain-glossary` skill against BC-01 to seed `GT-NN` terms (artefact, business ID, relationship, file binding, snapshot, …); then replace every `_TODO_ — BC-01.GT-NN` placeholder in this file with the actual term ID. | high     | closed | victor  | 2026-05-25        | 2026-05-25 commit on main — glossary authored with 15 BC-01 terms in commit `8cea266`; every entity (3) + VO (5) Glossary-term placeholder in this file replaced with live `02c-glossary.md#{term}--bc-01gt-{nn}` links in the same pass; header Ubiquitous language line points at the glossary's BC-01 section |
 | OI-002 | decision-gap   | Whether the Implementation supplement (Physical schema / Property schemas / Graph traversal pattern) stays in this file or moves to a separate data-model contract document. ADR-0003 currently sanctions it being here. | #implementation-supplement   | Implementation supplement                     | Decide once a second domain model file is created and the duplication / divergence cost becomes visible; if it moves, update ADR-0003 §Dependent artefacts to point at the new location. | low      | open   | victor  | 2026-09-01        | _TBD_       |
 
 ---
@@ -698,3 +698,4 @@ SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY dept
 | 2026-05-25 | Victor Hueni | Initial draft drawn from ADR-0001 + ADR-0002 + ADR-0003 (under DuckDB). |
 | 2026-05-25 | Victor Hueni | SQLite cascade: DDL rewritten for SQLite syntax (INTEGER PK AUTOINCREMENT, `datetime('now')`, `json_valid()` CHECK); PRAGMAs documented; transaction reference updated. |
 | 2026-05-25 | Victor Hueni | Template alignment pass (`domain-model` skill v1.0): H1 reformatted, Subdomain type + Ubiquitous language headers added, aggregate catalogue columns aligned to template, per-aggregate Commands → Events tables + Size check lines + Member listings added, dedicated Entity catalogue + Value object catalogue + Domain event catalogue sections introduced (entity sections now document behaviour methods explicitly to fix anemic-model finding), AGG-02 invariant rephrased to business language (`source ≠ target`), Implementation supplement clearly demarcated per ADR-0003 deviation, Open Items populated with glossary + supplement-location items, Changelog added. |
+| 2026-05-25 | Victor Hueni | Glossary cross-reference pass 2 (closes OI-001): header `Ubiquitous language` line now points at [`../02c-glossary.md#bc-01-artefact-store`](../02c-glossary.md#bc-01-artefact-store); every entity Glossary-term field (3) and every value-object Glossary-term field (5) wired to live `02c-glossary.md#{term}--bc-01gt-{nn}` anchors. Two deliberate class-name ↔ glossary-term divergences flagged inline (`ArtefactReference` class for the `Relationship` term — ORM/SQL reserved-word safety; `FileLayout` class for the `Layout` term — code clarity), both referencing the glossary's code-convention notes. `IdCounter` (VO-05) annotated as a sub-concept of `Business ID · GT-03` since it is the mint mechanism, not a standalone domain concept. OI-001 closed with tracker-ref text identifying commit `8cea266` (glossary authoring) and this commit (07b cross-reference wiring). |
