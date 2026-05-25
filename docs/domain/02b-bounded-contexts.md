@@ -22,7 +22,7 @@ This document catalogues the bounded contexts for clew: the named islands of con
 **Companion documents:**
 - Capability map: [`../business/03a-capability-map.md`](../business/03a-capability-map.md)
 - Context map: [`02b-context-map.md`](02b-context-map.md)
-- Domain glossary: [`02c-glossary.md`](02c-glossary.md) *(not yet authored — see [§Open Items](#open-items))*
+- Domain glossary: [`02c-glossary.md`](02c-glossary.md)
 - Personas: [`../business/01a-personas.md`](../business/01a-personas.md)
 - Value streams: [`../business/04a-value-streams.md`](../business/04a-value-streams.md)
 
@@ -66,13 +66,15 @@ This document catalogues the bounded contexts for clew: the named islands of con
 
 **Ubiquitous language scope** *(terms whose definition is specific to this context; cross-context homonyms with the external kit are called out):*
 
-- *Artefact* — a named, typed record in the metamodel (persona, capability, epic, ADR, …). Distinct from a raw markdown file or filesystem entry. → see [`02c-glossary.md#bc-01`](02c-glossary.md#bc-01) *(pending)*
-- *Business ID* — the stable semantic identifier (e.g. `P-01`, `C1.2.F03`, `OBJ-03`) that agents write in markdown prose and that survives DB drop-and-restore. Distinct from the internal surrogate `pk` used for joins.
-- *Relationship* — a typed directed edge between two artefacts (TRIGGERS, CONSUMES, GROUPS, …). Distinct from a generic markdown hyperlink and distinct from a database FK column.
-- *File binding* — the link between one artefact record and one markdown file section (`file_path` + `section_anchor`). Distinct from a filesystem path or directory.
-- *Snapshot* — the deterministic YAML export of the full store state. Distinct from the binary `.db` file (which is gitignored).
-- *Layout* — the per-artefact-type rule for where its narrative lives on disk (`single-collection`, `one-per-artefact`, `inherits-from-parent`). Distinct from filesystem layout or markdown formatting.
-- *Skill* (homonym warning) — in BC-01 not a domain concept; appears only as the upstream Conformist source that defines artefact-type schemas. *Inside the kit's own scope, "skill" is the central abstraction; do not confuse the two usages.*
+- [*Artefact* · BC-01.GT-01](02c-glossary.md#artefact--bc-01gt-01) — a named, typed record in the metamodel (persona, capability, epic, ADR, …). Distinct from a raw markdown file or filesystem entry.
+- [*Business ID* · BC-01.GT-03](02c-glossary.md#business-id--bc-01gt-03) — the stable semantic identifier (e.g. `P-01`, `C1.2.F03`, `OBJ-03`) that agents write in markdown prose and that survives DB drop-and-restore. Distinct from the internal surrogate `pk` used for joins.
+- [*Relationship* · BC-01.GT-06](02c-glossary.md#relationship--bc-01gt-06) — a typed directed edge between two artefacts (TRIGGERS, CONSUMES, GROUPS, …). Distinct from a generic markdown hyperlink and distinct from a database FK column.
+- [*File binding* · BC-01.GT-07](02c-glossary.md#file-binding--bc-01gt-07) — the link between one artefact record and one markdown file section (`file_path` + `section_anchor`). Distinct from a filesystem path or directory.
+- [*Snapshot* · BC-01.GT-10](02c-glossary.md#snapshot--bc-01gt-10) — the deterministic YAML export of the full store state. Distinct from the binary `.db` file (which is gitignored).
+- [*Layout* · BC-01.GT-09](02c-glossary.md#layout--bc-01gt-09) — the per-artefact-type rule for where its narrative lives on disk (`single-collection`, `one-per-artefact`, `inherits-from-parent`). Distinct from filesystem layout or markdown formatting.
+- [*Skill* · BC-01.GT-15](02c-glossary.md#skill--bc-01gt-15) *(homonym warning)* — in BC-01 not a domain concept; appears only as the upstream Conformist source that defines artefact-type schemas. *Inside the kit's own scope, "skill" is the central abstraction; do not confuse the two usages.*
+
+*(Eight further BC-01 terms — [Artefact type · GT-02](02c-glossary.md#artefact-type--bc-01gt-02), [Status · GT-04](02c-glossary.md#status--bc-01gt-04), [Narrative · GT-05](02c-glossary.md#narrative--bc-01gt-05), [Section anchor · GT-08](02c-glossary.md#section-anchor--bc-01gt-08), [Audit trail · GT-11](02c-glossary.md#audit-trail--bc-01gt-11), [Drift · GT-12](02c-glossary.md#drift--bc-01gt-12), [Traceability view · GT-13](02c-glossary.md#traceability-view--bc-01gt-13), and [Methodology · GT-14](02c-glossary.md#methodology--bc-01gt-14) — are documented in the full glossary; the seven above are the minimum subset that a contributor needs to read this BC catalogue entry without ambiguity.)*
 
 **Canonical data owned** *(no other context writes this data; others may read it via the CLI):*
 
@@ -100,7 +102,7 @@ This document catalogues the bounded contexts for clew: the named islands of con
 
 | OI-ID  | Type           | Summary                                                                                                   | Source anchor             | Source heading                  | Resolution path                                                                                                            | Priority | Status | Owner   | Due / Review date | Tracker ref |
 | :----- | :------------- | :-------------------------------------------------------------------------------------------------------- | :------------------------ | :------------------------------ | :------------------------------------------------------------------------------------------------------------------------- | :------- | :----- | :------ | :---------------- | :---------- |
-| OI-001 | doc-gap        | `02c-glossary.md` for BC-01 does not exist yet; the `Ubiquitous language scope` section above references it via `_TODO_` per-term anchors. | #ubiquitous-language-scope | Ubiquitous language scope       | Run the `domain-glossary` skill against BC-01 to mint `GT-NN` terms (artefact, business ID, artefact type, relationship, file binding, section anchor, snapshot, layout, …); then replace the `02c-glossary.md` link in §Companion documents with the live file and add per-term anchors. | high     | open   | victor  | 2026-06-15        | _TBD_       |
+| OI-001 | doc-gap        | `02c-glossary.md` for BC-01 does not exist yet; the `Ubiquitous language scope` section above references it via `_TODO_` per-term anchors. | #ubiquitous-language-scope | Ubiquitous language scope       | Run the `domain-glossary` skill against BC-01 to mint `GT-NN` terms (artefact, business ID, artefact type, relationship, file binding, section anchor, snapshot, layout, …); then replace the `02c-glossary.md` link in §Companion documents with the live file and add per-term anchors. | high     | closed | victor  | 2026-05-25        | 2026-05-25 commit on main — `02c-glossary.md` created with 15 BC-01 terms; §Companion documents pending-annotation removed; §Ubiquitous language scope per-term anchors wired to live GT-NN entries |
 | OI-002 | decision-gap   | Whether to elevate the external `homemade-claude-kit` to its own modelled BC-02 (Supporting) if/when its scope or consumer count grows beyond clew alone. | #subdomain-catalogue      | Subdomain catalogue             | Re-evaluate at the first of: (a) second downstream consumer of the kit is documented, (b) kit's per-skill artefact count exceeds the 17 currently mapped, (c) Conformist relationship starts producing friction (kit drift breaks clew). | low      | open   | victor  | 2026-12-01        | _TBD_       |
 
 ---
@@ -111,3 +113,4 @@ This document catalogues the bounded contexts for clew: the named islands of con
 |---|---|---|
 | 2026-05-25 | Initial 39-line draft under DuckDB (single-BC, capability list as verbose descriptions, no team-owner column, no context map file). | Victor Hueni |
 | 2026-05-25 | Template alignment pass (`domain-bounded-context` skill v1.0): methodology pointer + scope discipline + companion documents headers added; subdomain catalogue table extended with Team owner + Capabilities (C-N.M) columns; BC-01 per-context block restructured to template format (Responsibility, Subdomain type + Rationale, Capabilities owned with explicit C-N.M links and external-scope partition, Ubiquitous language scope with per-term scoped definitions and one homonym warning, Canonical data owned, Integration interfaces with Conformist upstream call-out, Team boundary recommendation); companion `02b-context-map.md` created in same commit modelling the external Conformist relationship with `homemade-claude-kit`; Open Items populated per open-items-governance schema. | Victor Hueni |
+| 2026-05-25 | Glossary cascade: `02c-glossary.md` authored in same commit (15 BC-01 terms); §Companion documents pending-annotation removed; §Ubiquitous language scope per-term anchors wired to live `02c-glossary.md#{term}--bc-01gt-{nn}` slugs (7 anchored inline, 8 cross-linked in a footer paragraph); OI-001 closed with tracker-ref text identifying the same commit. | Victor Hueni |
