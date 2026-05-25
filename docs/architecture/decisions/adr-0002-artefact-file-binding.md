@@ -260,4 +260,4 @@ This is the one-time bootstrap that lets clew adopt a repository whose markdown 
 ### Related decisions
 
 - Depends on: [ADR-0001 Introduce a persistence layer for the strategic-architecture metamodel](adr-0001-metamodel-persistence-layer.md).
-- Linked from: [Lean Canvas §4 Solution](../../business/02a-lean-canvas.md#4-solution--confidence-assumed) (first concrete demo of OBJ-02 KR-02.2), [OBJ-02 §Linked from](../../business/04b-objectives.md#obj-02--the-architectural-substrate-is-trustworthy-enough-that-agents-depend-on-it).
+- Linked from: [Lean Canvas §4 Solution](../../business/02a-lean-canvas.md#4-solution--confidence-assumed-solution-details-still-in-design-foundational-bullet-tested-n1) (first concrete demo of OBJ-02 KR-02.2), [OBJ-02 §Linked from](../../business/04b-objectives.md#obj-02--the-architectural-substrate-is-trustworthy-enough-that-agents-depend-on-it).

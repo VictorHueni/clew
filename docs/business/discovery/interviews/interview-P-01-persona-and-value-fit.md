@@ -21,8 +21,8 @@ This interview elevates four specific Assumed claims toward Tested. Each hypothe
 |---|---|---|---|---|
 | H1 | P-01's §Frustrations are the top 3 pains an agent-first product engineer faces, in the right priority order. | [01a-personas.md §Frustrations](../../01a-personas.md) | Assumed | Tested (confirmed / refuted / refined per item) |
 | H2 | P-01's §Goals (1 to 5) and §System Needs cover the outcomes the persona actually wants. | [01a-personas.md §Goals + §System Needs](../../01a-personas.md) | Assumed | Tested |
-| H3 | The Lean Canvas §3 UVP bullets (north-star, high-concept, three concrete wins, anti-promise) resonate as a pitch that would prompt the persona to try clew. | [02a-lean-canvas.md §3 UVP](../../02a-lean-canvas.md#3-unique-value-proposition--confidence-assumed) | Assumed | Tested |
-| H4 | The existing alternatives listed in PR-1 (markdown + grep, Notion DBs, bespoke YAML metamodels, spreadsheets, "trust the agent") are real tools the persona has used. | [02a-lean-canvas.md §1 Problem](../../02a-lean-canvas.md#1-problem--confidence-assumed) | Assumed | Tested |
+| H3 | The Lean Canvas §3 UVP bullets (north-star, high-concept, three concrete wins, anti-promise) resonate as a pitch that would prompt the persona to try clew. | [02a-lean-canvas.md §3 UVP](../../02a-lean-canvas.md#3-unique-value-proposition--confidence-tested-n1-founder-as-instance-with-refinement) | Assumed | Tested |
+| H4 | The existing alternatives listed in PR-1 (markdown + grep, Notion DBs, bespoke YAML metamodels, spreadsheets, "trust the agent") are real tools the persona has used. | [02a-lean-canvas.md §1 Problem](../../02a-lean-canvas.md#1-problem--confidence-tested-n1-founder-as-instance) | Assumed | Tested |
 
 ## Pre-interview prep checklist
 
