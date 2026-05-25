@@ -6,146 +6,534 @@ last_reviewed: 2026-05-25
 review_interval: 180d
 ---
 
-# Artefact Store — Domain Model
+<!-- dm-version: 1.0 | bc: BC-01 | bc-name: Artefact Store | created: 2026-05-25 -->
 
-Bounded context: [BC-01 Artefact Store](../02b-bounded-contexts.md)
+# Domain Model — BC-01 Artefact Store
+
+**Bounded context:** [BC-01 Artefact Store](../02b-bounded-contexts.md#bc-01--artefact-store)
+**Subdomain type:** Core — clew's competitive differentiator; the integrity guarantee lives here ([rationale](../02b-bounded-contexts.md#bc-01--artefact-store))
+**Ubiquitous language:** _TODO_ — `docs/domain/02c-glossary.md` does not exist yet; entity / VO / event names should be reconciled to `BC-01.GT-NN` terms once the glossary is authored (see [§Open Items](#open-items))
+
+> "An aggregate is a cluster of associated objects that we treat as a unit for the purpose of data changes. Each aggregate has a root and a boundary." — Evans, *Domain-Driven Design* (2003), Chapter 8
+
+---
 
 ## Aggregate catalogue
 
-| AGG-ID | Root entity | Invariants | Member count | Status |
-|---|---|---|---|---|
-| BC-01.AGG-01 | `Artefact` | business_id unique + immutable; artefact_type immutable; status transitions bounded | 1 root + `IdCounter` VO | active |
-| BC-01.AGG-02 | `ArtefactReference` | source ≠ target; relationship type in registry; source + target types satisfy registry constraints | 1 root | active |
-| BC-01.AGG-03 | `FileBinding` | at most one binding per artefact; file_path + section_anchor pair unique across all bindings | 1 root | active |
+| ID | Name | Root entity | Member entities | Member VOs | Invariant count | Domain events |
+|---|---|---|---|---|---|---|
+| BC-01.AGG-01 | Artefact | `Artefact` · BC-01.ENT-01 | (none — root only) | `BusinessId`, `ArtefactType`, `IdCounter` | 3 | `ArtefactRegistered`, `ArtefactImported`, `SnapshotExported`, `SnapshotRestored` |
+| BC-01.AGG-02 | ArtefactReference | `ArtefactReference` · BC-01.ENT-02 | (none — root only) | (none) | 3 | `ArtefactLinked` |
+| BC-01.AGG-03 | FileBinding | `FileBinding` · BC-01.ENT-03 | (none — root only) | `SectionAnchor`, `FileLayout` | 2 | `FileBindingRecorded` |
 
 ---
 
-## BC-01.AGG-01 — Artefact
+## Aggregates
 
-### Root definition
+### Artefact · BC-01.AGG-01
 
-An `Artefact` is any named, typed record in the metamodel — a persona, capability, value-stream stage, FBS functionality, epic, ADR, etc. It is the universal node in the artefact graph.
+**Root:** `Artefact` (BC-01.ENT-01)
+**Responsibility:** maintains a unique, immutable business identity for every named record in the metamodel and governs its one-way status lifecycle.
 
-### Invariants
+**Invariants:**
+- **INV-1:** A registered artefact's `business_id` is unique across the artefact store and is immutable after registration.
+- **INV-2:** A registered artefact's `artefact_type` is immutable; changing what kind of thing an artefact is requires creating a new artefact, not mutating the existing one.
+- **INV-3:** Status transitions are one-way: `active → retired` or `active → superseded`. A retired or superseded artefact cannot return to `active`.
 
-1. `business_id` is unique across all artefacts and is immutable after the record is created. It is assigned by the application layer (`id_gen.py`) from the `id_sequences` table — never by the DB engine and never by an LLM.
-2. `artefact_type` is immutable after creation. Changing what kind of thing an artefact is requires creating a new record, not mutating the existing one.
-3. `status` transitions are one-way: `active → retired` or `active → superseded`. A retired or superseded artefact cannot return to `active`.
+**Lifecycle states:**
 
-### Consistency boundary rationale
+```mermaid
+stateDiagram-v2
+    [*] --> active : register()
+    active --> retired : retire()
+    active --> superseded : supersede(replacement_id)
+    retired --> [*]
+    superseded --> [*]
+```
 
-Each artefact is fully self-contained in its row. Cross-artefact relationships are edges in `ArtefactReference` (a separate aggregate) — they do not live on the artefact itself. This allows an artefact to be created before its referencing relationships exist, and lets relationships be added or removed without touching the artefact record.
+**Commands → Events:**
 
-### Value object: IdCounter
+| Command | Precondition | Domain Event |
+|---|---|---|
+| `register(type, name, file?)` | `business_id` not already taken for this type | `ArtefactRegistered` (BC-01.EVT-01) |
+| `adoptFromMarkdown(file)` | heading first-token matches a known business-ID pattern | `ArtefactImported` (BC-01.EVT-02) |
+| `retire()` | `status = active` | `ArtefactRetired` *(folded into the status transition; no separate event in v1)* |
+| `supersede(replacement_id)` | `status = active` and `replacement_id` exists | `ArtefactSuperseded` *(folded into the status transition; no separate event in v1)* |
+| `exportSnapshot(dest)` | (collection-level — see Domain Service note below) | `SnapshotExported` (BC-01.EVT-04) |
+| `importSnapshot(src)` | (collection-level — destructive overwrite) | `SnapshotRestored` (BC-01.EVT-05) |
 
-Tracks the per-type counter used to generate the next business ID. Stored in the `id_sequences` table as `(artefact_type, next_val)`. The counter is application-managed and included in the YAML snapshot so business IDs are reproducible on DB restore.
+> **Domain service note:** `SnapshotExported` and `SnapshotRestored` operate on the whole `artefacts` collection, not on a single root instance. They are modelled here on AGG-01 because the collection has no separate aggregate of its own; in code they will be implemented as an application-service method that iterates the collection, not as `Artefact.export()`.
 
-**Equality rule:** two `IdCounter` instances are equal if they share the same `artefact_type` and `next_val`.
+**Member entities:** root only — `Artefact` (BC-01.ENT-01)
+**Member value objects:** `BusinessId`, `ArtefactType`, `IdCounter` (see [§Value object catalogue](#value-object-catalogue))
 
-**Immutability:** `IdCounter` is replaced (not mutated) on each ID generation via an atomic `UPDATE ... RETURNING` that increments `next_val` and returns the previous value in one statement.
+**Consistency boundary rationale:** the business-ID counter (`IdCounter`) and the artefact record are mutated atomically in the same transaction so that two concurrent `register()` calls cannot mint the same `business_id`. Properties (typed per artefact_type) live inside the root's JSON payload because they are validated only against the artefact as a whole — there is no cross-artefact invariant that requires them to live outside the root.
 
-### Domain event: ArtefactRegistered
-
-- **Trigger:** `clew new <type> <name>` succeeds
-- **Payload:** `business_id`, `artefact_type`, `name`, `file_path` (if provided), `created_at`
-- **Business significance:** a new named record exists in the metamodel with a stable, collision-free ID that all downstream artefacts can safely reference
-- **Consumers:** CLI (prints `business_id` to stdout), marimo notebooks (query `artefacts`)
-
-### Domain event: ArtefactImported
-
-- **Trigger:** `clew import md <path>` processes a heading whose first token matches a known business ID pattern
-- **Payload:** `business_id`, `artefact_type`, `name`, `file_path`, `section_anchor`
-- **Business significance:** a pre-existing markdown artefact (authored before clew) has been adopted into the DB; the `id_sequences` counter has been advanced past its suffix to prevent future collisions
-- **Consumers:** CLI (reports orphans and adoptions), `clew check`
-
----
-
-## BC-01.AGG-02 — ArtefactReference
-
-### Root definition
-
-An `ArtefactReference` is a typed, directed edge between two artefacts. It carries a `relationship` label (e.g. `TRIGGERS`, `CONSUMES`, `GROUPS`) and an optional `role` annotation (e.g. `Differentiator`, `Necessary`).
-
-### Invariants
-
-1. `source_pk ≠ target_pk`: an artefact cannot reference itself.
-2. `relationship` must exist in the allowed-relationships registry (see §Relationship registry below). Unknown relationship labels are rejected at write time.
-3. The `artefact_type` of `source` and `target` must satisfy the type constraints for the relationship in the registry. A `TRIGGERS` edge whose source is a `capability` (not a `persona`) is rejected.
-
-### Consistency boundary rationale
-
-References are separate aggregates — not properties on `Artefact` — so they can be added, removed, or annotated without touching either endpoint artefact. This also allows `clew impact` and `clew trace` to traverse the graph without loading full artefact property payloads.
-
-### Domain event: ArtefactLinked
-
-- **Trigger:** `clew link <source-id> <relationship> <target-id>` succeeds
-- **Payload:** `source_business_id`, `relationship`, `target_business_id`, `role` (optional)
-- **Business significance:** a semantic dependency between two metamodel artefacts is now queryable; `clew matrix` and `clew trace` will include this edge
-- **Consumers:** CLI (prints confirmation), `clew estimate` (reads edges for rollup)
+**Size check:** 1 entity ≤ 5 ✅
 
 ---
 
-## BC-01.AGG-03 — FileBinding
+### ArtefactReference · BC-01.AGG-02
 
-### Root definition
+**Root:** `ArtefactReference` (BC-01.ENT-02)
+**Responsibility:** maintains a typed, directed edge between two artefacts with optional role annotation, enforcing that every recorded relationship satisfies the registered type-safety rules.
 
-A `FileBinding` links one `Artefact` record to the markdown file section where its narrative lives. It stores the file path and a GFM-compatible section anchor.
+**Invariants:**
+- **INV-1:** Source artefact ≠ target artefact (no self-reference).
+- **INV-2:** `relationship` must exist in the allowed-relationships registry (see [§Relationship registry](#relationship-registry)). Unknown relationship labels are rejected at write time.
+- **INV-3:** The `artefact_type` of source and target must satisfy the registry's type constraints for `relationship`. A `TRIGGERS` edge whose source is a capability (not a persona) is rejected.
 
-### Invariants
+**Lifecycle states:** none — references are immutable once written; "remove a relationship" means deleting the row, not transitioning it.
 
-1. At most one binding per artefact (enforced by `UNIQUE (artefact_pk)` on the `file_bindings` table). An artefact's narrative lives in exactly one file section.
-2. The `(file_path, section_anchor)` pair is unique across all bindings — two artefacts cannot share the same section in the same file.
+**Commands → Events:**
 
-### Consistency boundary rationale
+| Command | Precondition | Domain Event |
+|---|---|---|
+| `link(source, relationship, target, role?)` | all 3 INVs satisfied | `ArtefactLinked` (BC-01.EVT-03) |
+| `unlink(source, relationship, target)` | edge exists | (no event in v1 — recorded in audit trail only) |
 
-Bindings are separate aggregates — not properties on `Artefact` — because they are file-system concerns, not identity concerns. An artefact can exist in the DB before its narrative has been written (content_hash is NULL until `clew check` first visits the section).
+**Member entities:** root only — `ArtefactReference` (BC-01.ENT-02)
+**Member value objects:** (none — relationship is a string from the registry; role is free text or registry-constrained)
 
-### Value object: SectionAnchor
+**Consistency boundary rationale:** an edge is a self-contained fact between two artefacts; it has no internal state beyond its three identity columns + role. Modelling it as a separate aggregate (rather than a property on `Artefact`) allows edges to be added, removed, or re-annotated without touching either endpoint artefact, and lets `clew impact` / `clew trace` traverse the edge graph without loading endpoint property payloads.
 
-Derived from `business_id` + the heading text: `{lowercase_id}--{gfm_slug_of_heading}`.
-
-**Example:** `P-01` with heading "P-01 · Ava the agent-first product engineer" → `p-01--ava-the-agent-first-product-engineer`.
-
-**Equality rule:** two `SectionAnchor` instances are equal if their string values are identical.
-
-**Immutability:** once set at `clew new` time, the anchor is treated as stable. If the heading is later renamed, `clew check` reports drift; the operator decides whether to update the anchor (via `clew bind --update`) or leave the heading unchanged.
-
-### Domain event: FileBindingRecorded
-
-- **Trigger:** `clew new <type> --file <path> ...` succeeds, or `clew import md` processes a matching heading
-- **Payload:** `business_id`, `file_path`, `section_anchor`, `content_hash` (NULL at creation)
-- **Business significance:** `clew where <id>` can now return a navigable `file#anchor` link; the agent knows where to write the narrative section
-- **Consumers:** CLI (`clew where`), `clew check` (drift detection)
+**Size check:** 1 entity ≤ 5 ✅
 
 ---
 
-## BC-01.AGG-01 domain events (continued)
+### FileBinding · BC-01.AGG-03
 
-### Domain event: SnapshotExported
+**Root:** `FileBinding` (BC-01.ENT-03)
+**Responsibility:** maintains the link between one artefact record and the markdown file section where its narrative lives, enabling `clew where <id>` and drift detection.
 
-- **Trigger:** `clew export [--out snapshot/]` completes
-- **Payload:** destination path, record counts per type, timestamp
-- **Business significance:** the current DB state is now persisted in a business-ID-centric YAML format that is git-trackable, human-readable, and sufficient for a full DB restore
-- **Consumers:** git (snapshot/ directory), `clew import snapshot`
+**Invariants:**
+- **INV-1:** At most one binding per artefact. An artefact's narrative lives in exactly one file section.
+- **INV-2:** The `(file_path, section_anchor)` pair is unique across all bindings — two artefacts cannot share the same section in the same file.
 
-### Domain event: SnapshotRestored
+**Lifecycle states:**
 
-- **Trigger:** `clew import snapshot [--from snapshot/]` completes
-- **Payload:** source path, record counts restored per type, surrogate PK remapping stats
-- **Business significance:** the DB has been rebuilt from the snapshot; all business IDs are identical to the exported state; surrogate PKs have been regenerated and all FK references re-resolved
-- **Consumers:** CLI (prints summary), all subsequent `clew` commands (now operate on the restored state)
+```mermaid
+stateDiagram-v2
+    [*] --> Unhashed : record(artefact_id, file_path, anchor)
+    Unhashed --> Hashed : check() observes the section
+    Hashed --> Drifted : check() finds content_hash mismatch
+    Drifted --> Hashed : check() re-hashes after operator reconciliation
+```
+
+**Commands → Events:**
+
+| Command | Precondition | Domain Event |
+|---|---|---|
+| `record(artefact_id, file_path, section_anchor)` | artefact exists; `(file_path, section_anchor)` not already bound | `FileBindingRecorded` (BC-01.EVT-06) |
+| `check()` | binding exists | (no event in v1; `clew check` emits a drift report) |
+
+**Member entities:** root only — `FileBinding` (BC-01.ENT-03)
+**Member value objects:** `SectionAnchor`, `FileLayout` (see [§Value object catalogue](#value-object-catalogue))
+
+**Consistency boundary rationale:** bindings are file-system concerns, not identity concerns. An artefact can exist in the store before its narrative has been written (content_hash is `NULL` until `clew check` first visits the section). Separating the binding from the artefact root lets the markdown layer evolve (rename a file, restructure a heading) without invalidating the artefact's identity.
+
+**Size check:** 1 entity ≤ 5 ✅
+
+---
+
+## Entity catalogue
+
+### Artefact · BC-01.ENT-01
+
+**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Aggregate:** BC-01.AGG-01 (Artefact)
+
+**Identity:** `business_id` (e.g. `P-01`, `C1.2`, `OBJ-03`) — assigned at registration by the application from the `id_sequences` counter for the artefact type; immutable thereafter.
+
+**Key attributes** (domain-meaningful only):
+
+| Attribute | Type | Business meaning |
+|---|---|---|
+| `business_id` | `BusinessId` (VO) | The stable semantic key agents write in markdown prose; survives DB drop-and-restore cycles |
+| `artefact_type` | `ArtefactType` (VO) | What kind of thing this is (persona, capability, epic, …); determines property schema and ID format |
+| `name` | string | Human-readable label for the artefact; appears in CLI listings and traceability views |
+| `status` | enum `active` \| `retired` \| `superseded` | Lifecycle state; gates which commands are permitted |
+| `properties` | JSON | Type-specific payload validated by the Pydantic model for `artefact_type` before write |
+
+**Behaviour methods:**
+
+| Method | Parameters | What it does + invariant enforced |
+|---|---|---|
+| `register()` | `(type, name, file?)` | Mints `business_id` from `id_sequences`, validates `properties` against type schema, writes the artefact and (if `file` provided) the FileBinding in one transaction; raises `ArtefactRegistered`. Enforces INV-1 + INV-2. |
+| `retire()` | () | Sets `status = retired`; rejects if INV-3 is violated. |
+| `supersede(replacement_id)` | (id of the replacing artefact) | Sets `status = superseded`; verifies the replacement artefact exists; rejects if INV-3 is violated. |
+| `adoptFromMarkdown(file_path)` | (path) | Class-level operation: scans the file for ID-shaped headings, calls `register()` for each unseen ID without re-minting (uses the parsed ID), advances `id_sequences.next_val` to `max(suffix) + 1`. Raises `ArtefactImported` per heading. |
+
+**Lifecycle:** Created on `clew new` or `clew import md` → mutated only via `retire()` / `supersede()` → never deleted (audit trail intact).
+
+---
+
+### ArtefactReference · BC-01.ENT-02
+
+**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Aggregate:** BC-01.AGG-02 (ArtefactReference)
+
+**Identity:** the triple `(source_business_id, relationship, target_business_id)` is the logical key; a surrogate `pk` exists for efficient joins but bears no business meaning.
+
+**Key attributes** (domain-meaningful only):
+
+| Attribute | Type | Business meaning |
+|---|---|---|
+| `source` | reference to `Artefact` by business ID | The artefact at the tail of the directed edge |
+| `relationship` | string from registry | The typed semantic of the edge (TRIGGERS, CONSUMES, GROUPS, …) |
+| `target` | reference to `Artefact` by business ID | The artefact at the head of the directed edge |
+| `role` | string (optional, registry-constrained per relationship) | Metadata about how source uses target (e.g. `Differentiator`, `Necessary` on a CONSUMES edge) |
+
+**Behaviour methods:**
+
+| Method | Parameters | What it does + invariant enforced |
+|---|---|---|
+| `link()` | `(source, relationship, target, role?)` | Resolves both endpoints, checks registry membership and type-safety, writes the edge; raises `ArtefactLinked`. Enforces INV-1, INV-2, INV-3. |
+| `unlink()` | (matching triple) | Removes the edge; recorded in audit trail. |
+
+**Lifecycle:** Created on `clew link` → immutable while present → deleted by `clew unlink` (no soft-delete; the audit trail is the history).
+
+---
+
+### FileBinding · BC-01.ENT-03
+
+**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Aggregate:** BC-01.AGG-03 (FileBinding)
+
+**Identity:** `artefact_id` — one binding per artefact; the binding's identity is borrowed from the artefact it binds.
+
+**Key attributes** (domain-meaningful only):
+
+| Attribute | Type | Business meaning |
+|---|---|---|
+| `artefact` | reference to `Artefact` by business ID | The artefact whose narrative this binding locates |
+| `file_path` | string (relative repo path) | Where the narrative lives on disk |
+| `section_anchor` | `SectionAnchor` (VO) | The GFM autoanchor within `file_path` that scopes the artefact's narrative |
+| `content_hash` | string \| null | Hash of the section content at last `check()`; null until first observation |
+| `last_seen_at` | timestamp \| null | When `check()` last successfully observed the section; null until first observation |
+
+**Behaviour methods:**
+
+| Method | Parameters | What it does + invariant enforced |
+|---|---|---|
+| `record()` | `(artefact_id, file_path, section_anchor)` | Verifies the artefact exists and the `(file_path, section_anchor)` pair is unused; writes the binding with `content_hash = NULL`; raises `FileBindingRecorded`. Enforces INV-1, INV-2. |
+| `check()` | () | Re-reads the file section, computes its content hash, updates `content_hash` + `last_seen_at`; if the new hash differs from the stored one, surfaces a drift report. |
+| `rebind()` | `(new_file_path?, new_section_anchor?)` | Operator-driven move of the narrative; preserves INV-1 + INV-2 against the new location. |
+
+**Lifecycle:** Created on `clew new --file …` or `clew import md` → mutated by `check()` (hash + timestamp) and `rebind()` → deleted only when its artefact is hard-removed (rare).
 
 ---
 
 ## Value object catalogue
 
-| VO | Immutable? | Equality rule | Validation invariants |
-|---|---|---|---|
-| `BusinessId` | Yes | String equality | Format matches per-type pattern (e.g. `P-\d{2}`, `E-\d{2}`, `OBJ-\d{2}`, `KR-\d+\.\d+`); never null or empty |
-| `SectionAnchor` | Yes (see above) | String equality | `{lowercase_id}--{gfm_slug}` format; no spaces; lowercase only |
-| `ArtefactType` | Yes | String equality | Must be a key in `ARTEFACT_TYPE_CONFIGS`; unknown types are rejected |
-| `FileLayout` | Yes | Literal equality | One of: `single-collection`, `one-per-artefact`, `inherits-from-parent` |
-| `IdCounter` | Replace-not-mutate | `(artefact_type, next_val)` equality | `next_val ≥ 1`; `artefact_type` must match a known artefact type |
+### BusinessId · BC-01.VO-01
+
+**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Used by:** AGG-01 (Artefact), AGG-02 (ArtefactReference for source/target), AGG-03 (FileBinding for artefact)
+
+**Attributes** (all immutable):
+- `value`: string — the formatted business ID (e.g. `P-01`, `C1.2.F03`, `KR-02.3`)
+
+**Equality:** equal when `value` strings are identical (case-sensitive).
+
+**Validation invariants** (enforced at construction):
+- Format must match the per-type pattern (e.g. `P-\d{2}`, `OBJ-\d{2}`, `KR-\d+\.\d+`, `ADR-\d{4}`); see [§Business identity](#business-identity) for the full table.
+- Never null or empty.
+
+**Replace-not-mutate:** confirmed.
+
+---
+
+### SectionAnchor · BC-01.VO-02
+
+**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Used by:** AGG-03 (FileBinding)
+
+**Attributes** (all immutable):
+- `value`: string — the GFM-compatible anchor (`{lowercase_id}--{gfm_slug_of_heading}`)
+
+**Equality:** equal when `value` strings are identical.
+
+**Validation invariants** (enforced at construction):
+- Format: `{lowercase_id}--{slug}` where the slug matches GFM autoanchor rules (lowercase ASCII letters, digits, hyphens; spaces → hyphens; non-ASCII stripped).
+- Computable deterministically from `(business_id, heading_text)` so two clients produce the same anchor for the same input.
+
+**Replace-not-mutate:** confirmed — once set at `record()` time, anchor changes flow through `rebind()`, which constructs a new instance rather than mutating the stored one.
+
+**Derivation:**
+
+```
+SectionAnchor.derive(business_id, heading_text) →
+  f"{business_id.lower()}--{gfm_slug(heading_text)}"
+```
+
+Example: `P-01` + heading "P-01 · Ava the agent-first product engineer" → `p-01--ava-the-agent-first-product-engineer`.
+
+---
+
+### ArtefactType · BC-01.VO-03
+
+**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Used by:** AGG-01 (Artefact)
+
+**Attributes** (all immutable):
+- `value`: string — one of the registered types (`persona`, `capability`, `value_stream`, `vs_stage`, `objective`, `key_result`, `fbs_functionality`, `epic`, `adr`, …)
+
+**Equality:** equal when `value` strings are identical.
+
+**Validation invariants** (enforced at construction):
+- Must be a key in `ARTEFACT_TYPE_CONFIGS` (defined in `schema.py`); unknown types are rejected.
+
+**Replace-not-mutate:** confirmed.
+
+---
+
+### FileLayout · BC-01.VO-04
+
+**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Used by:** AGG-03 (FileBinding — indirectly via `ARTEFACT_TYPE_CONFIGS`)
+
+**Attributes** (all immutable):
+- `value`: enum literal — one of `single-collection`, `one-per-artefact`, `inherits-from-parent`
+
+**Equality:** literal equality.
+
+**Validation invariants** (enforced at construction):
+- Must be one of the three enum values; the set is fixed at v0.1 per [ADR-0002](../../architecture/decisions/adr-0002-artefact-file-binding.md).
+
+**Replace-not-mutate:** confirmed — this is a static metadata constant per artefact type, not per-instance state.
+
+---
+
+### IdCounter · BC-01.VO-05
+
+**Glossary term:** _TODO_ — `BC-01.GT-NN`
+**Used by:** AGG-01 (Artefact — referenced by `register()` to mint the next `BusinessId`)
+
+**Attributes** (all immutable per snapshot):
+- `artefact_type`: `ArtefactType` — the type this counter is scoped to
+- `next_val`: positive integer — the next suffix to assign
+
+**Equality:** equal when both `artefact_type` and `next_val` are equal.
+
+**Validation invariants** (enforced at construction):
+- `next_val ≥ 1`
+- `artefact_type` must match a registered artefact type.
+
+**Replace-not-mutate:** confirmed — on each ID generation, the counter is replaced (not mutated) via an atomic `UPDATE … RETURNING` that increments `next_val` and returns the previous value in one statement. The previous instance is discarded.
+
+---
+
+## Domain event catalogue
+
+### ArtefactRegistered · BC-01.EVT-01
+
+**Naming check:** past tense ✅ | business-meaningful ✅
+**Raised by aggregate:** BC-01.AGG-01 (Artefact)
+
+**Trigger:** `clew new <type> <name>` succeeds.
+
+**Payload:**
+
+| Field | Type | Why consumers need this |
+|---|---|---|
+| `business_id` | string | Stable key the consumer will reference downstream |
+| `artefact_type` | string | Lets consumers filter by what kind of artefact was created |
+| `name` | string | Human-readable label for traceability views |
+| `file_path` | string \| null | Where the narrative will live (if `--file` was provided) |
+| `created_at` | timestamp | When this happened (for audit replay) |
+
+**Consumers:**
+- CLI (prints `business_id` to stdout)
+- marimo notebooks (query `artefacts` after the event)
+
+**Business significance:** a new named record exists in the metamodel with a stable, collision-free ID that all downstream artefacts can safely reference. This is the precondition for every cross-artefact relationship.
+
+---
+
+### ArtefactImported · BC-01.EVT-02
+
+**Naming check:** past tense ✅ | business-meaningful ✅
+**Raised by aggregate:** BC-01.AGG-01 (Artefact)
+
+**Trigger:** `clew import md <path>` processes a heading whose first token matches a known business ID pattern.
+
+**Payload:**
+
+| Field | Type | Why consumers need this |
+|---|---|---|
+| `business_id` | string | The ID parsed from the heading |
+| `artefact_type` | string | Inferred from the ID pattern |
+| `name` | string | Heading text minus the ID prefix |
+| `file_path` | string | Where the imported artefact lives |
+| `section_anchor` | string | The GFM autoanchor of the heading |
+
+**Consumers:**
+- CLI (reports adoptions vs. orphans)
+- `clew check` (uses the binding to detect future drift)
+
+**Business significance:** a pre-existing markdown artefact (authored before clew) has been adopted into the store; the `id_sequences` counter has been advanced past its suffix to prevent future collisions. This is how brownfield repos migrate without manual ID re-minting.
+
+---
+
+### ArtefactLinked · BC-01.EVT-03
+
+**Naming check:** past tense ✅ | business-meaningful ✅
+**Raised by aggregate:** BC-01.AGG-02 (ArtefactReference)
+
+**Trigger:** `clew link <source-id> <relationship> <target-id>` succeeds.
+
+**Payload:**
+
+| Field | Type | Why consumers need this |
+|---|---|---|
+| `source_business_id` | string | Tail of the edge |
+| `relationship` | string | Registry label (TRIGGERS, CONSUMES, …) |
+| `target_business_id` | string | Head of the edge |
+| `role` | string \| null | Edge-metadata annotation (e.g. `Differentiator`) |
+
+**Consumers:**
+- CLI (prints confirmation)
+- `clew matrix` / `clew trace` / `clew impact` (the new edge appears in next query)
+- `clew estimate` (rolls up effort along GROUPS edges)
+
+**Business significance:** a semantic dependency between two metamodel artefacts is now queryable; traceability views will include this edge. This is the mechanism by which the metamodel becomes a graph.
+
+---
+
+### SnapshotExported · BC-01.EVT-04
+
+**Naming check:** past tense ✅ | business-meaningful ✅
+**Raised by aggregate:** BC-01.AGG-01 (Artefact) — collection-level (see Domain service note in §AGG-01)
+
+**Trigger:** `clew export [--out snapshot/]` completes.
+
+**Payload:**
+
+| Field | Type | Why consumers need this |
+|---|---|---|
+| `destination_path` | string | Where the snapshot was written |
+| `record_counts_per_type` | map<type, int> | What was captured (for verification + audit) |
+| `timestamp` | timestamp | When the snapshot was taken |
+
+**Consumers:**
+- git (the snapshot directory becomes the next commit's diff)
+- `clew import snapshot` (the inverse operation, on a different machine or after a DB drop)
+
+**Business significance:** the current store state is now persisted in a business-ID-centric YAML format that is git-trackable, human-readable, and sufficient for a full DB restore. This is the durability mechanism that makes the SQLite file disposable.
+
+---
+
+### SnapshotRestored · BC-01.EVT-05
+
+**Naming check:** past tense ✅ | business-meaningful ✅
+**Raised by aggregate:** BC-01.AGG-01 (Artefact) — collection-level (see Domain service note in §AGG-01)
+
+**Trigger:** `clew import snapshot [--from snapshot/]` completes.
+
+**Payload:**
+
+| Field | Type | Why consumers need this |
+|---|---|---|
+| `source_path` | string | Where the snapshot was read from |
+| `record_counts_restored_per_type` | map<type, int> | What was rehydrated |
+| `surrogate_pk_remapping_stats` | object | How many references were re-resolved to new surrogate PKs |
+
+**Consumers:**
+- CLI (prints restore summary)
+- all subsequent `clew` commands (now operate on the restored state)
+
+**Business significance:** the store has been rebuilt from the snapshot; all business IDs are identical to the exported state; surrogate PKs have been regenerated and all FK references re-resolved. This proves the snapshot is the true source of truth, not the binary `.db` file.
+
+---
+
+### FileBindingRecorded · BC-01.EVT-06
+
+**Naming check:** past tense ✅ | business-meaningful ✅
+**Raised by aggregate:** BC-01.AGG-03 (FileBinding)
+
+**Trigger:** `clew new <type> --file <path> …` succeeds, or `clew import md` processes a matching heading.
+
+**Payload:**
+
+| Field | Type | Why consumers need this |
+|---|---|---|
+| `business_id` | string | Which artefact this binding belongs to |
+| `file_path` | string | Where the narrative will live |
+| `section_anchor` | string | The GFM anchor scoping the artefact's narrative |
+| `content_hash` | string \| null | Hash at recording time (null on initial record; populated on first `check()`) |
+
+**Consumers:**
+- CLI (`clew where <id>` can now return a navigable `file#anchor` link)
+- `clew check` (drift detection has an anchor to verify against)
+
+**Business significance:** the agent knows where to write the narrative section, and any future reader can navigate from a query result row to its prose with one click. This is the mechanism that keeps the structured store and the narrative layer reconciled.
+
+---
+
+## Class diagram
+
+```mermaid
+classDiagram
+    class Artefact {
+        +BusinessId business_id
+        +ArtefactType artefact_type
+        +string name
+        +string status
+        +JSON properties
+        +register() ArtefactRegistered
+        +retire() void
+        +supersede() void
+        +adoptFromMarkdown() ArtefactImported
+    }
+    class IdCounter {
+        +ArtefactType artefact_type
+        +uint next_val
+        +increment() BusinessId
+    }
+    class ArtefactReference {
+        +string relationship
+        +string role
+        +link(source, target) ArtefactLinked
+        +unlink() void
+    }
+    class FileBinding {
+        +string file_path
+        +SectionAnchor section_anchor
+        +string content_hash
+        +timestamp last_seen_at
+        +record() FileBindingRecorded
+        +check() void
+        +rebind() void
+    }
+    class BusinessId {
+        +string value
+        +validate() bool
+    }
+    class SectionAnchor {
+        +string value
+        +derive(id, heading) SectionAnchor
+    }
+    class ArtefactType {
+        +string value
+        +isKnown() bool
+    }
+    class FileLayout {
+        <<enumeration>>
+        single-collection
+        one-per-artefact
+        inherits-from-parent
+    }
+
+    Artefact "1" *-- "1" BusinessId : identified by
+    Artefact "1" *-- "1" ArtefactType : typed as
+    Artefact "1" --> "1" IdCounter : minted from (by type)
+    ArtefactReference "0..*" --> "1" Artefact : source by ID
+    ArtefactReference "0..*" --> "1" Artefact : target by ID
+    FileBinding "0..1" --> "1" Artefact : binds (by ID)
+    FileBinding "1" *-- "1" SectionAnchor : anchored at
+    ArtefactType "1" --> "1" FileLayout : has layout
+```
 
 ---
 
@@ -166,9 +554,9 @@ Source and target `artefact_type` values are validated against this registry bef
 
 ---
 
-## Business identity design
+## Business identity
 
-Business identifiers are **generated exclusively by the application layer** from the `id_sequences` table — never by the DB engine (no DB sequences for business IDs) and never by an LLM. The `id_sequences` table is included in the YAML snapshot so counters are reproduced identically on DB restore.
+Business identifiers are **generated exclusively by the application layer** from the `id_sequences` counter — never by the DB engine and never by an LLM. The `id_sequences` table is included in the YAML snapshot so counters are reproduced identically on restore.
 
 **ID format per artefact type:**
 
@@ -190,9 +578,13 @@ Business identifiers are **generated exclusively by the application layer** from
 
 ---
 
+# Implementation supplement
+
+The sections below are **intentional deviations from the `domain-model` skill template**. They are kept in this file by [ADR-0003 §Dependent artefacts](../../architecture/decisions/adr-0003-schema-design-typed-property-graph.md), which assigns the physical DDL location to the BC-01 domain model file rather than a separate interface contract. They describe the *implementation* of the domain model above (the *what*), distinct from the conceptual model (the *why*). If/when a separate `docs/architecture/data-model/artefact-store-schema.md` is introduced, this section moves there and this file becomes template-pure.
+
 ## Physical schema
 
-The SQLite physical schema implementing this domain model. Authoritative source for DDL; the domain model above describes the *why*, this section describes the *what*.
+The SQLite physical schema implementing this domain model.
 
 ```sql
 -- Per-connection PRAGMAs (set in the CLI's connection factory, not in DDL)
@@ -253,7 +645,7 @@ CREATE TABLE file_bindings (
 CREATE INDEX idx_bindings_file ON file_bindings(file_path);
 ```
 
-### Property schemas
+## Property schemas
 
 Type-specific fields are stored in `artefacts.properties` (a JSON text blob validated by SQLite's `json_valid()` at write time) and validated by Pydantic models in `schema.py` before write. Examples of representative types:
 
@@ -266,7 +658,7 @@ Type-specific fields are stored in `artefacts.properties` (a JSON text blob vali
 | `objective` | `perspective` (BSC tag), `timeframe`, `owner` | `perspective`: `financial`/`customer`/`internal`/`learning` |
 | `key_result` | `metric`, `baseline`, `target`, `unit`, `measurement_method` | `target` is numeric |
 
-### Graph traversal pattern
+## Graph traversal pattern
 
 All `clew impact`, `clew trace`, and `clew matrix` queries use a single recursive CTE pattern over `artefact_references`. Surrogate PKs are used internally for joins; only business IDs appear in query output.
 
@@ -290,68 +682,19 @@ SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY dept
 
 ---
 
-## Class diagram
+## Open Items
 
-```mermaid
-classDiagram
-    class Artefact {
-        +BusinessId business_id
-        +ArtefactType artefact_type
-        +string name
-        +string status
-        +JSON properties
-        +register() ArtefactRegistered
-        +retire() void
-        +supersede() void
-    }
-    class IdCounter {
-        +ArtefactType artefact_type
-        +uint next_val
-        +increment() BusinessId
-    }
-    class ArtefactReference {
-        +string relationship
-        +string role
-        +link(source, target) ArtefactLinked
-    }
-    class FileBinding {
-        +string file_path
-        +SectionAnchor section_anchor
-        +string content_hash
-        +timestamp last_seen_at
-        +record() FileBindingRecorded
-    }
-    class BusinessId {
-        +string value
-        +validate() bool
-    }
-    class SectionAnchor {
-        +string value
-        +derive(id, heading) SectionAnchor
-    }
-    class ArtefactType {
-        +string value
-        +isKnown() bool
-    }
-    class FileLayout {
-        <<enumeration>>
-        single-collection
-        one-per-artefact
-        inherits-from-parent
-    }
-
-    Artefact "1" --> "1" BusinessId : identified by
-    Artefact "1" --> "1" ArtefactType : typed as
-    Artefact "1" --> "1" IdCounter : counter tracks
-    ArtefactReference "0..*" --> "1" Artefact : source
-    ArtefactReference "0..*" --> "1" Artefact : target
-    FileBinding "0..1" --> "1" Artefact : binds
-    FileBinding "1" --> "1" SectionAnchor : anchored at
-    ArtefactType "1" --> "1" FileLayout : has layout
-```
+| OI-ID  | Type           | Summary                                                                                                                                                | Source anchor                | Source heading                                | Resolution path                                                                                                                       | Priority | Status | Owner   | Due / Review date | Tracker ref |
+| :----- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------- | :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ | :------- | :----- | :------ | :---------------- | :---------- |
+| OI-001 | doc-gap        | Glossary `docs/domain/02c-glossary.md` does not exist; every entity / VO / event in this model carries `_TODO_ — BC-01.GT-NN` for its glossary-term link. | #ubiquitous-language         | Domain Model — BC-01 Artefact Store (header)  | Run the `domain-glossary` skill against BC-01 to seed `GT-NN` terms (artefact, business ID, relationship, file binding, snapshot, …); then replace every `_TODO_ — BC-01.GT-NN` placeholder in this file with the actual term ID. | high     | open   | victor  | 2026-06-15        | _TBD_       |
+| OI-002 | decision-gap   | Whether the Implementation supplement (Physical schema / Property schemas / Graph traversal pattern) stays in this file or moves to a separate data-model contract document. ADR-0003 currently sanctions it being here. | #implementation-supplement   | Implementation supplement                     | Decide once a second domain model file is created and the duplication / divergence cost becomes visible; if it moves, update ADR-0003 §Dependent artefacts to point at the new location. | low      | open   | victor  | 2026-09-01        | _TBD_       |
 
 ---
 
-## Open Items
+## Changelog
 
-None at present.
+| Date | Author | Change |
+|---|---|---|
+| 2026-05-25 | Victor Hueni | Initial draft drawn from ADR-0001 + ADR-0002 + ADR-0003 (under DuckDB). |
+| 2026-05-25 | Victor Hueni | SQLite cascade: DDL rewritten for SQLite syntax (INTEGER PK AUTOINCREMENT, `datetime('now')`, `json_valid()` CHECK); PRAGMAs documented; transaction reference updated. |
+| 2026-05-25 | Victor Hueni | Template alignment pass (`domain-model` skill v1.0): H1 reformatted, Subdomain type + Ubiquitous language headers added, aggregate catalogue columns aligned to template, per-aggregate Commands → Events tables + Size check lines + Member listings added, dedicated Entity catalogue + Value object catalogue + Domain event catalogue sections introduced (entity sections now document behaviour methods explicitly to fix anemic-model finding), AGG-02 invariant rephrased to business language (`source ≠ target`), Implementation supplement clearly demarcated per ADR-0003 deviation, Open Items populated with glossary + supplement-location items, Changelog added. |
