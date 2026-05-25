@@ -17,17 +17,17 @@ The homemade-claude-kit metamodel produces artefacts across five layers:
 | Business architecture | personas, competitive landscape, lean canvas, capability map, value streams, objectives, quantitative models | P-NN, BC-NN, VS-N.M, OBJ-NN, KR-NN.M |
 | Domain | bounded contexts, glossary terms, domain model (entities, aggregates, events) | BC-NN, GT-NN |
 | Product | FBS (functionalities), delivery roadmap (epics), PRDs, quality attributes | C-N.M.FXX, E-NN |
-| Quality assurance | (planned) test plans, test cases, bug reports | — |
-| Operations | runbooks, RCAs, incidents | — |
+| Quality assurance | (planned) test plans, test cases, bug reports | (none yet) |
+| Operations | runbooks, RCAs, incidents | (none yet) |
 
 Today every artefact is a markdown file. Cross-references between artefacts use
 text-based ID conventions (e.g. `C-1.2.F03`, `E-02`) that are:
 
-- **unenforced** — no tool validates that a referenced ID exists
-- **unqueryable** — answering "which functionalities belong to E-02 and their
+- **unenforced**: no tool validates that a referenced ID exists
+- **unqueryable**: answering "which functionalities belong to E-02 and their
   total estimated effort?" requires reading and mentally joining multiple files
-- **drift-prone** — renaming or re-numbering an ID in one file does not propagate
-- **computation-hostile** — cross-artefact aggregation (effort estimates, roadmap
+- **drift-prone**: renaming or re-numbering an ID in one file does not propagate
+- **computation-hostile**: cross-artefact aggregation (effort estimates, roadmap
   timelines, model inputs) requires fragile markdown parsing
 
 A deeper problem surfaces when AI agents (Claude, Codex) are the primary authors
@@ -44,12 +44,12 @@ the tool layer, not by the agent's memory.
 
 ## Decision Drivers
 
-- Must cover all five metamodel layers — a tool that handles product but not
+- Must cover all five metamodel layers: a tool that handles product but not
   business architecture solves only part of the problem
 - Must enforce ID relationships (FK semantics between artefact types)
 - Must enable cross-artefact queries (e.g. effort per epic, KRs per objective)
 - IDs must be generated deterministically by the persistence layer, never by an LLM
-- Must be usable by AI agents (Claude, Codex) as a deterministic tool layer via MCP
+- Must be usable by AI agents (Claude, Codex) as a deterministic tool layer
 - Must be Python-native to integrate with marimo as the analysis interface
 - Must work for a solo founder / AI-only MVP with zero infrastructure overhead
 - Must not lock data in a proprietary cloud service
@@ -58,24 +58,24 @@ the tool layer, not by the agent's memory.
 
 ## Considered Options
 
-- **A** — Status quo: markdown files with text ID conventions
-- **B** — SaaS project-management tools (Linear, Jira/Confluence, Notion)
-- **C** — OSS self-hosted tools (Plane, AppFlowy, Anytype)
-- **D** — Local DuckDB file, human-edited via marimo
-- **E** — Structured YAML source files + DuckDB materialized query layer
-- **F** — Local MCP server exposing CRUD tools over DuckDB, with YAML export for git
-- **G** — CLI tool (adr-tools style) over DuckDB, with YAML export for git
+- **A.** Status quo: markdown files with text ID conventions
+- **B.** SaaS project-management tools (Linear, Jira/Confluence, Notion)
+- **C.** OSS self-hosted tools (Plane, AppFlowy, Anytype)
+- **D.** Local DuckDB file, human-edited via marimo
+- **E.** Structured YAML source files + DuckDB materialized query layer
+- **F.** Local MCP server exposing CRUD tools over DuckDB, with YAML export for git
+- **G.** CLI tool (adr-tools style) over DuckDB, with YAML export for git
 
 ## Decision Outcome
 
-Chosen option: **G — CLI tool + DuckDB + YAML export**, because it satisfies the
+Chosen option: **G (CLI tool + DuckDB + YAML export)**, because it satisfies the
 agent-as-primary-user constraint with the least infrastructure of any option.
 
-Claude Code already has the Bash tool. A CLI *is* the tool layer — no server
-process, no protocol, no JSON-RPC. The agent calls `metamodel new persona ...` via
+Claude Code already has the Bash tool. A CLI *is* the tool layer: no server
+process, no protocol, no JSON-RPC. The agent calls `clew new persona ...` via
 Bash and receives a deterministic ID back. The DB generates all IDs via sequences.
 Markdown narrative written by the agent references those IDs. Marimo notebooks
-query DuckDB for analysis. `metamodel export yaml` produces a git-readable snapshot.
+query DuckDB for analysis. `clew export yaml` produces a git-readable snapshot.
 
 The design is deliberately modelled on `adr-tools`: a small, composable CLI that
 does one thing well per command, installable in one line, usable in scripts and
@@ -85,18 +85,18 @@ agent sessions alike.
 AGENT (Claude / Codex)
   ├── converses to think through content
   ├── calls CLI via Bash to persist structured records
-  │     metamodel new persona "Ophthalmologist" --role "..." → P-01
-  │     metamodel new functionality "Schedule surgery" --cap C-1.2 → C-1.2.F03
-  │     metamodel set complexity C-1.2.F03 M
-  │     metamodel link C-1.2.F03 E-02
-  │     metamodel estimate epic E-02 → { best: 8d, likely: 12d, worst: 18d }
+  │     clew new persona "Ophthalmologist" --role "..." → P-01
+  │     clew new functionality "Schedule surgery" --cap C-1.2 → C-1.2.F03
+  │     clew set complexity C-1.2.F03 M
+  │     clew link C-1.2.F03 E-02
+  │     clew estimate epic E-02 → { best: 8d, likely: 12d, worst: 18d }
   └── writes markdown prose referencing returned IDs
 
-METAMODEL-CLI (Typer, installed via uvx / pip)
+CLEW CLI (Typer, installed via uvx / pip)
   ├── CRUD commands per entity type
   ├── ID generation via DB sequences (never by the agent)
   ├── FK enforcement at write time
-  └── metamodel export yaml → snapshot/
+  └── clew export yaml → snapshot/
 
 DUCKDB (local .db file per project)
   ├── Schema for all five metamodel layers
@@ -114,46 +114,71 @@ MARKDOWN DOCS (narrative layer)
   └── Rich prose that structured data cannot express
 
 snapshot/ (YAML export, git-tracked)
-  ├── Generated by `metamodel export yaml`
+  ├── Generated by `clew export yaml`
   ├── Human-readable; never edited directly
-  └── Deterministic — same DB state always produces same YAML
+  └── Deterministic: same DB state always produces same YAML
 ```
 
 ### Positive Consequences
 
-- IDs are DB sequences — deterministic, collision-free, never LLM-generated
+- IDs are DB sequences: deterministic, collision-free, never LLM-generated
 - FK violations fail at command time; the agent receives a clear error message
 - Any agent with shell access (Claude Code, Codex, scripts) uses the same CLI
-- No server process — the CLI is stateless; invoked per command, exits cleanly
-- Installable in one line: `uvx metamodel-cli` or `pip install metamodel-cli`
+- No server process: the CLI is stateless; invoked per command, exits cleanly
+- Installable in one line: `uvx clew` or `pip install clew`
 - Composable: pipe, script, combine with other shell tools
-- Markdown narrative survives unchanged — agents write prose; CLI manages structure
+- Markdown narrative survives unchanged: agents write prose; CLI manages structure
 - YAML export is deterministic (generated from DB state, not by an LLM)
-- Analysis notebooks are pure read-only DuckDB consumers — cannot corrupt data
+- Analysis notebooks are pure read-only DuckDB consumers, cannot corrupt data
 - Upgrade path is clean: wrap the same `crud.py` core in an MCP server or FastAPI
   when a dedicated protocol or multi-user access is needed; no core layer rewrite
 
 ### Negative Consequences
 
 - Schema design and migration discipline required as the metamodel evolves
-- Existing markdown artefacts with hand-written IDs must be migrated —
+- Existing markdown artefacts with hand-written IDs must be migrated:
   one-time cost per project
-- `metamodel-cli` package must be developed and maintained
+- `clew` package must be developed and maintained
 - DuckDB is a Python dependency; projects without Python cannot use the query layer
+
+### Concurrency model
+
+clew v1 is **single-writer per repository**. This is a deliberate scope
+decision, not an oversight:
+
+- Concurrent CLI invocations on the same machine are serialised via an OS
+  file lock (`flock`) on the DuckDB file. The second process waits rather
+  than racing; no data is lost.
+- YAML snapshot files are written via temp file + atomic `rename(2)` to
+  eliminate partial-write windows.
+- On startup, the CLI reconciles DB-vs-YAML drift: if the DB is ahead of
+  the YAML (which can happen if a process crashes between DB commit and
+  YAML rename), the YAML is regenerated from the DB. This makes the dual-
+  write self-healing without requiring a true distributed transaction.
+
+Cross-machine concurrency (two humans editing the same metamodel from
+different checkouts, CI writing while a human writes, or a web UI
+operating alongside the CLI) is **explicitly out of scope** for v1 and
+v2. That use case requires a real database server with its own
+concurrency control and conflict resolution, which is the v3 target.
+Bolting distributed coordination onto a local-file CLI is not attempted.
 
 ### Upgrade path
 
 ```
 MVP    CLI (Bash tool in Claude Code / Codex) → DuckDB
 v2     MCP server wrapping the same crud.py core → dedicated MCP clients
-v3     FastAPI wrapping the same crud.py core → HTTP / multi-user / mobile
+v3     FastAPI + Postgres wrapping the same crud.py core → HTTP / multi-user / mobile
 ```
 
-The `crud.py` core never changes between versions. Only the interface layer grows.
+The `crud.py` core never changes between versions. Only the interface
+layer grows. The jump from v2 → v3 is the one that lifts the
+single-writer constraint; v1 → v2 is a transport change, not a
+concurrency change.
 
 ## Pros and Cons of the Options
 
-### A — Status quo (markdown + text ID conventions)
+### A. Status quo (markdown + text ID conventions)
 
 #### Positive
 
@@ -163,14 +188,14 @@ The `crud.py` core never changes between versions. Only the interface layer grow
 
 #### Negative
 
-- IDs are unenforced text — broken references are invisible
+- IDs are unenforced text: broken references are invisible
 - No cross-artefact queries without bespoke parsing
 - LLM-generated IDs have no collision guarantee across sessions
 - Computation (effort estimates, timelines) requires fragile markdown parsing
 
-### B — SaaS project-management tools
+### B. SaaS project-management tools
 
-#### B1 — Linear
+#### B1. Linear
 
 #### Positive
 
@@ -178,13 +203,13 @@ The `crud.py` core never changes between versions. Only the interface layer grow
 
 #### Negative
 
-- Product layer only — no persona, capability-map, bounded-context, or
+- Product layer only: no persona, capability-map, bounded-context, or
   value-stream modeling
 - Proprietary; data in Linear's cloud
 - No MCP server; agent access requires bespoke Linear API integration per project
 - Cannot be self-hosted
 
-#### B2 — Jira + Confluence (Atlassian)
+#### B2. Jira + Confluence (Atlassian)
 
 #### Positive
 
@@ -197,7 +222,7 @@ The `crud.py` core never changes between versions. Only the interface layer grow
 - No MCP integration; no Python/marimo query layer
 - Confluence adds no enforcement over plain markdown
 
-#### B3 — Notion
+#### B3. Notion
 
 #### Positive
 
@@ -206,14 +231,14 @@ The `crud.py` core never changes between versions. Only the interface layer grow
 
 #### Negative
 
-- Schema is soft — no FK enforcement
+- Schema is soft: no FK enforcement
 - Proprietary; data not locally controlled
 - API rate-limited and eventual-consistent; not suitable as a live tool layer
 - Not git-friendly
 
-### C — OSS self-hosted tools
+### C. OSS self-hosted tools
 
-#### C1 — Plane (OSS Jira alternative)
+#### C1. Plane (OSS Jira alternative)
 
 #### Positive
 
@@ -222,10 +247,10 @@ The `crud.py` core never changes between versions. Only the interface layer grow
 #### Negative
 
 - Requires running a server (Docker)
-- Product tracking only — no business architecture layer
+- Product tracking only: no business architecture layer
 - No MCP server; no Python/marimo integration
 
-#### C2 — AppFlowy
+#### C2. AppFlowy
 
 #### Positive
 
@@ -235,7 +260,7 @@ The `crud.py` core never changes between versions. Only the interface layer grow
 
 - Limited relational features; no Python integration
 
-#### C3 — Anytype
+#### C3. Anytype
 
 #### Positive
 
@@ -245,7 +270,7 @@ The `crud.py` core never changes between versions. Only the interface layer grow
 
 - Immature; no SQL interface; no MCP server; no marimo integration
 
-### D — Local DuckDB, human-edited via marimo
+### D. Local DuckDB, human-edited via marimo
 
 DuckDB as single source of truth; marimo notebooks provide the data-entry UI.
 
@@ -257,12 +282,12 @@ DuckDB as single source of truth; marimo notebooks provide the data-entry UI.
 
 #### Negative
 
-- Marimo is the write path — agents cannot write to DuckDB directly without a
+- Marimo is the write path: agents cannot write to DuckDB directly without a
   tool layer; every agent session would need to open a notebook
 - No MCP interface; does not satisfy the agent-as-primary-user driver
 - Binary file; git diffs opaque
 
-### E — Structured YAML source + DuckDB materialized query layer
+### E. Structured YAML source + DuckDB materialized query layer
 
 YAML is the human-editable source of truth; DuckDB is rebuilt from it on demand.
 
@@ -273,14 +298,14 @@ YAML is the human-editable source of truth; DuckDB is rebuilt from it on demand.
 
 #### Negative
 
-- LLM-generated YAML is non-deterministic — field ordering, optional fields,
+- LLM-generated YAML is non-deterministic: field ordering, optional fields,
   phrasing vary across sessions, producing noisy git diffs even with no semantic
   change. This directly breaks the git-readability value proposition.
 - No MCP interface; agent must write YAML files directly, re-introducing the
   non-determinism problem
 - Two representations to maintain before a generation pipeline exists
 
-### F — Local MCP server + DuckDB + YAML export
+### F. Local MCP server + DuckDB + YAML export
 
 #### Positive
 
@@ -291,18 +316,18 @@ YAML is the human-editable source of truth; DuckDB is rebuilt from it on demand.
 
 #### Negative
 
-- MCP server process must be running at agent-session time — extra operational step
+- MCP server process must be running at agent-session time: extra operational step
 - Heavier than a CLI for the MVP use case where Claude Code's Bash tool suffices
 - Schema and migration discipline required
-- `metamodel-mcp` package must be developed and maintained
+- `clew-mcp` package must be developed and maintained
 
-### G — CLI tool (adr-tools style) + DuckDB + YAML export (chosen)
+### G. CLI tool (adr-tools style) + DuckDB + YAML export (chosen)
 
 See Decision Outcome above.
 
 #### Positive
 
-- No server process — stateless, invoked per command
+- No server process: stateless, invoked per command
 - Works with any agent that has shell access
 - Installable in one line; composable with other shell tools
 - Same `crud.py` core can be wrapped in MCP or FastAPI later without rewrite
@@ -311,7 +336,7 @@ See Decision Outcome above.
 #### Negative
 
 - Schema and migration discipline required
-- `metamodel-cli` package must be developed and maintained
+- `clew` package must be developed and maintained
 - DuckDB is a Python dependency
 
 ## Implementation Notes
@@ -319,10 +344,10 @@ See Decision Outcome above.
 ### Package structure
 
 ```
-metamodel-cli/
+clew/
   schema.py     # Pydantic models + DuckDB DDL for all five metamodel layers
-  crud.py       # CRUD functions — sole business logic, shared by all interfaces
-  id_gen.py     # DB sequence wrappers — sole source of ID generation
+  crud.py       # CRUD functions, sole business logic, shared by all interfaces
+  id_gen.py     # DB sequence wrappers, sole source of ID generation
   cli.py        # Typer CLI entry point
   export.py     # YAML export (deterministic serialisation from DB state)
 ```
@@ -330,37 +355,37 @@ metamodel-cli/
 ### Core commands (initial set)
 
 ```bash
-# Entity creation — returns the generated ID on stdout
-metamodel new persona "name" [--role] [--goals] [--pain-points]
-metamodel new capability "name" [--parent BC-NN] [--level 0|1|2]
-metamodel new functionality "name" --cap C-N.M [--description]
-metamodel new epic "name" [--phase N]
-metamodel new objective "statement" [--perspective financial|customer|...]
-metamodel new key-result OBJ-NN "metric" --target N [--unit]
+# Entity creation, returns the generated ID on stdout
+clew new persona "name" [--role] [--goals] [--pain-points]
+clew new capability "name" [--parent BC-NN] [--level 0|1|2]
+clew new functionality "name" --cap C-N.M [--description]
+clew new epic "name" [--phase N]
+clew new objective "statement" [--perspective financial|customer|...]
+clew new key-result OBJ-NN "metric" --target N [--unit]
 
 # Relationships
-metamodel link FUNC-ID epic EPIC-ID
-metamodel link KR-ID epic EPIC-ID
+clew link FUNC-ID epic EPIC-ID
+clew link KR-ID epic EPIC-ID
 
 # Updates
-metamodel set complexity FUNC-ID [XS|S|M|L|XL]
-metamodel set status FUNC-ID [planned|in-progress|done]
+clew set complexity FUNC-ID [XS|S|M|L|XL]
+clew set status FUNC-ID [planned|in-progress|done]
 
 # Queries
-metamodel list [entity-type] [--filters]
-metamodel estimate epic EPIC-ID
-metamodel estimate phase N
+clew list [entity-type] [--filters]
+clew estimate epic EPIC-ID
+clew estimate phase N
 
 # Git snapshot
-metamodel export yaml [--out snapshot/]
+clew export yaml [--out snapshot/]
 ```
 
 ### Project layout
 
 ```
-docs/metamodel/
-  metamodel.db    # DuckDB file — source of truth (.gitignore or track as binary)
-  snapshot/       # YAML export — git-tracked, human-readable, never edited directly
+docs/clew/
+  clew.db         # DuckDB file, local working cache, gitignored
+  snapshot/       # YAML export, git-tracked, source of truth, never edited directly
     personas.yaml
     capabilities.yaml
     functionalities.yaml
@@ -372,15 +397,19 @@ docs/metamodel/
 
 ### adr-tools analogy
 
-| `adr-tools` | `metamodel-cli` |
+| `adr-tools` | `clew` |
 |---|---|
-| `adr new "title"` | `metamodel new persona "name"` |
+| `adr new "title"` | `clew new persona "name"` |
 | Auto-numbered `.md` file | Auto-sequenced DB record, ID on stdout |
-| `adr list` | `metamodel list functionalities --epic E-02` |
-| `adr generate toc` | `metamodel export yaml` |
+| `adr list` | `clew list functionalities --epic E-02` |
+| `adr generate toc` | `clew export yaml` |
 | Bash scripts | Python / Typer + DuckDB |
 
 This ADR does not specify the full DuckDB schema or command signatures in detail.
-Those belong in the implementation plan for `metamodel-cli` v0.1, scoped to the
+Those belong in the implementation plan for `clew` v0.1, scoped to the
 first two entity types (functionalities + epics) to validate the pattern before
 generalising to all five metamodel layers.
+
+### Related decisions
+
+- [ADR-0002 Bind metamodel artefacts to narrative files via a typed layout convention](adr-0002-artefact-file-binding.md) extends `schema.py` (per-type `file_layout`, `default_path`, `parent_type`) and `cli.py` (`clew layout`, `clew where`, validation inside `clew new`).

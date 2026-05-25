@@ -1,0 +1,171 @@
+---
+title: Lean Canvas
+status: draft
+owner: Victor Hueni
+last_reviewed: 2026-05-24
+review_interval: 60d
+---
+
+<!-- doc-version: 1.0 | created: 2026-05-24 | variant: Lean Canvas (Maurya 2010) | timeframe: clew v1 MVP (current-state) -->
+
+# clew · Lean Canvas
+
+**Variant:** Lean Canvas (Ash Maurya, 2010). Chosen over BMC because clew is pre-revenue, pre-product, and high-uncertainty; the riskiest unknowns are persona existence and problem fit, not infrastructure scaling. [OBJ-03](04b-objectives.md#obj-03--validate-the-core-hypotheses-before-scaling) makes this explicit.
+
+**Timeframe:** clew v1 MVP, current-state only. A future-state canvas (post-validation, post-monetisation) belongs in a separate dated file when needed; per skill discipline, this canvas does not mix the two.
+
+**Companion docs:**
+- [`docs/VISION.md`](../VISION.md): north star this canvas operationalises.
+- [`docs/business/01a-personas.md`](01a-personas.md): P-01 Ava, the only segment in v1.
+- [`docs/business/04b-objectives.md`](04b-objectives.md): the OKR set this canvas's Key Metrics roll up to.
+
+**Methodology and bibliography:** see the [`business-model-canvas` skill in homemade-claude-kit](https://github.com/VictorHueni/homemade-claude-kit/tree/claude/metamodel-personal-skills-naecw/business-model-canvas) (Osterwalder & Pigneur 2010, Maurya 2010, Strategyzer practitioner discipline, plus 8-anti-pattern literature).
+
+**Upstream gaps:** processes (`proc-NN-{slug}`), FBS functionalities, and quantitative models are not yet defined; soft-link slots referencing them remain `_TODO_`. All 4 value streams in [`04a-value-streams.md`](04a-value-streams.md) are now fully filled (VS-1 Compose, VS-2 Navigate, VS-3 Refactor, VS-4 Share). §3 UVP Concrete wins 1, 2, 3, plus the markdown-and-git readability bullet, plus the Bidirectional time traceability bullet are all wired to filled streams. §5 Channels soft-links unchanged. Capabilities are defined in [`03a-capability-map.md`](03a-capability-map.md); §4 and §9 soft-links reference them directly.
+
+## Confidence Legend
+
+| Level | Meaning |
+|---|---|
+| Assumed | Author hypothesis. No external evidence yet. |
+| Tested | At least one interview, prototype test, smoke test, or analogous experiment supports the bullet. Directionally positive, not conclusive. |
+| Validated | Multiple independent data points or sustained real-world use. High confidence. |
+
+## 1. Problem · *Confidence: Tested (N=1, founder-as-instance)*
+
+Top 3 problems P-01 faces, in priority order per the [wave-1 synthesis](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md), plus the alternatives she actually uses today.
+
+- **PR-1.** No reliable traceability matrix or documentation relationship graph that comes directly from the documents themselves. Cross-artefact questions (which capability serves which persona, which KRs roll up to which objective, which features land in which epic) cannot be answered without the LLM scoping IDs from files and joining them in its head. Cross-artefact analytics (effort estimation, quantitative models) are blocked for the same reason. Even the existence of broken references is invisible without bespoke grep.
+- **PR-2.** No confidence in integrity-check or audit when relying solely on the LLM. The LLM silently renumbers items while updating an artefact; downstream references rot without anyone noticing. Determinism is the missing primitive: same input, same output, every time, with an audit trail anyone (human or future agent) can replay.
+- **PR-3.** Changing structure, name, or ID has massive blast radius across existing docs. A folder rename or artefact renumber means scanning every file for references and either fixing them by hand or trusting the agent to find them all. Even after a careful pass, dead links keep surfacing weeks later.
+- **Existing alternatives P-01 actually uses today** (the original 5-item list was trimmed after wave 1 refuted Notion DBs / bespoke YAML metamodels / spreadsheets as alternatives the interviewee had never tried): hand-rolled markdown conventions + grep; the prose-discipline triad (LLM + agent skills + Claude rules, plus the [`rules/metamodel.md`](https://github.com/VictorHueni/homemade-claude-kit/blob/claude/metamodel-personal-skills-naecw/rules/metamodel.md) prose-rules document as a mitigation attempt that proved insufficient); or "trust the agent to remember" (it doesn't).
+- **Out of context (work setting, separate from agent-first product workflows):** Atlassian + MCP. Tried and explicitly rejected for agent product workflows due to API complexity and per-fetch token consumption.
+
+**Soft-links:** [P-01 §Frustrations](01a-personas.md).
+
+## 2. Customer Segments · *Confidence: Assumed*
+
+- **CS-1 · P-01 Ava.** Agent-first product engineer building products solo or in tiny teams (1 to 3 people), using Claude Code or comparable agentic harnesses daily, triggered the moment a new project needs persona / value / requirement / process artefacts the agent can read back later in the same session. Full profile: [P-01 Ava (proto-persona)](01a-personas.md).
+- **v1 target size:** ≥ 5 active users running clew on their own projects ([OBJ-03 KR-03.3](04b-objectives.md#obj-03--validate-the-core-hypotheses-before-scaling)).
+- **Out of scope for v1:** traditional business analysts working without agents; teams already on enterprise BA tooling (Sparx, Mega, ARIS); knowledge-graph generalists; non-product domains (legal, finance, ops).
+
+**Soft-links:** [P-01](01a-personas.md).
+
+## 3. Unique Value Proposition · *Confidence: Tested (N=1, founder-as-instance) with refinement*
+
+Refined per [wave-1 synthesis](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md). Each bullet passes the "so that" test: feature *so that* outcome.
+
+- **North-star promise.** A typed, persistent architectural substrate **so that** any builder using agents can document their building process and make the produced knowledge navigable for humans and agents alike, with high confidence, across the full lifecycle (business architecture, market intelligence, product, QA, implementation, operations, runbooks). *(Tested · N=1, with scope-widening refinement: "agent-first product engineers" → "any builder using agents"; product-centric → full-lifecycle)*
+- **High-concept pitch.** "Git for the agentic product lifecycle": every artefact gets a stable ID, declared relationships, and a confidence rating, **so that** the next agent session can pick up exactly where the last one left off. *(Tested · N=1; scope qualifier widened from "product architecture")*
+- **Concrete win 1.** Ask "which X serves Y?" inside the agent session and get an answer in under 30 seconds, **so that** flow is not broken to go hunt context. User-visible demo of the deterministic traceability-matrix capability; the README headline candidate. *(Tested · N=1)*
+- **Concrete win 2.** Rename, delete, or refactor an artefact and have every broken reference caught at write-time, **so that** drift is impossible instead of silently common. *(Tested · N=1)*
+- **Concrete win 3.** Methodology disciplines (BIZBOK / BABOK / Strategyzer / Sommerville, with DDD / ATDD / BDD / SRE planned for the QA + ops layers) wired in as first-class typed artefacts with skill-mediated authoring, **so that** business, architect, PM, dev, QA, and DevOps roles work hand-in-hand on the same metamodel rather than each maintaining their own siloed view. *(Tested · N=1; multi-role alignment language added from interviewee's "they all work hand-in-hand toward the same goal" framing)*
+- **Bidirectional time traceability.** Every artefact preserves the rationale that produced it (why decisions were made) and surfaces what is planned ahead (roadmap state, KR progress, pending refactors), **so that** anyone (human or future agent) can always answer "why was this built?" and "what comes next?" without re-reading the whole history. *(Tested · N=1; new bullet from wave-1 finding "you will always know why things have been done and what is ahead for your product")*
+- **Anti-promise (what clew is not).** Not a BPMN tool. Not SaaS-first (local-first by design). The cosmetic layer of docs linting (formatting, prose, dead links) is bundled via [util-docs-lint](https://github.com/VictorHueni/homemade-claude-kit/tree/claude/metamodel-personal-skills-naecw/util-docs-lint); clew's differentiator is the *semantic* layer above that: broken artefact references, missing required relationships, drift a markdown linter cannot see. Knowledge-graph functionality is **not permanently excluded**; it may come later if it makes sense (wave-1 signal: "the knowledge graph might come at some point if that makes sense").
+
+**Soft-links:** [VS-1 Compose Architecture](04a-value-streams.md#vs-1--compose-architecture) (filled; the substrate that delivers Concrete win 3 and the foundational methodology distillation; VS-1.3 Draft + VS-1.4 Persist realise it stage-by-stage). [VS-2 Navigate Architecture](04a-value-streams.md#vs-2--navigate-architecture) (filled; realises Concrete win 1 at [VS-2.2 Resolve from Canonical Source](04a-value-streams.md#vs-22--resolve-from-canonical-source): the "< 30 s cross-artefact answer" promise delivered deterministically via C3.2 Pre-built traceability views). [VS-3 Refactor Architecture](04a-value-streams.md#vs-3--refactor-architecture) (filled; fully realises Concrete win 2 across two complementary stages: [VS-3.2 Preview Downstream Impact](04a-value-streams.md#vs-32--preview-downstream-impact) delivers the "rename catches drift" half *before commit* via C3.2's impact-analysis view applied to changes; [VS-3.3 Execute Change with Integrity](04a-value-streams.md#vs-33--execute-change-with-integrity) delivers the "drift is impossible" half *at commit* via C4.1's atomic integrity across the full change-set). [VS-4 Share Architecture](04a-value-streams.md#vs-4--share-architecture) (filled; realises the markdown-and-git readability promise across all 4 stages: [VS-4.1 Confirm Snapshot Is Current](04a-value-streams.md#vs-41--confirm-snapshot-is-current) ensures drift-free state, [VS-4.2 Materialise Self-Contained Views](04a-value-streams.md#vs-42--materialise-self-contained-views) pre-renders canonical views as static markdown so no clew runtime is needed, [VS-4.3 Publish to Reachable Location](04a-value-streams.md#vs-43--publish-to-reachable-location) gets the snapshot to the consumer, and [VS-4.4 Provide Reader Orientation](04a-value-streams.md#vs-44--provide-reader-orientation) ensures the consumer can find their way. Overall pain is Medium, not Critical: the only filled stream without Critical inheritance, reflecting Tier-2 / Backlog priority because no consumer instance yet exists). The Bidirectional time traceability bullet is fully realised at [VS-2.3 Surface Provenance](04a-value-streams.md#vs-23--surface-provenance) (where C3.3 Bidirectional time traceability attaches "why backward + what next forward" tags to every query result row), with the audit-trail substrate at VS-1.4. (VPC-_TODO_ deferred: wave 1 produced strong value-fit signal directly; VPC drill-down belongs after external interviews.)
+
+## 4. Solution · *Confidence: Assumed (solution details still in design); foundational bullet Tested (N=1)*
+
+Each solution bullet maps to one specific problem from §1, plus a foundational capability and a cross-cutting one.
+
+- **For PR-1 (no traceability matrix from documents themselves).** A typed metamodel covering the BIZBOK / BABOK / Strategyzer / Sommerville stack (personas, BMC, capabilities, value streams, processes, objectives, requirements, FBS, domain) with stable IDs and declared relationships, plus an agent-facing query surface so the relationship graph is computable from the persisted artefacts in under 30 seconds ([OBJ-01 KR-01.3](04b-objectives.md#obj-01--ava-ships-coherent-product-thinking-at-agent-speed)).
+- **For PR-2 (no integrity / audit confidence with LLM; determinism is missing).** Deterministic ID generation via DB sequences (never by the LLM), FK enforcement at write time, and an audit trail anyone (human or future agent) can replay. The user can verify, not just trust. Architecture: [ADR-0001](../architecture/decisions/adr-0001-metamodel-persistence-layer.md), [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md).
+- **For PR-3 (refactor blast radius).** Write-time integrity enforcement so a violation surfaces at the moment it is introduced ([OBJ-02 KR-02.2](04b-objectives.md#obj-02--the-architectural-substrate-is-trustworthy-enough-that-agents-depend-on-it)) rather than weeks later when a downstream reader notices. Combined with the binding model from [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md), every rename, restructure, or renumber produces immediate, complete impact surfacing.
+- **Foundational · methodology distillation.** A companion skill catalogue ([homemade-claude-kit](https://github.com/VictorHueni/homemade-claude-kit)) encodes each methodology (BIZBOK, BABOK, Strategyzer, Sommerville; DDD, ATDD / BDD, SRE planned for the QA + ops layers) as authoring discipline the agent invokes when filling an artefact. The skill **is** the methodology distilled into a template, applied at write time, not a PDF the engineer has to remember to consult. This serves all three PR items by giving the agent the right structured-authoring context per artefact type, and it is the substrate that makes §3 UVP Concrete win 3 and the §9 Unfair Advantage bullets meaningful rather than aspirational. *(Tested · N=1 · interviewee already uses homemade-claude-kit skills as the authoring discipline today)*
+- **Cross-cutting.** Markdown-first export so artefacts remain human-readable and grep-able in the repo, with no proprietary file format walls. Cosmetic docs linting (formatting, prose, dead links) bundled via [util-docs-lint](https://github.com/VictorHueni/homemade-claude-kit/tree/claude/metamodel-personal-skills-naecw/util-docs-lint), layered beneath clew's semantic integrity checks.
+
+**Soft-links:** FBS-_TODO_ · [Capability map](03a-capability-map.md) (every §4 bullet realises one or more L1 capabilities; mapping by bullet: PR-1 → C2.1, C2.2, C3.1, C3.2; PR-2 → C2.1, C4.1, C4.3; PR-3 → C2.3, C4.1; Foundational → C1.1, C5.1, C5.2; Cross-cutting → C2.4. Full L1 catalogue in the map's [§Capability index](03a-capability-map.md#capability-index)).
+
+## 5. Channels · *Confidence: Assumed*
+
+At least one channel per phase (discovery / evaluation / delivery / support).
+
+- **Discovery.** Word of mouth among Claude Code and agentic-dev power users; the founder's network; occasional long-form writeups (Substack, HN); talks at BABOK / Strategyzer / agentic-dev community meetups.
+- **Evaluation.** Open-source on GitHub. Install in under 5 minutes, run against your own project, decide within a week.
+- **Delivery.** CLI plus integration with Claude Code (and other agentic harnesses); local-first, no SaaS in v1.
+- **Support.** GitHub Issues; founder-direct loop (email, Discord) for the first cohort.
+
+**Soft-links:** Channel-to-stream mapping is partial because clew's modelled streams ([04a-value-streams.md](04a-value-streams.md)) cover the **internal** authoring flow (P-01 already using clew on a project), not external acquisition. Of the four channel phases: Delivery (CLI + local-first) is the substrate that lets [VS-1 Compose Architecture](04a-value-streams.md#vs-1--compose-architecture) operate; Evaluation (install + run on own project) exercises VS-1 end-to-end at first use. Discovery (word-of-mouth, talks, writeups) and Support (GitHub Issues, founder loop) are out-of-band with respect to the modelled streams; they would only map onto a separate "Adopt clew" customer-acquisition value stream that is **not modelled** today (it would require a new triggering persona, a prospective P-01 candidate not yet adopted, that is not in [`01a-personas.md`](01a-personas.md)).
+
+## 6. Revenue Streams · *Confidence: Assumed*
+
+- **v1: none, by design.** Free and open-source during the validation phase. Monetisation introduced now would pollute the OBJ-03 signal (are users adopting because clew helps, or because it's free?).
+- **Pricing model:** N/A in v1.
+- **Risk:** developer-tools markets often treat free + open-source as table stakes. A revenue path that doesn't damage the OSS community is undefined and out of scope for this canvas; it belongs in a separate future-state canvas when v1 validates.
+
+**Soft-links:** Quantitative model _TODO_.
+
+## 7. Cost Structure · *Confidence: Assumed*
+
+- **Posture.** Value-driven. Substrate quality is the priority; cost optimisation is not.
+- **Dominant cost.** Founder time (Victor Hueni, full-time on engineering, product, and methodology authorship).
+- **Second cost.** Agent inference (Claude API) during development and dogfooding.
+- **Long-tail cost.** Maintaining the [homemade-claude-kit](https://github.com/VictorHueni/homemade-claude-kit) skill catalogue. Every methodology added (BIZBOK, BABOK, Strategyzer, Sommerville extensions) is a recurring discipline-maintenance cost, not zero.
+- **Near-zero in v1.** Hosting (local-first), sales (no GTM motion), legal (OSS licence, no contracts).
+
+**Soft-links:** Cost model _TODO_.
+
+## 8. Key Metrics · *Confidence: Assumed*
+
+AARRR with at least one metric per stage relevant to v1.
+
+- **Acquisition.** Number of independent agent-first product engineers who clone clew and run it on their own project. Target ≥ 5 ([OBJ-03 KR-03.3](04b-objectives.md#obj-03--validate-the-core-hypotheses-before-scaling)).
+- **Activation.** Number of users who get their first persona persisted in under 5 minutes on their own project ([OBJ-01 KR-01.1](04b-objectives.md#obj-01--ava-ships-coherent-product-thinking-at-agent-speed)).
+- **Retention.** Number of users still authoring artefacts via clew after 4 weeks. No target yet; needs baseline.
+- **Referral.** Number of new users who arrived via existing-user word of mouth. No target yet.
+- **Revenue.** N/A in v1.
+
+**Soft-links:** Quantitative model _TODO_ · [OBJ-01](04b-objectives.md) · [OBJ-03](04b-objectives.md).
+
+## 9. Unfair Advantage · *Confidence: Assumed (one Tested item added wave 1)*
+
+Honest reflection. Per skill discipline: if it doesn't exist yet, say so.
+
+- **Embedded methodology depth.** clew encodes BIZBOK, BABOK, Strategyzer (Osterwalder, Maurya), and Sommerville disciplines as first-class typed artefacts with skill-mediated authoring. A competitor would have to internalise four bodies of practitioner literature before shipping a comparable substrate. *(Assumed)*
+- **Compounding skill catalogue.** Every methodology skill shipped in [homemade-claude-kit](https://github.com/VictorHueni/homemade-claude-kit) strengthens clew. The catalogue raises the cost-to-fork over time. *(Assumed)*
+- **Founder's practitioner background.** Victor Hueni's accumulated experience with these frameworks gives faster judgement on where the metamodel must bend and where it must hold. *(Assumed)*
+- **Local-first token economics.** Every context fetch is a file read (zero token cost), not an API roundtrip (N tokens per fetch). For agent-economics-aware buyers, this is a structural cost advantage over MCP-mediated or SaaS-hosted alternatives. Wave-1 evidence: "using tools like that having to use api etc... add complexity and token consumption for nothing really." *(Tested · N=1, founder-as-instance)*
+- **Honest gap.** No insider data, no exclusive licence, no proprietary distribution, no captive customer base, no team. If a well-resourced competitor matches the methodology embedding, the moat is small. This needs deliberate work to deepen, not assumption. *(Assumed)*
+
+**Soft-links:** Differentiator-rated L1 capabilities: [C1.1 Methodology-mediated artefact creation](03a-capability-map.md#c11--methodology-mediated-artefact-creation) · [C3.2 Pre-built traceability views](03a-capability-map.md#c32--pre-built-traceability-views) · [C4.1 Write-time reference validation](03a-capability-map.md#c41--write-time-reference-validation) · [C5.1 Skill catalogue management](03a-capability-map.md#c51--skill-catalogue-management).
+
+## Inter-Block Coherence Check
+
+The skill requires every Customer Segment to trace through every block. CS-1 (P-01 Ava) below.
+
+| Block | Coverage for CS-1 |
+|---|---|
+| Problem | PR-1, PR-2, PR-3 all rooted in Ava's stated frustrations. |
+| UVP | 6 of 7 bullets explicitly address Ava's bottleneck (the 7th is the anti-promise); all bullets cross-validated against wave-1 synthesis findings. |
+| Solution | Three bullets map directly to PR-1 / PR-2 / PR-3; a foundational bullet (methodology distillation) and a cross-cutting bullet (markdown export + util-docs-lint) serve all three. |
+| Channels | Discovery, evaluation, delivery, and support phases each name at least one channel reaching Ava's communities. |
+| Revenue | None in v1 by design; Ava is not asked to pay. |
+| Cost | Founder time plus inference cost; Ava bears zero cost. |
+| Key Metrics | Acquisition and Activation tie directly to OBJ KRs measuring Ava's outcome. |
+| Unfair Advantage | Methodology depth serves Ava (she will not get it from a generic markdown tool). |
+
+Result: CS-1 traces through every block. No orphan segments.
+
+## Open Issues / Next Tests
+
+- **Riskiest assumption #1:** that P-01 exists at scale beyond the author's head. Wave 1 (founder-as-instance) complete: persona core direction confirmed with refinement (see [wave-1 synthesis](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md)). Wave 2 (2 to 4 external interviews including ≥ 1 non-product role) still needed; KR-03.3 active-users target (≥ 5) untested.
+- **Riskiest assumption #2:** that write-time integrity enforcement is worth more than the friction it introduces. Untested until users hit a "no, you can't commit that" error and either thank clew or rage-quit. Smoke test: dogfood for 4 weeks, log every block.
+- **Riskiest assumption #3:** that markdown-first export is sufficient. Wave 1: the founder did not ask for a UI; explicitly endorsed git + markdown + close-to-code as positive signals ("everything is versioned with git and readable by anyone using a markdown reader", "close to code"). N=1 only; continue watching in wave 2.
+- **VPC drill-down deferred (again).** Wave 1 produced strong value-fit signal directly (H3 Confirmed with substantial refinement) without needing the VPC's formal structure. VPC remains a sharpening artefact for after external interviews surface any gaps the wave-1 interview did not catch.
+- **Soft-link gaps:** FBS-_TODO_, Quantitative model _TODO_, Cost model _TODO_, VPC-_TODO_. These wire up as the metamodel fills out. (Capabilities wired 2026-05-24, see [03a-capability-map.md](03a-capability-map.md). Value streams wired 2026-05-25, see [04a-value-streams.md](04a-value-streams.md): all 4 VS filled. §3 UVP Concrete wins 1, 2, 3, the markdown-and-git readability bullet, and the Bidirectional time traceability bullet are all wired to filled streams. A separate "Adopt clew" acquisition value stream would still be needed to fully wire §5 Channels Discovery/Support phases; not modelled today because the prospective-P-01 persona does not yet exist. **Trigger to model:** when a prospective-P-01 persona is identified, i.e., someone considering adoption but not yet a user, such as a GitHub stargazer asking adoption questions or a referral from a talk/writeup. The persona would likely emerge as `P-03 Prospective adopter` in [`01a-personas.md`](01a-personas.md); the stream would then carry the Discovery/Evaluation/Decide-to-adopt stages that §5 Channels currently leaves out-of-band.)
+
+## Changelog
+
+| Date | Block(s) | Evidence | Cascading effects |
+|---|---|---|---|
+| 2026-05-24 | All 9 blocks scaffolded + filled (Lean Canvas variant). | Drafted from VISION.md, P-01 (Ava), OBJ-01/02/03. All bullets Assumed; no Tested or Validated yet. | [VISION.md](../VISION.md) Linked Artefacts should backfill `Value propositions` slot to reference §3 UVP of this canvas. [04b-objectives.md](04b-objectives.md) Linked-from slots can backfill VP-_TODO_ entries. [01a-personas.md](01a-personas.md) §Frustrations gains a backlink target (PR-1, PR-2, PR-3). |
+| 2026-05-24 | §3 UVP anti-promise rewritten; §4 Solution cross-cutting bullet extended. | Author clarification: util-docs-lint (dprint + Vale + markdown-link-check) will be bundled into the clew CLI, so "not a markdown linter" was inaccurate. Reframed as: cosmetic linting bundled, semantic integrity is the differentiator. | None outside the canvas; the rewrite tightens the boundary statement, it does not change Problem, Customer Segments, or Key Metrics. |
+| 2026-05-24 | §4 Solution: PR-1-silent-failure bullet now cross-links [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md) as the first concrete demo of write-time integrity enforcement. | ADR-0002 drafted. | None; this is a backlink, not a content change. |
+| 2026-05-24 | Wave-1 synthesis cascade: §1 Problem PR items rewritten as F1 / F2 / F3 priority (traceability-graph > determinism + audit > refactor blast radius); existing alternatives trimmed after Notion / YAML / spreadsheets refuted, prose-discipline triad added, Atlassian + MCP noted as out-of-context rejected alternative. §3 UVP rewritten per interviewee's three sentences: north-star widened ("agent-first product engineers" → "any builder using agents"; product-centric → full-lifecycle); metaphor scope qualifier replaced ("Git for product architecture" → "Git for the agentic product lifecycle"); Concrete win 3 enriched with multi-role alignment + planned methodology canon for QA / ops; new Bidirectional-time-traceability bullet added; anti-promise refactored (knowledge-graph exclusion dropped, BPMN + SaaS-first kept). §9 Unfair Advantage gained local-first token-economics bullet. Confidence labels updated per block. Inter-block coherence check + Open Issues updated. | [Wave-1 P-01 validation synthesis](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md) (N = 1, founder-as-instance). | [01a-personas.md](01a-personas.md) §Frustrations / §Goals / §System Needs updated in companion commit. [04b-objectives.md](04b-objectives.md) KR-02.1 + KR-03.2 to update in next commit. |
+| 2026-05-24 | §4 Solution re-mapped to the new PR-1 / PR-2 / PR-3 labels (previous bullets still referenced the dropped PR-3 methodology-skip framing, leaving a coherence break). The methodology-skill-catalogue bullet reframed from "For PR-3 (methodology drift)" to "Foundational · methodology distillation", promoted to a cross-cutting capability that serves all three PR items and grounds §3 UVP Concrete win 3 + §9 Unfair Advantage bullets in something concrete rather than aspirational. Foundational bullet marked Tested (N=1) because the interviewee already uses homemade-claude-kit skills as the authoring discipline today. Inter-block coherence check Solution row updated. | Follow-up on wave-1 synthesis cascade; methodology positioning was preserved across §3 UVP / §9 but the §4 link to it was orphaned. | None outside the canvas; this is an internal re-mapping. |
+| 2026-05-24 | Capability backlinks wired. §Upstream gaps no longer lists `capabilities (C-N.M)` as an upstream gap. §4 Solution Soft-links: `C-_TODO_` replaced with a per-bullet capability mapping (PR-1 → C2.1, C2.2, C3.1, C3.2; PR-2 → C2.1, C4.1, C4.3; PR-3 → C2.3, C4.1; Foundational → C1.1, C5.1, C5.2; Cross-cutting → C2.4) plus a pointer to the capability map's §Capability index. §9 Unfair Advantage Soft-links: `Differentiator-rated capability _TODO_` replaced with the 4 Differentiator-rated L1 capabilities (C1.1, C3.2, C4.1, C5.1). §Open Issues soft-link gap list trimmed: `C-_TODO_` removed. | [03a-capability-map.md](03a-capability-map.md) committed earlier today. | [04b-objectives.md](04b-objectives.md) OBJ-01/02 to gain capability backlinks in next commit. [01a-personas.md](01a-personas.md) §System Needs to gain a capability-cousin footer in next commit. |
+| 2026-05-25 | VS-4 backlinks wired (cascade from [04a-value-streams.md](04a-value-streams.md) VS-4 fill). §3 UVP Soft-links: VS-4 promoted from "catalogued; will realise the markdown-and-git readability promise once filled" to "filled; realises the markdown-and-git readability promise across all 4 stages" with per-stage breakdown. Honest note added that VS-4 is the only filled stream with Medium overall pain (not Critical), reflecting Tier-2 / Backlog priority. §Upstream gaps refreshed: all 4 VS now filled; §3 UVP Concrete wins 1+2+3 plus markdown-and-git readability plus Bidirectional time traceability all wired to filled streams. §Open Issues §Soft-link gaps trimmed accordingly. The "Adopt clew" acquisition stream remains the one outstanding gap (still requires a prospective-P-01 persona that does not exist yet). | [04a-value-streams.md VS-4](04a-value-streams.md#vs-4--share-architecture). Completes the §3 UVP value-stream wiring loop. | None outside this commit. |
+| 2026-05-25 | VS-3 backlinks wired (cascade from [04a-value-streams.md](04a-value-streams.md) VS-3 fill). §3 UVP Soft-links: VS-3 promoted from "catalogued; will realise Concrete win 2 once filled; partially already realised at VS-1.4" to "filled; fully realises Concrete win 2 across two complementary stages: VS-3.2 Preview Downstream Impact delivers the 'rename catches drift' half *before commit* via C3.2's impact-analysis view applied to changes; VS-3.3 Execute Change with Integrity delivers the 'drift is impossible' half *at commit* via C4.1's atomic integrity across the full change-set." §Upstream gaps note refreshed: VS-3 now filled alongside VS-1 + VS-2; only VS-4 remains catalogued. §Open Issues §Soft-link gaps note refreshed correspondingly. Concrete wins 1, 2, and 3 are now all wired to filled streams; only the markdown-and-git readability bullet still queues on VS-4. | [04a-value-streams.md VS-3](04a-value-streams.md#vs-3--refactor-architecture). | None outside this commit. |
+| 2026-05-25 | VS-2 backlinks upgraded (cascade from [04a-value-streams.md](04a-value-streams.md) VS-2 fill). §3 UVP Soft-links: VS-2 promoted from catalogued to filled (Concrete win 1 "< 30 s cross-artefact answer" now actively realised at VS-2.2 Resolve via C3.2 Pre-built traceability views). Bidirectional time traceability bullet upgraded from "fully realised once VS-2 is filled" to "now fully realised at VS-2.3 Surface Provenance" (where C3.3 attaches "why backward + what next forward" tags to every query result row). | [04a-value-streams.md VS-2](04a-value-streams.md#vs-2--navigate-architecture). | None outside this commit. |
+| 2026-05-25 | Value-stream backlinks wired (cascade from [04a-value-streams.md](04a-value-streams.md) VS-1 fill). §Upstream gaps no longer lists `value streams (VS-N.M)` as an upstream gap. §3 UVP Soft-links: `VS-_TODO_` replaced with a per-Concrete-win mapping (Concrete win 3 + foundational methodology → VS-1 filled; Concrete win 1 → VS-2 catalogued; Concrete win 2 → VS-3 catalogued + partial VS-1.4; markdown-and-git readability → VS-4 catalogued; Bidirectional time traceability → VS-1.4 partial + VS-2 future). §5 Channels Soft-links: `VS-_TODO_ stages` replaced with an honest channel-to-stream mapping that flags the gap (Delivery + Evaluation map onto VS-1; Discovery + Support are out-of-band w.r.t. modelled streams and would need a separate "Adopt clew" acquisition value stream + a prospective-P-01 persona that does not exist yet). §Open Issues soft-link gap list trimmed: `VS-_TODO_` removed; "Adopt clew" gap explicitly listed. | [04a-value-streams.md](04a-value-streams.md) VS-1 committed earlier today. | None outside this commit. The "Adopt clew" candidate value stream is a known follow-up (deferred until a prospective-P-01 persona is added). |
