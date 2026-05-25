@@ -30,7 +30,7 @@ clew manages a complete **strategic-architecture documentation system** across f
 
 ### Artefact layers and build order
 
-16 artefacts across three layers (Business Architecture · Domain · Product Specs) plus a root Step 0. Solid arrows = hard dependency. Dashed arrows = supporting enrichment.
+18 artefacts across three layers (Business Architecture · Domain · Product Specs) plus a root Step 0 and two Architecture Contract steps. Solid arrows = hard dependency. Dashed arrows = supporting enrichment.
 
 ```mermaid
 flowchart TD
@@ -39,6 +39,7 @@ flowchart TD
     classDef specs    fill:#DBEAFE,stroke:#3B82F6,color:#1E40AF
     classDef delivery fill:#D1FAE5,stroke:#10B981,color:#065F46
     classDef support  fill:#F3F4F6,stroke:#9CA3AF,color:#374151
+    classDef arch     fill:#FEE2E2,stroke:#EF4444,color:#7F1D1D
 
     S0["0 · business-vision · VISION.md · north star"]:::business
 
@@ -65,6 +66,11 @@ flowchart TD
         S10["10 · spec-prd · PRD-NNNN"]:::specs
     end
 
+    subgraph ARCH["Architecture Contracts: Steps 7c · 8.5"]
+        S7c["7c · arch-service-contract · BC-NN.CTR-NN"]:::arch
+        S8_5["8.5 · arch-cli-contract · CLI-NN.CMD-NN"]:::arch
+    end
+
     subgraph EX["Execution: Step 11"]
         S11["11 · spec-implementation-plan · Plan-NNNN"]:::delivery
     end
@@ -72,8 +78,9 @@ flowchart TD
     subgraph SUP["Supporting Skills"]
         ADR["arch-adr · ADR-NNNN"]:::support
         CL["business-competitive-landscape"]:::support
-        RES["business-research"]:::support
-        WS["business-workshop"]:::support
+        RES["discovery-research"]:::support
+        WS["discovery-workshop"]:::support
+        IDX["discovery-idea · IDEA-NNNN"]:::support
     end
 
     S0 -.-> S1
@@ -99,18 +106,29 @@ flowchart TD
     S3 --> S7
     S7 --> S7b
     S2c --> S7b
+    S7b --> S7c
     S7 --> S8
+    S7 --> S8_5
+    S8 --> S8_5
     S7b --> S10
     S8 --> S9
+    S8_5 -.-> S9
+    S8_5 -.-> S10
+    S7c -.-> S10
     S9 --> S10
     S10 --> S11
+    ADR -.-> S7c
+    ADR -.-> S8_5
     ADR -.-> S9
     ADR -.-> S10
     CL -.-> S1
     CL -.-> S2
     RES -.-> S1
     RES -.-> S2
-    WS -.-> S3
+    RES -.-> S6
+    WS -.-> S2
+    WS -.-> S4
+    IDX -.-> S0
 ```
 
 ### Data relationships
@@ -188,6 +206,28 @@ erDiagram
         string BC_NN_EVT_NN PK
         string BC_NN_AGG_NN FK
     }
+    INTERFACE_CONTRACT {
+        string BC_NN_CTR_NN PK
+        string BC_NN FK
+        string BC_NN_AGG_NN FK
+        string BC_NN_EVT_NN FK
+        string ADR_NNNN FK
+    }
+    CLI_SURFACE {
+        string CLI_NN PK
+        string BC_NN FK
+    }
+    CLI_COMMAND {
+        string CLI_NN_CMD_NN PK
+        string CLI_NN FK
+        string C_NM_FXX FK
+        string BC_NN_CTR_NN FK
+    }
+    IDEA {
+        string IDEA_NNNN PK
+        string graduates_to FK
+        string target_id FK
+    }
 
     PERSONA ||--o{ VALUE_STREAM : "triggers"
     PERSONA ||--o{ BMC : "Customer Segments"
@@ -222,6 +262,23 @@ erDiagram
     FBS ||--o{ DOMAIN_MODEL : "functionalities become entities"
     DOMAIN_MODEL ||--o{ DOMAIN_EVENT : "aggregates produce"
     PRD }o--o{ DOMAIN_MODEL : "references AGG-NN and EVT-NN"
+    INTERFACE_CONTRACT }o--o{ ADR : "versioning and auth decisions"
+    INTERFACE_CONTRACT }o--o{ QUALITY_ATTRIBUTES : "SLA per CTR-NN"
+    INTERFACE_CONTRACT }o--o{ PRD : "acceptance criteria reference CTR-NN"
+    CLI_SURFACE ||--o{ CLI_COMMAND : "contains"
+    CLI_SURFACE }o--o{ BOUNDED_CONTEXT : "BC scope for BC-scoped CLIs"
+    CLI_SURFACE }o--o{ ADR : "taxonomy and config decisions"
+    CLI_COMMAND }o--o{ FBS : "maps to C-N.M.FXX"
+    CLI_COMMAND }o--o{ EPIC : "scoped by delivery phase"
+    CLI_COMMAND }o--o{ QUALITY_ATTRIBUTES : "SLA per command"
+    CLI_COMMAND }o--o{ PRD : "acceptance criteria reference CMD-NN"
+    CLI_COMMAND }o--o{ INTERFACE_CONTRACT : "wraps CTR-NN calls"
+    IDEA }o--o| PERSONA : "graduates_to"
+    IDEA }o--o| OBJECTIVE : "graduates_to"
+    IDEA }o--o| BMC : "graduates_to"
+    IDEA }o--o| ADR : "graduates_to"
+    IDEA }o--o| FBS : "graduates_to"
+    IDEA }o--o| PRD : "graduates_to"
 ```
 
 ---
