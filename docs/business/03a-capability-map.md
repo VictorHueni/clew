@@ -154,7 +154,7 @@ Capabilities that mediate the act of creating metamodel artefacts. The operator 
 - Does NOT verify the truthfulness of sources (editorial discipline; not enforced by clew).
 - Does NOT enforce that every claim must be cited (over-citation discipline lives in the methodology skill, not the substrate).
 
-**Soft-links.** Personas served: [P-01](01a-personas.md). Wave-1 evidence: [synthesis H2 external-evidence-backing finding](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md). Realised in streams: [VS-1.2 Load Methodology Context](04a-value-streams.md#vs-12--load-methodology-context), [VS-1.3 Draft Artefact Content](04a-value-streams.md#vs-13--draft-artefact-content).
+**Soft-links.** Personas served: [P-01](01a-personas.md). Wave-1 evidence: [synthesis H2 external-evidence-backing finding](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md). Realised in streams: [VS-1.2 Load Methodology Context](04a-value-streams.md#vs-12--load-methodology-context), [VS-1.3 Draft Artefact Content](04a-value-streams.md#vs-13--draft-artefact-content), [VS-2.3 Surface Provenance](04a-value-streams.md#vs-23--surface-provenance).
 
 ## C2 · Persistence
 
@@ -177,7 +177,7 @@ Capabilities that store and retrieve structured artefacts deterministically. The
 - Does NOT mint identifiers for non-metamodel objects (raw files, code, etc.).
 - Does NOT decide which artefacts to create (operator and skill judgement).
 
-**Soft-links.** Personas served: [P-01](01a-personas.md). ADRs: [ADR-0001](../architecture/decisions/adr-0001-metamodel-persistence-layer.md). Wave-1 evidence: [synthesis F2 finding](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md) (*"the LLM silently renumbers items… determinism is key"*). Realised in streams: [VS-1.4 Persist with Stable ID](04a-value-streams.md#vs-14--persist-with-stable-id).
+**Soft-links.** Personas served: [P-01](01a-personas.md). ADRs: [ADR-0001](../architecture/decisions/adr-0001-metamodel-persistence-layer.md). Wave-1 evidence: [synthesis F2 finding](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md) (*"the LLM silently renumbers items… determinism is key"*). Realised in streams: [VS-1.4 Persist with Stable ID](04a-value-streams.md#vs-14--persist-with-stable-id), [VS-2.2 Resolve from Canonical Source](04a-value-streams.md#vs-22--resolve-from-canonical-source) (deterministic IDs are what makes the joins reliable).
 
 ### C2.2 · Schema enforcement
 
@@ -215,7 +215,7 @@ Capabilities that store and retrieve structured artefacts deterministically. The
 - Does NOT regenerate markdown from the DB (explicitly out of scope per ADR-0002).
 - Does NOT manage Git operations or version control.
 
-**Soft-links.** Personas served: [P-01](01a-personas.md). ADRs: [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md). Realised in streams: [VS-1.4 Persist with Stable ID](04a-value-streams.md#vs-14--persist-with-stable-id).
+**Soft-links.** Personas served: [P-01](01a-personas.md). ADRs: [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md). Realised in streams: [VS-1.4 Persist with Stable ID](04a-value-streams.md#vs-14--persist-with-stable-id), [VS-2.3 Surface Provenance](04a-value-streams.md#vs-23--surface-provenance) (file binding provides the drill-down link from a query result row to its narrative).
 
 ### C2.4 · Deterministic structural export
 
@@ -257,7 +257,7 @@ Capabilities for navigating the relationships between artefacts. Pre-built views
 - Does NOT generate the answer in natural language (it returns structured results; narrative phrasing is the agent's job).
 - Does NOT pre-cache answers (queries run live against current DB state).
 
-**Soft-links.** Personas served: [P-01](01a-personas.md). OBJ KRs: [OBJ-01 KR-01.3](04b-objectives.md#obj-01--ava-ships-coherent-product-thinking-at-agent-speed). Lean Canvas: [§3 Concrete win 1](02a-lean-canvas.md#3-unique-value-proposition--confidence-tested-n1-founder-as-instance-with-refinement).
+**Soft-links.** Personas served: [P-01](01a-personas.md). OBJ KRs: [OBJ-01 KR-01.3](04b-objectives.md#obj-01--ava-ships-coherent-product-thinking-at-agent-speed). Lean Canvas: [§3 Concrete win 1](02a-lean-canvas.md#3-unique-value-proposition--confidence-tested-n1-founder-as-instance-with-refinement). Realised in streams: [VS-2.1 Scope the Question](04a-value-streams.md#vs-21--scope-the-question) (discoverable surface), [VS-2.2 Resolve from Canonical Source](04a-value-streams.md#vs-22--resolve-from-canonical-source) (the SQL execution path for ad-hoc questions).
 
 ### C3.2 · Pre-built traceability views
 
@@ -276,7 +276,7 @@ Capabilities for navigating the relationships between artefacts. Pre-built views
 - Does NOT include views that go beyond the metamodel (no business-intelligence dashboards).
 - Does NOT generate views interactively at runtime (canonical views ship with clew; new views require a code change, not configuration).
 
-**Soft-links.** Personas served: [P-01](01a-personas.md). Lean Canvas: [§3 Concrete win 1](02a-lean-canvas.md#3-unique-value-proposition--confidence-tested-n1-founder-as-instance-with-refinement) (the user-visible demo). Wave-1 evidence: [synthesis trust-threshold finding](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md).
+**Soft-links.** Personas served: [P-01](01a-personas.md). Lean Canvas: [§3 Concrete win 1](02a-lean-canvas.md#3-unique-value-proposition--confidence-tested-n1-founder-as-instance-with-refinement) (the user-visible demo). Wave-1 evidence: [synthesis trust-threshold finding](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md). Realised in streams: [VS-2.1 Scope the Question](04a-value-streams.md#vs-21--scope-the-question) (discoverable catalogue of canonical views), [VS-2.2 Resolve from Canonical Source](04a-value-streams.md#vs-22--resolve-from-canonical-source) (Differentiator role; the wave-1 trust threshold delivered deterministically), [VS-2.4 Validate Against Current State](04a-value-streams.md#vs-24--validate-against-current-state) (re-run to re-confirm).
 
 ### C3.3 · Bidirectional time traceability
 
@@ -295,7 +295,7 @@ Capabilities for navigating the relationships between artefacts. Pre-built views
 - Does NOT auto-generate rationale (operator and skill author it).
 - Does NOT do project management or task tracking (no Gantt, no sprint planning).
 
-**Soft-links.** Personas served: [P-01](01a-personas.md). Lean Canvas: [§3 Bidirectional time traceability](02a-lean-canvas.md#3-unique-value-proposition--confidence-tested-n1-founder-as-instance-with-refinement).
+**Soft-links.** Personas served: [P-01](01a-personas.md). Lean Canvas: [§3 Bidirectional time traceability](02a-lean-canvas.md#3-unique-value-proposition--confidence-tested-n1-founder-as-instance-with-refinement). Realised in streams: [VS-2.3 Surface Provenance](04a-value-streams.md#vs-23--surface-provenance) (the "why backward + what next forward" lineage attached to each query result row).
 
 ## C4 · Integrity and Audit
 
@@ -337,7 +337,7 @@ Capabilities for detecting and preventing drift between intended and actual stat
 - Does NOT auto-fix drift (reports it; reconciliation is operator and agent work).
 - Does NOT continuously monitor (runs on demand via `clew check`; CI integration is optional).
 
-**Soft-links.** Personas served: [P-01](01a-personas.md). ADRs: [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md).
+**Soft-links.** Personas served: [P-01](01a-personas.md). ADRs: [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md). Realised in streams: [VS-2.4 Validate Against Current State](04a-value-streams.md#vs-24--validate-against-current-state) (the substrate-level validation that catches drift introduced via hand-edits bypassing the CLI; pairs with C4.1's CLI-path write-time enforcement).
 
 ### C4.3 · Audit trail
 
@@ -356,7 +356,7 @@ Capabilities for detecting and preventing drift between intended and actual stat
 - Does NOT track changes to narrative markdown (only DB structural state).
 - Does NOT do compliance-grade audit (not SOC2 / GDPR by default; sufficient for project-level accountability).
 
-**Soft-links.** Personas served: [P-01](01a-personas.md). Wave-1 evidence: [synthesis F2 finding](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md) (*"determinism is key here… an audit trail anyone can replay"*). Realised in streams: [VS-1.4 Persist with Stable ID](04a-value-streams.md#vs-14--persist-with-stable-id).
+**Soft-links.** Personas served: [P-01](01a-personas.md). Wave-1 evidence: [synthesis F2 finding](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md) (*"determinism is key here… an audit trail anyone can replay"*). Realised in streams: [VS-1.4 Persist with Stable ID](04a-value-streams.md#vs-14--persist-with-stable-id), [VS-2.3 Surface Provenance](04a-value-streams.md#vs-23--surface-provenance) (audit-trail timestamps surface as the "when last changed" column on every query result row).
 
 ### C4.4 · Schema migration
 
@@ -491,7 +491,7 @@ Per the [`business-capability-map` skill](https://github.com/VictorHueni/homemad
 - **Capability count for C1 and C3.** Both have 3 L1, slightly under the 5-to-12 recommendation. Reconsider if FBS authoring or wave-2 interviews surface latent capabilities.
 - **C5.1 vs. C5.3 boundary.** Skill catalogue management (C5.1) governs the lifecycle of skills; artefact template management (C5.3) governs the templates within skills. The boundary is real but subtle; review if maintainers conflate them in practice.
 - **Maturity ratings not assessed.** Skipped intentionally for v1; most capabilities are pre-implementation (Initial or Developing). Revisit after v0.1 ships.
-- **Soft-link gaps.** Value streams now exist ([`04a-value-streams.md`](04a-value-streams.md)) with VS-1 fully filled; 12 L1 capabilities (C1.1, C1.2, C1.3, C2.1, C2.2, C2.3, C2.4, C4.1, C4.3, C5.1, C5.2, C5.3) now carry a `Realised in streams:` soft-link to a VS-1 stage. The remaining 7 L1 capabilities (C3.1, C3.2, C3.3, C4.2, C4.4, C5.4, C5.5) will gain `Realised in streams:` soft-links once VS-2 (Navigate), VS-3 (Refactor), and VS-4 (Share) are stage-decomposed. Processes, FBS, and domain model still do not exist; their soft-links remain pending.
+- **Soft-link gaps.** Value streams exist ([`04a-value-streams.md`](04a-value-streams.md)) with VS-1 and VS-2 fully filled. 16 of 19 L1 capabilities now carry a `Realised in streams:` soft-link: C1.1, C1.2, C1.3, C2.1, C2.2, C2.3, C2.4, C3.1, C3.2, C3.3, C4.1, C4.2, C4.3, C5.1, C5.2, C5.3. The remaining 3 L1 capabilities (C4.4 Schema migration, C5.4 Cross-methodology referencing, C5.5 Methodology canon coverage assessment) will gain `Realised in streams:` soft-links once VS-3 (Refactor) and VS-4 (Share) are stage-decomposed, though C4.4 and C5.5 may legitimately never land in a user-facing stream (they are clew-internal maintenance capabilities; revisit the "never" judgement after VS-3/VS-4 fill). Processes, FBS, and domain model still do not exist; their soft-links remain pending.
 - **L0 axis is the most consequential choice; lifecycle-layer as an alternative remains a real option.** If wave-2 interviews surface that "any builder" reaches for clew by lifecycle layer (QA-only, ops-only) rather than by capability domain, re-pick the axis.
 
 ## Changelog
@@ -500,3 +500,4 @@ Per the [`business-capability-map` skill](https://github.com/VictorHueni/homemad
 |---|---|---|---|
 | 2026-05-24 | Scaffold + structure + fill in one pass. 5 L0 (Authoring · Persistence · Querying and Traceability · Integrity and Audit · Methodology Distillation), 19 L1 capabilities. 4 Differentiators (C1.1 methodology-mediated artefact creation, C3.2 pre-built traceability views, C4.1 write-time reference validation, C5.1 skill catalogue management), 13 Necessary, 2 Commodity. Strategic Importance assigned now per [wave-1 synthesis](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md) signal. | Drafted hybrid (top-down framework cross-validated against VISION, P-01, Lean Canvas, OBJ-01/02/03, ADR-0001, ADR-0002, wave-1 synthesis). | [VISION.md](../VISION.md), [Lean Canvas](02a-lean-canvas.md), [OBJ doc](04b-objectives.md), [persona](01a-personas.md), [ADR-0001](../architecture/decisions/adr-0001-metamodel-persistence-layer.md), [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md): existing soft-link slots filled. Value streams / processes / FBS / domain model: still _TODO_ (no artefact to soft-link to yet). |
 | 2026-05-25 | Value-stream backlinks wired (cascade from [04a-value-streams.md](04a-value-streams.md) VS-1 fill). 12 L1 capabilities now carry a `Realised in streams:` soft-link to the VS-1 stage that consumes them: VS-1.1 ← C5.1, C5.3; VS-1.2 ← C5.3, C1.2, C1.3; VS-1.3 ← C1.1 (Differentiator role flagged), C1.3, C5.2; VS-1.4 ← C2.1, C2.2, C2.3, C2.4, C4.1 (Differentiator role flagged), C4.3. §Open Issues §Soft-link gaps updated: 12 capabilities now wired; 7 remaining (C3.1, C3.2, C3.3, C4.2, C4.4, C5.4, C5.5) await VS-2 / VS-3 / VS-4 stage decomposition. | [04a-value-streams.md VS-1](04a-value-streams.md#vs-1--compose-architecture). Cascade companion to today's value-streams commit. | None outside this commit. The 7 unwired capabilities will gain backlinks when VS-2 / VS-3 / VS-4 are filled. |
+| 2026-05-25 | Value-stream backlinks wired (cascade from [04a-value-streams.md](04a-value-streams.md) VS-2 fill). 4 capabilities gain their first `Realised in streams:` soft-link via VS-2 stages: C3.1 ← VS-2.1 + VS-2.2; C3.2 ← VS-2.1 + VS-2.2 (Differentiator role flagged, the wave-1 trust threshold) + VS-2.4; C3.3 ← VS-2.3; C4.2 ← VS-2.4. 4 capabilities gain an additional VS-2 backlink appended to their existing VS-1 link: C1.3 ← VS-2.3 added; C2.1 ← VS-2.2 added (deterministic IDs make joins reliable); C2.3 ← VS-2.3 added (drill-down link from query row to narrative); C4.3 ← VS-2.3 added (timestamps surface on every result row). §Open Issues §Soft-link gaps updated: 16 of 19 capabilities now wired; 3 remaining (C4.4, C5.4, C5.5) await VS-3/VS-4 decomposition (with the caveat that C4.4 + C5.5 may legitimately never land in a user-facing stream as they are clew-internal maintenance capabilities). | [04a-value-streams.md VS-2](04a-value-streams.md#vs-2--navigate-architecture). Cascade companion to today's VS-2 fill. | None outside this commit. |
