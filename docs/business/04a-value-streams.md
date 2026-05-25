@@ -87,7 +87,7 @@ Processes (how it operationally happens)
 | VS-ID | Name | Triggering stakeholder | Value proposition | Scope anchor | Overall pain index |
 |---|---|---|---|---|---|
 | VS-1 | Compose Architecture | [P-01 Ava](01a-personas.md#p-01--ava-the-agent-first-product-engineer) | A new typed artefact persisted with stable ID, fillable by the agent from the right context, validated at write time. | C1 (Authoring) + C2 (Persistence) + C4.1 (write-time validation) + C5 (Methodology Distillation) | **Critical** |
-| VS-2 | Navigate Architecture | [P-01 Ava](01a-personas.md#p-01--ava-the-agent-first-product-engineer) | An authoritative cross-artefact answer in seconds, not hours of grep. | C3 (Querying and Traceability) | _TODO_ (queued; not yet stage-decomposed) |
+| VS-2 | Navigate Architecture | [P-01 Ava](01a-personas.md#p-01--ava-the-agent-first-product-engineer) | An authoritative cross-artefact answer in seconds, not hours of grep. | C3 (Querying and Traceability) + C2.1 (stable IDs make joins) + C2.3 (file binding for drill-down) + C1.3 (evidence backing) + C4.2 (drift validation) + C4.3 (audit-trail timestamps) | **Critical** |
 | VS-3 | Refactor Architecture | [P-01 Ava](01a-personas.md#p-01--ava-the-agent-first-product-engineer) | Full downstream impact surfaced before commit; no silent rot afterwards. | C4 (Integrity and Audit) + C2.3 (file binding) | _TODO_ (queued) |
 | VS-4 | Share Architecture | [P-01 Ava](01a-personas.md#p-01--ava-the-agent-first-product-engineer) | A markdown-and-git artefact set any colleague (P-02 product partner or other) can review without authoring tools. | C2.3 + C2.4 + C3.2 | _TODO_ (queued) |
 
@@ -156,6 +156,67 @@ Processes (how it operationally happens)
 | **Operationalised by processes** | _TODO_ |
 | **Pain point index** | **Critical**. Wave-1 [F2 magic-wand finding](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md): *"a mechanism on place that can make 100% sure that all internal reference are up to date at all time."* Without write-time integrity enforcement, drift starts the moment the artefact is committed and compounds silently. This is the user-stated trust threshold and the gate on the entire value proposition. Maps to [OBJ-02 KR-02.1](04b-objectives.md#obj-02--the-architectural-substrate-is-trustworthy-enough-that-agents-depend-on-it) (100% at write time). *(Tested · N=1.)* |
 
+## VS-2 · Navigate Architecture
+
+- **Triggering stakeholder:** [P-01 Ava](01a-personas.md#p-01--ava-the-agent-first-product-engineer)
+- **Value proposition:** An authoritative cross-artefact answer in seconds, not hours of grep.
+- **Scope anchor:** C3 (Querying and Traceability) + C2.1 (stable IDs make the joins deterministic) + C2.3 (file binding for drill-down to narrative) + C1.3 (evidence backing) + C4.2 (drift validation) + C4.3 (audit-trail timestamps)
+- **Overall pain index:** **Critical**. Inherits from VS-2.2 Resolve from Canonical Source: that stage is the user-stated wave-1 trust threshold. Without canonical traceability views generated deterministically, the LLM-as-join-engine fallback today is non-deterministic, slow, and untrusted. Per-stage breakdown: VS-2.1 Low, VS-2.2 Critical, VS-2.3 Medium, VS-2.4 High.
+
+**Stage flow:**
+
+```
+[P-01 trigger] → VS-2.1 Scope → VS-2.2 Resolve → VS-2.3 Surface Provenance → VS-2.4 Validate → [Value: drift-validated authoritative answer]
+```
+
+### VS-2.1 · Scope the Question
+
+| Field | Value |
+|---|---|
+| **Participating stakeholders** | [P-01 Ava](01a-personas.md#p-01--ava-the-agent-first-product-engineer) (poses, refines). The agent may help classify the question and propose canonical views. |
+| **Entrance criteria** | Ava has a cross-artefact question (e.g., "which capabilities serve P-01?", "if I rename Z, what breaks?", "what is the median artefact age?"). · Project is in a queryable state (DB exists, snapshots present). |
+| **Exit criteria** | Question is classified as canonical-view-eligible OR ad-hoc-query. · The relevant artefact types and relationship pattern are identified. · A canonical view name is selected (for view-eligible questions) OR the ad-hoc query scope is defined. |
+| **Value items produced** | Question classification · canonical-view selection OR ad-hoc query scope |
+| **Enabling capabilities** | [C3.1 Ad-hoc cross-artefact query surface](03a-capability-map.md#c31--ad-hoc-cross-artefact-query-surface) · [C3.2 Pre-built traceability views](03a-capability-map.md#c32--pre-built-traceability-views) (provides the discoverable catalogue of canonical views) |
+| **Operationalised by processes** | _TODO_ |
+| **Pain point index** | **Low**. Wave 1 did not flag question-framing as a friction point; the canonical-view catalogue is currently small enough to be memorable. Re-evaluate when the catalogue grows past memorable size or when wave-2 interviews surface mis-classification problems. *(Assumed; not directly tested in wave 1.)* |
+
+### VS-2.2 · Resolve from Canonical Source
+
+| Field | Value |
+|---|---|
+| **Participating stakeholders** | The agent (executes). [P-01 Ava](01a-personas.md#p-01--ava-the-agent-first-product-engineer) (reviews). |
+| **Entrance criteria** | Query is scoped (VS-2.1 done). · DB is reachable. · Canonical view definition exists (for view-eligible questions) OR the ad-hoc query can be composed against the persisted schema. |
+| **Exit criteria** | Query executes against the live DB and returns a structural result (typed rows, not paraphrased prose). · Result is deterministic: same input + same DB state produces the same output across runs and across sessions. · Result includes typed identifiers, never LLM-paraphrased references. |
+| **Value items produced** | Deterministic query result · execution timestamp · DB-state hash (so the result is reproducible later) |
+| **Enabling capabilities** | [C3.1 Ad-hoc cross-artefact query surface](03a-capability-map.md#c31--ad-hoc-cross-artefact-query-surface) · [C3.2 Pre-built traceability views](03a-capability-map.md#c32--pre-built-traceability-views) (Differentiator; the wave-1 trust threshold) · [C2.1 Stable identifier generation](03a-capability-map.md#c21--stable-identifier-generation) (without deterministic IDs, joins are non-deterministic) |
+| **Operationalised by processes** | _TODO_ |
+| **Pain point index** | **Critical**. Wave-1 trust-threshold finding [(synthesis)](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md): *"I think that I can built the traceability matrix consistently and deterministically."* Without canonical views and stable IDs, this stage today is the LLM-as-join-engine fallback (non-deterministic across sessions, slow, untrusted). This is the gate on VS-2's value proposition; clew's existence is justified by removing this pain. Maps to [OBJ-01 KR-01.3](04b-objectives.md#obj-01--ava-ships-coherent-product-thinking-at-agent-speed) (< 30 s cross-artefact answer time) and [Lean Canvas §3 Concrete win 1](02a-lean-canvas.md#3-unique-value-proposition--confidence-tested-n1-founder-as-instance-with-refinement). *(Tested · N=1.)* |
+
+### VS-2.3 · Surface Provenance
+
+| Field | Value |
+|---|---|
+| **Participating stakeholders** | The agent (assembles provenance). [P-01 Ava](01a-personas.md#p-01--ava-the-agent-first-product-engineer) (reads, drills in). |
+| **Entrance criteria** | Structural result returned (VS-2.2 done). |
+| **Exit criteria** | Each row in the result carries: its source artefact ID(s); its file binding (path + section anchor) so the operator can drill into the narrative; the evidence references backing the artefact (where applicable); the audit-trail timestamp of last change; the bidirectional-time-traceability tags (rationale backward + planned state forward) where C3.3 applies. |
+| **Value items produced** | Provenance-annotated result · drillable file-binding links · evidence cites · audit timestamps · rationale / planned-state tags |
+| **Enabling capabilities** | [C2.3 File binding management](03a-capability-map.md#c23--file-binding-management) (the drill-down link to narrative) · [C3.3 Bidirectional time traceability](03a-capability-map.md#c33--bidirectional-time-traceability) (the "why backward + what next forward" lineage) · [C1.3 External evidence integration](03a-capability-map.md#c13--external-evidence-integration) (the evidence cite per row) · [C4.3 Audit trail](03a-capability-map.md#c43--audit-trail) (the "when last changed" timestamp) |
+| **Operationalised by processes** | _TODO_ |
+| **Pain point index** | **Medium**. Wave-1 finding: bidirectional time traceability (*"you will always know why things have been done and what is ahead for your product"*) is the kind of provenance the user wants. Today it is mostly absent because the LLM paraphrases relationships instead of citing typed references. Stage delivers it mechanically. *(Tested · N=1.)* |
+
+### VS-2.4 · Validate Against Current State
+
+| Field | Value |
+|---|---|
+| **Participating stakeholders** | The agent (runs drift check). [P-01 Ava](01a-personas.md#p-01--ava-the-agent-first-product-engineer) (commits to the next action). |
+| **Entrance criteria** | Provenance-annotated result in hand (VS-2.3 done). |
+| **Exit criteria** | Drift check passes for every artefact touched by the result: DB state matches markdown-layer content hash. · No orphan markdown sections found (referencing IDs the DB does not know). · No orphan DB records found (without a narrative). · Operator now has an authoritative answer that is reproducible (VS-2.2), traceable (VS-2.3), and proven against current state (VS-2.4). |
+| **Value items produced** | Drift-validated answer · drift-check pass record (the trust certificate) |
+| **Enabling capabilities** | [C4.2 Drift detection](03a-capability-map.md#c42--drift-detection) (the substrate-level validation) · [C3.2 Pre-built traceability views](03a-capability-map.md#c32--pre-built-traceability-views) (re-runnable to re-confirm against current state) |
+| **Operationalised by processes** | _TODO_ |
+| **Pain point index** | **High**. Wave-1 F2 finding [(synthesis)](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md): without integrity guarantees, the operator must manually re-verify before acting on the answer. Drift detection at this stage is what turns "I have an answer" into "I trust this answer enough to act on it." Note: [C4.1 Write-time reference validation](03a-capability-map.md#c41--write-time-reference-validation) (Differentiator, consumed by VS-1.4) prevents drift introduced via the CLI; [C4.2 Drift detection](03a-capability-map.md#c42--drift-detection) catches drift introduced via hand-edits bypassing the CLI. Both are needed for the substrate to be self-consistent. *(Tested · N=1.)* |
+
 ## Discipline checks (pass)
 
 Per the [`business-value-stream` skill](https://github.com/VictorHueni/homemade-claude-kit/tree/claude/metamodel-personal-skills-naecw/business-value-stream) discipline reference:
@@ -163,8 +224,8 @@ Per the [`business-value-stream` skill](https://github.com/VictorHueni/homemade-
 - **Naming.** Every stream name describes the final value achieved with business-object framing (Compose Architecture, Navigate Architecture, Refactor Architecture, Share Architecture). No internal-lifecycle names (no "design-to-deploy", no "draft-to-persist").
 - **One value proposition per stream.** No "AND" in any of the 4 value propositions.
 - **Triggering stakeholder is a persona.** All 4 streams trigger from [P-01 Ava](01a-personas.md). No system triggers, no department triggers, no scheduler triggers.
-- **Stage count.** VS-1 has 4 stages (Lean). Within the 4 to 10 range.
-- **Stage names are value milestones.** Each VS-1 stage names what is "true" after the stage, not the activity that ran (Choose Type, Load Context, Draft, Persist with Stable ID). No "Run X script", no "Submit form", no "Send email".
+- **Stage count.** VS-1 and VS-2 each have 4 stages (Lean). Within the 4 to 10 range.
+- **Stage names are value milestones.** Each filled-stream stage names what is "true" after the stage, not the activity that ran: VS-1 (Choose Type, Load Context, Draft, Persist with Stable ID); VS-2 (Scope, Resolve, Surface Provenance, Validate). No "Run X script", no "Submit form", no "Send email".
 - **Capabilities soft-linked, never inlined.** Every `Enabling capabilities` row points to an L1 ID in `03a-capability-map.md` with no definition duplication.
 - **EA stance preserved.** No cycle-time fields, no value-add classification, no takt-time, no waste analysis (those would be Lean VSM, which belongs in process docs).
 - **No customer-journey contamination.** No emotion fields, no channel fields, no touchpoint fields.
@@ -172,8 +233,7 @@ Per the [`business-value-stream` skill](https://github.com/VictorHueni/homemade-
 
 ## Open Issues / Next Iterations
 
-- **VS-2 Navigate Architecture** not yet stage-decomposed. Queued for the next iteration. Expected pain anchor: the stage where [C3.2 Pre-built traceability views](03a-capability-map.md#c32--pre-built-traceability-views) delivers the wave-1 trust-threshold demo (the deterministic traceability matrix).
-- **VS-3 Refactor Architecture** not yet stage-decomposed. Queued. Expected pain anchor: the rename / re-tier / retire stage, where [C4.1](03a-capability-map.md#c41--write-time-reference-validation) and [C2.3](03a-capability-map.md#c23--file-binding-management) jointly determine whether impact is surfaced before commit (Critical) or after (rot).
+- **VS-3 Refactor Architecture** not yet stage-decomposed. Queued. Expected pain anchor: the rename / re-tier / retire stage, where [C4.1](03a-capability-map.md#c41--write-time-reference-validation) and [C2.3](03a-capability-map.md#c23--file-binding-management) jointly determine whether impact is surfaced before commit (Critical) or after (rot). VS-3 is the most natural next decomposition because its trigger and value flow overlap with VS-2.4 Validate (drift detection); the "impact preview" stage is essentially VS-2 run forward into a planned change.
 - **VS-4 Share Architecture** not yet stage-decomposed. Queued, lowest priority of the three deferred streams: [P-02 (product partner)](01a-personas.md) is currently the only consumer and is Tier-2 / Backlog.
 - **Skill-maintainer persona missing.** Until [`01a-personas.md`](01a-personas.md) defines a "skill catalogue maintainer" persona, the "Extend Methodology Catalogue" candidate stream cannot be modelled without violating the persona-trigger discipline.
 - **Process doc gap.** Every stage's `Operationalised by processes` row is `_TODO_`. Wiring requires `05a-processes/` artefacts authored via the `business-process` skill. Suggested next sequence after VS-2 / VS-3 / VS-4 fill: process docs for VS-1.2 (Load Context), VS-1.3 (Draft), VS-1.4 (Persist).
@@ -184,4 +244,5 @@ Per the [`business-value-stream` skill](https://github.com/VictorHueni/homemade-
 
 | Date | Change | Evidence | Cascading effects |
 |---|---|---|---|
+| 2026-05-25 | Fill VS-2 Navigate Architecture (4 Lean stages: Scope the Question → Resolve from Canonical Source → Surface Provenance → Validate Against Current State). Overall pain index **Critical** (inherits from VS-2.2 Resolve, the wave-1 trust-threshold stage). Per-stage pain: VS-2.1 Low (Assumed), VS-2.2 Critical (Tested · N=1, user trust threshold), VS-2.3 Medium (Tested · N=1, bidirectional time traceability), VS-2.4 High (Tested · N=1, F2 integrity finding). Catalogue row updated: scope anchor extended beyond C3 to include cross-cutting capabilities (C2.1 + C2.3 + C1.3 + C4.2 + C4.3); pain index now Critical. §Discipline checks updated to cover VS-1 + VS-2. §Open Issues: VS-2 removed from queue; VS-3 noted as natural next decomposition because its impact-preview stage essentially runs VS-2 forward into a planned change. | Drafted from VS-1 patterns + wave-1 trust-threshold finding (canonical traceability matrix as deterministic value) + F2 integrity finding (drift validation makes the answer trustworthy) + C3.3 bidirectional time traceability for the provenance stage. | [03a-capability-map.md](03a-capability-map.md): 8 capabilities now reachable from VS-2 stages (4 first-time backlinks: C3.1, C3.2, C3.3, C4.2; 4 additional backlinks: C1.3, C2.1, C2.3, C4.3 already wired from VS-1 stages). Cascade follow-up: capability-map, objectives, lean-canvas, personas updates in companion commits. |
 | 2026-05-25 | Scaffold + build catalogue + fill VS-1 in one pass. Catalogue: 4 streams (VS-1 Compose Architecture, VS-2 Navigate Architecture, VS-3 Refactor Architecture, VS-4 Share Architecture), all triggered by [P-01 Ava](01a-personas.md). VS-1 fully filled with 4 Lean stages (Choose Type → Load Context → Draft → Persist with Stable ID); VS-2 / VS-3 / VS-4 catalogue rows only with `_TODO_` decomposition. Fifth candidate ("Extend Methodology Catalogue") deferred pending a skill-maintainer persona. Per-stage pain index: mix of Tested (N=1, wave 1) on stages 1.2 / 1.3 / 1.4 and Assumed on 1.1. Process links `_TODO_` everywhere (no `05a-processes/` artefacts yet). | Drafted from [VISION.md](../VISION.md), [P-01 §Goals + §Key Tasks](01a-personas.md), [03a-capability-map.md](03a-capability-map.md), and the [wave-1 P-01 synthesis](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md) (F1, F2, magic-wand). Per the [`business-value-stream` skill](https://github.com/VictorHueni/homemade-claude-kit/tree/claude/metamodel-personal-skills-naecw/business-value-stream). | [03a-capability-map.md](03a-capability-map.md): 12 capabilities now have a `Realised in streams:` cousin (C1.1, C1.2, C1.3, C2.1, C2.2, C2.3, C2.4, C4.1, C4.3, C5.1, C5.2, C5.3) → backlink cascade recommended. [`04b-objectives.md`](04b-objectives.md): OBJ-01 / OBJ-02 `VS-_TODO_` slots can now backfill to VS-1. [`02a-lean-canvas.md`](02a-lean-canvas.md): §3 UVP + §5 Channels `VS-_TODO_` slots can now backfill. [`01a-personas.md`](01a-personas.md): P-01 §Key Tasks gains a backlink target (the four streams correspond to four of Ava's five Key Tasks). |
