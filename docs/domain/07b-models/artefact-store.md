@@ -184,7 +184,7 @@ Business identifiers are **generated exclusively by the application layer** from
 | `adr` | `ADR-{nnnn}` | `ADR-0004` |
 | `glossary_term` | `BC-{nn}.GT-{nn}` | `BC-01.GT-05` |
 
-**Generation contract:** `next_business_id(conn, artefact_type, parent_business_id?)` — atomically increments `id_sequences.next_val` for the type and returns the formatted ID. The increment and the artefact insert are in the same DuckDB transaction; partial writes are not possible.
+**Generation contract:** `next_business_id(conn, artefact_type, parent_business_id?)` — atomically increments `id_sequences.next_val` for the type and returns the formatted ID. The increment and the artefact insert are in the same SQLite transaction; partial writes are not possible.
 
 **Snapshot contract:** `clew export` serialises the `id_sequences` table alongside all artefact records. `clew import snapshot` writes artefacts with their existing `business_id` values; it then sets `id_sequences.next_val` to `max(suffix) + 1` for each type from the imported records, ensuring no future collision.
 
@@ -192,39 +192,47 @@ Business identifiers are **generated exclusively by the application layer** from
 
 ## Physical schema
 
-The DuckDB physical schema implementing this domain model. Authoritative source for DDL; the domain model above describes the *why*, this section describes the *what*.
+The SQLite physical schema implementing this domain model. Authoritative source for DDL; the domain model above describes the *why*, this section describes the *what*.
 
 ```sql
--- Surrogate key sequences (DB-native; intentionally reset on DB recreation)
-CREATE SEQUENCE artefact_pk_seq START 1;
-CREATE SEQUENCE ref_pk_seq      START 1;
-CREATE SEQUENCE binding_pk_seq  START 1;
+-- Per-connection PRAGMAs (set in the CLI's connection factory, not in DDL)
+--   PRAGMA foreign_keys = ON;     -- enforce FK constraints (SQLite default is OFF)
+--   PRAGMA journal_mode = WAL;    -- single-writer + non-blocking readers
+--   PRAGMA synchronous = NORMAL;  -- safe with WAL; faster than FULL
+
+-- Surrogate keys via INTEGER PRIMARY KEY AUTOINCREMENT (SQLite rowid alias).
+-- Surrogate PKs are intentionally regenerated on DB recreation; only business_id is stable.
 
 -- Business ID counter (application-managed; included in YAML snapshot)
 CREATE TABLE id_sequences (
-  artefact_type  VARCHAR  PRIMARY KEY,
-  next_val       UINTEGER NOT NULL DEFAULT 1
+  artefact_type  TEXT     PRIMARY KEY,
+  next_val       INTEGER  NOT NULL DEFAULT 1 CHECK (next_val >= 1)
 );
 
 -- Universal artefact table — maps to BC-01.AGG-01
 CREATE TABLE artefacts (
-  pk             UINTEGER     PRIMARY KEY DEFAULT nextval('artefact_pk_seq'),
-  business_id    VARCHAR      UNIQUE NOT NULL,  -- stable semantic key; never regenerated
-  artefact_type  VARCHAR      NOT NULL,
-  name           VARCHAR      NOT NULL,
-  status         VARCHAR      DEFAULT 'active', -- active | retired | superseded
-  created_at     TIMESTAMPTZ  DEFAULT now(),
-  properties     JSON         NOT NULL DEFAULT '{}'
+  pk             INTEGER  PRIMARY KEY AUTOINCREMENT,
+  business_id    TEXT     UNIQUE NOT NULL,           -- stable semantic key; never regenerated
+  artefact_type  TEXT     NOT NULL,
+  name           TEXT     NOT NULL,
+  status         TEXT     NOT NULL DEFAULT 'active'  -- active | retired | superseded
+                          CHECK (status IN ('active','retired','superseded')),
+  created_at     TEXT     NOT NULL DEFAULT (datetime('now')),  -- ISO-8601 UTC
+  properties     TEXT     NOT NULL DEFAULT '{}'      -- JSON blob; validated by Pydantic
+                          CHECK (json_valid(properties))
 );
+
+CREATE INDEX idx_artefacts_type ON artefacts(artefact_type);
 
 -- Typed edge table — maps to BC-01.AGG-02
 CREATE TABLE artefact_references (
-  pk            UINTEGER     PRIMARY KEY DEFAULT nextval('ref_pk_seq'),
-  source_pk     UINTEGER     NOT NULL REFERENCES artefacts(pk),
-  relationship  VARCHAR      NOT NULL,
-  target_pk     UINTEGER     NOT NULL REFERENCES artefacts(pk),
-  role          VARCHAR,
-  created_at    TIMESTAMPTZ  DEFAULT now()
+  pk            INTEGER  PRIMARY KEY AUTOINCREMENT,
+  source_pk     INTEGER  NOT NULL REFERENCES artefacts(pk),
+  relationship  TEXT     NOT NULL,
+  target_pk     INTEGER  NOT NULL REFERENCES artefacts(pk),
+  role          TEXT,
+  created_at    TEXT     NOT NULL DEFAULT (datetime('now')),
+  CHECK (source_pk <> target_pk)
 );
 
 CREATE INDEX idx_refs_source ON artefact_references(source_pk, relationship);
@@ -232,13 +240,14 @@ CREATE INDEX idx_refs_target ON artefact_references(target_pk, relationship);
 
 -- File binding table — maps to BC-01.AGG-03
 CREATE TABLE file_bindings (
-  pk             UINTEGER     PRIMARY KEY DEFAULT nextval('binding_pk_seq'),
-  artefact_pk    UINTEGER     NOT NULL REFERENCES artefacts(pk),
-  file_path      VARCHAR      NOT NULL,
-  section_anchor VARCHAR      NOT NULL,
-  content_hash   VARCHAR,      -- NULL until clew check first hashes the section
-  last_seen_at   TIMESTAMPTZ, -- NULL until clew check first visits the section
-  UNIQUE (artefact_pk)         -- one binding per artefact
+  pk             INTEGER  PRIMARY KEY AUTOINCREMENT,
+  artefact_pk    INTEGER  NOT NULL REFERENCES artefacts(pk),
+  file_path      TEXT     NOT NULL,
+  section_anchor TEXT     NOT NULL,
+  content_hash   TEXT,                                -- NULL until clew check first hashes the section
+  last_seen_at   TEXT,                                -- NULL until clew check first visits the section
+  UNIQUE (artefact_pk),                               -- one binding per artefact
+  UNIQUE (file_path, section_anchor)                  -- no two artefacts share a file section
 );
 
 CREATE INDEX idx_bindings_file ON file_bindings(file_path);
@@ -246,7 +255,7 @@ CREATE INDEX idx_bindings_file ON file_bindings(file_path);
 
 ### Property schemas
 
-Type-specific fields are stored in `artefacts.properties` (JSON) and validated via Pydantic models in `schema.py` before write. Examples of representative types:
+Type-specific fields are stored in `artefacts.properties` (a JSON text blob validated by SQLite's `json_valid()` at write time) and validated by Pydantic models in `schema.py` before write. Examples of representative types:
 
 | Artefact type | Key properties | Notes |
 |---|---|---|

@@ -10,7 +10,7 @@ review_interval: 90d
 
 ## Context and Problem Statement
 
-[ADR-0001](adr-0001-metamodel-persistence-layer.md) establishes DuckDB as the canonical store, YAML as the deterministic structural export, and markdown as agent-authored narrative referencing CLI-returned IDs. ADR-0001 does **not** say *where* each artefact's narrative lives on disk, nor how the CLI should know whether `clew new <type>` should expect a new file or a new section in an existing file.
+[ADR-0001](adr-0001-metamodel-persistence-layer.md) establishes SQLite as the canonical store, YAML as the deterministic structural export, and markdown as agent-authored narrative referencing CLI-returned IDs. ADR-0001 does **not** say *where* each artefact's narrative lives on disk, nor how the CLI should know whether `clew new <type>` should expect a new file or a new section in an existing file.
 
 The repository today already demonstrates that at least three distinct file-layout patterns coexist in the metamodel:
 

@@ -228,7 +228,7 @@ Capabilities for navigating the relationships between artefacts. Pre-built views
 **Outcomes.**
 - Cross-artefact questions resolve in the same agent session, not via grep across multiple files.
 - Operator does not need to read multiple files manually to triangulate an answer.
-- SQL surface is available for power-user analytics directly against DuckDB.
+- SQL surface is available for power-user analytics directly against the artefact store.
 
 **Boundaries.**
 - Does NOT generate the answer in natural language (it returns structured results; narrative phrasing is the agent's job).

@@ -1,16 +1,16 @@
 ---
-title: Schema design — typed property graph over DuckDB
+title: Schema design — typed property graph
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-25
 review_interval: 90d
 ---
 
-# Schema design — typed property graph over DuckDB
+# Schema design — typed property graph
 
 ## Context and Problem Statement
 
-[ADR-0001](adr-0001-metamodel-persistence-layer.md) chose DuckDB + CLI as the persistence engine. This ADR decides **how the schema is designed within that engine** — two orthogonal concerns in one decision:
+[ADR-0001](adr-0001-metamodel-persistence-layer.md) chose CLI + SQLite as the persistence engine. This ADR decides **how the schema is designed within that engine** — two orthogonal concerns in one decision:
 
 1. **Property storage**: how type-specific fields (persona goals, capability definition, FBS functionality status, etc.) are stored across 19 artefact types, with more types planned as the 52 ⬜ backlog items are implemented.
 2. **Relationship storage**: how cross-artefact references (persona TRIGGERS value stream, VS stage CONSUMES capability, epic GROUPS FBS functionality, etc.) are stored, traversed, and annotated with metadata (role: Differentiator / Necessary).
@@ -34,7 +34,7 @@ The metamodel's typed relationships carry metadata:
 - Relationships carry metadata; the schema must store it without nullable column sprawl
 - Adding a new artefact type or relationship type must not require a DDL migration — the metamodel evolves continuously (19 types today, 52 ⬜ backlog items pending)
 - The primary consumer of both property reads and traversal queries is an AI agent via the CLI; schema consistency and predictability reduce prompt complexity and error surface
-- [ADR-0001](adr-0001-metamodel-persistence-layer.md) established DuckDB WITH RECURSIVE CTEs as the traversal mechanism; the schema must support them uniformly
+- [ADR-0001](adr-0001-metamodel-persistence-layer.md) established the engine's `WITH RECURSIVE` CTEs as the traversal mechanism; the schema must support them uniformly
 - Technical surrogate keys (DB-native auto-increment) must be decoupled from semantic business identifiers (P-01, C1.1.F03, VS-1.3); business identifiers are what the agent writes in markdown prose and must survive a DB drop-and-restore cycle unchanged
 
 ## Considered Options
@@ -64,15 +64,16 @@ The three fields ADR-0002 calls "artefact type definition" fields — `file_layo
 - Adding a new relationship type requires no DDL — one new entry in the `ALLOWED_RELATIONSHIPS` registry in `crud.py`
 - Traversal queries use a single, uniform recursive CTE pattern regardless of artefact type
 - Edge metadata (role, confidence, evidence_ref) is first-class in `artefact_references`
-- DuckPGQ property graph extension can be layered over the two tables in v2 with zero schema changes (`CREATE PROPERTY GRAPH` declaration only — no data migration)
 - Surrogate PKs and business identifiers are fully decoupled: `clew export` + `clew import snapshot` preserves all artefact records, edges, and file bindings exactly — surrogate PKs are regenerated transparently on restore, business IDs never change
-- The `properties` JSON column serialises naturally as a nested YAML object in the snapshot — each artefact is self-contained in the export
+- The `properties` JSON text column serialises naturally as a nested YAML object in the snapshot — each artefact is self-contained in the export
+- Schema is engine-portable: the same three-table structure works on SQLite (v1/v2) and ports to Postgres (v3) without redesign
 
 ### Negative Consequences
 
 - Type-specific field validation (required fields, allowed values per type) is enforced at the `crud.py` + Pydantic layer, not at the DB constraint layer; the DB cannot reject a `properties` blob that violates the persona schema
-- JSON path syntax in DuckDB queries (`properties->>'goals'`) is slightly more verbose than column-name references; offset by the query uniformity gained across all types
+- JSON path syntax (`json_extract(properties, '$.goals')` or `properties->>'$.goals'` from SQLite 3.38+) is more verbose than column-name references; offset by the query uniformity gained across all types
 - Cross-type relationship type-safety is enforced at the application layer, not DB-level
+- No in-engine property-graph DSL (the equivalent of Cypher / DuckPGQ); all traversal is recursive CTEs. Acceptable because the metamodel's bounded ≤5-hop depth is trivial for CTEs and no graph algorithms beyond traversal are needed
 
 ## Pros and Cons of the Options
 
@@ -111,7 +112,7 @@ All type-specific properties stored as `(artefact_pk, key, value TEXT)` rows in 
 - Every property read requires a `WHERE key = 'goals'` filter and a pivot; any multi-field read requires multiple rows or a PIVOT/CASE WHEN expression — queries become unreadable
 - No data types beyond TEXT; numeric or boolean properties require application-layer parsing
 - `value TEXT` means no DB-level type coercion even at the application boundary
-- DuckDB's JSON support is first-class and renders EAV unnecessary; JSON gives equivalent DDL-freedom with vastly better query ergonomics
+- SQLite's JSON1 functions render EAV unnecessary; a single JSON column gives equivalent DDL-freedom with vastly better query ergonomics
 
 ### D. Hybrid (FK columns for simple M:1 + edge table for M:M with metadata)
 
@@ -131,7 +132,7 @@ Simple M:1 relationships use FK columns on per-type tables; complex M:M or metad
 
 ## Related decisions
 
-- [ADR-0001 Persistence layer (DuckDB + CLI)](adr-0001-metamodel-persistence-layer.md) — this ADR defines the schema design within the engine chosen in ADR-0001.
+- [ADR-0001 Persistence layer (CLI + SQLite)](adr-0001-metamodel-persistence-layer.md) — this ADR defines the schema design within the engine chosen in ADR-0001.
 - [ADR-0002 Artefact file binding](adr-0002-artefact-file-binding.md) — the `file_bindings` table uses `artefacts(pk)` as its FK anchor. The `ARTEFACT_TYPE_CONFIGS` dict in `schema.py` holds the per-type layout constants that ADR-0002 exposes via `clew layout <type>`.
 
 ## Dependent artefacts
