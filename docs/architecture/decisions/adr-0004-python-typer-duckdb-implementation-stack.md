@@ -10,12 +10,7 @@ review_interval: 180d
 
 ## Context and Problem Statement
 
-[ADR-0001](adr-0001-metamodel-persistence-layer.md) stated "Python-native" as a decision
-driver and cited marimo as the analysis interface, but never formally chose an
-implementation language. ADR-0003 referenced Pydantic models and DuckDB Python bindings
-as assumed tooling. Neither ADR evaluated alternatives or recorded the rationale for these
-choices. This ADR closes that gap for the four technology choices that underpin the clew
-package:
+[ADR-0001](adr-0001-metamodel-persistence-layer.md) stated "Python-native" as a decision driver and cited marimo as the analysis interface, but never formally chose an implementation language. ADR-0003 referenced Pydantic models and DuckDB Python bindings as assumed tooling. Neither ADR evaluated alternatives or recorded the rationale for these choices. This ADR closes that gap for the four technology choices that underpin the clew package:
 
 1. **Language**: Python vs. other CLI-suitable languages (Go, Rust)
 2. **CLI framework**: Typer vs. Click vs. argparse
@@ -24,18 +19,12 @@ package:
 
 ## Decision Drivers
 
-- marimo (the mandated analysis and notebook interface) is Python-first; any non-Python
-  runtime creates a hard integration seam with the analysis layer
-- DuckDB ships a first-class Python client (`duckdb` PyPI package) with full SQL execution,
-  result-set materialisation to pandas/polars, and native JSON support
-- The agent writing to `clew` (Claude Code via Bash) does not care what language the CLI is
-  written in — it only cares about stdin/stdout contracts
-- The team is Python-fluent; Go and Rust would introduce a capability gap for future
-  contributors (including AI agents generating patches)
-- Schema evolution in the clew metamodel is expected to be frequent; the validation layer
-  must support incremental addition of per-type property fields without structural overhaul
-- Installability must be single-line (`uvx clew` or `pip install clew`); the package must
-  not require a build toolchain beyond a standard Python environment
+- marimo (the mandated analysis and notebook interface) is Python-first; any non-Python runtime creates a hard integration seam with the analysis layer
+- DuckDB ships a first-class Python client (`duckdb` PyPI package) with full SQL execution, result-set materialisation to pandas/polars, and native JSON support
+- The agent writing to `clew` (Claude Code via Bash) does not care what language the CLI is written in — it only cares about stdin/stdout contracts
+- The team is Python-fluent; Go and Rust would introduce a capability gap for future contributors (including AI agents generating patches)
+- Schema evolution in the clew metamodel is expected to be frequent; the validation layer must support incremental addition of per-type property fields without structural overhaul
+- Installability must be single-line (`uvx clew` or `pip install clew`); the package must not require a build toolchain beyond a standard Python environment
 
 ## Considered Options
 
@@ -54,8 +43,7 @@ package:
 ### DB interface (Python only)
 
 - **G.** DuckDB Python client (`duckdb` package) — call the Python API directly
-- **H.** Thin SQL-string layer — wrap raw SQL strings and call via `subprocess` or a
-  minimal driver; language-agnostic
+- **H.** Thin SQL-string layer — wrap raw SQL strings and call via `subprocess` or a minimal driver; language-agnostic
 
 ### Property validation (Python only)
 
@@ -65,54 +53,29 @@ package:
 
 ## Decision Outcome
 
-Chosen options: **A (Python 3.12+)**, **D (Typer)**, **G (DuckDB Python client)**,
-**I (Pydantic v2)**.
+Chosen options: **A (Python 3.12+)**, **D (Typer)**, **G (DuckDB Python client)**, **I (Pydantic v2)**.
 
-**Python** is the only language with first-class DuckDB and marimo integration. Go and
-Rust would require a bridge layer (subprocess calls or a separate marimo backend) that adds
-complexity without any v1-scale benefit — the CLI processes one command at a time, so
-Go/Rust performance advantages are irrelevant.
+**Python** is the only language with first-class DuckDB and marimo integration. Go and Rust would require a bridge layer (subprocess calls or a separate marimo backend) that adds complexity without any v1-scale benefit — the CLI processes one command at a time, so Go/Rust performance advantages are irrelevant.
 
-**Typer** over Click because Typer is built on Click but adds automatic type inference from
-Python type hints; command signatures defined as typed functions serve double duty as both
-CLI parsing and documentation. argparse is rejected for being too verbose and lacking
-automatic help generation from type hints.
+**Typer** over Click because Typer is built on Click but adds automatic type inference from Python type hints; command signatures defined as typed functions serve double duty as both CLI parsing and documentation. argparse is rejected for being too verbose and lacking automatic help generation from type hints.
 
-**DuckDB Python client** over a thin SQL-string wrapper because the Python API provides
-result-set materialisation, parameter binding (preventing injection), and direct access to
-pandas/polars output — all needed by the marimo analysis layer. A string wrapper adds no
-benefit and is less safe.
+**DuckDB Python client** over a thin SQL-string wrapper because the Python API provides result-set materialisation, parameter binding (preventing injection), and direct access to pandas/polars output — all needed by the marimo analysis layer. A string wrapper adds no benefit and is less safe.
 
-**Pydantic v2** over attrs and dataclasses because: (1) Pydantic v2 validates at assignment
-time and raises structured `ValidationError` objects, which the CLI surfaces as clear error
-messages; (2) per-type property schemas defined as Pydantic models integrate naturally with
-JSON serialisation and DuckDB's `properties JSON` column; (3) attrs and dataclasses require
-hand-rolled validation. Pydantic v2's performance regression vs. v1 is resolved in v2.x
-and is negligible at clew's record volumes.
+**Pydantic v2** over attrs and dataclasses because: (1) Pydantic v2 validates at assignment time and raises structured `ValidationError` objects, which the CLI surfaces as clear error messages; (2) per-type property schemas defined as Pydantic models integrate naturally with JSON serialisation and DuckDB's `properties JSON` column; (3) attrs and dataclasses require hand-rolled validation. Pydantic v2's performance regression vs. v1 is resolved in v2.x and is negligible at clew's record volumes.
 
 ### Positive Consequences
 
-- Single runtime (Python 3.12+) covers CLI, DB access, analysis (marimo), and property
-  validation with no bridging layer
-- `uvx clew` / `pip install clew` work from any standard Python environment; no separate
-  build step, no Cargo, no `go build`
-- Typer command signatures are self-documenting; `clew --help` output is generated from
-  type annotations without manual docstrings
-- Pydantic v2 `ValidationError` messages are structured and CLI-friendly; they propagate
-  directly to stderr without custom formatting code
-- DuckDB Python API exposes query results as pandas/polars DataFrames, enabling marimo
-  notebooks to query the DB directly with zero glue code
+- Single runtime (Python 3.12+) covers CLI, DB access, analysis (marimo), and property validation with no bridging layer
+- `uvx clew` / `pip install clew` work from any standard Python environment; no separate build step, no Cargo, no `go build`
+- Typer command signatures are self-documenting; `clew --help` output is generated from type annotations without manual docstrings
+- Pydantic v2 `ValidationError` messages are structured and CLI-friendly; they propagate directly to stderr without custom formatting code
+- DuckDB Python API exposes query results as pandas/polars DataFrames, enabling marimo notebooks to query the DB directly with zero glue code
 
 ### Negative Consequences
 
-- Python is slower to start than Go/Rust binaries; each `clew` invocation carries a CPython
-  startup penalty (~50–100ms). Acceptable for single-command agent sessions; may become
-  noticeable in tight shell loops.
-- Pydantic v2 is a non-trivial dependency; it pulls in Rust extensions (`pydantic-core`).
-  `pip install clew` on a machine without a pre-built wheel requires a Rust compiler.
-  Mitigated by publishing platform wheels to PyPI.
-- Python type system is structural, not nominal; Pydantic validation catches field-level
-  errors but not logic-level invariants (those are enforced in `crud.py`).
+- Python is slower to start than Go/Rust binaries; each `clew` invocation carries a CPython startup penalty (~50–100ms). Acceptable for single-command agent sessions; may become noticeable in tight shell loops.
+- Pydantic v2 is a non-trivial dependency; it pulls in Rust extensions (`pydantic-core`). `pip install clew` on a machine without a pre-built wheel requires a Rust compiler. Mitigated by publishing platform wheels to PyPI.
+- Python type system is structural, not nominal; Pydantic validation catches field-level errors but not logic-level invariants (those are enforced in `crud.py`).
 
 ## Pros and Cons of the Options
 
@@ -248,7 +211,5 @@ and is negligible at clew's record volumes.
 
 ## Related decisions
 
-- [ADR-0001 Persistence layer](adr-0001-metamodel-persistence-layer.md) — stated
-  "Python-native" as a driver and cited marimo; this ADR formalises that choice.
-- [ADR-0003 Schema design](adr-0003-schema-design-typed-property-graph.md) — specified
-  Pydantic models as the property validation layer; this ADR provides the formal decision.
+- [ADR-0001 Persistence layer](adr-0001-metamodel-persistence-layer.md) — stated "Python-native" as a driver and cited marimo; this ADR formalises that choice.
+- [ADR-0003 Schema design](adr-0003-schema-design-typed-property-graph.md) — specified Pydantic models as the property validation layer; this ADR provides the formal decision.

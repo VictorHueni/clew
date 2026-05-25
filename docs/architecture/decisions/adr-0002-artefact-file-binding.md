@@ -57,9 +57,7 @@ Chosen option: **D (schema field + CLI query + write-time validation)**, because
 
 ### Schema additions
 
-**Artefact type configuration — Python constants in `schema.py`** (not a DB table; see
-[ADR-0003 §Artefact type configuration](adr-0003-schema-design-typed-property-graph.md)
-for rationale):
+**Artefact type configuration — Python constants in `schema.py`** (not a DB table; see [ADR-0003 §Artefact type configuration](adr-0003-schema-design-typed-property-graph.md) for rationale):
 
 ```
 file_layout    Literal['single-collection', 'one-per-artefact', 'inherits-from-parent']
@@ -68,8 +66,7 @@ default_path   str | None   # template: {nn}/{nnnn} (zero-padded counter), {slug
 parent_type    str | None   # required when file_layout = 'inherits-from-parent'
 ```
 
-**Per-artefact file binding — `file_bindings` table** (defined in
-[ADR-0003](adr-0003-schema-design-typed-property-graph.md); FK on `artefacts(pk)`):
+**Per-artefact file binding — `file_bindings` table** (defined in [ADR-0003](adr-0003-schema-design-typed-property-graph.md); FK on `artefacts(pk)`):
 
 ```
 file_path        VARCHAR                # path captured at clew new time
@@ -78,8 +75,7 @@ content_hash     VARCHAR      NULLABLE  # NULL until clew check first hashes the
 last_seen_at     TIMESTAMPTZ  NULLABLE  # NULL until clew check first visits the section
 ```
 
-`clew where <id>` queries this table. One row per artefact; created at `clew new` time
-with `content_hash = NULL`.
+`clew where <id>` queries this table. One row per artefact; created at `clew new` time with `content_hash = NULL`.
 
 ### CLI surface
 
