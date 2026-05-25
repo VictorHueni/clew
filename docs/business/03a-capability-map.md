@@ -46,8 +46,7 @@ clew
 │   └── C2.4 Deterministic structural export
 ├── C3 · Querying and Traceability
 │   ├── C3.1 Ad-hoc cross-artefact query surface
-│   ├── C3.2 Pre-built traceability views
-│   └── C3.3 Bidirectional time traceability
+│   └── C3.2 Pre-built traceability views
 ├── C4 · Integrity and Audit
 │   ├── C4.1 Write-time reference validation
 │   ├── C4.2 Drift detection
@@ -61,7 +60,7 @@ clew
     └── C5.5 Methodology canon coverage assessment
 ```
 
-5 L0, 19 L1. Within TOGAF + Cutter sizing (3 to 8 L0; ≤ 25 L1 total).
+5 L0, 18 L1. Within TOGAF + Cutter sizing (3 to 8 L0; ≤ 25 L1 total).
 
 ## §Capability index
 
@@ -79,7 +78,6 @@ clew
 | C3 | Querying and Traceability | (root) | (composite) | Capabilities for navigating the relationships between artefacts. |
 | C3.1 | Ad-hoc cross-artefact query surface | C3 | Necessary | Arbitrary cross-artefact questions answerable in seconds from inside an agent session. |
 | C3.2 | Pre-built traceability views | C3 | **Differentiator** | Canonical, named views (the traceability matrix, lineage, impact analysis) that anyone can run deterministically. |
-| C3.3 | Bidirectional time traceability | C3 | Necessary | Rationale of each decision preserved backward; planned state surfaced forward. |
 | C4 | Integrity and Audit | (root) | (composite) | Capabilities for detecting and preventing drift between intended and actual state. |
 | C4.1 | Write-time reference validation | C4 | **Differentiator** | Rejects writes that would introduce broken references at the moment they are attempted. |
 | C4.2 | Drift detection | C4 | Necessary | Detects discrepancies between DB state and the markdown layer; reports orphans and hand-edits. |
@@ -92,7 +90,7 @@ clew
 | C5.4 | Cross-methodology referencing | C5 | Necessary | Type-aware references from an artefact in one methodology to an artefact in another. |
 | C5.5 | Methodology canon coverage assessment | C5 | Necessary | Audits which methodologies are encoded vs. which lifecycle layers are bare. |
 
-**Strategic Importance distribution:** 4 Differentiators · 13 Necessary · 2 Commodity. Healthy spread per Cutter (3 to 6 true Differentiators expected).
+**Strategic Importance distribution:** 4 Differentiators · 12 Necessary · 2 Commodity. Healthy spread per Cutter (3 to 6 true Differentiators expected).
 
 ## C1 · Authoring
 
@@ -277,25 +275,6 @@ Capabilities for navigating the relationships between artefacts. Pre-built views
 - Does NOT generate views interactively at runtime (canonical views ship with clew; new views require a code change, not configuration).
 
 **Soft-links.** Personas served: [P-01](01a-personas.md). Lean Canvas: [§3 Concrete win 1](02a-lean-canvas.md#3-unique-value-proposition--confidence-tested-n1-founder-as-instance-with-refinement) (the user-visible demo). Wave-1 evidence: [synthesis trust-threshold finding](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md). Realised in streams: [VS-2.1 Scope the Question](04a-value-streams.md#vs-21--scope-the-question) (discoverable catalogue of canonical views), [VS-2.2 Resolve from Canonical Source](04a-value-streams.md#vs-22--resolve-from-canonical-source) (Differentiator role; the wave-1 trust threshold delivered deterministically), [VS-2.4 Validate Against Current State](04a-value-streams.md#vs-24--validate-against-current-state) (re-run to re-confirm), [VS-3.1 Identify the Change](04a-value-streams.md#vs-31--identify-the-change) (see what the target is currently part of), [VS-3.2 Preview Downstream Impact](04a-value-streams.md#vs-32--preview-downstream-impact) (Differentiator role at this stage too; the impact-analysis canonical view is the magic-wand applied to changes), [VS-3.4 Confirm No Drift](04a-value-streams.md#vs-34--confirm-no-drift) (re-run the impact view to confirm the cascade propagated as predicted), [VS-4.2 Materialise Self-Contained Views](04a-value-streams.md#vs-42--materialise-self-contained-views) (views materialised as static markdown rather than executed on demand, for reader self-sufficiency), [VS-4.4 Provide Reader Orientation](04a-value-streams.md#vs-44--provide-reader-orientation) (canonical views serve as cross-cutting tables of contents).
-
-### C3.3 · Bidirectional time traceability
-
-**Definition.** Preserves the rationale of each artefact decision (why it was created or changed) and exposes the planned state attached to each artefact (what is coming next), so any reader can navigate backward through history or forward through plans.
-
-**Business object.** Decision-and-plan record.
-
-**Strategic importance.** Necessary. Maps to [§3 UVP Bidirectional time traceability bullet](02a-lean-canvas.md#3-unique-value-proposition--confidence-tested-n1-founder-as-instance-with-refinement) (wave-1 finding: *"you will always know why things have been done and what is ahead for your product"*).
-
-**Outcomes.**
-- Every artefact carries a why (rationale, ADR link, decision context).
-- Every artefact carries a what-next (planned KRs, attached epics, scheduled refactors).
-- Agent or human onboarding can reconstruct project history without re-interviewing prior maintainers.
-
-**Boundaries.**
-- Does NOT auto-generate rationale (operator and skill author it).
-- Does NOT do project management or task tracking (no Gantt, no sprint planning).
-
-**Soft-links.** Personas served: [P-01](01a-personas.md). Lean Canvas: [§3 Bidirectional time traceability](02a-lean-canvas.md#3-unique-value-proposition--confidence-tested-n1-founder-as-instance-with-refinement). Realised in streams: [VS-2.3 Surface Provenance](04a-value-streams.md#vs-23--surface-provenance) (the "why backward + what next forward" lineage attached to each query result row).
 
 ## C4 · Integrity and Audit
 
@@ -483,21 +462,22 @@ Per the [`business-capability-map` skill](https://github.com/VictorHueni/homemad
 - **Noun test:** every L0 and L1 capability name is a noun phrase, not a verb phrase.
 - **Technology-independence test:** no capability name contains a vendor, system, or tool (DuckDB, YAML, GFM, MCP, Claude all kept out of capability *names*; some appear in *definitions* as implementation hints, which is allowed).
 - **Anti-overlap test:** each capability appears once; the closest pair (C2.2 schema enforcement vs. C4.1 write-time reference validation) is disambiguated by scope (schema covers required fields and types; write-time reference validation is the FK-specific subset, called out for adoption reasons).
-- **Sizing:** 5 L0 (within 3 to 8); 19 L1 total (≤ 25); per-L0 L1 counts: 3 / 4 / 3 / 4 / 5 (3 is below the 5-to-12 recommended floor for C1 and C3 but defensible: C1's authoring scope is intentionally narrow; C3 collapses three tightly-related navigation modes).
+- **Sizing:** 5 L0 (within 3 to 8); 18 L1 total (≤ 25); per-L0 L1 counts: 3 / 4 / 2 / 4 / 5 (2 for C3 and 3 for C1 are below the 5-to-12 recommended floor but defensible: C1's authoring scope is intentionally narrow; C3 collapses two tightly-related navigation modes; `clew history` was folded into C4.3 rather than inflating C3).
 - **Differentiator distribution:** 4 Differentiators (within Cutter's 3 to 6 recommended range).
 
 ## Open Issues / Next Tests
 
-- **Capability count for C1 and C3.** Both have 3 L1, slightly under the 5-to-12 recommendation. Reconsider if FBS authoring or wave-2 interviews surface latent capabilities.
+- **Capability count for C1 and C3.** C1 has 3 L1, C3 has 2 L1 — both below the 5-to-12 recommendation. C3 was reduced from 3 to 2 when C3.3 (Bidirectional time traceability) was retired: its rationale-recording intent is covered by artefact content and kit methodology; its history-query intent was folded into C4.3. Reconsider if wave-2 interviews surface latent navigation capabilities not yet modelled.
 - **C5.1 vs. C5.3 boundary.** Skill catalogue management (C5.1) governs the lifecycle of skills; artefact template management (C5.3) governs the templates within skills. The boundary is real but subtle; review if maintainers conflate them in practice.
 - **Maturity ratings not assessed.** Skipped intentionally for v1; most capabilities are pre-implementation (Initial or Developing). Revisit after v0.1 ships.
-- **Soft-link gaps closed at the L1 level.** All 4 value streams ([`04a-value-streams.md`](04a-value-streams.md): VS-1 Compose, VS-2 Navigate, VS-3 Refactor, VS-4 Share) are now fully filled. 16 of 19 L1 capabilities carry a `Realised in streams:` soft-link: C1.1, C1.2, C1.3, C2.1, C2.2, C2.3, C2.4, C3.1, C3.2, C3.3, C4.1, C4.2, C4.3, C5.1, C5.2, C5.3. The remaining 3 (C4.4 Schema migration, C5.4 Cross-methodology referencing, C5.5 Methodology canon coverage assessment) are now **confirmed clew-internal maintenance capabilities** that do not land in user-facing value streams: they are infrastructure for the methodology layer itself (schema evolution, cross-methodology consistency, canon coverage), not workflows the operator follows to deliver value. Their absence from any VS is a **structural truth**, not a documentation gap. Processes, FBS, and domain model still do not exist; their soft-links remain pending. Processes, FBS, and domain model still do not exist; their soft-links remain pending.
+- **Soft-link gaps closed at the L1 level.** All 4 value streams ([`04a-value-streams.md`](04a-value-streams.md): VS-1 Compose, VS-2 Navigate, VS-3 Refactor, VS-4 Share) are now fully filled. 15 of 18 L1 capabilities carry a `Realised in streams:` soft-link: C1.1, C1.2, C1.3, C2.1, C2.2, C2.3, C2.4, C3.1, C3.2, C4.1, C4.2, C4.3, C5.1, C5.2, C5.3. The remaining 3 (C4.4 Schema migration, C5.4 Cross-methodology referencing, C5.5 Methodology canon coverage assessment) are now **confirmed clew-internal maintenance capabilities** that do not land in user-facing value streams. Their absence from any VS is a **structural truth**, not a documentation gap. Processes, FBS, and domain model still do not exist; their soft-links remain pending.
 - **L0 axis is the most consequential choice; lifecycle-layer as an alternative remains a real option.** If wave-2 interviews surface that "any builder" reaches for clew by lifecycle layer (QA-only, ops-only) rather than by capability domain, re-pick the axis.
 
 ## Changelog
 
 | Date | Change | Evidence | Cascading effects |
 |---|---|---|---|
+| 2026-05-25 | C3.3 (Bidirectional time traceability) retired. Rationale: artefact content and kit methodology already carry the "why backward" intent; "what next forward" is covered by epics (C3.2 impact view + delivery roadmap); `clew history` (C3.3.F03) folded into C4.3 as C4.3.F04 — it is an audit query, not a traceability view. L1 count: 19 → 18. Strategic Importance distribution: 13 Necessary → 12 Necessary. Soft-link count: 16 of 19 → 15 of 18. Discipline checks + Open Issues updated accordingly. | FBS redesign session. | [07a-fbs.md](../product-specs/07a-fbs.md): C3.3 section removed, C4.3.F04 added, counts updated. No cascade to value streams (C3.3's VS-2.3 backlink is simply removed). |
 | 2026-05-24 | Scaffold + structure + fill in one pass. 5 L0 (Authoring · Persistence · Querying and Traceability · Integrity and Audit · Methodology Distillation), 19 L1 capabilities. 4 Differentiators (C1.1 methodology-mediated artefact creation, C3.2 pre-built traceability views, C4.1 write-time reference validation, C5.1 skill catalogue management), 13 Necessary, 2 Commodity. Strategic Importance assigned now per [wave-1 synthesis](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md) signal. | Drafted hybrid (top-down framework cross-validated against VISION, P-01, Lean Canvas, OBJ-01/02/03, ADR-0001, ADR-0002, wave-1 synthesis). | [VISION.md](../VISION.md), [Lean Canvas](02a-lean-canvas.md), [OBJ doc](04b-objectives.md), [persona](01a-personas.md), [ADR-0001](../architecture/decisions/adr-0001-metamodel-persistence-layer.md), [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md): existing soft-link slots filled. Value streams / processes / FBS / domain model: still _TODO_ (no artefact to soft-link to yet). |
 | 2026-05-25 | Value-stream backlinks wired (cascade from [04a-value-streams.md](04a-value-streams.md) VS-1 fill). 12 L1 capabilities now carry a `Realised in streams:` soft-link to the VS-1 stage that consumes them: VS-1.1 ← C5.1, C5.3; VS-1.2 ← C5.3, C1.2, C1.3; VS-1.3 ← C1.1 (Differentiator role flagged), C1.3, C5.2; VS-1.4 ← C2.1, C2.2, C2.3, C2.4, C4.1 (Differentiator role flagged), C4.3. §Open Issues §Soft-link gaps updated: 12 capabilities now wired; 7 remaining (C3.1, C3.2, C3.3, C4.2, C4.4, C5.4, C5.5) await VS-2 / VS-3 / VS-4 stage decomposition. | [04a-value-streams.md VS-1](04a-value-streams.md#vs-1--compose-architecture). Cascade companion to today's value-streams commit. | None outside this commit. The 7 unwired capabilities will gain backlinks when VS-2 / VS-3 / VS-4 are filled. |
 | 2026-05-25 | Value-stream backlinks wired (cascade from [04a-value-streams.md](04a-value-streams.md) VS-4 fill). 5 capabilities gain additional VS-4 backlinks appended to existing soft-links (no first-time backlinks; VS-4 is value-flow reuse of substrate already in place): C1.1 ← VS-4.4 (orientation doc is itself a methodology-mediated artefact); C2.3 ← VS-4.2 (relative-path bindings resolve in plain markdown viewers) + VS-4.4 (cross-links from entry-point); C2.4 ← VS-4.1 (byte-identical snapshot makes the share reproducible) + VS-4.2 (the snapshot mechanism); C3.2 ← VS-4.2 (views materialised as static markdown for reader self-sufficiency) + VS-4.4 (canonical views as cross-cutting tables of contents); C4.2 ← VS-4.1 (pre-publish drift check ensures shared snapshot reflects current state). §Open Issues §Soft-link gaps re-written: the count stays at 16 of 19, and the remaining 3 (C4.4, C5.4, C5.5) are now **confirmed** clew-internal maintenance capabilities that do not land in user-facing value streams (their absence from any VS is a structural truth, not a documentation gap). All 4 streams now filled; the value-stream-to-capability backlink question is closed at the L1 level. | [04a-value-streams.md VS-4](04a-value-streams.md#vs-4--share-architecture). Cascade companion to today's VS-4 fill. | None outside this commit. With all 4 VS filled and 16 of 19 capabilities wired, this closes the cross-artefact wiring loop for the business layer. |
