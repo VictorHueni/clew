@@ -201,9 +201,27 @@ Upgrade path: CLI → MCP server → HTTP API, all wrapping the same core layer.
 
 ---
 
+## Where to start reading
+
+This repository is its own first project. The artefacts in [`docs/business/`](docs/business/) document clew using clew's own intended methodology, as a worked example for anyone evaluating the approach.
+
+Depending on what you came for:
+
+- **What is clew for?** → [`VISION.md`](docs/VISION.md) + [`docs/business/02a-lean-canvas.md`](docs/business/02a-lean-canvas.md)
+- **Who is it built for?** → [`docs/business/01a-personas.md`](docs/business/01a-personas.md) (P-01 Ava, the agent-first product engineer)
+- **What can it do? (capabilities)** → [`docs/business/03a-capability-map.md`](docs/business/03a-capability-map.md) (5 L0 domains, 19 L1 capabilities)
+- **How does value flow?** → [`docs/business/04a-value-streams.md`](docs/business/04a-value-streams.md) (4 streams, fully decomposed, all triggered by P-01)
+- **What are the goals and measures?** → [`docs/business/04b-objectives.md`](docs/business/04b-objectives.md) (3 OKRs, 12 KRs)
+- **Why these technical decisions?** → [`docs/architecture/decisions/`](docs/architecture/decisions/) (ADRs ahead of implementation)
+- **What does the user research say?** → [`docs/business/discovery/interviews/`](docs/business/discovery/interviews/) (wave-1 interview + synthesis, N=1, founder-as-instance)
+
+Every artefact uses **stable IDs** (P-NN, C-N.M, VS-N.M, OBJ-NN, KR-NN.M, ADR-NNNN) and **soft-links** to related artefacts; clicking any ID-tagged link drills into the referenced artefact. Confidence is labelled throughout. Pain ratings and KR targets are anchored on wave-1 N=1 evidence; see the **Confidence-cliff watchpoint** in [`docs/business/04b-objectives.md`](docs/business/04b-objectives.md#obj-03--validate-the-core-hypotheses-before-scaling) for when this evidence base will be refreshed.
+
+---
+
 ## Status
 
-Early design phase. ADRs written before code.
+Early design phase. Business-layer modelling **complete** (personas, lean canvas, capability map, value streams, objectives, all wired bidirectionally; see §Where to start reading above). Architecture layer: two ADRs ahead of implementation ([persistence layer](docs/architecture/decisions/adr-0001-metamodel-persistence-layer.md), [file binding](docs/architecture/decisions/adr-0002-artefact-file-binding.md)). **No CLI yet:** the commands shown in §What it does are the target shape, not the current state. Next layer: spec-functional-breakdown-structure (FBS) to bridge business → technical.
 
 ## License
 
