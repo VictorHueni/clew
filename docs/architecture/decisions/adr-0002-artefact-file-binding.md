@@ -35,7 +35,7 @@ A second, narrower problem rides alongside: even if the file is known, navigatio
 
 ## Decision Drivers
 
-- Every entity type in the metamodel must have a single, queryable layout convention.
+- Every artefact type in the metamodel must have a single, queryable layout convention.
 - Both agent and human must discover the convention without reading prose.
 - The CLI must enforce the convention at write time, consistent with the OBJ-02 promise.
 - Sub-artefacts must inherit their parent's binding by default; explicit overrides should be rare and intentional.
@@ -57,22 +57,29 @@ Chosen option: **D (schema field + CLI query + write-time validation)**, because
 
 ### Schema additions
 
-Each entity type definition gains three fields:
+**Artefact type configuration — Python constants in `schema.py`** (not a DB table; see
+[ADR-0003 §Artefact type configuration](adr-0003-schema-design-typed-property-graph.md)
+for rationale):
 
 ```
-file_layout    enum('single-collection', 'one-per-artefact', 'inherits-from-parent')
-default_path   str          # template with {nn}, {slug}, {parent_path} placeholders
-parent_type    optional[str]   # required when file_layout = inherits-from-parent
+file_layout    Literal['single-collection', 'one-per-artefact', 'inherits-from-parent']
+default_path   str | None   # template: {nn}/{nnnn} (zero-padded counter), {slug}, {parent_path}
+                            # None when file_layout = 'inherits-from-parent'
+parent_type    str | None   # required when file_layout = 'inherits-from-parent'
 ```
 
-Each artefact record gains four fields:
+**Per-artefact file binding — `file_bindings` table** (defined in
+[ADR-0003](adr-0003-schema-design-typed-property-graph.md); FK on `artefacts(pk)`):
 
 ```
-file_path        str          # captured at clew new time
-section_anchor   str          # derived from id + heading slug
-content_hash     str          # of the artefact's section in the file, last seen by clew
-last_seen_at     timestamp    # used by clew check for drift detection
+file_path        VARCHAR                # path captured at clew new time
+section_anchor   VARCHAR                # derived: {lowercase_id}--{gfm_slug_of_heading}
+content_hash     VARCHAR      NULLABLE  # NULL until clew check first hashes the section
+last_seen_at     TIMESTAMPTZ  NULLABLE  # NULL until clew check first visits the section
 ```
+
+`clew where <id>` queries this table. One row per artefact; created at `clew new` time
+with `content_hash = NULL`.
 
 ### CLI surface
 
@@ -120,7 +127,7 @@ clew new key-result OBJ-03 "interviews conducted" --target 5
 
 ### Layout taxonomy at MVP scope
 
-The three categories cover every entity type observed in the repo today. The complete enum is fixed at v0.1:
+The three categories cover every artefact type observed in the repo today. The complete enum is fixed at v0.1:
 
 | Type | Layout | Default path template | Parent |
 |---|---|---|---|
@@ -136,7 +143,7 @@ The three categories cover every entity type observed in the repo today. The com
 | glossary-term | single-collection | `docs/domain/glossary.md` | (none) |
 | adr | one-per-artefact | `docs/architecture/decisions/adr-{nnnn}-{slug}.md` | (none) |
 
-The table grows as v0.3 introduces remaining entity types (FBS, PRDs, quality attributes, epics, quantitative models). The enum stays stable; only rows are added.
+The table grows as v0.3 introduces remaining artefact types (FBS, PRDs, quality attributes, epics, quantitative models). The enum stays stable; only rows are added.
 
 ### Positive Consequences
 
@@ -149,7 +156,7 @@ The table grows as v0.3 introduces remaining entity types (FBS, PRDs, quality at
 
 ### Negative Consequences
 
-- The three-category enum is fixed at v0.1; a fourth category emerging in v0.3+ requires a schema migration.
+- The three-category enum is fixed at v0.1; a fourth category emerging in v0.3+ requires a `schema.py` code change (adding to the `FileLayout` literal type and updating `ARTEFACT_TYPE_CONFIGS`).
 - Default-path templates are a small interpolation language (`{nn}`, `{slug}`, `{parent_path}`) to maintain.
 - Existing files (authored before clew existed) need a one-time `clew import md` pass to populate `file_path`, `section_anchor`, and `content_hash` retroactively.
 - Anchor convention is GFM-coupled; non-GFM renderers (or future custom renderers) may produce different anchors, breaking `clew where` navigation outside the repo's primary toolchain.
@@ -182,7 +189,7 @@ The table grows as v0.3 introduces remaining entity types (FBS, PRDs, quality at
 #### Negative
 
 - Convention is hidden in Python source; agents and users cannot inspect it without reading code.
-- Adding a new entity type in v0.3 requires editing CLI code, not just schema config.
+- Adding a new artefact type in v0.3 requires editing CLI code, not just schema config.
 - Discovery requires `clew --help` walking, not a typed query.
 - The rule and the schema are decoupled, which is the same fork problem as option A in different clothing.
 
@@ -217,47 +224,21 @@ See *Decision Outcome* above.
 - Default-path interpolation needs a small grammar.
 - Initial migration of existing files is required (one-time `clew import md`).
 
-## Implementation Notes
-
-### Package structure (extends [ADR-0001](adr-0001-metamodel-persistence-layer.md))
-
-```
-clew/
-  schema.py     # per-type definitions gain file_layout, default_path, parent_type
-  crud.py       # clew new gains layout validation; sub-artefact inheritance lookup
-  cli.py        # adds: clew layout <type>, clew where <id>, clew check
-  binding.py    # NEW: anchor derivation, content-hash computation, drift detection
-  importer.py   # NEW: clew import md for migrating existing markdown files
-```
-
-### Anchor derivation function
-
-```
-def anchor_for(artefact_id: str, heading: str) -> str:
-    id_part = artefact_id.lower()
-    slug_part = slugify(heading, separator="-")  # strip ID prefix; GFM rules
-    return f"{id_part}--{slug_part}"
-```
-
-### Validation rules in `clew new`
-
-- `file_layout = single-collection`: `--file` is **required**, must match `default_path` for the type (or an explicitly registered alternate collection path; v0.3 may add `clew register-collection`).
-- `file_layout = one-per-artefact`: `--file` is **required**, must match the `default_path` template (with `{nn}` and `{slug}` interpolated). Reject if file already exists.
-- `file_layout = inherits-from-parent`: `--file` is **optional**; defaults to parent's `file_path`. If provided, must be one of `single-collection` or `one-per-artefact` according to the *parent's* layout.
-
-### Migration: bringing existing files into clew
-
-`clew import md <path>` walks a markdown file, looks for headings whose first token matches a known artefact ID pattern (`P-NN`, `OBJ-NN`, `KR-NN.M`, etc.), and creates binding records (`file_path`, `section_anchor`, `content_hash`) without touching the markdown. Reports any ID-shaped heading that does not correspond to a DB record (orphans in either direction).
-
-This is the one-time bootstrap that lets clew adopt a repository whose markdown predates the CLI. It is not the same as a regeneration command; markdown is never written by clew.
-
-### Out of scope for this ADR
+## Out of scope for this ADR
 
 - `clew render` and any form of DB-to-markdown generation. ADR-0001's "markdown is agent-authored narrative" stands; this ADR only adds a binding, not a rendering pipeline.
 - Multi-anchor-per-file artefacts (an artefact whose narrative spans multiple non-contiguous sections). Not observed in the repo; deferred until a real case appears.
 - Custom anchor schemes for non-GFM renderers. The convention is GFM-coupled by intent.
 
-### Related decisions
+## Related decisions
 
 - Depends on: [ADR-0001 Introduce a persistence layer for the strategic-architecture metamodel](adr-0001-metamodel-persistence-layer.md).
 - Linked from: [Lean Canvas §4 Solution](../../business/02a-lean-canvas.md#4-solution--confidence-assumed-solution-details-still-in-design-foundational-bullet-tested-n1) (first concrete demo of OBJ-02 KR-02.2), [OBJ-02 §Linked from](../../business/04b-objectives.md#obj-02--the-architectural-substrate-is-trustworthy-enough-that-agents-depend-on-it).
+
+## Dependent artefacts
+
+| Concern | Where it lives |
+|---|---|
+| `file_bindings` DDL + `ArtefactTypeConfig` dataclass | [Artefact Store domain model §Physical schema](../../domain/07b-models/artefact-store.md) |
+| Validation rules + transaction ordering for `clew new` | [CLI interface contract v1](../../architecture/interface-contracts/clew-cli-v1.md) |
+| Markdown migration procedure (`clew import md`) | [CLI interface contract v1](../../architecture/interface-contracts/clew-cli-v1.md) |

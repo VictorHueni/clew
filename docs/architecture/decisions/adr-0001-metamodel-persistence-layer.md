@@ -365,98 +365,22 @@ A property graph database storing all artefact types as nodes and cross-referenc
 - The "semantic layer" benefit cited in Neo4j literature (helping LLMs write better graph queries) is a query-composition concern addressable at the CLI layer without changing the storage tier.
 - Schema and migration discipline still required; graph schema evolution is no simpler than relational migration.
 
-## Implementation Notes
+## Project layout
 
-### Package structure
+The DB file (`docs/clew/clew.db`) is gitignored; the YAML snapshot directory
+(`docs/clew/snapshot/`) is git-tracked and never edited directly. Snapshot file names and
+the full CLI command set are specified in the
+[CLI interface contract](../../architecture/interface-contracts/clew-cli-v1.md).
 
-```
-clew/
-  schema.py     # Pydantic models + DuckDB DDL for all five metamodel layers
-  crud.py       # CRUD functions, sole business logic, shared by all interfaces
-  id_gen.py     # DB sequence wrappers, sole source of ID generation
-  cli.py        # Typer CLI entry point
-  export.py     # YAML export (deterministic serialisation from DB state)
-```
+## Related decisions
 
-### Core commands (initial set)
+- [ADR-0002 Bind metamodel artefacts to narrative files via a typed layout convention](adr-0002-artefact-file-binding.md) extends `schema.py` with `ARTEFACT_TYPE_CONFIGS` (per-type `file_layout`, `default_path`, `parent_type` — Python constants, not DB fields) and `cli.py` (`clew layout`, `clew where`, `clew import md`, validation inside `clew new`).
+- [ADR-0003 Schema design — typed property graph over DuckDB](adr-0003-schema-design-typed-property-graph.md) specifies the internal schema: universal `artefacts` node registry + typed `artefact_references` edge table + `file_bindings` binding table.
 
-```bash
-# Entity creation, returns the generated ID on stdout
-clew new persona "name" [--role] [--goals] [--pain-points]
-clew new capability "name" [--parent BC-NN] [--level 0|1|2]
-clew new functionality "name" --cap C-N.M [--description]
-clew new epic "name" [--phase N]
-clew new objective "statement" [--perspective financial|customer|...]
-clew new key-result OBJ-NN "metric" --target N [--unit]
+## Dependent artefacts
 
-# Relationships
-clew link FUNC-ID epic EPIC-ID
-clew link KR-ID epic EPIC-ID
-
-# Updates
-clew set complexity FUNC-ID [XS|S|M|L|XL]
-clew set status FUNC-ID [planned|in-progress|done]
-
-# Queries
-clew list [entity-type] [--filters]
-clew estimate epic EPIC-ID
-clew estimate phase N
-
-# Git snapshot
-clew export yaml [--out snapshot/]
-```
-
-### Project layout
-
-```
-docs/clew/
-  clew.db         # DuckDB file, local working cache, gitignored
-  snapshot/       # YAML export, git-tracked, source of truth, never edited directly
-    personas.yaml
-    capabilities.yaml
-    functionalities.yaml
-    epics.yaml
-    objectives.yaml
-    glossary.yaml
-    bounded-contexts.yaml
-```
-
-### adr-tools analogy
-
-| `adr-tools` | `clew` |
+| Concern | Where it lives |
 |---|---|
-| `adr new "title"` | `clew new persona "name"` |
-| Auto-numbered `.md` file | Auto-sequenced DB record, ID on stdout |
-| `adr list` | `clew list functionalities --epic E-02` |
-| `adr generate toc` | `clew export yaml` |
-| Bash scripts | Python / Typer + DuckDB |
-
-This ADR does not specify the full DuckDB schema or command signatures in detail.
-Those belong in the implementation plan for `clew` v0.1, scoped to the
-first two entity types (functionalities + epics) to validate the pattern before
-generalising to all five metamodel layers.
-
-### Graph traversal strategy
-
-Impact analysis (`clew impact <ID>`) and lineage views (`clew trace <ID>`) are reachability queries on the artefact FK graph. These map directly to DuckDB recursive CTEs — no graph engine required. Example structure for a reverse-impact query (find all artefacts referencing a given ID):
-
-```sql
-WITH RECURSIVE impact(id, artefact_type, depth) AS (
-  -- base: direct references to the target
-  SELECT source_id, source_type, 1
-  FROM artefact_references WHERE target_id = ?
-  UNION ALL
-  -- recursive: references to those referencing artefacts
-  SELECT r.source_id, r.source_type, i.depth + 1
-  FROM artefact_references r JOIN impact i ON r.target_id = i.id
-  WHERE i.depth < 10  -- guard; max real depth ≤ 5
-)
-SELECT * FROM impact ORDER BY depth;
-```
-
-Maximum traversal depth in the clew metamodel is bounded at 5 hops. The guard of 10 provides safety without being a practical constraint. The traceability matrix (`clew matrix`) is a multi-way cross-join across the artefact types, not a recursive traversal — DuckDB's columnar engine handles this efficiently.
-
-### Related decisions
-
-- [ADR-0002 Bind metamodel artefacts to narrative files via a typed layout convention](adr-0002-artefact-file-binding.md) extends `schema.py` (per-type `file_layout`, `default_path`, `parent_type`) and `cli.py` (`clew layout`, `clew where`, validation inside `clew new`).
-- [ADR-0003 Schema design — typed property graph over DuckDB](adr-0003-schema-design-typed-property-graph.md) specifies the internal schema: universal `artefacts` node registry + typed `artefact_references` edge table + per-type property tables.
+| Implementation stack choice (Python / Typer / DuckDB / Pydantic) | [ADR-0004](adr-0004-python-typer-duckdb-implementation-stack.md) |
+| Physical DuckDB schema (DDL, indexes, sequences) | [Artefact Store domain model §Physical schema](../../domain/07b-models/artefact-store.md) |
+| Full CLI command surface + validation rules | [CLI interface contract v1](../../architecture/interface-contracts/clew-cli-v1.md) |

@@ -72,70 +72,26 @@ relationship types, supports uniform recursive CTE traversal, and keeps the sche
 to two functional tables — while delegating type-specific validation to `schema.py`
 Pydantic models, which is where clew's validation contract already lives.
 
-### Schema
+Three tables implement this design: `artefacts` (universal node registry),
+`artefact_references` (typed edge table with relationship metadata), and `file_bindings`
+(artefact-to-file binding, FK on `artefacts(pk)`). Adding a new artefact type requires no
+DDL — one new Pydantic class in `schema.py` (property schema) + one new `ArtefactTypeConfig`
+entry (layout config) + one new row in `id_sequences` (ID counter). Full DDL, query
+patterns, and property schemas are in the
+[Artefact Store domain model §Physical schema](../../domain/07b-models/artefact-store.md).
 
-```sql
--- Technical surrogate key sequences (DB-native; may reset on DB recreation — intended)
-CREATE SEQUENCE artefact_pk_seq START 1;
-CREATE SEQUENCE ref_pk_seq      START 1;
+### Artefact type configuration (Python constants, not a DB table)
 
--- Business identifier counter table (application-managed; exported in YAML snapshot
--- so business IDs are reproduced identically on DB restore from snapshot)
-CREATE TABLE id_sequences (
-  artefact_type  VARCHAR  PRIMARY KEY,
-  next_val       UINTEGER NOT NULL DEFAULT 1
-);
+The three fields ADR-0002 calls "artefact type definition" fields — `file_layout`,
+`default_path`, `parent_type` — are Python constants in `schema.py`, **not rows in the
+database**. Rationale:
 
--- Single universal artefact table — no per-type tables
-CREATE TABLE artefacts (
-  pk             UINTEGER PRIMARY KEY DEFAULT nextval('artefact_pk_seq'),  -- surrogate key
-  business_id    VARCHAR  UNIQUE NOT NULL,    -- 'P-01', 'C1.1', 'VS-1.3' — stable semantic key
-  artefact_type  VARCHAR  NOT NULL,           -- 'persona', 'capability', 'vs_stage', ...
-  name           VARCHAR  NOT NULL,
-  status         VARCHAR  DEFAULT 'active',   -- 'active', 'retired', 'superseded'
-  created_at     TIMESTAMPTZ DEFAULT now(),
-  properties     JSON     NOT NULL DEFAULT '{}' -- all type-specific fields; schema in schema.py
-);
-
--- Typed edge table: all cross-artefact relationships; internal FK joins on surrogate PKs
-CREATE TABLE artefact_references (
-  pk            UINTEGER PRIMARY KEY DEFAULT nextval('ref_pk_seq'),
-  source_pk     UINTEGER NOT NULL REFERENCES artefacts(pk),
-  relationship  VARCHAR  NOT NULL,            -- 'TRIGGERS', 'CONSUMES', 'GROUPS', 'REALIZES', 'INFORMS'
-  target_pk     UINTEGER NOT NULL REFERENCES artefacts(pk),
-  role          VARCHAR,                      -- 'Differentiator', 'Necessary', etc.
-  created_at    TIMESTAMPTZ DEFAULT now()
-);
-
-CREATE INDEX idx_refs_source ON artefact_references(source_pk, relationship);
-CREATE INDEX idx_refs_target ON artefact_references(target_pk, relationship);
-```
-
-Two functional tables. Adding a new artefact type = one new Pydantic class in `schema.py`
-+ one new row in `id_sequences`. No DDL.
-
-### Traversal pattern (recursive CTE)
-
-Every traversal query — impact analysis, lineage, traceability matrix path — uses the
-same pattern over `artefact_references`:
-
-```sql
--- Resolve input business ID to surrogate PK once at query entry; traverse on integer PKs
-WITH RECURSIVE impact(pk, business_id, artefact_type, relationship, depth) AS (
-  SELECT a.pk, a.business_id, a.artefact_type, r.relationship, 1
-  FROM   artefact_references r
-  JOIN   artefacts a ON a.pk = r.source_pk
-  WHERE  r.target_pk = (SELECT pk FROM artefacts WHERE business_id = ?)
-  UNION ALL
-  SELECT a.pk, a.business_id, a.artefact_type, r.relationship, i.depth + 1
-  FROM   artefact_references r
-  JOIN   artefacts a ON a.pk = r.source_pk
-  JOIN   impact i    ON r.target_pk = i.pk
-  WHERE  i.depth < 10          -- guard; max real depth ≤ 5
-)
--- Output is business IDs only; surrogate PKs are internal to the traversal
-SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY depth;
-```
+- They are static metadata about artefact *types*, not per-artefact instance data; they
+  change only when a new artefact type is added to the kit, never when artefacts are created.
+- A DB table would require a seeding migration for every type, defeating the no-DDL goal.
+- `clew layout <type>` introspects `ARTEFACT_TYPE_CONFIGS` at runtime and returns the same
+  structured output an agent would get from a DB query — the programmatic-discovery contract
+  in ADR-0002 is fulfilled without a DB table.
 
 ### Positive Consequences
 
@@ -146,9 +102,10 @@ SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY dept
 - Traversal queries use a single, uniform recursive CTE pattern regardless of artefact type
 - Edge metadata (role, confidence, evidence_ref) is first-class in `artefact_references`
 - DuckPGQ property graph extension can be layered over the two tables in v2 with zero
-  schema changes
-- Surrogate PKs and business identifiers are fully decoupled: drop-and-restore preserves
-  all business IDs exactly while surrogate PKs are silently regenerated
+  schema changes (`CREATE PROPERTY GRAPH` declaration only — no data migration)
+- Surrogate PKs and business identifiers are fully decoupled: `clew export` + `clew import snapshot`
+  preserves all artefact records, edges, and file bindings exactly — surrogate PKs are
+  regenerated transparently on restore, business IDs never change
 - The `properties` JSON column serialises naturally as a nested YAML object in the
   snapshot — each artefact is self-contained in the export
 
@@ -226,155 +183,20 @@ metadata-carrying relationships use `artefact_references`.
 - Traversal queries cannot use a uniform CTE pattern — they branch by relationship type
 - Retains the per-type DDL migration burden for property storage
 
-## Implementation Notes
-
-### Pydantic property schema registry (`schema.py`)
-
-Type-specific field schemas are defined as Pydantic models — one per artefact type. Adding
-a new type is one new class; no DDL required:
-
-```python
-from pydantic import BaseModel
-from typing import Literal
-
-class PersonaProperties(BaseModel):
-    goals:       str | None = None
-    pain_points: str | None = None
-
-class CapabilityProperties(BaseModel):
-    strategic_importance: Literal['Differentiator', 'Necessary', 'Commodity'] | None = None
-    definition:           str | None = None
-    outcomes:             str | None = None
-
-class FbsFunctionalityProperties(BaseModel):
-    description: str | None = None
-    vs_stage:    str | None = None   # soft-link; not a FK — resolved at query time
-    is_differentiator: bool = False
-
-ARTEFACT_SCHEMAS: dict[str, type[BaseModel]] = {
-    'persona':            PersonaProperties,
-    'capability':         CapabilityProperties,
-    'fbs_functionality':  FbsFunctionalityProperties,
-    # one entry per type; new types extend this dict — zero DDL
-}
-```
-
-`crud.py` validates the incoming properties dict against `ARTEFACT_SCHEMAS[artefact_type]`
-before serialising to JSON and writing to `artefacts.properties`. Unknown types receive a
-validation error naming the unrecognised type and listing the known types.
-
-### Querying type-specific properties
-
-DuckDB JSON operators make property queries concise enough for agent-generated SQL:
-
-```sql
--- All Differentiator capabilities
-SELECT business_id, name, properties->>'strategic_importance' AS importance
-FROM   artefacts
-WHERE  artefact_type = 'capability'
-  AND  properties->>'strategic_importance' = 'Differentiator';
-
--- All shipped FBS functionalities with their VS-stage soft-links
-SELECT business_id, name,
-       (properties->>'vs_stage')         AS vs_stage,
-       (properties->>'is_differentiator') AS differentiator
-FROM   artefacts
-WHERE  artefact_type = 'fbs_functionality'
-  AND  status = 'active';
-```
-
-### Relationship type registry
-
-Canonical relationship types, enforced by `crud.py` at write time:
-
-| Relationship | Source type(s) | Target type(s) | Role values |
-|---|---|---|---|
-| TRIGGERS | persona | value_stream | — |
-| CONSUMES | vs_stage | capability | Differentiator, Necessary |
-| REALIZES | fbs_functionality | vs_stage | Differentiator |
-| GROUPS | epic | fbs_functionality | — |
-| INFORMS | objective | vs_stage | — |
-| REFERENCES | any | any | (free text; soft cross-link) |
-
-New relationship types are added to this registry in `crud.py`; no DDL migration needed.
-
-### Type-safety enforcement (`crud.py`)
-
-`crud.py` validates source and target artefact types before writing to `artefact_references`:
-
-```python
-ALLOWED_RELATIONSHIPS = {
-    "TRIGGERS":   ({"persona"},           {"value_stream"}),
-    "CONSUMES":   ({"vs_stage"},          {"capability"}),
-    "REALIZES":   ({"fbs_functionality"}, {"vs_stage"}),
-    "GROUPS":     ({"epic"},              {"fbs_functionality"}),
-    "INFORMS":    ({"objective"},         {"vs_stage"}),
-    "REFERENCES": (None, None),  # None = any type permitted
-}
-```
-
-If source or target type is not in the allowed set, the write is rejected with a structured
-error naming the relationship, the actual types, and the allowed types.
-
-### Business identifier generation (`id_gen.py`)
-
-Business identifiers are generated exclusively by `id_gen.py` (application layer) — never
-by the DB engine and never by the agent. The `id_sequences` table persists per-type counter
-state so business IDs are reproducible on DB restore:
-
-```python
-def next_business_id(conn, artefact_type: str, parent_business_id: str | None = None) -> str:
-    """Atomically increment the per-type counter; return the next business ID."""
-    val = conn.execute(
-        "UPDATE id_sequences SET next_val = next_val + 1 "
-        "WHERE artefact_type = ? RETURNING next_val - 1",
-        [artefact_type]
-    ).fetchone()[0]
-
-    match artefact_type:
-        case "persona":           return f"P-{val:02d}"
-        case "epic":              return f"E-{val:02d}"
-        case "objective":         return f"OBJ-{val:02d}"
-        case "key_result":        return f"KR-{parent_business_id}.{val}"
-        case "vs_stage":          return f"{parent_business_id}.{val}"       # VS-1 → VS-1.1
-        case "fbs_functionality": return f"{parent_business_id}.F{val:02d}"  # C1.1 → C1.1.F01
-```
-
-**Snapshot and restore contract:**
-
-- `clew export` serialises the `id_sequences` table alongside all artefact records in the
-  YAML snapshot — counter state is part of the snapshot, not a DB-only concern.
-- `clew import` (DB restore from snapshot) writes artefacts with their existing
-  `business_id` values; business IDs are stable across restores. Surrogate PKs are
-  regenerated from scratch; FK references within the restored DB are resolved by business ID
-  during import, then remapped to the new surrogate PKs before writing.
-- The YAML snapshot is **business-ID-centric**: cross-artefact relationships are expressed
-  as `(source_business_id, relationship, target_business_id)` tuples. Surrogate PKs do not
-  appear in the snapshot and are never hand-edited.
-
-### DuckPGQ upgrade path (v2)
-
-The `artefacts` table maps to a PGQ vertex table; `artefact_references` maps to a PGQ
-edge table. The v2 upgrade is a DuckDB extension load + a `CREATE PROPERTY GRAPH`
-declaration — no data migration, no schema change:
-
-```sql
--- v2 addition only — no schema change to existing tables
-CREATE PROPERTY GRAPH clew_graph
-  VERTEX TABLES (artefacts LABEL artefact_type)
-  EDGE TABLES (
-    artefact_references
-      SOURCE KEY (source_pk) REFERENCES artefacts(pk)
-      DESTINATION KEY (target_pk) REFERENCES artefacts(pk)
-      LABEL relationship
-  );
-```
-
-### Related decisions
+## Related decisions
 
 - [ADR-0001 Persistence layer (DuckDB + CLI)](adr-0001-metamodel-persistence-layer.md) —
-  this ADR defines the schema design within the engine chosen in ADR-0001; the graph
-  traversal strategy note in ADR-0001 §Implementation Notes is the direct precursor.
+  this ADR defines the schema design within the engine chosen in ADR-0001.
 - [ADR-0002 Artefact file binding](adr-0002-artefact-file-binding.md) — the `file_bindings`
-  table uses `artefacts(pk)` as its FK anchor; the universal node registry introduced here
-  is the FK target.
+  table uses `artefacts(pk)` as its FK anchor. The `ARTEFACT_TYPE_CONFIGS` dict in
+  `schema.py` holds the per-type layout constants that ADR-0002 exposes via `clew layout <type>`.
+
+## Dependent artefacts
+
+| Concern | Where it lives |
+|---|---|
+| Physical DDL (all `CREATE TABLE`, sequences, indexes) | [Artefact Store domain model §Physical schema](../../domain/07b-models/artefact-store.md) |
+| Property schemas per artefact type (Pydantic models) | [Artefact Store domain model §Property schemas](../../domain/07b-models/artefact-store.md) |
+| Relationship type registry + type-safety rules | [Artefact Store domain model §Relationship registry](../../domain/07b-models/artefact-store.md) |
+| Business ID generation contract + ID format table | [Artefact Store domain model §Business identity](../../domain/07b-models/artefact-store.md) |
+| Snapshot / restore contract (`clew export` / `clew import snapshot`) | [CLI interface contract v1](../../architecture/interface-contracts/clew-cli-v1.md) |
