@@ -63,8 +63,7 @@ clew
 │
 ├── C1 · Authoring
 │   ├── C1.1 · Methodology-mediated artefact creation  (functionalities: 3 ✅ · 0 🔄 · 0 ⬜)
-│   ├── C1.2 · Selective context loading               (functionalities: 0 ✅ · 0 🔄 · 3 ⬜)
-│   └── C1.3 · External evidence integration           (functionalities: 0 ✅ · 0 🔄 · 3 ⬜)
+│   └── C1.2 · Selective context loading               (functionalities: 0 ✅ · 0 🔄 · 3 ⬜)
 │
 ├── C2 · Persistence
 │   ├── C2.1 · Stable identifier generation            (functionalities: 0 ✅ · 0 🔄 · 4 ⬜)
@@ -90,7 +89,7 @@ clew
     └── C5.5 · Methodology canon coverage assessment   (functionalities: 0 ✅ · 0 🔄 · 2 ⬜)
 ```
 
-**Total:** 60 functionalities · 5 ✅ shipped · 0 🔄 planned · 55 ⬜ backlog. The 5 shipped functionalities are realised by [`homemade-claude-kit`](https://github.com/VictorHueni/homemade-claude-kit) — no clew CLI code required for them. The 55 remaining ⬜ are the clew CLI build surface.
+**Total:** 57 functionalities · 5 ✅ shipped · 0 🔄 planned · 52 ⬜ backlog. The 5 shipped functionalities are realised by [`homemade-claude-kit`](https://github.com/VictorHueni/homemade-claude-kit) — no clew CLI code required for them. The 55 remaining ⬜ are the clew CLI build surface.
 
 ---
 
@@ -98,7 +97,7 @@ clew
 
 Capabilities that mediate the act of creating metamodel artefacts. The operator (or the agent on their behalf) does authoring; clew makes the authoring structured.
 
-> **Implementation note — C1.1:** [`homemade-claude-kit`](https://github.com/VictorHueni/homemade-claude-kit) is the full implementation of C1.1. The skill invocation pattern (`rules/metamodel.md` trigger words), per-skill `SKILL.md` authoring instructions, embedded `references/template.md` scaffolds, and `rules/artefact-frontmatter.md` schema rules collectively realise every C1.1 functionality. No clew CLI component is needed here. C1.2 (selective context loading) and C1.3 (external evidence integration) still require clew-side implementation.
+> **Implementation note — C1.1:** [`homemade-claude-kit`](https://github.com/VictorHueni/homemade-claude-kit) is the full implementation of C1.1. The skill invocation pattern (`rules/metamodel.md` trigger words), per-skill `SKILL.md` authoring instructions, embedded `references/template.md` scaffolds, and `rules/artefact-frontmatter.md` schema rules collectively realise every C1.1 functionality. No clew CLI component is needed here. C1.2 (selective context loading) still requires clew-side implementation.
 
 ---
 
@@ -131,22 +130,6 @@ Loads exactly the metamodel slice relevant to the current task into the agent se
 | C1.2.F01 | ★ Task-scoped slice assembly — load exactly the artefact subset relevant to a task type (e.g. VISION+BMC for orientation, glossary+domain model for PRD authoring, QA attributes for test design) | ⬜ | [VS-1.2](../business/04a-value-streams.md#vs-12--load-methodology-context) |
 | C1.2.F02 | Slice composition preview — expose the artefact list and size estimate for a proposed context slice before loading | ⬜ | [VS-1.2](../business/04a-value-streams.md#vs-12--load-methodology-context) |
 | C1.2.F03 | Multi-project context isolation — prevent artefacts from one project leaking into another project's loaded context | ⬜ | [VS-1.2](../business/04a-value-streams.md#vs-12--load-methodology-context) |
-
----
-
-### C1.3 · External evidence integration
-
-Enables every artefact to carry first-class references to external sources (URLs, citations, archived snapshots) that ground the claims it contains.
-
-**BC Map:** [C1.3 in `03a-capability-map.md`](../business/03a-capability-map.md#c13--external-evidence-integration)
-**Backend:** `_TODO_`
-**Frontend:** N/A
-
-| ID | Functionality | Status | VS stage |
-|---|---|---|---|
-| C1.3.F01 | Evidence reference recording — attach an external reference (source, title, and access date) to a named field in any artefact | ⬜ | [VS-1.3](../business/04a-value-streams.md#vs-13--draft-artefact-content) |
-| C1.3.F02 | Reference reachability check — verify that each external reference is reachable at the moment it is recorded; warn if it cannot be accessed | ⬜ | [VS-1.3](../business/04a-value-streams.md#vs-13--draft-artefact-content) |
-| C1.3.F03 | Reference archiving — capture a durable copy of each external reference at record time so it remains accessible if the original is removed or changed | ⬜ | [VS-2.3](../business/04a-value-streams.md#vs-23--surface-provenance) |
 
 ---
 
@@ -436,6 +419,7 @@ Audits which methodologies are encoded vs. which lifecycle layers are bare.
 
 | Date | Change | Author |
 |---|---|---|
+| 2026-05-25 | C1.3 (External evidence integration) retired as a capability. Rationale: citation discipline is a kit methodology concern embedded in `rules/writing-citations.md` and the evidence-production skills (arch-research, business-competitive-landscape, business-quantitative-model, business-research, com-slide-deck). F01 (evidence reference recording), F02 (reference reachability check), and F03 (reference archiving) all removed — none require a clew DB field or CLI command. Total: 60 → 57 functionalities · 55 → 52 ⬜ backlog. C1 now has 2 L1 capabilities (C1.1, C1.2). | Victor Hueni |
 | 2026-05-25 | C3.3 (Bidirectional time traceability) retired as a capability. F01 (rationale recording) and F02 (planned-state tagging) removed — both covered by artefact content and kit methodology; no dedicated clew feature needed. F03 (`clew history <ID>`) relocated to C4.3 as C4.3.F04 — conceptually an audit query, not a traceability view. C3 now has 2 L1 capabilities (C3.1, C3.2). Total: 60 functionalities · 5 ✅ · 55 ⬜. | Victor Hueni |
 | 2026-05-25 | Technology-stack language removed from all functionality descriptions. Terms replaced: DB → artefact store · markdown layer → documentation layer · YAML / SQL / SHA / Wayback Machine / chezmoi / `~/.claude/skills/` / FK / DB sequence / byte-identical YAML / DuckDB SQL → technology-agnostic equivalents throughout C1–C5. Section sub-headings (C2.3 · C2.4 · C4.2 · C4.3 · C5.3) updated to match. `C5.2.F01–F05` reframed from "encode as typed DB tables with FK relationships" to "register in the metamodel so the system enforces structure at write time." No status changes; no ID changes. | Victor Hueni |
 | 2026-05-25 | Kit-realised functionalities marked ✅. C1.1.F01/F02/F03, C5.1.F01, C5.3.F01 promoted from ⬜ to ✅ — all realised by [`homemade-claude-kit`](https://github.com/VictorHueni/homemade-claude-kit) (skill invocation pattern, embedded templates, schema-aware rules). C1.1 backend annotation updated from `_TODO_` to the kit. Implementation notes added to §C1 Authoring and §C5 Methodology Distillation section headers to distinguish authoring-side (kit) from persistence-side (clew CLI TODO). Total: 5 ✅ shipped · 57 ⬜ backlog. | Victor Hueni |

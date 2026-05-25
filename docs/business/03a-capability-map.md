@@ -2,7 +2,7 @@
 title: Business Capability Map
 status: draft
 owner: Victor Hueni
-last_reviewed: 2026-05-24
+last_reviewed: 2026-05-25
 review_interval: 180d
 ---
 
@@ -37,8 +37,7 @@ This document is clew's strategic "what" layer. It answers one question: *what d
 clew
 ├── C1 · Authoring
 │   ├── C1.1 Methodology-mediated artefact creation
-│   ├── C1.2 Selective context loading
-│   └── C1.3 External evidence integration
+│   └── C1.2 Selective context loading
 ├── C2 · Persistence
 │   ├── C2.1 Stable identifier generation
 │   ├── C2.2 Schema enforcement
@@ -60,7 +59,7 @@ clew
     └── C5.5 Methodology canon coverage assessment
 ```
 
-5 L0, 18 L1. Within TOGAF + Cutter sizing (3 to 8 L0; ≤ 25 L1 total).
+5 L0, 17 L1. Within TOGAF + Cutter sizing (3 to 8 L0; ≤ 25 L1 total).
 
 ## §Capability index
 
@@ -69,7 +68,6 @@ clew
 | C1 | Authoring | (root) | (composite) | Capabilities that mediate the act of creating metamodel artefacts. |
 | C1.1 | Methodology-mediated artefact creation | C1 | **Differentiator** | Distills external methodology (BIZBOK, BABOK, Strategyzer, Sommerville, planned DDD / ATDD / BDD / SRE) into an authoring discipline the agent invokes at write time. |
 | C1.2 | Selective context loading | C1 | Necessary | Loads exactly the metamodel slice relevant to the current task into the agent session. |
-| C1.3 | External evidence integration | C1 | Necessary | First-class URLs / citations / archived sources backing the claims an artefact makes. |
 | C2 | Persistence | (root) | (composite) | Capabilities that store and retrieve structured artefacts deterministically. |
 | C2.1 | Stable identifier generation | C2 | Necessary | Deterministic, collision-free identifier assignment. Never LLM-generated. |
 | C2.2 | Schema enforcement | C2 | Necessary | Write-time validation of typed metamodel constraints (required fields, types, references). |
@@ -90,7 +88,7 @@ clew
 | C5.4 | Cross-methodology referencing | C5 | Necessary | Type-aware references from an artefact in one methodology to an artefact in another. |
 | C5.5 | Methodology canon coverage assessment | C5 | Necessary | Audits which methodologies are encoded vs. which lifecycle layers are bare. |
 
-**Strategic Importance distribution:** 4 Differentiators · 12 Necessary · 2 Commodity. Healthy spread per Cutter (3 to 6 true Differentiators expected).
+**Strategic Importance distribution:** 4 Differentiators · 11 Necessary · 2 Commodity. Healthy spread per Cutter (3 to 6 true Differentiators expected).
 
 ## C1 · Authoring
 
@@ -134,25 +132,6 @@ Capabilities that mediate the act of creating metamodel artefacts. The operator 
 - Does NOT compress or paraphrase context (delivers structured artefacts verbatim; summarisation is the agent's job).
 
 **Soft-links.** Personas served: [P-01](01a-personas.md). Lean Canvas: [§9 Local-first token economics](02a-lean-canvas.md#9-unfair-advantage--confidence-assumed-one-tested-item-added-wave-1). Wave-1 evidence: [synthesis H2 selective-compositional-context finding](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md). Realised in streams: [VS-1.2 Load Methodology Context](04a-value-streams.md#vs-12--load-methodology-context).
-
-### C1.3 · External evidence integration
-
-**Definition.** Enables every artefact to carry first-class references to external sources (URLs, citations, archived snapshots) that ground the claims it contains. Evidence is a typed field, not a footnote prose convention.
-
-**Business object.** Evidence reference.
-
-**Strategic importance.** Necessary. Maps to [P-01 §Goal 2](01a-personas.md#goals) (Tested wave 1: *"I can enrich them with proof found on the internet and add the url"*). Without it, the metamodel records beliefs without proof.
-
-**Outcomes.**
-- Every claim in an artefact can be traced to a cited source by ID.
-- Sources survive web rot via snapshotting or archival capture.
-- Both humans and agents can re-read the evidence behind a decision.
-
-**Boundaries.**
-- Does NOT verify the truthfulness of sources (editorial discipline; not enforced by clew).
-- Does NOT enforce that every claim must be cited (over-citation discipline lives in the methodology skill, not the substrate).
-
-**Soft-links.** Personas served: [P-01](01a-personas.md). Wave-1 evidence: [synthesis H2 external-evidence-backing finding](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md). Realised in streams: [VS-1.2 Load Methodology Context](04a-value-streams.md#vs-12--load-methodology-context), [VS-1.3 Draft Artefact Content](04a-value-streams.md#vs-13--draft-artefact-content), [VS-2.3 Surface Provenance](04a-value-streams.md#vs-23--surface-provenance).
 
 ## C2 · Persistence
 
@@ -462,21 +441,22 @@ Per the [`business-capability-map` skill](https://github.com/VictorHueni/homemad
 - **Noun test:** every L0 and L1 capability name is a noun phrase, not a verb phrase.
 - **Technology-independence test:** no capability name contains a vendor, system, or tool (DuckDB, YAML, GFM, MCP, Claude all kept out of capability *names*; some appear in *definitions* as implementation hints, which is allowed).
 - **Anti-overlap test:** each capability appears once; the closest pair (C2.2 schema enforcement vs. C4.1 write-time reference validation) is disambiguated by scope (schema covers required fields and types; write-time reference validation is the FK-specific subset, called out for adoption reasons).
-- **Sizing:** 5 L0 (within 3 to 8); 18 L1 total (≤ 25); per-L0 L1 counts: 3 / 4 / 2 / 4 / 5 (2 for C3 and 3 for C1 are below the 5-to-12 recommended floor but defensible: C1's authoring scope is intentionally narrow; C3 collapses two tightly-related navigation modes; `clew history` was folded into C4.3 rather than inflating C3).
+- **Sizing:** 5 L0 (within 3 to 8); 17 L1 total (≤ 25); per-L0 L1 counts: 2 / 4 / 2 / 4 / 5 (2 for C1 and C3 are below the 5-to-12 recommended floor but defensible: C1's authoring scope is intentionally narrow — citation discipline is embedded in kit skills via `rules/writing-citations.md`, not a clew infrastructure concern; C3 collapses two tightly-related navigation modes; `clew history` was folded into C4.3 rather than inflating C3).
 - **Differentiator distribution:** 4 Differentiators (within Cutter's 3 to 6 recommended range).
 
 ## Open Issues / Next Tests
 
-- **Capability count for C1 and C3.** C1 has 3 L1, C3 has 2 L1 — both below the 5-to-12 recommendation. C3 was reduced from 3 to 2 when C3.3 (Bidirectional time traceability) was retired: its rationale-recording intent is covered by artefact content and kit methodology; its history-query intent was folded into C4.3. Reconsider if wave-2 interviews surface latent navigation capabilities not yet modelled.
+- **Capability count for C1 and C3.** C1 has 2 L1, C3 has 2 L1 — both below the 5-to-12 recommendation. C1 was reduced from 3 to 2 when C1.3 (External evidence integration) was retired: citation discipline is embedded in kit skills via `rules/writing-citations.md` and is not a clew infrastructure concern. C3 was reduced from 3 to 2 when C3.3 (Bidirectional time traceability) was retired: its rationale-recording intent is covered by artefact content and kit methodology; its history-query intent was folded into C4.3. Reconsider both if wave-2 interviews surface latent capabilities not yet modelled.
 - **C5.1 vs. C5.3 boundary.** Skill catalogue management (C5.1) governs the lifecycle of skills; artefact template management (C5.3) governs the templates within skills. The boundary is real but subtle; review if maintainers conflate them in practice.
 - **Maturity ratings not assessed.** Skipped intentionally for v1; most capabilities are pre-implementation (Initial or Developing). Revisit after v0.1 ships.
-- **Soft-link gaps closed at the L1 level.** All 4 value streams ([`04a-value-streams.md`](04a-value-streams.md): VS-1 Compose, VS-2 Navigate, VS-3 Refactor, VS-4 Share) are now fully filled. 15 of 18 L1 capabilities carry a `Realised in streams:` soft-link: C1.1, C1.2, C1.3, C2.1, C2.2, C2.3, C2.4, C3.1, C3.2, C4.1, C4.2, C4.3, C5.1, C5.2, C5.3. The remaining 3 (C4.4 Schema migration, C5.4 Cross-methodology referencing, C5.5 Methodology canon coverage assessment) are now **confirmed clew-internal maintenance capabilities** that do not land in user-facing value streams. Their absence from any VS is a **structural truth**, not a documentation gap. Processes, FBS, and domain model still do not exist; their soft-links remain pending.
+- **Soft-link gaps closed at the L1 level.** All 4 value streams ([`04a-value-streams.md`](04a-value-streams.md): VS-1 Compose, VS-2 Navigate, VS-3 Refactor, VS-4 Share) are now fully filled. 14 of 17 L1 capabilities carry a `Realised in streams:` soft-link: C1.1, C1.2, C2.1, C2.2, C2.3, C2.4, C3.1, C3.2, C4.1, C4.2, C4.3, C5.1, C5.2, C5.3. The remaining 3 (C4.4 Schema migration, C5.4 Cross-methodology referencing, C5.5 Methodology canon coverage assessment) are now **confirmed clew-internal maintenance capabilities** that do not land in user-facing value streams. Their absence from any VS is a **structural truth**, not a documentation gap. Processes, FBS, and domain model still do not exist; their soft-links remain pending.
 - **L0 axis is the most consequential choice; lifecycle-layer as an alternative remains a real option.** If wave-2 interviews surface that "any builder" reaches for clew by lifecycle layer (QA-only, ops-only) rather than by capability domain, re-pick the axis.
 
 ## Changelog
 
 | Date | Change | Evidence | Cascading effects |
 |---|---|---|---|
+| 2026-05-25 | C1.3 (External evidence integration) retired. Rationale: citation discipline is embedded in kit skills via `rules/writing-citations.md` (inline links in markdown artefacts, bibliography.yaml in slide decks) and realised by the evidence-production skills (arch-research, business-competitive-landscape, business-quantitative-model, business-research, com-slide-deck). No clew DB field or CLI command is needed. L1 count: 18 → 17. Strategic Importance distribution: 12 Necessary → 11 Necessary. | C1.3 scope review. | [07a-fbs.md](../product-specs/07a-fbs.md): C1.3 section removed (F01/F02/F03 retired), counts updated 60 → 57. [04a-value-streams.md](04a-value-streams.md): C1.3 backlinks removed from VS-1.2 enabling capabilities + exit criteria, VS-1.3 enabling capabilities, VS-2 scope anchor, VS-2.3 enabling capabilities + exit criteria. Pre-existing C3.3 orphan reference in VS-2.3 cleaned up in same pass. |
 | 2026-05-25 | C3.3 (Bidirectional time traceability) retired. Rationale: artefact content and kit methodology already carry the "why backward" intent; "what next forward" is covered by epics (C3.2 impact view + delivery roadmap); `clew history` (C3.3.F03) folded into C4.3 as C4.3.F04 — it is an audit query, not a traceability view. L1 count: 19 → 18. Strategic Importance distribution: 13 Necessary → 12 Necessary. Soft-link count: 16 of 19 → 15 of 18. Discipline checks + Open Issues updated accordingly. | FBS redesign session. | [07a-fbs.md](../product-specs/07a-fbs.md): C3.3 section removed, C4.3.F04 added, counts updated. No cascade to value streams (C3.3's VS-2.3 backlink is simply removed). |
 | 2026-05-24 | Scaffold + structure + fill in one pass. 5 L0 (Authoring · Persistence · Querying and Traceability · Integrity and Audit · Methodology Distillation), 19 L1 capabilities. 4 Differentiators (C1.1 methodology-mediated artefact creation, C3.2 pre-built traceability views, C4.1 write-time reference validation, C5.1 skill catalogue management), 13 Necessary, 2 Commodity. Strategic Importance assigned now per [wave-1 synthesis](discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md) signal. | Drafted hybrid (top-down framework cross-validated against VISION, P-01, Lean Canvas, OBJ-01/02/03, ADR-0001, ADR-0002, wave-1 synthesis). | [VISION.md](../VISION.md), [Lean Canvas](02a-lean-canvas.md), [OBJ doc](04b-objectives.md), [persona](01a-personas.md), [ADR-0001](../architecture/decisions/adr-0001-metamodel-persistence-layer.md), [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md): existing soft-link slots filled. Value streams / processes / FBS / domain model: still _TODO_ (no artefact to soft-link to yet). |
 | 2026-05-25 | Value-stream backlinks wired (cascade from [04a-value-streams.md](04a-value-streams.md) VS-1 fill). 12 L1 capabilities now carry a `Realised in streams:` soft-link to the VS-1 stage that consumes them: VS-1.1 ← C5.1, C5.3; VS-1.2 ← C5.3, C1.2, C1.3; VS-1.3 ← C1.1 (Differentiator role flagged), C1.3, C5.2; VS-1.4 ← C2.1, C2.2, C2.3, C2.4, C4.1 (Differentiator role flagged), C4.3. §Open Issues §Soft-link gaps updated: 12 capabilities now wired; 7 remaining (C3.1, C3.2, C3.3, C4.2, C4.4, C5.4, C5.5) await VS-2 / VS-3 / VS-4 stage decomposition. | [04a-value-streams.md VS-1](04a-value-streams.md#vs-1--compose-architecture). Cascade companion to today's value-streams commit. | None outside this commit. The 7 unwired capabilities will gain backlinks when VS-2 / VS-3 / VS-4 are filled. |
