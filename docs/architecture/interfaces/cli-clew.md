@@ -16,7 +16,30 @@ Covers `clew` v0.1–v0.3 (MVP scope). This document is the authoritative contra
 
 ---
 
-## Overview
+## §0 Traceability
+
+This CLI is the BC-scoped Open Host Service for **BC-01 Artefact Store** ([bounded-contexts.md](../../domain/02b-bounded-contexts.md#bc-01--artefact-store)). It is the only writer to the artefact store (single-writer per repo, per ADR-0001) and the Published Language consumed by AI agents, marimo notebooks (read-only), and shell scripts ([context map](../../domain/02b-context-map.md)).
+
+**Capability consumption (per [03a-capability-map.md](../../business/03a-capability-map.md)):**
+
+| Command group | Capabilities realised |
+|---|---|
+| `clew new` (creation) | C2.1 Stable identifier generation · C2.2 Schema enforcement · C2.3 File binding management · C4.1 Write-time reference validation (Differentiator) |
+| `clew link` (relationships) | C4.1 Write-time reference validation |
+| `clew set` (updates) | C2.2 Schema enforcement · C4.3 Audit trail |
+| `clew list` / `clew estimate` | C3.1 Ad-hoc cross-artefact query surface · C3.2 Pre-built traceability views (Differentiator, via canonical views) |
+| `clew layout` / `clew where` | C2.3 File binding management |
+| `clew check` (health) | C4.1 Write-time reference validation · C4.2 Drift detection · C2.3 File binding management |
+| `clew export` / `clew import snapshot` | C2.4 Deterministic structural export · C2.1 Stable identifier generation |
+| `clew import md` (bootstrap) | C2.3 File binding management · C2.1 Stable identifier generation |
+
+**Domain model anchors:** every command shape derives from BC-01's aggregates (`Artefact`, `Reference`, `FileBinding`, `IdSequence`) and domain events (`ArtefactRegistered`, `ArtefactLinked`, `FileBindingRecorded`, `SnapshotExported`, `SnapshotRestored`). Full mapping: [Artefact Store §Aggregate catalogue](../../domain/07b-models/artefact-store.md#aggregate-catalogue).
+
+**ADR dependencies:** ADR-0001 (persistence layer + single-writer concurrency) · ADR-0002 (file binding model + layout enforcement) · ADR-0003 (typed property graph schema) · ADR-0004 (Python / Typer / DuckDB stack).
+
+---
+
+## §1 Overview
 
 ### Install
 
@@ -37,7 +60,7 @@ pip install clew  # persistent install
 
 ---
 
-## Command reference
+## §2 Command catalogue
 
 ### Creation group — `clew new`
 
@@ -344,7 +367,7 @@ clew import md <path>
 
 ---
 
-## Validation rules
+## §4 Validation rules
 
 ### Layout enforcement (`clew new`)
 
@@ -369,7 +392,49 @@ Before writing to `artefact_references`:
 
 ---
 
-## Error contract
+## §5 Output contract
+
+The CLI separates **structured result** (stdout) from **human-readable narrative** (stderr) so callers — AI agents, shell scripts, CI jobs — can parse stdout without filtering out progress noise. The same separation makes interactive sessions readable.
+
+### Channels
+
+| Channel | Carries | On success | On error |
+|---|---|---|---|
+| **stdout** | Structured result only: a freshly minted business ID, a query table, a single scalar value. No progress, no logs, no warnings. | One line per result row, no trailing newline noise. | Empty. |
+| **stderr** | Progress, warnings, errors, advisory messages. | Optional info messages (e.g. "wrote 12 artefacts to snapshot"). | `Error: <category>: <message>` per §7. |
+| **Exit code** | `0` success · `1` user error · `2` internal error. | `0` | `1` or `2` (see §7). |
+
+### Per-command output shapes
+
+| Command | stdout shape |
+|---|---|
+| `clew new <type> …` | A single line: the minted business ID (e.g. `P-01`, `C1.2.F03`, `ADR-NNNN`). No surrounding noise. |
+| `clew link …` / `clew set …` | Empty. Success indicated by exit code `0`. |
+| `clew list [type] [--format table\|csv\|json]` | Table by default; CSV (RFC 4180-compliant); or a JSON array of objects (one per row). `--format json` is the canonical shape for callers piping to `jq` or similar. |
+| `clew estimate epic <E-NN>` / `clew estimate phase <N>` | One row per rollup, columns: `epic, functionalities, XS, S, M, L, XL, best(d), likely(d), worst(d)`. |
+| `clew layout <type>` | One line of `key=value` pairs separated by two spaces, machine-parseable (e.g. `type=persona  layout=single-collection  default_path=docs/business/01a-personas.md  parent_type=`). |
+| `clew where <id>` | One line: `<relative-path>#<section-anchor>`. Empty stdout + exit `1` if the artefact has no `file_bindings` record. |
+| `clew check [--path]` | A report block per check category (Orphan in DB, Orphan in file, Layout violation, Content drift) with one row per finding. Empty report on a clean run. |
+| `clew export` / `clew import snapshot` / `clew import md` | Empty stdout. Progress messages on stderr; final summary line on stderr. |
+
+### Determinism guarantees
+
+- Same DB state + same command + same flags → byte-identical stdout (modulo timestamps in `clew list` rows, which surface from the audit trail and are themselves deterministic per row).
+- `clew export` produces byte-identical YAML files for the same DB state, per [C2.4 Deterministic structural export](../../business/03a-capability-map.md#c24--deterministic-structural-export). This is the substrate that makes git-diff of snapshots meaningful.
+- No locale-dependent formatting on stdout (numbers use `.` decimal separator, dates use ISO 8601).
+
+### Atomicity
+
+- Snapshot writes (`clew export`) are atomic: each YAML file is written to a temp path and renamed in place; partial snapshots never leave the temp directory.
+- DB writes (`clew new`, `clew link`, `clew set`, `clew import …`) are wrapped in a single transaction per invocation; on internal error (exit `2`) the DB is unchanged.
+
+### Colour and TTY
+
+stderr human-readable messages may use ANSI colour when attached to a TTY; colour is suppressed when stderr is not a TTY. stdout is **always** plain text — no colour escape codes — so structured pipelines see clean output regardless of TTY attachment.
+
+---
+
+## §7 Error contract
 
 All errors are written to **stderr**. stdout is empty on error. Exit code is `1` (user error) or `2` (internal error).
 
@@ -399,3 +464,9 @@ Error: <category>: <human-readable message>
 ## Open Items
 
 None at present.
+
+## Changelog
+
+| Date | Change | Evidence | Cascading effects |
+|---|---|---|---|
+| 2026-05-26 | File renamed `clew-cli-v1.md` → `cli-clew.md` and moved from `docs/architecture/interface-contracts/` to canonical `docs/architecture/interfaces/`. Headings aligned to the `arch-cli-contract` template: added §0 Traceability (capability + domain-model + ADR provenance), renamed §Command reference → §2 Command catalogue, renumbered §Validation rules → §4, added §5 Output contract (channels + per-command output shapes + determinism + atomicity + colour), renumbered §Error contract → §7. §Changelog added. | Metamodel audit 2026-05-26 (§2 + §9 findings); `rules/metamodel.md` Step 8.5 canonical path. | Cross-references in [ADR-0001](../decisions/adr-0001-metamodel-persistence-layer.md), [ADR-0002](../decisions/adr-0002-artefact-file-binding.md), [ADR-0003](../decisions/adr-0003-schema-design-typed-property-graph.md), [02b-bounded-contexts.md](../../domain/02b-bounded-contexts.md), [02b-context-map.md](../../domain/02b-context-map.md), [02c-glossary.md](../../domain/02c-glossary.md) updated to the new path in the same pass. |

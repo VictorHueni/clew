@@ -85,7 +85,7 @@ This document catalogues the bounded contexts for clew: the named islands of con
 
 **Integration interfaces** *(how other contexts use this one):*
 
-- **Publishes (Open Host Service):** the `clew` CLI v1 contract — every command, its arguments, exit codes, and stdout/stderr structure are the Published Language. See [CLI interface contract v1](../architecture/interface-contracts/clew-cli-v1.md).
+- **Publishes (Open Host Service):** the `clew` CLI v1 contract — every command, its arguments, exit codes, and stdout/stderr structure are the Published Language. See [CLI interface contract v1](../architecture/interfaces/cli-clew.md).
 - **Publishes (events):** domain events `ArtefactRegistered`, `ArtefactImported`, `ArtefactLinked`, `FileBindingRecorded`, `SnapshotExported`, `SnapshotRestored` — recorded in the audit trail at v1; v2 (MCP) may surface them on a wire protocol.
 - **Exposes (read-only query):** SQL surface via stdlib `sqlite3` — read-only for marimo notebooks; the CLI is the only writer (single-writer per repo, per [ADR-0001](../architecture/decisions/adr-0001-metamodel-persistence-layer.md)).
 - **Consumes (Conformist, external upstream):** the `homemade-claude-kit` skill catalogue defines artefact-type schemas, naming conventions, ID format patterns, and authoring templates. clew accepts these encodings as-is and does not negotiate changes upstream. See [02b-context-map.md §clew ← Conformist ← homemade-claude-kit](02b-context-map.md#bc-01--conformist--homemade-claude-kit-external-upstream).

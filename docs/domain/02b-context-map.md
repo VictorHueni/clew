@@ -86,7 +86,7 @@ clew at v1 has a single bounded context (BC-01 Artefact Store) — there are no 
 
 **Non-BC consumers of BC-01** (shown in the Overview diagram for completeness, not modelled as separate BCs):
 
-- **AI agents (Claude Code, Codex, etc.)** consume the CLI as an Open Host Service whose stdout/stderr/exit-code contract is the Published Language (see [CLI interface contract v1](../architecture/interface-contracts/clew-cli-v1.md)). Agents do not hold domain objects — they invoke commands and read structured output. They are tool users, not bounded contexts in their own right within clew's scope.
+- **AI agents (Claude Code, Codex, etc.)** consume the CLI as an Open Host Service whose stdout/stderr/exit-code contract is the Published Language (see [CLI interface contract v1](../architecture/interfaces/cli-clew.md)). Agents do not hold domain objects — they invoke commands and read structured output. They are tool users, not bounded contexts in their own right within clew's scope.
 - **marimo notebooks** consume BC-01 via read-only SQL through the stdlib `sqlite3` driver. They produce analytics views (effort rollups, roadmap visualisations) but never write — single-writer concurrency is preserved (per [ADR-0001 §Concurrency model](../architecture/decisions/adr-0001-metamodel-persistence-layer.md#concurrency-model)).
 
 If clew ever introduces a second writer (a web UI, an MCP server with mutating tools), that writer becomes a candidate BC and the context map gains internal relationships.

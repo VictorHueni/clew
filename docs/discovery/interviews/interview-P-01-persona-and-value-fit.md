@@ -132,7 +132,7 @@ What you're listening for: alignment between Section 1's stated pain and Section
 | 5.2 | Are there one or two other people in your network who fit the agent-first product engineer profile and might be willing to do a 30-to-45-minute conversation like this? | Warm-intro leads for wave 2 of OBJ-03 KR-03.2. Costs nothing to ask; halves recruitment effort. |
 
 **Wrap-up script:**
-> "Thanks. I'll synthesise this within an hour and the synthesis will land in `docs/business/discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md` along with the specific updates to the persona and Lean Canvas. You'll see exactly which of your answers shifted which bullet. If anything I write doesn't match your intent, push back on the synthesis and I'll re-state."
+> "Thanks. I'll synthesise this within an hour and the synthesis will land in `docs/discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md` along with the specific updates to the persona and Lean Canvas. You'll see exactly which of your answers shifted which bullet. If anything I write doesn't match your intent, push back on the synthesis and I'll re-state."
 
 ## Limits
 

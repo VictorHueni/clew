@@ -236,5 +236,5 @@ See *Decision Outcome* above.
 | Concern | Where it lives |
 |---|---|
 | `file_bindings` DDL + `ArtefactTypeConfig` dataclass | [Artefact Store domain model §Physical schema](../../domain/07b-models/artefact-store.md) |
-| Validation rules + transaction ordering for `clew new` | [CLI interface contract v1](../../architecture/interface-contracts/clew-cli-v1.md) |
-| Markdown migration procedure (`clew import md`) | [CLI interface contract v1](../../architecture/interface-contracts/clew-cli-v1.md) |
+| Validation rules + transaction ordering for `clew new` | [CLI interface contract v1](../../architecture/interfaces/cli-clew.md) |
+| Markdown migration procedure (`clew import md`) | [CLI interface contract v1](../../architecture/interfaces/cli-clew.md) |

@@ -182,7 +182,7 @@ These should inform wave-2 interview scripts and may justify expanding KR-03.2's
 
 - [ ] `docs/business/02b-vpc-cs-1.md` (VPC for CS-1): now lower priority given how much value-fit signal this interview produced. Defer until external interviews complete.
 - [ ] `docs/business/03a-capability-map.md`: next artefact in the canonical order (per the user's previous direction).
-- [ ] `docs/business/discovery/competitive/business-competitive-landscape.md`: gap from interview close. Captures methodology-encoding alternatives (Sparx, ARIS, Mega, Cursor / Copilot rules patterns) absent from ADR-0001's persistence-only competitive review.
+- [ ] `docs/business/01b-competitive-landscape/`: gap from interview close. Captures methodology-encoding alternatives (Sparx, ARIS, Mega, Cursor / Copilot rules patterns) absent from ADR-0001's persistence-only competitive review.
 - [ ] Methodology canon audit for QA + ops / runbook coverage (DDD, ATDD / BDD, SRE).
 - [ ] Schedule wave 2 interviews: target 2 to 4 more candidates across roles (one non-product role mandatory).
 

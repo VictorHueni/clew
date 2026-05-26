@@ -326,7 +326,7 @@ review_interval: 180d
 
 **Cross-context:** N/A — concept owned entirely by BC-01.
 
-**Code convention:** `Drift` is a report concept, not a typed entity; appears in code as `drift_report` (the output of `clew check`); the categories within a drift report (Orphan in file, Orphan in DB, Content drift, Layout violation) each have specific names per the [CLI interface contract `clew check` table](../architecture/interface-contracts/clew-cli-v1.md)
+**Code convention:** `Drift` is a report concept, not a typed entity; appears in code as `drift_report` (the output of `clew check`); the categories within a drift report (Orphan in file, Orphan in DB, Content drift, Layout violation) each have specific names per the [CLI interface contract `clew check` table](../architecture/interfaces/cli-clew.md)
 
 **First referenced:** [Capability Map C4.2 + ADR-0002](../business/03a-capability-map.md#c42--drift-detection) · 2026-05-25
 

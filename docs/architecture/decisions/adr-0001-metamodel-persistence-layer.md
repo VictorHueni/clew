@@ -364,7 +364,7 @@ A property graph database storing all artefact types as nodes and cross-referenc
 
 ## Project layout
 
-The DB file (`docs/clew/clew.db`) is gitignored; the YAML snapshot directory (`docs/clew/snapshot/`) is git-tracked and never edited directly. Snapshot file names and the full CLI command set are specified in the [CLI interface contract](../../architecture/interface-contracts/clew-cli-v1.md).
+The DB file (`docs/clew/clew.db`) is gitignored; the YAML snapshot directory (`docs/clew/snapshot/`) is git-tracked and never edited directly. Snapshot file names and the full CLI command set are specified in the [CLI interface contract](../../architecture/interfaces/cli-clew.md).
 
 ## Related decisions
 
@@ -377,4 +377,4 @@ The DB file (`docs/clew/clew.db`) is gitignored; the YAML snapshot directory (`d
 |---|---|
 | Implementation stack choice (Python / Typer / SQLite / Pydantic) | [ADR-0004](adr-0004-python-typer-duckdb-implementation-stack.md) |
 | Physical SQLite schema (DDL, indexes, sequences table) | [Artefact Store domain model §Physical schema](../../domain/07b-models/artefact-store.md) |
-| Full CLI command surface + validation rules | [CLI interface contract v1](../../architecture/interface-contracts/clew-cli-v1.md) |
+| Full CLI command surface + validation rules | [CLI interface contract v1](../../architecture/interfaces/cli-clew.md) |

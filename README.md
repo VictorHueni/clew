@@ -320,7 +320,7 @@ Depending on what you came for:
 - **How does value flow?** → [`docs/business/04a-value-streams.md`](docs/business/04a-value-streams.md) (4 streams, fully decomposed, all triggered by P-01)
 - **What are the goals and measures?** → [`docs/business/04b-objectives.md`](docs/business/04b-objectives.md) (3 OKRs, 12 KRs)
 - **Why these technical decisions?** → [`docs/architecture/decisions/`](docs/architecture/decisions/) (ADRs ahead of implementation)
-- **What does the user research say?** → [`docs/business/discovery/interviews/`](docs/business/discovery/interviews/) (wave-1 interview + synthesis, N=1, founder-as-instance)
+- **What does the user research say?** → [`docs/discovery/interviews/`](docs/discovery/interviews/) (wave-1 interview + synthesis, N=1, founder-as-instance)
 
 Every artefact uses **stable IDs** (P-NN, C-N.M, VS-N.M, OBJ-NN, KR-NN.M, ADR-NNNN) and **soft-links** to related artefacts; clicking any ID-tagged link drills into the referenced artefact. Confidence is labelled throughout. Pain ratings and KR targets are anchored on wave-1 N=1 evidence; see the **Confidence-cliff watchpoint** in [`docs/business/04b-objectives.md`](docs/business/04b-objectives.md#obj-03--validate-the-core-hypotheses-before-scaling) for when this evidence base will be refreshed.
 

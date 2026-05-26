@@ -143,4 +143,4 @@ Simple M:1 relationships use FK columns on per-type tables; complex M:M or metad
 | Property schemas per artefact type (Pydantic models) | [Artefact Store domain model §Property schemas](../../domain/07b-models/artefact-store.md) |
 | Relationship type registry + type-safety rules | [Artefact Store domain model §Relationship registry](../../domain/07b-models/artefact-store.md) |
 | Business ID generation contract + ID format table | [Artefact Store domain model §Business identity](../../domain/07b-models/artefact-store.md) |
-| Snapshot / restore contract (`clew export` / `clew import snapshot`) | [CLI interface contract v1](../../architecture/interface-contracts/clew-cli-v1.md) |
+| Snapshot / restore contract (`clew export` / `clew import snapshot`) | [CLI interface contract v1](../../architecture/interfaces/cli-clew.md) |
