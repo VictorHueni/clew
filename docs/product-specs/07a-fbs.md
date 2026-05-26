@@ -415,6 +415,12 @@ Audits which methodologies are encoded vs. which lifecycle layers are bare.
 
 ---
 
+## Open Items
+
+None at present. *(Functionality-level status is tracked via the ⬜/🔄/✅ column in each capability table above, not as OI rows. Capability-level structural questions live in [`docs/business/03a-capability-map.md` §Open Items](../business/03a-capability-map.md#open-items); delivery sequencing will land in `docs/product-specs/08a-delivery-roadmap.md` once written.)*
+
+---
+
 ## Changelog
 
 | Date | Change | Author |

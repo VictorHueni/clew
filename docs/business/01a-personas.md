@@ -212,6 +212,12 @@ Ordered by priority per the [wave-1 P-01 validation synthesis](../discovery/inte
 
 ---
 
+## Open Items
+
+None at present. *(P-01 wave-2 follow-ups are tracked in [`docs/discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md` §Open Items](../discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md#open-items); P-02 / P-03 backlog work surfaces through the relevant Tier table rows above rather than as separate OI rows.)*
+
+---
+
 ## Changelog
 
 - 2026-05-24 · Scaffold · Created `personas.md` with template, backlog, and `§Personas` section per the `business-persona` skill.

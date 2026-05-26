@@ -87,6 +87,10 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 |---|---|---|---|
 | _TODO_ | (no epics defined yet; delivery roadmap pending) | | |
 
+## Open Items
+
+None at present. *(KR-baseline-promotion work is tracked indirectly via the per-KR `Confidence` column above and via [`docs/business/04a-value-streams.md` §Open Items OI-005 + OI-006](04a-value-streams.md#open-items) — the wave-2 cliff that gates OBJ-03 KR-03.2. No standalone OI rows here until a baseline or target is itself in dispute.)*
+
 ## Changelog
 
 | Date | Change | Evidence | Effects |

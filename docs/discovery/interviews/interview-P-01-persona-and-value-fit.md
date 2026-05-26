@@ -186,8 +186,11 @@ This interview deliberately does **not** test:
 - Evidence: {tools named; tools dropped}
 - Update to apply: {file:§ + before/after}
 
-## Open questions surfaced (for wave 2)
-- {new hypotheses or pains the interview surfaced but did not answer}
+## Open Items
+
+| OI-ID  | Type | Summary | Source anchor | Source heading | Resolution path | Priority | Status | Owner | Due / Review date | Tracker ref |
+| :----- | :--- | :------ | :------------ | :------------- | :-------------- | :------- | :----- | :---- | :---------------- | :---------- |
+| OI-NNN | execution-item / doc-gap / decision-gap | {new hypothesis or pain the interview surfaced but did not answer — one row per question} | #{section-anchor} | {section heading} | {wave-2 follow-up via discovery-research, or downstream skill invocation} | low / medium / high | open | {{owner}} | {{wave-2 deadline}} | _TBD_ |
 
 ## Per-artefact updates table
 
