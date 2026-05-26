@@ -50,7 +50,7 @@ flowchart LR
 
 ### BC-01 ← Conformist ← homemade-claude-kit (external upstream)
 
-**Upstream context:** `homemade-claude-kit` (separate repository: <https://github.com/VictorHueni/homemade-claude-kit>) — **not modelled as a clew-internal BC** ([per §Open Items OI-002 in 02b-bounded-contexts.md](02b-bounded-contexts.md#open-items), elevation to BC-02 is deferred until kit scope or consumer count grows).
+**Upstream context:** `homemade-claude-kit` (separate repository: <https://github.com/VictorHueni/homemade-claude-kit>) — **not modelled as a clew-internal BC** ([per §Open Items OI-0018 in 02b-bounded-contexts.md](02b-bounded-contexts.md#open-items), elevation to BC-02 is deferred until kit scope or consumer count grows).
 **Downstream context:** BC-01 · Artefact Store (this repo)
 **Integration pattern:** **Conformist**
 
@@ -64,7 +64,7 @@ flowchart LR
 - **Authoring templates** — the kit ships `references/template.md` per skill; clew's `C1.1 Methodology-mediated artefact creation` is fully realised by the kit (FBS line 92: *"The 5 shipped functionalities are realised by `homemade-claude-kit` — no clew CLI code required for them."*).
 - **Cross-methodology semantics** — when clew's `C5.4` validates that a `persona` reference cannot point at an `ADR`, the *categorisation* of those types into "methodologies" (BIZBOK, BABOK, Strategyzer, Sommerville, …) comes from the kit.
 
-**Translation layer (ACL only):** N/A — this is Conformist, not ACL. clew deliberately does not translate. If the kit renames `business-persona` to `business-stakeholder`, clew adopts the new name in its `ARTEFACT_TYPE_CONFIGS` rather than maintaining a translation map. This is a deliberate choice — the kit-as-upstream is authored by the same person who authors clew, so the "no influence" cost of Conformist is zero in practice. *(If a second downstream consumer of the kit emerges, the no-translation stance should be re-examined — see OI-002 in [02b-bounded-contexts.md](02b-bounded-contexts.md#open-items).)*
+**Translation layer (ACL only):** N/A — this is Conformist, not ACL. clew deliberately does not translate. If the kit renames `business-persona` to `business-stakeholder`, clew adopts the new name in its `ARTEFACT_TYPE_CONFIGS` rather than maintaining a translation map. This is a deliberate choice — the kit-as-upstream is authored by the same person who authors clew, so the "no influence" cost of Conformist is zero in practice. *(If a second downstream consumer of the kit emerges, the no-translation stance should be re-examined — see OI-0018 in [02b-bounded-contexts.md](02b-bounded-contexts.md#open-items).)*
 
 **Technical implementation hint:**
 
@@ -82,7 +82,7 @@ flowchart LR
 
 ## Why no internal BC-to-BC relationships
 
-clew at v1 has a single bounded context (BC-01 Artefact Store) — there are no internal BC-to-BC relationships to map. This is documented as a deliberate choice in [02b-bounded-contexts.md §Subdomain catalogue](02b-bounded-contexts.md#subdomain-catalogue) and tracked for re-evaluation as OI-002.
+clew at v1 has a single bounded context (BC-01 Artefact Store) — there are no internal BC-to-BC relationships to map. This is documented as a deliberate choice in [02b-bounded-contexts.md §Subdomain catalogue](02b-bounded-contexts.md#subdomain-catalogue) and tracked for re-evaluation as OI-0018.
 
 **Non-BC consumers of BC-01** (shown in the Overview diagram for completeness, not modelled as separate BCs):
 
@@ -95,7 +95,7 @@ If clew ever introduces a second writer (a web UI, an MCP server with mutating t
 
 ## Open Items
 
-None at present. *(The decision to elevate the kit to BC-02 is tracked in [`02b-bounded-contexts.md` OI-002](02b-bounded-contexts.md#open-items); the missing glossary is tracked there as OI-001. Both items affect this file's references but are owned by the BC catalogue, not the context map.)*
+None at present. *(The decision to elevate the kit to BC-02 is tracked in [`02b-bounded-contexts.md` OI-0018](02b-bounded-contexts.md#open-items); the missing glossary is tracked there as OI-0017. Both items affect this file's references but are owned by the BC catalogue, not the context map.)*
 
 ---
 

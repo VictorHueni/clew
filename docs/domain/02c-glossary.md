@@ -412,13 +412,13 @@ review_interval: 180d
 | The kit-side package that embodies a Methodology | BC-01.GT-15 Skill *(homonym warning; boundary marker only)* | "Skill" (central abstraction — `SKILL.md` package) | BC-01 must not import kit-Skill semantics into its own prose; the term appears in BC-01 only as a marker to warn contributors of the boundary |
 | A markdown document authored by the agent | BC-01.GT-05 Narrative *(precise: a section bound to one Artefact)* | "Artefact" (informal — any kit-produced doc, including slide decks) | Inside BC-01 the precise term for prose is Narrative; the kit's informal usage of "artefact" for any output document is different from BC-01's strict definition of Artefact as a registered metamodel record |
 
-The external kit is not formally modelled as a clew-internal bounded context at v1 (see [02b OI-002](02b-bounded-contexts.md#open-items)). The matrix above documents the term-level translations across the Conformist boundary for the three terms where divergence matters most.
+The external kit is not formally modelled as a clew-internal bounded context at v1 (see [02b OI-0018](02b-bounded-contexts.md#open-items)). The matrix above documents the term-level translations across the Conformist boundary for the three terms where divergence matters most.
 
 ---
 
 ## Open Items
 
-None at present. *(The decision to elevate the kit to BC-02 is tracked in [`02b-bounded-contexts.md` OI-002](02b-bounded-contexts.md#open-items); the glossary's existence closes OI-001 in that file in the same commit.)*
+None at present. *(The decision to elevate the kit to BC-02 is tracked in [`02b-bounded-contexts.md` OI-0018](02b-bounded-contexts.md#open-items); the glossary's existence closes OI-0017 in that file in the same commit.)*
 
 ---
 
