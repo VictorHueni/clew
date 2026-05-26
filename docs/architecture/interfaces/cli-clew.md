@@ -153,7 +153,7 @@ clew new adr <title>
 ```
 
 - Generates the file at `docs/architecture/decisions/adr-{nnnn}-{slug}.md` (layout: `one-per-artefact`). Rejects if the file already exists.
-- Returns: `ADR-{nnnn}` on stdout (e.g. `ADR-0005`).
+- Returns: `ADR-{nnnn}` on stdout (e.g. `ADR-NNNN`).
 
 ---
 
@@ -230,7 +230,7 @@ Output (stdout, one line per row):
 
 ```
 epic    functionalities    XS    S    M    L    XL    best(d)    likely(d)    worst(d)
-E-02    12                 2     4    3    2    1     8          12           18
+E-NN    12                 2     4    3    2    1     8          12           18
 ```
 
 Complexity → day mapping: `XS=0.5d`, `S=1d`, `M=2d`, `L=3d`, `XL=5d`. Best = sum of lower bounds; likely = sum of modal; worst = sum of upper bounds.
@@ -451,7 +451,7 @@ Error: <category>: <human-readable message>
 |---|---|---|
 | 1 | `layout-violation` | `persona '--file docs/business/05a-processes/foo.md' does not match required path docs/business/01a-personas.md` |
 | 1 | `file-exists` | `adr 'docs/architecture/decisions/adr-0005-my-title.md' already exists` |
-| 1 | `unknown-id` | `source 'P-99' not found in artefacts` |
+| 1 | `unknown-id` | `source 'P-NN' not found in artefacts` |
 | 1 | `type-constraint` | `TRIGGERS requires source type persona, got capability (P-01 is a capability)` |
 | 1 | `unknown-relationship` | `'DRIVES' is not a known relationship type; known: TRIGGERS, CONSUMES, REALIZES, GROUPS, INFORMS, REFERENCES` |
 | 1 | `unknown-field` | `field 'priority' is not settable on persona; settable fields: name, status` |

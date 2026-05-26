@@ -20,10 +20,10 @@ The homemade-claude-kit metamodel produces artefacts across five layers:
 | Quality assurance | (planned) test plans, test cases, bug reports | (none yet) |
 | Operations | runbooks, RCAs, incidents | (none yet) |
 
-Today every artefact is a markdown file. Cross-references between artefacts use text-based ID conventions (e.g. `C-1.2.F03`, `E-02`) that are:
+Today every artefact is a markdown file. Cross-references between artefacts use text-based ID conventions (e.g. `C-N.M.FXX`, `E-NN`) that are:
 
 - **unenforced**: no tool validates that a referenced ID exists
-- **unqueryable**: answering "which functionalities belong to E-02 and their total estimated effort?" requires reading and mentally joining multiple files
+- **unqueryable**: answering "which functionalities belong to a given epic and their total estimated effort?" requires reading and mentally joining multiple files
 - **drift-prone**: renaming or re-numbering an ID in one file does not propagate
 - **computation-hostile**: cross-artefact aggregation (effort estimates, roadmap timelines, model inputs) requires fragile markdown parsing
 
@@ -69,10 +69,10 @@ AGENT (Claude / Codex)
   ├── converses to think through content
   ├── calls CLI via Bash to persist structured records
   │     clew new persona "Ophthalmologist" --role "..." → P-01
-  │     clew new functionality "Schedule surgery" --cap C-1.2 → C-1.2.F03
-  │     clew set complexity C-1.2.F03 M
-  │     clew link C-1.2.F03 E-02
-  │     clew estimate epic E-02 → { best: 8d, likely: 12d, worst: 18d }
+  │     clew new functionality "Schedule surgery" --cap C-N.M → C-N.M.FXX
+  │     clew set complexity C-N.M.FXX M
+  │     clew link C-N.M.FXX E-NN
+  │     clew estimate epic E-NN → { best: 8d, likely: 12d, worst: 18d }
   └── writes markdown prose referencing returned IDs
 
 CLEW CLI (Typer, installed via uvx / pip)

@@ -564,7 +564,7 @@ Business identifiers are **generated exclusively by the application layer** from
 |---|---|---|
 | `persona` | `P-{nn}` | `P-01` |
 | `capability` | `C{n}.{m}` | `C1.2` |
-| `epic` | `E-{nn}` | `E-03` |
+| `epic` | `E-{nn}` | `E-NN` |
 | `objective` | `OBJ-{nn}` | `OBJ-02` |
 | `key_result` | `KR-{parent_id}.{m}` | `KR-02.3` |
 | `vs_stage` | `{parent_id}.{m}` | `VS-1.3` |

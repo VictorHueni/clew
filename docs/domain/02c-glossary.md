@@ -132,7 +132,7 @@ review_interval: 180d
 
 **Definition:** The lifecycle state of an Artefact — one of `active` (the default at registration), `retired` (the artefact is no longer in use but is preserved for history), or `superseded` (replaced by another Artefact whose Business ID is recorded). Transitions are one-way: an artefact cannot return to `active` once retired or superseded.
 
-**Example:** "When ADR-0001 is replaced by a future ADR-0019, the operator runs `clew set ADR-0001 status superseded --by ADR-0019`; the old ADR's Status moves from `active` to `superseded` and stays there."
+**Example:** "When ADR-0001 is replaced by a future `ADR-NNNN`, the operator runs `clew set ADR-0001 status superseded --by ADR-NNNN`; the old ADR's Status moves from `active` to `superseded` and stays there."
 
 **Aliases (deprecated):** State (deprecated — "state" is overloaded; "status" is the canonical term for an artefact's lifecycle position)
 
