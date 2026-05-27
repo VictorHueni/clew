@@ -77,6 +77,8 @@ last_seen_at     TIMESTAMPTZ  NULLABLE  # NULL until clew check first visits the
 
 `clew where <id>` queries this table. One row per artefact; created at `clew new` time with `content_hash = NULL`.
 
+> **Hash scope and canonicalisation:** the exact bytes covered by `content_hash`, the canonicalisation rule applied before hashing, the additional `canonicaliser_version` column, and the four drift categories surfaced by `clew check` are decided in [ADR-0007 File-binding content-hash strategy](adr-0007-file-binding-content-hash-strategy.md). This ADR reserves the column; ADR-0007 specifies its contents.
+
 ### CLI surface
 
 ```
@@ -109,7 +111,7 @@ AGENT (Claude / Codex)
   │     ├── CLI stores: P-01, file_path, section_anchor, content_hash=NULL (no section yet)
   │     └── CLI returns: P-01
   ├── writes markdown section in the file under heading "P-01 · Ava the agent-first product engineer"
-  └── clew check → updates content_hash for the new section
+  └── clew check → updates content_hash for the new section (per [ADR-0007](adr-0007-file-binding-content-hash-strategy.md): dprint-canonicalised section body)
 ```
 
 For sub-artefacts:
@@ -231,6 +233,7 @@ See *Decision Outcome* above.
 ## Related decisions
 
 - Depends on: [ADR-0001 Introduce a persistence layer for the strategic-architecture metamodel](adr-0001-metamodel-persistence-layer.md).
+- Refined by: [ADR-0007 File-binding content-hash strategy](adr-0007-file-binding-content-hash-strategy.md). ADR-0007 specifies the contents of `content_hash`, the canonicalisation rule, the additional `canonicaliser_version` column, and the four drift categories surfaced by `clew check`.
 - Linked from: [Lean Canvas §4 Solution](../../business/02a-lean-canvas.md#4-solution--confidence-assumed-solution-details-still-in-design-foundational-bullet-tested-n1) (first concrete demo of OBJ-02 KR-02.2), [OBJ-02 §Linked from](../../business/04b-objectives.md#obj-02--the-architectural-substrate-is-trustworthy-enough-that-agents-depend-on-it).
 
 ## Dependent artefacts
