@@ -35,7 +35,7 @@ This CLI is the BC-scoped Open Host Service for **BC-01 Artefact Store** ([bound
 
 **Domain model anchors:** every command shape derives from BC-01's aggregates (`Artefact`, `Reference`, `FileBinding`, `IdSequence`) and domain events (`ArtefactRegistered`, `ArtefactLinked`, `FileBindingRecorded`, `SnapshotExported`, `SnapshotRestored`). Full mapping: [Artefact Store §Aggregate catalogue](../../domain/07b-models/artefact-store.md#aggregate-catalogue).
 
-**ADR dependencies:** ADR-0001 (persistence layer + single-writer concurrency) · ADR-0002 (file binding model + layout enforcement) · ADR-0003 (typed property graph schema) · ADR-0004 (Python / Typer / DuckDB stack).
+**ADR dependencies:** ADR-0001 (persistence layer + single-writer concurrency) · ADR-0002 (file binding model + layout enforcement) · ADR-0003 (typed property graph schema) · ADR-0004 (Python / Typer / SQLite stack).
 
 ---
 

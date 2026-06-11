@@ -539,18 +539,97 @@ classDiagram
 
 ## Relationship registry
 
-Canonical relationship types enforced at write time by `crud.py`. New types are added to the registry in code — no DDL migration required.
+Canonical relationship types enforced at write time by `crud.py`. Source and target
+`artefact_type` values are validated against this registry before any `artefact_references`
+row is written; a mismatch produces a structured error naming the relationship, the actual
+types, and the allowed types. New relationship types are added in code — no DDL migration
+required (the generic `artefact_references` table holds any edge).
 
-| Relationship | Source type(s) | Target type(s) | Role values | Notes |
-|---|---|---|---|---|
-| `TRIGGERS` | `persona` | `value_stream` | — | A persona triggers a value stream |
-| `CONSUMES` | `vs_stage` | `capability` | `Differentiator`, `Necessary` | A VS stage consumes a capability |
-| `REALIZES` | `fbs_functionality` | `vs_stage` | `Differentiator` | A functionality realises a VS stage |
-| `GROUPS` | `epic` | `fbs_functionality` | — | An epic groups FBS functionalities |
-| `INFORMS` | `objective` | `vs_stage` | — | An objective informs a VS stage |
-| `REFERENCES` | any | any | (free text) | Generic soft cross-link; no type constraint |
+This table is the documentation mirror of `crud.py`'s `ALLOWED_RELATIONSHIPS`. It is a
+**first full transcription** of [`metamodel.md`](../../../homemade-claude-kit/rules/metamodel.md)'s
+ER diagram + "hard rules of the graph", expressed in clew's snake_case artefact types.
 
-Source and target `artefact_type` values are validated against this registry before any `artefact_references` row is written. A mismatch produces a structured error naming the relationship, the actual types, and the allowed types.
+**Columns.** `card` = cardinality (`1:1`, `1:N`, `N:M`, `N:0..1`). `str` = strength:
+
+- **hard** — a structural metamodel dependency (solid edge in the `metamodel.md` DAG); part
+  of end-to-end traceability, type pair enforced.
+- **soft** — supporting enrichment (dashed edge in the DAG) or a generic cross-link; the
+  type pair is advisory.
+
+Two notes: (1) *every* edge already requires both endpoints to exist via the
+`artefact_references` FK on `artefacts(pk)` — `str` is about metamodel role, not endpoint
+existence. (2) The six verbs without a ⚠ are the established baseline; **⚠ marks verbs and
+directions introduced in this transcription — propose only, ratify against `crud.py` when it
+lands.**
+
+| Relationship | Source | Target | card | str | Role values | Notes |
+|---|---|---|---|---|---|---|
+| `TRIGGERS` | `persona` | `value_stream` | 1:N | hard | — | Persona triggers a value stream |
+| `SEGMENTS` ⚠ | `persona` | `canvas` | N:M | hard | Customer Segment | Persona populates a BMC/Lean Customer-Segment block |
+| `RESOURCES` ⚠ | `capability` | `canvas` | N:M | soft | Key Resources | Capability appears as a BMC Key Resource |
+| `CONSUMES` | `vs_stage` | `capability` | N:M | hard | `Differentiator`, `Necessary` | VS stage consumes a capability |
+| `OPERATIONALISES` ⚠ | `process` | `vs_stage` | N:1 | hard | — | Process operationalises a VS stage |
+| `QUANTIFIES` ⚠ | `quantitative_model` | `canvas` | N:M | hard | Revenue, Cost | Model quantifies BMC Revenue/Cost |
+| `MEASURES` ⚠ | `objective` | `key_result` | 1:N | hard | — | Objective measured by its key results |
+| `INFORMS` | `objective` | `vs_stage` | N:M | soft | — | Objective informs a VS stage (pain-index link) |
+| `ADDRESSES` ⚠ | `objective` | `persona` | N:M | soft | — | Objective serves a persona's outcomes |
+| `SERVES` ⚠ | `epic` | `objective` | N:M | soft | — | Epic serves an objective (Objective×Epic matrix) |
+| `GROUPS_INTO` ⚠ | `capability` | `bounded_context` | N:1 | hard | — | Capabilities group into a bounded context |
+| `GROUNDS_BC` ⚠ | `persona` | `bounded_context` | N:M | soft | ubiquitous language | Persona grounds a BC's language |
+| `SIGNALS` ⚠ | `vs_stage` | `bounded_context` | N:M | soft | boundary signal | VS-stage boundary signals a BC boundary |
+| `SCOPES` ⚠ | `bounded_context` | `glossary_term` | 1:N | hard | — | BC scopes its glossary terms |
+| `MODELS` ⚠ | `bounded_context` | `domain_model` | 1:1 | hard | — | One domain model per BC |
+| `EMITS` ⚠ | `aggregate` | `domain_event` | 1:N | hard | — | Aggregate produces domain events |
+| `NAMES` ⚠ | `glossary_term` | `aggregate` | N:M | soft | — | Entity/aggregate names match glossary terms |
+| `INHERITS` ⚠ | `fbs_functionality` | `capability` | N:1 | hard | — | FBS inherits L0/L1 (also encoded in `C-N.M.FXX`) |
+| `REALIZES` | `fbs_functionality` | `vs_stage` | N:M | hard | `Differentiator` | Functionality realises a VS stage |
+| `BECOMES` ⚠ | `fbs_functionality` | `aggregate` | N:M | hard | — | Functionalities become domain aggregates/entities |
+| `GROUPS` | `epic` | `fbs_functionality` | 1:N | hard | — | Epic groups FBS functionalities |
+| `ACTOR_OF` ⚠ | `persona` | `use_case` | 1:N | hard | — | Persona is a use case's primary actor |
+| `COVERS` ⚠ | `use_case` | `fbs_functionality` | N:M | hard | — | Use case covers (realises) functionalities |
+| `SPECIFIES` ⚠ | `epic` | `prd` | 1:1 | hard | — | One PRD per epic |
+| `GROUNDS` ⚠ | `use_case` | `prd` | 1:N | hard | — | Use case grounds PRD acceptance criteria |
+| `CONSTRAINS` ⚠ | `quality_attribute` | `prd` | 1:N | hard | — | QA appears in PRD acceptance criteria |
+| `GROUNDS_QA` ⚠ | `persona` | `quality_attribute` | N:M | soft | IC, PE | Persona grounds IC/PE quality attributes |
+| `DRIVES` ⚠ | `fbs_functionality` | `quality_attribute` | N:M | soft | `Differentiator` | Differentiator FBS drives Reliability QAs |
+| `DETAILS` ⚠ | `prd` | `implementation_plan` | 1:1 | hard | — | One implementation plan per PRD |
+| `REFERENCES_DM` ⚠ | `prd` | `aggregate` | N:M | soft | — | PRD references AGG/EVT IDs |
+| `EXPOSES` ⚠ | `domain_model` | `interface_contract` | N:M | hard | — | Aggregates/events become contract resources |
+| `CONTAINS` ⚠ | `cli_surface` | `cli_command` | 1:N | hard | — | CLI surface contains commands |
+| `MAPS_TO` ⚠ | `cli_command` | `fbs_functionality` | N:M | hard | — | Command maps to a functionality |
+| `WRAPS` ⚠ | `cli_command` | `interface_contract` | N:M | soft | — | Command wraps CTR calls |
+| `DECIDES` ⚠ | `adr` | `quality_attribute` | N:M | soft | — | ADR decision informs QA (Security/Flexibility) |
+| `DECIDES` ⚠ | `adr` | `prd` | N:M | soft | — | ADR decision informs PRD architecture |
+| `GOVERNS` ⚠ | `adr` | `interface_contract` | N:M | soft | versioning, auth | ADR governs contract versioning/auth |
+| `GRADUATES_TO` ⚠ | `idea` | `persona`,`objective`,`canvas`,`process`,`adr`,`fbs_functionality`,`prd` | N:0..1 | soft | — | One-way; target carries **no** back-FK (recorded in target body text, per metamodel "hard rules") |
+| `REFERENCES` | any | any | N:M | soft | (free text) | Generic catch-all cross-link; no type constraint |
+
+### Registry open items & flagged judgment calls
+
+1. **⚠ verbs are proposed.** Only `TRIGGERS`, `CONSUMES`, `REALIZES`, `GROUPS`, `INFORMS`,
+   `REFERENCES` are the prior baseline. All ⚠ rows are this pass's best transcription of the
+   ER and must be ratified (verb name + direction) when `crud.py`'s `ALLOWED_RELATIONSHIPS`
+   is authored.
+2. **Granularity differs from the entity-level ER.** `metamodel.md`'s ER draws entities
+   (`VALUE_STREAM`, `CAPABILITY_MAP`, `DOMAIN_MODEL`); this registry uses clew's finer
+   artefact types (`vs_stage`, `aggregate`, `domain_event`, `key_result`, `cli_command`),
+   so edges are mapped to the granular type, not the entity.
+3. **`GRADUATES_TO` is asymmetric** — the ID lives only on `idea.target_id`; the target does
+   **not** carry an `IDEA_NNNN` FK column (it back-references in body text). Cardinality is
+   `N:0..1` (each idea graduates to 0..1 targets).
+4. **`DECIDES` carries two type pairs** (`adr→quality_attribute`, `adr→prd`); `crud.py` must
+   allow multiple `(source,target)` pairs per verb.
+5. **`vision` edges omitted.** The ER's `VISION }o--o{ persona/objective/canvas` links are
+   intentionally not enforced here — `vision` is a singleton with no minted ID, and those
+   "audience scope / operationalised by" links are advisory and better stated in
+   `VISION.md` prose. Flagged for a decision if vision-level traceability is later wanted.
+6. **v1 scope.** Several target types (`use_case`, `interface_contract`, `cli_surface`,
+   `cli_command`, domain sub-types) are not yet in clew's persisted set; rows involving them
+   activate only when §Property schemas adds those types (see the §Property-schemas scope
+   call).
+
+Source and target `artefact_type` values are validated against this registry before any
+`artefact_references` row is written.
 
 ---
 
@@ -607,8 +686,8 @@ CREATE TABLE artefacts (
   business_id    TEXT     UNIQUE NOT NULL,           -- stable semantic key; never regenerated
   artefact_type  TEXT     NOT NULL,
   name           TEXT     NOT NULL,
-  status         TEXT     NOT NULL DEFAULT 'active'  -- active | retired | superseded
-                          CHECK (status IN ('active','retired','superseded')),
+  status         TEXT     NOT NULL DEFAULT 'draft'   -- draft | active | superseded | deprecated (aligned to artefact-frontmatter.md)
+                          CHECK (status IN ('draft','active','superseded','deprecated')),
   created_at     TEXT     NOT NULL DEFAULT (datetime('now')),  -- ISO-8601 UTC
   properties     TEXT     NOT NULL DEFAULT '{}'      -- JSON blob; validated by Pydantic
                           CHECK (json_valid(properties))
@@ -647,16 +726,37 @@ CREATE INDEX idx_bindings_file ON file_bindings(file_path);
 
 ## Property schemas
 
-Type-specific fields are stored in `artefacts.properties` (a JSON text blob validated by SQLite's `json_valid()` at write time) and validated by Pydantic models in `schema.py` before write. Examples of representative types:
+Type-specific fields are stored in `artefacts.properties` (a JSON text blob validated by SQLite's `json_valid()` at write time) and validated by Pydantic models in `schema.py` before write. The table covers the **v1 persisted set** — the self-dogfooding spine of 11 types clew's own repo authors (see scope note below). Listed fields are the *key* properties, not exhaustive; the authoritative schema is the Pydantic model.
 
 | Artefact type | Key properties | Notes |
 |---|---|---|
 | `persona` | `goals`, `pain_points`, `role` | Free-text strings |
 | `capability` | `strategic_importance` (`Differentiator`/`Necessary`/`Commodity`), `definition`, `outcomes` | `strategic_importance` validated against enum |
-| `fbs_functionality` | `description`, `vs_stage` (soft-link), `is_differentiator` (bool), `status` (`planned`/`in-progress`/`done`), `complexity` (`XS`/`S`/`M`/`L`/`XL`) | `vs_stage` is a business ID reference, not a FK |
-| `epic` | `phase`, `value_statement` | `phase` is a positive integer |
+| `value_stream` | `value_proposition` (one sentence, no "AND"), `scope_anchor` (capability-map L0s consumed), `pain_index` (`Low`/`Medium`/`High`/`Critical`) | Triggering persona is a `TRIGGERS` edge, not a property |
+| `vs_stage` | `description` (value milestone, not activity), `pain` (`Low`/`Medium`/`High`/`Critical`) | Consumed capabilities are `CONSUMES` edges; ID inherits parent `value_stream` |
 | `objective` | `perspective` (BSC tag), `timeframe`, `owner` | `perspective`: `financial`/`customer`/`internal`/`learning` |
 | `key_result` | `metric`, `baseline`, `target`, `unit`, `measurement_method` | `target` is numeric |
+| `fbs_functionality` | `description`, `vs_stage` (soft-link), `is_differentiator` (bool), `status` (`planned`/`in-progress`/`done`), `complexity` (`XS`/`S`/`M`/`L`/`XL`) | `vs_stage` is a business ID reference, not a FK |
+| `epic` | `phase`, `value_statement` | `phase` is a positive integer |
+| `bounded_context` | `subdomain_type` (`Core`/`Supporting`/`Generic`), `responsibility` (definition), `rationale`, `team_owner` | `subdomain_type` validated against enum; owned capabilities are `GROUPS_INTO` edges |
+| `glossary_term` | `definition`, `example` (example sentence), `aliases` (deprecated synonyms, list), `code_convention` | Term lifecycle (`Active`/`Retired` in the glossary) maps to `artefacts.status` (`active`/`deprecated`) |
+| `adr` | `decision` (chosen-option one-liner), `drivers` (list) | MADR `status` now aligns with `artefacts.status` (see flag 2) |
+
+### Property-schemas scope & flags
+
+1. **v1 persisted set (self-dogfooding spine, 11 types):** `persona`, `capability`,
+   `value_stream`, `vs_stage`, `objective`, `key_result`, `fbs_functionality`, `epic`,
+   `bounded_context`, `glossary_term`, `adr`. All other kit types (`process`, `canvas`,
+   `bmc_block`, `quantitative_model`, `prd`, `implementation_plan`, `use_case`,
+   `interface_contract`, `cli_surface`/`cli_command`, the domain sub-types, `idea`,
+   `competitor`) are **deferred to v2** — their §Relationship-registry rows stay inert until
+   their schema is added here.
+2. **`adr` status-enum (resolved 2026-06-11):** `artefacts.status` was aligned to the
+   authoritative `artefact-frontmatter.md` status enum
+   (`draft`/`active`/`superseded`/`deprecated`, default `draft`) — see §Physical schema. The
+   glossary's term-level `Retired` maps to `deprecated`. No remaining mismatch.
+3. Per ADR-0006 Phase 4, the kit registry's `property_schema_ref` column points back to the
+   Pydantic models that formalise these rows, once `schema.py` lands.
 
 ## Graph traversal pattern
 
@@ -698,4 +798,7 @@ SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY dept
 | 2026-05-25 | Victor Hueni | Initial draft drawn from ADR-0001 + ADR-0002 + ADR-0003 (under DuckDB). |
 | 2026-05-25 | Victor Hueni | SQLite cascade: DDL rewritten for SQLite syntax (INTEGER PK AUTOINCREMENT, `datetime('now')`, `json_valid()` CHECK); PRAGMAs documented; transaction reference updated. |
 | 2026-05-25 | Victor Hueni | Template alignment pass (`domain-model` skill v1.0): H1 reformatted, Subdomain type + Ubiquitous language headers added, aggregate catalogue columns aligned to template, per-aggregate Commands → Events tables + Size check lines + Member listings added, dedicated Entity catalogue + Value object catalogue + Domain event catalogue sections introduced (entity sections now document behaviour methods explicitly to fix anemic-model finding), AGG-02 invariant rephrased to business language (`source ≠ target`), Implementation supplement clearly demarcated per ADR-0003 deviation, Open Items populated with glossary + supplement-location items, Changelog added. |
+| 2026-06-11 | Victor Hueni | §Relationship registry expanded from 6 to 39 edges — first full transcription of `metamodel.md`'s ER + "hard rules" into clew's snake_case types, adding `card` (cardinality) and `str` (hard/soft) columns. Newly-introduced verbs/directions marked ⚠ (ratify against `crud.py`). Six judgment calls flagged (granularity, `GRADUATES_TO` asymmetry, multi-pair `DECIDES`, omitted `vision` edges, v1 scope). Follows the ADR-0006 registry consolidation. |
+| 2026-06-11 | Victor Hueni | §Property schemas extended from 6 to the 11-type v1 self-dogfooding spine — added `value_stream`, `vs_stage`, `bounded_context`, `glossary_term`, `adr`, with fields grounded in clew's own repo instances. Added a v1-scope note (persisted set vs deferred types) and flagged the `adr` status-enum mismatch (MADR `draft`/`active`/`superseded`/`deprecated` vs `artefacts.status` `active`/`retired`/`superseded`). |
+| 2026-06-11 | Victor Hueni | Cleanup: aligned `artefacts.status` CHECK to the authoritative `artefact-frontmatter.md` enum (`draft`/`active`/`superseded`/`deprecated`, default `draft`), resolving the `adr` status-enum flag; glossary term `Retired` → `deprecated`. (ADR-0002 §Layout taxonomy separately corrected: `bounded-context`/`glossary-term` are single-collection single files.) |
 | 2026-05-25 | Victor Hueni | Glossary cross-reference pass 2 (closes OI-0019): header `Ubiquitous language` line now points at [`../02c-glossary.md#bc-01-artefact-store`](../02c-glossary.md#bc-01-artefact-store); every entity Glossary-term field (3) and every value-object Glossary-term field (5) wired to live `02c-glossary.md#{term}--bc-01gt-{nn}` anchors. Two deliberate class-name ↔ glossary-term divergences flagged inline (`ArtefactReference` class for the `Relationship` term — ORM/SQL reserved-word safety; `FileLayout` class for the `Layout` term — code clarity), both referencing the glossary's code-convention notes. `IdCounter` (VO-05) annotated as a sub-concept of `Business ID · GT-03` since it is the mint mechanism, not a standalone domain concept. OI-0019 closed with tracker-ref text identifying commit `8cea266` (glossary authoring) and this commit (07b cross-reference wiring). |

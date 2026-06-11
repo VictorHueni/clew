@@ -2,7 +2,7 @@
 title: Bind metamodel artefacts to narrative files via a typed layout convention
 status: draft
 owner: Victor Hueni
-last_reviewed: 2026-05-24
+last_reviewed: 2026-06-11
 review_interval: 90d
 ---
 
@@ -135,11 +135,13 @@ The three categories cover every artefact type observed in the repo today. The c
 | capability | single-collection | `docs/business/03a-capability-map.md` | (none) |
 | value-stream | single-collection | `docs/business/04a-value-streams.md` | (none) |
 | process | one-per-artefact | `docs/business/05a-processes/proc-{nn}-{slug}.md` | (none) |
-| bounded-context | one-per-artefact | `docs/domain/contexts/{slug}.md` | (none) |
-| glossary-term | single-collection | `docs/domain/glossary.md` | (none) |
+| bounded-context | single-collection | `docs/domain/02b-bounded-contexts.md` | (none) |
+| glossary-term | single-collection | `docs/domain/02c-glossary.md` | (none) |
 | adr | one-per-artefact | `docs/architecture/decisions/adr-{nnnn}-{slug}.md` | (none) |
 
 The table grows as v0.3 introduces remaining artefact types (FBS, PRDs, quality attributes, epics, quantitative models). The enum stays stable; only rows are added.
+
+> **Correction (2026-06-11):** the `bounded-context` and `glossary-term` rows were corrected to match repository reality and `homemade-claude-kit/rules/metamodel.md` canonical paths — both are **single-collection** single files (`02b-bounded-contexts.md`, `02c-glossary.md`), not `one-per-artefact` under `contexts/` or a `glossary.md`. Discrepancy surfaced while building `rules/artefact-types-registry.md` (clew ADR-0006).
 
 ### Positive Consequences
 

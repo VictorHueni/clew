@@ -292,7 +292,7 @@ AGENT (Claude / Codex)
   calls clew via Bash → gets deterministic IDs back
   writes markdown prose referencing those IDs
 
-CLEW CLI (Typer + DuckDB)
+CLEW CLI (Typer + SQLite)
   CRUD commands per entity type
   ID generation via DB sequences, never by the LLM
   FK enforcement at write time
@@ -328,7 +328,7 @@ Every artefact uses **stable IDs** (P-NN, C-N.M, VS-N.M, OBJ-NN, KR-NN.M, ADR-NN
 
 ## Status
 
-Early design phase. Business-layer modelling **complete** (personas, lean canvas, capability map, value streams, objectives, all wired bidirectionally; see §Where to start reading above). Architecture layer: two ADRs ahead of implementation ([persistence layer](docs/architecture/decisions/adr-0001-metamodel-persistence-layer.md), [file binding](docs/architecture/decisions/adr-0002-artefact-file-binding.md)). **No CLI yet:** the commands shown in §What it does are the target shape, not the current state. Next layer: spec-functional-breakdown-structure (FBS) to bridge business → technical.
+Early design phase. Business-layer modelling **complete** (personas, lean canvas, capability map, value streams, objectives, all wired bidirectionally; see §Where to start reading above). Spec + domain layers drafted (FBS, bounded contexts, the Artefact Store domain model, and the CLI interface contract). Architecture layer: **seven ADRs ahead of implementation** in [`docs/architecture/decisions/`](docs/architecture/decisions/) — persistence layer, file binding, schema design, implementation stack, frontmatter policy, type-definition home, and migration framework. **No CLI yet:** the commands shown in §What it does are the target shape, not the current state. Next: implement the `clew` package (ADR-0001/0003/0004/0007).
 
 ## License
 
