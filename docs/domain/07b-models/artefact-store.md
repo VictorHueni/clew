@@ -686,8 +686,8 @@ CREATE TABLE artefacts (
   business_id    TEXT     UNIQUE NOT NULL,           -- stable semantic key; never regenerated
   artefact_type  TEXT     NOT NULL,
   name           TEXT     NOT NULL,
-  status         TEXT     NOT NULL DEFAULT 'active'  -- active | retired | superseded
-                          CHECK (status IN ('active','retired','superseded')),
+  status         TEXT     NOT NULL DEFAULT 'draft'   -- draft | active | superseded | deprecated (aligned to artefact-frontmatter.md)
+                          CHECK (status IN ('draft','active','superseded','deprecated')),
   created_at     TEXT     NOT NULL DEFAULT (datetime('now')),  -- ISO-8601 UTC
   properties     TEXT     NOT NULL DEFAULT '{}'      -- JSON blob; validated by Pydantic
                           CHECK (json_valid(properties))
@@ -739,8 +739,8 @@ Type-specific fields are stored in `artefacts.properties` (a JSON text blob vali
 | `fbs_functionality` | `description`, `vs_stage` (soft-link), `is_differentiator` (bool), `status` (`planned`/`in-progress`/`done`), `complexity` (`XS`/`S`/`M`/`L`/`XL`) | `vs_stage` is a business ID reference, not a FK |
 | `epic` | `phase`, `value_statement` | `phase` is a positive integer |
 | `bounded_context` | `subdomain_type` (`Core`/`Supporting`/`Generic`), `responsibility` (definition), `rationale`, `team_owner` | `subdomain_type` validated against enum; owned capabilities are `GROUPS_INTO` edges |
-| `glossary_term` | `definition`, `example` (example sentence), `aliases` (deprecated synonyms, list), `code_convention` | Term lifecycle (`Active`/`Retired`) maps to `artefacts.status` (`active`/`retired`) |
-| `adr` | `decision` (chosen-option one-liner), `drivers` (list) | ⚠ status-enum mismatch — see flag 2 below |
+| `glossary_term` | `definition`, `example` (example sentence), `aliases` (deprecated synonyms, list), `code_convention` | Term lifecycle (`Active`/`Retired` in the glossary) maps to `artefacts.status` (`active`/`deprecated`) |
+| `adr` | `decision` (chosen-option one-liner), `drivers` (list) | MADR `status` now aligns with `artefacts.status` (see flag 2) |
 
 ### Property-schemas scope & flags
 
@@ -751,10 +751,10 @@ Type-specific fields are stored in `artefacts.properties` (a JSON text blob vali
    `interface_contract`, `cli_surface`/`cli_command`, the domain sub-types, `idea`,
    `competitor`) are **deferred to v2** — their §Relationship-registry rows stay inert until
    their schema is added here.
-2. **⚠ `adr` status-enum mismatch:** the MADR/frontmatter `status`
-   (`draft`/`active`/`superseded`/`deprecated`) does not align with the `artefacts.status`
-   CHECK (`active`/`retired`/`superseded`). Reconcile before persisting ADRs — either widen
-   `artefacts.status`, or map `draft→active` (+ a `draft` flag) and `deprecated→retired`.
+2. **`adr` status-enum (resolved 2026-06-11):** `artefacts.status` was aligned to the
+   authoritative `artefact-frontmatter.md` status enum
+   (`draft`/`active`/`superseded`/`deprecated`, default `draft`) — see §Physical schema. The
+   glossary's term-level `Retired` maps to `deprecated`. No remaining mismatch.
 3. Per ADR-0006 Phase 4, the kit registry's `property_schema_ref` column points back to the
    Pydantic models that formalise these rows, once `schema.py` lands.
 
@@ -800,4 +800,5 @@ SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY dept
 | 2026-05-25 | Victor Hueni | Template alignment pass (`domain-model` skill v1.0): H1 reformatted, Subdomain type + Ubiquitous language headers added, aggregate catalogue columns aligned to template, per-aggregate Commands → Events tables + Size check lines + Member listings added, dedicated Entity catalogue + Value object catalogue + Domain event catalogue sections introduced (entity sections now document behaviour methods explicitly to fix anemic-model finding), AGG-02 invariant rephrased to business language (`source ≠ target`), Implementation supplement clearly demarcated per ADR-0003 deviation, Open Items populated with glossary + supplement-location items, Changelog added. |
 | 2026-06-11 | Victor Hueni | §Relationship registry expanded from 6 to 39 edges — first full transcription of `metamodel.md`'s ER + "hard rules" into clew's snake_case types, adding `card` (cardinality) and `str` (hard/soft) columns. Newly-introduced verbs/directions marked ⚠ (ratify against `crud.py`). Six judgment calls flagged (granularity, `GRADUATES_TO` asymmetry, multi-pair `DECIDES`, omitted `vision` edges, v1 scope). Follows the ADR-0006 registry consolidation. |
 | 2026-06-11 | Victor Hueni | §Property schemas extended from 6 to the 11-type v1 self-dogfooding spine — added `value_stream`, `vs_stage`, `bounded_context`, `glossary_term`, `adr`, with fields grounded in clew's own repo instances. Added a v1-scope note (persisted set vs deferred types) and flagged the `adr` status-enum mismatch (MADR `draft`/`active`/`superseded`/`deprecated` vs `artefacts.status` `active`/`retired`/`superseded`). |
+| 2026-06-11 | Victor Hueni | Cleanup: aligned `artefacts.status` CHECK to the authoritative `artefact-frontmatter.md` enum (`draft`/`active`/`superseded`/`deprecated`, default `draft`), resolving the `adr` status-enum flag; glossary term `Retired` → `deprecated`. (ADR-0002 §Layout taxonomy separately corrected: `bounded-context`/`glossary-term` are single-collection single files.) |
 | 2026-05-25 | Victor Hueni | Glossary cross-reference pass 2 (closes OI-0019): header `Ubiquitous language` line now points at [`../02c-glossary.md#bc-01-artefact-store`](../02c-glossary.md#bc-01-artefact-store); every entity Glossary-term field (3) and every value-object Glossary-term field (5) wired to live `02c-glossary.md#{term}--bc-01gt-{nn}` anchors. Two deliberate class-name ↔ glossary-term divergences flagged inline (`ArtefactReference` class for the `Relationship` term — ORM/SQL reserved-word safety; `FileLayout` class for the `Layout` term — code clarity), both referencing the glossary's code-convention notes. `IdCounter` (VO-05) annotated as a sub-concept of `Business ID · GT-03` since it is the mint mechanism, not a standalone domain concept. OI-0019 closed with tracker-ref text identifying commit `8cea266` (glossary authoring) and this commit (07b cross-reference wiring). |
