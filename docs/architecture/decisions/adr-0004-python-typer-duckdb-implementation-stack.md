@@ -2,7 +2,7 @@
 title: Choose Python + Typer + SQLite + Pydantic as the clew implementation stack
 status: draft
 owner: Victor Hueni
-last_reviewed: 2026-05-25
+last_reviewed: 2026-06-11
 review_interval: 180d
 ---
 
@@ -24,7 +24,7 @@ review_interval: 180d
 - ADR-0001 chose SQLite as the persistence engine; the Python stdlib ships a first-class `sqlite3` driver, eliminating one non-stdlib binary wheel from `pip install clew`
 - marimo (the analysis and notebook interface) is Python-first; any non-Python runtime creates a hard integration seam with the analysis layer
 - The agent writing to `clew` (Claude Code via Bash) does not care what language the CLI is written in — it only cares about stdin/stdout contracts
-- The team is Python-fluent; Go and Rust would introduce a capability gap for future contributors (including AI agents generating patches)
+- Language fluency: the builder is **Java-fluent, not Python-fluent** (re-examined 2026-06-11 — see Decision Outcome §Java reconsidered). This does not by itself select the language: the fluency gap is temporary and largely absorbed by AI agents generating patches, whereas the ecosystem drivers above are permanent
 - Schema evolution in the clew metamodel is expected to be frequent; the validation layer must support incremental addition of per-type property fields without structural overhaul
 - Installability must be single-line (`uvx clew` or `pip install clew`); the package must not require a build toolchain beyond a standard Python environment
 
@@ -35,6 +35,7 @@ review_interval: 180d
 - **A.** Python 3.12+
 - **B.** Go
 - **C.** Rust
+- **M.** Java (Picocli CLI / Quarkus or Micronaut API) — *added 2026-06-11 when the builder's Java fluency reopened the choice; rejected, Python reaffirmed*
 
 ### CLI framework (Python only)
 
@@ -59,6 +60,8 @@ review_interval: 180d
 Chosen options: **A (Python 3.12+)**, **D (Typer)**, **G (stdlib `sqlite3`)**, **I (Pydantic v2)**.
 
 **Python** is the only language with first-class marimo integration and a stdlib SQL driver (`sqlite3`). Go and Rust would require a bridge layer (subprocess calls or a separate marimo backend) that adds complexity without any v1-scale benefit — the CLI processes one command at a time, so Go/Rust performance advantages are irrelevant.
+
+**Java reconsidered and rejected (2026-06-11, option M).** The builder is Java-fluent, which reopened the language choice — and ADR-0004's original "team is Python-fluent" driver was simply inaccurate. Java covers clew's needs (Picocli ≈ Typer, Flyway/Liquibase ≈ Alembic, `sqlite-jdbc`, the official MCP Java SDK, GraalVM native-image for fast CLI startup). Python is **reaffirmed** because its advantages are permanent and structural — marimo is Python-native (the analysis layer reads the same DB file), the agent / MCP / LLM-tooling ecosystem is most mature in Python, stdlib `sqlite3` + `uvx` keep install trivial, and the code stays concise — whereas the fluency gap is temporary and largely absorbed by AI agents generating patches. The marimo coupling does not *force* Python (marimo only reads the DB file, so a Java core is technically viable as a polyglot split), but the balance of permanent ecosystem fit over a temporary, agent-mitigated fluency gap does. Going Java would also have superseded [ADR-0007](adr-0007-schema-migration-framework.md) (Alembic → Flyway/Liquibase) for no offsetting structural gain.
 
 **Typer** over Click because Typer is built on Click but adds automatic type inference from Python type hints; command signatures defined as typed functions serve double duty as both CLI parsing and documentation. argparse is rejected for being too verbose and lacking automatic help generation from type hints.
 
@@ -123,6 +126,26 @@ Chosen options: **A (Python 3.12+)**, **D (Typer)**, **G (stdlib `sqlite3`)**, *
 
 - No marimo integration; same split-runtime problem as Go
 - Highest ramp-up cost; CLIs in Rust are more verbose
+
+### M. Java (Picocli / Quarkus) — added 2026-06-11, rejected
+
+The builder's native language; reconsidered when ADR-0004's original "team is Python-fluent" driver proved inaccurate. Python was reaffirmed (see Decision Outcome §Java reconsidered).
+
+#### Positive
+
+- Builder-fluent → confident review of correctness-critical code (the builder is the sole quality gate)
+- Picocli matches Typer's ergonomics (annotation-driven CLI); GraalVM native-image gives sub-second CLI startup and a single distributable binary
+- Flyway / Liquibase are mature, dialect-aware migration tools (SQLite → Postgres), on par with or ahead of Alembic
+- Official MCP Java SDK + Quarkus / Spring-AI MCP cover the v2 MCP and v3 API path
+- Strong static typing and refactoring tooling
+
+#### Negative
+
+- marimo is Python-only → analysis becomes a separate Python sidecar (polyglot repo), eroding the single-runtime benefit
+- Heavier packaging/distribution than `uvx clew` / `pip install` (native-image build step, or jbang)
+- The agent / MCP / LLM-tooling ecosystem is less battle-tested in Java than in Python
+- More verbose codebase; higher token cost for agent-generated patches
+- Would supersede ADR-0007 (Alembic → Flyway/Liquibase) with no offsetting structural gain
 
 ### D. Typer
 
