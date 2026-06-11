@@ -292,7 +292,7 @@ AGENT (Claude / Codex)
   calls clew via Bash → gets deterministic IDs back
   writes markdown prose referencing those IDs
 
-CLEW CLI (Typer + DuckDB)
+CLEW CLI (Typer + SQLite)
   CRUD commands per entity type
   ID generation via DB sequences, never by the LLM
   FK enforcement at write time

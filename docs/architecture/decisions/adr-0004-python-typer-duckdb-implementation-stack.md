@@ -237,3 +237,4 @@ Was chosen in the earlier draft of this ADR, before ADR-0001 reconsidered the en
 
 - [ADR-0001 Persistence layer (CLI + SQLite)](adr-0001-metamodel-persistence-layer.md) — chose SQLite as the storage engine; this ADR's DB-interface choice (stdlib `sqlite3`) is the cascade.
 - [ADR-0003 Schema design — typed property graph](adr-0003-schema-design-typed-property-graph.md) — specified Pydantic models as the property validation layer; this ADR provides the formal decision.
+- [ADR-0007 Schema migration framework (Alembic + SQLAlchemy)](adr-0007-schema-migration-framework.md) — **amends** this ADR: SQLAlchemy Core + Alembic are added for schema definition + migrations, softening the "zero non-stdlib DB dependency" consequence (the runtime CRUD path may remain stdlib `sqlite3`).
