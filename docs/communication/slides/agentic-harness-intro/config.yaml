@@ -1,0 +1,46 @@
+# ─────────────────────────────────────────────
+# Slide Builder - Project Configuration
+# ─────────────────────────────────────────────
+
+title: "The Agentic Development Stack"
+author: "Victor Hueni"
+date_label: "June 2026"
+
+canvas:
+  width: 1280
+  height: 720
+
+fonts:
+  - family: "Inter"
+    weights: [400, 500, 600, 700, 800]
+  - family: "JetBrains Mono"
+    weights: [400, 500]
+
+external_scripts:
+  - "https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"
+
+slides:
+  - file: "01-cover.html"
+    class: "s-cover"
+    label: "Cover"
+  - file: "02-harness.html"
+    class: "s-harness"
+    label: "The Agentic Harness"
+  - file: "03-clew.html"
+    class: "s-clew"
+    label: "clew — Architecture Memory"
+  - file: "04-workflow.html"
+    class: "s-workflow"
+    label: "The Dev Workflow"
+
+paths:
+  slides_dir:        "output/slides"
+  styles_file:       "design/styles.css"
+  script_file:       "design/script.js"
+  bibliography_file: "context/bibliography.yaml"
+  output_dir:        "output/slide-deck"
+  output_filename:   "presentation.html"
+
+numbering:
+  enabled: true
+  format: "{current} / {total}"

@@ -1,0 +1,728 @@
+/* ============================================================
+   CLEW · Agentic Harness Deck — deck-only stylesheet
+   Base palette + typography inherited from docs/ux/tokens.css
+   All values reference var(--token) — never raw hex.
+   ============================================================ */
+
+/* ── Deck-only tokens ──────────────────────────────────────── */
+:root {
+  --dim:           #9aa2ae;
+  --accent-lt:     color-mix(in srgb, var(--accent) 10%, var(--surface));
+  --dark-bg:       #0f1117;
+  --dark-surface:  #181d2c;
+  --dark-border:   #252d42;
+  --dark-muted:    #6b7a9a;
+  --dark-ink:      #eef1f8;
+  --accent-bright: #c04060;
+  --loop-bg:       #1a2035;
+}
+
+/* ── Base slide shell ──────────────────────────────────────── */
+.slide {
+  width: 1280px;
+  height: 720px;
+  position: relative;
+  overflow: hidden;
+  background: var(--canvas-bg);
+  font-family: var(--font-sans);
+  color: var(--ink);
+  box-sizing: border-box;
+}
+
+/* ── Atoms ─────────────────────────────────────────────────── */
+.section-label {
+  position: absolute;
+  top: 44px; left: 68px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.slide-title {
+  position: absolute;
+  top: 72px; left: 68px; right: 68px;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.slide-number {
+  position: absolute;
+  bottom: 32px; right: 52px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--dim);
+}
+
+.accent-bar-left {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 5px;
+  background: var(--accent);
+}
+
+.icon-sm { width: 16px; height: 16px; }
+.icon-md { width: 22px; height: 22px; }
+.icon-lg { width: 32px; height: 32px; }
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 1 — COVER (s-cover)
+   ══════════════════════════════════════════════════════════════ */
+.s-cover {
+  background: var(--dark-bg);
+}
+
+.s-cover .cover-wordmark {
+  position: absolute;
+  top: 44px; left: 80px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-bright);
+}
+
+.s-cover .cover-left {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 80px;
+  width: 600px;
+}
+
+.s-cover .cover-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dark-muted);
+  margin-bottom: 20px;
+}
+
+.s-cover .cover-title {
+  font-size: 58px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--dark-ink);
+  margin: 0 0 28px 0;
+}
+
+.s-cover .cover-title em {
+  font-style: normal;
+  color: var(--accent-bright);
+}
+
+.s-cover .cover-sub {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--dark-muted);
+  margin-bottom: 40px;
+  max-width: 480px;
+}
+
+.s-cover .cover-author {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--dark-muted);
+  letter-spacing: 0.06em;
+}
+
+.s-cover .cover-right {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 560px;
+  overflow: hidden;
+}
+
+.s-cover .cover-shape {
+  position: absolute;
+  right: -80px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  border: 1px solid var(--dark-border);
+}
+
+.s-cover .cover-shape::before {
+  content: '';
+  position: absolute;
+  inset: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--dark-border);
+}
+
+.s-cover .cover-shape::after {
+  content: '';
+  position: absolute;
+  inset: 110px;
+  border-radius: 50%;
+  background: var(--dark-surface);
+  border: 1.5px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  box-shadow: 0 0 80px color-mix(in srgb, var(--accent) 18%, transparent),
+              inset 0 0 40px color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.s-cover .cover-loop {
+  position: absolute;
+  right: 98px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.s-cover .loop-step {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dark-muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.s-cover .loop-step.active {
+  color: var(--accent-bright);
+}
+
+.s-cover .loop-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--dark-border);
+  flex-shrink: 0;
+}
+
+.s-cover .loop-step.active .loop-dot {
+  background: var(--accent-bright);
+  box-shadow: 0 0 8px var(--accent-bright);
+}
+
+.s-cover .cover-bottom-line {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--accent) 0%, transparent 55%);
+}
+
+.s-cover .slide-number {
+  color: var(--dark-muted);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 2 — THE HARNESS (s-harness)
+   ══════════════════════════════════════════════════════════════ */
+
+.s-harness .harness-left {
+  position: absolute;
+  top: 145px; left: 68px;
+  width: 340px;
+}
+
+.s-harness .stat-num {
+  font-size: 100px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+}
+
+.s-harness .stat-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
+.s-harness .stat-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.4;
+  margin-bottom: 32px;
+}
+
+.s-harness .harness-verdict {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ink);
+  border-left: 3px solid var(--accent);
+  padding-left: 14px;
+}
+
+/* Right panel — harness anatomy diagram */
+.s-harness .harness-diagram {
+  position: absolute;
+  top: 108px; right: 52px;
+  width: 748px;
+  height: 566px;
+}
+
+.s-harness .hd-outer {
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+}
+
+.s-harness .hd-outer-label {
+  position: absolute;
+  top: -13px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--canvas-bg);
+  padding: 0 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.s-harness .hd-top-row,
+.s-harness .hd-bot-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 24px;
+}
+
+.s-harness .hd-model-zone {
+  flex: 1;
+  margin: 0 24px;
+  border-radius: 12px;
+  background: var(--loop-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.s-harness .hd-model-zone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent) 8%, transparent) 0%,
+    transparent 60%);
+  pointer-events: none;
+}
+
+.s-harness .hd-model-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dark-muted);
+  margin-bottom: 16px;
+}
+
+.s-harness .hd-loop {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.s-harness .loop-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.s-harness .loop-bubble {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: 1.5px solid var(--dark-border);
+  background: var(--dark-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark-muted);
+}
+
+.s-harness .loop-bubble.act {
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--dark-surface));
+  color: var(--accent-bright);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.s-harness .loop-name {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dark-muted);
+}
+
+.s-harness .loop-name.act {
+  color: var(--accent-bright);
+}
+
+.s-harness .loop-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--dark-border);
+  padding: 0 6px;
+  margin-bottom: 24px;
+}
+
+.s-harness .h-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border-radius: 9px;
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.s-harness .h-chip svg {
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.s-harness .h-chip.accent {
+  background: var(--accent-lt);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  color: var(--accent);
+}
+
+.s-harness .h-chip.accent svg {
+  color: var(--accent);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 3 — CLEW (s-clew)
+   ══════════════════════════════════════════════════════════════ */
+
+.s-clew .artefact-panel {
+  position: absolute;
+  top: 120px; left: 68px;
+  width: 580px;
+  bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.s-clew .artefact-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.s-clew .ast-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.s-clew .ast-connector {
+  width: 2px;
+  height: 16px;
+  background: var(--border);
+  margin-left: 22px;
+}
+
+.s-clew .ast-node {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow);
+  flex: 1;
+}
+
+.s-clew .ast-node.highlight {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  background: var(--accent-lt);
+}
+
+.s-clew .ast-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.s-clew .ast-node.highlight .ast-dot {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.s-clew .ast-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent);
+  min-width: 78px;
+  letter-spacing: 0.04em;
+}
+
+.s-clew .ast-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.s-clew .ast-group {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+}
+
+.s-clew .ast-group .ast-node {
+  flex: 1;
+}
+
+.s-clew .ast-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.s-clew .clew-claim {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 52px;
+  width: 520px;
+}
+
+.s-clew .clew-section-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.s-clew .clew-title {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 22px 0;
+}
+
+.s-clew .clew-subtitle {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+.s-clew .clew-props {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.s-clew .clew-prop {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.s-clew .prop-icon {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  background: var(--accent-lt);
+  border: 1.5px solid color-mix(in srgb, var(--accent) 28%, var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.s-clew .prop-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.s-clew .prop-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 4 — WORKFLOW (s-workflow)
+   ══════════════════════════════════════════════════════════════ */
+
+.s-workflow .workflow-wrap {
+  position: absolute;
+  left: 68px; right: 68px;
+  top: 155px;
+  bottom: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.s-workflow .wf-flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  flex: 1;
+}
+
+.s-workflow .wf-step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 12px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow);
+  position: relative;
+  text-align: center;
+}
+
+.s-workflow .wf-step.highlight {
+  border-color: var(--accent);
+  background: var(--accent-lt);
+}
+
+.s-workflow .wf-num {
+  position: absolute;
+  top: 14px; left: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--dim);
+}
+
+.s-workflow .wf-icon-wrap {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+.s-workflow .wf-step.highlight .wf-icon-wrap {
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  color: var(--accent);
+}
+
+.s-workflow .wf-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.s-workflow .wf-step.highlight .wf-label {
+  color: var(--accent);
+}
+
+.s-workflow .wf-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.5;
+  max-width: 110px;
+}
+
+.s-workflow .wf-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--border);
+  padding: 0 4px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.s-workflow .wf-tools-row {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 12px;
+}
+
+.s-workflow .wf-tool-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.s-workflow .wf-tool-spacer {
+  flex-shrink: 0;
+  width: 30px;
+}
+
+.s-workflow .wf-tool-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--dim);
+  text-align: center;
+  line-height: 1.45;
+}
+
+.s-workflow .wf-tool-tag.accent {
+  color: color-mix(in srgb, var(--accent) 75%, var(--muted));
+}
