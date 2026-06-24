@@ -226,207 +226,353 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SLIDE 2 — THE HARNESS (s-harness)
+   SLIDE 2 — HARNESS ANATOMY (s-harness)
+   14-domain functional anatomy, 3-column layout
    ══════════════════════════════════════════════════════════════ */
 
-.s-harness .harness-left {
-  position: absolute;
-  top: 145px; left: 68px;
-  width: 340px;
-}
-
-.s-harness .stat-num {
-  font-size: 100px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  color: var(--accent);
-}
-
-.s-harness .stat-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
+/* Smaller title to give room to the diagram */
+.s-harness .slide-title {
+  font-size: 15px;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
   color: var(--muted);
-  margin-top: 4px;
-  margin-bottom: 6px;
+  top: 66px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.03em;
 }
 
-.s-harness .stat-desc {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.4;
-  margin-bottom: 32px;
-}
-
-.s-harness .harness-verdict {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.35;
-  color: var(--ink);
-  border-left: 3px solid var(--accent);
-  padding-left: 14px;
-}
-
-/* Right panel — harness anatomy diagram */
-.s-harness .harness-diagram {
+/* 3-column main grid */
+.s-harness .ha-wrap {
   position: absolute;
-  top: 108px; right: 52px;
-  width: 748px;
-  height: 566px;
+  top: 96px; left: 10px; right: 10px;
+  bottom: 66px;
+  display: flex;
+  gap: 0;
 }
 
-.s-harness .hd-outer {
-  width: 100%;
-  height: 100%;
-  border: 2px solid var(--border);
-  border-radius: 16px;
-  background: var(--surface);
-  position: relative;
+/* Domain columns (left & right) */
+.s-harness .ha-col {
+  width: 298px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  gap: 5px;
+}
+
+/* Single domain card */
+.s-harness .ha-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 8px;
+  border-radius: 7px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  overflow: hidden;
   box-shadow: var(--shadow);
 }
 
-.s-harness .hd-outer-label {
-  position: absolute;
-  top: -13px; left: 50%;
-  transform: translateX(-50%);
-  background: var(--canvas-bg);
-  padding: 0 14px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
+.s-harness .ha-card-accent {
+  width: 4px;
+  align-self: stretch;
+  flex-shrink: 0;
 }
 
-.s-harness .hd-top-row,
-.s-harness .hd-bot-row {
+.s-harness .ha-card-icon {
+  width: 28px; height: 28px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 20px 24px;
+  flex-shrink: 0;
 }
 
-.s-harness .hd-model-zone {
+.s-harness .ha-card-body {
   flex: 1;
-  margin: 0 24px;
-  border-radius: 12px;
-  background: var(--loop-bg);
+  min-width: 0;
+  padding: 5px 0;
+}
+
+.s-harness .ha-card-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.s-harness .ha-card-tags {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 3px;
+  margin-top: 3px;
+}
+
+.s-harness .ha-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--muted);
+  background: var(--surface-2);
+  padding: 1px 4px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+/* Left column — blue (info) accent */
+.s-harness .ha-col-left .ha-card-accent {
+  background: var(--info);
+}
+.s-harness .ha-col-left .ha-card-icon {
+  background: color-mix(in srgb, var(--info) 10%, var(--surface));
+  color: var(--info);
+}
+
+/* Right column — burgundy accent */
+.s-harness .ha-col-right .ha-card-accent {
+  background: var(--accent);
+}
+.s-harness .ha-col-right .ha-card-icon {
+  background: var(--accent-lt);
+  color: var(--accent);
+}
+
+/* Center: Agent Core */
+.s-harness .ha-center {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.s-harness .ha-core {
+  width: 460px;
+  height: 390px;          /* shorter — does not fill full column height */
+  flex-shrink: 0;
+  background: var(--dark-surface);
+  border-radius: 12px;
+  border: 1.5px solid var(--dark-border);
+  display: flex;
+  flex-direction: column;
+  padding: 14px 18px;
   position: relative;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.22),
+              0 0 0 1px rgba(255,255,255,0.04) inset;
   overflow: hidden;
 }
 
-.s-harness .hd-model-zone::before {
+.s-harness .ha-core::before {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg,
-    color-mix(in srgb, var(--accent) 8%, transparent) 0%,
-    transparent 60%);
+    color-mix(in srgb, var(--accent) 7%, transparent) 0%,
+    transparent 55%);
   pointer-events: none;
 }
 
-.s-harness .hd-model-label {
+.s-harness .ha-core-label {
   font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--dark-muted);
-  margin-bottom: 16px;
-}
-
-.s-harness .hd-loop {
-  display: flex;
-  align-items: center;
-  gap: 0;
-}
-
-.s-harness .loop-node {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.s-harness .loop-bubble {
-  width: 66px;
-  height: 66px;
-  border-radius: 50%;
-  border: 1.5px solid var(--dark-border);
-  background: var(--dark-surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--dark-muted);
-}
-
-.s-harness .loop-bubble.act {
-  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
-  background: color-mix(in srgb, var(--accent) 14%, var(--dark-surface));
-  color: var(--accent-bright);
-  box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 22%, transparent);
-}
-
-.s-harness .loop-name {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--dark-muted);
-}
-
-.s-harness .loop-name.act {
-  color: var(--accent-bright);
-}
-
-.s-harness .loop-arrow {
-  display: flex;
-  align-items: center;
-  color: var(--dark-border);
-  padding: 0 6px;
-  margin-bottom: 24px;
-}
-
-.s-harness .h-chip {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 15px;
-  border-radius: 9px;
-  background: var(--surface-2);
-  border: 1.5px solid var(--border);
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
-  color: var(--ink);
-  white-space: nowrap;
-}
-
-.s-harness .h-chip svg {
-  color: var(--muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dark-muted);
+  text-align: center;
+  margin-bottom: 14px;
   flex-shrink: 0;
 }
 
-.s-harness .h-chip.accent {
+.s-harness .ha-core-modules {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.s-harness .ha-module {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--loop-bg);
+  border: 1px solid var(--dark-border);
+}
+
+.s-harness .ha-module svg {
+  color: var(--dark-muted);
+  flex-shrink: 0;
+}
+
+.s-harness .ha-module-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark-ink);
+  letter-spacing: 0.01em;
+}
+
+.s-harness .ha-core-stat {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--dark-muted);
+  text-align: center;
+  margin-top: 12px;
+  flex-shrink: 0;
+  line-height: 1.5;
+}
+
+.s-harness .ha-core-stat em {
+  color: var(--accent-bright);
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ── Spine connectors (between domain columns and Agent Core) ── */
+/*
+ * Column height = 720 - 96 - 66 = 558px.  7 cards, 6 × 5px gaps.
+ * Card height = (558 - 30) / 7 = 75.43px.
+ * Card midpoint percentages: 6.8 | 21.2 | 35.6 | 50 | 64.4 | 78.8 | 93.2
+ *
+ * Core height = 390px, centred → margins = (558-390)/2 = 84px.
+ * Core extent: 15.1% → 84.9%.
+ * Vertical spine drawn only across the core extent (cards 1 & 7 route
+ * via the vertical bar).
+ */
+.s-harness .ha-spine {
+  width: 16px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Vertical connecting bar within the core's vertical extent */
+.s-harness .ha-spine::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 15.1%;
+  bottom: 15.1%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: var(--border);
+}
+
+/* 7 horizontal stubs at each card's midpoint */
+.s-harness .ha-spine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(var(--border), var(--border)) left  6.8%  / 100% 1px,
+    linear-gradient(var(--border), var(--border)) left 21.2%  / 100% 1px,
+    linear-gradient(var(--border), var(--border)) left 35.6%  / 100% 1px,
+    linear-gradient(var(--border), var(--border)) left 50%    / 100% 1px,
+    linear-gradient(var(--border), var(--border)) left 64.4%  / 100% 1px,
+    linear-gradient(var(--border), var(--border)) left 78.8%  / 100% 1px,
+    linear-gradient(var(--border), var(--border)) left 93.2%  / 100% 1px;
+  background-repeat: no-repeat;
+}
+
+/* Small arrowhead at core connection point (centred on spine) */
+.s-harness .ha-spine-left::before  { transform: translateX(-50%); }
+.s-harness .ha-spine-right::before { transform: translateX(-50%); }
+
+.s-harness .ha-spine-left  .ha-spine-tip,
+.s-harness .ha-spine-right .ha-spine-tip {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0; height: 0;
+}
+
+.s-harness .ha-spine-left .ha-spine-tip {
+  right: 0;
+  border-top:    4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left:   5px solid var(--border);
+}
+
+.s-harness .ha-spine-right .ha-spine-tip {
+  left: 0;
+  border-top:    4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-right:  5px solid var(--border);
+}
+
+/* Agent Loop bottom strip */
+.s-harness .ha-loop {
+  position: absolute;
+  bottom: 8px; left: 10px; right: 10px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  padding-top: 6px;
+}
+
+.s-harness .ha-loop-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+.s-harness .ha-loop-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.s-harness .ha-loop-bubble {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+.s-harness .ha-loop-bubble.lit {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
   background: var(--accent-lt);
-  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
   color: var(--accent);
 }
 
-.s-harness .h-chip.accent svg {
+.s-harness .ha-loop-name {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.s-harness .ha-loop-name.lit {
   color: var(--accent);
 }
+
+.s-harness .ha-loop-arr {
+  color: var(--border);
+  padding: 0 5px;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.s-harness .icon-xs { width: 10px; height: 10px; }
 
 /* ══════════════════════════════════════════════════════════════
    SLIDE 3 — CLEW (s-clew)
