@@ -1,0 +1,43 @@
+/*
+ * tokens.css — canonical design-system token contract.
+ *
+ * GENERATED from docs/ux/design-system.md by the ux-design-system skill on 2026-06-24.
+ * Edit the token tables in design-system.md and re-run `generate`; do not
+ * hand-edit here (changes are overwritten on refresh).
+ *
+ * Every com-* renderer references these variables via var() and never
+ * hard-codes a colour/font/radius — so editing values re-themes every deck
+ * and view with no renderer change.
+ */
+:root {
+  /* ---- Base palette ---- */
+  --ink:        #0f1117;
+  --muted:      #5c6470;
+  --canvas-bg:  #f8f9fc;
+  --surface:    #ffffff;
+  --surface-2:  #eef0f6;
+  --border:     #d0d5e1;
+  --accent:     #800020;
+  --accent-ink: #ffffff;
+
+  /* ---- Semantic state (generic — portable) ---- */
+  --success: #1ea97c;
+  --warning: #e8a219;
+  --danger:  #e03e3e;
+  --info:    #3b82f6;
+
+  /* ---- Typography ---- */
+  --font-sans:  "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono:  "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+  --title-size: 1.6rem;
+
+  /* ---- Spacing & shape ---- */
+  --space-sm:    0.5rem;
+  --space-md:    1rem;
+  --space-lg:    2rem;
+  --shell-max:   1400px;
+  --card-radius: 12px;
+  --btn-radius:  8px;
+  --node-radius: 10px;
+  --shadow:      0 1px 2px rgba(15,17,23,.05), 0 2px 6px rgba(15,17,23,.09);
+}
