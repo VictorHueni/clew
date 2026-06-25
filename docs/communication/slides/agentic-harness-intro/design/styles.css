@@ -880,3 +880,86 @@
 .s-workflow .wf-tool-tag.accent {
   color: color-mix(in srgb, var(--accent) 75%, var(--muted));
 }
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 5 — METAMODEL (s-metamodel)
+   DevOps ∞ loop — 8 phases · 10 skill prefixes · 19 artefact types
+   ══════════════════════════════════════════════════════════════ */
+
+/* Compact title to give room to the diagram */
+.s-metamodel .slide-title {
+  font-size: 17px;
+  font-weight: 500;
+  top: 66px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.03em;
+}
+
+.s-metamodel .mm-ring {
+  position: absolute;
+  top: 0; left: 0;
+  pointer-events: none;
+}
+
+.s-metamodel .phase-card {
+  position: absolute;
+  background: var(--surface);
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--pc);
+  padding: 8px 10px;
+  width: 174px;
+  box-shadow: var(--shadow);
+}
+
+.s-metamodel .phase-name {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--pc);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 3px;
+  font-family: var(--font-mono);
+}
+
+.s-metamodel .phase-prefixes {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.s-metamodel .phase-prefix {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--pc);
+  padding: 1px 5px;
+  border-radius: 3px;
+  border: 1px solid var(--pc);
+}
+
+.s-metamodel .phase-skills {
+  font-size: 8.5px;
+  color: var(--muted);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.s-metamodel .phase-ids {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.s-metamodel .id-chip {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  padding: 2px 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--muted);
+  white-space: nowrap;
+}

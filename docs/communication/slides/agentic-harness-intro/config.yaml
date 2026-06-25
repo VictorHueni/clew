@@ -32,6 +32,9 @@ slides:
   - file: "04-workflow.html"
     class: "s-workflow"
     label: "The Dev Workflow"
+  - file: "05-metamodel.html"
+    class: "s-metamodel"
+    label: "The Metamodel — DevOps ∞"
 
 paths:
   slides_dir:        "output/slides"
