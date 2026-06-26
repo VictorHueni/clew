@@ -1861,26 +1861,27 @@
 /* ══════════════════════════════════════════════════════════════
    SDLC SLIDES (s-sdlc-ov + s-phase) · overview + 3 deep-dives
    ══════════════════════════════════════════════════════════════ */
-/* SDLC OVERVIEW (s-sdlc-ov) */
+/* SDLC OVERVIEW (s-sdlc-ov) — prefix-grouped artefact cards */
 .s-sdlc-ov .slide-title { font-size:30px; }
-.s-sdlc-ov .ov-flow { position:absolute; top:176px; left:40px; right:40px; bottom:126px; display:flex; align-items:stretch; gap:0; }
-.s-sdlc-ov .ov-phase { flex:1; display:flex; flex-direction:column; border:1px solid var(--border); border-top:4px solid var(--accent); border-radius:11px; background:var(--surface); box-shadow:var(--shadow); padding:18px; }
-.s-sdlc-ov .ov-num { width:32px; height:32px; border-radius:50%; background:var(--accent); color:var(--accent-ink); font-weight:800; font-size:15px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
-.s-sdlc-ov .ov-name { font-size:18px; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.1; }
-.s-sdlc-ov .ov-tag { font-size:12px; color:var(--accent); font-weight:600; margin-top:4px; margin-bottom:13px; }
-.s-sdlc-ov .ov-layers { display:flex; gap:6px; margin-bottom:13px; }
-.s-sdlc-ov .ov-layer { font-family:var(--font-mono); font-size:9.5px; font-weight:700; color:var(--muted); background:var(--surface-2); border:1px solid var(--border); border-radius:5px; padding:3px 8px; }
-.s-sdlc-ov .ov-do { font-size:12.5px; color:var(--ink); line-height:1.5; }
-.s-sdlc-ov .ov-arts { margin-top:auto; padding-top:14px; }
-.s-sdlc-ov .ov-count { font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--accent); }
-.s-sdlc-ov .ov-count em { font-style:normal; color:var(--dim); font-weight:500; }
-.s-sdlc-ov .ov-list { font-family:var(--font-mono); font-size:10px; color:var(--muted); line-height:1.65; margin-top:6px; }
-.s-sdlc-ov .ov-arr { display:flex; align-items:center; justify-content:center; width:30px; flex-shrink:0; color:color-mix(in srgb,var(--accent) 55%,var(--border)); }
-.s-sdlc-ov .ov-cross { position:absolute; left:40px; right:40px; bottom:60px; height:44px; display:flex; align-items:center; gap:14px; background:var(--dark-surface); border:1.5px solid var(--dark-border); border-radius:10px; padding:0 18px; }
-.s-sdlc-ov .ov-cross-l { font-family:var(--font-mono); font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-bright); flex-shrink:0; }
-.s-sdlc-ov .ov-cross-items { display:flex; gap:8px; flex:1; }
-.s-sdlc-ov .ov-cross-chip { font-family:var(--font-mono); font-size:10px; font-weight:600; color:var(--dark-ink); background:var(--loop-bg); border:1px solid var(--dark-border); border-radius:6px; padding:4px 10px; }
-.s-sdlc-ov .ov-cross-note { font-size:10.5px; color:var(--dark-muted); flex-shrink:0; }
+.s-sdlc-ov .ov-flow { position:absolute; top:170px; left:40px; right:40px; bottom:52px; display:flex; align-items:stretch; gap:0; }
+.s-sdlc-ov .ov-phase { flex:1; display:flex; flex-direction:column; border:1px solid var(--border); border-top:4px solid var(--accent); border-radius:11px; background:var(--surface); box-shadow:var(--shadow); padding:15px 15px 13px; }
+.s-sdlc-ov .ov-head { display:flex; align-items:center; gap:11px; margin-bottom:13px; }
+.s-sdlc-ov .ov-num { width:30px; height:30px; border-radius:50%; background:var(--accent); color:var(--accent-ink); font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.s-sdlc-ov .ov-name { font-size:16.5px; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.05; }
+.s-sdlc-ov .ov-tag { font-size:11px; color:var(--accent); font-weight:600; margin-top:2px; }
+.s-sdlc-ov .ov-groups { display:flex; flex-direction:column; gap:15px; }
+.s-sdlc-ov .ov-grp-h { display:flex; align-items:baseline; gap:7px; margin-bottom:4px; }
+.s-sdlc-ov .ov-grp-pfx { font-family:var(--font-mono); font-size:9px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--accent); background:var(--accent-lt); border:1px solid color-mix(in srgb,var(--accent) 22%,var(--border)); border-radius:4px; padding:2px 7px; }
+.s-sdlc-ov .ov-grp-n { font-family:var(--font-mono); font-size:9px; font-weight:600; color:var(--dim); }
+.s-sdlc-ov .ov-grp-list { font-size:10.5px; color:var(--ink); line-height:1.55; }
+.s-sdlc-ov .ov-group.plan .ov-grp-pfx { color:var(--muted); background:var(--surface-2); border-style:dashed; }
+.s-sdlc-ov .ov-group.plan .ov-grp-list { color:var(--muted); }
+.s-sdlc-ov .ov-foot { margin-top:auto; padding-top:13px; border-top:1px solid var(--border); font-size:11px; color:var(--muted); line-height:1.45; }
+.s-sdlc-ov .ov-arr { display:flex; align-items:center; justify-content:center; width:26px; flex-shrink:0; color:color-mix(in srgb,var(--accent) 55%,var(--border)); }
+
+/* METAMODEL ENTITY MAP (s-mmer) */
+.s-mmer .mm-wrap { position:absolute; top:150px; left:36px; right:36px; bottom:30px; display:flex; align-items:center; justify-content:center; }
+.s-mmer .mm-wrap svg { max-width:100%; max-height:100%; }
 
 /* SDLC DEEP-DIVE (s-phase) */
 .s-phase .slide-title { font-size:30px; }
@@ -1908,8 +1909,38 @@
 .s-phase .ph-node.plan { background:transparent; border-style:dashed; box-shadow:none; }
 .s-phase .ph-node.plan .ph-nm { color:var(--muted); }
 .s-phase .ph-node.plan .ph-sub { color:var(--dim); }
-.s-phase .ph-feed { position:absolute; bottom:40px; left:68px; right:64px; display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:11px; font-weight:600; color:var(--muted); }
+.s-phase .ph-feed { position:absolute; bottom:40px; left:68px; right:116px; display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:11px; font-weight:600; color:var(--muted); }
 .s-phase .ph-feed em { font-style:normal; color:var(--accent); }
+
+/* ══════════════════════════════════════════════════════════════
+   SECTION DIVIDERS (s-divider) · dark section-title slides
+   ══════════════════════════════════════════════════════════════ */
+.s-divider { background: var(--dark-bg); }
+.s-divider .slide-number { color: var(--dark-muted); }
+.s-divider .div-bignum {
+  position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+  font-size: 300px; font-weight: 800; line-height: 1; letter-spacing: -0.04em;
+  color: var(--dark-surface); z-index: 1; user-select: none;
+}
+.s-divider .div-wrap {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  left: 90px; right: 320px; z-index: 2;
+}
+.s-divider .div-kicker {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-bright);
+  margin-bottom: 22px;
+}
+.s-divider .div-title {
+  font-size: 62px; font-weight: 800; line-height: 1.04; letter-spacing: -0.03em;
+  color: var(--dark-ink); margin: 0 0 22px 0;
+}
+.s-divider .div-title em { font-style: normal; color: var(--accent-bright); }
+.s-divider .div-tag { font-size: 18px; line-height: 1.5; color: var(--dark-muted); max-width: 680px; }
+.s-divider .div-bottom-line {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, var(--accent) 0%, transparent 55%);
+}
 
 /* ── Baseline: controls hint ── */
 .controls-hint {
@@ -2011,12 +2042,28 @@ body.presenting .slide.active {
   </div>
 
   <div class="cover-bottom-line"></div>
-  <div class="slide-number">1 / 16</div>
+  <div class="slide-number">1 / 19</div>
 </div>
 
 
 
-<!-- slide 2: Proof — same model, better harness -->
+<!-- slide 2: §01 — The Agentic Harness -->
+
+<div class="slide s-divider">
+  <div class="accent-bar-left"></div>
+  <div class="div-bignum">01</div>
+  <div class="div-wrap">
+    <div class="div-kicker">Section 01 / 03</div>
+    <h1 class="div-title">The Agentic <em>Harness</em></h1>
+    <div class="div-tag">Why the tooling around the model — not the model — is the performance lever.</div>
+  </div>
+  <div class="div-bottom-line"></div>
+  <div class="slide-number">2 / 19</div>
+</div>
+
+
+
+<!-- slide 3: Proof — same model, better harness -->
 
 <div class="slide s-proof" data-sources="li-agentic-coding">
   <div class="section-label">The Lever · Proof</div>
@@ -2039,14 +2086,14 @@ body.presenting .slide.active {
   </div>
 
   <div class="proof-same">Claude Opus 4.5 · HAL CORE-Bench · the only thing that changed was the harness</div>
-  <div class="slide-number">2 / 16</div>
+  <div class="slide-number">3 / 19</div>
 
 <div class="slide-source-bar">Aidan Li · An Opinionated Guide to Agentic Coding (2026) — aidanli.dev</div>
 </div>
 
 
 
-<!-- slide 3: The lever is the tooling -->
+<!-- slide 4: The lever is the tooling -->
 
 <div class="slide s-lever" data-sources="ahe-2604">
   <div class="section-label">The Lever · Where it lives</div>
@@ -2087,14 +2134,14 @@ body.presenting .slide.active {
     </div>
   </div>
 
-  <div class="slide-number">3 / 16</div>
+  <div class="slide-number">4 / 19</div>
 
 <div class="slide-source-bar">arXiv 2604.25850 · Agentic Harness Engineering (2026) — arxiv.org</div>
 </div>
 
 
 
-<!-- slide 4: Anatomy — loop + 15 capabilities -->
+<!-- slide 5: Anatomy — loop + 15 capabilities -->
 
 <div class="slide s-anatomy" data-sources="clew-research-harness">
   <div class="section-label">Harness Anatomy</div>
@@ -2174,14 +2221,14 @@ body.presenting .slide.active {
     </div>
   </div>
 
-  <div class="slide-number">4 / 16</div>
+  <div class="slide-number">5 / 19</div>
 
 <div class="slide-source-bar">Internal research · What Makes a Good Agentic Harness — research synthesis (2026)</div>
 </div>
 
 
 
-<!-- slide 5: Anatomy — harness around the model -->
+<!-- slide 6: Anatomy — harness around the model -->
 
 <div class="slide s-rings2">
   <div class="section-label">Harness Anatomy · Rings</div>
@@ -2206,12 +2253,12 @@ body.presenting .slide.active {
   </div>
 
   <div class="rings-cap">Each wedge is <em>one loop step</em> and the capabilities it owns · the three on the right <em>govern every step</em>.</div>
-  <div class="slide-number">5 / 16</div>
+  <div class="slide-number">6 / 19</div>
 </div>
 
 
 
-<!-- slide 6: Harnesses starve memory -->
+<!-- slide 7: Harnesses starve memory -->
 
 <div class="slide s-memory" data-sources="raschka-coding-agent,clew-research-harness">
   <div class="section-label">The Gap</div>
@@ -2246,14 +2293,14 @@ body.presenting .slide.active {
     </div>
   </div>
 
-  <div class="slide-number">6 / 16</div>
+  <div class="slide-number">7 / 19</div>
 
 <div class="slide-source-bar">Sebastian Raschka · Components of a Coding Agent (2026) — magazine.sebastianraschka.com &nbsp;|&nbsp; Internal research · What Makes a Good Agentic Harness — research synthesis (2026)</div>
 </div>
 
 
 
-<!-- slide 7: Context rot — the window isn't the memory -->
+<!-- slide 8: Context rot — the window isn't the memory -->
 
 <div class="slide s-crot" data-sources="anthropic-opus47,anthropic-opus46,nolima-context">
   <div class="section-label">The Gap · Context Rot</div>
@@ -2306,14 +2353,303 @@ body.presenting .slide.active {
     </div>
   </div>
 
-  <div class="slide-number">7 / 16</div>
+  <div class="slide-number">8 / 19</div>
 
 <div class="slide-source-bar">Anthropic · Claude Opus 4.7 System Card · MRCR v2 (vendor-reported) (2026) — anthropic.com &nbsp;|&nbsp; Anthropic · Claude Opus 4.6 System Card · MRCR v2 (vendor-reported) (2026) — anthropic.com &nbsp;|&nbsp; Adobe Research / LMU Munich · NoLiMa: Long-Context Evaluation Beyond Literal Matching (ICML 2025) (2025) — arxiv.org</div>
 </div>
 
 
 
-<!-- slide 8: clew engineers memory -->
+<!-- slide 9: §02 — The Metamodel -->
+
+<div class="slide s-divider">
+  <div class="accent-bar-left"></div>
+  <div class="div-bignum">02</div>
+  <div class="div-wrap">
+    <div class="div-kicker">Section 02 / 03</div>
+    <h1 class="div-title">The <em>Metamodel</em></h1>
+    <div class="div-tag">How an agent armed with skills and rules turns business context into deployable artefacts — every step traceable.</div>
+  </div>
+  <div class="div-bottom-line"></div>
+  <div class="slide-number">9 / 19</div>
+</div>
+
+
+
+<!-- slide 10: SDLC overview — context to code -->
+
+<div class="slide s-sdlc-ov">
+  <div class="section-label">The Metamodel · SDLC</div>
+  <h2 class="slide-title">From context to code — skills &amp; rules map the whole SDLC.</h2>
+  <p class="slide-lede">Every skill carries a prefix; every prefix maps to a phase. The full kit, grouped end to end (utilities aside).</p>
+  <div class="ov-flow">
+    <div class="ov-phase"><div class="ov-head"><div class="ov-num">1</div><div><div class="ov-name">Discover &amp; Define</div><div class="ov-tag">make the context real</div></div></div><div class="ov-groups"><div class="ov-group"><div class="ov-grp-h"><span class="ov-grp-pfx">Business</span><span class="ov-grp-n">9</span></div><div class="ov-grp-list">Vision · Persona · Model canvas · Capability map · Competitive landscape · Value stream · Objective · Process · Quant model</div></div><div class="ov-group"><div class="ov-grp-h"><span class="ov-grp-pfx">Discovery</span><span class="ov-grp-n">3</span></div><div class="ov-grp-list">Idea · Research · Workshop</div></div><div class="ov-group"><div class="ov-grp-h"><span class="ov-grp-pfx">Domain</span><span class="ov-grp-n">3</span></div><div class="ov-grp-list">Bounded context · Glossary · Domain model</div></div></div><div class="ov-foot">Brainstorm with the business, then model the domain language.</div></div>
+    <div class="ov-arr"><i data-lucide="chevron-right" class="icon-md"></i></div>
+    <div class="ov-phase"><div class="ov-head"><div class="ov-num">2</div><div><div class="ov-name">Design the Solution</div><div class="ov-tag">turn context into a solution</div></div></div><div class="ov-groups"><div class="ov-group"><div class="ov-grp-h"><span class="ov-grp-pfx">Architecture</span><span class="ov-grp-n">9</span></div><div class="ov-grp-list">ADR · Research · Service contract · CLI contract · Structurizr · C4 · PlantUML · UML · arc42</div></div><div class="ov-group"><div class="ov-grp-h"><span class="ov-grp-pfx">Specification</span><span class="ov-grp-n">6</span></div><div class="ov-grp-list">Functional breakdown · Use case · Quality attributes · PRD · Peer review · Grill-me</div></div><div class="ov-group"><div class="ov-grp-h"><span class="ov-grp-pfx">UX</span><span class="ov-grp-n">1</span></div><div class="ov-grp-list">Design system</div></div></div><div class="ov-foot">Specify what to build and decide the architecture — every link traces back to the domain.</div></div>
+    <div class="ov-arr"><i data-lucide="chevron-right" class="icon-md"></i></div>
+    <div class="ov-phase"><div class="ov-head"><div class="ov-num">3</div><div><div class="ov-name">Execute &amp; Deliver</div><div class="ov-tag">plan, build, test, ship</div></div></div><div class="ov-groups"><div class="ov-group"><div class="ov-grp-h"><span class="ov-grp-pfx">Specification</span><span class="ov-grp-n">2</span></div><div class="ov-grp-list">Delivery roadmap · Implementation plan</div></div><div class="ov-group plan"><div class="ov-grp-h"><span class="ov-grp-pfx">QA</span><span class="ov-grp-n">5 · planned</span></div><div class="ov-grp-list">Test strategy · Test scenario · Test plan · Acceptance test · Eval harness</div></div><div class="ov-group"><div class="ov-grp-h"><span class="ov-grp-pfx">Development</span><span class="ov-grp-n">8</span></div><div class="ov-grp-list">Agent config · Getting started · Stack guide · Git init · Git commit · Git worktree · PR · Ralph loop</div></div><div class="ov-group"><div class="ov-grp-h"><span class="ov-grp-pfx">Ops</span><span class="ov-grp-n">3</span></div><div class="ov-grp-list">Runbook · Bug RCA · Terraform (Exoscale)</div></div></div><div class="ov-foot">Plan increments, validate, then ship and operate — the rest of the SDLC.</div></div>
+  </div>
+  <div class="slide-number">10 / 19</div>
+</div>
+
+
+
+<!-- slide 11: SDLC ① Discover & Define -->
+
+<div class="slide s-phase p1">
+  <div class="section-label">The SDLC · Discover</div>
+  <h2 class="slide-title">Discover &amp; Define <span style="color:var(--accent)">—</span> make the context real.</h2>
+  <div class="ph-stepper"><span class="ph-step on">① Discover</span><span class="ph-step-arr">›</span><span class="ph-step">② Design</span><span class="ph-step-arr">›</span><span class="ph-step">③ Deliver</span></div>
+  <div class="ph-left">
+    <div class="ph-h">What the agentic engineer does here</div>
+    <div class="ph-act"><div class="ph-act-ic"><i data-lucide="lightbulb" class="icon-sm"></i></div><div><div class="ph-act-t">Brainstorm &amp; capture</div><div class="ph-act-s">ideas, hypotheses</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="search" class="icon-sm"></i></div><div><div class="ph-act-t">Research &amp; scan</div><div class="ph-act-s">market, competitors</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="users" class="icon-sm"></i></div><div><div class="ph-act-t">Interview &amp; workshop</div><div class="ph-act-s">with the business</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="layout-grid" class="icon-sm"></i></div><div><div class="ph-act-t">Model the business</div><div class="ph-act-s">vision → objectives</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="book-open" class="icon-sm"></i></div><div><div class="ph-act-t">Define the domain</div><div class="ph-act-s">ubiquitous language</div></div></div>
+  </div>
+  <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Business<span>9 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Vision</span><span class="ph-sub">north star</span></div><div class="ph-node"><span class="ph-nm">Persona</span><span class="ph-sub">who we serve</span></div><div class="ph-node"><span class="ph-nm">Model canvas</span><span class="ph-sub">value model</span></div><div class="ph-node"><span class="ph-nm">Capability map</span><span class="ph-sub">what it can do</span></div><div class="ph-node"><span class="ph-nm">Competitive landscape</span><span class="ph-sub">market position</span></div><div class="ph-node"><span class="ph-nm">Value stream</span><span class="ph-sub">how value flows</span></div><div class="ph-node"><span class="ph-nm">Objective</span><span class="ph-sub">goals & KRs</span></div><div class="ph-node"><span class="ph-nm">Process</span><span class="ph-sub">operations</span></div><div class="ph-node"><span class="ph-nm">Quant model</span><span class="ph-sub">unit economics</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Discovery<span>3 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Idea</span><span class="ph-sub">capture & graduate</span></div><div class="ph-node"><span class="ph-nm">Research</span><span class="ph-sub">1:1 interviews</span></div><div class="ph-node"><span class="ph-nm">Workshop</span><span class="ph-sub">group facilitation</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Domain<span>3 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Bounded context</span><span class="ph-sub">boundaries</span></div><div class="ph-node"><span class="ph-nm">Glossary</span><span class="ph-sub">ubiquitous language</span></div><div class="ph-node"><span class="ph-nm">Domain model</span><span class="ph-sub">aggregates & events</span></div></div></div></div>
+  <div class="ph-feed"><span></span><span>feeds → Design</span></div>
+  <div class="slide-number">11 / 19</div>
+</div>
+
+
+
+<!-- slide 12: SDLC ② Design the Solution -->
+
+<div class="slide s-phase p2">
+  <div class="section-label">The SDLC · Design</div>
+  <h2 class="slide-title">Design the Solution <span style="color:var(--accent)">—</span> turn context into a solution.</h2>
+  <div class="ph-stepper"><span class="ph-step">① Discover</span><span class="ph-step-arr">›</span><span class="ph-step on">② Design</span><span class="ph-step-arr">›</span><span class="ph-step">③ Deliver</span></div>
+  <div class="ph-left">
+    <div class="ph-h">What the agentic engineer does here</div>
+    <div class="ph-act"><div class="ph-act-ic"><i data-lucide="git-branch" class="icon-sm"></i></div><div><div class="ph-act-t">Decide architecture</div><div class="ph-act-s">ADRs, C4, arc42</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="file-text" class="icon-sm"></i></div><div><div class="ph-act-t">Define contracts</div><div class="ph-act-s">service, CLI</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="list-tree" class="icon-sm"></i></div><div><div class="ph-act-t">Break down function</div><div class="ph-act-s">FBS</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="square-check" class="icon-sm"></i></div><div><div class="ph-act-t">Specify &amp; qualify</div><div class="ph-act-s">use cases, quality</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="file" class="icon-sm"></i></div><div><div class="ph-act-t">Write &amp; review PRDs</div><div class="ph-act-s">one per epic</div></div></div>
+  </div>
+  <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Architecture<span>9 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">ADR</span><span class="ph-sub">decisions</span></div><div class="ph-node"><span class="ph-nm">Research</span><span class="ph-sub">arch notes</span></div><div class="ph-node"><span class="ph-nm">Service contract</span><span class="ph-sub">API surface</span></div><div class="ph-node"><span class="ph-nm">CLI contract</span><span class="ph-sub">command surface</span></div><div class="ph-node"><span class="ph-nm">Structurizr</span><span class="ph-sub">C4 workspace</span></div><div class="ph-node"><span class="ph-nm">C4</span><span class="ph-sub">context → component</span></div><div class="ph-node"><span class="ph-nm">PlantUML</span><span class="ph-sub">UML pipeline</span></div><div class="ph-node"><span class="ph-nm">UML</span><span class="ph-sub">sequence/class/state</span></div><div class="ph-node"><span class="ph-nm">arc42</span><span class="ph-sub">arch narrative</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Specification<span>6 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Functional breakdown</span><span class="ph-sub">feature tree</span></div><div class="ph-node"><span class="ph-nm">Use case</span><span class="ph-sub">actor scenarios</span></div><div class="ph-node"><span class="ph-nm">Quality attributes</span><span class="ph-sub">ISO 25010</span></div><div class="ph-node"><span class="ph-nm">PRD</span><span class="ph-sub">one per epic</span></div><div class="ph-node"><span class="ph-nm">Peer review</span><span class="ph-sub">PRD/plan review</span></div><div class="ph-node"><span class="ph-nm">Grill-me</span><span class="ph-sub">adversarial review</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">UX<span>1 skill</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Design system</span><span class="ph-sub">tokens & brand</span></div></div></div></div>
+  <div class="ph-feed"><span>fed by ← Context</span><span>feeds → Execution</span></div>
+  <div class="slide-number">12 / 19</div>
+</div>
+
+
+
+<!-- slide 13: SDLC ③ Execute & Deliver -->
+
+<div class="slide s-phase p3">
+  <div class="section-label">The SDLC · Deliver</div>
+  <h2 class="slide-title">Execute &amp; Deliver <span style="color:var(--accent)">—</span> plan, build, test, ship.</h2>
+  <div class="ph-stepper"><span class="ph-step">① Discover</span><span class="ph-step-arr">›</span><span class="ph-step">② Design</span><span class="ph-step-arr">›</span><span class="ph-step on">③ Deliver</span></div>
+  <div class="ph-left">
+    <div class="ph-h">What the agentic engineer does here</div>
+    <div class="ph-act"><div class="ph-act-ic"><i data-lucide="map" class="icon-sm"></i></div><div><div class="ph-act-t">Sequence the roadmap</div><div class="ph-act-s">epics, phases</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="list-checks" class="icon-sm"></i></div><div><div class="ph-act-t">Plan increments</div><div class="ph-act-s">atomic steps</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="flask-conical" class="icon-sm"></i></div><div><div class="ph-act-t">Build &amp; validate</div><div class="ph-act-s">tests, checks</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="rocket" class="icon-sm"></i></div><div><div class="ph-act-t">Deploy</div><div class="ph-act-s">infra, release</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="activity" class="icon-sm"></i></div><div><div class="ph-act-t">Operate &amp; fix</div><div class="ph-act-s">runbooks, RCA</div></div></div>
+  </div>
+  <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Specification<span>2 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Delivery roadmap</span><span class="ph-sub">epics & phases</span></div><div class="ph-node"><span class="ph-nm">Implementation plan</span><span class="ph-sub">atomic increments</span></div></div></div><div class="ph-lane plan"><div class="ph-lane-h">QA<span>5 · planned</span></div><div class="ph-nodes"><div class="ph-node plan"><span class="ph-nm">Test strategy</span><span class="ph-sub">pyramid & coverage</span></div><div class="ph-node plan"><span class="ph-nm">Test scenario</span><span class="ph-sub">from use cases</span></div><div class="ph-node plan"><span class="ph-nm">Test plan</span><span class="ph-sub">per release</span></div><div class="ph-node plan"><span class="ph-nm">Acceptance test</span><span class="ph-sub">Given–When–Then</span></div><div class="ph-node plan"><span class="ph-nm">Eval harness</span><span class="ph-sub">agent evals</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Development<span>8 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Agent config</span><span class="ph-sub">CLAUDE.md & rules</span></div><div class="ph-node"><span class="ph-nm">Getting started</span><span class="ph-sub">onboarding</span></div><div class="ph-node"><span class="ph-nm">Stack guide</span><span class="ph-sub">tech patterns</span></div><div class="ph-node"><span class="ph-nm">Git init</span><span class="ph-sub">repo setup</span></div><div class="ph-node"><span class="ph-nm">Git commit</span><span class="ph-sub">commits</span></div><div class="ph-node"><span class="ph-nm">Git worktree</span><span class="ph-sub">worktrees</span></div><div class="ph-node"><span class="ph-nm">PR</span><span class="ph-sub">pull requests</span></div><div class="ph-node"><span class="ph-nm">Ralph loop</span><span class="ph-sub">autonomous loop</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Ops<span>3 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Runbook</span><span class="ph-sub">operations</span></div><div class="ph-node"><span class="ph-nm">Bug RCA</span><span class="ph-sub">incident analysis</span></div><div class="ph-node"><span class="ph-nm">Terraform</span><span class="ph-sub">Exoscale infra</span></div></div></div></div>
+  <div class="ph-feed"><span>fed by ← Design</span><span></span></div>
+  <div class="slide-number">13 / 19</div>
+</div>
+
+
+
+<!-- slide 14: Metamodel — everything is related -->
+
+<div class="slide s-mmer">
+  <div class="section-label">The Metamodel · Entity map</div>
+  <h2 class="slide-title">Everything is related <span style="color:var(--accent)">—</span> the metamodel as one graph.</h2>
+  <p class="slide-lede">Seven domains, twenty-seven artefacts; solid edges are referential links the engine enforces at write time — dashed are loose post-ship lifecycle.</p>
+  <div class="mm-wrap">
+<svg width="100%" height="100%" viewBox="0 150 1280 540" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+<defs><marker id="arr" markerWidth="9" markerHeight="9" refX="7.2" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L7.2,3 L0,6 Z" fill="#9aa2ae"/></marker></defs>
+<rect x="24" y="152" width="478" height="86" rx="10" fill="#f3eef7" stroke="#d8cce3" stroke-width="1.4"/>
+<text x="263" y="170" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="1.1" fill="#800020">DISCOVERY</text>
+<rect x="24" y="258" width="304" height="206" rx="10" fill="#f7eef1" stroke="#e3c9d2" stroke-width="1.4"/>
+<text x="176" y="276" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="1.1" fill="#800020">BUSINESS</text>
+<rect x="374" y="296" width="130" height="206" rx="10" fill="#eaf3f4" stroke="#c4dadd" stroke-width="1.4"/>
+<text x="439" y="314" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="1.1" fill="#800020">DOMAIN</text>
+<rect x="24" y="520" width="304" height="146" rx="10" fill="#eef1f6" stroke="#cdd5e2" stroke-width="1.4"/>
+<text x="176" y="538" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="1.1" fill="#800020">ARCHITECTURE</text>
+<rect x="604" y="296" width="304" height="206" rx="10" fill="#eef4ef" stroke="#cbdcce" stroke-width="1.4"/>
+<text x="756" y="314" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="1.1" fill="#800020">SPECIFICATION</text>
+<rect x="552" y="540" width="478" height="86" rx="10" fill="#f6f1e8" stroke="#e0d4bc" stroke-width="1.4"/>
+<text x="791" y="558" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="1.1" fill="#800020">QA</text>
+<rect x="904" y="152" width="304" height="86" rx="10" fill="#eef2f5" stroke="#cdd8e0" stroke-width="1.4"/>
+<text x="1056" y="170" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="1.1" fill="#800020">OPS</text>
+<polyline points="89,225 89,293" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="263,225 263,293" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="437,225 437,286 439,286 439,331" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="141,312 211,312" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="141,372 211,372" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="263,331 263,353" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="263,391 263,413" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="89,391 89,492 345,492 345,350 387,350" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="439,369 439,391" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="439,429 439,451" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="315,312 351,312 351,274 556,274 556,410 617,410" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="89,451 89,500 360,500 360,252 843,252 843,331" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="617,350 560,350 560,470 491,470" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="263,593 263,615" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="141,574 176,574 176,634 211,634" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="141,634 211,634" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="315,574 556,574 556,470 617,470" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="721,350 791,350" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="669,369 669,391" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="721,410 791,410" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="843,369 843,391" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="721,470 756,470 756,410 791,410" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="843,429 843,451" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="669,489 617,575" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="617,410 566,410 566,510 791,510 791,575" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="895,410 936,410 936,524 791,524 791,575" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="843,489 843,512 965,512 965,575" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="617,613 617,642 965,642 965,613" fill="none" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<polyline points="895,470 975,470 975,268 969,268 969,225" fill="none" stroke="#9aa2ae" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#arr)"/>
+<polyline points="1143,225 1143,250 1010,250 1010,470 895,470" fill="none" stroke="#9aa2ae" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#arr)"/>
+<rect x="37" y="187" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="89" y="210" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Idea</text>
+<rect x="211" y="187" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="263" y="210" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Research</text>
+<rect x="385" y="187" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="437" y="210" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Workshop</text>
+<rect x="37" y="293" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="89" y="316" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Vision</text>
+<rect x="211" y="293" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="263" y="316" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Persona</text>
+<rect x="37" y="353" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="89" y="369" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Capability</text>
+<text x="89" y="382" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">map</text>
+<rect x="211" y="353" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="263" y="369" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Value</text>
+<text x="263" y="382" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">stream</text>
+<rect x="37" y="413" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="89" y="436" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Objective</text>
+<rect x="211" y="413" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="263" y="436" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Process</text>
+<rect x="387" y="331" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="439" y="347" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Bounded</text>
+<text x="439" y="360" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">context</text>
+<rect x="387" y="391" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="439" y="414" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Glossary</text>
+<rect x="387" y="451" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="439" y="467" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Domain</text>
+<text x="439" y="480" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">model</text>
+<rect x="37" y="555" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="89" y="578" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">C4</text>
+<rect x="211" y="555" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="263" y="578" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">ADR</text>
+<rect x="37" y="615" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="89" y="638" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">UML</text>
+<rect x="211" y="615" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="263" y="638" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">arc42</text>
+<rect x="617" y="331" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="669" y="354" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">FBS</text>
+<rect x="791" y="331" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="843" y="347" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Delivery</text>
+<text x="843" y="360" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">roadmap</text>
+<rect x="617" y="391" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="669" y="414" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Use case</text>
+<rect x="791" y="391" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="843" y="414" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">PRD</text>
+<rect x="617" y="451" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="669" y="467" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Quality</text>
+<text x="669" y="480" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">attribute</text>
+<rect x="791" y="451" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="843" y="467" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Implementation</text>
+<text x="843" y="480" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">plan</text>
+<rect x="565" y="575" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="617" y="591" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Test</text>
+<text x="617" y="604" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">strategy</text>
+<rect x="739" y="575" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="791" y="591" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Test</text>
+<text x="791" y="604" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">scenario</text>
+<rect x="913" y="575" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="965" y="591" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Test</text>
+<text x="965" y="604" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">plan</text>
+<rect x="917" y="187" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="969" y="210" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Runbook</text>
+<rect x="1091" y="187" width="104" height="38" rx="6" fill="#ffffff" stroke="#c8cedd" stroke-width="1.2"/>
+<text x="1143" y="210" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1f29">Bug RCA</text>
+<rect x="62" y="251" width="55" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="89" y="262" text-anchor="middle" font-size="9.5" fill="#7a4a60">graduates</text>
+<rect x="236" y="251" width="55" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="263" y="262" text-anchor="middle" font-size="9.5" fill="#7a4a60">validates</text>
+<rect x="399" y="278" width="81" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="439" y="289" text-anchor="middle" font-size="9.5" fill="#7a4a60">event storming</text>
+<rect x="156" y="304" width="39" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="176" y="315" text-anchor="middle" font-size="9.5" fill="#7a4a60">scopes</text>
+<rect x="159" y="364" width="34" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="176" y="375" text-anchor="middle" font-size="9.5" fill="#7a4a60">feeds</text>
+<rect x="238" y="334" width="50" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="263" y="345" text-anchor="middle" font-size="9.5" fill="#7a4a60">triggers</text>
+<rect x="249" y="394" width="29" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="263" y="405" text-anchor="middle" font-size="9.5" fill="#7a4a60">runs</text>
+<rect x="177" y="477" width="70" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="212" y="488" text-anchor="middle" font-size="9.5" fill="#7a4a60">grouped into</text>
+<rect x="409" y="372" width="60" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="439" y="383" text-anchor="middle" font-size="9.5" fill="#7a4a60">one per BC</text>
+<rect x="406" y="432" width="65" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="439" y="443" text-anchor="middle" font-size="9.5" fill="#7a4a60">terms match</text>
+<rect x="430" y="259" width="76" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="468" y="270" text-anchor="middle" font-size="9.5" fill="#7a4a60">primary actor</text>
+<rect x="507" y="237" width="65" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="540" y="248" text-anchor="middle" font-size="9.5" fill="#7a4a60">epics serve</text>
+<rect x="514" y="372" width="91" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="560" y="383" text-anchor="middle" font-size="9.5" fill="#7a4a60">reveals entities</text>
+<rect x="225" y="596" width="76" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="263" y="607" text-anchor="middle" font-size="9.5" fill="#7a4a60">referenced by</text>
+<rect x="159" y="596" width="34" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="176" y="607" text-anchor="middle" font-size="9.5" fill="#7a4a60">emits</text>
+<rect x="154" y="626" width="44" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="176" y="637" text-anchor="middle" font-size="9.5" fill="#7a4a60">figures</text>
+<rect x="510" y="496" width="91" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="556" y="507" text-anchor="middle" font-size="9.5" fill="#7a4a60">decisions inform</text>
+<rect x="721" y="342" width="70" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="756" y="353" text-anchor="middle" font-size="9.5" fill="#7a4a60">grouped into</text>
+<rect x="644" y="372" width="50" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="669" y="383" text-anchor="middle" font-size="9.5" fill="#7a4a60">realised</text>
+<rect x="734" y="402" width="44" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="756" y="413" text-anchor="middle" font-size="9.5" fill="#7a4a60">grounds</text>
+<rect x="818" y="372" width="50" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="843" y="383" text-anchor="middle" font-size="9.5" fill="#7a4a60">per epic</text>
+<rect x="718" y="432" width="76" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="756" y="443" text-anchor="middle" font-size="9.5" fill="#7a4a60">in acceptance</text>
+<rect x="803" y="432" width="81" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="843" y="443" text-anchor="middle" font-size="9.5" fill="#7a4a60">one plan / PRD</text>
+<rect x="569" y="508" width="96" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="617" y="519" text-anchor="middle" font-size="9.5" fill="#7a4a60">defines tests for</text>
+<rect x="615" y="495" width="50" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="640" y="506" text-anchor="middle" font-size="9.5" fill="#7a4a60">realises</text>
+<rect x="898" y="462" width="76" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="936" y="473" text-anchor="middle" font-size="9.5" fill="#7a4a60">is oracle for</text>
+<rect x="872" y="497" width="65" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="905" y="508" text-anchor="middle" font-size="9.5" fill="#7a4a60">verified by</text>
+<rect x="771" y="634" width="39" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="791" y="645" text-anchor="middle" font-size="9.5" fill="#7a4a60">scopes</text>
+<rect x="940" y="248" width="70" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="975" y="259" text-anchor="middle" font-size="9.5" fill="#7a4a60">operated via</text>
+<rect x="1042" y="234" width="65" height="14" rx="3" fill="#ffffff" fill-opacity="0.98"/>
+<text x="1075" y="245" text-anchor="middle" font-size="9.5" fill="#7a4a60">feeds fixes</text>
+<line x1="1066" y1="600" x2="1092" y2="600" stroke="#9aa2ae" stroke-width="1.3" marker-end="url(#arr)"/>
+<text x="1100" y="603" font-size="9" fill="#7a4a60">enforced referential link</text>
+<line x1="1066" y1="618" x2="1092" y2="618" stroke="#9aa2ae" stroke-width="1.3" stroke-dasharray="5,4" marker-end="url(#arr)"/>
+<text x="1100" y="621" font-size="9" fill="#7a4a60">post-ship lifecycle (no FK)</text>
+</svg>
+  </div>
+  <div class="slide-number">14 / 19</div>
+</div>
+
+
+
+<!-- slide 15: §03 — clew -->
+
+<div class="slide s-divider">
+  <div class="accent-bar-left"></div>
+  <div class="div-bignum">03</div>
+  <div class="div-wrap">
+    <div class="div-kicker">Section 03 / 03</div>
+    <h1 class="div-title"><em>clew</em></h1>
+    <div class="div-tag">The engine that persists the whole graph: deterministic IDs, write-time integrity, and end-to-end traceability.</div>
+  </div>
+  <div class="div-bottom-line"></div>
+  <div class="slide-number">15 / 19</div>
+</div>
+
+
+
+<!-- slide 16: clew engineers memory -->
 
 <div class="slide s-clew" data-sources="clew-research-p01">
   <div class="section-label">clew</div>
@@ -2378,109 +2714,14 @@ body.presenting .slide.active {
 
   </div>
 
-  <div class="slide-number">8 / 16</div>
+  <div class="slide-number">16 / 19</div>
 
 <div class="slide-source-bar">Internal research · P-01 validation interview — research synthesis (N=1) (2026)</div>
 </div>
 
 
 
-<!-- slide 9: SDLC overview — context to code -->
-
-<div class="slide s-sdlc-ov">
-  <div class="section-label">The Metamodel · SDLC</div>
-  <h2 class="slide-title">From context to code — clew maps the whole SDLC.</h2>
-  <p class="slide-lede">Nineteen artefact types across three phases — discovery feeds design, design feeds delivery, all traceable.</p>
-  <div class="ov-flow">
-    <div class="ov-phase">
-      <div class="ov-num">1</div>
-      <div class="ov-name">Discover &amp; Define</div>
-      <div class="ov-tag">make the context real</div>
-      <div class="ov-layers"><span class="ov-layer">Business</span><span class="ov-layer">Domain</span></div>
-      <div class="ov-do">Brainstorm, interview and run workshops with the business; model the business architecture and define the domain language.</div>
-      <div class="ov-arts"><div class="ov-count">11 artefacts</div><div class="ov-list">VISION · Persona · Capability · Value stream · Objective · Bounded context · Glossary · Domain model …</div></div>
-    </div>
-    <div class="ov-arr"><i data-lucide="chevron-right" class="icon-md"></i></div>
-    <div class="ov-phase">
-      <div class="ov-num">2</div>
-      <div class="ov-name">Design the Solution</div>
-      <div class="ov-tag">fed by the context</div>
-      <div class="ov-layers"><span class="ov-layer">Product specs</span><span class="ov-layer">Architecture</span></div>
-      <div class="ov-do">Decide the architecture, define contracts, break functionality down and specify requirements &amp; quality — all tracing back to the domain.</div>
-      <div class="ov-arts"><div class="ov-count">7 artefacts</div><div class="ov-list">FBS · Use case · Quality attribute · PRD · Interface contract · CLI contract · ADR</div></div>
-    </div>
-    <div class="ov-arr"><i data-lucide="chevron-right" class="icon-md"></i></div>
-    <div class="ov-phase">
-      <div class="ov-num">3</div>
-      <div class="ov-name">Execute &amp; Deliver</div>
-      <div class="ov-tag">plan, build, test, ship</div>
-      <div class="ov-layers"><span class="ov-layer">Execution</span></div>
-      <div class="ov-do">Sequence the roadmap, plan atomic increments, build and validate, then deploy and operate — covering the rest of the SDLC.</div>
-      <div class="ov-arts"><div class="ov-count">6 built <em>· 1 planned</em></div><div class="ov-list">Delivery roadmap · Implementation plan · Getting started · Deployment · Runbook · Incident analysis · <span style="color:var(--dim)">Test strategy</span></div></div>
-    </div>
-  </div>
-  <div class="ov-cross">
-    <span class="ov-cross-l">Cross-cutting</span>
-    <div class="ov-cross-items"><span class="ov-cross-chip">Ideas</span><span class="ov-cross-chip">research</span><span class="ov-cross-chip">workshop</span><span class="ov-cross-chip">competitive landscape</span></div>
-    <span class="ov-cross-note">discovery &amp; enrichment that feed every phase</span>
-  </div>
-  <div class="slide-number">9 / 16</div>
-</div>
-
-
-
-<!-- slide 10: SDLC ① Discover & Define -->
-
-<div class="slide s-phase p1">
-  <div class="section-label">The SDLC · Discover</div>
-  <h2 class="slide-title">Discover &amp; Define <span style="color:var(--accent)">—</span> make the context real.</h2>
-  <div class="ph-stepper"><span class="ph-step on">① Discover</span><span class="ph-step-arr">›</span><span class="ph-step">② Design</span><span class="ph-step-arr">›</span><span class="ph-step">③ Deliver</span></div>
-  <div class="ph-left">
-    <div class="ph-h">What the agentic engineer does here</div>
-    <div class="ph-act"><div class="ph-act-ic"><i data-lucide="lightbulb" class="icon-sm"></i></div><div><div class="ph-act-t">Brainstorm &amp; capture</div><div class="ph-act-s">ideas, hypotheses</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="search" class="icon-sm"></i></div><div><div class="ph-act-t">Research &amp; scan</div><div class="ph-act-s">market, competitors</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="users" class="icon-sm"></i></div><div><div class="ph-act-t">Interview &amp; workshop</div><div class="ph-act-s">with the business</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="layout-grid" class="icon-sm"></i></div><div><div class="ph-act-t">Model the business</div><div class="ph-act-s">vision → objectives</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="book-open" class="icon-sm"></i></div><div><div class="ph-act-t">Define the domain</div><div class="ph-act-s">ubiquitous language</div></div></div>
-  </div>
-  <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Business<span>Steps 0–6</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Vision</span><span class="ph-sub">north star</span></div><div class="ph-node"><span class="ph-nm">Persona</span><span class="ph-sub">who we serve</span></div><div class="ph-node"><span class="ph-nm">Lean Canvas</span><span class="ph-sub">value proposition</span></div><div class="ph-node"><span class="ph-nm">Capability map</span><span class="ph-sub">what it can do</span></div><div class="ph-node"><span class="ph-nm">Value stream</span><span class="ph-sub">how value flows</span></div><div class="ph-node"><span class="ph-nm">Objective</span><span class="ph-sub">goals & key results</span></div><div class="ph-node"><span class="ph-nm">Business process</span><span class="ph-sub">operations</span></div><div class="ph-node"><span class="ph-nm">Quantitative model</span><span class="ph-sub">unit economics</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Domain<span>Steps 2b–7b</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Bounded context</span><span class="ph-sub">consistency boundary</span></div><div class="ph-node"><span class="ph-nm">Glossary</span><span class="ph-sub">ubiquitous language</span></div><div class="ph-node"><span class="ph-nm">Domain model</span><span class="ph-sub">aggregates & events</span></div></div></div></div>
-  <div class="ph-feed"><span></span><span>feeds → Design</span></div>
-  <div class="slide-number">10 / 16</div>
-</div>
-
-
-
-<!-- slide 11: SDLC ② Design the Solution -->
-
-<div class="slide s-phase p2">
-  <div class="section-label">The SDLC · Design</div>
-  <h2 class="slide-title">Design the Solution <span style="color:var(--accent)">—</span> turn context into a solution.</h2>
-  <div class="ph-stepper"><span class="ph-step">① Discover</span><span class="ph-step-arr">›</span><span class="ph-step on">② Design</span><span class="ph-step-arr">›</span><span class="ph-step">③ Deliver</span></div>
-  <div class="ph-left">
-    <div class="ph-h">What the agentic engineer does here</div>
-    <div class="ph-act"><div class="ph-act-ic"><i data-lucide="git-branch" class="icon-sm"></i></div><div><div class="ph-act-t">Decide architecture</div><div class="ph-act-s">ADRs, trade-offs</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="file-text" class="icon-sm"></i></div><div><div class="ph-act-t">Define contracts</div><div class="ph-act-s">interface, CLI</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="list-tree" class="icon-sm"></i></div><div><div class="ph-act-t">Break down function</div><div class="ph-act-s">FBS</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="square-check" class="icon-sm"></i></div><div><div class="ph-act-t">Specify &amp; qualify</div><div class="ph-act-s">use cases, quality</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="file" class="icon-sm"></i></div><div><div class="ph-act-t">Write PRDs</div><div class="ph-act-s">one per epic</div></div></div>
-  </div>
-  <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Product specs<span>Steps 7–10</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Functional breakdown</span><span class="ph-sub">feature tree</span></div><div class="ph-node"><span class="ph-nm">Use case</span><span class="ph-sub">actor scenarios</span></div><div class="ph-node"><span class="ph-nm">Quality attribute</span><span class="ph-sub">ISO 25010</span></div><div class="ph-node"><span class="ph-nm">Product requirements</span><span class="ph-sub">one per epic</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Architecture<span>Steps 7c · 8.5</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Interface contract</span><span class="ph-sub">API & events</span></div><div class="ph-node"><span class="ph-nm">CLI contract</span><span class="ph-sub">command surface</span></div><div class="ph-node"><span class="ph-nm">Decision record</span><span class="ph-sub">architecture choices</span></div></div></div></div>
-  <div class="ph-feed"><span>fed by ← Context</span><span>feeds → Execution</span></div>
-  <div class="slide-number">11 / 16</div>
-</div>
-
-
-
-<!-- slide 12: SDLC ③ Execute & Deliver -->
-
-<div class="slide s-phase p3">
-  <div class="section-label">The SDLC · Deliver</div>
-  <h2 class="slide-title">Execute &amp; Deliver <span style="color:var(--accent)">—</span> plan, build, test, ship.</h2>
-  <div class="ph-stepper"><span class="ph-step">① Discover</span><span class="ph-step-arr">›</span><span class="ph-step">② Design</span><span class="ph-step-arr">›</span><span class="ph-step on">③ Deliver</span></div>
-  <div class="ph-left">
-    <div class="ph-h">What the agentic engineer does here</div>
-    <div class="ph-act"><div class="ph-act-ic"><i data-lucide="map" class="icon-sm"></i></div><div><div class="ph-act-t">Sequence the roadmap</div><div class="ph-act-s">epics, phases</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="list-checks" class="icon-sm"></i></div><div><div class="ph-act-t">Plan increments</div><div class="ph-act-s">atomic steps</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="flask-conical" class="icon-sm"></i></div><div><div class="ph-act-t">Build &amp; validate</div><div class="ph-act-s">tests, checks</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="rocket" class="icon-sm"></i></div><div><div class="ph-act-t">Deploy</div><div class="ph-act-s">infra, release</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="activity" class="icon-sm"></i></div><div><div class="ph-act-t">Operate &amp; fix</div><div class="ph-act-s">runbooks, RCA</div></div></div>
-  </div>
-  <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Plan & build<span>exists</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Delivery roadmap</span><span class="ph-sub">epics & phases</span></div><div class="ph-node"><span class="ph-nm">Implementation plan</span><span class="ph-sub">atomic increments</span></div></div></div><div class="ph-lane plan"><div class="ph-lane-h">Validate<span>planned · new qa- category</span></div><div class="ph-nodes"><div class="ph-node plan"><span class="ph-nm">Test strategy</span><span class="ph-sub">the one gap</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Deploy & operate<span>exists</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Deployment view</span><span class="ph-sub">infra & topology</span></div><div class="ph-node"><span class="ph-nm">Getting started</span><span class="ph-sub">onboarding guide</span></div><div class="ph-node"><span class="ph-nm">Runbook</span><span class="ph-sub">operations</span></div><div class="ph-node"><span class="ph-nm">Incident analysis</span><span class="ph-sub">bug RCA</span></div></div></div></div>
-  <div class="ph-feed"><span>fed by ← Design</span><span></span></div>
-  <div class="slide-number">12 / 16</div>
-</div>
-
-
-
-<!-- slide 13: Deterministic IDs, write-time checks -->
+<!-- slide 17: Deterministic IDs, write-time checks -->
 
 <div class="slide s-mechanism" data-sources="clew-research-p01">
   <div class="section-label">How it works</div>
@@ -2524,14 +2765,14 @@ body.presenting .slide.active {
     </div>
   </div>
 
-  <div class="slide-number">13 / 16</div>
+  <div class="slide-number">17 / 19</div>
 
 <div class="slide-source-bar">Internal research · P-01 validation interview — research synthesis (N=1) (2026)</div>
 </div>
 
 
 
-<!-- slide 14: Trace, impact, integrity -->
+<!-- slide 18: Trace, impact, integrity -->
 
 <div class="slide s-trace" data-sources="clew-research-p01">
   <div class="section-label">The Payoff</div>
@@ -2580,14 +2821,14 @@ body.presenting .slide.active {
     <div class="claim-sub">Every internal reference is up to date, <em>all the time</em> — the north-star metric is end-to-end traceability, not work-in-progress.</div>
   </div>
 
-  <div class="slide-number">14 / 16</div>
+  <div class="slide-number">18 / 19</div>
 
 <div class="slide-source-bar">Internal research · P-01 validation interview — research synthesis (N=1) (2026)</div>
 </div>
 
 
 
-<!-- slide 15: Engineer the harness -->
+<!-- slide 19: Engineer the harness -->
 
 <div class="slide s-close">
   <div class="accent-bar-left"></div>
@@ -2608,96 +2849,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="close-bottom-line"></div>
-  <div class="slide-number">15 / 16</div>
-</div>
-
-
-
-<!-- slide 16: Appendix — full capability map -->
-
-<div class="slide s-anatomy-detail" data-sources="clew-research-harness">
-  <div class="section-label">Appendix</div>
-  <h2 class="slide-title">The full capability map — 15 domains around the agent loop.</h2>
-
-  <div class="cap-grid">
-    <div class="cap-card core">
-      <div class="cc-name">1 · Agent Core</div>
-      <div class="cc-tags"><span class="cc-tag">reasoning</span><span class="cc-tag">planning</span><span class="cc-tag">tool select</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cc-name">2 · Memory</div>
-      <div class="cc-tags"><span class="cc-tag">working</span><span class="cc-tag">episodic</span><span class="cc-tag">long-term</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cc-name">3 · Knowledge</div>
-      <div class="cc-tags"><span class="cc-tag">repo</span><span class="cc-tag">docs</span><span class="cc-tag">RAG</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cc-name">4 · Sensors / Perception</div>
-      <div class="cc-tags"><span class="cc-tag">files</span><span class="cc-tag">runtime</span><span class="cc-tag">telemetry</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cc-name">5 · Actuators / Actions</div>
-      <div class="cc-tags"><span class="cc-tag">edit</span><span class="cc-tag">execute</span><span class="cc-tag">git</span></div>
-    </div>
-
-    <div class="cap-card">
-      <div class="cc-name">6 · Controls &amp; Validation</div>
-      <div class="cc-tags"><span class="cc-tag">tests</span><span class="cc-tag">types</span><span class="cc-tag">evals</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cc-name">7 · Observability</div>
-      <div class="cc-tags"><span class="cc-tag">traces</span><span class="cc-tag">logs</span><span class="cc-tag">metrics</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cc-name">8 · Goals &amp; Tasking</div>
-      <div class="cc-tags"><span class="cc-tag">intent</span><span class="cc-tag">success</span><span class="cc-tag">scope</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cc-name">9 · Planning &amp; Decomp.</div>
-      <div class="cc-tags"><span class="cc-tag">decompose</span><span class="cc-tag">sequence</span><span class="cc-tag">retries</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cc-name">10 · Identity &amp; Access</div>
-      <div class="cc-tags"><span class="cc-tag">auth</span><span class="cc-tag">roles</span><span class="cc-tag">secrets</span></div>
-    </div>
-
-    <div class="cap-card">
-      <div class="cc-name">11 · Human Feedback</div>
-      <div class="cc-tags"><span class="cc-tag">review</span><span class="cc-tag">approval</span><span class="cc-tag">handoff</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cc-name">12 · Learning &amp; Adaptation</div>
-      <div class="cc-tags"><span class="cc-tag">feedback</span><span class="cc-tag">heuristics</span><span class="cc-tag">eval-driven</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cc-name">13 · Safety &amp; Governance</div>
-      <div class="cc-tags"><span class="cc-tag">permissions</span><span class="cc-tag">sandbox</span><span class="cc-tag">policy</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cc-name">14 · Environment State</div>
-      <div class="cc-tags"><span class="cc-tag">repo</span><span class="cc-tag">runtime</span><span class="cc-tag">deps</span></div>
-    </div>
-    <div class="cap-card">
-      <div class="cc-name">15 · Tools &amp; Skills</div>
-      <div class="cc-tags"><span class="cc-tag">shell</span><span class="cc-tag">MCP</span><span class="cc-tag">skills</span></div>
-    </div>
-  </div>
-
-  <div class="det-loop">
-    <span class="det-loop-label">Agent loop</span>
-    <span class="det-phase">Sense</span><span class="det-arr"><i data-lucide="chevron-right" class="icon-sm"></i></span>
-    <span class="det-phase">Retrieve</span><span class="det-arr"><i data-lucide="chevron-right" class="icon-sm"></i></span>
-    <span class="det-phase">Remember</span><span class="det-arr"><i data-lucide="chevron-right" class="icon-sm"></i></span>
-    <span class="det-phase">Plan</span><span class="det-arr"><i data-lucide="chevron-right" class="icon-sm"></i></span>
-    <span class="det-phase">Act</span><span class="det-arr"><i data-lucide="chevron-right" class="icon-sm"></i></span>
-    <span class="det-phase">Validate</span><span class="det-arr"><i data-lucide="chevron-right" class="icon-sm"></i></span>
-    <span class="det-phase">Learn</span>
-  </div>
-
-  <div class="slide-number">16 / 16</div>
-
-<div class="slide-source-bar">Internal research · What Makes a Good Agentic Harness — research synthesis (2026)</div>
+  <div class="slide-number">19 / 19</div>
 </div>
 
 
