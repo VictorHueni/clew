@@ -1064,6 +1064,853 @@
   white-space: nowrap;
 }
 
+/* ══════════════════════════════════════════════════════════════
+   v2 REBUILD — shared atoms
+   ══════════════════════════════════════════════════════════════ */
+
+/* Lede line under an action title (the supporting "so-what") */
+.slide-lede {
+  position: absolute;
+  top: 132px; left: 68px; right: 68px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+}
+.slide-lede em { font-style: normal; color: var(--accent); font-weight: 600; }
+
+/* Bottom takeaway strip — the single conclusion line */
+.takeaway {
+  position: absolute;
+  bottom: 30px; left: 68px; right: 220px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.takeaway::before {
+  content: '';
+  width: 22px; height: 3px; border-radius: 2px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 02 — PROOF (s-proof)  ·  42% → 78% bar comparison
+   ══════════════════════════════════════════════════════════════ */
+.s-proof .proof-wrap {
+  position: absolute;
+  top: 200px; left: 68px; right: 68px; bottom: 90px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 120px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0;
+}
+.s-proof .bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+}
+.s-proof .bar-val {
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.s-proof .bar {
+  width: 150px;
+  border-radius: 8px 8px 0 0;
+}
+.s-proof .bar-col.baseline .bar-val { color: var(--muted); }
+.s-proof .bar-col.baseline .bar {
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  border-bottom: none;
+}
+.s-proof .bar-col.hero .bar-val { color: var(--accent); }
+.s-proof .bar-col.hero .bar {
+  background: linear-gradient(180deg,
+    var(--accent) 0%,
+    color-mix(in srgb, var(--accent) 80%, #000) 100%);
+  box-shadow: 0 10px 40px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.s-proof .bar-cap {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-top: 14px;
+  text-align: center;
+  line-height: 1.5;
+}
+.s-proof .bar-cap strong { color: var(--ink); font-weight: 700; }
+.s-proof .proof-delta {
+  position: absolute;
+  top: 210px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-lt);
+  border: 1.5px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+  border-radius: 20px;
+  padding: 6px 16px;
+}
+.s-proof .proof-same {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--dim);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 03 — LEVER (s-lever)  ·  ablation ranking bars
+   ══════════════════════════════════════════════════════════════ */
+.s-lever .rank {
+  position: absolute;
+  top: 210px; left: 68px; right: 340px; bottom: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+.s-lever .rank-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.s-lever .rank-rankno {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dim);
+  width: 22px;
+  flex-shrink: 0;
+}
+.s-lever .rank-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  width: 168px;
+  flex-shrink: 0;
+}
+.s-lever .rank-track {
+  flex: 1;
+  height: 34px;
+  background: var(--surface-2);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.s-lever .rank-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg,
+    var(--accent) 0%,
+    color-mix(in srgb, var(--accent) 70%, var(--surface)) 100%);
+}
+.s-lever .rank-row.lo .rank-fill {
+  background: color-mix(in srgb, var(--accent) 28%, var(--surface-2));
+}
+.s-lever .rank-row.lo .rank-label { color: var(--muted); }
+.s-lever .rank-note {
+  position: absolute;
+  top: 210px; right: 68px; bottom: 96px;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  border-left: 1.5px solid var(--border);
+  padding-left: 28px;
+}
+.s-lever .note-block .note-k {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.s-lever .note-block .note-v {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 04 — ANATOMY (s-anatomy)  ·  loop ribbon + clustered caps
+   ══════════════════════════════════════════════════════════════ */
+.s-anatomy .loop-track {
+  position: absolute;
+  top: 196px; left: 40px; right: 40px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.s-anatomy .phase-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.s-anatomy .phase-head {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 20px;
+  padding: 6px 14px;
+  white-space: nowrap;
+}
+.s-anatomy .phase-caps {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  align-items: stretch;
+  padding: 0 4px;
+}
+.s-anatomy .cap-chip {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  box-shadow: var(--shadow);
+  padding: 8px 6px;
+  text-align: center;
+  line-height: 1.25;
+}
+.s-anatomy .loop-arr {
+  align-self: flex-start;
+  margin-top: 8px;
+  color: var(--border);
+  flex-shrink: 0;
+  display: flex;
+}
+.s-anatomy .govern-band {
+  position: absolute;
+  left: 68px; right: 68px; bottom: 96px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--dark-surface);
+  border: 1.5px solid var(--dark-border);
+  border-radius: 12px;
+  padding: 14px 22px;
+}
+.s-anatomy .govern-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-bright);
+  flex-shrink: 0;
+}
+.s-anatomy .govern-caps {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+}
+.s-anatomy .govern-cap {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dark-ink);
+  background: var(--loop-bg);
+  border: 1px solid var(--dark-border);
+  border-radius: 7px;
+  padding: 9px 10px;
+  text-align: center;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 05 — MEMORY (s-memory)  ·  3-layer pyramid + stat cards
+   ══════════════════════════════════════════════════════════════ */
+.s-memory .mem-layers {
+  position: absolute;
+  top: 200px; left: 68px; width: 560px; bottom: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.s-memory .mem-layer {
+  border-radius: 10px;
+  padding: 14px 20px;
+  text-align: center;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.s-memory .mem-layer .ml-name {
+  font-size: 14px; font-weight: 700; color: var(--ink);
+}
+.s-memory .mem-layer .ml-sub {
+  font-family: var(--font-mono); font-size: 10px; color: var(--muted); margin-top: 3px;
+}
+.s-memory .mem-layer.l-working  { width: 56%; }
+.s-memory .mem-layer.l-episodic { width: 78%; }
+.s-memory .mem-layer.l-longterm {
+  width: 100%;
+  background: var(--accent-lt);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+}
+.s-memory .mem-layer.l-longterm .ml-name { color: var(--accent); }
+.s-memory .mem-shallow {
+  position: absolute;
+  top: 336px; left: 642px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--danger);
+  display: flex; align-items: center; gap: 6px;
+}
+.s-memory .mem-deep {
+  position: absolute;
+  top: 486px; left: 668px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+}
+.s-memory .mem-stats {
+  position: absolute;
+  top: 200px; right: 68px; width: 420px; bottom: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+.s-memory .stat-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+}
+.s-memory .stat-big {
+  font-size: 34px; font-weight: 800; color: var(--ink); letter-spacing: -0.02em;
+}
+.s-memory .stat-big em { font-style: normal; color: var(--accent); }
+.s-memory .stat-desc {
+  font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 6px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 06 — CLEW (s-clew v2)  ·  problem vs answer columns
+   ══════════════════════════════════════════════════════════════ */
+.s-clew .clew2-cols {
+  position: absolute;
+  top: 196px; left: 68px; right: 68px; bottom: 92px;
+  display: flex;
+  gap: 40px;
+}
+.s-clew .clew2-col { flex: 1; display: flex; flex-direction: column; }
+.s-clew .clew2-head {
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.s-clew .clew2-col.problem .clew2-head { color: var(--danger); }
+.s-clew .clew2-col.answer  .clew2-head { color: var(--accent); }
+.s-clew .pain-row {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+}
+.s-clew .pain-row:last-child { border-bottom: 1px solid var(--border); }
+.s-clew .pain-x {
+  width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0;
+  background: color-mix(in srgb, var(--danger) 12%, var(--surface));
+  color: var(--danger);
+  display: flex; align-items: center; justify-content: center;
+}
+.s-clew .pain-label { font-size: 13.5px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.s-clew .pain-sub { font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+.s-clew .clew2-col.answer { padding-left: 40px; border-left: 1.5px solid var(--border); }
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 07 — METAMODEL (s-metamodel v2)  ·  typed-graph pipeline
+   Override the legacy compact title back to a standard action title.
+   ══════════════════════════════════════════════════════════════ */
+.s-metamodel .slide-title {
+  font-family: var(--font-sans);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--ink);
+  top: 72px;
+  letter-spacing: -0.01em;
+}
+.s-metamodel .mm-graph {
+  position: absolute;
+  top: 210px; left: 68px; right: 68px; bottom: 110px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.s-metamodel .mm-layer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+.s-metamodel .mm-node {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  box-shadow: var(--shadow);
+  padding: 10px 12px;
+}
+.s-metamodel .mm-node .mm-id {
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 0.03em;
+  display: block;
+}
+.s-metamodel .mm-node .mm-name {
+  font-size: 11.5px; font-weight: 600; color: var(--ink); margin-top: 2px; display: block;
+}
+.s-metamodel .mm-node.anchor {
+  background: var(--accent-lt);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+}
+.s-metamodel .mm-arr {
+  width: 30px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: color-mix(in srgb, var(--accent) 55%, var(--border));
+}
+.s-metamodel .mm-legend {
+  position: absolute;
+  bottom: 70px; left: 68px;
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--muted);
+  display: flex; gap: 22px; align-items: center;
+}
+.s-metamodel .mm-legend b { color: var(--accent); font-weight: 700; }
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 08 — MECHANISM (s-mechanism)
+   ══════════════════════════════════════════════════════════════ */
+.s-mechanism .mech-flow {
+  position: absolute;
+  top: 210px; left: 68px; right: 68px;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+.s-mechanism .mech-box {
+  flex: 1;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.s-mechanism .mech-box.engine {
+  background: var(--dark-surface);
+  border-color: var(--dark-border);
+}
+.s-mechanism .mech-step {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);
+}
+.s-mechanism .mech-box.engine .mech-step { color: var(--accent-bright); }
+.s-mechanism .mech-title { font-size: 14px; font-weight: 700; color: var(--ink); }
+.s-mechanism .mech-box.engine .mech-title { color: var(--dark-ink); }
+.s-mechanism .mech-code {
+  font-family: var(--font-mono); font-size: 11.5px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 6px; padding: 8px 10px; color: var(--ink);
+}
+.s-mechanism .mech-box.engine .mech-code {
+  background: var(--loop-bg); border-color: var(--dark-border); color: var(--dark-ink);
+}
+.s-mechanism .mech-code .ok { color: var(--success); }
+.s-mechanism .mech-desc { font-size: 12px; color: var(--muted); line-height: 1.45; }
+.s-mechanism .mech-box.engine .mech-desc { color: var(--dark-muted); }
+.s-mechanism .mech-arr {
+  width: 36px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: color-mix(in srgb, var(--accent) 55%, var(--border));
+}
+.s-mechanism .mech-contrast {
+  position: absolute;
+  left: 68px; right: 68px; bottom: 92px;
+  display: flex; gap: 20px;
+}
+.s-mechanism .contrast-cell {
+  flex: 1;
+  display: flex; align-items: center; gap: 12px;
+  border-radius: 10px; padding: 14px 18px;
+  font-size: 13px; font-weight: 600;
+}
+.s-mechanism .contrast-cell.good {
+  background: color-mix(in srgb, var(--success) 10%, var(--surface));
+  border: 1.5px solid color-mix(in srgb, var(--success) 35%, var(--border));
+  color: var(--ink);
+}
+.s-mechanism .contrast-cell.bad {
+  background: color-mix(in srgb, var(--danger) 8%, var(--surface));
+  border: 1.5px solid color-mix(in srgb, var(--danger) 30%, var(--border));
+  color: var(--muted);
+}
+.s-mechanism .contrast-cell .ci { flex-shrink: 0; }
+.s-mechanism .contrast-cell.good .ci { color: var(--success); }
+.s-mechanism .contrast-cell.bad .ci { color: var(--danger); }
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 09 — TRACEABILITY (s-trace)
+   ══════════════════════════════════════════════════════════════ */
+.s-trace .trace-cards {
+  position: absolute;
+  top: 200px; left: 68px; right: 68px;
+  display: flex; gap: 20px;
+}
+.s-trace .tcard {
+  flex: 1;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.s-trace .tcard-cmd {
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 700; color: var(--accent);
+  background: var(--accent-lt);
+  border-bottom: 1.5px solid color-mix(in srgb, var(--accent) 25%, var(--border));
+  padding: 11px 14px;
+}
+.s-trace .tcard-out {
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px; line-height: 1.7; color: var(--ink);
+}
+.s-trace .tcard-out .dim { color: var(--dim); }
+.s-trace .tcard-out .ok { color: var(--success); font-weight: 700; }
+.s-trace .tcard-cap {
+  font-size: 11px; color: var(--muted); padding: 0 14px 14px; line-height: 1.4;
+}
+.s-trace .trace-claim {
+  position: absolute;
+  left: 68px; right: 68px; bottom: 88px;
+  background: var(--dark-surface);
+  border: 1.5px solid var(--dark-border);
+  border-radius: 12px;
+  padding: 16px 24px;
+  display: flex; align-items: center; gap: 18px;
+}
+.s-trace .claim-big {
+  font-size: 22px; font-weight: 800; color: var(--accent-bright); letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+.s-trace .claim-sub {
+  font-size: 13px; color: var(--dark-muted); line-height: 1.45;
+}
+.s-trace .claim-sub em { font-style: normal; color: var(--dark-ink); font-weight: 600; }
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 10 — CLOSE (s-close)  ·  dark bookend
+   ══════════════════════════════════════════════════════════════ */
+.s-close { background: var(--dark-bg); }
+.s-close .slide-number { color: var(--dark-muted); }
+.s-close .close-wordmark {
+  position: absolute;
+  top: 44px; left: 80px;
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent-bright);
+}
+.s-close .close-wrap {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  left: 80px; right: 80px;
+}
+.s-close .close-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--dark-muted); margin-bottom: 18px;
+}
+.s-close .close-title {
+  font-size: 50px; font-weight: 800; line-height: 1.08; letter-spacing: -0.025em;
+  color: var(--dark-ink); margin: 0 0 16px 0; max-width: 900px;
+}
+.s-close .close-title em { font-style: normal; color: var(--accent-bright); }
+.s-close .close-sub {
+  font-size: 17px; color: var(--dark-muted); margin-bottom: 40px;
+}
+.s-close .close-posrow { display: flex; gap: 14px; margin-bottom: 26px; }
+.s-close .close-pos {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  color: var(--dark-muted);
+  border: 1px solid var(--dark-border); border-radius: 20px;
+  padding: 7px 14px;
+}
+.s-close .close-metaphor {
+  font-size: 15px; color: var(--dark-ink); font-weight: 600;
+}
+.s-close .close-metaphor em { font-style: normal; color: var(--accent-bright); }
+.s-close .close-bottom-line {
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(to right, var(--accent) 0%, transparent 55%);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   APPENDIX A1 — full capability map (s-anatomy-detail)
+   ══════════════════════════════════════════════════════════════ */
+.s-anatomy-detail .slide-title {
+  font-size: 16px; font-weight: 500; top: 66px;
+  color: var(--muted); font-family: var(--font-mono); letter-spacing: 0.03em;
+}
+.s-anatomy-detail .cap-grid {
+  position: absolute;
+  top: 100px; left: 40px; right: 40px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+.s-anatomy-detail .cap-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 9px 10px;
+  min-height: 78px;
+}
+.s-anatomy-detail .cap-card.core {
+  background: var(--dark-surface);
+  border-left-color: var(--accent-bright);
+}
+.s-anatomy-detail .cc-name {
+  font-size: 11px; font-weight: 700; color: var(--ink); line-height: 1.2;
+}
+.s-anatomy-detail .cap-card.core .cc-name { color: var(--dark-ink); }
+.s-anatomy-detail .cc-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; }
+.s-anatomy-detail .cc-tag {
+  font-family: var(--font-mono); font-size: 8.5px;
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: 3px;
+  padding: 1px 4px; color: var(--muted); white-space: nowrap;
+}
+.s-anatomy-detail .cap-card.core .cc-tag {
+  background: var(--loop-bg); border-color: var(--dark-border); color: var(--dark-muted);
+}
+.s-anatomy-detail .det-loop {
+  position: absolute;
+  left: 40px; right: 40px; bottom: 40px;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  border-top: 1px solid var(--border); padding-top: 16px;
+}
+.s-anatomy-detail .det-loop-label {
+  font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+  margin-right: 14px;
+}
+.s-anatomy-detail .det-phase {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+  color: var(--accent);
+}
+.s-anatomy-detail .det-arr { color: var(--border); display: flex; }
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 04b — RINGS SUNBURST (s-rings2)
+   ══════════════════════════════════════════════════════════════ */
+.s-rings2 .rs-stage { position:absolute; inset:0; }
+.s-rings2 .rs-svg { position:absolute; left:0; top:0; z-index:0; }
+.s-rings2 .rs-core {
+  position:absolute; width:104px; height:104px; border-radius:50%; transform:translate(-50%,-50%); z-index:3;
+  background:var(--dark-surface); border:1.5px solid var(--accent-bright);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  box-shadow:0 0 55px color-mix(in srgb,var(--accent) 30%,transparent);
+}
+.s-rings2 .rs-core .t { font-size:15px; font-weight:800; color:var(--dark-ink); letter-spacing:.04em; }
+.s-rings2 .rs-phase {
+  position:absolute; transform:translate(-50%,-50%); z-index:2;
+  font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--accent-ink); background:var(--accent); border-radius:11px; padding:3px 9px; white-space:nowrap;
+}
+.s-rings2 .rs-cap {
+  position:absolute; transform:translate(-50%,-50%); z-index:2;
+  font-size:11px; font-weight:600; color:var(--ink); background:var(--surface);
+  border:1.5px solid var(--border); border-radius:7px; box-shadow:var(--shadow);
+  padding:5px 9px; white-space:nowrap;
+}
+.s-rings2 .rs-govern {
+  position:absolute; right:60px; top:392px; transform:translateY(-50%); width:308px; z-index:2;
+  background:var(--dark-surface); border:1.5px solid var(--dark-border); border-radius:12px;
+  padding:18px 18px; box-shadow:0 4px 28px rgba(0,0,0,.22);
+}
+.s-rings2 .rs-glabel {
+  font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--accent-bright); margin-bottom:4px;
+}
+.s-rings2 .rs-gsub { font-size:11.5px; color:var(--dark-muted); line-height:1.45; margin-bottom:14px; }
+.s-rings2 .rs-gcap {
+  display:flex; align-items:center; gap:11px; padding:11px 13px; margin-top:9px;
+  background:var(--loop-bg); border:1px solid var(--dark-border); border-radius:8px;
+  color:var(--dark-ink); font-size:13px; font-weight:600;
+}
+.s-rings2 .rs-gcap .icon-sm { width:16px; height:16px; color:var(--accent-bright); flex-shrink:0; }
+.s-rings2 .rings-cap {
+  position:absolute; bottom:28px; left:68px; right:68px; text-align:center;
+  font-size:12.5px; font-weight:600; color:var(--muted);
+}
+.s-rings2 .rings-cap em { font-style:normal; color:var(--accent); }
+
+/* SOURCE-BAR OVERRIDE — truncate before the slide number (bottom-right) */
+.slide .slide-source-bar { right: 120px; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 05b — CONTEXT ROT (s-crot)
+   ══════════════════════════════════════════════════════════════ */
+.s-crot .cr-svg { position:absolute; left:0; top:0; z-index:0; }
+.s-crot .cr-grid { stroke:var(--border); stroke-width:1; }
+.s-crot .cr-grid-half { stroke:color-mix(in srgb,var(--accent) 45%,var(--border)); stroke-width:1.5; stroke-dasharray:4 5; }
+.s-crot .cr-line { fill:none; }
+.s-crot .cr-line.ref  { stroke:var(--muted); stroke-width:2.5; }
+.s-crot .cr-line.gpt  { stroke:var(--dim); stroke-width:2.5; stroke-dasharray:7 5; }
+.s-crot .cr-line.hero { stroke:var(--accent); stroke-width:3.5; }
+.s-crot .cr-dot { stroke:var(--surface); stroke-width:2; }
+.s-crot .cr-dot.ref  { fill:var(--muted); }
+.s-crot .cr-dot.gpt  { fill:var(--dim); }
+.s-crot .cr-dot.hero { fill:var(--accent); }
+.s-crot .cr-yax { position:absolute; transform:translate(-100%,-50%); z-index:2;
+  font-family:var(--font-mono); font-size:10px; color:var(--dim); }
+.s-crot .cr-val { position:absolute; transform:translate(-50%,-50%); z-index:2;
+  font-size:15px; font-weight:800; }
+.s-crot .cr-val.ref { color:var(--muted); }
+.s-crot .cr-val.hero { color:var(--accent); }
+.s-crot .cr-model { position:absolute; transform:translate(-100%,-50%); z-index:2;
+  font-size:13px; font-weight:700; white-space:nowrap; }
+.s-crot .cr-model.ref { color:var(--muted); }
+.s-crot .cr-model.gpt { color:var(--dim); }
+.s-crot .cr-model.hero { color:var(--accent); }
+.s-crot .cr-xax { position:absolute; transform:translate(-50%,0); z-index:2;
+  font-family:var(--font-mono); font-size:11px; font-weight:600; color:var(--ink); text-align:center; }
+.s-crot .cr-xax span { display:block; font-weight:400; color:var(--dim); font-size:9px; margin-top:2px; }
+.s-crot .cr-halftag { position:absolute; transform:translate(0,-50%); z-index:2;
+  font-family:var(--font-mono); font-size:9px; font-weight:600; color:var(--accent);
+  background:var(--accent-lt); border-radius:3px; padding:1px 5px; }
+.s-crot .cr-axtitle { position:absolute; z-index:2; font-family:var(--font-mono);
+  font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+
+.s-crot .cr-panel { position:absolute; right:64px; top:198px; width:330px;
+  display:flex; flex-direction:column; gap:15px; z-index:2; }
+.s-crot .cr-take { font-size:19px; font-weight:800; color:var(--ink); line-height:1.25; letter-spacing:-.01em; }
+.s-crot .cr-take em { font-style:normal; color:var(--accent); }
+.s-crot .cr-fact { border-left:3px solid var(--border); padding-left:14px; }
+.s-crot .cr-fact .k { font-size:17px; font-weight:800; color:var(--ink); letter-spacing:-.01em; }
+.s-crot .cr-fact .k em { font-style:normal; color:var(--accent); }
+.s-crot .cr-fact .v { font-size:12px; color:var(--muted); line-height:1.45; margin-top:3px; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE 07 — METAMODEL FLOW (mmf) · all 19 artefacts, 5 lanes
+   ══════════════════════════════════════════════════════════════ */
+.s-metamodel .mmf-flow { position:absolute; top:170px; left:40px; right:40px; bottom:128px; display:flex; align-items:stretch; gap:0; }
+.s-metamodel .mmf-lane { flex:1; display:flex; flex-direction:column; min-width:0;
+  background:color-mix(in srgb,var(--accent) 3%,var(--surface));
+  border:1px solid var(--border); border-top:3px solid var(--accent); border-radius:9px; padding:11px 9px; }
+.s-metamodel .mmf-head { font-size:12.5px; font-weight:700; color:var(--accent); line-height:1.1; }
+.s-metamodel .mmf-head span { display:block; font-family:var(--font-mono); font-size:8.5px; font-weight:500;
+  letter-spacing:.06em; text-transform:uppercase; color:var(--dim); margin-top:2px; }
+.s-metamodel .mmf-nodes { display:flex; flex-direction:column; gap:6px; margin-top:10px; justify-content:center; flex:1; }
+.s-metamodel .mmf-node { background:var(--surface); border:1.5px solid var(--border); border-radius:6px; padding:6px 9px; box-shadow:var(--shadow); }
+.s-metamodel .mmf-id { font-family:var(--font-mono); font-size:10.5px; font-weight:700; color:var(--accent); display:block; line-height:1.2; }
+.s-metamodel .mmf-name { font-size:9.5px; color:var(--muted); display:block; line-height:1.2; margin-top:1px; }
+.s-metamodel .mmf-node.anchor { background:var(--accent-lt); border-color:color-mix(in srgb,var(--accent) 40%,var(--border)); }
+.s-metamodel .mmf-arr { display:flex; align-items:center; justify-content:center; width:24px; flex-shrink:0;
+  color:color-mix(in srgb,var(--accent) 55%,var(--border)); }
+.s-metamodel .mmf-cross { position:absolute; left:40px; right:40px; bottom:62px; height:46px;
+  display:flex; align-items:center; gap:14px; background:var(--dark-surface);
+  border:1.5px solid var(--dark-border); border-radius:10px; padding:0 18px; }
+.s-metamodel .mmf-cross-label { font-family:var(--font-mono); font-size:9.5px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--accent-bright); flex-shrink:0; line-height:1.3; }
+.s-metamodel .mmf-cross-items { display:flex; gap:8px; flex:1; }
+.s-metamodel .mmf-cross-chip { font-family:var(--font-mono); font-size:10px; font-weight:600; color:var(--dark-ink);
+  background:var(--loop-bg); border:1px solid var(--dark-border); border-radius:6px; padding:4px 10px; }
+.s-metamodel .mmf-cross-note { font-size:10.5px; color:var(--dark-muted); flex-shrink:0; }
+
+/* ══════════════════════════════════════════════════════════════
+   SDLC SLIDES (s-sdlc-ov + s-phase) · overview + 3 deep-dives
+   ══════════════════════════════════════════════════════════════ */
+/* SDLC OVERVIEW (s-sdlc-ov) */
+.s-sdlc-ov .slide-title { font-size:30px; }
+.s-sdlc-ov .ov-flow { position:absolute; top:176px; left:40px; right:40px; bottom:126px; display:flex; align-items:stretch; gap:0; }
+.s-sdlc-ov .ov-phase { flex:1; display:flex; flex-direction:column; border:1px solid var(--border); border-top:4px solid var(--accent); border-radius:11px; background:var(--surface); box-shadow:var(--shadow); padding:18px; }
+.s-sdlc-ov .ov-num { width:32px; height:32px; border-radius:50%; background:var(--accent); color:var(--accent-ink); font-weight:800; font-size:15px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
+.s-sdlc-ov .ov-name { font-size:18px; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.1; }
+.s-sdlc-ov .ov-tag { font-size:12px; color:var(--accent); font-weight:600; margin-top:4px; margin-bottom:13px; }
+.s-sdlc-ov .ov-layers { display:flex; gap:6px; margin-bottom:13px; }
+.s-sdlc-ov .ov-layer { font-family:var(--font-mono); font-size:9.5px; font-weight:700; color:var(--muted); background:var(--surface-2); border:1px solid var(--border); border-radius:5px; padding:3px 8px; }
+.s-sdlc-ov .ov-do { font-size:12.5px; color:var(--ink); line-height:1.5; }
+.s-sdlc-ov .ov-arts { margin-top:auto; padding-top:14px; }
+.s-sdlc-ov .ov-count { font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--accent); }
+.s-sdlc-ov .ov-count em { font-style:normal; color:var(--dim); font-weight:500; }
+.s-sdlc-ov .ov-list { font-family:var(--font-mono); font-size:10px; color:var(--muted); line-height:1.65; margin-top:6px; }
+.s-sdlc-ov .ov-arr { display:flex; align-items:center; justify-content:center; width:30px; flex-shrink:0; color:color-mix(in srgb,var(--accent) 55%,var(--border)); }
+.s-sdlc-ov .ov-cross { position:absolute; left:40px; right:40px; bottom:60px; height:44px; display:flex; align-items:center; gap:14px; background:var(--dark-surface); border:1.5px solid var(--dark-border); border-radius:10px; padding:0 18px; }
+.s-sdlc-ov .ov-cross-l { font-family:var(--font-mono); font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-bright); flex-shrink:0; }
+.s-sdlc-ov .ov-cross-items { display:flex; gap:8px; flex:1; }
+.s-sdlc-ov .ov-cross-chip { font-family:var(--font-mono); font-size:10px; font-weight:600; color:var(--dark-ink); background:var(--loop-bg); border:1px solid var(--dark-border); border-radius:6px; padding:4px 10px; }
+.s-sdlc-ov .ov-cross-note { font-size:10.5px; color:var(--dark-muted); flex-shrink:0; }
+
+/* SDLC DEEP-DIVE (s-phase) */
+.s-phase .slide-title { font-size:30px; }
+.s-phase .ph-stepper { position:absolute; top:40px; right:60px; display:flex; align-items:center; gap:6px; z-index:2; }
+.s-phase .ph-step { font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:.04em; padding:4px 10px; border-radius:12px; border:1.5px solid var(--border); color:var(--dim); }
+.s-phase .ph-step.on { background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+.s-phase .ph-step-arr { color:var(--border); font-size:10px; }
+.s-phase .ph-left { position:absolute; top:190px; left:68px; width:392px; bottom:74px; }
+.s-phase .ph-h { font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+.s-phase .ph-act { display:flex; gap:13px; align-items:flex-start; padding:10px 0; border-top:1px solid var(--border); }
+.s-phase .ph-act:last-child { border-bottom:1px solid var(--border); }
+.s-phase .ph-act-ic { width:34px; height:34px; border-radius:8px; background:var(--accent-lt); border:1.5px solid color-mix(in srgb,var(--accent) 25%,var(--border)); display:flex; align-items:center; justify-content:center; color:var(--accent); flex-shrink:0; }
+.s-phase .ph-act-t { font-size:13.5px; font-weight:700; color:var(--ink); line-height:1.2; }
+.s-phase .ph-act-s { font-size:11px; color:var(--muted); margin-top:2px; }
+.s-phase .ph-right { position:absolute; top:190px; left:500px; right:64px; bottom:74px; display:flex; gap:14px; }
+.s-phase .ph-lane { flex:1; display:flex; flex-direction:column; background:color-mix(in srgb,var(--accent) 3%,var(--surface)); border:1px solid var(--border); border-top:3px solid var(--accent); border-radius:9px; padding:11px 10px; }
+.s-phase .ph-lane.plan { border-top-color:var(--dim); border-style:dashed; background:var(--surface-2); }
+.s-phase .ph-lane-h { font-size:12px; font-weight:700; color:var(--accent); line-height:1.1; }
+.s-phase .ph-lane-h span { display:block; font-family:var(--font-mono); font-size:8.5px; font-weight:500; letter-spacing:.05em; text-transform:uppercase; color:var(--dim); margin-top:2px; }
+.s-phase .ph-lane.plan .ph-lane-h { color:var(--muted); }
+.s-phase .ph-nodes { display:flex; flex-direction:column; gap:6px; justify-content:center; flex:1; margin-top:9px; }
+.s-phase .ph-node { background:var(--surface); border:1.5px solid var(--border); border-radius:6px; padding:6px 10px; box-shadow:var(--shadow); }
+.s-phase .ph-node .ph-nm { font-size:11.5px; font-weight:700; color:var(--ink); display:block; line-height:1.2; }
+.s-phase .ph-node .ph-sub { font-size:9.5px; color:var(--muted); display:block; line-height:1.2; margin-top:1px; }
+.s-phase .ph-node.plan { background:transparent; border-style:dashed; box-shadow:none; }
+.s-phase .ph-node.plan .ph-nm { color:var(--muted); }
+.s-phase .ph-node.plan .ph-sub { color:var(--dim); }
+.s-phase .ph-feed { position:absolute; bottom:40px; left:68px; right:64px; display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:11px; font-weight:600; color:var(--muted); }
+.s-phase .ph-feed em { font-style:normal; color:var(--accent); }
+
 /* ── Baseline: controls hint ── */
 .controls-hint {
   text-align: center;
@@ -1164,735 +2011,693 @@ body.presenting .slide.active {
   </div>
 
   <div class="cover-bottom-line"></div>
-  <div class="slide-number">1 / 5</div>
+  <div class="slide-number">1 / 16</div>
 </div>
 
 
 
-<!-- slide 2: The Agentic Harness -->
+<!-- slide 2: Proof — same model, better harness -->
 
-<div class="slide s-harness">
-  <div class="section-label">The Agentic Harness</div>
-  <h2 class="slide-title">Functional anatomy — 14 domains around one shared Agent Core.</h2>
+<div class="slide s-proof" data-sources="li-agentic-coding">
+  <div class="section-label">The Lever · Proof</div>
+  <h2 class="slide-title">Hold the model fixed, swap the harness: 42% → 78%.</h2>
 
-  <div class="ha-wrap">
-
-    <!-- LEFT: input / context domains (1–7) -->
-    <div class="ha-col ha-col-left">
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="target" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">1 · Goals &amp; Tasking</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">user intent</span>
-            <span class="ha-tag">constraints</span>
-            <span class="ha-tag">priority</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="book-open" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">2 · Knowledge</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">docs</span>
-            <span class="ha-tag">search</span>
-            <span class="ha-tag">RAG</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="database" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">3 · Memory</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">working</span>
-            <span class="ha-tag">episodic</span>
-            <span class="ha-tag">long-term</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="eye" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">4 · Sensors / Perception</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">files</span>
-            <span class="ha-tag">logs</span>
-            <span class="ha-tag">telemetry</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="layers" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">5 · Environment State</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">repo</span>
-            <span class="ha-tag">runtime</span>
-            <span class="ha-tag">context</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="terminal" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">6 · Actuators / Actions</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">edit</span>
-            <span class="ha-tag">execute</span>
-            <span class="ha-tag">API calls</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="shield-check" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">7 · Controls &amp; Validation</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">tests</span>
-            <span class="ha-tag">assertions</span>
-            <span class="ha-tag">evals</span>
-          </div>
-        </div>
-      </div>
-
+  <div class="proof-wrap">
+    <div class="bar-col baseline">
+      <div class="bar-val">42%</div>
+      <div class="bar" style="height: 168px;"></div>
+      <div class="bar-cap"><strong>Baseline harness</strong><br>off-the-shelf scaffolding</div>
     </div>
 
-    <!-- Spine connector: left column → Agent Core (7 stubs, one per card) -->
-    <div class="ha-spine ha-spine-left">
-      <div class="ha-spine-line"></div>
-      <div class="ha-spine-line"></div>
-      <div class="ha-spine-line"></div>
-      <div class="ha-spine-line"></div>
-      <div class="ha-spine-line"></div>
-      <div class="ha-spine-line"></div>
-      <div class="ha-spine-line"></div>
+    <div class="bar-col hero">
+      <div class="bar-val">78%</div>
+      <div class="bar" style="height: 312px;"></div>
+      <div class="bar-cap"><strong>Engineered harness</strong><br>same model, better tooling</div>
     </div>
 
-    <!-- CENTER: Agent Core -->
-    <div class="ha-core">
-        <div class="ha-core-label">Agent Core</div>
-        <div class="ha-core-modules">
-
-          <div class="ha-module">
-            <i data-lucide="list-checks" class="icon-sm"></i>
-            <span class="ha-module-name">Planner</span>
-          </div>
-
-          <div class="ha-module">
-            <i data-lucide="cpu" class="icon-sm"></i>
-            <span class="ha-module-name">Reasoner</span>
-          </div>
-
-          <div class="ha-module">
-            <i data-lucide="share-2" class="icon-sm"></i>
-            <span class="ha-module-name">Policy / Orchestrator</span>
-          </div>
-
-          <div class="ha-module">
-            <i data-lucide="repeat" class="icon-sm"></i>
-            <span class="ha-module-name">Execution Loop</span>
-          </div>
-
-        </div>
-        <div class="ha-core-stat">
-          Same model · better harness &nbsp;→&nbsp; <em>42% → 78%</em> on HAL CORE-Bench
-        </div>
-    </div>
-
-    <!-- Spine connector: Agent Core → right column (7 stubs, one per card) -->
-    <div class="ha-spine ha-spine-right">
-      <div class="ha-spine-line"></div>
-      <div class="ha-spine-line"></div>
-      <div class="ha-spine-line"></div>
-      <div class="ha-spine-line"></div>
-      <div class="ha-spine-line"></div>
-      <div class="ha-spine-line"></div>
-      <div class="ha-spine-line"></div>
-    </div>
-
-    <!-- RIGHT: governance / output domains (8–14) -->
-    <div class="ha-col ha-col-right">
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="git-branch" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">8 · Planning &amp; Decomposition</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">task graph</span>
-            <span class="ha-tag">sequencing</span>
-            <span class="ha-tag">retries</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="wrench" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">9 · Tools &amp; Skills</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">shell</span>
-            <span class="ha-tag">code tools</span>
-            <span class="ha-tag">MCP</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="lock" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">10 · Safety &amp; Governance</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">guardrails</span>
-            <span class="ha-tag">approvals</span>
-            <span class="ha-tag">policy</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="refresh-cw" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">11 · Learning &amp; Adaptation</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">feedback</span>
-            <span class="ha-tag">tuning</span>
-            <span class="ha-tag">heuristics</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="users" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">12 · Human Feedback</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">review</span>
-            <span class="ha-tag">approval</span>
-            <span class="ha-tag">handoff</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="fingerprint" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">13 · Identity &amp; Access</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">roles</span>
-            <span class="ha-tag">credentials</span>
-            <span class="ha-tag">auth</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ha-card">
-        <div class="ha-card-accent"></div>
-        <div class="ha-card-icon"><i data-lucide="bar-chart-2" class="icon-sm"></i></div>
-        <div class="ha-card-body">
-          <div class="ha-card-name">14 · Observability</div>
-          <div class="ha-card-tags">
-            <span class="ha-tag">logs</span>
-            <span class="ha-tag">traces</span>
-            <span class="ha-tag">metrics</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
+    <div class="proof-delta">+36 points · same model weights</div>
   </div>
 
-  <!-- Agent Loop bottom strip -->
-  <div class="ha-loop">
-    <span class="ha-loop-label">Agent Loop</span>
+  <div class="proof-same">Claude Opus 4.5 · HAL CORE-Bench · the only thing that changed was the harness</div>
+  <div class="slide-number">2 / 16</div>
 
-    <div class="ha-loop-step">
-      <div class="ha-loop-bubble">
-        <i data-lucide="radio" class="icon-xs"></i>
-      </div>
-      <div class="ha-loop-name">Sense</div>
-    </div>
-    <div class="ha-loop-arr"><i data-lucide="chevron-right" class="icon-xs"></i></div>
-
-    <div class="ha-loop-step">
-      <div class="ha-loop-bubble">
-        <i data-lucide="search" class="icon-xs"></i>
-      </div>
-      <div class="ha-loop-name">Retrieve</div>
-    </div>
-    <div class="ha-loop-arr"><i data-lucide="chevron-right" class="icon-xs"></i></div>
-
-    <div class="ha-loop-step">
-      <div class="ha-loop-bubble">
-        <i data-lucide="bookmark" class="icon-xs"></i>
-      </div>
-      <div class="ha-loop-name">Remember</div>
-    </div>
-    <div class="ha-loop-arr"><i data-lucide="chevron-right" class="icon-xs"></i></div>
-
-    <div class="ha-loop-step">
-      <div class="ha-loop-bubble lit">
-        <i data-lucide="list-checks" class="icon-xs"></i>
-      </div>
-      <div class="ha-loop-name lit">Plan</div>
-    </div>
-    <div class="ha-loop-arr"><i data-lucide="chevron-right" class="icon-xs"></i></div>
-
-    <div class="ha-loop-step">
-      <div class="ha-loop-bubble lit">
-        <i data-lucide="zap" class="icon-xs"></i>
-      </div>
-      <div class="ha-loop-name lit">Act</div>
-    </div>
-    <div class="ha-loop-arr"><i data-lucide="chevron-right" class="icon-xs"></i></div>
-
-    <div class="ha-loop-step">
-      <div class="ha-loop-bubble">
-        <i data-lucide="check-circle" class="icon-xs"></i>
-      </div>
-      <div class="ha-loop-name">Validate</div>
-    </div>
-    <div class="ha-loop-arr"><i data-lucide="chevron-right" class="icon-xs"></i></div>
-
-    <div class="ha-loop-step">
-      <div class="ha-loop-bubble">
-        <i data-lucide="refresh-cw" class="icon-xs"></i>
-      </div>
-      <div class="ha-loop-name">Learn</div>
-    </div>
-
-  </div>
-
-  <div class="slide-number">2 / 5</div>
+<div class="slide-source-bar">Aidan Li · An Opinionated Guide to Agentic Coding (2026) — aidanli.dev</div>
 </div>
 
 
 
-<!-- slide 3: clew — Architecture Memory -->
+<!-- slide 3: The lever is the tooling -->
 
-<div class="slide s-clew">
-  <!-- Left: artefact stack -->
-  <div class="artefact-panel">
-    <div class="artefact-stack">
+<div class="slide s-lever" data-sources="ahe-2604">
+  <div class="section-label">The Lever · Where it lives</div>
+  <h2 class="slide-title">Performance lives in the tooling around the model — not the model.</h2>
+  <p class="slide-lede">Ablation studies rank what actually moves agent performance. Model prompt-tuning sits <em>last</em>.</p>
 
-      <div class="ast-row">
-        <div class="ast-node highlight">
-          <div class="ast-dot"></div>
-          <span class="ast-id">VISION</span>
-          <span class="ast-name">Product Vision</span>
-          <span class="ast-tag">north star</span>
-        </div>
-      </div>
-
-      <div class="ast-connector"></div>
-
-      <div class="ast-row">
-        <div class="ast-group">
-          <div class="ast-node">
-            <div class="ast-dot"></div>
-            <span class="ast-id">P-01</span>
-            <span class="ast-name">Personas</span>
-          </div>
-          <div class="ast-node">
-            <div class="ast-dot"></div>
-            <span class="ast-id">OBJ-01</span>
-            <span class="ast-name">Objectives</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ast-connector"></div>
-
-      <div class="ast-row">
-        <div class="ast-group">
-          <div class="ast-node">
-            <div class="ast-dot"></div>
-            <span class="ast-id">C2.3</span>
-            <span class="ast-name">Capabilities</span>
-          </div>
-          <div class="ast-node">
-            <div class="ast-dot"></div>
-            <span class="ast-id">BC-01</span>
-            <span class="ast-name">Domain Model</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ast-connector"></div>
-
-      <div class="ast-row">
-        <div class="ast-group">
-          <div class="ast-node">
-            <div class="ast-dot"></div>
-            <span class="ast-id">E-03</span>
-            <span class="ast-name">Roadmap</span>
-          </div>
-          <div class="ast-node">
-            <div class="ast-dot"></div>
-            <span class="ast-id">QA-PE01</span>
-            <span class="ast-name">Quality Attrs</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ast-connector"></div>
-
-      <div class="ast-row">
-        <div class="ast-node highlight">
-          <div class="ast-dot"></div>
-          <span class="ast-id">PRD-0003</span>
-          <span class="ast-name">Product Requirements</span>
-          <span class="ast-tag">→ code</span>
-        </div>
-      </div>
-
+  <div class="rank">
+    <div class="rank-row">
+      <span class="rank-rankno">1</span>
+      <span class="rank-label">Tools</span>
+      <div class="rank-track"><div class="rank-fill" style="width: 100%;"></div></div>
+    </div>
+    <div class="rank-row">
+      <span class="rank-rankno">2</span>
+      <span class="rank-label">Middleware</span>
+      <div class="rank-track"><div class="rank-fill" style="width: 82%;"></div></div>
+    </div>
+    <div class="rank-row">
+      <span class="rank-rankno">3</span>
+      <span class="rank-label">Long-term memory</span>
+      <div class="rank-track"><div class="rank-fill" style="width: 64%;"></div></div>
+    </div>
+    <div class="rank-row lo">
+      <span class="rank-rankno">4</span>
+      <span class="rank-label">System prompt</span>
+      <div class="rank-track"><div class="rank-fill" style="width: 30%;"></div></div>
     </div>
   </div>
 
-  <!-- Right: claim -->
-  <div class="clew-claim">
-    <div class="clew-section-label">clew</div>
-    <h2 class="clew-title">
-      The harness's<br>long-term memory.
-    </h2>
-    <div class="clew-subtitle">
-      Every artefact has a stable ID.<br>
-      Every agent session starts with context.
+  <div class="rank-note">
+    <div class="note-block">
+      <div class="note-k">The inversion</div>
+      <div class="note-v">Most teams pour effort into #4 — the prompt. The gains sit in #1–3.</div>
+    </div>
+    <div class="note-block">
+      <div class="note-k">The model</div>
+      <div class="note-v">Table stakes once it is capable. The harness is the differentiator.</div>
+    </div>
+  </div>
+
+  <div class="slide-number">3 / 16</div>
+
+<div class="slide-source-bar">arXiv 2604.25850 · Agentic Harness Engineering (2026) — arxiv.org</div>
+</div>
+
+
+
+<!-- slide 4: Anatomy — loop + 15 capabilities -->
+
+<div class="slide s-anatomy" data-sources="clew-research-harness">
+  <div class="section-label">Harness Anatomy</div>
+  <h2 class="slide-title">One loop, 15 capabilities — a capability system, not a layer cake.</h2>
+  <p class="slide-lede">The model fills each step; the harness governs the transitions — and three capabilities govern them all.</p>
+
+  <div class="loop-track">
+
+    <div class="phase-col">
+      <div class="phase-head">Sense</div>
+      <div class="phase-caps">
+        <div class="cap-chip">Sensors / Perception</div>
+        <div class="cap-chip">Environment State</div>
+      </div>
+    </div>
+    <div class="loop-arr"><i data-lucide="chevron-right" class="icon-sm"></i></div>
+
+    <div class="phase-col">
+      <div class="phase-head">Retrieve</div>
+      <div class="phase-caps">
+        <div class="cap-chip">Knowledge</div>
+      </div>
+    </div>
+    <div class="loop-arr"><i data-lucide="chevron-right" class="icon-sm"></i></div>
+
+    <div class="phase-col">
+      <div class="phase-head">Remember</div>
+      <div class="phase-caps">
+        <div class="cap-chip">Memory</div>
+      </div>
+    </div>
+    <div class="loop-arr"><i data-lucide="chevron-right" class="icon-sm"></i></div>
+
+    <div class="phase-col">
+      <div class="phase-head">Plan</div>
+      <div class="phase-caps">
+        <div class="cap-chip">Agent Core</div>
+        <div class="cap-chip">Goals &amp; Tasking</div>
+        <div class="cap-chip">Planning &amp; Decomp.</div>
+      </div>
+    </div>
+    <div class="loop-arr"><i data-lucide="chevron-right" class="icon-sm"></i></div>
+
+    <div class="phase-col">
+      <div class="phase-head">Act</div>
+      <div class="phase-caps">
+        <div class="cap-chip">Actuators / Actions</div>
+        <div class="cap-chip">Tools &amp; Skills</div>
+      </div>
+    </div>
+    <div class="loop-arr"><i data-lucide="chevron-right" class="icon-sm"></i></div>
+
+    <div class="phase-col">
+      <div class="phase-head">Validate</div>
+      <div class="phase-caps">
+        <div class="cap-chip">Controls &amp; Validation</div>
+        <div class="cap-chip">Observability</div>
+      </div>
+    </div>
+    <div class="loop-arr"><i data-lucide="chevron-right" class="icon-sm"></i></div>
+
+    <div class="phase-col">
+      <div class="phase-head">Learn</div>
+      <div class="phase-caps">
+        <div class="cap-chip">Learning &amp; Adaptation</div>
+      </div>
     </div>
 
-    <div class="clew-props">
-      <div class="clew-prop">
-        <div class="prop-icon">
-          <i data-lucide="link" class="icon-sm"></i>
-        </div>
+  </div>
+
+  <div class="govern-band">
+    <span class="govern-label">Governs<br>every step</span>
+    <div class="govern-caps">
+      <div class="govern-cap">Safety &amp; Governance</div>
+      <div class="govern-cap">Identity &amp; Access</div>
+      <div class="govern-cap">Human Feedback</div>
+    </div>
+  </div>
+
+  <div class="slide-number">4 / 16</div>
+
+<div class="slide-source-bar">Internal research · What Makes a Good Agentic Harness — research synthesis (2026)</div>
+</div>
+
+
+
+<!-- slide 5: Anatomy — harness around the model -->
+
+<div class="slide s-rings2">
+  <div class="section-label">Harness Anatomy · Rings</div>
+  <h2 class="slide-title">The model is a dot. The harness is the mass around it.</h2>
+
+  <div class="rs-stage">
+    <svg class="rs-svg" viewBox="0 0 1280 720" width="1280" height="720">
+      <path d="M 505.0 336.0 L 505.0 150.0 A 250 250 0 0 1 721.5 275.0 L 560.4 368.0 A 64 64 0 0 0 505.0 336.0 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/><path d="M 560.4 368.0 L 721.5 275.0 A 250 250 0 0 1 755.0 400.0 L 569.0 400.0 A 64 64 0 0 0 560.4 368.0 Z" style="fill:color-mix(in srgb,var(--accent) 5%,var(--surface));stroke:none"/><path d="M 569.0 400.0 L 755.0 400.0 A 250 250 0 0 1 721.5 525.0 L 560.4 432.0 A 64 64 0 0 0 569.0 400.0 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/><path d="M 560.4 432.0 L 721.5 525.0 A 250 250 0 0 1 380.0 616.5 L 473.0 455.4 A 64 64 0 0 0 560.4 432.0 Z" style="fill:color-mix(in srgb,var(--accent) 5%,var(--surface));stroke:none"/><path d="M 473.0 455.4 L 380.0 616.5 A 250 250 0 0 1 255.0 400.0 L 441.0 400.0 A 64 64 0 0 0 473.0 455.4 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/><path d="M 441.0 400.0 L 255.0 400.0 A 250 250 0 0 1 380.0 183.5 L 473.0 344.6 A 64 64 0 0 0 441.0 400.0 Z" style="fill:color-mix(in srgb,var(--accent) 5%,var(--surface));stroke:none"/><path d="M 473.0 344.6 L 380.0 183.5 A 250 250 0 0 1 505.0 150.0 L 505.0 336.0 A 64 64 0 0 0 473.0 344.6 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/>
+      <line x1="505.0" y1="336.0" x2="505.0" y2="150.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="560.4" y1="368.0" x2="721.5" y2="275.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="569.0" y1="400.0" x2="755.0" y2="400.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="560.4" y1="432.0" x2="721.5" y2="525.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="473.0" y1="455.4" x2="380.0" y2="616.5" style="stroke:var(--surface);stroke-width:2.5"/><line x1="441.0" y1="400.0" x2="255.0" y2="400.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="473.0" y1="344.6" x2="380.0" y2="183.5" style="stroke:var(--surface);stroke-width:2.5"/><line x1="505.0" y1="336.0" x2="505.0" y2="150.0" style="stroke:var(--surface);stroke-width:2.5"/>
+    </svg>
+    <div class="rs-core" style="left:505px;top:400px;"><div class="t">MODEL</div></div>
+    <div class="rs-phase" style="left:559.0px;top:306.5px;">Sense</div><div class="rs-phase" style="left:609.3px;top:372.0px;">Retrieve</div><div class="rs-phase" style="left:609.3px;top:428.0px;">Remember</div><div class="rs-phase" style="left:533.0px;top:504.3px;">Plan</div><div class="rs-phase" style="left:411.5px;top:454.0px;">Act</div><div class="rs-phase" style="left:411.5px;top:346.0px;">Validate</div><div class="rs-phase" style="left:477.0px;top:295.7px;">Learn</div>
+    <div class="rs-cap" style="left:565.0px;top:175.9px;">Sensors</div><div class="rs-cap" style="left:669.0px;top:236.0px;">Env. State</div><div class="rs-cap" style="left:729.1px;top:340.0px;">Knowledge</div><div class="rs-cap" style="left:729.1px;top:460.0px;">Memory</div><div class="rs-cap" style="left:669.0px;top:564.0px;">Agent Core</div><div class="rs-cap" style="left:565.0px;top:624.1px;">Goals</div><div class="rs-cap" style="left:445.0px;top:624.1px;">Planning</div><div class="rs-cap" style="left:341.0px;top:564.0px;">Actuators</div><div class="rs-cap" style="left:280.9px;top:460.0px;">Tools & Skills</div><div class="rs-cap" style="left:280.9px;top:340.0px;">Controls</div><div class="rs-cap" style="left:341.0px;top:236.0px;">Observability</div><div class="rs-cap" style="left:445.0px;top:175.9px;">Learning</div>
+  </div>
+
+  <div class="rs-govern">
+    <div class="rs-glabel">Cross-cutting</div>
+    <div class="rs-gsub">Govern every step — they don't belong to one.</div>
+    <div class="rs-gcap"><i data-lucide="shield-check" class="icon-sm"></i>Safety &amp; Governance</div>
+    <div class="rs-gcap"><i data-lucide="key-round" class="icon-sm"></i>Identity &amp; Access</div>
+    <div class="rs-gcap"><i data-lucide="users" class="icon-sm"></i>Human Feedback</div>
+  </div>
+
+  <div class="rings-cap">Each wedge is <em>one loop step</em> and the capabilities it owns · the three on the right <em>govern every step</em>.</div>
+  <div class="slide-number">5 / 16</div>
+</div>
+
+
+
+<!-- slide 6: Harnesses starve memory -->
+
+<div class="slide s-memory" data-sources="raschka-coding-agent,clew-research-harness">
+  <div class="section-label">The Gap</div>
+  <h2 class="slide-title">Most harnesses only have the shallowest memory — yet memory is the moat.</h2>
+
+  <div class="mem-layers">
+    <div class="mem-layer l-working">
+      <div class="ml-name">Working memory</div>
+      <div class="ml-sub">session scratchpad</div>
+    </div>
+    <div class="mem-layer l-episodic">
+      <div class="ml-name">Episodic memory</div>
+      <div class="ml-sub">resumable transcript</div>
+    </div>
+    <div class="mem-layer l-longterm">
+      <div class="ml-name">Long-term memory</div>
+      <div class="ml-sub">AGENTS.md · CLAUDE.md · the artefact store</div>
+    </div>
+  </div>
+
+  <div class="mem-shallow"><i data-lucide="arrow-left" class="icon-sm"></i>&nbsp;most stop here</div>
+  <div class="mem-deep">the moat</div>
+
+  <div class="mem-stats">
+    <div class="stat-card">
+      <div class="stat-big"><em>Persists</em></div>
+      <div class="stat-desc">Working memory dies at session end. Long-term memory is the only layer that survives across sessions — and compounds as the project grows.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-big"><em>0</em> tokens / fetch</div>
+      <div class="stat-desc">And it's a local file read — no MCP API roundtrip, no token cost, reloaded at the start of every session.</div>
+    </div>
+  </div>
+
+  <div class="slide-number">6 / 16</div>
+
+<div class="slide-source-bar">Sebastian Raschka · Components of a Coding Agent (2026) — magazine.sebastianraschka.com &nbsp;|&nbsp; Internal research · What Makes a Good Agentic Harness — research synthesis (2026)</div>
+</div>
+
+
+
+<!-- slide 7: Context rot — the window isn't the memory -->
+
+<div class="slide s-crot" data-sources="anthropic-opus47,anthropic-opus46,nolima-context">
+  <div class="section-label">The Gap · Context Rot</div>
+  <h2 class="slide-title">A bigger context window is not bigger memory.</h2>
+  <p class="slide-lede">Retrieval accuracy <em>rots</em> as you fill the window — even the 2026 frontier.</p>
+
+  <svg class="cr-svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <line class="cr-grid" x1="340" y1="210.0" x2="740" y2="210.0"/><line class="cr-grid" x1="340" y1="313.1" x2="740" y2="313.1"/><line class="cr-grid-half" x1="340" y1="416.2" x2="740" y2="416.2"/><line class="cr-grid" x1="340" y1="519.4" x2="740" y2="519.4"/>
+    <line class="cr-line ref" x1="360" y1="238.9" x2="720" y2="309.0"/><line class="cr-line gpt" x1="360" y1="261.6" x2="720" y2="317.2"/><line class="cr-line hero" x1="360" y1="379.1" x2="720" y2="490.5"/><circle class="cr-dot ref" cx="360" cy="238.9" r="5.5"/><circle class="cr-dot ref" cx="720" cy="309.0" r="5.5"/><circle class="cr-dot gpt" cx="360" cy="261.6" r="5.5"/><circle class="cr-dot gpt" cx="720" cy="317.2" r="5.5"/><circle class="cr-dot hero" cx="360" cy="379.1" r="5.5"/><circle class="cr-dot hero" cx="720" cy="490.5" r="5.5"/>
+  </svg>
+
+  <!-- y-axis labels -->
+  <div class="cr-yax" style="left:332px;top:210px;">100%</div>
+  <div class="cr-yax" style="left:332px;top:313px;">75%</div>
+  <div class="cr-yax" style="left:332px;top:416px;">50%</div>
+  <div class="cr-yax" style="left:332px;top:519px;">25%</div>
+  <div class="cr-halftag" style="left:602px;top:416px;">half of baseline</div>
+  <div class="cr-axtitle" style="left:300px;top:175px;">retrieval accuracy · MRCR v2</div>
+
+  <!-- model labels (left) -->
+  <div class="cr-model ref"  style="left:312px;top:239px;">Opus 4.6</div>
+  <div class="cr-model gpt"  style="left:312px;top:262px;">GPT-5.5</div>
+  <div class="cr-model hero" style="left:312px;top:379px;">Opus 4.7</div>
+
+  <!-- value labels (Opus only; GPT numbers live in the panel) -->
+  <div class="cr-val ref"  style="left:360px;top:217px;">93%</div>
+  <div class="cr-val ref"  style="left:720px;top:287px;">76%</div>
+  <div class="cr-val hero" style="left:360px;top:357px;">59%</div>
+  <div class="cr-val hero" style="left:720px;top:468px;">32%</div>
+
+  <!-- x-axis -->
+  <div class="cr-xax" style="left:360px;top:550px;">256K<span>tokens</span></div>
+  <div class="cr-xax" style="left:720px;top:550px;">1M<span>tokens</span></div>
+  <div class="cr-axtitle" style="left:470px;top:592px;">context length &rarr;</div>
+
+  <!-- right panel -->
+  <div class="cr-panel">
+    <div class="cr-take">The advertised window is <em>not</em> the usable window.</div>
+    <div class="cr-fact">
+      <div class="k"><em>59% &rarr; 32%</em></div>
+      <div class="v">Claude Opus 4.7 loses ~half its multi-needle retrieval from 256K to 1M tokens. Opus 4.6 holds better (93% &rarr; 76%).</div>
+    </div>
+    <div class="cr-fact">
+      <div class="k">Codex too</div>
+      <div class="v">the GPT-5.x line behind Codex CLI drops ~87% &rarr; 74% at long context — a proxy; no per-length figure is published for the Codex-tuned model.</div>
+    </div>
+    <div class="cr-fact">
+      <div class="k"><em>11 of 13</em></div>
+      <div class="v">models fell below half their accuracy by 32K tokens — context rot isn't new (NoLiMa, 2025).</div>
+    </div>
+  </div>
+
+  <div class="slide-number">7 / 16</div>
+
+<div class="slide-source-bar">Anthropic · Claude Opus 4.7 System Card · MRCR v2 (vendor-reported) (2026) — anthropic.com &nbsp;|&nbsp; Anthropic · Claude Opus 4.6 System Card · MRCR v2 (vendor-reported) (2026) — anthropic.com &nbsp;|&nbsp; Adobe Research / LMU Munich · NoLiMa: Long-Context Evaluation Beyond Literal Matching (ICML 2025) (2025) — arxiv.org</div>
+</div>
+
+
+
+<!-- slide 8: clew engineers memory -->
+
+<div class="slide s-clew" data-sources="clew-research-p01">
+  <div class="section-label">clew</div>
+  <h2 class="slide-title">clew engineers the deepest memory layer — so it stops rotting.</h2>
+
+  <div class="clew2-cols">
+
+    <div class="clew2-col problem">
+      <div class="clew2-head">Without structure, memory rots</div>
+
+      <div class="pain-row">
+        <div class="pain-x"><i data-lucide="unlink" class="icon-sm"></i></div>
         <div>
-          <div class="prop-label">End-to-end traceability</div>
-          <div class="prop-sub">VISION → PRD-0003 · no broken links</div>
+          <div class="pain-label">No traceability graph from the docs</div>
+          <div class="pain-sub">No reliable view of how artefacts relate — joins across them are impossible.</div>
         </div>
       </div>
-      <div class="clew-prop">
-        <div class="prop-icon">
-          <i data-lucide="shield-check" class="icon-sm"></i>
-        </div>
+
+      <div class="pain-row">
+        <div class="pain-x"><i data-lucide="dice-5" class="icon-sm"></i></div>
         <div>
-          <div class="prop-label">Write-time integrity</div>
-          <div class="prop-sub">FK enforcement · drift caught at commit</div>
+          <div class="pain-label">No determinism if you trust the LLM</div>
+          <div class="pain-sub">It silently renumbers IDs; you end up re-verifying everything by hand.</div>
         </div>
       </div>
-      <div class="clew-prop">
-        <div class="prop-icon">
-          <i data-lucide="cpu" class="icon-sm"></i>
-        </div>
+
+      <div class="pain-row">
+        <div class="pain-x"><i data-lucide="hammer" class="icon-sm"></i></div>
         <div>
-          <div class="prop-label">Zero token cost per fetch</div>
-          <div class="prop-sub">local file reads · no API roundtrips</div>
+          <div class="pain-label">Refactors cost a fortune</div>
+          <div class="pain-sub">Change one ID or name and the effort to update every reference is massive.</div>
         </div>
       </div>
     </div>
+
+    <div class="clew2-col answer">
+      <div class="clew2-head">clew = structured long-term memory</div>
+      <div class="clew-props">
+        <div class="clew-prop">
+          <div class="prop-icon"><i data-lucide="link" class="icon-sm"></i></div>
+          <div>
+            <div class="prop-label">End-to-end traceability</div>
+            <div class="prop-sub">a typed graph generated from the docs themselves</div>
+          </div>
+        </div>
+        <div class="clew-prop">
+          <div class="prop-icon"><i data-lucide="shield-check" class="icon-sm"></i></div>
+          <div>
+            <div class="prop-label">Write-time integrity</div>
+            <div class="prop-sub">deterministic IDs · FK checks · drift detection</div>
+          </div>
+        </div>
+        <div class="clew-prop">
+          <div class="prop-icon"><i data-lucide="cpu" class="icon-sm"></i></div>
+          <div>
+            <div class="prop-label">Zero token cost per fetch</div>
+            <div class="prop-sub">local file reads · the repo is the source of truth</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <div class="slide-number">3 / 5</div>
+  <div class="slide-number">8 / 16</div>
+
+<div class="slide-source-bar">Internal research · P-01 validation interview — research synthesis (N=1) (2026)</div>
 </div>
 
 
 
-<!-- slide 4: The Dev Workflow -->
+<!-- slide 9: SDLC overview — context to code -->
 
-<div class="slide s-workflow">
-  <div class="section-label">The Dev Workflow</div>
-  <h2 class="slide-title">Read clew. Plan. Code. Validate. Ship.</h2>
-
-  <div class="workflow-wrap">
-    <!-- Step row -->
-    <div class="wf-flow">
-
-      <div class="wf-step highlight">
-        <div class="wf-num">01</div>
-        <div class="wf-icon-wrap">
-          <i data-lucide="book-open" class="icon-md"></i>
-        </div>
-        <div class="wf-label">Orient</div>
-        <div class="wf-sub">Read clew artefacts<br>PRD · domain · ADRs</div>
-      </div>
-
-      <div class="wf-arrow">
-        <i data-lucide="arrow-right" class="icon-sm"></i>
-      </div>
-
-      <div class="wf-step">
-        <div class="wf-num">02</div>
-        <div class="wf-icon-wrap">
-          <i data-lucide="git-branch" class="icon-md"></i>
-        </div>
-        <div class="wf-label">Plan</div>
-        <div class="wf-sub">Decompose tasks<br>sequence · deps</div>
-      </div>
-
-      <div class="wf-arrow">
-        <i data-lucide="arrow-right" class="icon-sm"></i>
-      </div>
-
-      <div class="wf-step">
-        <div class="wf-num">03</div>
-        <div class="wf-icon-wrap">
-          <i data-lucide="code-2" class="icon-md"></i>
-        </div>
-        <div class="wf-label">Code</div>
-        <div class="wf-sub">Edit · Bash<br>minimal diffs</div>
-      </div>
-
-      <div class="wf-arrow">
-        <i data-lucide="arrow-right" class="icon-sm"></i>
-      </div>
-
-      <div class="wf-step">
-        <div class="wf-num">04</div>
-        <div class="wf-icon-wrap">
-          <i data-lucide="check-circle-2" class="icon-md"></i>
-        </div>
-        <div class="wf-label">Validate</div>
-        <div class="wf-sub">Tests · LSP<br>linting · build</div>
-      </div>
-
-      <div class="wf-arrow">
-        <i data-lucide="arrow-right" class="icon-sm"></i>
-      </div>
-
-      <div class="wf-step highlight">
-        <div class="wf-num">05</div>
-        <div class="wf-icon-wrap">
-          <i data-lucide="git-commit-horizontal" class="icon-md"></i>
-        </div>
-        <div class="wf-label">Commit</div>
-        <div class="wf-sub">Update artefacts<br>audit trail · ship</div>
-      </div>
-
+<div class="slide s-sdlc-ov">
+  <div class="section-label">The Metamodel · SDLC</div>
+  <h2 class="slide-title">From context to code — clew maps the whole SDLC.</h2>
+  <p class="slide-lede">Nineteen artefact types across three phases — discovery feeds design, design feeds delivery, all traceable.</p>
+  <div class="ov-flow">
+    <div class="ov-phase">
+      <div class="ov-num">1</div>
+      <div class="ov-name">Discover &amp; Define</div>
+      <div class="ov-tag">make the context real</div>
+      <div class="ov-layers"><span class="ov-layer">Business</span><span class="ov-layer">Domain</span></div>
+      <div class="ov-do">Brainstorm, interview and run workshops with the business; model the business architecture and define the domain language.</div>
+      <div class="ov-arts"><div class="ov-count">11 artefacts</div><div class="ov-list">VISION · Persona · Capability · Value stream · Objective · Bounded context · Glossary · Domain model …</div></div>
     </div>
-
-    <!-- Harness tool annotation -->
-    <div class="wf-tools-row">
-      <div class="wf-tool-cell">
-        <div class="wf-tool-tag accent">CLAUDE.md<br>AGENTS.md<br>clew store</div>
-      </div>
-      <div class="wf-tool-spacer"></div>
-      <div class="wf-tool-cell">
-        <div class="wf-tool-tag">Task graph<br>Workflow tool</div>
-      </div>
-      <div class="wf-tool-spacer"></div>
-      <div class="wf-tool-cell">
-        <div class="wf-tool-tag">Edit · Write<br>Bash · MCP</div>
-      </div>
-      <div class="wf-tool-spacer"></div>
-      <div class="wf-tool-cell">
-        <div class="wf-tool-tag">LSP · Grep<br>pytest · tsc</div>
-      </div>
-      <div class="wf-tool-spacer"></div>
-      <div class="wf-tool-cell">
-        <div class="wf-tool-tag accent">clew artefacts<br>git · hooks</div>
-      </div>
+    <div class="ov-arr"><i data-lucide="chevron-right" class="icon-md"></i></div>
+    <div class="ov-phase">
+      <div class="ov-num">2</div>
+      <div class="ov-name">Design the Solution</div>
+      <div class="ov-tag">fed by the context</div>
+      <div class="ov-layers"><span class="ov-layer">Product specs</span><span class="ov-layer">Architecture</span></div>
+      <div class="ov-do">Decide the architecture, define contracts, break functionality down and specify requirements &amp; quality — all tracing back to the domain.</div>
+      <div class="ov-arts"><div class="ov-count">7 artefacts</div><div class="ov-list">FBS · Use case · Quality attribute · PRD · Interface contract · CLI contract · ADR</div></div>
+    </div>
+    <div class="ov-arr"><i data-lucide="chevron-right" class="icon-md"></i></div>
+    <div class="ov-phase">
+      <div class="ov-num">3</div>
+      <div class="ov-name">Execute &amp; Deliver</div>
+      <div class="ov-tag">plan, build, test, ship</div>
+      <div class="ov-layers"><span class="ov-layer">Execution</span></div>
+      <div class="ov-do">Sequence the roadmap, plan atomic increments, build and validate, then deploy and operate — covering the rest of the SDLC.</div>
+      <div class="ov-arts"><div class="ov-count">6 built <em>· 1 planned</em></div><div class="ov-list">Delivery roadmap · Implementation plan · Getting started · Deployment · Runbook · Incident analysis · <span style="color:var(--dim)">Test strategy</span></div></div>
     </div>
   </div>
-
-  <div class="slide-number">4 / 5</div>
+  <div class="ov-cross">
+    <span class="ov-cross-l">Cross-cutting</span>
+    <div class="ov-cross-items"><span class="ov-cross-chip">Ideas</span><span class="ov-cross-chip">research</span><span class="ov-cross-chip">workshop</span><span class="ov-cross-chip">competitive landscape</span></div>
+    <span class="ov-cross-note">discovery &amp; enrichment that feed every phase</span>
+  </div>
+  <div class="slide-number">9 / 16</div>
 </div>
 
 
 
-<!-- slide 5: The Metamodel — DevOps ∞ -->
+<!-- slide 10: SDLC ① Discover & Define -->
 
-<div class="slide s-metamodel">
+<div class="slide s-phase p1">
+  <div class="section-label">The SDLC · Discover</div>
+  <h2 class="slide-title">Discover &amp; Define <span style="color:var(--accent)">—</span> make the context real.</h2>
+  <div class="ph-stepper"><span class="ph-step on">① Discover</span><span class="ph-step-arr">›</span><span class="ph-step">② Design</span><span class="ph-step-arr">›</span><span class="ph-step">③ Deliver</span></div>
+  <div class="ph-left">
+    <div class="ph-h">What the agentic engineer does here</div>
+    <div class="ph-act"><div class="ph-act-ic"><i data-lucide="lightbulb" class="icon-sm"></i></div><div><div class="ph-act-t">Brainstorm &amp; capture</div><div class="ph-act-s">ideas, hypotheses</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="search" class="icon-sm"></i></div><div><div class="ph-act-t">Research &amp; scan</div><div class="ph-act-s">market, competitors</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="users" class="icon-sm"></i></div><div><div class="ph-act-t">Interview &amp; workshop</div><div class="ph-act-s">with the business</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="layout-grid" class="icon-sm"></i></div><div><div class="ph-act-t">Model the business</div><div class="ph-act-s">vision → objectives</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="book-open" class="icon-sm"></i></div><div><div class="ph-act-t">Define the domain</div><div class="ph-act-s">ubiquitous language</div></div></div>
+  </div>
+  <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Business<span>Steps 0–6</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Vision</span><span class="ph-sub">north star</span></div><div class="ph-node"><span class="ph-nm">Persona</span><span class="ph-sub">who we serve</span></div><div class="ph-node"><span class="ph-nm">Lean Canvas</span><span class="ph-sub">value proposition</span></div><div class="ph-node"><span class="ph-nm">Capability map</span><span class="ph-sub">what it can do</span></div><div class="ph-node"><span class="ph-nm">Value stream</span><span class="ph-sub">how value flows</span></div><div class="ph-node"><span class="ph-nm">Objective</span><span class="ph-sub">goals & key results</span></div><div class="ph-node"><span class="ph-nm">Business process</span><span class="ph-sub">operations</span></div><div class="ph-node"><span class="ph-nm">Quantitative model</span><span class="ph-sub">unit economics</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Domain<span>Steps 2b–7b</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Bounded context</span><span class="ph-sub">consistency boundary</span></div><div class="ph-node"><span class="ph-nm">Glossary</span><span class="ph-sub">ubiquitous language</span></div><div class="ph-node"><span class="ph-nm">Domain model</span><span class="ph-sub">aggregates & events</span></div></div></div></div>
+  <div class="ph-feed"><span></span><span>feeds → Design</span></div>
+  <div class="slide-number">10 / 16</div>
+</div>
+
+
+
+<!-- slide 11: SDLC ② Design the Solution -->
+
+<div class="slide s-phase p2">
+  <div class="section-label">The SDLC · Design</div>
+  <h2 class="slide-title">Design the Solution <span style="color:var(--accent)">—</span> turn context into a solution.</h2>
+  <div class="ph-stepper"><span class="ph-step">① Discover</span><span class="ph-step-arr">›</span><span class="ph-step on">② Design</span><span class="ph-step-arr">›</span><span class="ph-step">③ Deliver</span></div>
+  <div class="ph-left">
+    <div class="ph-h">What the agentic engineer does here</div>
+    <div class="ph-act"><div class="ph-act-ic"><i data-lucide="git-branch" class="icon-sm"></i></div><div><div class="ph-act-t">Decide architecture</div><div class="ph-act-s">ADRs, trade-offs</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="file-text" class="icon-sm"></i></div><div><div class="ph-act-t">Define contracts</div><div class="ph-act-s">interface, CLI</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="list-tree" class="icon-sm"></i></div><div><div class="ph-act-t">Break down function</div><div class="ph-act-s">FBS</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="square-check" class="icon-sm"></i></div><div><div class="ph-act-t">Specify &amp; qualify</div><div class="ph-act-s">use cases, quality</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="file" class="icon-sm"></i></div><div><div class="ph-act-t">Write PRDs</div><div class="ph-act-s">one per epic</div></div></div>
+  </div>
+  <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Product specs<span>Steps 7–10</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Functional breakdown</span><span class="ph-sub">feature tree</span></div><div class="ph-node"><span class="ph-nm">Use case</span><span class="ph-sub">actor scenarios</span></div><div class="ph-node"><span class="ph-nm">Quality attribute</span><span class="ph-sub">ISO 25010</span></div><div class="ph-node"><span class="ph-nm">Product requirements</span><span class="ph-sub">one per epic</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Architecture<span>Steps 7c · 8.5</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Interface contract</span><span class="ph-sub">API & events</span></div><div class="ph-node"><span class="ph-nm">CLI contract</span><span class="ph-sub">command surface</span></div><div class="ph-node"><span class="ph-nm">Decision record</span><span class="ph-sub">architecture choices</span></div></div></div></div>
+  <div class="ph-feed"><span>fed by ← Context</span><span>feeds → Execution</span></div>
+  <div class="slide-number">11 / 16</div>
+</div>
+
+
+
+<!-- slide 12: SDLC ③ Execute & Deliver -->
+
+<div class="slide s-phase p3">
+  <div class="section-label">The SDLC · Deliver</div>
+  <h2 class="slide-title">Execute &amp; Deliver <span style="color:var(--accent)">—</span> plan, build, test, ship.</h2>
+  <div class="ph-stepper"><span class="ph-step">① Discover</span><span class="ph-step-arr">›</span><span class="ph-step">② Design</span><span class="ph-step-arr">›</span><span class="ph-step on">③ Deliver</span></div>
+  <div class="ph-left">
+    <div class="ph-h">What the agentic engineer does here</div>
+    <div class="ph-act"><div class="ph-act-ic"><i data-lucide="map" class="icon-sm"></i></div><div><div class="ph-act-t">Sequence the roadmap</div><div class="ph-act-s">epics, phases</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="list-checks" class="icon-sm"></i></div><div><div class="ph-act-t">Plan increments</div><div class="ph-act-s">atomic steps</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="flask-conical" class="icon-sm"></i></div><div><div class="ph-act-t">Build &amp; validate</div><div class="ph-act-s">tests, checks</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="rocket" class="icon-sm"></i></div><div><div class="ph-act-t">Deploy</div><div class="ph-act-s">infra, release</div></div></div><div class="ph-act"><div class="ph-act-ic"><i data-lucide="activity" class="icon-sm"></i></div><div><div class="ph-act-t">Operate &amp; fix</div><div class="ph-act-s">runbooks, RCA</div></div></div>
+  </div>
+  <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Plan & build<span>exists</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Delivery roadmap</span><span class="ph-sub">epics & phases</span></div><div class="ph-node"><span class="ph-nm">Implementation plan</span><span class="ph-sub">atomic increments</span></div></div></div><div class="ph-lane plan"><div class="ph-lane-h">Validate<span>planned · new qa- category</span></div><div class="ph-nodes"><div class="ph-node plan"><span class="ph-nm">Test strategy</span><span class="ph-sub">the one gap</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Deploy & operate<span>exists</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Deployment view</span><span class="ph-sub">infra & topology</span></div><div class="ph-node"><span class="ph-nm">Getting started</span><span class="ph-sub">onboarding guide</span></div><div class="ph-node"><span class="ph-nm">Runbook</span><span class="ph-sub">operations</span></div><div class="ph-node"><span class="ph-nm">Incident analysis</span><span class="ph-sub">bug RCA</span></div></div></div></div>
+  <div class="ph-feed"><span>fed by ← Design</span><span></span></div>
+  <div class="slide-number">12 / 16</div>
+</div>
+
+
+
+<!-- slide 13: Deterministic IDs, write-time checks -->
+
+<div class="slide s-mechanism" data-sources="clew-research-p01">
+  <div class="section-label">How it works</div>
+  <h2 class="slide-title">IDs minted by the app, links checked at write time — never by the LLM.</h2>
+
+  <div class="mech-flow">
+    <div class="mech-box">
+      <div class="mech-step">1 · Agent asks</div>
+      <div class="mech-title">Call clew via Bash</div>
+      <div class="mech-code">clew new prd --epic E-01</div>
+      <div class="mech-desc">The agent never invents an ID — it requests one.</div>
+    </div>
+
+    <div class="mech-arr"><i data-lucide="chevron-right" class="icon-md"></i></div>
+
+    <div class="mech-box engine">
+      <div class="mech-step">2 · clew enforces</div>
+      <div class="mech-title">Validate &amp; mint</div>
+      <div class="mech-code">E-01 exists? <span class="ok">✓</span><br>FK enforced &middot; → PRD-0001</div>
+      <div class="mech-desc">Type-checked against the relationship registry; collisions rejected.</div>
+    </div>
+
+    <div class="mech-arr"><i data-lucide="chevron-right" class="icon-md"></i></div>
+
+    <div class="mech-box">
+      <div class="mech-step">3 · Agent writes</div>
+      <div class="mech-title">Reference the ID</div>
+      <div class="mech-code">[PRD-0001](prd-0001.md)</div>
+      <div class="mech-desc">Markdown prose cites the stable ID clew returned.</div>
+    </div>
+  </div>
+
+  <div class="mech-contrast">
+    <div class="contrast-cell good">
+      <i data-lucide="check-circle-2" class="icon-md ci"></i>
+      Deterministic — clew mints every ID and checks every link
+    </div>
+    <div class="contrast-cell bad">
+      <i data-lucide="x-circle" class="icon-md ci"></i>
+      Guessed — the LLM renumbers silently and references rot
+    </div>
+  </div>
+
+  <div class="slide-number">13 / 16</div>
+
+<div class="slide-source-bar">Internal research · P-01 validation interview — research synthesis (N=1) (2026)</div>
+</div>
+
+
+
+<!-- slide 14: Trace, impact, integrity -->
+
+<div class="slide s-trace" data-sources="clew-research-p01">
+  <div class="section-label">The Payoff</div>
+  <h2 class="slide-title">Ask the graph anything: trace upstream, measure blast radius, prove integrity.</h2>
+
+  <div class="trace-cards">
+    <div class="tcard">
+      <div class="tcard-cmd">clew trace OBJ-02</div>
+      <div class="tcard-out">
+        OBJ-02<br>
+        <span class="dim">↑</span> E-01 Epic<br>
+        <span class="dim">↑</span> C1.2 Capability<br>
+        <span class="dim">↑</span> P-01 Persona<br>
+        <span class="dim">↑</span> VISION
+      </div>
+      <div class="tcard-cap">Upstream chain — why this exists.</div>
+    </div>
+
+    <div class="tcard">
+      <div class="tcard-cmd">clew impact E-03</div>
+      <div class="tcard-out">
+        E-03 changes →<br>
+        <span class="dim">↓</span> PRD-0007<br>
+        <span class="dim">↓</span> QA-SC02<br>
+        <span class="dim">↓</span> Plan-0007<br>
+        <span class="dim">3 artefacts affected</span>
+      </div>
+      <div class="tcard-cap">Downstream blast radius — what breaks.</div>
+    </div>
+
+    <div class="tcard">
+      <div class="tcard-cmd">clew check</div>
+      <div class="tcard-out">
+        scanning references…<br>
+        bindings <span class="ok">✓</span><br>
+        drift <span class="ok">✓</span><br>
+        orphans <span class="ok">✓</span><br>
+        <span class="ok">0 broken references</span>
+      </div>
+      <div class="tcard-cap">Integrity audit — deterministic, repeatable.</div>
+    </div>
+  </div>
+
+  <div class="trace-claim">
+    <div class="claim-big">100% current</div>
+    <div class="claim-sub">Every internal reference is up to date, <em>all the time</em> — the north-star metric is end-to-end traceability, not work-in-progress.</div>
+  </div>
+
+  <div class="slide-number">14 / 16</div>
+
+<div class="slide-source-bar">Internal research · P-01 validation interview — research synthesis (N=1) (2026)</div>
+</div>
+
+
+
+<!-- slide 15: Engineer the harness -->
+
+<div class="slide s-close">
   <div class="accent-bar-left"></div>
-  <div class="section-label">The Metamodel</div>
-  <h2 class="slide-title">DevOps ∞ — 8 phases · 10 skill prefixes · 19 artefact types</h2>
-  <svg class="mm-ring" width="1280" height="720"></svg>
-  <div class="slide-number">5 / 5</div>
+  <div class="close-wordmark">clew</div>
 
-<script>
-(function () {
-  const slide = document.currentScript.closest('.s-metamodel');
-  const svg   = slide.querySelector('svg.mm-ring');
+  <div class="close-wrap">
+    <div class="close-eyebrow">The takeaway</div>
+    <h1 class="close-title">Engineer the <em>harness</em>,<br>not just the prompt.</h1>
+    <div class="close-sub">Start with the highest-leverage capability: memory that doesn't rot.</div>
 
-  const CX = 640, CY = 408;
+    <div class="close-posrow">
+      <span class="close-pos">Not a PM tool</span>
+      <span class="close-pos">Not a wiki</span>
+      <span class="close-pos">Not a SaaS</span>
+      <span class="close-pos">The repo is the source of truth</span>
+    </div>
+    <div class="close-metaphor"><em>Git for product architecture</em> — manage what must be true, not what's in progress.</div>
+  </div>
 
-  const SEG = {
-    rUp: [[CX,CY],[710,278],[950,278],[950,CY]],
-    rDn: [[950,CY],[950,538],[710,538],[CX,CY]],
-    lDn: [[CX,CY],[570,538],[330,538],[330,CY]],
-    lUp: [[330,CY],[330,278],[570,278],[CX,CY]],
-  };
+  <div class="close-bottom-line"></div>
+  <div class="slide-number">15 / 16</div>
+</div>
 
-  function bez(t,[p0,p1,p2,p3]) {
-    const m=1-t;
-    return [
-      m*m*m*p0[0]+3*m*m*t*p1[0]+3*m*t*t*p2[0]+t*t*t*p3[0],
-      m*m*m*p0[1]+3*m*m*t*p1[1]+3*m*t*t*p2[1]+t*t*t*p3[1],
-    ];
-  }
-  function bezTan(t,[p0,p1,p2,p3]) {
-    const m=1-t;
-    return [
-      3*(m*m*(p1[0]-p0[0])+2*m*t*(p2[0]-p1[0])+t*t*(p3[0]-p2[0])),
-      3*(m*m*(p1[1]-p0[1])+2*m*t*(p2[1]-p1[1])+t*t*(p3[1]-p2[1])),
-    ];
-  }
 
-  const phases = [
-    { name:'Plan',    color:'#0ea5e9', seg:'lUp', t:0.5,
-      cardXY:[460,205], prefixes:['discovery-','business-'],
-      skills:'vision · persona · capability · value-stream · objective',
-      ids:['IDEA-NNNN','P-NN','C-N.M','OBJ-NN'] },
-    { name:'Code',    color:'#3b82f6', seg:'lDn', t:1.0,
-      cardXY:[190,CY], prefixes:['domain-','spec-'],
-      skills:'bounded-context · domain-model · fbs · use-case · prd',
-      ids:['BC-NN','UC-NN','PRD-NNNN'] },
-    { name:'Build',   color:'#22c55e', seg:'lDn', t:0.5,
-      cardXY:[455,616], prefixes:['dev-','com-'],
-      skills:'stack-guide · ralph-loop · slide-deck · artefact-viz',
-      ids:['stack guides','tokens.css','slides'] },
-    { name:'Test',    color:'#a855f7', seg:'lDn', t:0.1,
-      cardXY:[613,510], prefixes:['spec-','arch-'],
-      skills:'quality-attributes · use-case · service-contract',
-      ids:['QA-XXNN','UC-NN','CTR-NN'] },
-    { name:'Release', color:'#f59e0b', seg:'rUp', t:0.1,
-      cardXY:[667,306], prefixes:['arch-','dev-'],
-      skills:'arc42 · deployment views · git-pr workflow',
-      ids:['DN-NN','SCN-NN','PR'] },
-    { name:'Deploy',  color:'#f97316', seg:'rUp', t:0.5,
-      cardXY:[820,205], prefixes:['ops-','dev-'],
-      skills:'getting-started · runbook · infra provisioning',
-      ids:['getting-started.md','runbooks'] },
-    { name:'Operate', color:'#ef4444', seg:'rUp', t:1.0,
-      cardXY:[1090,CY], prefixes:['ops-'],
-      skills:'runbook · bug-rca · incident response',
-      ids:['runbooks','RCA docs'] },
-    { name:'Monitor', color:'#9aa2ae', seg:'rDn', t:0.5,
-      cardXY:[825,616], prefixes:['util-'],
-      skills:'metamodel-audit · docs-audit · migration',
-      ids:['audit report','INDEX.md'] },
-  ];
 
-  function el(tag, a={}) {
-    const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
-    Object.entries(a).forEach(([k,v]) => e.setAttribute(k,v));
-    return e;
-  }
+<!-- slide 16: Appendix — full capability map -->
 
-  // ── Infinity path ──────────────────────────────────────────
-  // Right lobe (Ops)
-  svg.appendChild(el('path',{
-    d:`M${CX} ${CY} C 710 278,950 278,950 ${CY} C 950 538,710 538,${CX} ${CY} Z`,
-    fill:'rgba(249,115,22,0.06)', stroke:'rgba(249,115,22,0.45)',
-    'stroke-width':3.5, 'stroke-linejoin':'round',
-  }));
-  // Left lobe (Dev)
-  svg.appendChild(el('path',{
-    d:`M${CX} ${CY} C 570 538,330 538,330 ${CY} C 330 278,570 278,${CX} ${CY} Z`,
-    fill:'rgba(59,130,246,0.06)', stroke:'rgba(59,130,246,0.45)',
-    'stroke-width':3.5, 'stroke-linejoin':'round',
-  }));
-  // Unified outline
-  svg.appendChild(el('path',{
-    d:`M${CX} ${CY} C 710 278,950 278,950 ${CY} C 950 538,710 538,${CX} ${CY} C 570 538,330 538,330 ${CY} C 330 278,570 278,${CX} ${CY} Z`,
-    fill:'none', stroke:'#c8d0e4', 'stroke-width':2,
-  }));
+<div class="slide s-anatomy-detail" data-sources="clew-research-harness">
+  <div class="section-label">Appendix</div>
+  <h2 class="slide-title">The full capability map — 15 domains around the agent loop.</h2>
 
-  // Lobe labels
-  [{x:460,y:CY-2,t:'DEV',c:'rgba(59,130,246,0.28)'},
-   {x:820,y:CY-2,t:'OPS',c:'rgba(249,115,22,0.28)'}].forEach(({x,y,t,c}) => {
-    const txt = el('text',{x,y,'text-anchor':'middle','dominant-baseline':'middle',
-      'font-family':"'JetBrains Mono','Liberation Mono','Courier New',monospace",
-      'font-size':28,'font-weight':800,fill:c,'letter-spacing':5});
-    txt.textContent = t; svg.appendChild(txt);
-  });
+  <div class="cap-grid">
+    <div class="cap-card core">
+      <div class="cc-name">1 · Agent Core</div>
+      <div class="cc-tags"><span class="cc-tag">reasoning</span><span class="cc-tag">planning</span><span class="cc-tag">tool select</span></div>
+    </div>
+    <div class="cap-card">
+      <div class="cc-name">2 · Memory</div>
+      <div class="cc-tags"><span class="cc-tag">working</span><span class="cc-tag">episodic</span><span class="cc-tag">long-term</span></div>
+    </div>
+    <div class="cap-card">
+      <div class="cc-name">3 · Knowledge</div>
+      <div class="cc-tags"><span class="cc-tag">repo</span><span class="cc-tag">docs</span><span class="cc-tag">RAG</span></div>
+    </div>
+    <div class="cap-card">
+      <div class="cc-name">4 · Sensors / Perception</div>
+      <div class="cc-tags"><span class="cc-tag">files</span><span class="cc-tag">runtime</span><span class="cc-tag">telemetry</span></div>
+    </div>
+    <div class="cap-card">
+      <div class="cc-name">5 · Actuators / Actions</div>
+      <div class="cc-tags"><span class="cc-tag">edit</span><span class="cc-tag">execute</span><span class="cc-tag">git</span></div>
+    </div>
 
-  // CI/CD center badge
-  svg.appendChild(el('circle',{cx:CX,cy:CY,r:28,fill:'var(--surface)',stroke:'#c8d0e4','stroke-width':1.5}));
-  [{t:'CI/CD',dy:-7,sz:9,c:'var(--muted)'},{t:'junction',dy:6,sz:8,c:'#9aa4bb'}].forEach(({t,dy,sz,c}) => {
-    const txt=el('text',{x:CX,y:CY+dy,'text-anchor':'middle',
-      'font-family':"'JetBrains Mono','Liberation Mono','Courier New',monospace",
-      'font-size':sz,'font-weight':700,fill:c,'letter-spacing':0.5});
-    txt.textContent=t; svg.appendChild(txt);
-  });
+    <div class="cap-card">
+      <div class="cc-name">6 · Controls &amp; Validation</div>
+      <div class="cc-tags"><span class="cc-tag">tests</span><span class="cc-tag">types</span><span class="cc-tag">evals</span></div>
+    </div>
+    <div class="cap-card">
+      <div class="cc-name">7 · Observability</div>
+      <div class="cc-tags"><span class="cc-tag">traces</span><span class="cc-tag">logs</span><span class="cc-tag">metrics</span></div>
+    </div>
+    <div class="cap-card">
+      <div class="cc-name">8 · Goals &amp; Tasking</div>
+      <div class="cc-tags"><span class="cc-tag">intent</span><span class="cc-tag">success</span><span class="cc-tag">scope</span></div>
+    </div>
+    <div class="cap-card">
+      <div class="cc-name">9 · Planning &amp; Decomp.</div>
+      <div class="cc-tags"><span class="cc-tag">decompose</span><span class="cc-tag">sequence</span><span class="cc-tag">retries</span></div>
+    </div>
+    <div class="cap-card">
+      <div class="cc-name">10 · Identity &amp; Access</div>
+      <div class="cc-tags"><span class="cc-tag">auth</span><span class="cc-tag">roles</span><span class="cc-tag">secrets</span></div>
+    </div>
 
-  // Phase dots + connectors
-  phases.forEach(p => {
-    const [dx,dy] = bez(p.t, SEG[p.seg]);
-    const [cx,cy] = p.cardXY;
-    svg.appendChild(el('line',{
-      x1:dx.toFixed(1),y1:dy.toFixed(1),x2:cx,y2:cy,
-      stroke:p.color,'stroke-width':1.2,'stroke-dasharray':'3 4',opacity:0.45,
-    }));
-    svg.appendChild(el('circle',{
-      cx:dx.toFixed(1),cy:dy.toFixed(1),r:5,
-      fill:'var(--surface)',stroke:p.color,'stroke-width':2.5,
-    }));
-  });
+    <div class="cap-card">
+      <div class="cc-name">11 · Human Feedback</div>
+      <div class="cc-tags"><span class="cc-tag">review</span><span class="cc-tag">approval</span><span class="cc-tag">handoff</span></div>
+    </div>
+    <div class="cap-card">
+      <div class="cc-name">12 · Learning &amp; Adaptation</div>
+      <div class="cc-tags"><span class="cc-tag">feedback</span><span class="cc-tag">heuristics</span><span class="cc-tag">eval-driven</span></div>
+    </div>
+    <div class="cap-card">
+      <div class="cc-name">13 · Safety &amp; Governance</div>
+      <div class="cc-tags"><span class="cc-tag">permissions</span><span class="cc-tag">sandbox</span><span class="cc-tag">policy</span></div>
+    </div>
+    <div class="cap-card">
+      <div class="cc-name">14 · Environment State</div>
+      <div class="cc-tags"><span class="cc-tag">repo</span><span class="cc-tag">runtime</span><span class="cc-tag">deps</span></div>
+    </div>
+    <div class="cap-card">
+      <div class="cc-name">15 · Tools &amp; Skills</div>
+      <div class="cc-tags"><span class="cc-tag">shell</span><span class="cc-tag">MCP</span><span class="cc-tag">skills</span></div>
+    </div>
+  </div>
 
-  // Flow arrows
-  [{seg:'lUp',t:0.25},{seg:'lDn',t:0.6},{seg:'rUp',t:0.6},{seg:'rDn',t:0.25}].forEach(({seg,t}) => {
-    const [ax,ay]=bez(t,SEG[seg]), [tx,ty]=bezTan(t,SEG[seg]);
-    const len=Math.sqrt(tx*tx+ty*ty), nx=tx/len, ny=ty/len, s=7, w=4;
-    const pts=[[ax+nx*s-ny*w/2,ay+ny*s+nx*w/2],[ax-nx*s*0.3-ny*w/2,ay-ny*s*0.3+nx*w/2],[ax-ny*w*0.8,ay+nx*w*0.8]]
-      .map(([px,py])=>`${px.toFixed(1)},${py.toFixed(1)}`).join(' ');
-    svg.appendChild(el('polygon',{points:pts,fill:'#9aa4bb'}));
-  });
+  <div class="det-loop">
+    <span class="det-loop-label">Agent loop</span>
+    <span class="det-phase">Sense</span><span class="det-arr"><i data-lucide="chevron-right" class="icon-sm"></i></span>
+    <span class="det-phase">Retrieve</span><span class="det-arr"><i data-lucide="chevron-right" class="icon-sm"></i></span>
+    <span class="det-phase">Remember</span><span class="det-arr"><i data-lucide="chevron-right" class="icon-sm"></i></span>
+    <span class="det-phase">Plan</span><span class="det-arr"><i data-lucide="chevron-right" class="icon-sm"></i></span>
+    <span class="det-phase">Act</span><span class="det-arr"><i data-lucide="chevron-right" class="icon-sm"></i></span>
+    <span class="det-phase">Validate</span><span class="det-arr"><i data-lucide="chevron-right" class="icon-sm"></i></span>
+    <span class="det-phase">Learn</span>
+  </div>
 
-  // Phase cards
-  const CARD_W=174, CARD_H=95;
-  phases.forEach(p => {
-    const [cx,cy] = p.cardXY;
-    const card = document.createElement('div');
-    card.className = 'phase-card';
-    card.style.setProperty('--pc', p.color);
-    card.style.left = Math.round(cx-CARD_W/2)+'px';
-    card.style.top  = Math.round(cy-CARD_H/2)+'px';
+  <div class="slide-number">16 / 16</div>
 
-    const nm = document.createElement('div'); nm.className='phase-name'; nm.textContent=p.name;
-    card.appendChild(nm);
-
-    const pw = document.createElement('div'); pw.className='phase-prefixes';
-    p.prefixes.forEach(pr => {
-      const b=document.createElement('span'); b.className='phase-prefix'; b.textContent=pr;
-      pw.appendChild(b);
-    });
-    card.appendChild(pw);
-
-    const sk=document.createElement('div'); sk.className='phase-skills'; sk.textContent=p.skills;
-    card.appendChild(sk);
-
-    const iw=document.createElement('div'); iw.className='phase-ids';
-    p.ids.forEach(id => {
-      const c=document.createElement('span'); c.className='id-chip'; c.textContent=id;
-      iw.appendChild(c);
-    });
-    card.appendChild(iw);
-
-    slide.appendChild(card);
-  });
-}());
-</script>
+<div class="slide-source-bar">Internal research · What Makes a Good Agentic Harness — research synthesis (2026)</div>
 </div>
 
 

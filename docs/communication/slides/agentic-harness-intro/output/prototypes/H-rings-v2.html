@@ -1,0 +1,69 @@
+
+<style>
+.s-rings2 .rs-stage { position:absolute; inset:0; }
+.s-rings2 .rs-svg { position:absolute; left:0; top:0; z-index:0; }
+.s-rings2 .rs-core {
+  position:absolute; width:104px; height:104px; border-radius:50%; transform:translate(-50%,-50%); z-index:3;
+  background:var(--dark-surface); border:1.5px solid var(--accent-bright);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  box-shadow:0 0 55px color-mix(in srgb,var(--accent) 30%,transparent);
+}
+.s-rings2 .rs-core .t { font-size:15px; font-weight:800; color:var(--dark-ink); letter-spacing:.04em; }
+.s-rings2 .rs-phase {
+  position:absolute; transform:translate(-50%,-50%); z-index:2;
+  font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--accent-ink); background:var(--accent); border-radius:11px; padding:3px 9px; white-space:nowrap;
+}
+.s-rings2 .rs-cap {
+  position:absolute; transform:translate(-50%,-50%); z-index:2;
+  font-size:11px; font-weight:600; color:var(--ink); background:var(--surface);
+  border:1.5px solid var(--border); border-radius:7px; box-shadow:var(--shadow);
+  padding:5px 9px; white-space:nowrap;
+}
+.s-rings2 .rs-govern {
+  position:absolute; right:60px; top:392px; transform:translateY(-50%); width:308px; z-index:2;
+  background:var(--dark-surface); border:1.5px solid var(--dark-border); border-radius:12px;
+  padding:18px 18px; box-shadow:0 4px 28px rgba(0,0,0,.22);
+}
+.s-rings2 .rs-glabel {
+  font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--accent-bright); margin-bottom:4px;
+}
+.s-rings2 .rs-gsub { font-size:11.5px; color:var(--dark-muted); line-height:1.45; margin-bottom:14px; }
+.s-rings2 .rs-gcap {
+  display:flex; align-items:center; gap:11px; padding:11px 13px; margin-top:9px;
+  background:var(--loop-bg); border:1px solid var(--dark-border); border-radius:8px;
+  color:var(--dark-ink); font-size:13px; font-weight:600;
+}
+.s-rings2 .rs-gcap .icon-sm { width:16px; height:16px; color:var(--accent-bright); flex-shrink:0; }
+.s-rings2 .rings-cap {
+  position:absolute; bottom:28px; left:68px; right:68px; text-align:center;
+  font-size:12.5px; font-weight:600; color:var(--muted);
+}
+.s-rings2 .rings-cap em { font-style:normal; color:var(--accent); }
+</style>
+<div class="slide s-rings2">
+  <div class="section-label">Harness Anatomy · Rings</div>
+  <h2 class="slide-title">The model is a dot. The harness is the mass around it.</h2>
+
+  <div class="rs-stage">
+    <svg class="rs-svg" viewBox="0 0 1280 720" width="1280" height="720">
+      <path d="M 505.0 336.0 L 505.0 150.0 A 250 250 0 0 1 721.5 275.0 L 560.4 368.0 A 64 64 0 0 0 505.0 336.0 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/><path d="M 560.4 368.0 L 721.5 275.0 A 250 250 0 0 1 755.0 400.0 L 569.0 400.0 A 64 64 0 0 0 560.4 368.0 Z" style="fill:color-mix(in srgb,var(--accent) 5%,var(--surface));stroke:none"/><path d="M 569.0 400.0 L 755.0 400.0 A 250 250 0 0 1 721.5 525.0 L 560.4 432.0 A 64 64 0 0 0 569.0 400.0 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/><path d="M 560.4 432.0 L 721.5 525.0 A 250 250 0 0 1 380.0 616.5 L 473.0 455.4 A 64 64 0 0 0 560.4 432.0 Z" style="fill:color-mix(in srgb,var(--accent) 5%,var(--surface));stroke:none"/><path d="M 473.0 455.4 L 380.0 616.5 A 250 250 0 0 1 255.0 400.0 L 441.0 400.0 A 64 64 0 0 0 473.0 455.4 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/><path d="M 441.0 400.0 L 255.0 400.0 A 250 250 0 0 1 380.0 183.5 L 473.0 344.6 A 64 64 0 0 0 441.0 400.0 Z" style="fill:color-mix(in srgb,var(--accent) 5%,var(--surface));stroke:none"/><path d="M 473.0 344.6 L 380.0 183.5 A 250 250 0 0 1 505.0 150.0 L 505.0 336.0 A 64 64 0 0 0 473.0 344.6 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/>
+      <line x1="505.0" y1="336.0" x2="505.0" y2="150.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="560.4" y1="368.0" x2="721.5" y2="275.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="569.0" y1="400.0" x2="755.0" y2="400.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="560.4" y1="432.0" x2="721.5" y2="525.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="473.0" y1="455.4" x2="380.0" y2="616.5" style="stroke:var(--surface);stroke-width:2.5"/><line x1="441.0" y1="400.0" x2="255.0" y2="400.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="473.0" y1="344.6" x2="380.0" y2="183.5" style="stroke:var(--surface);stroke-width:2.5"/><line x1="505.0" y1="336.0" x2="505.0" y2="150.0" style="stroke:var(--surface);stroke-width:2.5"/>
+    </svg>
+    <div class="rs-core" style="left:505px;top:400px;"><div class="t">MODEL</div></div>
+    <div class="rs-phase" style="left:559.0px;top:306.5px;">Sense</div><div class="rs-phase" style="left:609.3px;top:372.0px;">Retrieve</div><div class="rs-phase" style="left:609.3px;top:428.0px;">Remember</div><div class="rs-phase" style="left:533.0px;top:504.3px;">Plan</div><div class="rs-phase" style="left:411.5px;top:454.0px;">Act</div><div class="rs-phase" style="left:411.5px;top:346.0px;">Validate</div><div class="rs-phase" style="left:477.0px;top:295.7px;">Learn</div>
+    <div class="rs-cap" style="left:565.0px;top:175.9px;">Sensors</div><div class="rs-cap" style="left:669.0px;top:236.0px;">Env. State</div><div class="rs-cap" style="left:729.1px;top:340.0px;">Knowledge</div><div class="rs-cap" style="left:729.1px;top:460.0px;">Memory</div><div class="rs-cap" style="left:669.0px;top:564.0px;">Agent Core</div><div class="rs-cap" style="left:565.0px;top:624.1px;">Goals</div><div class="rs-cap" style="left:445.0px;top:624.1px;">Planning</div><div class="rs-cap" style="left:341.0px;top:564.0px;">Actuators</div><div class="rs-cap" style="left:280.9px;top:460.0px;">Tools & Skills</div><div class="rs-cap" style="left:280.9px;top:340.0px;">Controls</div><div class="rs-cap" style="left:341.0px;top:236.0px;">Observability</div><div class="rs-cap" style="left:445.0px;top:175.9px;">Learning</div>
+  </div>
+
+  <div class="rs-govern">
+    <div class="rs-glabel">Cross-cutting</div>
+    <div class="rs-gsub">Govern every step — they don't belong to one.</div>
+    <div class="rs-gcap"><i data-lucide="shield-check" class="icon-sm"></i>Safety &amp; Governance</div>
+    <div class="rs-gcap"><i data-lucide="key-round" class="icon-sm"></i>Identity &amp; Access</div>
+    <div class="rs-gcap"><i data-lucide="users" class="icon-sm"></i>Human Feedback</div>
+  </div>
+
+  <div class="rings-cap">Each wedge is <em>one loop step</em> and the capabilities it owns · the three on the right <em>govern every step</em>.</div>
+  <div class="slide-number"></div>
+</div>

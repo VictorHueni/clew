@@ -10,19 +10,63 @@
 #   4. Internal estimates (no public URL) should use:
 #        org: "Internal estimate"
 #      and omit the url field.
-#
-# Example entry:
-#   interpharma-preismodelle:
-#     org: Interpharma
-#     title: "Preismodelle bei Medikamenten"
-#     url: "https://www.interpharma.ch/blog/preismodelle-bei-medikamenten-darum-geht-es/"
-#     year: 2023
-#     accessed: 2026-05-14
 
-sources: {}
-#  example-source:
-#    org: "Organisation Name"
-#    title: "Document or Page Title"
-#    url: "https://example.com/source"
-#    year: 2024
-#    accessed: 2026-01-01
+sources:
+  li-agentic-coding:
+    org: "Aidan Li"
+    title: "An Opinionated Guide to Agentic Coding"
+    url: "https://aidanli.dev"
+    year: 2026
+    accessed: 2026-06-24
+  ahe-2604:
+    org: "arXiv 2604.25850"
+    title: "Agentic Harness Engineering"
+    url: "https://arxiv.org/abs/2604.25850"
+    year: 2026
+    accessed: 2026-06-24
+  config-study-2602:
+    org: "arXiv 2602.14690"
+    title: "Configuring Agentic AI Coding Tools: An Exploratory Study (2,853 repos)"
+    url: "https://arxiv.org/abs/2602.14690"
+    year: 2026
+    accessed: 2026-06-24
+  raschka-coding-agent:
+    org: "Sebastian Raschka"
+    title: "Components of a Coding Agent"
+    url: "https://magazine.sebastianraschka.com"
+    year: 2026
+    accessed: 2026-06-24
+  clew-research-harness:
+    org: "Internal research"
+    title: "What Makes a Good Agentic Harness — research synthesis"
+    year: 2026
+    accessed: 2026-06-24
+  clew-research-p01:
+    org: "Internal research"
+    title: "P-01 validation interview — research synthesis (N=1)"
+    year: 2026
+    accessed: 2026-05-24
+  nolima-context:
+    org: "Adobe Research / LMU Munich"
+    title: "NoLiMa: Long-Context Evaluation Beyond Literal Matching (ICML 2025)"
+    url: "https://arxiv.org/abs/2502.05167"
+    year: 2025
+    accessed: 2026-06-25
+  chroma-context-rot:
+    org: "Chroma Research"
+    title: "Context Rot: How Increasing Input Tokens Impacts LLM Performance"
+    url: "https://www.trychroma.com/research/context-rot"
+    year: 2025
+    accessed: 2026-06-25
+  anthropic-opus47:
+    org: "Anthropic"
+    title: "Claude Opus 4.7 System Card · MRCR v2 (vendor-reported)"
+    url: "https://www.anthropic.com/claude-opus-4-7-system-card"
+    year: 2026
+    accessed: 2026-06-25
+  anthropic-opus46:
+    org: "Anthropic"
+    title: "Claude Opus 4.6 System Card · MRCR v2 (vendor-reported)"
+    url: "https://www.anthropic.com/news/claude-opus-4-6"
+    year: 2026
+    accessed: 2026-06-26

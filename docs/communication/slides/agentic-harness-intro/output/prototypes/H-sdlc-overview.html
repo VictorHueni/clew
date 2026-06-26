@@ -1,0 +1,90 @@
+<style>
+/* SDLC OVERVIEW (s-sdlc-ov) */
+.s-sdlc-ov .slide-title { font-size:30px; }
+.s-sdlc-ov .ov-flow { position:absolute; top:176px; left:40px; right:40px; bottom:126px; display:flex; align-items:stretch; gap:0; }
+.s-sdlc-ov .ov-phase { flex:1; display:flex; flex-direction:column; border:1px solid var(--border); border-top:4px solid var(--accent); border-radius:11px; background:var(--surface); box-shadow:var(--shadow); padding:18px; }
+.s-sdlc-ov .ov-num { width:32px; height:32px; border-radius:50%; background:var(--accent); color:var(--accent-ink); font-weight:800; font-size:15px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
+.s-sdlc-ov .ov-name { font-size:18px; font-weight:800; color:var(--ink); letter-spacing:-.01em; line-height:1.1; }
+.s-sdlc-ov .ov-tag { font-size:12px; color:var(--accent); font-weight:600; margin-top:4px; margin-bottom:13px; }
+.s-sdlc-ov .ov-layers { display:flex; gap:6px; margin-bottom:13px; }
+.s-sdlc-ov .ov-layer { font-family:var(--font-mono); font-size:9.5px; font-weight:700; color:var(--muted); background:var(--surface-2); border:1px solid var(--border); border-radius:5px; padding:3px 8px; }
+.s-sdlc-ov .ov-do { font-size:12.5px; color:var(--ink); line-height:1.5; }
+.s-sdlc-ov .ov-arts { margin-top:auto; padding-top:14px; }
+.s-sdlc-ov .ov-count { font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--accent); }
+.s-sdlc-ov .ov-count em { font-style:normal; color:var(--dim); font-weight:500; }
+.s-sdlc-ov .ov-list { font-family:var(--font-mono); font-size:10px; color:var(--muted); line-height:1.65; margin-top:6px; }
+.s-sdlc-ov .ov-arr { display:flex; align-items:center; justify-content:center; width:30px; flex-shrink:0; color:color-mix(in srgb,var(--accent) 55%,var(--border)); }
+.s-sdlc-ov .ov-cross { position:absolute; left:40px; right:40px; bottom:60px; height:44px; display:flex; align-items:center; gap:14px; background:var(--dark-surface); border:1.5px solid var(--dark-border); border-radius:10px; padding:0 18px; }
+.s-sdlc-ov .ov-cross-l { font-family:var(--font-mono); font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-bright); flex-shrink:0; }
+.s-sdlc-ov .ov-cross-items { display:flex; gap:8px; flex:1; }
+.s-sdlc-ov .ov-cross-chip { font-family:var(--font-mono); font-size:10px; font-weight:600; color:var(--dark-ink); background:var(--loop-bg); border:1px solid var(--dark-border); border-radius:6px; padding:4px 10px; }
+.s-sdlc-ov .ov-cross-note { font-size:10.5px; color:var(--dark-muted); flex-shrink:0; }
+
+/* SDLC DEEP-DIVE (s-phase) */
+.s-phase .slide-title { font-size:30px; }
+.s-phase .ph-stepper { position:absolute; top:40px; right:60px; display:flex; align-items:center; gap:6px; z-index:2; }
+.s-phase .ph-step { font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:.04em; padding:4px 10px; border-radius:12px; border:1.5px solid var(--border); color:var(--dim); }
+.s-phase .ph-step.on { background:var(--accent); border-color:var(--accent); color:var(--accent-ink); }
+.s-phase .ph-step-arr { color:var(--border); font-size:10px; }
+.s-phase .ph-left { position:absolute; top:190px; left:68px; width:392px; bottom:74px; }
+.s-phase .ph-h { font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+.s-phase .ph-act { display:flex; gap:13px; align-items:flex-start; padding:10px 0; border-top:1px solid var(--border); }
+.s-phase .ph-act:last-child { border-bottom:1px solid var(--border); }
+.s-phase .ph-act-ic { width:34px; height:34px; border-radius:8px; background:var(--accent-lt); border:1.5px solid color-mix(in srgb,var(--accent) 25%,var(--border)); display:flex; align-items:center; justify-content:center; color:var(--accent); flex-shrink:0; }
+.s-phase .ph-act-t { font-size:13.5px; font-weight:700; color:var(--ink); line-height:1.2; }
+.s-phase .ph-act-s { font-size:11px; color:var(--muted); margin-top:2px; }
+.s-phase .ph-right { position:absolute; top:190px; left:500px; right:64px; bottom:74px; display:flex; gap:14px; }
+.s-phase .ph-lane { flex:1; display:flex; flex-direction:column; background:color-mix(in srgb,var(--accent) 3%,var(--surface)); border:1px solid var(--border); border-top:3px solid var(--accent); border-radius:9px; padding:11px 10px; }
+.s-phase .ph-lane.plan { border-top-color:var(--dim); border-style:dashed; background:var(--surface-2); }
+.s-phase .ph-lane-h { font-size:12px; font-weight:700; color:var(--accent); line-height:1.1; }
+.s-phase .ph-lane-h span { display:block; font-family:var(--font-mono); font-size:8.5px; font-weight:500; letter-spacing:.05em; text-transform:uppercase; color:var(--dim); margin-top:2px; }
+.s-phase .ph-lane.plan .ph-lane-h { color:var(--muted); }
+.s-phase .ph-nodes { display:flex; flex-direction:column; gap:6px; justify-content:center; flex:1; margin-top:9px; }
+.s-phase .ph-node { background:var(--surface); border:1.5px solid var(--border); border-radius:6px; padding:6px 10px; box-shadow:var(--shadow); }
+.s-phase .ph-node .ph-nm { font-size:11.5px; font-weight:700; color:var(--ink); display:block; line-height:1.2; }
+.s-phase .ph-node .ph-sub { font-size:9.5px; color:var(--muted); display:block; line-height:1.2; margin-top:1px; }
+.s-phase .ph-node.plan { background:transparent; border-style:dashed; box-shadow:none; }
+.s-phase .ph-node.plan .ph-nm { color:var(--muted); }
+.s-phase .ph-node.plan .ph-sub { color:var(--dim); }
+.s-phase .ph-feed { position:absolute; bottom:40px; left:68px; right:64px; display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:11px; font-weight:600; color:var(--muted); }
+.s-phase .ph-feed em { font-style:normal; color:var(--accent); }
+</style>
+<div class="slide s-sdlc-ov">
+  <div class="section-label">The Metamodel · SDLC</div>
+  <h2 class="slide-title">From context to code — clew maps the whole SDLC.</h2>
+  <p class="slide-lede">Nineteen artefact types across three phases — discovery feeds design, design feeds delivery, all traceable.</p>
+  <div class="ov-flow">
+    <div class="ov-phase">
+      <div class="ov-num">1</div>
+      <div class="ov-name">Discover &amp; Define</div>
+      <div class="ov-tag">make the context real</div>
+      <div class="ov-layers"><span class="ov-layer">Business</span><span class="ov-layer">Domain</span></div>
+      <div class="ov-do">Brainstorm, interview and run workshops with the business; model the business architecture and define the domain language.</div>
+      <div class="ov-arts"><div class="ov-count">11 artefacts</div><div class="ov-list">VISION · Persona · Capability · Value stream · Objective · Bounded context · Glossary · Domain model …</div></div>
+    </div>
+    <div class="ov-arr"><i data-lucide="chevron-right" class="icon-md"></i></div>
+    <div class="ov-phase">
+      <div class="ov-num">2</div>
+      <div class="ov-name">Design the Solution</div>
+      <div class="ov-tag">fed by the context</div>
+      <div class="ov-layers"><span class="ov-layer">Product specs</span><span class="ov-layer">Architecture</span></div>
+      <div class="ov-do">Decide the architecture, define contracts, break functionality down and specify requirements &amp; quality — all tracing back to the domain.</div>
+      <div class="ov-arts"><div class="ov-count">7 artefacts</div><div class="ov-list">FBS · Use case · Quality attribute · PRD · Interface contract · CLI contract · ADR</div></div>
+    </div>
+    <div class="ov-arr"><i data-lucide="chevron-right" class="icon-md"></i></div>
+    <div class="ov-phase">
+      <div class="ov-num">3</div>
+      <div class="ov-name">Execute &amp; Deliver</div>
+      <div class="ov-tag">plan, build, test, ship</div>
+      <div class="ov-layers"><span class="ov-layer">Execution</span></div>
+      <div class="ov-do">Sequence the roadmap, plan atomic increments, build and validate, then deploy and operate — covering the rest of the SDLC.</div>
+      <div class="ov-arts"><div class="ov-count">6 built <em>· 1 planned</em></div><div class="ov-list">Delivery roadmap · Implementation plan · Getting started · Deployment · Runbook · Incident analysis · <span style="color:var(--dim)">Test strategy</span></div></div>
+    </div>
+  </div>
+  <div class="ov-cross">
+    <span class="ov-cross-l">Cross-cutting</span>
+    <div class="ov-cross-items"><span class="ov-cross-chip">Ideas</span><span class="ov-cross-chip">research</span><span class="ov-cross-chip">workshop</span><span class="ov-cross-chip">competitive landscape</span></div>
+    <span class="ov-cross-note">discovery &amp; enrichment that feed every phase</span>
+  </div>
+  <div class="slide-number"></div>
+</div>

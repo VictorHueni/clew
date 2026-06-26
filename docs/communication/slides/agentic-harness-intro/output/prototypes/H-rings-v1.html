@@ -1,0 +1,67 @@
+
+<style>
+.s-rings .rings-stage { position:absolute; inset:0; }
+.s-rings .rings-svg { position:absolute; left:0; top:0; z-index:0; }
+.s-rings .rc-loop { fill:none; stroke:color-mix(in srgb,var(--accent) 35%,var(--border)); stroke-width:1.5; }
+.s-rings .rc-cap  { fill:none; stroke:var(--border); stroke-width:1.5; }
+.s-rings .ring-core {
+  position:absolute; width:108px; height:108px; border-radius:50%;
+  transform:translate(-50%,-50%); z-index:2;
+  background:var(--dark-surface); border:1.5px solid var(--accent-bright);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  box-shadow:0 0 60px color-mix(in srgb,var(--accent) 30%,transparent);
+}
+.s-rings .ring-core .rc-t { font-size:16px; font-weight:800; color:var(--dark-ink); letter-spacing:0.04em; }
+.s-rings .ring-loop {
+  position:absolute; transform:translate(-50%,-50%); z-index:2;
+  font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:0.05em;
+  text-transform:uppercase; color:var(--accent);
+  background:var(--accent-lt); border:1px solid color-mix(in srgb,var(--accent) 25%,var(--border));
+  border-radius:12px; padding:3px 8px; white-space:nowrap;
+}
+.s-rings .ring-cap {
+  position:absolute; transform:translate(-50%,-50%); z-index:2;
+  font-size:11px; font-weight:600; color:var(--ink);
+  background:var(--surface); border:1.5px solid var(--border);
+  border-radius:7px; box-shadow:var(--shadow); padding:5px 9px; white-space:nowrap;
+}
+.s-rings .rings-legend {
+  position:absolute; right:64px; top:170px; width:300px;
+  display:flex; flex-direction:column; gap:16px;
+}
+.s-rings .rl-item { display:flex; gap:12px; align-items:flex-start; }
+.s-rings .rl-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; margin-top:3px; }
+.s-rings .rl-dot.core { background:var(--accent-bright); }
+.s-rings .rl-dot.loop { background:color-mix(in srgb,var(--accent) 45%,var(--surface)); border:1.5px solid var(--accent); }
+.s-rings .rl-dot.cap  { background:var(--surface); border:1.5px solid var(--border); }
+.s-rings .rl-k { font-size:13px; font-weight:700; color:var(--ink); }
+.s-rings .rl-v { font-size:12px; color:var(--muted); line-height:1.45; margin-top:2px; }
+.s-rings .rings-cap {
+  position:absolute; bottom:30px; left:68px; right:68px;
+  font-size:13px; font-weight:600; color:var(--muted);
+}
+.s-rings .rings-cap em { font-style:normal; color:var(--accent); }
+</style>
+<div class="slide s-rings">
+  <div class="section-label">Harness Anatomy · Rings</div>
+  <h2 class="slide-title">The model is a dot. The harness is the mass around it.</h2>
+
+  <div class="rings-stage">
+    <svg class="rings-svg" viewBox="0 0 1280 720" width="1280" height="720">
+      <circle class="rc-loop" cx="590" cy="395" r="138"/>
+      <circle class="rc-cap"  cx="590" cy="395" r="252"/>
+    </svg>
+    <div class="ring-core" style="left:590px;top:395px;"><div class="rc-t">MODEL</div></div>
+    <div class="ring-loop" style="left:590.0px;top:257.0px;">Sense</div><div class="ring-loop" style="left:697.9px;top:309.0px;">Retrieve</div><div class="ring-loop" style="left:724.5px;top:425.7px;">Remember</div><div class="ring-loop" style="left:649.9px;top:519.3px;">Plan</div><div class="ring-loop" style="left:530.1px;top:519.3px;">Act</div><div class="ring-loop" style="left:455.5px;top:425.7px;">Validate</div><div class="ring-loop" style="left:482.1px;top:309.0px;">Learn</div>
+    <div class="ring-cap" style="left:590.0px;top:143.0px;">Sensors</div><div class="ring-cap" style="left:692.5px;top:164.8px;">Environment State</div><div class="ring-cap" style="left:777.3px;top:226.4px;">Knowledge</div><div class="ring-cap" style="left:829.7px;top:317.1px;">Memory</div><div class="ring-cap" style="left:840.6px;top:421.3px;">Agent Core</div><div class="ring-cap" style="left:808.2px;top:521.0px;">Goals & Tasking</div><div class="ring-cap" style="left:738.1px;top:598.9px;">Planning</div><div class="ring-cap" style="left:642.4px;top:641.5px;">Actuators</div><div class="ring-cap" style="left:537.6px;top:641.5px;">Tools & Skills</div><div class="ring-cap" style="left:441.9px;top:598.9px;">Controls</div><div class="ring-cap" style="left:371.8px;top:521.0px;">Observability</div><div class="ring-cap" style="left:339.4px;top:421.3px;">Learning</div><div class="ring-cap" style="left:350.3px;top:317.1px;">Safety</div><div class="ring-cap" style="left:402.7px;top:226.4px;">Identity</div><div class="ring-cap" style="left:487.5px;top:164.8px;">Human Feedback</div>
+  </div>
+
+  <div class="rings-legend">
+    <div class="rl-item"><div class="rl-dot core"></div><div><div class="rl-k">Model</div><div class="rl-v">Raw reasoning. Fills each step — nothing more.</div></div></div>
+    <div class="rl-item"><div class="rl-dot loop"></div><div><div class="rl-k">+ Agent loop</div><div class="rl-v">Sense → … → Learn. Orchestration the model can't do alone.</div></div></div>
+    <div class="rl-item"><div class="rl-dot cap"></div><div><div class="rl-k">+ 15 capabilities</div><div class="rl-v">Memory, tools, validation, governance. Each ring adds intelligence.</div></div></div>
+  </div>
+
+  <div class="rings-cap">Same weights at the centre — every ring you add around them makes the system <em>measurably smarter</em>.</div>
+  <div class="slide-number"></div>
+</div>

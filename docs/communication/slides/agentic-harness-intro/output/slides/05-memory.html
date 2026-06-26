@@ -1,0 +1,35 @@
+<div class="slide s-memory" data-sources="raschka-coding-agent,clew-research-harness">
+  <div class="section-label">The Gap</div>
+  <h2 class="slide-title">Most harnesses only have the shallowest memory — yet memory is the moat.</h2>
+
+  <div class="mem-layers">
+    <div class="mem-layer l-working">
+      <div class="ml-name">Working memory</div>
+      <div class="ml-sub">session scratchpad</div>
+    </div>
+    <div class="mem-layer l-episodic">
+      <div class="ml-name">Episodic memory</div>
+      <div class="ml-sub">resumable transcript</div>
+    </div>
+    <div class="mem-layer l-longterm">
+      <div class="ml-name">Long-term memory</div>
+      <div class="ml-sub">AGENTS.md · CLAUDE.md · the artefact store</div>
+    </div>
+  </div>
+
+  <div class="mem-shallow"><i data-lucide="arrow-left" class="icon-sm"></i>&nbsp;most stop here</div>
+  <div class="mem-deep">the moat</div>
+
+  <div class="mem-stats">
+    <div class="stat-card">
+      <div class="stat-big"><em>Persists</em></div>
+      <div class="stat-desc">Working memory dies at session end. Long-term memory is the only layer that survives across sessions — and compounds as the project grows.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-big"><em>0</em> tokens / fetch</div>
+      <div class="stat-desc">And it's a local file read — no MCP API roundtrip, no token cost, reloaded at the start of every session.</div>
+    </div>
+  </div>
+
+  <div class="slide-number"></div>
+</div>

@@ -1,0 +1,53 @@
+<div class="slide s-crot" data-sources="anthropic-opus47,anthropic-opus46,nolima-context">
+  <div class="section-label">The Gap · Context Rot</div>
+  <h2 class="slide-title">A bigger context window is not bigger memory.</h2>
+  <p class="slide-lede">Retrieval accuracy <em>rots</em> as you fill the window — even the 2026 frontier.</p>
+
+  <svg class="cr-svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <line class="cr-grid" x1="340" y1="210.0" x2="740" y2="210.0"/><line class="cr-grid" x1="340" y1="313.1" x2="740" y2="313.1"/><line class="cr-grid-half" x1="340" y1="416.2" x2="740" y2="416.2"/><line class="cr-grid" x1="340" y1="519.4" x2="740" y2="519.4"/>
+    <line class="cr-line ref" x1="360" y1="238.9" x2="720" y2="309.0"/><line class="cr-line gpt" x1="360" y1="261.6" x2="720" y2="317.2"/><line class="cr-line hero" x1="360" y1="379.1" x2="720" y2="490.5"/><circle class="cr-dot ref" cx="360" cy="238.9" r="5.5"/><circle class="cr-dot ref" cx="720" cy="309.0" r="5.5"/><circle class="cr-dot gpt" cx="360" cy="261.6" r="5.5"/><circle class="cr-dot gpt" cx="720" cy="317.2" r="5.5"/><circle class="cr-dot hero" cx="360" cy="379.1" r="5.5"/><circle class="cr-dot hero" cx="720" cy="490.5" r="5.5"/>
+  </svg>
+
+  <!-- y-axis labels -->
+  <div class="cr-yax" style="left:332px;top:210px;">100%</div>
+  <div class="cr-yax" style="left:332px;top:313px;">75%</div>
+  <div class="cr-yax" style="left:332px;top:416px;">50%</div>
+  <div class="cr-yax" style="left:332px;top:519px;">25%</div>
+  <div class="cr-halftag" style="left:602px;top:416px;">half of baseline</div>
+  <div class="cr-axtitle" style="left:300px;top:175px;">retrieval accuracy · MRCR v2</div>
+
+  <!-- model labels (left) -->
+  <div class="cr-model ref"  style="left:312px;top:239px;">Opus 4.6</div>
+  <div class="cr-model gpt"  style="left:312px;top:262px;">GPT-5.5</div>
+  <div class="cr-model hero" style="left:312px;top:379px;">Opus 4.7</div>
+
+  <!-- value labels (Opus only; GPT numbers live in the panel) -->
+  <div class="cr-val ref"  style="left:360px;top:217px;">93%</div>
+  <div class="cr-val ref"  style="left:720px;top:287px;">76%</div>
+  <div class="cr-val hero" style="left:360px;top:357px;">59%</div>
+  <div class="cr-val hero" style="left:720px;top:468px;">32%</div>
+
+  <!-- x-axis -->
+  <div class="cr-xax" style="left:360px;top:550px;">256K<span>tokens</span></div>
+  <div class="cr-xax" style="left:720px;top:550px;">1M<span>tokens</span></div>
+  <div class="cr-axtitle" style="left:470px;top:592px;">context length &rarr;</div>
+
+  <!-- right panel -->
+  <div class="cr-panel">
+    <div class="cr-take">The advertised window is <em>not</em> the usable window.</div>
+    <div class="cr-fact">
+      <div class="k"><em>59% &rarr; 32%</em></div>
+      <div class="v">Claude Opus 4.7 loses ~half its multi-needle retrieval from 256K to 1M tokens. Opus 4.6 holds better (93% &rarr; 76%).</div>
+    </div>
+    <div class="cr-fact">
+      <div class="k">Codex too</div>
+      <div class="v">the GPT-5.x line behind Codex CLI drops ~87% &rarr; 74% at long context — a proxy; no per-length figure is published for the Codex-tuned model.</div>
+    </div>
+    <div class="cr-fact">
+      <div class="k"><em>11 of 13</em></div>
+      <div class="v">models fell below half their accuracy by 32K tokens — context rot isn't new (NoLiMa, 2025).</div>
+    </div>
+  </div>
+
+  <div class="slide-number"></div>
+</div>
