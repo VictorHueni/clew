@@ -50,7 +50,7 @@ slides:
     class: "s-divider"
     label: "§02 — The Metamodel"
   - file: "07-metamodel.html"
-    class: "s-sdlc-ov"
+    class: "s-devops"
     label: "SDLC overview — context to code"
   - file: "07b-sdlc-discover.html"
     class: "s-phase"

@@ -1923,3 +1923,16 @@
 .s-ralph .r-loopback{display:flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;color:var(--accent-bright);justify-content:flex-end;margin:2px 4px 8px;}
 .s-ralph .r-done{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700;color:#fff;background:#1a7f4b;border-radius:9px;padding:9px 14px;}
 .s-ralph .r-done i{width:16px;height:16px;}
+
+/* ══ DEVOPS LOOP (s-devops) ══ */
+.s-devops .slide-title{font-size:28px;}
+.s-devops .dv-stage{position:absolute;inset:0;}
+.s-devops .dv-svg{position:absolute;inset:0;width:100%;height:100%;}
+.s-devops .dv-cl{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:9px;box-shadow:var(--shadow);padding:8px 10px;}
+.s-devops .dv-cl.dv-l{border-top:3px solid #800020;}
+.s-devops .dv-cl.dv-r{border-top:3px solid #c04060;}
+.s-devops .dv-clh{display:flex;align-items:baseline;justify-content:space-between;gap:6px;margin-bottom:4px;}
+.s-devops .dv-clt{font-family:var(--font-mono);font-size:10px;font-weight:800;letter-spacing:.05em;color:#800020;}
+.s-devops .dv-cl.dv-r .dv-clt{color:#c04060;}
+.s-devops .dv-cln{font-family:var(--font-mono);font-size:9px;font-weight:600;color:var(--dim);}
+.s-devops .dv-cls{font-size:9.5px;line-height:1.42;color:var(--ink);}
