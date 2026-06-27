@@ -1,6 +1,6 @@
 ---
 title: Build-planning artefacts move to a `plan-` package, split from Product Specs
-status: draft
+status: active
 owner: Victor Hueni
 last_reviewed: 2026-06-27
 review_interval: 180d
@@ -90,3 +90,4 @@ This takes the metamodel package taxonomy from 7 to **8**.
 | Date | Change | Author |
 | :-- | :-- | :-- |
 | 2026-06-27 | Initial draft. Split build-planning (`delivery-roadmap`, `implementation-plan`) out of `spec-` into a new `plan-` package; artefact types/IDs unchanged. Exercises ADR-0008 (clew as SoT); kit cascade tracked as OI-0035. | Victor Hueni |
+| 2026-06-27 | Activated (`draft → active`). Both open items closed: clew docs applied (OI-0034) and the kit cascade merged (OI-0035, kit PR #51). | Victor Hueni |

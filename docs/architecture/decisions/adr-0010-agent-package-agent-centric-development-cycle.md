@@ -1,6 +1,6 @@
 ---
 title: Agent-tooling skills regroup into an `agent-` package (Agent-Centric Development Cycle)
-status: draft
+status: active
 owner: Victor Hueni
 last_reviewed: 2026-06-27
 review_interval: 180d
@@ -101,3 +101,4 @@ ad-hoc bucket; `qa-` stays clean for product tests; no instance re-mint.
 | Date | Change | Author |
 | :-- | :-- | :-- |
 | 2026-06-27 | Initial draft. Regroup `agent-config`, `agent-grill-me`, `agent-peer-review`, `agent-ralph-loop` into a new `agent-` (Agent-Centric Development Cycle) supporting package; skills mint no IDs, so no metamodel-structure change. Exercises ADR-0008 (clew as SoT); kit cascade tracked as OI-0037. | Victor Hueni |
+| 2026-06-27 | Activated (`draft → active`). Both open items closed: clew docs applied (OI-0036) and the kit cascade merged (OI-0037, kit PR #52). | Victor Hueni |

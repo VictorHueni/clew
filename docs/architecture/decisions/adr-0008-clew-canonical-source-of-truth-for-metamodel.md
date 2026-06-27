@@ -1,6 +1,6 @@
 ---
 title: clew is the canonical source of truth for metamodel structure & relationships
-status: draft
+status: active
 owner: Victor Hueni
 last_reviewed: 2026-06-27
 review_interval: 180d
@@ -229,3 +229,4 @@ Confirmed when all hold:
 | Date | Change | Author |
 | :-- | :-- | :-- |
 | 2026-06-27 | Initial draft. Amends ADR-0006: clew becomes the canonical source of truth for the structural + relational metamodel (skills retain semantics); kit registry + `metamodel.md` structural blocks become generated projections via a future `clew metamodel export`. Motivated by the metamodel being a tool-agnostic standard wrongly coupled to a Claude-specific skills repo. Four-phase rollout (this ADR → `docs/metamodel/` → machine-readable spec → kit export). | Victor Hueni |
+| 2026-06-27 | Activated (`draft → active`). Phases 1–2 in place (`docs/metamodel/` authored) and the SoT pattern exercised twice — ADR-0009 (`plan-` split) and ADR-0010 (`agent-` package) — with kit PRs #51/#52 merged. Phases 3–4 (machine-readable spec, `clew metamodel export`) remain future work. | Victor Hueni |
