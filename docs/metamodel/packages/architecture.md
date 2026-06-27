@@ -66,6 +66,15 @@ flowchart TD
 | `cli_surface` | `CLI-NN` _(+ `cli_command CLI-NN.CMD-NN`)_ | `arch-cli-contract` | one-per-artefact | `docs/architecture/interfaces/cli-{slug}.md` | CLI command tree — global flags, exit codes, stdout/stderr contract. |
 | C4 / arc42 / UML views | _diagram IDs only_ | `arch-c4` · `arch-arc42` · `arch-uml` | — | `docs/architecture/{c4,arc42,diagrams}/` | **Derived views** — visualise IDs owned elsewhere; author no persisted relationships. |
 
+## Planned additions
+
+> Candidate skills from the [kit backlog](https://github.com/VictorHueni/homemade-claude-kit/issues) — not yet shipped.
+
+| Planned skill | Mints | What it will add | Kit issue |
+| :-- | :-- | :-- | :-- |
+| `arch-threat-model` | `THR-NN` | STRIDE per data-flow; feeds ADRs + security QAs | [#12](https://github.com/VictorHueni/homemade-claude-kit/issues/12) |
+| `arch-team-topology` | `TEAM-NN` | Team Topologies derived from `BC-NN` | [#10](https://github.com/VictorHueni/homemade-claude-kit/issues/10) |
+
 ## Boundary relationships
 
 | Verb | Source → Target | Card. | Strength | Neighbour package | Meaning |

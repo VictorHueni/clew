@@ -64,7 +64,9 @@ The whole metamodel as one build-order graph (overview, all packages at once) li
 > mint no artefacts — they are tooling, described under [Supporting packages](#supporting-packages--tooling)
 > below.
 
-> **Status:** all seven package pages drafted. Still to come: the consolidated
+> **Status:** all seven package pages drafted, each ending with a **Planned additions** table of
+> candidate skills from the [kit backlog](https://github.com/VictorHueni/homemade-claude-kit/issues)
+> (qa-*, `domain-event-storming`, `arch-threat-model`, `ops-slo`, …). Still to come: the consolidated
 > [`relationships.md`](#how-to-read-this-section) catalogue (moved out of `artefact-store.md`) and,
 > later, generation from clew's schema. Tracked as OI-0029 on
 > [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md).

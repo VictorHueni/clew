@@ -42,3 +42,11 @@ and relationships those packages declare; `util-open-items` runs the governance 
 every artefact's `## Open Items`. None of these mint or own an artefact — they enforce the rules the
 rest of the metamodel is written against. Under ADR-0008, the audit's source of truth for IDs and
 relationships becomes clew's export rather than the kit registry.
+
+## Planned additions
+
+| Planned skill / feature | Adds | Kit issue |
+| :-- | :-- | :-- |
+| `util-open-items` runner | Deterministic CLI — parse tables, mint `OI-NNNN`, sync, validate, archive | [#20](https://github.com/VictorHueni/homemade-claude-kit/issues/20) |
+| `util-provenance --sign` | Detached digital signature of the digest (GPG / openssl), fully local | [#27](https://github.com/VictorHueni/homemade-claude-kit/issues/27) |
+| `util-provenance --c2pa` | Signed C2PA Content Credentials manifest (author + edit history) | [#28](https://github.com/VictorHueni/homemade-claude-kit/issues/28) |

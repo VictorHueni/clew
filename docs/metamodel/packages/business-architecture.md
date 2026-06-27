@@ -79,6 +79,15 @@ flowchart TD
 | `quantitative_model` | — | `business-quantitative-model` | one-per-artefact | `docs/business/06a-models/qm-NN-{topic}.md` | The numbers — TAM/SAM/SOM, unit economics; quantifies the canvas. |
 | `competitor` | `CO-NN` | `business-competitive-landscape` | one-per-artefact | `docs/business/01b-competitive-landscape/{slug}.md` | Tier-1 competitor profile (Porter + value curve); positions against the canvas, maps ICPs to personas. |
 
+## Planned additions
+
+> Candidate skills from the [kit backlog](https://github.com/VictorHueni/homemade-claude-kit/issues) — not yet shipped. They will mint the IDs below and join this package once built.
+
+| Planned skill | Mints | What it will add | Kit issue |
+| :-- | :-- | :-- | :-- |
+| `business-customer-journey-map` | `CJ-N.M` | Experience-view customer journeys | [#9](https://github.com/VictorHueni/homemade-claude-kit/issues/9) |
+| `business-stakeholder-map` | _TBD_ | RACI / influence–interest stakeholder grid | [#17](https://github.com/VictorHueni/homemade-claude-kit/issues/17) |
+
 ## Boundary relationships
 
 Out-ports into Domain and Product Specs (in-ports are advisory flows from Discovery — see that page).

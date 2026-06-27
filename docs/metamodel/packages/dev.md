@@ -39,3 +39,9 @@ The only structural touchpoint is **execution**: `dev-ralph-loop` runs the incre
 guide skills write to `docs/dev-guides/`, which is reference material, not a governed artefact (no
 frontmatter-tracked review cadence, no ID, no relationship). Everything here is downstream of the
 model and feeds nothing back into it.
+
+## Planned additions
+
+| Planned skill | Adds | Kit issue |
+| :-- | :-- | :-- |
+| `dev-changelog` | `CHANGELOG.md` per Keep a Changelog | [#18](https://github.com/VictorHueni/homemade-claude-kit/issues/18) |

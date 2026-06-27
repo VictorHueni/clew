@@ -62,6 +62,15 @@ flowchart TD
 > **BC-NN namespace rule.** Every tactical ID is scoped to its bounded context: `BC-01.AGG-03` and
 > `BC-02.AGG-03` are different aggregates. Bare `AGG-03` is ambiguous and invalid.
 
+## Planned additions
+
+> Candidate skills from the [kit backlog](https://github.com/VictorHueni/homemade-claude-kit/issues) — not yet shipped.
+
+| Planned skill | Mints | What it will add | Kit issue |
+| :-- | :-- | :-- | :-- |
+| `domain-event-storming` | `ES-EVT-NN` · `ES-CMD-NN` | Event Storming to discover bounded contexts before Step 2b | [#7](https://github.com/VictorHueni/homemade-claude-kit/issues/7) |
+| `domain-integration-contract` | `INT-NN` | A concrete integration contract per BC-pair | [#13](https://github.com/VictorHueni/homemade-claude-kit/issues/13) |
+
 ## Boundary relationships
 
 How the Domain package connects to its neighbours (the edges crossing the package border). `hard` =

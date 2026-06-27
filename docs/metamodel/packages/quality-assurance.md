@@ -66,8 +66,7 @@ All in-ports; none enforced yet (no skill). They activate when the first `qa-` s
 | is oracle for | prd → test_scenario | soft | Product Specs | PRD acceptance criteria are the pass/fail oracle |
 | verified by | implementation_plan → test_plan | soft | Product Specs | Increments are checked against the plan |
 
-> **Distinct from `spec-quality-attributes`.** That skill defines the `QA-XXNN` *requirements*; this
-> package will produce the *tests* that prove them. Don't merge the two.
+> **Kit tracking.** The lead skill `qa-test-strategy` (`TS-NN`) is tracked at [kit #8](https://github.com/VictorHueni/homemade-claude-kit/issues/8); the `qa-test-scenario` / `qa-test-plan` / `qa-acceptance-test` / `qa-eval-harness` family is reserved (named in the metamodel rule, no issues yet).
 
 ---
 

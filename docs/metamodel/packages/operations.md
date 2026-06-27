@@ -46,6 +46,15 @@ flowchart TD
 > Infra provisioning (`ops-terraform-exoscale`) also lives under the `ops-` umbrella but is tooling,
 > not a metamodel artefact (mints no IDs, produces no governed doc).
 
+## Planned additions
+
+> Candidate skills from the [kit backlog](https://github.com/VictorHueni/homemade-claude-kit/issues) — not yet shipped.
+
+| Planned skill | Mints | What it will add | Kit issue |
+| :-- | :-- | :-- | :-- |
+| `ops-slo` | `SLO-NN` | SLI/SLO/error budgets derived from `QA-XXNN` | [#11](https://github.com/VictorHueni/homemade-claude-kit/issues/11) |
+| `ops-post-mortem` | _TBD_ | Blameless incident review (broader than `ops-bug-rca`) | [#16](https://github.com/VictorHueni/homemade-claude-kit/issues/16) |
+
 ## Boundary relationships
 
 Both edges are **post-ship, soft, no enforced FK** (dashed on every diagram).

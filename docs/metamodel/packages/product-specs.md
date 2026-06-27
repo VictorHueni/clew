@@ -69,6 +69,14 @@ flowchart TD
 | `prd` | `PRD-NNNN` | `spec-prd` | one-per-artefact | `docs/product-specs/prds/prd-NNNN-{feature}.md` | Feature spec, one per epic; §0 traces E-NN / P-NN / C-N.M / QA-XXNN / UC-NN. |
 | `implementation_plan` | `Plan-NNNN` | `spec-implementation-plan` | one-per-artefact | `docs/exec-plans/active/{nnnn}_exec_{slug}.md` | Atomic, testable, reversible increments — one plan per PRD (note: `docs/exec-plans/`, still `spec-`). |
 
+## Planned additions
+
+> Candidate skills from the [kit backlog](https://github.com/VictorHueni/homemade-claude-kit/issues) — not yet shipped.
+
+| Planned skill | Mints | What it will add | Kit issue |
+| :-- | :-- | :-- | :-- |
+| `spec-release-plan` | _TBD_ | Rollout / comms / rollback plan per `E-NN` | [#15](https://github.com/VictorHueni/homemade-claude-kit/issues/15) |
+
 ## Boundary relationships
 
 | Verb | Source → Target | Card. | Strength | Neighbour package | Meaning |
