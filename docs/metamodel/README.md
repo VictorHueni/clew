@@ -63,8 +63,9 @@ The whole metamodel as one build-order graph (overview, all packages at once) li
 > `arch-`, `qa-`, `ops-`). **Build planning** (`plan-` → `docs/plans/`: the delivery roadmap and
 > implementation plans) was split out of `spec-` in
 > [ADR-0009](../architecture/decisions/adr-0009-plan-package-split-from-product-specs.md) — they
-> specify *intended sequence*, not the product. `ux-`/`com-`/`dev-`/`util-` mint no artefacts — they
-> are tooling, described under [Supporting packages](#supporting-packages--tooling) below.
+> specify *intended sequence*, not the product. `agent-`/`ux-`/`com-`/`dev-`/`util-` mint no
+> artefacts — they are tooling, described under [Supporting packages](#supporting-packages--tooling)
+> below.
 
 > **Status:** all seven package pages drafted, each ending with a **Planned additions** table of
 > candidate skills from the [kit backlog](https://github.com/VictorHueni/homemade-claude-kit/issues)
@@ -86,5 +87,6 @@ Documented here for completeness, and because clew will eventually own how they 
 | :-- | :-- | :-- | :-- |
 | **UX** | `ux-` | The project's visual design system → token contract the `com-` layer themes from | [ux.md](packages/ux.md) |
 | **Communication** | `com-` | Render metamodel artefacts into slide decks + interactive HTML views | [com.md](packages/com.md) |
-| **Dev** | `dev-` | Developer workflow — execute implementation plans, git, PRs, reference guides | [dev.md](packages/dev.md) |
+| **Agent** | `agent-` | Agent-Centric Development Cycle — Guide (`CLAUDE.md`), Verify (grill / review), Solve (autonomous loop) | [agent.md](packages/agent.md) |
+| **Dev** | `dev-` | Developer workflow — git, commits, PRs, worktrees, reference guides | [dev.md](packages/dev.md) |
 | **Util** | `util-` | Governance & housekeeping — scaffold, audit, migrate, lint the metamodel itself | [util.md](packages/util.md) |
