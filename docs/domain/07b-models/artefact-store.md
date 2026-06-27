@@ -570,6 +570,10 @@ lands.**
 | `CONSUMES` | `vs_stage` | `capability` | N:M | hard | `Differentiator`, `Necessary` | VS stage consumes a capability |
 | `OPERATIONALISES` ⚠ | `process` | `vs_stage` | N:1 | hard | — | Process operationalises a VS stage |
 | `QUANTIFIES` ⚠ | `quantitative_model` | `canvas` | N:M | hard | Revenue, Cost | Model quantifies BMC Revenue/Cost |
+| `TARGETS` ⚠ | `competitor` | `persona` | N:M | soft | ICP | Competitor's ICP maps to a persona (run after Step 1 so ICPs map to P-NN) |
+| `POSITIONS_AGAINST` ⚠ | `competitor` | `canvas` | N:M | soft | Value Proposition | Competitive positioning informs the BMC/Lean VP block (run before Step 2 fill) |
+| `COMPETES_ON` ⚠ | `competitor` | `capability` | N:M | soft | Value-curve axis | Competitor rated against a capability on the value curve |
+| `BENCHMARKS` ⚠ | `competitor` | `quantitative_model` | N:M | soft | pricing, market size | Competitor pricing / market-sizing data feeds a quantitative model |
 | `MEASURES` ⚠ | `objective` | `key_result` | 1:N | hard | — | Objective measured by its key results |
 | `INFORMS` | `objective` | `vs_stage` | N:M | soft | — | Objective informs a VS stage (pain-index link) |
 | `ADDRESSES` ⚠ | `objective` | `persona` | N:M | soft | — | Objective serves a persona's outcomes |
@@ -601,7 +605,7 @@ lands.**
 | `DECIDES` ⚠ | `adr` | `quality_attribute` | N:M | soft | — | ADR decision informs QA (Security/Flexibility) |
 | `DECIDES` ⚠ | `adr` | `prd` | N:M | soft | — | ADR decision informs PRD architecture |
 | `GOVERNS` ⚠ | `adr` | `interface_contract` | N:M | soft | versioning, auth | ADR governs contract versioning/auth |
-| `GRADUATES_TO` ⚠ | `idea` | `persona`,`objective`,`canvas`,`process`,`adr`,`fbs_functionality`,`prd` | N:0..1 | soft | — | One-way; target carries **no** back-FK (recorded in target body text, per metamodel "hard rules") |
+| `GRADUATES_TO` ⚠ | `idea` | `persona`,`objective`,`canvas`,`process`,`research`,`adr`,`fbs_functionality`,`prd` | N:0..1 | soft | — | One-way; target carries **no** back-FK (recorded in target body text, per metamodel "hard rules"). `research` (`arch-research` → `Research-NNNN`) is a graduation target only — not a persisted clew entity (architecture layer, deferred) |
 | `REFERENCES` | any | any | N:M | soft | (free text) | Generic catch-all cross-link; no type constraint |
 
 ### Registry open items & flagged judgment calls
@@ -623,10 +627,15 @@ lands.**
    intentionally not enforced here — `vision` is a singleton with no minted ID, and those
    "audience scope / operationalised by" links are advisory and better stated in
    `VISION.md` prose. Flagged for a decision if vision-level traceability is later wanted.
-6. **v1 scope.** Several target types (`use_case`, `interface_contract`, `cli_surface`,
-   `cli_command`, domain sub-types) are not yet in clew's persisted set; rows involving them
-   activate only when §Property schemas adds those types (see the §Property-schemas scope
-   call).
+6. **v1 scope.** Several target types (`competitor`, `use_case`, `interface_contract`,
+   `cli_surface`, `cli_command`, domain sub-types) are not yet in clew's persisted set; rows
+   involving them activate only when §Property schemas adds those types (see the
+   §Property-schemas scope call).
+7. **`competitor` (CO-NN) added 2026-06-27.** `business-competitive-landscape` mints `CO-NN`
+   per Tier-1 competitor; its four soft edges (`TARGETS`/`POSITIONS_AGAINST`/`COMPETES_ON`/
+   `BENCHMARKS`) were missing from the prior transcription. Registry-only for now — the type
+   stays in the deferred §Property-schemas set (clew's own repo carries no competitive
+   landscape yet).
 
 Source and target `artefact_type` values are validated against this registry before any
 `artefact_references` row is written.
@@ -663,7 +672,51 @@ The sections below are **intentional deviations from the `domain-model` skill te
 
 ## Physical schema
 
-The SQLite physical schema implementing this domain model.
+The SQLite physical schema implementing this domain model — the **physical view**: the four tables that actually exist on disk. It is the lowest of three abstraction levels of the same model:
+
+- **Conceptual** — the per-artefact-type entity-relationship diagram in [`README.md` §Data relationships](../../../README.md#data-relationships): which metamodel edges are *meaningful*.
+- **Logical** — the [§Class diagram](#class-diagram) above: domain objects, value objects, and behaviour.
+- **Physical** — *this section*: the on-disk tables.
+
+The crossing point between the levels: **every conceptual entity is a row in `artefacts`; every conceptual edge is a row in `artefact_references`.** There are no per-type tables — `artefact_type` is a column, not a schema. Adding a relationship type changes `ALLOWED_RELATIONSHIPS` in code, never the DDL (the typed-property-graph payoff of [ADR-0003](../../architecture/decisions/adr-0003-schema-design-typed-property-graph.md)).
+
+```mermaid
+erDiagram
+    artefacts {
+        integer pk PK "AUTOINCREMENT surrogate — join key only; regenerated on rebuild"
+        text    business_id UK "stable semantic ID (P-01, C1.2.F03); never regenerated"
+        text    artefact_type "persona | capability | epic | adr | … — drives Pydantic schema"
+        text    name
+        text    status "draft | active | superseded | deprecated"
+        text    created_at "ISO-8601 UTC"
+        text    properties "JSON — type-specific fields; json_valid() CHECK + Pydantic at write"
+    }
+    artefact_references {
+        integer pk PK
+        integer source_pk FK "→ artefacts.pk (edge tail); CHECK source_pk <> target_pk"
+        text    relationship "TRIGGERS | CONSUMES | GROUPS | … validated vs ALLOWED_RELATIONSHIPS"
+        integer target_pk FK "→ artefacts.pk (edge head)"
+        text    role "optional edge annotation (Differentiator, Necessary, …)"
+        text    created_at
+    }
+    file_bindings {
+        integer pk PK
+        integer artefact_pk FK "→ artefacts.pk — UNIQUE (one binding per artefact)"
+        text    file_path
+        text    section_anchor "UNIQUE(file_path, section_anchor)"
+        text    content_hash "NULL until first clew check"
+        text    last_seen_at "NULL until first clew check"
+    }
+    id_sequences {
+        text    artefact_type PK "one counter per type"
+        integer next_val "next suffix to mint; CHECK next_val >= 1"
+    }
+
+    artefacts ||--o{ artefact_references : "source_pk — outgoing edges"
+    artefacts ||--o{ artefact_references : "target_pk — incoming edges"
+    artefacts ||--o| file_bindings : "0..1 narrative location"
+    id_sequences ||--o{ artefacts : "mints business_id (value-join on artefact_type, not a declared FK)"
+```
 
 ```sql
 -- Per-connection PRAGMAs (set in the CLI's connection factory, not in DDL)
@@ -801,4 +854,6 @@ SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY dept
 | 2026-06-11 | Victor Hueni | §Relationship registry expanded from 6 to 39 edges — first full transcription of `metamodel.md`'s ER + "hard rules" into clew's snake_case types, adding `card` (cardinality) and `str` (hard/soft) columns. Newly-introduced verbs/directions marked ⚠ (ratify against `crud.py`). Six judgment calls flagged (granularity, `GRADUATES_TO` asymmetry, multi-pair `DECIDES`, omitted `vision` edges, v1 scope). Follows the ADR-0006 registry consolidation. |
 | 2026-06-11 | Victor Hueni | §Property schemas extended from 6 to the 11-type v1 self-dogfooding spine — added `value_stream`, `vs_stage`, `bounded_context`, `glossary_term`, `adr`, with fields grounded in clew's own repo instances. Added a v1-scope note (persisted set vs deferred types) and flagged the `adr` status-enum mismatch (MADR `draft`/`active`/`superseded`/`deprecated` vs `artefacts.status` `active`/`retired`/`superseded`). |
 | 2026-06-11 | Victor Hueni | Cleanup: aligned `artefacts.status` CHECK to the authoritative `artefact-frontmatter.md` enum (`draft`/`active`/`superseded`/`deprecated`, default `draft`), resolving the `adr` status-enum flag; glossary term `Retired` → `deprecated`. (ADR-0002 §Layout taxonomy separately corrected: `bounded-context`/`glossary-term` are single-collection single files.) |
+| 2026-06-27 | Victor Hueni | Added a **physical-implementation ER diagram** to §Physical schema (the four on-disk tables: `artefacts`, `artefact_references`, `file_bindings`, `id_sequences`) above the DDL, with an explicit three-level framing (conceptual = README per-type ER · logical = §Class diagram · physical = this). Makes the typed-property-graph reality legible: every conceptual entity is a row in `artefacts`, every edge a row in `artefact_references`; `id_sequences → artefacts` flagged as a value-join, not a declared FK. |
+| 2026-06-27 | Victor Hueni | Kit-drift reconciliation (kit `f4da118`, 54 skills): §Relationship registry +4 `competitor` (CO-NN) soft edges (`TARGETS`/`POSITIONS_AGAINST`/`COMPETES_ON`/`BENCHMARKS`) — 43 edges total; `GRADUATES_TO` gains the `research` (`arch-research`) target; §Property-schemas v1-scope flag now lists `competitor` as deferred. arc42/C4/UML architecture-description layer deliberately kept out of the persisted model (derived diagrams). Mirrors the same pass in README ER (adds `USE_CASE`, `COMPETITOR`, `PRD.UC_NN`) + flowchart (Step 9.5 `spec-use-case`). |
 | 2026-05-25 | Victor Hueni | Glossary cross-reference pass 2 (closes OI-0019): header `Ubiquitous language` line now points at [`../02c-glossary.md#bc-01-artefact-store`](../02c-glossary.md#bc-01-artefact-store); every entity Glossary-term field (3) and every value-object Glossary-term field (5) wired to live `02c-glossary.md#{term}--bc-01gt-{nn}` anchors. Two deliberate class-name ↔ glossary-term divergences flagged inline (`ArtefactReference` class for the `Relationship` term — ORM/SQL reserved-word safety; `FileLayout` class for the `Layout` term — code clarity), both referencing the glossary's code-convention notes. `IdCounter` (VO-05) annotated as a sub-concept of `Business ID · GT-03` since it is the mint mechanism, not a standalone domain concept. OI-0019 closed with tracker-ref text identifying commit `8cea266` (glossary authoring) and this commit (07b cross-reference wiring). |

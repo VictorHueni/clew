@@ -30,7 +30,7 @@ clew manages a complete **strategic-architecture documentation system** across f
 
 ### Artefact layers and build order
 
-18 artefacts across three layers (Business Architecture · Domain · Product Specs) plus a root Step 0 and two Architecture Contract steps. Solid arrows = hard dependency. Dashed arrows = supporting enrichment.
+19 artefacts across three layers (Business Architecture · Domain · Product Specs) plus a root Step 0 and two Architecture Contract steps. Solid arrows = hard dependency. Dashed arrows = supporting enrichment.
 
 ```mermaid
 flowchart TD
@@ -59,10 +59,11 @@ flowchart TD
         S7b["7b · domain-model · BC-NN.AGG / ENT / VO / EVT"]:::domain
     end
 
-    subgraph PS["Product Specs: Steps 7–10"]
+    subgraph PS["Product Specs: Steps 7–10 + 9.5"]
         S7["7 · spec-functional-breakdown-structure · C-N.M.FXX"]:::specs
         S8["8 · spec-delivery-roadmap · E-NN"]:::specs
         S9["9 · spec-quality-attributes · QA-XXNN"]:::specs
+        S9_5["9.5 · spec-use-case · UC-NN"]:::specs
         S10["10 · spec-prd · PRD-NNNN"]:::specs
     end
 
@@ -77,7 +78,7 @@ flowchart TD
 
     subgraph SUP["Supporting Skills"]
         ADR["arch-adr · ADR-NNNN"]:::support
-        CL["business-competitive-landscape"]:::support
+        CL["business-competitive-landscape · CO-NN"]:::support
         RES["discovery-research"]:::support
         WS["discovery-workshop"]:::support
         IDX["discovery-idea · IDEA-NNNN"]:::support
@@ -116,6 +117,9 @@ flowchart TD
     S8_5 -.-> S10
     S7c -.-> S10
     S9 --> S10
+    S1 -.-> S9_5
+    S7 -.-> S9_5
+    S9_5 --> S10
     S10 --> S11
     ADR -.-> S7c
     ADR -.-> S8_5
@@ -178,11 +182,21 @@ erDiagram
         string ADR_NNNN FK
         string P_NN FK
     }
+    USE_CASE {
+        string UC_NN PK
+        string P_NN FK
+        string C_NM_FXX FK
+    }
+    COMPETITOR {
+        string CO_NN PK
+        string P_NN FK
+    }
     PRD {
         string PRD_NNNN PK
         string E_NN FK
         string QA_XXNN FK
         string ADR_NNNN FK
+        string UC_NN FK
     }
     IMPLEMENTATION_PLAN {
         string Plan_NNNN PK
@@ -253,6 +267,13 @@ erDiagram
     ADR }o--o{ PRD : "decisions inform"
     EPIC ||--|| PRD : "one PRD per epic"
     QUALITY_ATTRIBUTES ||--o{ PRD : "in acceptance criteria"
+    PERSONA ||--o{ USE_CASE : "is primary actor of"
+    FBS ||--o{ USE_CASE : "realised by"
+    USE_CASE ||--o{ PRD : "grounds acceptance criteria"
+    PERSONA }o--o{ COMPETITOR : "ICP maps to"
+    CAPABILITY_MAP }o--o{ COMPETITOR : "value-curve axis"
+    BMC }o--o{ COMPETITOR : "positioning informs VP"
+    QUANTITATIVE_MODEL }o--o{ COMPETITOR : "pricing feeds"
     PRD ||--|| IMPLEMENTATION_PLAN : "one plan per PRD"
     CAPABILITY_MAP ||--o{ BOUNDED_CONTEXT : "capabilities group into"
     PERSONA }o--o{ BOUNDED_CONTEXT : "grounds language"
