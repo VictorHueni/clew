@@ -683,7 +683,7 @@ The crossing point between the levels: **every conceptual entity is a row in `ar
 ```mermaid
 erDiagram
     artefacts {
-        integer pk PK "AUTOINCREMENT surrogate — join key only; regenerated on rebuild"
+        integer pk_surrogate PK "DDL column: pk — AUTOINCREMENT; join key only; regenerated on rebuild"
         text    business_id UK "stable semantic ID (P-01, C1.2.F03); never regenerated"
         text    artefact_type "persona | capability | epic | adr | … — drives Pydantic schema"
         text    name
@@ -692,15 +692,15 @@ erDiagram
         text    properties "JSON — type-specific fields; json_valid() CHECK + Pydantic at write"
     }
     artefact_references {
-        integer pk PK
-        integer source_pk FK "→ artefacts.pk (edge tail); CHECK source_pk <> target_pk"
+        integer pk_surrogate PK "DDL column: pk"
+        integer source_pk FK "→ artefacts.pk (edge tail); CHECK source_pk ≠ target_pk"
         text    relationship "TRIGGERS | CONSUMES | GROUPS | … validated vs ALLOWED_RELATIONSHIPS"
         integer target_pk FK "→ artefacts.pk (edge head)"
         text    role "optional edge annotation (Differentiator, Necessary, …)"
         text    created_at
     }
     file_bindings {
-        integer pk PK
+        integer pk_surrogate PK "DDL column: pk"
         integer artefact_pk FK "→ artefacts.pk — UNIQUE (one binding per artefact)"
         text    file_path
         text    section_anchor "UNIQUE(file_path, section_anchor)"
