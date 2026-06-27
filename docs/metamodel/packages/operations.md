@@ -61,8 +61,8 @@ Both edges are **post-ship, soft, no enforced FK** (dashed on every diagram).
 
 | Verb | Source → Target | Strength | Neighbour package | Meaning |
 | :-- | :-- | :-- | :-- | :-- |
-| operated via | implementation_plan → runbook | soft | Product Specs | A shipped increment is operated via runbooks |
-| feeds fixes | bug_rca → implementation_plan | soft | Product Specs | An RCA feeds corrective increments |
+| operated via | implementation_plan → runbook | soft | Planning | A shipped increment is operated via runbooks |
+| feeds fixes | bug_rca → implementation_plan | soft | Planning | An RCA feeds corrective increments |
 
 ---
 

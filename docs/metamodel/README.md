@@ -53,16 +53,18 @@ The whole metamodel as one build-order graph (overview, all packages at once) li
 | **Discovery** | `discovery-` | Pre-formal evidence — ideas, research, workshops (cross-cutting) | [discovery.md](packages/discovery.md) |
 | **Business Architecture** | `business-` | Vision, personas, capability map, value streams, objectives, processes, models, competitive landscape | [business-architecture.md](packages/business-architecture.md) |
 | **Domain** | `domain-` | Bounded contexts, glossary, domain model | [domain.md](packages/domain.md) |
-| **Product Specs** | `spec-` | FBS, delivery roadmap, quality attributes, use cases, PRDs, implementation plans | [product-specs.md](packages/product-specs.md) |
+| **Product Specs** | `spec-` | FBS, quality attributes, use cases, PRDs | [product-specs.md](packages/product-specs.md) |
+| **Planning** | `plan-` | Delivery roadmap (epics), implementation plans | [planning.md](packages/planning.md) |
 | **Architecture** | `arch-` | ADRs, service & CLI contracts (+ C4/arc42/UML diagrams) | [architecture.md](packages/architecture.md) |
 | **Quality Assurance** | `qa-` | Test strategy, scenarios, plans — **reserved**, no skill yet | [quality-assurance.md](packages/quality-assurance.md) |
 | **Operations** | `ops-` | Runbooks, bug RCAs — post-ship; mints no IDs | [operations.md](packages/operations.md) |
 
-> **Packages map 1:1 to kit prefixes** (`discovery-`, `business-`, `domain-`, `spec-`, `arch-`,
-> `qa-`, `ops-`). `spec-` spans `docs/product-specs/` **and** `docs/exec-plans/` — implementation
-> plans belong to Product Specs, not a separate "Execution" package. `ux-`/`com-`/`dev-`/`util-`
-> mint no artefacts — they are tooling, described under [Supporting packages](#supporting-packages--tooling)
-> below.
+> **Packages map 1:1 to kit prefixes** (`discovery-`, `business-`, `domain-`, `spec-`, `plan-`,
+> `arch-`, `qa-`, `ops-`). **Build planning** (`plan-` → `docs/plans/`: the delivery roadmap and
+> implementation plans) was split out of `spec-` in
+> [ADR-0009](../architecture/decisions/adr-0009-plan-package-split-from-product-specs.md) — they
+> specify *intended sequence*, not the product. `ux-`/`com-`/`dev-`/`util-` mint no artefacts — they
+> are tooling, described under [Supporting packages](#supporting-packages--tooling) below.
 
 > **Status:** all seven package pages drafted, each ending with a **Planned additions** table of
 > candidate skills from the [kit backlog](https://github.com/VictorHueni/homemade-claude-kit/issues)
