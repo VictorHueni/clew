@@ -51,7 +51,7 @@ cleanest split from product specification.
 | Was | Becomes | Mints (unchanged) | Path |
 | :-- | :-- | :-- | :-- |
 | `spec-delivery-roadmap` | `plan-delivery-roadmap` | `epic` (`E-NN`) | `docs/plans/delivery-roadmap.md` |
-| `spec-implementation-plan` | `plan-implementation` | `implementation_plan` (`Plan-NNNN`) | `docs/plans/active/{nnnn}_{slug}.md` |
+| `spec-implementation-plan` | `plan-implementation` | `implementation_plan` (`Plan-NNNN`) | `docs/plans/active/{nnnn}_exec_{slug}.md` |
 
 - **Artefact types and IDs are unchanged** (`epic` / `E-NN`, `implementation_plan` / `Plan-NNNN`); only
   the minting skill name, package, and default path move.

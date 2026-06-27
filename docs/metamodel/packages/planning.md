@@ -48,7 +48,7 @@ flowchart TD
 | Artefact | ID | Minting skill | Layout | Path | Purpose & key properties |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | `epic` | `E-NN` | `plan-delivery-roadmap` | single-collection | `docs/plans/delivery-roadmap.md` | Delivery grouping (Plan by Feature) — FBS clustered by VS stage + capability, ordered by pain index; carries the walking skeleton + phase goals. Props: `phase`, `value_statement`. |
-| `implementation_plan` | `Plan-NNNN` | `plan-implementation` | one-per-artefact | `docs/plans/active/{nnnn}_{slug}.md` | Atomic, testable, reversible increments — one plan per PRD. |
+| `implementation_plan` | `Plan-NNNN` | `plan-implementation` | one-per-artefact | `docs/plans/active/{nnnn}_exec_{slug}.md` | Atomic, testable, reversible increments — one plan per PRD. |
 
 > **Skill renames (ADR-0009).** `spec-delivery-roadmap` → `plan-delivery-roadmap`;
 > `spec-implementation-plan` → `plan-implementation`. Artefact types and IDs are unchanged — only the
