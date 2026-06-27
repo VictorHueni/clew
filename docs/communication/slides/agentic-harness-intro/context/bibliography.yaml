@@ -76,11 +76,11 @@ sources:
     url: "https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/"
     year: 2025
     accessed: 2026-06-27
-  swe-lancer:
-    org: "OpenAI"
-    title: "SWE-Lancer: Can Frontier LLMs Earn $1M from Real-World Freelance Software Engineering?"
-    url: "https://arxiv.org/abs/2502.12115"
-    year: 2025
+  swe-bench-pro:
+    org: "Scale AI (SEAL)"
+    title: "SWE-bench Pro — standardized public leaderboard · 1,865 real tasks across 41 professional repos"
+    url: "https://labs.scale.com/leaderboard/swe_bench_pro_public"
+    year: 2026
     accessed: 2026-06-27
   openai-harness:
     org: "OpenAI"
