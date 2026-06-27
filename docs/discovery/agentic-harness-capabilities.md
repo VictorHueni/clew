@@ -2,7 +2,7 @@
 title: Agentic Harness — Capabilities, Techniques, and Real Tool Ecosystem
 status: active
 owner: Victor Hueni
-last_reviewed: 2026-06-25
+last_reviewed: 2026-06-28
 review_interval: 90d
 ---
 
@@ -28,7 +28,41 @@ Artifact / example = one concrete instance.
 
 ---
 
+## Capability Zones — the Agent Core and six functional groups
+
+The fifteen domains cluster into **one hub plus six functional zones**. The **Agent Core** is the decision hub at the centre; the other fourteen domains group by *what they do for the core* — laid out as a compass: **sense** comes in from one side, **act** goes out the other, **knowledge** feeds from above, and **assurance** (verify + govern) grounds it from below.
+
+```text
+        +------------- KNOW -------------+   +-------- DIRECT --------+
+        | Knowledge . Memory . Learning  |   | Goals . Planning       |
+        +--------------------------------+   +------------------------+
++- PERCEIVE -+            [#]  AGENT CORE -- the model           +---- ACT ----+
+| Sensors    |            reason . choose . run the loop         | Actuators   |
+| Env. State |                                                   | Tools&Skills|
++------------+ +------------- VERIFY ----------+ +-- GOVERN --+  +-------------+
+               | Controls . Observability      | | Safety     |
+               +-------------------------------+ | Identity   |
+                                                 | Human FB   |
+                                                 +------------+
+```
+
+| Zone | Theme | Domains |
+|---|---|---|
+| **Agent Core** (hub) | reason · choose · run the loop | Agent Core (§1) |
+| **① Perceive** | sense the world | Sensors / Perception (§4) · Environment State (§14) |
+| **② Know** | acquire · retain · improve | Knowledge (§3) · Memory (§2) · Learning & Adaptation (§12) |
+| **③ Direct** | intent & plan | Goals & Tasking (§8) · Planning & Decomposition (§9) |
+| **④ Act** | change the world | Actuators / Actions (§5) · Tools & Skills (§15) |
+| **⑤ Verify** | is the work correct? | Controls & Validation (§6) · Observability (§7) |
+| **⑥ Govern** | safe & in-bounds | Safety & Governance (§13) · Identity & Access (§10) · Human Feedback (§11) |
+
+These zones are a **static grouping** of the domains — the harness-anatomy view used in clew's slide deck — and are complementary to the dynamic [agent loop](#clean-top-level-agent-loop) defined further below (the zones say *what each capability is for*; the loop says *in what order they fire*). Each domain below is tagged with its zone; full definitions follow in §1–§15.
+
+---
+
 ## 1. Agent Core
+
+_Zone:_ **Agent Core** — the decision hub
 
 **Definition:**
 The decision-making center of the agent. It receives goals, reasons about state, chooses actions, calls tools, and manages the loop until the task is complete.
@@ -81,6 +115,8 @@ Edit file → run test → read failure → patch again → test passes.
 ---
 
 ## 2. Memory
+
+_Zone:_ **② Know** — acquire · retain · improve
 
 **Definition:**
 Memory is the harness domain responsible for carrying useful information across the agent's reasoning process, across tool calls, and sometimes across sessions.
@@ -444,6 +480,8 @@ Delete a project instruction after the repo migrates from Jest to Vitest.
 
 ## 3. Knowledge
 
+_Zone:_ **② Know** — acquire · retain · improve
+
 **Definition:**
 External information the agent can consult to understand the world, codebase, APIs, frameworks, or organization.
 
@@ -523,6 +561,8 @@ Search "where do we validate subscription status?" even if no file contains that
 ---
 
 ## 4. Sensors / Perception
+
+_Zone:_ **① Perceive** — sense the world
 
 **Definition:**
 The channels through which the agent observes the environment.
@@ -610,6 +650,8 @@ Compare a screenshot before and after a CSS change.
 
 ## 5. Actuators / Actions
 
+_Zone:_ **④ Act** — change the world
+
 **Definition:**
 The ways the agent can change the environment.
 
@@ -695,6 +737,8 @@ Edit → test → revert if validation fails.
 ---
 
 ## 6. Controls & Validation
+
+_Zone:_ **⑤ Verify** — is the work correct?
 
 **Definition:**
 Mechanisms that determine whether the agent's work is correct, safe, and complete.
@@ -798,6 +842,8 @@ Score code changes across benchmark tasks.
 
 ## 7. Observability
 
+_Zone:_ **⑤ Verify** — is the work correct?
+
 **Definition:**
 The ability to inspect what the agent did, why it did it at a high level, and what happened.
 
@@ -884,6 +930,8 @@ Review `git diff` before summarizing.
 
 ## 8. Goals & Tasking
 
+_Zone:_ **③ Direct** — intent & plan
+
 **Definition:**
 The mechanism that defines what the agent is trying to accomplish.
 
@@ -960,6 +1008,8 @@ Ask before deleting data or changing architecture.
 ---
 
 ## 9. Planning & Decomposition
+
+_Zone:_ **③ Direct** — intent & plan
 
 **Definition:**
 The process of breaking a task into manageable steps and dependencies.
@@ -1047,6 +1097,8 @@ Schema fix must happen before API test.
 
 ## 10. Identity & Access
 
+_Zone:_ **⑥ Govern** — safe & in-bounds
+
 **Definition:**
 The system that controls who or what the agent is allowed to act as.
 
@@ -1122,6 +1174,8 @@ Ask before deploying to production.
 ---
 
 ## 11. Human Feedback
+
+_Zone:_ **⑥ Govern** — safe & in-bounds
 
 **Definition:**
 The interface through which humans guide, correct, approve, or stop the agent.
@@ -1199,6 +1253,8 @@ Pull request, patch, summary, screenshot, or test report.
 
 ## 12. Learning & Adaptation
 
+_Zone:_ **② Know** — acquire · retain · improve
+
 **Definition:**
 The ability of the system to improve future behavior from feedback, outcomes, or patterns.
 
@@ -1274,6 +1330,8 @@ Compare success rate before and after a new planning rule.
 ---
 
 ## 13. Safety & Governance
+
+_Zone:_ **⑥ Govern** — safe & in-bounds
 
 **Definition:**
 Rules, permissions, and boundaries that keep the agent safe, controlled, and compliant.
@@ -1361,6 +1419,8 @@ Container, VM, restricted filesystem, or restricted network.
 
 ## 14. Environment State
 
+_Zone:_ **① Perceive** — sense the world
+
 **Definition:**
 The current condition of the world the agent is operating in.
 
@@ -1436,6 +1496,8 @@ Check which files changed after the agent acted.
 ---
 
 ## 15. Tools & Skills
+
+_Zone:_ **④ Act** — change the world
 
 **Definition:**
 The concrete interfaces and specialized abilities the agent can use to operate.
