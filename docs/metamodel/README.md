@@ -50,19 +50,20 @@ The whole metamodel as one build-order graph (overview, all packages at once) li
 
 | Package | Prefix | What it holds | Page |
 | :-- | :-- | :-- | :-- |
-| **Discovery** | `discovery-` | Pre-formal evidence — ideas, research, workshops (cross-cutting) | _forthcoming_ |
-| **Business Architecture** | `business-` | Vision, personas, capability map, value streams, objectives, processes, models, competitive landscape | _forthcoming_ |
-| **Domain** | `domain-` | Bounded contexts, glossary, domain model | [domain.md](packages/domain.md) ✅ |
-| **Product Specs** | `spec-` | FBS, delivery roadmap, quality attributes, use cases, PRDs, implementation plans | _forthcoming_ |
-| **Architecture** | `arch-` | ADRs, service & CLI contracts (+ C4/arc42/UML diagrams) | _forthcoming_ |
-| **Quality Assurance** | `qa-` | Test strategy, scenarios, plans — **reserved**, no skill yet | _forthcoming_ |
-| **Operations** | `ops-` | Runbooks, bug RCAs — post-ship; mints no IDs | _forthcoming_ |
+| **Discovery** | `discovery-` | Pre-formal evidence — ideas, research, workshops (cross-cutting) | [discovery.md](packages/discovery.md) |
+| **Business Architecture** | `business-` | Vision, personas, capability map, value streams, objectives, processes, models, competitive landscape | [business-architecture.md](packages/business-architecture.md) |
+| **Domain** | `domain-` | Bounded contexts, glossary, domain model | [domain.md](packages/domain.md) |
+| **Product Specs** | `spec-` | FBS, delivery roadmap, quality attributes, use cases, PRDs, implementation plans | [product-specs.md](packages/product-specs.md) |
+| **Architecture** | `arch-` | ADRs, service & CLI contracts (+ C4/arc42/UML diagrams) | [architecture.md](packages/architecture.md) |
+| **Quality Assurance** | `qa-` | Test strategy, scenarios, plans — **reserved**, no skill yet | [quality-assurance.md](packages/quality-assurance.md) |
+| **Operations** | `ops-` | Runbooks, bug RCAs — post-ship; mints no IDs | [operations.md](packages/operations.md) |
 
 > **Packages map 1:1 to kit prefixes** (`discovery-`, `business-`, `domain-`, `spec-`, `arch-`,
 > `qa-`, `ops-`). `spec-` spans `docs/product-specs/` **and** `docs/exec-plans/` — implementation
 > plans belong to Product Specs, not a separate "Execution" package. `ux-`/`com-`/`dev-`/`util-`
 > mint no artefacts and are tooling, not metamodel packages.
 
-> **Status:** scaffolding. The Domain page is the template; the other six follow once its style is
-> settled. Tracked as OI-0029 on
+> **Status:** all seven package pages drafted. Still to come: the consolidated
+> [`relationships.md`](#how-to-read-this-section) catalogue (moved out of `artefact-store.md`) and,
+> later, generation from clew's schema. Tracked as OI-0029 on
 > [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md).
