@@ -30,7 +30,7 @@ clew manages a complete **strategic-architecture documentation system** across f
 
 ### Artefact layers and build order
 
-19 artefacts grouped into packages by kit prefix — cross-cutting **Discovery**, **Business Architecture** (Step 0 vision through Step 6, plus competitive landscape), **Domain**, **Product Specs**, **Architecture** (ADR + service/CLI contracts), and **Execution**. Solid arrows = hard dependency; dashed arrows = supporting enrichment. Each edge is named with its relationship: `UPPERCASE` is the canonical typed relationship clew stores in `artefact_references.relationship` and validates against the `ALLOWED_RELATIONSHIPS` registry (see the [domain model §Relationship registry](docs/domain/07b-models/artefact-store.md#relationship-registry)); lowercase names are softer/advisory links the registry does not type, or read in the build-order (prerequisite→dependent) direction.
+19 artefacts grouped into packages by kit prefix — cross-cutting **Discovery**, **Business Architecture** (Step 0 vision through Step 6, plus competitive landscape), **Domain**, **Product Specs** (Steps 7–11, including implementation plans), and **Architecture** (ADR + service/CLI contracts). This is the build-order view; the two post-ship/reserved packages (**Operations**, **Quality Assurance**) and the full per-package reference live in [`docs/metamodel/`](docs/metamodel/). Solid arrows = hard dependency; dashed arrows = supporting enrichment. Each edge is named with its relationship: `UPPERCASE` is the canonical typed relationship clew stores in `artefact_references.relationship` and validates against the `ALLOWED_RELATIONSHIPS` registry (see the [domain model §Relationship registry](docs/domain/07b-models/artefact-store.md#relationship-registry)); lowercase names are softer/advisory links the registry does not type, or read in the build-order (prerequisite→dependent) direction.
 
 ```mermaid
 flowchart TD
@@ -65,22 +65,19 @@ flowchart TD
         S7b["7b · domain-model · BC-NN.AGG / ENT / VO / EVT"]:::domain
     end
 
-    subgraph PS["Product Specs: Steps 7–10 + 9.5"]
+    subgraph PS["Product Specs: Steps 7–11 + 9.5"]
         S7["7 · spec-functional-breakdown-structure · C-N.M.FXX"]:::specs
         S8["8 · spec-delivery-roadmap · E-NN"]:::specs
         S9["9 · spec-quality-attributes · QA-XXNN"]:::specs
         S9_5["9.5 · spec-use-case · UC-NN"]:::specs
         S10["10 · spec-prd · PRD-NNNN"]:::specs
+        S11["11 · spec-implementation-plan · Plan-NNNN"]:::delivery
     end
 
     subgraph ARCH["Architecture: ADR + Contracts (Steps 7c · 8.5)"]
         ADR["arch-adr · ADR-NNNN"]:::arch
         S7c["7c · arch-service-contract · BC-NN.CTR-NN"]:::arch
         S8_5["8.5 · arch-cli-contract · CLI-NN.CMD-NN"]:::arch
-    end
-
-    subgraph EX["Execution: Step 11"]
-        S11["11 · spec-implementation-plan · Plan-NNNN"]:::delivery
     end
 
     S0 -.->|"scopes audience"| S1
