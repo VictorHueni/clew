@@ -1,0 +1,24 @@
+<div class="slide s-ralph">
+  <div class="section-label">The Build Workflow · Autonomous execution</div>
+  <h2 class="slide-title">The Ralph loop — a fresh agent per increment, until the plan is done.</h2>
+  <div class="r-left">
+    <div class="r-h">What the loop is</div>
+    <div class="r-li"><i data-lucide="repeat"></i><div>A bash script (<b>ralph.sh</b>) drives the plan to completion — one increment per iteration.</div></div>
+    <div class="r-li"><i data-lucide="refresh-cw"></i><div><b>Fresh agent each iteration</b> &rarr; clean context, no drift or context rot.</div></div>
+    <div class="r-li"><i data-lucide="flag"></i><div>Loops while increments are <b>pending</b>; stops when every one is <b>Status: done</b>.</div></div>
+    <div class="r-cmd">ralph.sh <span class="fl">&lt;workspace&gt;</span> \<br>
+&nbsp;&nbsp;<span class="fl">--max-iterations</span> 50 <span class="fl">--with-prd</span> <span class="fl">--with-push</span><br>
+<span class="cm"># spawns: claude --print &lt; iteration-prompt</span></div>
+  </div>
+  <div class="r-right">
+    <div class="r-rh"><i data-lucide="rotate-cw" style="width:13px;height:13px"></i>One iteration · Perceive &rarr; Implement &rarr; Validate &rarr; Commit</div>
+    <div class="r-rsub">Audit must be green before the first run.</div>
+    <div class="r-node"><div class="ix"><i data-lucide="crosshair"></i></div><div><div class="r-nt">Pick next pending increment</div><div class="r-ns">read workspace + plan</div></div></div>
+    <div class="r-node"><div class="ix"><i data-lucide="hammer"></i></div><div><div class="r-nt">Implement its scope</div><div class="r-ns">follow the primary-files list</div></div></div>
+    <div class="r-node"><div class="ix"><i data-lucide="flask-conical"></i></div><div><div class="r-nt">Run the test gate</div><div class="r-ns">pottery wheel — up to 3 retries</div></div></div>
+    <div class="r-node"><div class="ix"><i data-lucide="git-commit-horizontal"></i></div><div><div class="r-nt">Commit the increment</div><div class="r-ns">advance status &rarr; done</div></div></div>
+    <div class="r-loopback"><i data-lucide="corner-left-up" style="width:13px;height:13px"></i>repeat with a fresh agent</div>
+    <div class="r-done"><i data-lucide="check-check"></i>All increments done &rarr; run CI</div>
+  </div>
+  <div class="slide-number"></div>
+</div>
