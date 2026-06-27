@@ -1857,7 +1857,7 @@
 .s-wf-flow .slide-title,.s-prd-plan .slide-title,.s-verify .slide-title,.s-ralph .slide-title{font-size:29px;}
 
 /* WHOLE PROCESS */
-.s-wf-flow .wf-row{position:absolute;top:178px;left:40px;right:40px;bottom:84px;display:flex;align-items:stretch;gap:0;}
+.s-wf-flow .wf-row{position:absolute;top:178px;left:40px;right:40px;bottom:84px;display:flex;align-items:center;justify-content:center;gap:0;}
 .s-wf-flow .wf-card{flex:1;display:flex;flex-direction:column;border:1px solid var(--border);border-top:4px solid var(--accent);border-radius:11px;background:var(--surface);box-shadow:var(--shadow);padding:14px 13px 12px;}
 .s-wf-flow .wf-hd{display:flex;align-items:center;gap:9px;margin-bottom:6px;}
 .s-wf-flow .wf-num{width:25px;height:25px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:12.5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}

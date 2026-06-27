@@ -1957,7 +1957,7 @@
 .s-wf-flow .slide-title,.s-prd-plan .slide-title,.s-verify .slide-title,.s-ralph .slide-title{font-size:29px;}
 
 /* WHOLE PROCESS */
-.s-wf-flow .wf-row{position:absolute;top:178px;left:40px;right:40px;bottom:84px;display:flex;align-items:stretch;gap:0;}
+.s-wf-flow .wf-row{position:absolute;top:178px;left:40px;right:40px;bottom:84px;display:flex;align-items:center;justify-content:center;gap:0;}
 .s-wf-flow .wf-card{flex:1;display:flex;flex-direction:column;border:1px solid var(--border);border-top:4px solid var(--accent);border-radius:11px;background:var(--surface);box-shadow:var(--shadow);padding:14px 13px 12px;}
 .s-wf-flow .wf-hd{display:flex;align-items:center;gap:9px;margin-bottom:6px;}
 .s-wf-flow .wf-num{width:25px;height:25px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:12.5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
@@ -2146,7 +2146,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="cover-bottom-line"></div>
-  <div class="slide-number">1 / 24</div>
+  <div class="slide-number">1 / 22</div>
 </div>
 
 
@@ -2162,7 +2162,7 @@ body.presenting .slide.active {
     <div class="div-tag">Why the tooling around the model — not the model — is the performance lever.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">2 / 24</div>
+  <div class="slide-number">2 / 22</div>
 </div>
 
 
@@ -2190,7 +2190,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="proof-same">Claude Opus 4.5 · HAL CORE-Bench · the only thing that changed was the harness</div>
-  <div class="slide-number">3 / 24</div>
+  <div class="slide-number">3 / 22</div>
 
 <div class="slide-source-bar">Aidan Li · An Opinionated Guide to Agentic Coding (2026) — aidanli.dev</div>
 </div>
@@ -2238,131 +2238,14 @@ body.presenting .slide.active {
     </div>
   </div>
 
-  <div class="slide-number">4 / 24</div>
+  <div class="slide-number">4 / 22</div>
 
 <div class="slide-source-bar">arXiv 2604.25850 · Agentic Harness Engineering (2026) — arxiv.org</div>
 </div>
 
 
 
-<!-- slide 5: Anatomy — loop + 15 capabilities -->
-
-<div class="slide s-anatomy" data-sources="clew-research-harness">
-  <div class="section-label">Harness Anatomy</div>
-  <h2 class="slide-title">One loop, 15 capabilities — a capability system, not a layer cake.</h2>
-  <p class="slide-lede">The model fills each step; the harness governs the transitions — and three capabilities govern them all.</p>
-
-  <div class="loop-track">
-
-    <div class="phase-col">
-      <div class="phase-head">Sense</div>
-      <div class="phase-caps">
-        <div class="cap-chip">Sensors / Perception</div>
-        <div class="cap-chip">Environment State</div>
-      </div>
-    </div>
-    <div class="loop-arr"><i data-lucide="chevron-right" class="icon-sm"></i></div>
-
-    <div class="phase-col">
-      <div class="phase-head">Retrieve</div>
-      <div class="phase-caps">
-        <div class="cap-chip">Knowledge</div>
-      </div>
-    </div>
-    <div class="loop-arr"><i data-lucide="chevron-right" class="icon-sm"></i></div>
-
-    <div class="phase-col">
-      <div class="phase-head">Remember</div>
-      <div class="phase-caps">
-        <div class="cap-chip">Memory</div>
-      </div>
-    </div>
-    <div class="loop-arr"><i data-lucide="chevron-right" class="icon-sm"></i></div>
-
-    <div class="phase-col">
-      <div class="phase-head">Plan</div>
-      <div class="phase-caps">
-        <div class="cap-chip">Agent Core</div>
-        <div class="cap-chip">Goals &amp; Tasking</div>
-        <div class="cap-chip">Planning &amp; Decomp.</div>
-      </div>
-    </div>
-    <div class="loop-arr"><i data-lucide="chevron-right" class="icon-sm"></i></div>
-
-    <div class="phase-col">
-      <div class="phase-head">Act</div>
-      <div class="phase-caps">
-        <div class="cap-chip">Actuators / Actions</div>
-        <div class="cap-chip">Tools &amp; Skills</div>
-      </div>
-    </div>
-    <div class="loop-arr"><i data-lucide="chevron-right" class="icon-sm"></i></div>
-
-    <div class="phase-col">
-      <div class="phase-head">Validate</div>
-      <div class="phase-caps">
-        <div class="cap-chip">Controls &amp; Validation</div>
-        <div class="cap-chip">Observability</div>
-      </div>
-    </div>
-    <div class="loop-arr"><i data-lucide="chevron-right" class="icon-sm"></i></div>
-
-    <div class="phase-col">
-      <div class="phase-head">Learn</div>
-      <div class="phase-caps">
-        <div class="cap-chip">Learning &amp; Adaptation</div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="govern-band">
-    <span class="govern-label">Governs<br>every step</span>
-    <div class="govern-caps">
-      <div class="govern-cap">Safety &amp; Governance</div>
-      <div class="govern-cap">Identity &amp; Access</div>
-      <div class="govern-cap">Human Feedback</div>
-    </div>
-  </div>
-
-  <div class="slide-number">5 / 24</div>
-
-<div class="slide-source-bar">Internal research · What Makes a Good Agentic Harness — research synthesis (2026)</div>
-</div>
-
-
-
-<!-- slide 6: Anatomy — harness around the model -->
-
-<div class="slide s-rings2">
-  <div class="section-label">Harness Anatomy · Rings</div>
-  <h2 class="slide-title">The model is a dot. The harness is the mass around it.</h2>
-
-  <div class="rs-stage">
-    <svg class="rs-svg" viewBox="0 0 1280 720" width="1280" height="720">
-      <path d="M 505.0 336.0 L 505.0 150.0 A 250 250 0 0 1 721.5 275.0 L 560.4 368.0 A 64 64 0 0 0 505.0 336.0 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/><path d="M 560.4 368.0 L 721.5 275.0 A 250 250 0 0 1 755.0 400.0 L 569.0 400.0 A 64 64 0 0 0 560.4 368.0 Z" style="fill:color-mix(in srgb,var(--accent) 5%,var(--surface));stroke:none"/><path d="M 569.0 400.0 L 755.0 400.0 A 250 250 0 0 1 721.5 525.0 L 560.4 432.0 A 64 64 0 0 0 569.0 400.0 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/><path d="M 560.4 432.0 L 721.5 525.0 A 250 250 0 0 1 380.0 616.5 L 473.0 455.4 A 64 64 0 0 0 560.4 432.0 Z" style="fill:color-mix(in srgb,var(--accent) 5%,var(--surface));stroke:none"/><path d="M 473.0 455.4 L 380.0 616.5 A 250 250 0 0 1 255.0 400.0 L 441.0 400.0 A 64 64 0 0 0 473.0 455.4 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/><path d="M 441.0 400.0 L 255.0 400.0 A 250 250 0 0 1 380.0 183.5 L 473.0 344.6 A 64 64 0 0 0 441.0 400.0 Z" style="fill:color-mix(in srgb,var(--accent) 5%,var(--surface));stroke:none"/><path d="M 473.0 344.6 L 380.0 183.5 A 250 250 0 0 1 505.0 150.0 L 505.0 336.0 A 64 64 0 0 0 473.0 344.6 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/>
-      <line x1="505.0" y1="336.0" x2="505.0" y2="150.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="560.4" y1="368.0" x2="721.5" y2="275.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="569.0" y1="400.0" x2="755.0" y2="400.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="560.4" y1="432.0" x2="721.5" y2="525.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="473.0" y1="455.4" x2="380.0" y2="616.5" style="stroke:var(--surface);stroke-width:2.5"/><line x1="441.0" y1="400.0" x2="255.0" y2="400.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="473.0" y1="344.6" x2="380.0" y2="183.5" style="stroke:var(--surface);stroke-width:2.5"/><line x1="505.0" y1="336.0" x2="505.0" y2="150.0" style="stroke:var(--surface);stroke-width:2.5"/>
-    </svg>
-    <div class="rs-core" style="left:505px;top:400px;"><div class="t">MODEL</div></div>
-    <div class="rs-phase" style="left:559.0px;top:306.5px;">Sense</div><div class="rs-phase" style="left:609.3px;top:372.0px;">Retrieve</div><div class="rs-phase" style="left:609.3px;top:428.0px;">Remember</div><div class="rs-phase" style="left:533.0px;top:504.3px;">Plan</div><div class="rs-phase" style="left:411.5px;top:454.0px;">Act</div><div class="rs-phase" style="left:411.5px;top:346.0px;">Validate</div><div class="rs-phase" style="left:477.0px;top:295.7px;">Learn</div>
-    <div class="rs-cap" style="left:565.0px;top:175.9px;">Sensors</div><div class="rs-cap" style="left:669.0px;top:236.0px;">Env. State</div><div class="rs-cap" style="left:729.1px;top:340.0px;">Knowledge</div><div class="rs-cap" style="left:729.1px;top:460.0px;">Memory</div><div class="rs-cap" style="left:669.0px;top:564.0px;">Agent Core</div><div class="rs-cap" style="left:565.0px;top:624.1px;">Goals</div><div class="rs-cap" style="left:445.0px;top:624.1px;">Planning</div><div class="rs-cap" style="left:341.0px;top:564.0px;">Actuators</div><div class="rs-cap" style="left:280.9px;top:460.0px;">Tools & Skills</div><div class="rs-cap" style="left:280.9px;top:340.0px;">Controls</div><div class="rs-cap" style="left:341.0px;top:236.0px;">Observability</div><div class="rs-cap" style="left:445.0px;top:175.9px;">Learning</div>
-  </div>
-
-  <div class="rs-govern">
-    <div class="rs-glabel">Cross-cutting</div>
-    <div class="rs-gsub">Govern every step — they don't belong to one.</div>
-    <div class="rs-gcap"><i data-lucide="shield-check" class="icon-sm"></i>Safety &amp; Governance</div>
-    <div class="rs-gcap"><i data-lucide="key-round" class="icon-sm"></i>Identity &amp; Access</div>
-    <div class="rs-gcap"><i data-lucide="users" class="icon-sm"></i>Human Feedback</div>
-  </div>
-
-  <div class="rings-cap">Each wedge is <em>one loop step</em> and the capabilities it owns · the three on the right <em>govern every step</em>.</div>
-  <div class="slide-number">6 / 24</div>
-</div>
-
-
-
-<!-- slide 7: Harnesses starve memory -->
+<!-- slide 5: Harnesses starve memory -->
 
 <div class="slide s-memory" data-sources="raschka-coding-agent,clew-research-harness">
   <div class="section-label">The Gap</div>
@@ -2397,14 +2280,14 @@ body.presenting .slide.active {
     </div>
   </div>
 
-  <div class="slide-number">7 / 24</div>
+  <div class="slide-number">5 / 22</div>
 
 <div class="slide-source-bar">Sebastian Raschka · Components of a Coding Agent (2026) — magazine.sebastianraschka.com &nbsp;|&nbsp; Internal research · What Makes a Good Agentic Harness — research synthesis (2026)</div>
 </div>
 
 
 
-<!-- slide 8: Context rot — the window isn't the memory -->
+<!-- slide 6: Context rot — the window isn't the memory -->
 
 <div class="slide s-crot" data-sources="anthropic-opus47,anthropic-opus46,nolima-context">
   <div class="section-label">The Gap · Context Rot</div>
@@ -2457,14 +2340,44 @@ body.presenting .slide.active {
     </div>
   </div>
 
-  <div class="slide-number">8 / 24</div>
+  <div class="slide-number">6 / 22</div>
 
 <div class="slide-source-bar">Anthropic · Claude Opus 4.7 System Card · MRCR v2 (vendor-reported) (2026) — anthropic.com &nbsp;|&nbsp; Anthropic · Claude Opus 4.6 System Card · MRCR v2 (vendor-reported) (2026) — anthropic.com &nbsp;|&nbsp; Adobe Research / LMU Munich · NoLiMa: Long-Context Evaluation Beyond Literal Matching (ICML 2025) (2025) — arxiv.org</div>
 </div>
 
 
 
-<!-- slide 9: §02 — The Metamodel -->
+<!-- slide 7: Anatomy — harness around the model -->
+
+<div class="slide s-rings2">
+  <div class="section-label">Harness Anatomy · Rings</div>
+  <h2 class="slide-title">The model is a dot. The harness is the mass around it.</h2>
+
+  <div class="rs-stage">
+    <svg class="rs-svg" viewBox="0 0 1280 720" width="1280" height="720">
+      <path d="M 505.0 336.0 L 505.0 150.0 A 250 250 0 0 1 721.5 275.0 L 560.4 368.0 A 64 64 0 0 0 505.0 336.0 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/><path d="M 560.4 368.0 L 721.5 275.0 A 250 250 0 0 1 755.0 400.0 L 569.0 400.0 A 64 64 0 0 0 560.4 368.0 Z" style="fill:color-mix(in srgb,var(--accent) 5%,var(--surface));stroke:none"/><path d="M 569.0 400.0 L 755.0 400.0 A 250 250 0 0 1 721.5 525.0 L 560.4 432.0 A 64 64 0 0 0 569.0 400.0 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/><path d="M 560.4 432.0 L 721.5 525.0 A 250 250 0 0 1 380.0 616.5 L 473.0 455.4 A 64 64 0 0 0 560.4 432.0 Z" style="fill:color-mix(in srgb,var(--accent) 5%,var(--surface));stroke:none"/><path d="M 473.0 455.4 L 380.0 616.5 A 250 250 0 0 1 255.0 400.0 L 441.0 400.0 A 64 64 0 0 0 473.0 455.4 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/><path d="M 441.0 400.0 L 255.0 400.0 A 250 250 0 0 1 380.0 183.5 L 473.0 344.6 A 64 64 0 0 0 441.0 400.0 Z" style="fill:color-mix(in srgb,var(--accent) 5%,var(--surface));stroke:none"/><path d="M 473.0 344.6 L 380.0 183.5 A 250 250 0 0 1 505.0 150.0 L 505.0 336.0 A 64 64 0 0 0 473.0 344.6 Z" style="fill:color-mix(in srgb,var(--accent) 14%,var(--surface));stroke:none"/>
+      <line x1="505.0" y1="336.0" x2="505.0" y2="150.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="560.4" y1="368.0" x2="721.5" y2="275.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="569.0" y1="400.0" x2="755.0" y2="400.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="560.4" y1="432.0" x2="721.5" y2="525.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="473.0" y1="455.4" x2="380.0" y2="616.5" style="stroke:var(--surface);stroke-width:2.5"/><line x1="441.0" y1="400.0" x2="255.0" y2="400.0" style="stroke:var(--surface);stroke-width:2.5"/><line x1="473.0" y1="344.6" x2="380.0" y2="183.5" style="stroke:var(--surface);stroke-width:2.5"/><line x1="505.0" y1="336.0" x2="505.0" y2="150.0" style="stroke:var(--surface);stroke-width:2.5"/>
+    </svg>
+    <div class="rs-core" style="left:505px;top:400px;"><div class="t">MODEL</div></div>
+    <div class="rs-phase" style="left:559.0px;top:306.5px;">Sense</div><div class="rs-phase" style="left:609.3px;top:372.0px;">Retrieve</div><div class="rs-phase" style="left:609.3px;top:428.0px;">Remember</div><div class="rs-phase" style="left:533.0px;top:504.3px;">Plan</div><div class="rs-phase" style="left:411.5px;top:454.0px;">Act</div><div class="rs-phase" style="left:411.5px;top:346.0px;">Validate</div><div class="rs-phase" style="left:477.0px;top:295.7px;">Learn</div>
+    <div class="rs-cap" style="left:565.0px;top:175.9px;">Sensors</div><div class="rs-cap" style="left:669.0px;top:236.0px;">Env. State</div><div class="rs-cap" style="left:729.1px;top:340.0px;">Knowledge</div><div class="rs-cap" style="left:729.1px;top:460.0px;">Memory</div><div class="rs-cap" style="left:669.0px;top:564.0px;">Agent Core</div><div class="rs-cap" style="left:565.0px;top:624.1px;">Goals</div><div class="rs-cap" style="left:445.0px;top:624.1px;">Planning</div><div class="rs-cap" style="left:341.0px;top:564.0px;">Actuators</div><div class="rs-cap" style="left:280.9px;top:460.0px;">Tools & Skills</div><div class="rs-cap" style="left:280.9px;top:340.0px;">Controls</div><div class="rs-cap" style="left:341.0px;top:236.0px;">Observability</div><div class="rs-cap" style="left:445.0px;top:175.9px;">Learning</div>
+  </div>
+
+  <div class="rs-govern">
+    <div class="rs-glabel">Cross-cutting</div>
+    <div class="rs-gsub">Govern every step — they don't belong to one.</div>
+    <div class="rs-gcap"><i data-lucide="shield-check" class="icon-sm"></i>Safety &amp; Governance</div>
+    <div class="rs-gcap"><i data-lucide="key-round" class="icon-sm"></i>Identity &amp; Access</div>
+    <div class="rs-gcap"><i data-lucide="users" class="icon-sm"></i>Human Feedback</div>
+  </div>
+
+  <div class="rings-cap">Each wedge is <em>one loop step</em> and the capabilities it owns · the three on the right <em>govern every step</em>.</div>
+  <div class="slide-number">7 / 22</div>
+</div>
+
+
+
+<!-- slide 8: §02 — The Metamodel -->
 
 <div class="slide s-divider">
   <div class="accent-bar-left"></div>
@@ -2475,12 +2388,12 @@ body.presenting .slide.active {
     <div class="div-tag">How an agent armed with skills and rules turns business context into deployable artefacts — every step traceable.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">9 / 24</div>
+  <div class="slide-number">8 / 22</div>
 </div>
 
 
 
-<!-- slide 10: SDLC overview — context to code -->
+<!-- slide 9: SDLC overview — context to code -->
 
 <div class="slide s-devops">
   <div class="section-label">The Metamodel · The cycle</div>
@@ -2542,12 +2455,12 @@ body.presenting .slide.active {
   <div class="dv-cl dv-r" style="left:1058px;top:452px;width:182px;min-height:96px"><div class="dv-clh"><span class="dv-clt">QA</span><span class="dv-cln">5 · planned</span></div><div class="dv-cls">Test strategy · Test scenario · Test plan · Acceptance test · Eval harness</div></div>
   <div class="dv-cl dv-r" style="left:794px;top:596px;width:200px;min-height:72px"><div class="dv-clh"><span class="dv-clt">OPS</span><span class="dv-cln">3</span></div><div class="dv-cls">Runbook · Bug RCA · Terraform (Exoscale)</div></div>
   </div>
-  <div class="slide-number">10 / 24</div>
+  <div class="slide-number">9 / 22</div>
 </div>
 
 
 
-<!-- slide 11: SDLC ① Discover & Define -->
+<!-- slide 10: SDLC ① Discover & Define -->
 
 <div class="slide s-phase p1">
   <div class="section-label">The SDLC · Discover</div>
@@ -2559,12 +2472,12 @@ body.presenting .slide.active {
   </div>
   <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Business<span>9 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Vision</span><span class="ph-sub">north star</span></div><div class="ph-node"><span class="ph-nm">Persona</span><span class="ph-sub">who we serve</span></div><div class="ph-node"><span class="ph-nm">Model canvas</span><span class="ph-sub">value model</span></div><div class="ph-node"><span class="ph-nm">Capability map</span><span class="ph-sub">what it can do</span></div><div class="ph-node"><span class="ph-nm">Competitive landscape</span><span class="ph-sub">market position</span></div><div class="ph-node"><span class="ph-nm">Value stream</span><span class="ph-sub">how value flows</span></div><div class="ph-node"><span class="ph-nm">Objective</span><span class="ph-sub">goals & KRs</span></div><div class="ph-node"><span class="ph-nm">Process</span><span class="ph-sub">operations</span></div><div class="ph-node"><span class="ph-nm">Quant model</span><span class="ph-sub">unit economics</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Discovery<span>3 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Idea</span><span class="ph-sub">capture & graduate</span></div><div class="ph-node"><span class="ph-nm">Research</span><span class="ph-sub">1:1 interviews</span></div><div class="ph-node"><span class="ph-nm">Workshop</span><span class="ph-sub">group facilitation</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Domain<span>3 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Bounded context</span><span class="ph-sub">boundaries</span></div><div class="ph-node"><span class="ph-nm">Glossary</span><span class="ph-sub">ubiquitous language</span></div><div class="ph-node"><span class="ph-nm">Domain model</span><span class="ph-sub">aggregates & events</span></div></div></div></div>
   <div class="ph-feed"><span></span><span>feeds → Design</span></div>
-  <div class="slide-number">11 / 24</div>
+  <div class="slide-number">10 / 22</div>
 </div>
 
 
 
-<!-- slide 12: SDLC ② Design the Solution -->
+<!-- slide 11: SDLC ② Design the Solution -->
 
 <div class="slide s-phase p2">
   <div class="section-label">The SDLC · Architect</div>
@@ -2576,12 +2489,12 @@ body.presenting .slide.active {
   </div>
   <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Architecture<span>9 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">ADR</span><span class="ph-sub">decisions</span></div><div class="ph-node"><span class="ph-nm">Research</span><span class="ph-sub">arch notes</span></div><div class="ph-node"><span class="ph-nm">Service contract</span><span class="ph-sub">API surface</span></div><div class="ph-node"><span class="ph-nm">CLI contract</span><span class="ph-sub">command surface</span></div><div class="ph-node"><span class="ph-nm">Structurizr</span><span class="ph-sub">C4 workspace</span></div><div class="ph-node"><span class="ph-nm">C4</span><span class="ph-sub">context → component</span></div><div class="ph-node"><span class="ph-nm">PlantUML</span><span class="ph-sub">UML pipeline</span></div><div class="ph-node"><span class="ph-nm">UML</span><span class="ph-sub">sequence/class/state</span></div><div class="ph-node"><span class="ph-nm">arc42</span><span class="ph-sub">arch narrative</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Specification<span>6 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Functional breakdown</span><span class="ph-sub">feature tree</span></div><div class="ph-node"><span class="ph-nm">Use case</span><span class="ph-sub">actor scenarios</span></div><div class="ph-node"><span class="ph-nm">Quality attributes</span><span class="ph-sub">ISO 25010</span></div><div class="ph-node"><span class="ph-nm">PRD</span><span class="ph-sub">one per epic</span></div><div class="ph-node"><span class="ph-nm">Peer review</span><span class="ph-sub">PRD/plan review</span></div><div class="ph-node"><span class="ph-nm">Grill-me</span><span class="ph-sub">adversarial review</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">UX<span>1 skill</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Design system</span><span class="ph-sub">tokens & brand</span></div></div></div></div>
   <div class="ph-feed"><span>fed by ← Context</span><span>feeds → Execution</span></div>
-  <div class="slide-number">12 / 24</div>
+  <div class="slide-number">11 / 22</div>
 </div>
 
 
 
-<!-- slide 13: SDLC ③ Execute & Deliver -->
+<!-- slide 12: SDLC ③ Execute & Deliver -->
 
 <div class="slide s-phase p3">
   <div class="section-label">The SDLC · Deliver</div>
@@ -2593,33 +2506,12 @@ body.presenting .slide.active {
   </div>
   <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Specification<span>2 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Delivery roadmap</span><span class="ph-sub">epics & phases</span></div><div class="ph-node"><span class="ph-nm">Implementation plan</span><span class="ph-sub">atomic increments</span></div></div></div><div class="ph-lane plan"><div class="ph-lane-h">QA<span>5 · planned</span></div><div class="ph-nodes"><div class="ph-node plan"><span class="ph-nm">Test strategy</span><span class="ph-sub">pyramid & coverage</span></div><div class="ph-node plan"><span class="ph-nm">Test scenario</span><span class="ph-sub">from use cases</span></div><div class="ph-node plan"><span class="ph-nm">Test plan</span><span class="ph-sub">per release</span></div><div class="ph-node plan"><span class="ph-nm">Acceptance test</span><span class="ph-sub">Given–When–Then</span></div><div class="ph-node plan"><span class="ph-nm">Eval harness</span><span class="ph-sub">agent evals</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Development<span>8 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Agent config</span><span class="ph-sub">CLAUDE.md & rules</span></div><div class="ph-node"><span class="ph-nm">Getting started</span><span class="ph-sub">onboarding</span></div><div class="ph-node"><span class="ph-nm">Stack guide</span><span class="ph-sub">tech patterns</span></div><div class="ph-node"><span class="ph-nm">Git init</span><span class="ph-sub">repo setup</span></div><div class="ph-node"><span class="ph-nm">Git commit</span><span class="ph-sub">commits</span></div><div class="ph-node"><span class="ph-nm">Git worktree</span><span class="ph-sub">worktrees</span></div><div class="ph-node"><span class="ph-nm">PR</span><span class="ph-sub">pull requests</span></div><div class="ph-node"><span class="ph-nm">Ralph loop</span><span class="ph-sub">autonomous loop</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Ops<span>3 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Runbook</span><span class="ph-sub">operations</span></div><div class="ph-node"><span class="ph-nm">Bug RCA</span><span class="ph-sub">incident analysis</span></div><div class="ph-node"><span class="ph-nm">Terraform</span><span class="ph-sub">Exoscale infra</span></div></div></div></div>
   <div class="ph-feed"><span>fed by ← Design</span><span></span></div>
-  <div class="slide-number">13 / 24</div>
+  <div class="slide-number">12 / 22</div>
 </div>
 
 
 
-<!-- slide 14: Metamodel — artefact inventory by package -->
-
-<div class="slide s-mmer">
-  <div class="section-label">The Metamodel · Inventory</div>
-  <h2 class="slide-title">Every artefact, by package <span style="color:var(--accent)">—</span> and the skill that mints it.</h2>
-  <p class="slide-lede">Seven packages, 35 artefact types; each produced by one kit skill (the package prefix + the suffix shown). Quality Assurance is reserved.</p>
-  <div class="mm-grid">
-    <div class="mm-pk" style="--pk:#0D9488"><div class="mm-ph"><span class="mm-pt">DISCOVERY</span><span class="mm-pp">discovery-</span></div><ul class="mm-list"><li><span class="mm-art">Idea</span> <span class="mm-id">IDEA-NNNN</span> <span class="mm-sk">· idea</span></li><li><span class="mm-art">Research</span> <span class="mm-sk">· research</span></li><li><span class="mm-art">Workshop</span> <span class="mm-sk">· workshop</span></li></ul></div>
-    <div class="mm-pk" style="--pk:#D97706"><div class="mm-ph"><span class="mm-pt">BUSINESS ARCHITECTURE</span><span class="mm-pp">business-</span></div><ul class="mm-list"><li><span class="mm-art">Vision</span> <span class="mm-sk">· vision</span></li><li><span class="mm-art">Persona</span> <span class="mm-id">P-NN</span> <span class="mm-sk">· persona</span></li><li><span class="mm-art">Model canvas</span> <span class="mm-sk">· model-canvas</span></li><li><span class="mm-art">Capability map</span> <span class="mm-id">C-N.M</span> <span class="mm-sk">· capability-map</span></li><li><span class="mm-art">Value stream</span> <span class="mm-id">VS-N.M</span> <span class="mm-sk">· value-stream</span></li><li><span class="mm-art">Objective</span> <span class="mm-id">OBJ-NN</span> <span class="mm-sk">· objective</span></li><li><span class="mm-art">Process</span> <span class="mm-sk">· process</span></li><li><span class="mm-art">Quantitative model</span> <span class="mm-sk">· quantitative-model</span></li><li><span class="mm-art">Competitive landscape</span> <span class="mm-id">CO-NN</span> <span class="mm-sk">· competitive-landscape</span></li></ul></div>
-    <div class="mm-pk" style="--pk:#7C3AED"><div class="mm-ph"><span class="mm-pt">DOMAIN</span><span class="mm-pp">domain-</span></div><ul class="mm-list"><li><span class="mm-art">Bounded context</span> <span class="mm-id">BC-NN</span> <span class="mm-sk">· bounded-context</span></li><li><span class="mm-art">Glossary</span> <span class="mm-id">BC-NN.GT-NN</span> <span class="mm-sk">· glossary</span></li><li><span class="mm-art">Domain model</span> <span class="mm-id">AGG/ENT/VO/EVT</span> <span class="mm-sk">· model</span></li></ul></div>
-    <div class="mm-pk" style="--pk:#3B82F6"><div class="mm-ph"><span class="mm-pt">PRODUCT SPECS</span><span class="mm-pp">spec-</span></div><ul class="mm-list"><li><span class="mm-art">FBS</span> <span class="mm-id">C-N.M.FXX</span> <span class="mm-sk">· functional-breakdown-structure</span></li><li><span class="mm-art">Quality attributes</span> <span class="mm-id">QA-XXNN</span> <span class="mm-sk">· quality-attributes</span></li><li><span class="mm-art">Use case</span> <span class="mm-id">UC-NN</span> <span class="mm-sk">· use-case</span></li><li><span class="mm-art">PRD</span> <span class="mm-id">PRD-NNNN</span> <span class="mm-sk">· prd</span></li></ul></div>
-    <div class="mm-pk" style="--pk:#10B981"><div class="mm-ph"><span class="mm-pt">PLANNING</span><span class="mm-pp">plan-</span></div><ul class="mm-list"><li><span class="mm-art">Delivery roadmap</span> <span class="mm-id">E-NN</span> <span class="mm-sk">· delivery-roadmap</span></li><li><span class="mm-art">Implementation plan</span> <span class="mm-id">Plan-NNNN</span> <span class="mm-sk">· implementation</span></li></ul></div>
-    <div class="mm-pk" style="--pk:#EF4444"><div class="mm-ph"><span class="mm-pt">ARCHITECTURE</span><span class="mm-pp">arch-</span></div><ul class="mm-list"><li><span class="mm-art">ADR</span> <span class="mm-id">ADR-NNNN</span> <span class="mm-sk">· adr</span></li><li><span class="mm-art">Research</span> <span class="mm-id">Research-NNNN</span> <span class="mm-sk">· research</span></li><li><span class="mm-art">Service contract</span> <span class="mm-id">BC-NN.CTR-NN</span> <span class="mm-sk">· service-contract</span></li><li><span class="mm-art">CLI contract</span> <span class="mm-id">CLI-NN.CMD-NN</span> <span class="mm-sk">· cli-contract</span></li><li><span class="mm-art">C4 model</span> <span class="mm-id">SYS/CON/CMP/DN-NN</span> <span class="mm-sk">· c4 · structurizr</span></li><li><span class="mm-art">arc42</span> <span class="mm-id">SCN/CST/CC/RSK-NN</span> <span class="mm-sk">· arc42</span></li><li><span class="mm-art">UML</span> <span class="mm-sk">· uml · plantuml</span></li></ul></div>
-    <div class="mm-pk" style="--pk:#CA8A04"><div class="mm-ph"><span class="mm-pt">QUALITY ASSURANCE <span class="mm-rsv">reserved</span></span><span class="mm-pp">qa-</span></div><ul class="mm-list"><li><span class="mm-art">Test strategy</span> <span class="mm-id">TS-NN</span> <span class="mm-sk">· test-strategy</span></li><li><span class="mm-art">Test scenario</span> <span class="mm-sk">· test-scenario</span></li><li><span class="mm-art">Test plan</span> <span class="mm-sk">· test-plan</span></li><li><span class="mm-art">Acceptance test</span> <span class="mm-sk">· acceptance-test</span></li><li><span class="mm-art">Eval harness</span> <span class="mm-sk">· eval-harness</span></li></ul></div>
-    <div class="mm-pk" style="--pk:#475569"><div class="mm-ph"><span class="mm-pt">OPERATIONS</span><span class="mm-pp">ops-</span></div><ul class="mm-list"><li><span class="mm-art">Runbook</span> <span class="mm-sk">· runbook</span></li><li><span class="mm-art">Bug RCA</span> <span class="mm-sk">· bug-rca</span></li></ul></div>
-  </div>
-  <div class="slide-number">14 / 24</div>
-</div>
-
-
-
-<!-- slide 15: §03 — The Build Workflow -->
+<!-- slide 13: §03 — The Build Workflow -->
 
 <div class="slide s-divider">
   <div class="accent-bar-left"></div>
@@ -2630,12 +2522,12 @@ body.presenting .slide.active {
     <div class="div-tag">From a PRD to merged code — how one engineer drives agents through alignment and verification gates, then lets them run autonomously.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">15 / 24</div>
+  <div class="slide-number">13 / 22</div>
 </div>
 
 
 
-<!-- slide 16: Whole process — PRD to merged code -->
+<!-- slide 14: Whole process — PRD to merged code -->
 
 <div class="slide s-wf-flow">
   <div class="section-label">The Build Workflow · End to end</div>
@@ -2644,19 +2536,19 @@ body.presenting .slide.active {
   <div class="wf-row">
     <div class="wf-card"><div class="wf-hd"><div class="wf-num">1</div><div class="wf-name">Spec ready</div></div><div class="wf-fresh wf-given"><i data-lucide="check"></i>already done</div><div class="wf-step"><i data-lucide="map" class="wf-ic"></i><div>Delivery roadmap &rarr; <b>one PRD per epic</b></div></div><div class="wf-step"><i data-lucide="target" class="wf-ic"></i><div>Each PRD states what must be true</div></div><div class="wf-out"><i data-lucide="check-circle-2" class="wf-ic"></i>PRD in hand</div></div>
     <div class="wf-arr"><i data-lucide="chevron-right" class="icon-md"></i></div>
-    <div class="wf-card"><div class="wf-hd"><div class="wf-num">2</div><div class="wf-name">Align &amp; plan</div></div><div class="wf-fresh"><i data-lucide="refresh-cw"></i>fresh session</div><div class="wf-step"><i data-lucide="messages-square" class="wf-ic"></i><div><span class='wf-skill'>spec-grill-me</span>: agent grills you ~10 Q on impl &amp; architecture</div></div><div class="wf-step"><i data-lucide="user" class="wf-ic wf-you"></i><div>you answer &rarr; shared mental model</div></div><div class="wf-step"><i data-lucide="file-text" class="wf-ic"></i><div>agent writes the <b>implementation plan</b></div></div><div class="wf-out"><i data-lucide="check-circle-2" class="wf-ic"></i>Plan drafted</div></div>
+    <div class="wf-card"><div class="wf-hd"><div class="wf-num">2</div><div class="wf-name">Align &amp; plan</div></div><div class="wf-fresh"><i data-lucide="refresh-cw"></i>fresh session</div><div class="wf-step"><i data-lucide="messages-square" class="wf-ic"></i><div><span class='wf-skill'>agent-grill-me</span>: agent grills you ~10 Q on impl &amp; architecture</div></div><div class="wf-step"><i data-lucide="user" class="wf-ic wf-you"></i><div>you answer &rarr; shared mental model</div></div><div class="wf-step"><i data-lucide="file-text" class="wf-ic"></i><div>agent writes the <b>implementation plan</b></div></div><div class="wf-out"><i data-lucide="check-circle-2" class="wf-ic"></i>Plan drafted</div></div>
     <div class="wf-arr"><i data-lucide="chevron-right" class="icon-md"></i></div>
-    <div class="wf-card"><div class="wf-hd"><div class="wf-num">3</div><div class="wf-name">Verify the plan</div></div><div class="wf-fresh"><i data-lucide="refresh-cw"></i>fresh session</div><div class="wf-step"><i data-lucide="search-check" class="wf-ic"></i><div><span class='wf-skill'>spec-peer-review</span>: findings ranked critical &rarr; low</div></div><div class="wf-step"><i data-lucide="user" class="wf-ic wf-you"></i><div>you resolve the ones needing guidance &rarr; amend</div></div><div class="wf-step"><i data-lucide="clipboard-check" class="wf-ic"></i><div><span class='wf-skill'>ralph audit</span>: plan is autonomously runnable</div></div><div class="wf-out"><i data-lucide="check-circle-2" class="wf-ic"></i>Audit green</div></div>
+    <div class="wf-card"><div class="wf-hd"><div class="wf-num">3</div><div class="wf-name">Verify the plan</div></div><div class="wf-fresh"><i data-lucide="refresh-cw"></i>fresh session</div><div class="wf-step"><i data-lucide="search-check" class="wf-ic"></i><div><span class='wf-skill'>agent-peer-review</span>: findings ranked critical &rarr; low</div></div><div class="wf-step"><i data-lucide="user" class="wf-ic wf-you"></i><div>you resolve the ones needing guidance &rarr; amend</div></div><div class="wf-step"><i data-lucide="clipboard-check" class="wf-ic"></i><div><span class='wf-skill'>ralph audit</span>: plan is autonomously runnable</div></div><div class="wf-out"><i data-lucide="check-circle-2" class="wf-ic"></i>Audit green</div></div>
     <div class="wf-arr"><i data-lucide="chevron-right" class="icon-md"></i></div>
-    <div class="wf-card"><div class="wf-hd"><div class="wf-num">4</div><div class="wf-name">Execute &amp; ship</div></div><div class="wf-fresh wf-given"><i data-lucide="terminal"></i>separate CLI</div><div class="wf-step"><i data-lucide="repeat" class="wf-ic"></i><div><span class='wf-skill'>dev-ralph-loop</span> <span class='wf-skill'>ralph.sh</span>: fresh agent per increment</div></div><div class="wf-step"><i data-lucide="git-commit-horizontal" class="wf-ic"></i><div>implement &rarr; test gate &rarr; commit, until done</div></div><div class="wf-step"><i data-lucide="check-check" class="wf-ic"></i><div>run CI on the finished work</div></div><div class="wf-out"><i data-lucide="check-circle-2" class="wf-ic"></i>Merged</div></div>
+    <div class="wf-card"><div class="wf-hd"><div class="wf-num">4</div><div class="wf-name">Execute &amp; ship</div></div><div class="wf-fresh wf-given"><i data-lucide="terminal"></i>separate CLI</div><div class="wf-step"><i data-lucide="repeat" class="wf-ic"></i><div><span class='wf-skill'>agent-ralph-loop</span> <span class='wf-skill'>ralph.sh</span>: fresh agent per increment</div></div><div class="wf-step"><i data-lucide="git-commit-horizontal" class="wf-ic"></i><div>implement &rarr; test gate &rarr; commit, until done</div></div><div class="wf-step"><i data-lucide="check-check" class="wf-ic"></i><div>run CI on the finished work</div></div><div class="wf-out"><i data-lucide="check-circle-2" class="wf-ic"></i>Merged</div></div>
   </div>
   <div class="wf-foot">Two <b>fresh-session</b> checks (grill-me before, peer-review after) keep me and the agent aligned; the loop only runs once the plan is proven autonomous.</div>
-  <div class="slide-number">16 / 24</div>
+  <div class="slide-number">14 / 22</div>
 </div>
 
 
 
-<!-- slide 17: PRD & implementation plan -->
+<!-- slide 15: PRD & implementation plan -->
 
 <div class="slide s-prd-plan">
   <div class="section-label">The Build Workflow · Artefacts</div>
@@ -2690,12 +2582,12 @@ body.presenting .slide.active {
       <div class="pp-tags">Plan-NNNN · Inc-N · Status: pending &rarr; done</div>
     </div>
   </div>
-  <div class="slide-number">17 / 24</div>
+  <div class="slide-number">15 / 22</div>
 </div>
 
 
 
-<!-- slide 18: Grill-me & peer review -->
+<!-- slide 16: Grill-me & peer review -->
 
 <div class="slide s-verify">
   <div class="section-label">The Build Workflow · Alignment &amp; verification</div>
@@ -2704,7 +2596,7 @@ body.presenting .slide.active {
   <div class="v-wrap">
     <div class="v-card a">
       <div class="v-tag"><i data-lucide="refresh-cw" style="width:11px;height:11px"></i>Alignment · before the plan</div>
-      <div class="v-skill">spec-grill-me</div>
+      <div class="v-skill">agent-grill-me</div>
       <div class="v-when">Live Socratic session on the PRD — one question at a time.</div>
       <div class="v-li"><i data-lucide="help-circle"></i><div>Agent asks ~10 focused Q on <b>implementation &amp; architecture</b></div></div>
       <div class="v-li"><i data-lucide="book-marked"></i><div>Vocabulary checked against the <b>domain glossary</b></div></div>
@@ -2714,7 +2606,7 @@ body.presenting .slide.active {
     </div>
     <div class="v-card b">
       <div class="v-tag"><i data-lucide="refresh-cw" style="width:11px;height:11px"></i>Verification · after the plan</div>
-      <div class="v-skill">spec-peer-review</div>
+      <div class="v-skill">agent-peer-review</div>
       <div class="v-when">Static, independent scan of the finished plan.</div>
       <div class="v-li"><i data-lucide="scan-search"></i><div>Reads the plan end-to-end, builds a requirement map</div></div>
       <div class="v-li"><i data-lucide="alert-triangle"></i><div>Findings ranked with concrete remediation:</div></div>
@@ -2729,12 +2621,12 @@ body.presenting .slide.active {
     </div>
   </div>
   <div class="v-band"><i data-lucide="info" style="width:13px;height:13px"></i>Peer-review finds the <b>mechanical</b> gaps automatically; grill-me surfaces the <b>thinking</b> gaps under questioning.</div>
-  <div class="slide-number">18 / 24</div>
+  <div class="slide-number">16 / 22</div>
 </div>
 
 
 
-<!-- slide 19: The Ralph loop -->
+<!-- slide 17: The Ralph loop -->
 
 <div class="slide s-ralph">
   <div class="section-label">The Build Workflow · Autonomous execution</div>
@@ -2758,12 +2650,12 @@ body.presenting .slide.active {
     <div class="r-loopback"><i data-lucide="corner-left-up" style="width:13px;height:13px"></i>repeat with a fresh agent</div>
     <div class="r-done"><i data-lucide="check-check"></i>All increments done &rarr; run CI</div>
   </div>
-  <div class="slide-number">19 / 24</div>
+  <div class="slide-number">17 / 22</div>
 </div>
 
 
 
-<!-- slide 20: §04 — clew -->
+<!-- slide 18: §04 — clew -->
 
 <div class="slide s-divider">
   <div class="accent-bar-left"></div>
@@ -2774,12 +2666,12 @@ body.presenting .slide.active {
     <div class="div-tag">The engine that persists the whole graph: deterministic IDs, write-time integrity, and end-to-end traceability.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">20 / 24</div>
+  <div class="slide-number">18 / 22</div>
 </div>
 
 
 
-<!-- slide 21: clew engineers memory -->
+<!-- slide 19: clew engineers memory -->
 
 <div class="slide s-clew" data-sources="clew-research-p01">
   <div class="section-label">clew</div>
@@ -2844,14 +2736,14 @@ body.presenting .slide.active {
 
   </div>
 
-  <div class="slide-number">21 / 24</div>
+  <div class="slide-number">19 / 22</div>
 
 <div class="slide-source-bar">Internal research · P-01 validation interview — research synthesis (N=1) (2026)</div>
 </div>
 
 
 
-<!-- slide 22: Deterministic IDs, write-time checks -->
+<!-- slide 20: Deterministic IDs, write-time checks -->
 
 <div class="slide s-mechanism" data-sources="clew-research-p01">
   <div class="section-label">How it works</div>
@@ -2895,14 +2787,14 @@ body.presenting .slide.active {
     </div>
   </div>
 
-  <div class="slide-number">22 / 24</div>
+  <div class="slide-number">20 / 22</div>
 
 <div class="slide-source-bar">Internal research · P-01 validation interview — research synthesis (N=1) (2026)</div>
 </div>
 
 
 
-<!-- slide 23: Trace, impact, integrity -->
+<!-- slide 21: Trace, impact, integrity -->
 
 <div class="slide s-trace" data-sources="clew-research-p01">
   <div class="section-label">The Payoff</div>
@@ -2951,14 +2843,14 @@ body.presenting .slide.active {
     <div class="claim-sub">Every internal reference is up to date, <em>all the time</em> — the north-star metric is end-to-end traceability, not work-in-progress.</div>
   </div>
 
-  <div class="slide-number">23 / 24</div>
+  <div class="slide-number">21 / 22</div>
 
 <div class="slide-source-bar">Internal research · P-01 validation interview — research synthesis (N=1) (2026)</div>
 </div>
 
 
 
-<!-- slide 24: Engineer the harness -->
+<!-- slide 22: Engineer the harness -->
 
 <div class="slide s-close">
   <div class="accent-bar-left"></div>
@@ -2979,7 +2871,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="close-bottom-line"></div>
-  <div class="slide-number">24 / 24</div>
+  <div class="slide-number">22 / 22</div>
 </div>
 
 
