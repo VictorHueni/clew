@@ -1105,9 +1105,22 @@
   font-size: 15px;
   font-weight: 700;
   color: var(--ink);
-  width: 168px;
+  width: 188px;
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  line-height: 1.12;
 }
+.s-lever .rank-sub {
+  font-size: 8.5px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+.s-lever .rank-sub em { font-style: normal; opacity: .65; }
 .s-lever .rank-track {
   flex: 1;
   height: 34px;

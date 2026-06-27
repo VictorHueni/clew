@@ -1205,9 +1205,22 @@
   font-size: 15px;
   font-weight: 700;
   color: var(--ink);
-  width: 168px;
+  width: 188px;
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  line-height: 1.12;
 }
+.s-lever .rank-sub {
+  font-size: 8.5px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+.s-lever .rank-sub em { font-style: normal; opacity: .65; }
 .s-lever .rank-track {
   flex: 1;
   height: 34px;
@@ -2212,7 +2225,7 @@ body.presenting .slide.active {
     </div>
     <div class="rank-row">
       <span class="rank-rankno">2</span>
-      <span class="rank-label">Middleware</span>
+      <span class="rank-label">Control layer<span class="rank-sub">context · execution · recovery <em>(middleware)</em></span></span>
       <div class="rank-track"><div class="rank-fill" style="width: 82%;"></div></div>
     </div>
     <div class="rank-row">
