@@ -30,20 +30,25 @@ clew manages a complete **strategic-architecture documentation system** across f
 
 ### Artefact layers and build order
 
-19 artefacts across three layers (Business Architecture · Domain · Product Specs) plus a root Step 0 and two Architecture Contract steps. Solid arrows = hard dependency. Dashed arrows = supporting enrichment.
+19 artefacts grouped into packages by kit prefix — cross-cutting **Discovery**, **Business Architecture** (Step 0 vision through Step 6, plus competitive landscape), **Domain**, **Product Specs**, **Architecture** (ADR + service/CLI contracts), and **Execution**. Solid arrows = hard dependency; dashed arrows = supporting enrichment. Each edge is named with its relationship: `UPPERCASE` is the canonical typed relationship clew stores in `artefact_references.relationship` and validates against the `ALLOWED_RELATIONSHIPS` registry (see the [domain model §Relationship registry](docs/domain/07b-models/artefact-store.md#relationship-registry)); lowercase names are softer/advisory links the registry does not type, or read in the build-order (prerequisite→dependent) direction.
 
 ```mermaid
 flowchart TD
-    classDef business fill:#FEF3C7,stroke:#D97706,color:#92400E
-    classDef domain   fill:#EDE9FE,stroke:#7C3AED,color:#4C1D95
-    classDef specs    fill:#DBEAFE,stroke:#3B82F6,color:#1E40AF
-    classDef delivery fill:#D1FAE5,stroke:#10B981,color:#065F46
-    classDef support  fill:#F3F4F6,stroke:#9CA3AF,color:#374151
-    classDef arch     fill:#FEE2E2,stroke:#EF4444,color:#7F1D1D
+    classDef business  fill:#FEF3C7,stroke:#D97706,color:#92400E
+    classDef discovery fill:#CCFBF1,stroke:#0D9488,color:#115E59
+    classDef domain    fill:#EDE9FE,stroke:#7C3AED,color:#4C1D95
+    classDef specs     fill:#DBEAFE,stroke:#3B82F6,color:#1E40AF
+    classDef delivery  fill:#D1FAE5,stroke:#10B981,color:#065F46
+    classDef arch      fill:#FEE2E2,stroke:#EF4444,color:#7F1D1D
 
-    S0["0 · business-vision · VISION.md · north star"]:::business
+    subgraph DISC["Discovery — cross-cutting · pre-formal evidence"]
+        IDX["discovery-idea · IDEA-NNNN"]:::discovery
+        RES["discovery-research"]:::discovery
+        WS["discovery-workshop"]:::discovery
+    end
 
-    subgraph BA["Business Architecture: Steps 1–6 + 4.5"]
+    subgraph BA["Business Architecture: Step 0 · Steps 1–6 + 4.5"]
+        S0["0 · business-vision · VISION.md · north star"]:::business
         S1["1 · business-persona · P-NN"]:::business
         S2["2 · business-model-canvas"]:::business
         S3["3 · business-capability-map · C-N.M"]:::business
@@ -51,6 +56,7 @@ flowchart TD
         S4b["4.5 · business-objective · OBJ-NN · KR-NN.M"]:::business
         S5["5 · business-process"]:::business
         S6["6 · business-quantitative-model"]:::business
+        CL["business-competitive-landscape · CO-NN"]:::business
     end
 
     subgraph DOM["Domain Layer: Steps 2b · 2c · 7b"]
@@ -67,7 +73,8 @@ flowchart TD
         S10["10 · spec-prd · PRD-NNNN"]:::specs
     end
 
-    subgraph ARCH["Architecture Contracts: Steps 7c · 8.5"]
+    subgraph ARCH["Architecture: ADR + Contracts (Steps 7c · 8.5)"]
+        ADR["arch-adr · ADR-NNNN"]:::arch
         S7c["7c · arch-service-contract · BC-NN.CTR-NN"]:::arch
         S8_5["8.5 · arch-cli-contract · CLI-NN.CMD-NN"]:::arch
     end
@@ -76,230 +83,55 @@ flowchart TD
         S11["11 · spec-implementation-plan · Plan-NNNN"]:::delivery
     end
 
-    subgraph SUP["Supporting Skills"]
-        ADR["arch-adr · ADR-NNNN"]:::support
-        CL["business-competitive-landscape · CO-NN"]:::support
-        RES["discovery-research"]:::support
-        WS["discovery-workshop"]:::support
-        IDX["discovery-idea · IDEA-NNNN"]:::support
-    end
-
-    S0 -.-> S1
-    S0 -.-> S2
-    S0 -.-> S4b
-    S0 -.-> S8
-    S1 --> S2
-    S1 --> S3
-    S1 --> S4
-    S3 --> S4
-    S4 --> S5
-    S2 --> S6
-    S1 -.-> S4b
-    S2 -.-> S4b
-    S4 --> S4b
-    S4b -.-> S8
-    S4b -.-> S9
-    S4b -.-> S10
-    S3 --> S2b
-    S4 --> S2b
-    S2b --> S2c
-    S2b --> S7b
-    S3 --> S7
-    S7 --> S7b
-    S2c --> S7b
-    S7b --> S7c
-    S7 --> S8
-    S7 --> S8_5
-    S8 --> S8_5
-    S7b --> S10
-    S8 --> S9
-    S8_5 -.-> S9
-    S8_5 -.-> S10
-    S7c -.-> S10
-    S9 --> S10
-    S1 -.-> S9_5
-    S7 -.-> S9_5
-    S9_5 --> S10
-    S10 --> S11
-    ADR -.-> S7c
-    ADR -.-> S8_5
-    ADR -.-> S9
-    ADR -.-> S10
-    CL -.-> S1
-    CL -.-> S2
-    RES -.-> S1
-    RES -.-> S2
-    RES -.-> S6
-    WS -.-> S2
-    WS -.-> S4
-    IDX -.-> S0
-```
-
-### Data relationships
-
-Each entity **mints** a primary ID and **consumes** upstream IDs as foreign keys. clew enforces these relationships at write time. Each edge is tagged with its **canonical relationship type** — the `UPPERCASE` verb clew stores in `artefact_references.relationship` and validates against the `ALLOWED_RELATIONSHIPS` registry (see the [domain model §Relationship registry](docs/domain/07b-models/artefact-store.md#relationship-registry)); edges left in lowercase prose are softer/advisory links the registry does not type.
-
-```mermaid
-erDiagram
-    VISION { string file PK }
-    PERSONA { string P_NN PK }
-    CAPABILITY_MAP { string C_NM PK }
-    VALUE_STREAM {
-        string VS_NM PK
-        string P_NN FK
-        string C_NM FK
-    }
-    BUSINESS_PROCESS {
-        string slug PK
-        string VS_NM FK
-    }
-    BMC {
-        string id PK
-        string P_NN FK
-    }
-    QUANTITATIVE_MODEL { string slug PK }
-    OBJECTIVE {
-        string OBJ_NN PK
-        string VS_NM FK
-        string P_NN FK
-    }
-    KEY_RESULT {
-        string KR_NNM PK
-        string OBJ_NN FK
-    }
-    FBS {
-        string C_NM_FXX PK
-        string C_NM FK
-    }
-    EPIC {
-        string E_NN PK
-        string C_NM_FXX FK
-        string VS_NM FK
-    }
-    ADR { string ADR_NNNN PK }
-    QUALITY_ATTRIBUTES {
-        string QA_XXNN PK
-        string ADR_NNNN FK
-        string P_NN FK
-    }
-    USE_CASE {
-        string UC_NN PK
-        string P_NN FK
-        string C_NM_FXX FK
-    }
-    COMPETITOR {
-        string CO_NN PK
-        string P_NN FK
-    }
-    PRD {
-        string PRD_NNNN PK
-        string E_NN FK
-        string QA_XXNN FK
-        string ADR_NNNN FK
-        string UC_NN FK
-    }
-    IMPLEMENTATION_PLAN {
-        string Plan_NNNN PK
-        string PRD_NNNN FK
-    }
-    BOUNDED_CONTEXT {
-        string BC_NN PK
-        string C_NM FK
-        string subdomain_type
-    }
-    GLOSSARY_TERM {
-        string BC_NN_GT_NN PK
-        string BC_NN FK
-    }
-    DOMAIN_MODEL {
-        string BC_NN_AGG_NN PK
-        string BC_NN FK
-        string C_NM_FXX FK
-    }
-    DOMAIN_EVENT {
-        string BC_NN_EVT_NN PK
-        string BC_NN_AGG_NN FK
-    }
-    INTERFACE_CONTRACT {
-        string BC_NN_CTR_NN PK
-        string BC_NN FK
-        string BC_NN_AGG_NN FK
-        string BC_NN_EVT_NN FK
-        string ADR_NNNN FK
-    }
-    CLI_SURFACE {
-        string CLI_NN PK
-        string BC_NN FK
-    }
-    CLI_COMMAND {
-        string CLI_NN_CMD_NN PK
-        string CLI_NN FK
-        string C_NM_FXX FK
-        string BC_NN_CTR_NN FK
-    }
-    IDEA {
-        string IDEA_NNNN PK
-        string graduates_to FK
-        string target_id FK
-    }
-
-    PERSONA ||--o{ VALUE_STREAM : "TRIGGERS"
-    PERSONA ||--o{ BMC : "SEGMENTS · customer segments"
-    PERSONA }o--o{ QUALITY_ATTRIBUTES : "GROUNDS_QA · IC/PE"
-    CAPABILITY_MAP ||--o{ VALUE_STREAM : "CONSUMES · stages consume"
-    CAPABILITY_MAP ||--|| FBS : "INHERITS · L0 + L1"
-    CAPABILITY_MAP }o--o{ BMC : "RESOURCES · key resources"
-    VALUE_STREAM ||--o{ BUSINESS_PROCESS : "OPERATIONALISES"
-    VALUE_STREAM }o--o{ QUALITY_ATTRIBUTES : "pain index drives PE"
-    VALUE_STREAM }o--o{ EPIC : "VS stage anchor"
-    BMC ||--o{ QUANTITATIVE_MODEL : "QUANTIFIES · revenue + cost"
-    VISION }o--o{ PERSONA : "audience scope"
-    VISION }o--o{ OBJECTIVE : "operationalised by"
-    VISION }o--o{ BMC : "expressed commercially"
-    VALUE_STREAM }o--o{ OBJECTIVE : "INFORMS · pain index"
-    PERSONA }o--o{ OBJECTIVE : "ADDRESSES · whose outcomes"
-    OBJECTIVE ||--o{ KEY_RESULT : "MEASURES"
-    OBJECTIVE }o--o{ EPIC : "SERVES · epics serve"
-    KEY_RESULT }o--o{ QUALITY_ATTRIBUTES : "targets ground"
-    FBS ||--o{ EPIC : "GROUPS · grouped into"
-    FBS }o--o{ QUALITY_ATTRIBUTES : "DRIVES · differentiators"
-    ADR }o--o{ QUALITY_ATTRIBUTES : "DECIDES · Security/Flex"
-    ADR }o--o{ PRD : "DECIDES · architecture"
-    EPIC ||--|| PRD : "SPECIFIES · one per epic"
-    QUALITY_ATTRIBUTES ||--o{ PRD : "CONSTRAINS · acceptance criteria"
-    PERSONA ||--o{ USE_CASE : "ACTOR_OF · primary actor"
-    FBS ||--o{ USE_CASE : "COVERS · realised by"
-    USE_CASE ||--o{ PRD : "GROUNDS · acceptance criteria"
-    PERSONA }o--o{ COMPETITOR : "TARGETS · ICP"
-    CAPABILITY_MAP }o--o{ COMPETITOR : "COMPETES_ON · value curve"
-    BMC }o--o{ COMPETITOR : "POSITIONS_AGAINST · positioning"
-    QUANTITATIVE_MODEL }o--o{ COMPETITOR : "BENCHMARKS · pricing"
-    PRD ||--|| IMPLEMENTATION_PLAN : "DETAILS · one plan per PRD"
-    CAPABILITY_MAP ||--o{ BOUNDED_CONTEXT : "GROUPS_INTO · capabilities"
-    PERSONA }o--o{ BOUNDED_CONTEXT : "GROUNDS_BC · language"
-    VALUE_STREAM }o--o{ BOUNDED_CONTEXT : "SIGNALS · boundary"
-    BOUNDED_CONTEXT ||--o{ GLOSSARY_TERM : "SCOPES"
-    BOUNDED_CONTEXT ||--o{ DOMAIN_MODEL : "MODELS · one per BC"
-    FBS ||--o{ DOMAIN_MODEL : "BECOMES · entities"
-    DOMAIN_MODEL ||--o{ DOMAIN_EVENT : "EMITS · domain events"
-    PRD }o--o{ DOMAIN_MODEL : "REFERENCES_DM · AGG/EVT"
-    INTERFACE_CONTRACT }o--o{ ADR : "GOVERNS · versioning + auth"
-    INTERFACE_CONTRACT }o--o{ QUALITY_ATTRIBUTES : "SLA per CTR-NN"
-    INTERFACE_CONTRACT }o--o{ PRD : "references CTR-NN"
-    CLI_SURFACE ||--o{ CLI_COMMAND : "CONTAINS"
-    CLI_SURFACE }o--o{ BOUNDED_CONTEXT : "BC scope"
-    CLI_SURFACE }o--o{ ADR : "taxonomy + config decisions"
-    CLI_COMMAND }o--o{ FBS : "MAPS_TO · C-N.M.FXX"
-    CLI_COMMAND }o--o{ EPIC : "scoped by delivery phase"
-    CLI_COMMAND }o--o{ QUALITY_ATTRIBUTES : "SLA per command"
-    CLI_COMMAND }o--o{ PRD : "references CMD-NN"
-    CLI_COMMAND }o--o{ INTERFACE_CONTRACT : "WRAPS · CTR-NN calls"
-    IDEA }o--o| PERSONA : "GRADUATES_TO"
-    IDEA }o--o| OBJECTIVE : "GRADUATES_TO"
-    IDEA }o--o| BMC : "GRADUATES_TO"
-    IDEA }o--o| ADR : "GRADUATES_TO"
-    IDEA }o--o| FBS : "GRADUATES_TO"
-    IDEA }o--o| PRD : "GRADUATES_TO"
+    S0 -.->|"scopes audience"| S1
+    S0 -.->|"frames VP"| S2
+    S0 -.->|"sets intent"| S4b
+    S0 -.->|"guides"| S8
+    S1 -->|"SEGMENTS"| S2
+    S1 -->|"informs"| S3
+    S1 -->|"TRIGGERS"| S4
+    S3 -->|"consumed by"| S4
+    S4 -->|"operationalised by"| S5
+    S2 -->|"quantified by"| S6
+    S1 -.->|"serves outcomes"| S4b
+    S2 -.->|"VP intent"| S4b
+    S4 -->|"pain informs"| S4b
+    S4b -.->|"epics serve"| S8
+    S4b -.->|"KR grounds"| S9
+    S4b -.->|"traces to"| S10
+    S3 -->|"GROUPS_INTO"| S2b
+    S4 -->|"SIGNALS"| S2b
+    S2b -->|"SCOPES"| S2c
+    S2b -->|"MODELS"| S7b
+    S3 -->|"inherited by"| S7
+    S7 -->|"BECOMES"| S7b
+    S2c -->|"names terms"| S7b
+    S7b -->|"EXPOSES"| S7c
+    S7 -->|"grouped into"| S8
+    S7 -->|"surfaced by"| S8_5
+    S8 -->|"phases commands"| S8_5
+    S7b -->|"referenced by"| S10
+    S8 -->|"scopes QA"| S9
+    S8_5 -.->|"per-command SLA"| S9
+    S8_5 -.->|"referenced by"| S10
+    S7c -.->|"referenced by"| S10
+    S9 -->|"CONSTRAINS"| S10
+    S1 -.->|"ACTOR_OF"| S9_5
+    S7 -.->|"realised by"| S9_5
+    S9_5 -->|"GROUNDS"| S10
+    S10 -->|"DETAILS"| S11
+    ADR -.->|"GOVERNS"| S7c
+    ADR -.->|"DECIDES"| S8_5
+    ADR -.->|"DECIDES"| S9
+    ADR -.->|"DECIDES"| S10
+    CL -.->|"TARGETS"| S1
+    CL -.->|"POSITIONS"| S2
+    RES -.->|"validates"| S1
+    RES -.->|"validates"| S2
+    RES -.->|"validates"| S6
+    WS -.->|"aligns"| S2
+    WS -.->|"aligns"| S4
+    IDX -.->|"graduates to"| S0
 ```
 
 ---
