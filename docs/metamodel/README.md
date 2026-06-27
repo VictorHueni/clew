@@ -82,6 +82,6 @@ Documented here for completeness, and because clew will eventually own how they 
 | Package | Prefix | Role | Page |
 | :-- | :-- | :-- | :-- |
 | **UX** | `ux-` | The project's visual design system → token contract the `com-` layer themes from | [ux.md](packages/ux.md) |
-| **Communication** | `com-` | Render metamodel artefacts into slide decks + interactive HTML views | _forthcoming_ |
+| **Communication** | `com-` | Render metamodel artefacts into slide decks + interactive HTML views | [com.md](packages/com.md) |
 | **Dev** | `dev-` | Developer workflow — execute implementation plans, git, PRs, reference guides | [dev.md](packages/dev.md) |
 | **Util** | `util-` | Governance & housekeeping — scaffold, audit, migrate, lint the metamodel itself | [util.md](packages/util.md) |
