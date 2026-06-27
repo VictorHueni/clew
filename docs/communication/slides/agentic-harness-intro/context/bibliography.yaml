@@ -88,3 +88,14 @@ sources:
     url: "https://openai.com/index/harness-engineering/"
     year: 2026
     accessed: 2026-06-27
+  clew-harness-caps:
+    org: "Internal research"
+    title: "Agentic Harness — Capabilities map (15 functional domains, 80+ real shipping tools)"
+    year: 2026
+    accessed: 2026-06-28
+  claude-code-tools:
+    org: "Anthropic"
+    title: "Claude Code — tools reference (Read · Grep · Edit · Bash · MCP · subagents · hooks)"
+    url: "https://docs.anthropic.com/en/docs/claude-code/tools"
+    year: 2026
+    accessed: 2026-06-28
