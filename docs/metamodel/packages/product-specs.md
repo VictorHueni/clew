@@ -60,29 +60,14 @@ flowchart TD
 
 ## Artefacts in this package
 
-### fbs_functionality · `C-N.M.FXX`
-The functionality registry — one row per capability function, status-tracked (✅/🔄/⬜). Inherits L0/L1 from the capability map.
-- **Skill:** `spec-functional-breakdown-structure` · **Layout:** single-collection · **Path:** `docs/product-specs/07a-fbs.md` · **Key props:** `status`, `complexity`, `is_differentiator`
-
-### epic · `E-NN`
-A delivery grouping (Plan by Feature) — FBS functionalities clustered by VS stage + capability, ordered by pain index.
-- **Skill:** `spec-delivery-roadmap` · **Layout:** single-collection · **Path:** `docs/product-specs/08a-delivery-roadmap.md` · **Key props:** `phase`, `value_statement`
-
-### quality_attribute · `QA-XXNN`
-The non-functional bar (ISO/IEC 25010) — measurable acceptance criteria per sub-characteristic.
-- **Skill:** `spec-quality-attributes` · **Layout:** single-collection · **Path:** `docs/product-specs/09a-quality-attributes.md`
-
-### use_case · `UC-NN`
-The actor↔system behavioural scenario — all paths + guarantees. Grounds PRD acceptance criteria.
-- **Skill:** `spec-use-case` · **Layout:** one-per-artefact · **Path:** `docs/product-specs/use-cases/uc-NN-{slug}.md`
-
-### prd · `PRD-NNNN`
-The feature spec (Build by Feature) — one per epic; §0 traces E-NN, P-NN, C-N.M, QA-XXNN, UC-NN.
-- **Skill:** `spec-prd` · **Layout:** one-per-artefact · **Path:** `docs/product-specs/prds/prd-NNNN-{feature}.md`
-
-### implementation_plan · `Plan-NNNN`
-Atomic, testable, reversible increments — one plan per PRD. Outputs to `docs/exec-plans/` (still `spec-`).
-- **Skill:** `spec-implementation-plan` · **Layout:** one-per-artefact · **Path:** `docs/exec-plans/active/{nnnn}_exec_{slug}.md`
+| Artefact | ID | Minting skill | Layout | Path | Purpose & key properties |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `fbs_functionality` | `C-N.M.FXX` | `spec-functional-breakdown-structure` | single-collection | `docs/product-specs/07a-fbs.md` | Functionality registry, status-tracked; inherits L0/L1. Props: `status`, `complexity`, `is_differentiator`. |
+| `epic` | `E-NN` | `spec-delivery-roadmap` | single-collection | `docs/product-specs/08a-delivery-roadmap.md` | Delivery grouping (Plan by Feature), ordered by pain index. Props: `phase`, `value_statement`. |
+| `quality_attribute` | `QA-XXNN` | `spec-quality-attributes` | single-collection | `docs/product-specs/09a-quality-attributes.md` | Non-functional bar (ISO/IEC 25010) with measurable acceptance criteria. |
+| `use_case` | `UC-NN` | `spec-use-case` | one-per-artefact | `docs/product-specs/use-cases/uc-NN-{slug}.md` | Actor↔system scenario (all paths + guarantees); grounds PRD acceptance criteria. |
+| `prd` | `PRD-NNNN` | `spec-prd` | one-per-artefact | `docs/product-specs/prds/prd-NNNN-{feature}.md` | Feature spec, one per epic; §0 traces E-NN / P-NN / C-N.M / QA-XXNN / UC-NN. |
+| `implementation_plan` | `Plan-NNNN` | `spec-implementation-plan` | one-per-artefact | `docs/exec-plans/active/{nnnn}_exec_{slug}.md` | Atomic, testable, reversible increments — one plan per PRD (note: `docs/exec-plans/`, still `spec-`). |
 
 ## Boundary relationships
 

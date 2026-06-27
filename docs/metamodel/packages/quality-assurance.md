@@ -46,17 +46,14 @@ flowchart TD
 
 ## Artefacts in this package (all planned)
 
-### test_strategy · `TS-NN` — _planned_
-Test pyramid + coverage policy + the `QA-XXNN` → test-type mapping. The lead artefact; mints `TS-NN`.
-- **Skill (planned):** `qa-test-strategy` · **Path (planned):** `docs/qa/test-strategy/`
+| Artefact | ID | Minting skill | Layout | Path | Purpose & key properties |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `test_strategy` | `TS-NN` _(planned)_ | `qa-test-strategy` _(planned)_ | — | `docs/qa/test-strategy/` | Test pyramid + coverage + the `QA-XXNN`→test-type mapping. The lead artefact; mints `TS-NN`. |
+| `test_scenario` | — _(planned)_ | `qa-test-scenario` _(planned)_ | — | `docs/qa/` | *Realises* a `UC-NN`: its flows become test scenarios, with PRD acceptance criteria as the oracle. |
+| `test_plan` · acceptance · eval | — _(planned)_ | `qa-test-plan` · `qa-acceptance-test` · `qa-eval-harness` _(planned)_ | — | `docs/qa/` | Executable test plans + harnesses verifying the strategy's coverage. |
 
-### test_scenario — _planned_
-*Realises* a `UC-NN`: a use case's main + alternate + exception flows become test scenarios, with the PRD acceptance criteria as the oracle and step vocabulary from the glossary.
-- **Skill (planned):** `qa-test-scenario`
-
-### test_plan / acceptance test / eval harness — _planned_
-The executable test plans and harnesses that verify the strategy's coverage.
-- **Skills (planned):** `qa-test-plan`, `qa-acceptance-test`, `qa-eval-harness`
+> **Distinct from `spec-quality-attributes`.** That skill defines the `QA-XXNN` *requirements*; this
+> package will produce the *tests* that prove them. Don't merge the two.
 
 ## Boundary relationships (intended)
 

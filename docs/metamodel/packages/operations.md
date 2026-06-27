@@ -38,13 +38,10 @@ flowchart TD
 
 ## Artefacts in this package
 
-### runbook — _(no ID)_
-An operational procedure captured post-ship — how to run, recover, or respond.
-- **Skill:** `ops-runbook` · **Layout:** one-per-artefact · **Path:** `docs/ops/runbooks/{slug}.md`
-
-### bug_rca — _(no ID)_
-A post-incident root-cause analysis; feeds corrective work back into implementation plans.
-- **Skill:** `ops-bug-rca` · **Layout:** one-per-artefact · **Path:** `docs/ops/rcas/{YYYY-MM-DD}-{slug}.md`
+| Artefact | ID | Minting skill | Layout | Path | Purpose & key properties |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `runbook` | — | `ops-runbook` | one-per-artefact | `docs/ops/runbooks/{slug}.md` | An operational procedure captured post-ship — how to run, recover, respond. |
+| `bug_rca` | — | `ops-bug-rca` | one-per-artefact | `docs/ops/rcas/{YYYY-MM-DD}-{slug}.md` | A post-incident root-cause analysis; feeds corrective work into implementation plans. |
 
 > Infra provisioning (`ops-terraform-exoscale`) also lives under the `ops-` umbrella but is tooling,
 > not a metamodel artefact (mints no IDs, produces no governed doc).

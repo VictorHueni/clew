@@ -58,25 +58,13 @@ flowchart TD
 
 ## Artefacts in this package
 
-### research · `Research-NNNN`
-Architecture research notes that inform ADR decisions; lifecycle Draft → Active → Frozen → Superseded.
-- **Skill:** `arch-research` · **Layout:** one-per-artefact · **Path:** `docs/architecture/research/{nnnn}-{slug}.md`
-
-### adr · `ADR-NNNN`
-An Architecture Decision Record (MADR). Gates Quality Attributes (security/flexibility/maintainability) and the PRDs whose choices it settles; governs contract versioning/auth.
-- **Skill:** `arch-adr` · **Layout:** one-per-artefact · **Path:** `docs/architecture/decisions/adr-{nnnn}-{slug}.md` · **Frontmatter:** `supersedes`/`superseded_by`
-
-### interface_contract · `BC-NN.CTR-NN`
-The external API + async surface per bounded context — REST resources + domain-event topics, error contract, versioning, security.
-- **Skill:** `arch-service-contract` · **Layout:** one-per-artefact · **Path:** `docs/architecture/interfaces/{bc-slug}.md`
-
-### cli_surface · `CLI-NN` (+ `cli_command CLI-NN.CMD-NN`)
-The CLI command tree — flags, exit codes, output contract — when the product exposes a CLI.
-- **Skill:** `arch-cli-contract` · **Layout:** one-per-artefact · **Path:** `docs/architecture/interfaces/cli-{slug}.md`
-
-### C4 / arc42 / UML views — _(diagram IDs only; derived)_
-C4 (`arch-c4`/`arch-structurizr`), arc42 narrative (`arch-arc42`), UML (`arch-uml`/`arch-plantuml`). They **visualise** IDs owned elsewhere; they author no persisted relationships.
-- **Paths:** `docs/architecture/c4/`, `docs/architecture/arc42/`, `docs/architecture/diagrams/`
+| Artefact | ID | Minting skill | Layout | Path | Purpose & key properties |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `research` | `Research-NNNN` | `arch-research` | one-per-artefact | `docs/architecture/research/{nnnn}-{slug}.md` | Research notes informing ADRs; Draft → Active → Frozen → Superseded. |
+| `adr` | `ADR-NNNN` | `arch-adr` | one-per-artefact | `docs/architecture/decisions/adr-{nnnn}-{slug}.md` | MADR decision; gates QAs/PRDs; governs contracts. Frontmatter: `supersedes`/`superseded_by`. |
+| `interface_contract` | `BC-NN.CTR-NN` | `arch-service-contract` | one-per-artefact | `docs/architecture/interfaces/{bc-slug}.md` | External API + async surface per BC — error contract, versioning, security. |
+| `cli_surface` | `CLI-NN` _(+ `cli_command CLI-NN.CMD-NN`)_ | `arch-cli-contract` | one-per-artefact | `docs/architecture/interfaces/cli-{slug}.md` | CLI command tree — global flags, exit codes, stdout/stderr contract. |
+| C4 / arc42 / UML views | _diagram IDs only_ | `arch-c4` · `arch-arc42` · `arch-uml` | — | `docs/architecture/{c4,arc42,diagrams}/` | **Derived views** — visualise IDs owned elsewhere; author no persisted relationships. |
 
 ## Boundary relationships
 

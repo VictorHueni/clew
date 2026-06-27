@@ -49,31 +49,11 @@ flowchart TD
 
 ## Artefacts in this package
 
-### idea · `IDEA-NNNN`
-
-A pre-formal idea captured, refined through a divergent/convergent loop, and **graduated** into the
-downstream artefact that matches its matured form. The only Discovery artefact that mints an ID.
-
-- **Minting skill:** `discovery-idea` · **Layout:** one-per-artefact · **Path:** `docs/discovery/ideation/IDEA-{nnnn}-{slug}.md` (+ `INDEX.md`)
-- **Mints:** `IDEA-NNNN` · **Key property:** `graduates_to` (the downstream skill that owns the matured artefact)
-- **Out:** `GRADUATES_TO` → persona, objective, canvas, process, research, adr, fbs_functionality, prd (one-way; the target carries no back-FK)
-
-### research — _(no ID)_
-
-Hypothesis-anchored interview scripts and synthesis. Reality-checks individual assumptions; its
-synthesis feeds confidence ratings (`Assumed → Tested → Validated`) back into the artefacts that
-carry `Assumed` claims.
-
-- **Minting skill:** `discovery-research` · **Layout:** one-per-artefact · **Path:** `docs/discovery/interviews/`
-- **Mints:** nothing · **Out (advisory):** validates persona, canvas, value-stream pain, quantitative-model inputs, objective KR baselines
-
-### workshop — _(no ID)_
-
-Group facilitation guides and synthesis — group reality-checking and alignment. Its Event Storming
-mode is the canonical bridge into Domain (boundary discovery → bounded contexts).
-
-- **Minting skill:** `discovery-workshop` · **Layout:** one-per-artefact · **Path:** `docs/discovery/workshops/`
-- **Mints:** nothing · **Out (advisory):** aligns vision, canvas, value-stream, capability-map, objective; **event storming →** bounded_context boundaries
+| Artefact | ID | Minting skill | Layout | Path | Purpose & key properties |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `idea` | `IDEA-NNNN` | `discovery-idea` | one-per-artefact | `docs/discovery/ideation/IDEA-{nnnn}-{slug}.md` | Pre-formal idea, refined then **graduated** downstream. The only Discovery artefact with an ID. Prop: `graduates_to`. |
+| `research` | — | `discovery-research` | one-per-artefact | `docs/discovery/interviews/` | Hypothesis-anchored interview scripts + synthesis; upgrades `Assumed → Tested → Validated` on business artefacts. |
+| `workshop` | — | `discovery-workshop` | one-per-artefact | `docs/discovery/workshops/` | Group facilitation + synthesis; Event Storming mode bridges into Domain (BC boundaries). |
 
 ## Boundary relationships
 

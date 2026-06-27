@@ -67,41 +67,17 @@ flowchart TD
 
 ## Artefacts in this package
 
-### vision — _(no ID, singleton)_
-The north star — why the product exists, who for, what it is NOT. Soft-links to all downstream.
-- **Skill:** `business-vision` · **Layout:** one-per-artefact · **Path:** `docs/VISION.md` (root, for agent-context visibility) · **Mints:** nothing
-
-### persona · `P-NN`
-Who the product serves. The most-referenced business artefact (triggers streams, segments the canvas, is the actor of use cases).
-- **Skill:** `business-persona` · **Layout:** single-collection · **Path:** `docs/business/01a-personas.md` · **Key props:** `role`, `goals`, `pain_points`
-
-### canvas · _(no ID; blocks `[A-Z]{2}-NN`)_
-The commercial wrapper — BMC or Lean Canvas, nine blocks with confidence ratings.
-- **Skill:** `business-model-canvas` · **Layout:** one-per-artefact · **Path:** `docs/business/02a-{bmc|lean-canvas}.md` · **Mints (sub):** `bmc_block` IDs
-
-### capability · `C-N.M`
-A business ability (tech-independent noun). The **hub** of the metamodel — capabilities are consumed by streams, group into contexts, and seed the FBS.
-- **Skill:** `business-capability-map` · **Layout:** single-collection · **Path:** `docs/business/03a-capability-map.md` · **Key prop:** `strategic_importance` (Differentiator/Necessary/Commodity)
-
-### value_stream · `VS-NN` (+ `vs_stage VS-NN.M`)
-How value flows to a persona — stages, each consuming capabilities, each with a pain index.
-- **Skill:** `business-value-stream` · **Layout:** single-collection · **Path:** `docs/business/04a-value-streams.md` · **Key props:** `value_proposition`, `pain_index`
-
-### objective · `OBJ-NN` (+ `key_result KR-NN.M`)
-Strategic intent (BSC-tagged) measured by Key Results (outcome metrics, not output features).
-- **Skill:** `business-objective` · **Layout:** single-collection · **Path:** `docs/business/04b-objectives.md` · **Key props:** `perspective`, `timeframe`, `owner`
-
-### process — _(no ID)_
-An operational workflow operationalising a value-stream stage (BPMN-ready).
-- **Skill:** `business-process` · **Layout:** one-per-artefact · **Path:** `docs/business/05a-processes/proc-NN-{slug}.md`
-
-### quantitative_model — _(no ID)_
-The numbers — TAM/SAM/SOM, unit economics, ROI. Quantifies the canvas's Revenue/Cost blocks.
-- **Skill:** `business-quantitative-model` · **Layout:** one-per-artefact · **Path:** `docs/business/06a-models/qm-NN-{topic}.md`
-
-### competitor · `CO-NN`
-A Tier-1 competitor profile (Porter Five Forces + value curve). Positions against the canvas, maps ICPs to personas.
-- **Skill:** `business-competitive-landscape` · **Layout:** one-per-artefact · **Path:** `docs/business/01b-competitive-landscape/{slug}.md`
+| Artefact | ID | Minting skill | Layout | Path | Purpose & key properties |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `vision` | — | `business-vision` | one-per-artefact | `docs/VISION.md` | North star — why / who-for / what-NOT. Singleton; soft-links to all downstream. |
+| `persona` | `P-NN` | `business-persona` | single-collection | `docs/business/01a-personas.md` | Who the product serves; the most-referenced business artefact. Props: `role`, `goals`, `pain_points`. |
+| `canvas` | — _(blocks `[A-Z]{2}-NN`)_ | `business-model-canvas` | one-per-artefact | `02a-bmc.md` / `02a-lean-canvas.md` | Commercial wrapper — nine blocks with confidence ratings. |
+| `capability` | `C-N.M` | `business-capability-map` | single-collection | `docs/business/03a-capability-map.md` | Business ability (tech-independent noun) — the metamodel **hub**. Prop: `strategic_importance`. |
+| `value_stream` | `VS-NN` _(+ `vs_stage VS-NN.M`)_ | `business-value-stream` | single-collection | `docs/business/04a-value-streams.md` | How value flows to a persona; stages consume capabilities. Props: `value_proposition`, `pain_index`. |
+| `objective` | `OBJ-NN` _(+ `KR-NN.M`)_ | `business-objective` | single-collection | `docs/business/04b-objectives.md` | Strategic intent measured by outcome KRs. Props: `perspective`, `timeframe`, `owner`. |
+| `process` | — | `business-process` | one-per-artefact | `docs/business/05a-processes/proc-NN-{slug}.md` | Operational workflow operationalising a VS stage (BPMN-ready). |
+| `quantitative_model` | — | `business-quantitative-model` | one-per-artefact | `docs/business/06a-models/qm-NN-{topic}.md` | The numbers — TAM/SAM/SOM, unit economics; quantifies the canvas. |
+| `competitor` | `CO-NN` | `business-competitive-landscape` | one-per-artefact | `docs/business/01b-competitive-landscape/{slug}.md` | Tier-1 competitor profile (Porter + value curve); positions against the canvas, maps ICPs to personas. |
 
 ## Boundary relationships
 

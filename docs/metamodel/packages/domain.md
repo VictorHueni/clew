@@ -53,36 +53,11 @@ flowchart TD
 
 ## Artefacts in this package
 
-### bounded_context · `BC-NN`
-
-The named island of consistent domain meaning — where one word has one precise definition and one
-team is responsible for it. Classified as **Core** (competitive advantage; build & protect),
-**Supporting** (enables Core; build or buy), or **Generic** (commodity; buy SaaS/OSS).
-
-- **Minting skill:** `domain-bounded-context` · **Layout:** single-collection · **Path:** `docs/domain/02b-bounded-contexts.md`
-- **Mints:** `BC-NN` (and scopes the `BC-NN.*` namespace for all tactical IDs below)
-- **Key properties:** `subdomain_type` (Core/Supporting/Generic), `responsibility`, `rationale`, `team_owner`
-- **In:** capability `GROUPS_INTO`, value-stream `SIGNALS`, persona `GROUNDS_BC` · **Out:** `SCOPES` glossary, `MODELS` domain model
-
-### glossary_term · `BC-NN.GT-NN`
-
-One entry of the ubiquitous language, scoped to a bounded context. No living synonyms within a BC;
-homonyms across BCs are called out explicitly. Entity, value-object, and event names in the domain
-model must reconcile to a glossary term.
-
-- **Minting skill:** `domain-glossary` · **Layout:** single-collection · **Path:** `docs/domain/02c-glossary.md`
-- **Mints:** `BC-NN.GT-NN` · **Key properties:** `definition`, `example`, `aliases`, `code_convention`
-- **In:** bounded-context `SCOPES` · **Out:** `NAMES` the aggregates/entities of the domain model
-
-### domain_model · _(file-level; mints tactical sub-IDs)_
-
-The tactical DDD model for one bounded context — one file per BC. Holds the aggregates and their
-invariants, entities and behaviour, value objects, and domain events.
-
-- **Minting skill:** `domain-model` · **Layout:** one-per-artefact · **Path:** `docs/domain/07b-models/{bc-slug}.md`
-- **Mints (sub-elements, BC-scoped):** `BC-NN.AGG-NN` (aggregate), `BC-NN.ENT-NN` (entity), `BC-NN.VO-NN` (value object), `BC-NN.EVT-NN` (domain event)
-- **In:** bounded-context `MODELS`, glossary `NAMES`, FBS `BECOMES` (functionalities reveal entities) · **Out:** `EXPOSES` interface contracts; PRD `REFERENCES_DM`
-- **Internal:** aggregate `EMITS` domain event
+| Artefact | ID | Minting skill | Layout | Path | Purpose & key properties |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `bounded_context` | `BC-NN` | `domain-bounded-context` | single-collection | `docs/domain/02b-bounded-contexts.md` | The named island of consistent meaning; Core/Supporting/Generic. Scopes the `BC-NN.*` namespace. Props: `subdomain_type`, `responsibility`, `team_owner`. |
+| `glossary_term` | `BC-NN.GT-NN` | `domain-glossary` | single-collection | `docs/domain/02c-glossary.md` | One ubiquitous-language entry per BC; no living synonyms within a BC. Props: `definition`, `example`, `aliases`, `code_convention`. |
+| `domain_model` | _file-level; mints `BC-NN.AGG/ENT/VO/EVT-NN`_ | `domain-model` | one-per-artefact | `docs/domain/07b-models/{bc-slug}.md` | Tactical DDD model per BC — aggregates + invariants, entities, value objects, domain events. |
 
 > **BC-NN namespace rule.** Every tactical ID is scoped to its bounded context: `BC-01.AGG-03` and
 > `BC-02.AGG-03` are different aggregates. Bare `AGG-03` is ambiguous and invalid.
