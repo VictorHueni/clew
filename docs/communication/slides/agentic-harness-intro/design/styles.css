@@ -1779,9 +1779,18 @@
 .s-sdlc-ov .ov-foot { margin-top:auto; padding-top:13px; border-top:1px solid var(--border); font-size:11px; color:var(--muted); line-height:1.45; }
 .s-sdlc-ov .ov-arr { display:flex; align-items:center; justify-content:center; width:26px; flex-shrink:0; color:color-mix(in srgb,var(--accent) 55%,var(--border)); }
 
-/* METAMODEL ENTITY MAP (s-mmer) */
-.s-mmer .mm-wrap { position:absolute; top:150px; left:36px; right:36px; bottom:30px; display:flex; align-items:center; justify-content:center; }
-.s-mmer .mm-wrap svg { max-width:100%; max-height:100%; }
+/* METAMODEL INVENTORY (s-mmer) — packages × artefacts × skills */
+.s-mmer .mm-grid { position:absolute; top:126px; left:30px; right:30px; bottom:22px; columns:3; column-gap:14px; }
+.s-mmer .mm-pk { break-inside:avoid; margin:0 0 11px; background:var(--surface); border:1px solid var(--border); border-top:3px solid var(--pk); border-radius:8px; padding:7px 9px 8px; box-shadow:var(--shadow); }
+.s-mmer .mm-ph { display:flex; align-items:baseline; justify-content:space-between; gap:6px; margin-bottom:5px; }
+.s-mmer .mm-pt { font-family:var(--font-mono); font-size:10px; font-weight:800; letter-spacing:.03em; color:var(--pk); }
+.s-mmer .mm-pp { font-family:var(--font-mono); font-size:8.5px; font-weight:600; color:var(--dim); }
+.s-mmer .mm-list { list-style:none; margin:0; padding:0; }
+.s-mmer .mm-list li { font-size:9.5px; line-height:1.46; color:var(--ink); margin-bottom:1px; }
+.s-mmer .mm-art { font-weight:600; }
+.s-mmer .mm-id { font-family:var(--font-mono); font-size:8px; color:var(--accent); }
+.s-mmer .mm-sk { font-family:var(--font-mono); font-size:8.5px; color:var(--dim); }
+.s-mmer .mm-rsv { font-size:8px; font-style:italic; color:var(--dim); font-weight:600; }
 
 /* SDLC DEEP-DIVE (s-phase) */
 .s-phase .slide-title { font-size:30px; }

@@ -63,7 +63,7 @@ slides:
     label: "SDLC ③ Execute & Deliver"
   - file: "07e-metamodel-er.html"
     class: "s-mmer"
-    label: "Metamodel — everything is related"
+    label: "Metamodel — artefact inventory by package"
   # ── §03 The Build Workflow ──
   - file: "S3a-divider-workflow.html"
     class: "s-divider"
