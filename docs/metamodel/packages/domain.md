@@ -90,5 +90,5 @@ Intra-package edges (`SCOPES`, `MODELS`, `NAMES`, `EMITS`) are shown on the zoom
 ---
 
 *Relationship verbs are the canonical types clew stores in `artefact_references.relationship`. The
-full catalogue across all packages will live in [`../relationships.md`](../README.md#how-to-read-this-section)
-(forthcoming); until then see [`../../domain/07b-models/artefact-store.md` §Relationship registry](../../domain/07b-models/artefact-store.md#relationship-registry).*
+full catalogue lives in [`../relationships.md`](../relationships.md) (which currently mirrors
+[`artefact-store.md` §Relationship registry](../../domain/07b-models/artefact-store.md#relationship-registry)).*

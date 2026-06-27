@@ -71,4 +71,4 @@ All in-ports; none enforced yet (no skill). They activate when the first `qa-` s
 ---
 
 *Relationship verbs are the canonical types clew stores in `artefact_references.relationship`. Full
-catalogue: [`../relationships.md`](../README.md#how-to-read-this-section) (forthcoming).*
+catalogue: [`../relationships.md`](../relationships.md).*

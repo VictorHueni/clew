@@ -104,4 +104,4 @@ Out-ports into Domain and Product Specs (in-ports are advisory flows from Discov
 ---
 
 *Relationship verbs are the canonical types clew stores in `artefact_references.relationship`. Full
-catalogue: [`../relationships.md`](../README.md#how-to-read-this-section) (forthcoming).*
+catalogue: [`../relationships.md`](../relationships.md).*

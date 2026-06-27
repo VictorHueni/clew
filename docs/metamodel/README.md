@@ -35,11 +35,11 @@ Three lenses on the same model, from coarse to fine:
 2. **Artefacts** — every artefact *type*: its purpose, package, ID format, file layout, what it
    mints, and its in/out relationships. (Described inline on each package page for now; a
    standalone artefact index is forthcoming.)
-3. **Relationships** — the catalogue of every typed edge: verb, source→target, cardinality,
-   strength (hard/soft), role vocabulary, and meaning. This is the human-readable form of clew's
-   `ALLOWED_RELATIONSHIPS`. *(`relationships.md` — forthcoming; the registry currently lives in
-   [`../domain/07b-models/artefact-store.md` §Relationship registry](../domain/07b-models/artefact-store.md#relationship-registry)
-   and will consolidate here.)*
+3. **Relationships** — [`relationships.md`](relationships.md): the catalogue of every typed edge —
+   verb, source→target, cardinality, strength (hard/soft), role vocabulary, and meaning. The
+   human-readable form of clew's `ALLOWED_RELATIONSHIPS`. *(Transitional: an identical copy still
+   lives in [`artefact-store.md` §Relationship registry](../domain/07b-models/artefact-store.md#relationship-registry)
+   until OI-0029 reduces it to a pointer.)*
 
 The whole metamodel as one build-order graph (overview, all packages at once) lives in the
 [repository README](../../README.md#artefact-layers-and-build-order).
@@ -66,9 +66,10 @@ The whole metamodel as one build-order graph (overview, all packages at once) li
 
 > **Status:** all seven package pages drafted, each ending with a **Planned additions** table of
 > candidate skills from the [kit backlog](https://github.com/VictorHueni/homemade-claude-kit/issues)
-> (qa-*, `domain-event-storming`, `arch-threat-model`, `ops-slo`, …). Still to come: the consolidated
-> [`relationships.md`](#how-to-read-this-section) catalogue (moved out of `artefact-store.md`) and,
-> later, generation from clew's schema. Tracked as OI-0029 on
+> (qa-*, `domain-event-storming`, `arch-threat-model`, `ops-slo`, …); the
+> [`relationships.md`](relationships.md) catalogue is in place. Still to come: reducing the duplicate
+> registry in `artefact-store.md` to a pointer, and later generation from clew's schema. Tracked as
+> OI-0029 on
 > [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md).
 
 ---

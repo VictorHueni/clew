@@ -70,4 +70,4 @@ Discovery is all out-ports (it feeds downstream and mints no incoming dependency
 ---
 
 *Relationship verbs are the canonical types clew stores in `artefact_references.relationship`. Full
-catalogue: [`../relationships.md`](../README.md#how-to-read-this-section) (forthcoming).*
+catalogue: [`../relationships.md`](../relationships.md).*

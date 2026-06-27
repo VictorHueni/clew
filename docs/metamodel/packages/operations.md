@@ -67,4 +67,4 @@ Both edges are **post-ship, soft, no enforced FK** (dashed on every diagram).
 ---
 
 *Relationship verbs are the canonical types clew stores in `artefact_references.relationship`. Full
-catalogue: [`../relationships.md`](../README.md#how-to-read-this-section) (forthcoming).*
+catalogue: [`../relationships.md`](../relationships.md).*
