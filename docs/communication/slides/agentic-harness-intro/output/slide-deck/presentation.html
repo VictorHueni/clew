@@ -2246,7 +2246,7 @@ body.presenting .slide.active {
   <div class="div-wrap">
     <div class="div-kicker">Section 01 / 05</div>
     <h1 class="div-title">The <em>Problem</em></h1>
-    <div class="div-tag">Coding agents forget between sessions — and a million-token context window doesn't fix it.</div>
+    <div class="div-tag">Agents can't remember between sessions — and every obvious fix for it fails.</div>
   </div>
   <div class="div-bottom-line"></div>
   <div class="slide-number">2 / 25</div>
@@ -2254,35 +2254,7 @@ body.presenting .slide.active {
 
 
 
-<!-- slide 3: Hype vs reality — 2025 didn't land -->
-
-<div class="slide s-hype" data-sources="mit-genai-divide,swe-bench-pro">
-  <div class="section-label">The Problem · Reality check</div>
-  <h2 class="slide-title">2025 was the “Year of the Agent.” It didn't land.</h2>
-  <p class="slide-lede">The hype was model-led — but in production, the model alone fell short, expensively.</p>
-
-  <div class="hype-stats">
-    <div class="hype-card">
-      <div class="hype-big">95%</div>
-      <div class="hype-k">of enterprise GenAI pilots showed <em>no measurable P&amp;L impact</em></div>
-      <div class="hype-v">MIT studied 300 deployments + 350 leaders. The blocker wasn't model IQ — it was integrating AI into real workflows.</div>
-    </div>
-    <div class="hype-card">
-      <div class="hype-big">~59%</div>
-      <div class="hype-k">is the <em>best</em> frontier model's score on realistic enterprise tasks</div>
-      <div class="hype-v">Scale's SWE-bench Pro — 1,865 real tasks across 41 professional repos (2026). The same models score 80–95% on the benchmark everyone quotes; the gap is the reality.</div>
-    </div>
-  </div>
-
-  <div class="hype-foot">The missing variable wasn't intelligence — it was the <b>infrastructure around the model</b>.</div>
-  <div class="slide-number">3 / 25</div>
-
-<div class="slide-source-bar">MIT Project NANDA · The GenAI Divide: State of AI in Business 2025 (95% of pilots — no measurable P&L impact) · via Fortune (2025) — fortune.com &nbsp;|&nbsp; Scale AI (SEAL) · SWE-bench Pro — standardized public leaderboard · 1,865 real tasks across 41 professional repos (2026) — labs.scale.com</div>
-</div>
-
-
-
-<!-- slide 4: Harnesses starve memory -->
+<!-- slide 3: Harnesses starve memory -->
 
 <div class="slide s-memory" data-sources="raschka-coding-agent,clew-research-harness">
   <div class="section-label">The Gap</div>
@@ -2322,14 +2294,14 @@ body.presenting .slide.active {
 
   <div class="mem-bridge"><span class="mem-bridge-tag">the obvious objection</span>“A frontier window holds a million tokens now — so why not just let the <em>window</em> be the memory?”<span class="mem-bridge-cue">answered next&nbsp;→</span></div>
 
-  <div class="slide-number">4 / 25</div>
+  <div class="slide-number">3 / 25</div>
 
 <div class="slide-source-bar">Sebastian Raschka · Components of a Coding Agent (2026) — magazine.sebastianraschka.com &nbsp;|&nbsp; Internal research · What Makes a Good Agentic Harness — research synthesis (2026)</div>
 </div>
 
 
 
-<!-- slide 5: Context rot — the window isn't the memory -->
+<!-- slide 4: Context rot — the window isn't the memory -->
 
 <div class="slide s-crot" data-sources="anthropic-opus47,anthropic-opus46,nolima-context">
   <div class="section-label">The Gap · Context Rot &middot; <span class="sl-answer">the answer</span></div>
@@ -2382,14 +2354,14 @@ body.presenting .slide.active {
     </div>
   </div>
 
-  <div class="slide-number">5 / 25</div>
+  <div class="slide-number">4 / 25</div>
 
 <div class="slide-source-bar">Anthropic · Claude Opus 4.7 System Card · MRCR v2 (vendor-reported) (2026) — anthropic.com &nbsp;|&nbsp; Anthropic · Claude Opus 4.6 System Card · MRCR v2 (vendor-reported) (2026) — anthropic.com &nbsp;|&nbsp; Adobe Research / LMU Munich · NoLiMa: Long-Context Evaluation Beyond Literal Matching (ICML 2025) (2025) — arxiv.org</div>
 </div>
 
 
 
-<!-- slide 6: Writing it down isn't memory either -->
+<!-- slide 5: Writing it down isn't memory either -->
 
 <div class="slide s-writedown" data-sources="openai-harness">
   <div class="section-label">The Problem · Written memory rots</div>
@@ -2421,14 +2393,14 @@ body.presenting .slide.active {
       </div>
     </div>
   </div>
-  <div class="slide-number">6 / 25</div>
+  <div class="slide-number">5 / 25</div>
 
 <div class="slide-source-bar">OpenAI · Harness Engineering: Leveraging Codex in an Agent-First World (2026) — openai.com</div>
 </div>
 
 
 
-<!-- slide 7: §02 — The Agentic Harness -->
+<!-- slide 6: §02 — The Agentic Harness -->
 
 <div class="slide s-divider">
   <div class="accent-bar-left"></div>
@@ -2439,7 +2411,35 @@ body.presenting .slide.active {
     <div class="div-tag">Why the tooling around the model — not the model — is the performance lever.</div>
   </div>
   <div class="div-bottom-line"></div>
+  <div class="slide-number">6 / 25</div>
+</div>
+
+
+
+<!-- slide 7: Hype vs reality — 2025 didn't land -->
+
+<div class="slide s-hype" data-sources="mit-genai-divide,swe-bench-pro">
+  <div class="section-label">The Lever · Reality check</div>
+  <h2 class="slide-title">2025 was the “Year of the Agent.” It didn't land.</h2>
+  <p class="slide-lede">The hype was model-led — but in production, the model alone fell short, expensively.</p>
+
+  <div class="hype-stats">
+    <div class="hype-card">
+      <div class="hype-big">95%</div>
+      <div class="hype-k">of enterprise GenAI pilots showed <em>no measurable P&amp;L impact</em></div>
+      <div class="hype-v">MIT studied 300 deployments + 350 leaders. The blocker wasn't model IQ — it was integrating AI into real workflows.</div>
+    </div>
+    <div class="hype-card">
+      <div class="hype-big">~59%</div>
+      <div class="hype-k">is the <em>best</em> frontier model's score on realistic enterprise tasks</div>
+      <div class="hype-v">Scale's SWE-bench Pro — 1,865 real tasks across 41 professional repos (2026). The same models score 80–95% on the benchmark everyone quotes; the gap is the reality.</div>
+    </div>
+  </div>
+
+  <div class="hype-foot">The missing variable wasn't intelligence — it was the <b>harness around the model</b>.</div>
   <div class="slide-number">7 / 25</div>
+
+<div class="slide-source-bar">MIT Project NANDA · The GenAI Divide: State of AI in Business 2025 (95% of pilots — no measurable P&L impact) · via Fortune (2025) — fortune.com &nbsp;|&nbsp; Scale AI (SEAL) · SWE-bench Pro — standardized public leaderboard · 1,865 real tasks across 41 professional repos (2026) — labs.scale.com</div>
 </div>
 
 
