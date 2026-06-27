@@ -31,3 +31,17 @@ scaffold it any time before producing slide decks or artefact visualisations.
 **`com-`** packages (`com-slide-deck`, `com-artefact-viz`), which render metamodel artefacts into
 slides and interactive HTML. So the dependency runs *one way and outward*: metamodel artefacts are the
 source data; `ux-` themes how they look; `com-` renders them. None of it feeds back into the model.
+
+## Experience artefacts — where they live
+
+The `ux-` prefix is the *design **and** experience* layer, so you might expect service blueprints and
+customer-journey maps here. Both were considered for `ux-` and **deliberately placed elsewhere** — so
+`ux-` ships only `ux-design-system` today, with no standalone `ux-*` experience skill planned.
+
+| Experience artefact | Actually lives in | Why not a `ux-` skill |
+| :-- | :-- | :-- |
+| **Service blueprint** | `com-artefact-viz --kind service-blueprint` (Communication) | Scoped as `ux-service-blueprint` but found ~80% overlap with `business-process`; shipped as a composition **renderer** over process + value-stream + persona. Mints no IDs. (kit [OI-0025 / #29](https://github.com/VictorHueni/homemade-claude-kit/issues/29)) |
+| **Customer journey map** | `business-customer-journey-map` — Business Architecture, *planned* | Filed under BIZBOK business architecture; mints `CJ-N.M`. (kit [#9](https://github.com/VictorHueni/homemade-claude-kit/issues/9)) |
+
+Both are experience views *derived from* business artefacts — which is why the kit keeps their source in
+`business-`/`com-` rather than minting a parallel `ux-` artefact.
