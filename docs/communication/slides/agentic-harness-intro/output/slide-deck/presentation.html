@@ -1382,7 +1382,14 @@
   font-size: 14px; font-weight: 700; color: var(--ink);
 }
 .s-memory .mem-layer .ml-sub {
-  font-family: var(--font-mono); font-size: 10px; color: var(--muted); margin-top: 3px;
+  font-size: 10.5px; color: var(--muted); margin-top: 3px; line-height: 1.3;
+}
+.s-memory .mem-layer .ml-how {
+  font-family: var(--font-mono); font-size: 8.5px; color: var(--dim);
+  margin-top: 4px; letter-spacing: .01em; line-height: 1.3;
+}
+.s-memory .mem-layer .ml-how code {
+  font-family: var(--font-mono); color: var(--accent);
 }
 .s-memory .mem-layer.l-working  { width: 56%; }
 .s-memory .mem-layer.l-episodic { width: 78%; }
@@ -1429,6 +1436,8 @@
   font-size: 34px; font-weight: 800; color: var(--ink); letter-spacing: -0.02em;
 }
 .s-memory .stat-big em { font-style: normal; color: var(--accent); }
+.s-memory .stat-card.loss { border-left-color: var(--danger); }
+.s-memory .stat-card.loss .stat-big em { color: var(--danger); }
 .s-memory .stat-desc {
   font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 6px;
 }
@@ -2267,15 +2276,18 @@ body.presenting .slide.active {
   <div class="mem-layers">
     <div class="mem-layer l-working">
       <div class="ml-name">Working memory</div>
-      <div class="ml-sub">session scratchpad</div>
+      <div class="ml-sub">the active task — recent files, notes, distilled</div>
+      <div class="ml-how">compacted into the prompt each turn · lost at session end</div>
     </div>
     <div class="mem-layer l-episodic">
       <div class="ml-name">Episodic memory</div>
-      <div class="ml-sub">resumable transcript</div>
+      <div class="ml-sub">full transcript of this session — every request, tool call, result</div>
+      <div class="ml-how">saved to a file → <code>/resume</code> · but locked to this one thread</div>
     </div>
     <div class="mem-layer l-longterm">
       <div class="ml-name">Long-term memory</div>
       <div class="ml-sub">AGENTS.md · CLAUDE.md · the artefact store</div>
+      <div class="ml-how">plain files · reloaded at the start of every session</div>
     </div>
   </div>
 
@@ -2283,9 +2295,9 @@ body.presenting .slide.active {
   <div class="mem-deep">the moat</div>
 
   <div class="mem-stats">
-    <div class="stat-card">
-      <div class="stat-big"><em>Persists</em></div>
-      <div class="stat-desc">Working memory dies at session end. Long-term memory is the only layer that survives across sessions — and compounds as the project grows.</div>
+    <div class="stat-card loss">
+      <div class="stat-big"><em>2 of 3</em> session-bound</div>
+      <div class="stat-desc">Working memory is distilled, then discarded at session end; episodic is a resumable transcript but locked to its own thread. Only long-term — plain files — crosses into the next session.</div>
     </div>
     <div class="stat-card">
       <div class="stat-big"><em>0</em> tokens / fetch</div>

@@ -5,15 +5,18 @@
   <div class="mem-layers">
     <div class="mem-layer l-working">
       <div class="ml-name">Working memory</div>
-      <div class="ml-sub">session scratchpad</div>
+      <div class="ml-sub">the active task — recent files, notes, distilled</div>
+      <div class="ml-how">compacted into the prompt each turn · lost at session end</div>
     </div>
     <div class="mem-layer l-episodic">
       <div class="ml-name">Episodic memory</div>
-      <div class="ml-sub">resumable transcript</div>
+      <div class="ml-sub">full transcript of this session — every request, tool call, result</div>
+      <div class="ml-how">saved to a file → <code>/resume</code> · but locked to this one thread</div>
     </div>
     <div class="mem-layer l-longterm">
       <div class="ml-name">Long-term memory</div>
       <div class="ml-sub">AGENTS.md · CLAUDE.md · the artefact store</div>
+      <div class="ml-how">plain files · reloaded at the start of every session</div>
     </div>
   </div>
 
@@ -21,9 +24,9 @@
   <div class="mem-deep">the moat</div>
 
   <div class="mem-stats">
-    <div class="stat-card">
-      <div class="stat-big"><em>Persists</em></div>
-      <div class="stat-desc">Working memory dies at session end. Long-term memory is the only layer that survives across sessions — and compounds as the project grows.</div>
+    <div class="stat-card loss">
+      <div class="stat-big"><em>2 of 3</em> session-bound</div>
+      <div class="stat-desc">Working memory is distilled, then discarded at session end; episodic is a resumable transcript but locked to its own thread. Only long-term — plain files — crosses into the next session.</div>
     </div>
     <div class="stat-card">
       <div class="stat-big"><em>0</em> tokens / fetch</div>

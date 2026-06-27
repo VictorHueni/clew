@@ -1282,7 +1282,14 @@
   font-size: 14px; font-weight: 700; color: var(--ink);
 }
 .s-memory .mem-layer .ml-sub {
-  font-family: var(--font-mono); font-size: 10px; color: var(--muted); margin-top: 3px;
+  font-size: 10.5px; color: var(--muted); margin-top: 3px; line-height: 1.3;
+}
+.s-memory .mem-layer .ml-how {
+  font-family: var(--font-mono); font-size: 8.5px; color: var(--dim);
+  margin-top: 4px; letter-spacing: .01em; line-height: 1.3;
+}
+.s-memory .mem-layer .ml-how code {
+  font-family: var(--font-mono); color: var(--accent);
 }
 .s-memory .mem-layer.l-working  { width: 56%; }
 .s-memory .mem-layer.l-episodic { width: 78%; }
@@ -1329,6 +1336,8 @@
   font-size: 34px; font-weight: 800; color: var(--ink); letter-spacing: -0.02em;
 }
 .s-memory .stat-big em { font-style: normal; color: var(--accent); }
+.s-memory .stat-card.loss { border-left-color: var(--danger); }
+.s-memory .stat-card.loss .stat-big em { color: var(--danger); }
 .s-memory .stat-desc {
   font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 6px;
 }
