@@ -70,3 +70,21 @@ sources:
     url: "https://www.anthropic.com/news/claude-opus-4-6"
     year: 2026
     accessed: 2026-06-26
+  mit-genai-divide:
+    org: "MIT Project NANDA"
+    title: "The GenAI Divide: State of AI in Business 2025 (95% of pilots — no measurable P&L impact) · via Fortune"
+    url: "https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/"
+    year: 2025
+    accessed: 2026-06-27
+  swe-lancer:
+    org: "OpenAI"
+    title: "SWE-Lancer: Can Frontier LLMs Earn $1M from Real-World Freelance Software Engineering?"
+    url: "https://arxiv.org/abs/2502.12115"
+    year: 2025
+    accessed: 2026-06-27
+  openai-harness:
+    org: "OpenAI"
+    title: "Harness Engineering: Leveraging Codex in an Agent-First World"
+    url: "https://openai.com/index/harness-engineering/"
+    year: 2026
+    accessed: 2026-06-27

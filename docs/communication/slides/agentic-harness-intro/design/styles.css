@@ -1984,3 +1984,51 @@
 .s-devops .dv-cl.dv-r .dv-clt{color:#c04060;}
 .s-devops .dv-cln{font-family:var(--font-mono);font-size:9px;font-weight:600;color:var(--dim);}
 .s-devops .dv-cls{font-size:9.5px;line-height:1.42;color:var(--ink);}
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE — HYPE vs REALITY (s-hype)  ·  two verified stat cards
+   ══════════════════════════════════════════════════════════════ */
+.s-hype .hype-stats {
+  position: absolute; top: 226px; left: 68px; right: 68px; bottom: 118px;
+  display: flex; gap: 32px; align-items: stretch;
+}
+.s-hype .hype-card {
+  flex: 1; background: var(--surface); border: 1.5px solid var(--border);
+  border-top: 4px solid var(--accent); border-radius: 12px; box-shadow: var(--shadow);
+  padding: 30px 30px 26px; display: flex; flex-direction: column;
+}
+.s-hype .hype-big { font-size: 82px; font-weight: 800; color: var(--accent); letter-spacing: -.03em; line-height: 1; }
+.s-hype .hype-k { font-size: 17px; font-weight: 700; color: var(--ink); margin-top: 14px; line-height: 1.3; }
+.s-hype .hype-k em { font-style: normal; color: var(--accent); }
+.s-hype .hype-v { font-size: 13px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
+.s-hype .hype-foot {
+  position: absolute; left: 68px; right: 68px; bottom: 60px; text-align: center;
+  font-size: 15px; color: var(--ink);
+}
+.s-hype .hype-foot b { color: var(--accent); font-weight: 700; }
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE — WRITING IT DOWN (s-writedown)  ·  monolithic AGENTS.md rots
+   ══════════════════════════════════════════════════════════════ */
+.s-writedown .wd-strip { position: absolute; top: 184px; left: 68px; display: flex; gap: 12px; }
+.s-writedown .wd-chip {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--muted);
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px;
+}
+.s-writedown .wd-chip em { font-style: normal; color: var(--accent); font-weight: 800; }
+.s-writedown .wd-cols { position: absolute; top: 238px; left: 68px; right: 68px; bottom: 70px; display: flex; gap: 28px; }
+.s-writedown .wd-modes { flex: 1.45; display: flex; flex-direction: column; gap: 13px; }
+.s-writedown .wd-modes-h { font-size: 14px; font-weight: 800; color: var(--ink); }
+.s-writedown .wd-modes-h code { font-family: var(--font-mono); color: var(--accent); }
+.s-writedown .wd-mode { display: flex; gap: 11px; align-items: flex-start; font-size: 13px; color: var(--ink); line-height: 1.4; }
+.s-writedown .wd-mode b { color: var(--ink); }
+.s-writedown .wd-ic { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+.s-writedown .wd-side { flex: 1; display: flex; flex-direction: column; gap: 16px; justify-content: center; }
+.s-writedown .wd-illeg { background: var(--surface); border: 1.5px solid var(--border); border-left: 4px solid var(--danger); border-radius: 10px; padding: 15px 18px; }
+.s-writedown .wd-illeg-k { font-size: 13.5px; font-weight: 800; color: var(--ink); }
+.s-writedown .wd-illeg-v { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+.s-writedown .wd-fix { background: var(--accent-lt); border: 1.5px solid color-mix(in srgb, var(--accent) 40%, var(--border)); border-radius: 10px; padding: 15px 18px; }
+.s-writedown .wd-fix-k { font-size: 13.5px; font-weight: 800; color: var(--accent); }
+.s-writedown .wd-fix-v { font-size: 12.5px; color: var(--ink); margin-top: 6px; line-height: 1.5; }
+.s-writedown .wd-fix-v b, .s-writedown .wd-fix-v code { color: var(--accent); }
+.s-writedown .wd-fix-v code { font-family: var(--font-mono); }

@@ -1,0 +1,32 @@
+<div class="slide s-writedown" data-sources="openai-harness">
+  <div class="section-label">The Problem · Written memory rots</div>
+  <h2 class="slide-title">Writing it down isn't memory either.</h2>
+  <p class="slide-lede">OpenAI shipped a 1M-line product with <em>zero</em> hand-written code — then found the obvious fix, one big context file, fails.</p>
+
+  <div class="wd-strip">
+    <div class="wd-chip"><em>1M</em>&nbsp; lines of code</div>
+    <div class="wd-chip"><em>0</em>&nbsp; hand-written</div>
+    <div class="wd-chip"><em>1,500</em>&nbsp; PRs merged</div>
+  </div>
+
+  <div class="wd-cols">
+    <div class="wd-modes">
+      <div class="wd-modes-h">“One big <code>AGENTS.md</code>” failed four ways</div>
+      <div class="wd-mode"><i data-lucide="layers" class="wd-ic"></i><div><b>Crowds out the task.</b> Context is scarce — the giant file pushes out the code and the docs.</div></div>
+      <div class="wd-mode"><i data-lucide="volume-x" class="wd-ic"></i><div><b>Too much guidance becomes none.</b> When everything is “important,” nothing is.</div></div>
+      <div class="wd-mode"><i data-lucide="trending-down" class="wd-ic"></i><div><b>It rots instantly.</b> A graveyard of stale rules — the agent can't tell what's still true.</div></div>
+      <div class="wd-mode"><i data-lucide="search-x" class="wd-ic"></i><div><b>It can't be verified.</b> Drift is inevitable without mechanical checks.</div></div>
+    </div>
+    <div class="wd-side">
+      <div class="wd-illeg">
+        <div class="wd-illeg-k">If it's not in-context, it doesn't exist</div>
+        <div class="wd-illeg-v">Anything in Slack, Google Docs, or someone's head is invisible to the agent.</div>
+      </div>
+      <div class="wd-fix">
+        <div class="wd-fix-k">OpenAI's fix</div>
+        <div class="wd-fix-v">A <b>~100-line table of contents</b> pointing into a <b>structured <code>docs/</code> tree</b> — a map, not an encyclopedia.</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number"></div>
+</div>
