@@ -61,9 +61,25 @@ The whole metamodel as one build-order graph (overview, all packages at once) li
 > **Packages map 1:1 to kit prefixes** (`discovery-`, `business-`, `domain-`, `spec-`, `arch-`,
 > `qa-`, `ops-`). `spec-` spans `docs/product-specs/` **and** `docs/exec-plans/` — implementation
 > plans belong to Product Specs, not a separate "Execution" package. `ux-`/`com-`/`dev-`/`util-`
-> mint no artefacts and are tooling, not metamodel packages.
+> mint no artefacts — they are tooling, described under [Supporting packages](#supporting-packages--tooling)
+> below.
 
 > **Status:** all seven package pages drafted. Still to come: the consolidated
 > [`relationships.md`](#how-to-read-this-section) catalogue (moved out of `artefact-store.md`) and,
 > later, generation from clew's schema. Tracked as OI-0029 on
 > [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md).
+
+---
+
+## Supporting packages — tooling
+
+These prefixes are **not metamodel packages** — they mint no IDs, hold no typed relationships, and
+appear in no registry. They *operate on* or *render from* the metamodel rather than being part of it.
+Documented here for completeness, and because clew will eventually own how they read the model.
+
+| Package | Prefix | Role | Page |
+| :-- | :-- | :-- | :-- |
+| **UX** | `ux-` | The project's visual design system → token contract the `com-` layer themes from | [ux.md](packages/ux.md) |
+| **Communication** | `com-` | Render metamodel artefacts into slide decks + interactive HTML views | _forthcoming_ |
+| **Dev** | `dev-` | Developer workflow — execute implementation plans, git, PRs, reference guides | [dev.md](packages/dev.md) |
+| **Util** | `util-` | Governance & housekeeping — scaffold, audit, migrate, lint the metamodel itself | [util.md](packages/util.md) |
