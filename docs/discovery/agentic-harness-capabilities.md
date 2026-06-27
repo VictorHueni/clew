@@ -103,14 +103,21 @@ Edit file → run test → read failure → patch again → test passes.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **Claude Code** | Agentic coding assistant; built-in ReAct loop with Read / Edit / Bash / Write tools and permission-gated execution | [docs](https://docs.anthropic.com/en/docs/claude-code) |
-| **OpenAI Assistants API** | Hosted thread + tool-call loop with built-in code interpreter and file search; manages the run lifecycle | [docs](https://platform.openai.com/docs/assistants/overview) |
-| **LangGraph** | Graph-based agent orchestration; nodes are reasoning steps, edges are conditional transitions; first-class persistence and branching | [github](https://github.com/langchain-ai/langgraph) |
-| **Anthropic extended thinking** | Exposes chain-of-thought reasoning as a structured block before the final response; useful for verifying multi-step decisions | [docs](https://docs.anthropic.com/en/docs/extended-thinking) |
-| **ReAct pattern** | Interleaves Reason and Act steps; the foundational pattern behind most production agent loops (Yao et al. 2022) | [paper](https://arxiv.org/abs/2210.03629) |
-| **smolagents** (HuggingFace) | Lightweight framework where the agent writes and executes Python as its primary action; minimal abstraction overhead | [github](https://github.com/huggingface/smolagents) |
+| **[AutoGen](https://github.com/microsoft/autogen)** | 59.3k | Multi-agent conversation framework for collaborating, tool-using agents |
+| **[CrewAI](https://github.com/crewAIInc/crewAI)** | 54.5k | Role-based multi-agent “crews” with task delegation and process control |
+| **[Agno](https://github.com/agno-agi/agno)** | 40.9k | Full-stack framework for multi-modal agents with memory, tools, reasoning |
+| [LangGraph](https://github.com/langchain-ai/langgraph) | 35.9k | Graph-based stateful orchestration for cyclic, multi-step agent loops |
+| [DSPy](https://github.com/stanfordnlp/dspy) | 35.5k | Programs (and optimizes) LM pipelines instead of hand-tuned prompts |
+| [smolagents](https://github.com/huggingface/smolagents) | 28.1k | Minimal code-writing agent library (agents act by emitting Python) |
+| [OpenAI Agents SDK](https://github.com/openai/openai-agents-python) | 27.5k | Lightweight agent loop with handoffs, guardrails, tracing |
+| [Pydantic-AI](https://github.com/pydantic/pydantic-ai) | 18.0k | Type-safe agent framework with structured, validated outputs |
+
+**Most popular:** AutoGen (59.3k), CrewAI (54.5k) and LangGraph (35.9k) are the most-used dedicated orchestration cores.
+
 
 ---
 
@@ -467,14 +474,19 @@ Delete a project instruction after the repo migrates from Jest to Vitest.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **Mem0** | Managed long-term memory layer; auto-extracts and stores facts from conversations; REST API + Python/JS SDKs | [mem0.ai](https://mem0.ai/) |
-| **Letta (formerly MemGPT)** | OS-inspired memory management: paged main context + archival storage for unlimited effective memory; open-source | [github](https://github.com/letta-ai/letta) |
-| **Zep** | Memory layer for AI apps; structured episode + fact extraction with semantic search; self-hosted or cloud | [github](https://github.com/getzep/zep) |
-| **LangChain memory** | `ConversationBufferMemory`, `ConversationSummaryMemory`, `VectorStoreRetrieverMemory` — drop-in modules for any chain | [docs](https://python.langchain.com/docs/how_to/#memory) |
-| **OpenAI Assistants threads** | Server-side conversation history; the API stores and manages message threads automatically across runs | [docs](https://platform.openai.com/docs/assistants/how-it-works/managing-threads-and-messages) |
-| **CLAUDE.md / AGENTS.md** | File-based persistent project memory loaded at agent startup by Claude Code, OpenAI Codex-style agents, and Cursor | [docs](https://docs.anthropic.com/en/docs/claude-code/memory) |
+| **[Mem0](https://github.com/mem0ai/mem0)** | 59.6k | Self-improving memory layer that extracts/stores facts across sessions |
+| **[Cognee](https://github.com/topoteretes/cognee)** | 24.0k | Memory engine building knowledge graphs from agent interactions |
+| **[Letta (ex-MemGPT)](https://github.com/letta-ai/letta)** | 23.5k | Stateful agents server with self-editing long-term + working memory |
+| [txtai](https://github.com/neuml/txtai) | 12.7k | Embeddings database for semantic memory, search and retrieval |
+| [Zep](https://github.com/getzep/zep) | 4.7k | Temporal knowledge-graph memory for chat history and user state |
+| [Memary](https://github.com/kingjulio8238/Memary) | 2.6k | Open-source long-term (knowledge-graph) memory for autonomous agents |
+
+**Most popular:** Mem0 (59.6k) is the clear leader of the dedicated agent-memory layer, with Cognee (24.0k) and Letta (23.5k) next.
+
 
 ---
 
@@ -547,16 +559,22 @@ Search "where do we validate subscription status?" even if no file contains that
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **LlamaIndex** | Full RAG framework: connectors, node parsers, indexes, retrievers, query engines, and response synthesizers | [docs](https://docs.llamaindex.ai/) |
-| **LangChain RAG** | Document loaders + text splitters + vector retrievers + generation chains; 100+ source connectors | [docs](https://python.langchain.com/docs/tutorials/rag/) |
-| **Chroma** | Embedded open-source vector store; zero-config local dev; scales to hosted deployment | [github](https://github.com/chroma-core/chroma) |
-| **Qdrant** | Production vector search engine; supports hybrid sparse/dense retrieval and named vectors | [docs](https://qdrant.tech/documentation/) |
-| **pgvector** | PostgreSQL extension for embedding storage and cosine / L2 / inner-product similarity search | [github](https://github.com/pgvector/pgvector) |
-| **OpenAI file search** | Built-in RAG for Assistants API; auto-chunks and embeds uploaded files into a hosted vector store | [docs](https://platform.openai.com/docs/assistants/tools/file-search) |
-| **Haystack** | Production NLP + RAG pipelines; `DocumentStore` + `Retriever` + `Reader` architecture with pipeline graphs | [docs](https://haystack.deepset.ai/) |
-| **Anthropic RAG cookbook** | Reference implementation of RAG over a document corpus with Claude; chunking + embedding + retrieval patterns | [github](https://github.com/anthropics/anthropic-cookbook/blob/main/skills/retrieval_augmented_generation/) |
+| **[LangChain](https://github.com/langchain-ai/langchain)** | 140.3k | Broad RAG toolkit: loaders, splitters, retrievers, vector-store glue |
+| **[LlamaIndex](https://github.com/run-llama/llama_index)** | 50.5k | Data framework for indexing/retrieval — the canonical RAG ingestion+query layer |
+| **[Milvus](https://github.com/milvus-io/milvus)** | 45.0k | Distributed, high-scale vector database for similarity search |
+| [Qdrant](https://github.com/qdrant/qdrant) | 32.7k | Rust vector database with rich filtering and hybrid search |
+| [Chroma](https://github.com/chroma-core/chroma) | 28.6k | Developer-friendly embedded/serverable vector store for RAG |
+| [Haystack](https://github.com/deepset-ai/haystack) | 25.8k | Production RAG/search pipelines and retrieval-augmented QA |
+| [pgvector](https://github.com/pgvector/pgvector) | 22.0k | Postgres extension adding vector similarity search to an existing DB |
+| [Weaviate](https://github.com/weaviate/weaviate) | 16.4k | Vector database with built-in hybrid search and module ecosystem |
+| [txtai](https://github.com/neuml/txtai) | 12.7k | All-in-one embeddings database for semantic search and RAG |
+
+**Most popular:** LangChain (140.3k) dominates retrieval tooling; LlamaIndex (50.5k) is the leading dedicated RAG data framework and Milvus (45.0k) the top pure vector store.
+
 
 ---
 
@@ -637,14 +655,22 @@ Compare a screenshot before and after a CSS change.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **Playwright** | Headless browser automation; DOM inspection, screenshots, network interception, accessibility tree access | [playwright.dev](https://playwright.dev/) |
-| **Stagehand** (Browserbase) | AI-native browser automation; natural language → browser actions with fallback to Playwright primitives | [github](https://github.com/browserbase/stagehand) |
-| **BrowserBase** | Hosted headless browser infrastructure for agents; persistent sessions, proxies, and CAPTCHA handling | [browserbase.com](https://browserbase.com/) |
-| **tree-sitter** | Incremental parsing library for source code; provides structured syntax trees for 100+ languages; used by editors and agents for symbol extraction | [tree-sitter.github.io](https://tree-sitter.github.io/tree-sitter/) |
-| **Language Server Protocol (LSP)** | Standard interface for IDE-grade code intelligence: go-to-definition, symbol lookup, find-references, type info | [spec](https://microsoft.github.io/language-server-protocol/) |
-| **Claude computer use** | Screenshot + click + keyboard input API for observing and interacting with any rendered desktop or browser UI | [docs](https://docs.anthropic.com/en/docs/computer-use) |
+| **[browser-use](https://github.com/browser-use/browser-use)** | 101.0k | Drives a real browser from LLM instructions; makes the web agent-accessible |
+| **[Puppeteer](https://github.com/puppeteer/puppeteer)** | 95.3k | Headless Chrome/Firefox automation over DevTools; DOM + screenshots |
+| **[Playwright](https://github.com/microsoft/playwright)** | 91.8k | Cross-browser observation (accessibility tree, DOM, screenshots) — the dominant browser sensor |
+| [Playwright-MCP](https://github.com/microsoft/playwright-mcp) | 34.4k | MCP server exposing Playwright accessibility snapshots as agent-native perception |
+| [Selenium](https://github.com/SeleniumHQ/selenium) | 34.2k | Long-standing WebDriver browser automation/observation framework |
+| [tree-sitter](https://github.com/tree-sitter/tree-sitter) | 26.0k | Incremental parser → concrete syntax trees: how agents “see” code structure |
+| [Stagehand](https://github.com/browserbase/stagehand) | 23.3k | AI-first browser framework adding natural-language act/observe/extract on Playwright |
+| [chromedp](https://github.com/chromedp/chromedp) | 13.1k | Go driver for headless Chrome DevTools — browser observation, no external deps |
+| [Language Server Protocol (LSP)](https://github.com/microsoft/language-server-protocol) | — (spec ~12.9k) | Industry-standard IDE protocol for code symbols/diagnostics/hover — how agents perceive code semantics |
+
+**Most popular:** browser-use (101.0k) leads; Puppeteer (95.3k) and Playwright (91.8k) are the entrenched browser-perception engines. LSP + tree-sitter are the standard *code*-perception layer.
+
 
 ---
 
@@ -725,14 +751,22 @@ Edit → test → revert if validation fails.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **Claude Code Edit / Write / Bash** | Patch-based file editing and auditable shell command execution; native tools in the Claude Code harness with permission modes | [docs](https://docs.anthropic.com/en/docs/claude-code/tools) |
-| **E2B Code Interpreter** | Secure sandboxed code execution in a microVM; < 200 ms hot-start, file-system scoped, network-isolated; Python and JavaScript | [e2b.dev](https://e2b.dev/docs) |
-| **GitHub CLI (`gh`)** | Create branches, PRs, issues, and merge from the command line; scriptable for git-based agent workflows | [cli.github.com](https://cli.github.com/manual/) |
-| **Octokit** | GitHub REST + GraphQL client; agents use it to comment on, merge, and label PRs programmatically | [github](https://github.com/octokit/octokit.js) |
-| **Playwright (action mode)** | Browser click / type / form-submit / file-upload actions; standard for UI-driven agent workflows | [playwright.dev/docs/input](https://playwright.dev/docs/input) |
-| **Modal** | Serverless GPU/CPU execution platform; agents dispatch sandboxed workloads (data processing, model inference) without managing infra | [modal.com](https://modal.com/) |
+| **[Daytona](https://github.com/daytonaio/daytona)** | 72.4k | Secure, elastic infrastructure/sandboxes for running AI-generated code |
+| **[Open Interpreter](https://github.com/OpenInterpreter/open-interpreter)** | 64.1k | Lets LLMs run code locally — natural-language code-execution actuator |
+| **[GitHub CLI](https://github.com/cli/cli)** | 45.0k | `gh` — scriptable git/VCS actions (PRs, issues, repos, releases) |
+| [E2B](https://github.com/e2b-dev/E2B) | 12.8k | Secure cloud sandboxes (SDK) for executing AI-generated code |
+| [Octokit](https://github.com/octokit/octokit.js) | 7.8k | Official GitHub API SDK — programmatic git/repo/PR actuation |
+| [microsandbox](https://github.com/microsandbox/microsandbox) | 6.7k | Self-hosted microVM sandbox for running untrusted AI-generated code |
+| [GitHub Actions Runner](https://github.com/actions/runner) | 6.1k | Executes CI workflows — agent-triggered build/test/deploy |
+| [GitPython](https://github.com/gitpython-developers/GitPython) | 5.1k | Python library for programmatic git actions (commit, branch, diff) |
+| Modal | — (SaaS) | Serverless compute/sandbox for running code & GPU jobs (closed-source) |
+
+**Most popular:** Daytona (72.4k) and Open Interpreter (64.1k) lead code-execution/sandbox actuation; GitHub CLI (45.0k) dominates git-action tooling.
+
 
 ---
 
@@ -829,14 +863,22 @@ Score code changes across benchmark tasks.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **Vitest** | Fast unit and integration testing for JS/TS; watch mode and inline snapshots suit agent-driven TDD loops | [vitest.dev](https://vitest.dev/) |
-| **Pytest** | Python test runner; `parametrize` + fixtures make it easy for agents to write targeted regression suites | [docs.pytest.org](https://docs.pytest.org/) |
-| **Promptfoo** | LLM output evaluation framework; define test cases + assertions, run evals against live or recorded model outputs, compare across prompt versions | [github](https://github.com/promptfoo/promptfoo) |
-| **OpenAI Evals** | Open-source framework for evaluating LLM completions against ground-truth datasets; jsonl-based eval definitions | [github](https://github.com/openai/evals) |
-| **Braintrust** | Eval and observability platform for LLM apps; tracks scores across prompt versions and model changes with experiment UI | [braintrust.dev](https://www.braintrust.dev/) |
-| **LangSmith** | LangChain's testing + tracing platform; record runs, annotate with labels, compare metrics across deployments | [docs.smith.langchain.com](https://docs.smith.langchain.com/) |
+| **[Playwright](https://github.com/microsoft/playwright)** | 91.8k | Cross-browser E2E automation; backbone for agent UI/web-action testing |
+| **[Promptfoo](https://github.com/promptfoo/promptfoo)** | 22.7k | Declarative prompt/LLM/agent eval + red-teaming with assertions and CI gating |
+| **[OpenAI Evals](https://github.com/openai/evals)** | 18.8k | Framework + registry for benchmarking LLM behaviour against eval suites |
+| [Vitest](https://github.com/vitest-dev/vitest) | 16.8k | Fast Vite-native JS/TS unit + integration test runner |
+| [DeepEval](https://github.com/confident-ai/deepeval) | 16.5k | “Pytest for LLMs” — metric-based unit tests (G-Eval, hallucination, RAG) |
+| [Ragas](https://github.com/explodinggradients/ragas) | 14.6k | RAG/agent eval metrics (faithfulness, answer/context relevance) |
+| [Pytest](https://github.com/pytest-dev/pytest) | 14.3k | De-facto Python test framework; harness for tool/code validation |
+| [Giskard](https://github.com/Giskard-AI/giskard) | 5.5k | Automated testing + vulnerability scanning for ML/LLM systems |
+| [Inspect](https://github.com/UKGovernmentBEIS/inspect_ai) | 2.3k | UK AISI framework for rigorous LLM evals (datasets, solvers, scorers) |
+
+**Most popular:** Playwright (91.8k) leads overall; Promptfoo (22.7k) and OpenAI Evals (18.8k) lead LLM/agent-specific evaluation.
+
 
 ---
 
@@ -917,14 +959,23 @@ Review `git diff` before summarizing.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **LangSmith** | Traces every LLM call, tool invocation, and chain step; shareable run URLs for debugging; dataset management for evals | [docs.smith.langchain.com](https://docs.smith.langchain.com/) |
-| **LangFuse** | Open-source LLM observability; traces, scores, prompt versioning, cost tracking; self-hosted or cloud | [github](https://github.com/langfuse/langfuse) |
-| **Helicone** | Proxy-based observability for OpenAI / Anthropic; zero-code integration via base URL override; per-request cost and latency | [docs.helicone.ai](https://docs.helicone.ai/) |
-| **Weights & Biases (W&B)** | Experiment tracking and prompt management for ML/LLM workflows; run comparison and artifact versioning | [docs.wandb.ai](https://docs.wandb.ai/guides/prompts) |
-| **OpenTelemetry** | Vendor-neutral distributed tracing standard; `opentelemetry-instrumentation-openai` auto-instruments every LLM call | [github](https://github.com/open-telemetry/opentelemetry-python-contrib) |
-| **Arize AI** | LLM performance monitoring in production; embedding drift detection, hallucination scoring, retrieval quality metrics | [docs.arize.com](https://docs.arize.com/) |
+| **[LangFuse](https://github.com/langfuse/langfuse)** | 29.9k | OSS LLM-engineering platform: tracing, evals, prompt mgmt, cost/metrics |
+| **[Opik](https://github.com/comet-ml/opik)** | 20.0k | LLM/agent tracing, evaluation, and production monitoring (Comet) |
+| **[Arize Phoenix](https://github.com/Arize-ai/phoenix)** | 10.3k | OSS observability for tracing, eval and debugging of LLM/agent apps |
+| [Evidently](https://github.com/evidentlyai/evidently) | 7.6k | ML + LLM monitoring, eval reports, drift/quality dashboards |
+| [OpenLLMetry](https://github.com/traceloop/openllmetry) | 7.2k | OpenTelemetry-based instrumentation for LLM apps (vendor-neutral) |
+| [Helicone](https://github.com/Helicone/helicone) | 5.9k | Proxy-based LLM logging: cost, latency, usage observability |
+| [OpenLIT](https://github.com/openlit/openlit) | 2.6k | OTel-native GenAI observability, cost tracking, evals |
+| [Langtrace](https://github.com/Scale3-Labs/langtrace) | 1.2k | Open-source, OTel-compatible LLM/agent tracing and metrics |
+| [Weave](https://github.com/wandb/weave) | 1.1k | W&B’s LLM app tracing + evaluation toolkit |
+| LangSmith | — (SaaS) | LangChain’s commercial LLMOps tracing/eval platform (default for LangChain users) |
+
+**Most popular:** LangFuse (29.9k) is the leading open-source LLM-observability platform, with Opik (20.0k) and Arize Phoenix (10.3k) next.
+
 
 ---
 
@@ -997,13 +1048,22 @@ Ask before deleting data or changing architecture.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **Instructor** | Structured output library for Python + TypeScript; validates LLM responses against Pydantic / Zod schemas with automatic retry on schema violation | [python.useinstructor.com](https://python.useinstructor.com/) |
-| **DSPy** | Declarative LLM programming; define input → output signatures and let optimizers find the best prompts and few-shot examples automatically | [dspy-docs.vercel.app](https://dspy-docs.vercel.app/) |
-| **OpenAI structured outputs** | Schema-constrained JSON generation; guarantees model response matches a JSON Schema with no parsing or retry needed | [docs](https://platform.openai.com/docs/guides/structured-outputs) |
-| **Anthropic tool use** | Type-safe function calling; model returns `tool_use` blocks with structured, validated arguments that map directly to function signatures | [docs](https://docs.anthropic.com/en/docs/tool-use) |
-| **Marvin** | Lightweight Python library for structured extraction, classification, and generation; wraps any LLM with type-annotated function decorators | [github](https://github.com/prefecthq/marvin) |
+| **[DSPy](https://github.com/stanfordnlp/dspy)** | 35.5k | Declarative, typed LM pipelines (signatures) instead of hand-tuned prompts |
+| **[SGLang](https://github.com/sgl-project/sglang)** | 29.7k | Fast serving runtime with structured/constrained, grammar-based decoding |
+| **[Guidance](https://github.com/guidance-ai/guidance)** | 21.5k | Constrained generation enforcing grammars, regex and typed templates |
+| [Pydantic-AI](https://github.com/pydantic/pydantic-ai) | 18.0k | Pydantic-model-typed, validated structured LLM I/O |
+| [Outlines](https://github.com/dottxt-ai/outlines) | 14.2k | Structured generation enforcing JSON Schema / regex / grammars at decode time |
+| [Instructor](https://github.com/jxnl/instructor) | 13.3k | Patches LLM clients to return validated Pydantic models with auto-retries |
+| [BAML](https://github.com/BoundaryML/baml) | 8.4k | DSL + codegen for typed LLM functions with schema-aligned parsing/tests |
+| [Marvin](https://github.com/PrefectHQ/marvin) | 6.2k | Pydantic toolkit turning functions/types into structured AI tasks |
+| OpenAI Structured Outputs | — (API) | Native JSON-Schema-constrained responses; the de-facto baseline SDKs build on |
+
+**Most popular:** DSPy (35.5k) leads, with SGLang (29.7k) and Guidance (21.5k) the constrained-decoding workhorses.
+
 
 ---
 
@@ -1084,14 +1144,23 @@ Schema fix must happen before API test.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **LangGraph** | State-machine graph for agent orchestration; nodes are Python functions, edges are routing logic; native persistence, checkpointing, and human-in-the-loop | [langchain-ai.github.io/langgraph](https://langchain-ai.github.io/langgraph/) |
-| **AutoGen** (Microsoft) | Multi-agent conversation framework; specialized agents negotiate task completion via structured message passing | [github](https://github.com/microsoft/autogen) |
-| **CrewAI** | Role-based multi-agent orchestration; crews of agents with defined goals, tools, backstories, and delegation rules | [github](https://github.com/crewAIInc/crewAI) |
-| **smolagents** (HuggingFace) | Lightweight code-first agents; the agent writes and executes Python as its primary action primitive; minimal overhead | [github](https://github.com/huggingface/smolagents) |
-| **Tree of Thoughts** | Explores multiple reasoning paths as a tree; prunes weak branches before committing; works best for combinatorial planning tasks (Yao et al. 2023) | [arxiv.org/abs/2305.10601](https://arxiv.org/abs/2305.10601) |
-| **OpenAI Swarm** | Experimental lightweight multi-agent handoff model; routines + handoffs pattern for distributing subtasks across specialized agents | [github](https://github.com/openai/swarm) |
+| **[LangChain](https://github.com/langchain-ai/langchain)** | 140.3k | Foundational chaining of LLM calls, tools and decomposition logic |
+| **[MetaGPT](https://github.com/geekan/MetaGPT)** | 69.1k | Multi-agent SOP roles (PM/architect/engineer) decomposing software tasks |
+| **[AutoGen](https://github.com/microsoft/autogen)** | 59.3k | Conversational multi-agent orchestration and group-chat task solving |
+| [CrewAI](https://github.com/crewAIInc/crewAI) | 54.5k | Role-based orchestration with sequential/hierarchical task graphs |
+| [LlamaIndex](https://github.com/run-llama/llama_index) | 50.5k | Event-driven agent workflows and task-graph orchestration |
+| [Agno](https://github.com/agno-agi/agno) | 40.9k | High-performance multi-agent teams and reasoning workflows |
+| [LangGraph](https://github.com/langchain-ai/langgraph) | 35.9k | Agents as nodes/edges with controllable loops and state |
+| [Semantic Kernel](https://github.com/microsoft/semantic-kernel) | 28.2k | Planners decomposing goals into orchestrated tool/skill steps |
+| [OpenAI Agents SDK](https://github.com/openai/openai-agents-python) | 27.5k | Handoffs, guardrails and multi-agent routing |
+| [OpenAI Swarm](https://github.com/openai/swarm) | 21.7k | Lightweight experimental multi-agent handoff/routing pattern |
+
+**Most popular:** LangChain (140.3k) anchors the ecosystem; MetaGPT (69.1k) and AutoGen (59.3k) lead purpose-built multi-agent orchestration.
+
 
 ---
 
@@ -1164,12 +1233,25 @@ Ask before deploying to production.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **GitHub fine-grained tokens** | Repository-scoped, operation-specific tokens; an agent gets read/write on one repo but cannot touch others or delete branches | [docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) |
-| **HashiCorp Vault** | Secrets management; dynamic credentials for databases and cloud; agents fetch just-in-time short-lived secrets that auto-expire | [developer.hashicorp.com/vault](https://developer.hashicorp.com/vault/docs) |
-| **AWS IAM roles** | Instance profiles and OIDC give agents time-limited cloud credentials without static keys; the standard least-privilege pattern for cloud agents | [docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) |
-| **Claude Code permission modes** | `bypassPermissions` / `default` / `autoEdit` modes gate which tool calls execute automatically and which require user approval at runtime | [docs](https://docs.anthropic.com/en/docs/claude-code/settings) |
+| **[HashiCorp Vault](https://github.com/hashicorp/vault)** | 35.8k | Secrets management & dynamic credentials; standard secret store for agent runtimes |
+| **[Keycloak](https://github.com/keycloak/keycloak)** | 35.3k | OSS IAM / OIDC / OAuth2 provider for authenticating agents and services |
+| **[Infisical](https://github.com/Infisical/infisical)** | 27.5k | OSS secrets platform with SDK/CLI injection for apps and agents |
+| [Teleport](https://github.com/gravitational/teleport) | 20.5k | Identity-aware access proxy (SSH/k8s/DB) with short-lived certs |
+| [Casbin](https://github.com/casbin/casbin) | 20.2k | Embeddable authorization library (ACL/RBAC/ABAC) across many languages |
+| [Ory Hydra](https://github.com/ory/hydra) | 17.4k | Certified OAuth2 / OIDC server issuing tokens to clients and agents |
+| [Ory Kratos](https://github.com/ory/kratos) | 13.7k | Headless identity, login and credential-management API |
+| [Permify](https://github.com/Permify/permify) | 5.9k | Zanzibar-style fine-grained authorization-as-a-service (ReBAC) |
+| [OpenFGA](https://github.com/openfga/openfga) | 5.4k | CNCF Zanzibar-inspired relationship-based authz; scopes agent permissions |
+| [Cerbos](https://github.com/cerbos/cerbos) | 4.5k | Stateless policy-decision-point for context-aware RBAC/ABAC |
+| [Oso](https://github.com/osohq/oso) | 3.5k | Polar policy library for app- and agent-level access rules |
+| [SPIFFE/SPIRE](https://github.com/spiffe/spire) | 2.4k | Workload identity (SVIDs/mTLS) issuing cryptographic identities to agents |
+
+**Most popular:** HashiCorp Vault (35.8k) leads on secrets; OpenFGA (5.4k) is the most-starred purpose-built fine-grained agent-authz engine.
+
 
 ---
 
@@ -1242,12 +1324,21 @@ Pull request, patch, summary, screenshot, or test report.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **LangGraph `interrupt()`** | Pauses a running agent graph at any node; awaits human input before resuming — first-class HITL primitive in the state-machine model | [langchain-ai.github.io/langgraph/concepts/human_in_the_loop](https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop/) |
-| **OpenAI Assistants `requires_action`** | Run status that pauses a thread when tool calls need human input or approval before the run can continue | [docs](https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps) |
-| **Claude Code permission prompts** | Tool calls that exceed the current permission mode surface a real-time y/n prompt in the terminal before execution | [docs](https://docs.anthropic.com/en/docs/claude-code/settings) |
-| **GitHub PR review** | Agent creates a PR; human inspects the diff and approves / requests changes before merge — the standard HITL gate for code changes in team workflows | [docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews) |
+| **[Streamlit](https://github.com/streamlit/streamlit)** | 45.1k | Python framework for building human review/approval UIs fast |
+| **[Gradio](https://github.com/gradio-app/gradio)** | 43.0k | UI library with built-in feedback, flagging and chat-review widgets |
+| **[LangGraph](https://github.com/langchain-ai/langgraph)** | 35.9k | `interrupt()` — native human-in-the-loop approval/edit gate for agents |
+| [CopilotKit](https://github.com/CopilotKit/CopilotKit) | 35.6k | React framework for in-app copilots with HITL/approval surfaces |
+| [Reflex](https://github.com/reflex-dev/reflex) | 28.6k | Pure-Python full-stack framework for agent review/control panels |
+| [Chainlit](https://github.com/Chainlit/chainlit) | 12.3k | Conversational-AI UI with feedback collection and human handoff |
+| [HumanLayer](https://github.com/humanlayer/humanlayer) | 11.1k | API/SDK adding human approval gates (Slack/email) to agent tool calls |
+| [Panel](https://github.com/holoviz/panel) | 5.7k | Python dashboarding framework for review/monitoring interfaces |
+
+**Most popular:** Streamlit (45.1k) and Gradio (43.0k) dominate review-UI building; LangGraph (35.9k) is the most-used native approval-gate primitive; HumanLayer (11.1k) is the purpose-built approval API.
+
 
 ---
 
@@ -1320,12 +1411,22 @@ Compare success rate before and after a new planning rule.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **DSPy optimizers** | `BootstrapFewShot`, `MIPRO`, and `BayesianSignatureOptimizer` learn better prompts and few-shot examples from labeled data automatically — no manual prompt engineering | [dspy-docs.vercel.app/docs/building-blocks/optimizers](https://dspy-docs.vercel.app/docs/building-blocks/optimizers) |
-| **Promptfoo** | A/B tests prompt variants against eval suites; tracks pass rates across versions to guide iterative refinement | [promptfoo.dev](https://www.promptfoo.dev/docs/) |
-| **OpenAI fine-tuning** | Supervised fine-tuning on curated conversation examples; improves behavior and reduces prompt length for domain-specific tasks | [docs](https://platform.openai.com/docs/guides/fine-tuning) |
-| **Weights & Biases sweeps** | Hyperparameter and prompt sweep with Bayesian optimization; compares runs across prompt variants, model versions, and temperature settings | [docs.wandb.ai/guides/sweeps](https://docs.wandb.ai/guides/sweeps) |
+| **[DSPy](https://github.com/stanfordnlp/dspy)** | 35.5k | Compiles/optimizes prompts + weights via teleprompters (eval-driven) |
+| **[Promptfoo](https://github.com/promptfoo/promptfoo)** | 22.7k | Eval-driven prompt iteration and A/B comparison feeding optimization |
+| **[Optuna](https://github.com/optuna/optuna)** | 14.4k | Hyperparameter/program optimization used in eval-driven tuning |
+| [Weights & Biases](https://github.com/wandb/wandb) | 11.1k | Experiment tracking + sweeps powering eval-driven improvement |
+| [ell](https://github.com/MadcowD/ell) | 5.9k | LM programming with prompt versioning/optimization first-class |
+| [AdalFlow](https://github.com/SylphAI-Inc/AdalFlow) | 4.2k | Auto-optimizes prompts/pipelines (text-grad style) |
+| [TextGrad](https://github.com/zou-group/textgrad) | 3.6k | “Textual gradients” — backprops NL feedback to optimize prompts |
+| [Prompty](https://github.com/microsoft/prompty) | 1.2k | Spec + tooling for observable, iterable prompt assets |
+| [OPRO](https://github.com/google-deepmind/opro) | 0.8k | “LLMs as Optimizers” — reference impl of prompt optimization research |
+
+**Most popular:** DSPy (35.5k) is the dominant framework for eval-driven prompt/program optimization, with Promptfoo (22.7k) and Optuna (14.4k) next.
+
 
 ---
 
@@ -1406,14 +1507,24 @@ Container, VM, restricted filesystem, or restricted network.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **NeMo Guardrails** (NVIDIA) | Programmable rails defined in Colang; blocks off-topic, unsafe, or hallucinated responses before they leave the agent; integrates with any LLM | [github](https://github.com/NVIDIA/NeMo-Guardrails) |
-| **Guardrails AI** | Schema-based validators + fix strategies for LLM outputs; plugs into any inference call with configurable retry and correction policies | [github](https://github.com/guardrails-ai/guardrails) |
-| **E2B Code Interpreter** | MicroVM sandbox for agent-generated code; 150 ms cold-start, network-isolated, file-system scoped; prevents host system access | [e2b.dev/docs/sandbox/overview](https://e2b.dev/docs/sandbox/overview) |
-| **Firecracker** | AWS open-source microVM hypervisor; sub-second boot; the runtime behind E2B, AWS Lambda, and Fly.io machines — the gold standard for sandboxed agent code execution | [github](https://github.com/firecracker-microvm/firecracker) |
-| **Rebuff** | Prompt injection detection; semantic + heuristic analysis of user inputs before they reach the agent's reasoning step | [github](https://github.com/woop/rebuff) |
-| **Anthropic Constitutional AI** | Training-time principle set that shapes the model's built-in refusal and policy boundaries before any harness layer is applied | [anthropic.com/research](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback) |
+| **[Firecracker](https://github.com/firecracker-microvm/firecracker)** | 35.2k | MicroVM for secure, fast sandbox isolation of untrusted agent/code execution |
+| **[gVisor](https://github.com/google/gvisor)** | 18.6k | Application-kernel sandbox: strong container isolation for untrusted workloads |
+| **[E2B](https://github.com/e2b-dev/E2B)** | 12.8k | Firecracker-based cloud sandboxes for running agent-generated code safely |
+| [Presidio](https://github.com/microsoft/presidio) | 9.7k | PII detection/anonymization — data-governance guardrail for agent I/O |
+| [garak](https://github.com/NVIDIA/garak) | 8.2k | LLM vulnerability scanner / red-team probes (injection, jailbreak, leakage) |
+| [Guardrails AI](https://github.com/guardrails-ai/guardrails) | 7.1k | Input/output validation framework with a hub of LLM/agent validators |
+| [NeMo Guardrails](https://github.com/NVIDIA/NeMo-Guardrails) | 6.6k | Programmable rails (Colang) for topical/safety/dialog control |
+| [PurpleLlama (Llama Guard · LlamaFirewall)](https://github.com/meta-llama/PurpleLlama) | 4.2k | Meta trust-and-safety suite: Llama Guard classifier + LlamaFirewall agent guardrails |
+| [LLM Guard](https://github.com/protectai/llm-guard) | 3.1k | Scans prompts/outputs for injection, toxicity, secrets and PII |
+| [Rebuff](https://github.com/protectai/rebuff) | 1.5k | Self-hardening prompt-injection detector (heuristics + canary tokens) |
+| Lakera Guard | — (SaaS) | Commercial real-time prompt-injection/PII firewall API |
+
+**Most popular:** Firecracker (35.2k) leads sandbox isolation; among LLM-specific guardrails, garak (8.2k) and Guardrails AI (7.1k) are most-starred.
+
 
 ---
 
@@ -1486,12 +1597,23 @@ Check which files changed after the agent acted.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **Git** | Branching, status, and diff as the primary environment state tracker for code agents; `git status` + `git diff` are standard agent perception calls | [git-scm.com/docs](https://git-scm.com/docs) |
-| **Docker Compose** | Defines the full service environment; agents snapshot runtime state via `docker ps` and service log inspection | [docs.docker.com/compose](https://docs.docker.com/compose/) |
-| **GitHub Actions** | CI state as environment truth; agents check workflow run status via `gh run list --json status,conclusion` before deciding to proceed | [docs.github.com/en/actions](https://docs.github.com/en/actions) |
-| **Nix** | Reproducible build environments; agents can pin and restore exact dependency states across machines and CI runs | [nix.dev](https://nix.dev/) |
+| **[Docker (moby)](https://github.com/moby/moby)** | 71.8k | Container engine — reproducible runtime/environment state |
+| **[Git](https://github.com/git/git)** | 61.7k | Distributed VCS — canonical repo/source state and history |
+| **[Docker Compose](https://github.com/docker/compose)** | 37.6k | Declarative multi-container environment definition and state |
+| [Podman](https://github.com/containers/podman) | 32.1k | Daemonless OCI container/runtime state engine (Docker-compatible) |
+| [Nixpkgs](https://github.com/NixOS/nixpkgs) | 25.2k | Nix package set — reproducible dependency/environment state |
+| [Renovate](https://github.com/renovatebot/renovate) | 21.9k | Automated dependency-state tracking and update PRs |
+| [Nix](https://github.com/NixOS/nix) | 17.2k | Purely-functional package manager — fully reproducible build state |
+| [Dagger](https://github.com/dagger/dagger) | 16.0k | Programmable CI/build engine modelling pipeline/environment state as code |
+| [BuildKit](https://github.com/moby/buildkit) | 10.1k | Modern image-build engine underpinning reproducible build state |
+| [Testcontainers](https://github.com/testcontainers/testcontainers-java) | 8.7k | Throwaway containerised dependencies for tests — ephemeral runtime state |
+
+**Most popular:** Docker/moby (71.8k) and Git (61.7k) are the foundational runtime- and repo-state primitives; Docker Compose (37.6k) is standard for multi-service env state.
+
 
 ---
 
@@ -1575,13 +1697,23 @@ A frontend QA skill that tells the agent how to inspect UI changes.
 
 ### Real tools used in practice
 
-| Tool | What it does | Link |
+> Real, widely-used tools ranked by GitHub stars (★, fetched 2026-06-28); **bold** = top 3 by popularity. Closed-source SaaS / specs shown without a star count.
+
+| Tool | GitHub ★ | What it does |
 |---|---|---|
-| **Model Context Protocol (MCP)** | Anthropic's open standard for connecting agents to tools, data, and services; JSON-RPC transport, resource + tool + prompt primitives; 1000+ community servers | [modelcontextprotocol.io](https://modelcontextprotocol.io/) |
-| **Composio** | 150+ managed MCP-compatible integrations: GitHub, Linear, Slack, Notion, Salesforce — auth, refresh, and rate-limiting handled for each integration | [docs.composio.dev](https://docs.composio.dev/) |
-| **LangChain tools** | Standardized tool interface; 100+ pre-built tools for web search, file system, SQL, Wolfram Alpha, and more; wraps any Python function | [docs](https://python.langchain.com/docs/integrations/tools/) |
-| **Arcade AI** | Hosted tool infrastructure for agents; built-in OAuth, rate limiting, and per-call observability; no per-integration plumbing | [docs.arcade-ai.com](https://docs.arcade-ai.com/) |
-| **Toolhouse** | Tool execution platform; agents call tools via a single API without managing per-integration infra; usage-based billing | [toolhouse.ai/docs](https://toolhouse.ai/docs) |
+| **[MCP Servers](https://github.com/modelcontextprotocol/servers)** | 87.8k | Reference + community collection of MCP servers exposing tools/data to agents |
+| **[Composio](https://github.com/ComposioHQ/composio)** | 29.0k | Managed tool platform: authenticated access to 250+ apps and APIs |
+| **[FastMCP](https://github.com/jlowin/fastmcp)** | 25.8k | Pythonic framework for building MCP servers/clients (upstreamed into the SDK) |
+| [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) | 23.5k | Official Python SDK for MCP servers and clients |
+| [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk) | 12.7k | Official TypeScript SDK for MCP servers and clients |
+| [MCP Specification](https://github.com/modelcontextprotocol/modelcontextprotocol) | 8.5k | The MCP spec + docs; standard adopted across Anthropic, OpenAI and IDEs |
+| [mcp-agent](https://github.com/lastmile-ai/mcp-agent) | 8.4k | Framework for building agents on MCP servers with composable patterns |
+| [MCP Registry](https://github.com/modelcontextprotocol/registry) | 7.0k | Official community registry for discovering published MCP servers |
+| [Arcade](https://github.com/arcadeai/arcade-ai) | 0.9k | Tool-calling platform with managed auth and an SDK for serving agent tools |
+| [Toolhouse](https://github.com/toolhouseai/toolhouse-sdk-python) | <0.1k | Hosted tool/function-execution backend for agents (cloud SaaS) |
+
+**Most popular:** The MCP servers collection (87.8k) anchors the tool ecosystem; Composio (29.0k) and FastMCP (25.8k) lead the build-and-integrate tier.
+
 
 ---
 
