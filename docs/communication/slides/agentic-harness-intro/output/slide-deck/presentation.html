@@ -1438,6 +1438,22 @@
 .s-memory .stat-big em { font-style: normal; color: var(--accent); }
 .s-memory .stat-card.loss { border-left-color: var(--danger); }
 .s-memory .stat-card.loss .stat-big em { color: var(--danger); }
+.s-memory .mem-bridge {
+  position: absolute; left: 68px; right: 68px; bottom: 40px;
+  text-align: center; font-size: 13.5px; font-style: italic;
+  color: var(--ink); line-height: 1.4;
+}
+.s-memory .mem-bridge em { font-style: italic; color: var(--accent); }
+.s-memory .mem-bridge-tag {
+  font-family: var(--font-mono); font-size: 8.5px; font-weight: 700;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--accent);
+  font-style: normal; margin-right: 12px;
+}
+.s-memory .mem-bridge-cue {
+  font-family: var(--font-mono); font-size: 8.5px; font-weight: 700;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--muted);
+  font-style: normal; margin-left: 12px;
+}
 .s-memory .stat-desc {
   font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 6px;
 }
@@ -1812,6 +1828,7 @@
 /* ══════════════════════════════════════════════════════════════
    SLIDE 05b — CONTEXT ROT (s-crot)
    ══════════════════════════════════════════════════════════════ */
+.s-crot .sl-answer { color:var(--accent); }
 .s-crot .cr-svg { position:absolute; left:0; top:0; z-index:0; }
 .s-crot .cr-grid { stroke:var(--border); stroke-width:1; }
 .s-crot .cr-grid-half { stroke:color-mix(in srgb,var(--accent) 45%,var(--border)); stroke-width:1.5; stroke-dasharray:4 5; }
@@ -2305,6 +2322,8 @@ body.presenting .slide.active {
     </div>
   </div>
 
+  <div class="mem-bridge"><span class="mem-bridge-tag">the obvious objection</span>“A frontier window holds a million tokens now — so why not just let the <em>window</em> be the memory?”<span class="mem-bridge-cue">answered next&nbsp;→</span></div>
+
   <div class="slide-number">5 / 22</div>
 
 <div class="slide-source-bar">Sebastian Raschka · Components of a Coding Agent (2026) — magazine.sebastianraschka.com &nbsp;|&nbsp; Internal research · What Makes a Good Agentic Harness — research synthesis (2026)</div>
@@ -2315,9 +2334,9 @@ body.presenting .slide.active {
 <!-- slide 6: Context rot — the window isn't the memory -->
 
 <div class="slide s-crot" data-sources="anthropic-opus47,anthropic-opus46,nolima-context">
-  <div class="section-label">The Gap · Context Rot</div>
-  <h2 class="slide-title">A bigger context window is not bigger memory.</h2>
-  <p class="slide-lede">Retrieval accuracy <em>rots</em> as you fill the window — even the 2026 frontier.</p>
+  <div class="section-label">The Gap · Context Rot &middot; <span class="sl-answer">the answer</span></div>
+  <h2 class="slide-title">No — a bigger context window is not bigger memory.</h2>
+  <p class="slide-lede">Bury one fact in a million-token prompt and ask for it back: the frontier model returns it barely <em>1 in 3</em> times. The window <em>forgets</em> as you fill it.</p>
 
   <svg class="cr-svg" viewBox="0 0 1280 720" width="1280" height="720">
     <line class="cr-grid" x1="340" y1="210.0" x2="740" y2="210.0"/><line class="cr-grid" x1="340" y1="313.1" x2="740" y2="313.1"/><line class="cr-grid-half" x1="340" y1="416.2" x2="740" y2="416.2"/><line class="cr-grid" x1="340" y1="519.4" x2="740" y2="519.4"/>

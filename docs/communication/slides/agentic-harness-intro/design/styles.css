@@ -1338,6 +1338,22 @@
 .s-memory .stat-big em { font-style: normal; color: var(--accent); }
 .s-memory .stat-card.loss { border-left-color: var(--danger); }
 .s-memory .stat-card.loss .stat-big em { color: var(--danger); }
+.s-memory .mem-bridge {
+  position: absolute; left: 68px; right: 68px; bottom: 40px;
+  text-align: center; font-size: 13.5px; font-style: italic;
+  color: var(--ink); line-height: 1.4;
+}
+.s-memory .mem-bridge em { font-style: italic; color: var(--accent); }
+.s-memory .mem-bridge-tag {
+  font-family: var(--font-mono); font-size: 8.5px; font-weight: 700;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--accent);
+  font-style: normal; margin-right: 12px;
+}
+.s-memory .mem-bridge-cue {
+  font-family: var(--font-mono); font-size: 8.5px; font-weight: 700;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--muted);
+  font-style: normal; margin-left: 12px;
+}
 .s-memory .stat-desc {
   font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 6px;
 }
@@ -1712,6 +1728,7 @@
 /* ══════════════════════════════════════════════════════════════
    SLIDE 05b — CONTEXT ROT (s-crot)
    ══════════════════════════════════════════════════════════════ */
+.s-crot .sl-answer { color:var(--accent); }
 .s-crot .cr-svg { position:absolute; left:0; top:0; z-index:0; }
 .s-crot .cr-grid { stroke:var(--border); stroke-width:1; }
 .s-crot .cr-grid-half { stroke:color-mix(in srgb,var(--accent) 45%,var(--border)); stroke-width:1.5; stroke-dasharray:4 5; }
