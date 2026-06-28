@@ -2048,14 +2048,13 @@
 .s-harness-map .zlabel.cross{color:var(--muted);}
 .s-harness-map .zlabel .sm{font-weight:500;letter-spacing:.04em;color:var(--dim);text-transform:none;}
 .s-harness-map .wire{position:absolute;inset:0;z-index:2;}
-.s-harness-map .lc{position:absolute;background:var(--surface);border:1.3px solid var(--border);
-  border-radius:9px;box-shadow:var(--shadow);padding:8px 11px;z-index:3;overflow:hidden;}
-.s-harness-map .lc .lh{display:flex;align-items:center;gap:6px;margin-bottom:4px;}
-.s-harness-map .lc .lh i{width:13px;height:13px;color:var(--accent);stroke-width:2.3;flex-shrink:0;}
-.s-harness-map .lc .lh h4{font-size:10px;font-weight:800;color:var(--ink);margin:0;white-space:nowrap;}
-.s-harness-map .lc .tt{font-family:var(--font-mono);font-size:7.5px;line-height:1.4;color:var(--dim);}
+.s-harness-map .lc{position:absolute;background:var(--surface);border:1.3px solid var(--border);border-radius:9px;box-shadow:var(--shadow);padding:6px 10px;z-index:3;overflow:hidden;}
+.s-harness-map .lc .lh{display:flex;align-items:center;gap:5px;margin-bottom:3px;}
+.s-harness-map .lc .lh i{width:12px;height:12px;color:var(--accent);stroke-width:2.3;flex-shrink:0;}
+.s-harness-map .lc .lh h4{font-size:9.5px;font-weight:800;color:var(--ink);margin:0;white-space:nowrap;line-height:1.1;}
+.s-harness-map .lc .tt{font-family:var(--font-mono);font-size:7px;line-height:1.42;color:var(--dim);}
 .s-harness-map .lc .tt .tn{color:var(--accent);font-weight:600;}
-.s-harness-map .core{position:absolute;left:550px;top:326px;width:180px;height:160px;background:var(--accent);
+.s-harness-map .core{position:absolute;left:550px;top:322px;width:180px;height:160px;background:var(--accent);
   border-radius:18px;box-shadow:0 6px 20px rgba(128,0,32,.30);z-index:4;display:flex;flex-direction:column;
   align-items:center;justify-content:center;text-align:center;border:2px solid var(--accent);}
 .s-harness-map .core .ch{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
@@ -2066,3 +2065,5 @@
   border:1px solid rgba(255,255,255,.4);border-radius:7px;padding:4px 10px;}
 .s-harness-map .core .mdl{font-size:7.5px;color:rgba(255,255,255,.8);margin-top:7px;text-transform:uppercase;letter-spacing:.08em;}
 .s-harness-map .lc,.s-harness-map .zone,.s-harness-map .core{box-sizing:border-box;}
+.s-harness-map .lc .lh svg{width:12px;height:12px;flex-shrink:0;}
+.s-harness-map .core .ch svg{width:15px;height:15px;}
