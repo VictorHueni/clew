@@ -152,3 +152,39 @@ sources:
     url: "https://www.truefoundry.com/blog/litellm-vs-openrouter"
     year: 2026
     accessed: 2026-06-28
+  swe-bench-cards:
+    org: "Vendor model cards / Artificial Analysis"
+    title: "SWE-bench Verified scores per frontier model release (2024–2026)"
+    url: "https://artificialanalysis.ai/"
+    year: 2026
+    accessed: 2026-06-28
+  openai-swe-retired:
+    org: "OpenAI"
+    title: "Why SWE-bench Verified no longer measures frontier coding capabilities (retired Feb 2026; 59% of hard tests flawed; training contamination)"
+    url: "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/"
+    year: 2026
+    accessed: 2026-06-28
+  epoch-eci-gap:
+    org: "Epoch AI"
+    title: "Gap between open and closed frontier models — ~4 months / 8 ECI points (Jan–May 2026)"
+    url: "https://epoch.ai/data-insights/open-closed-eci-gap"
+    year: 2026
+    accessed: 2026-06-28
+  deepseek-v4:
+    org: "DeepSeek"
+    title: "DeepSeek-V4-Pro ≈ 80.6% SWE-bench Verified — open weights at parity with the closed frontier (Apr 2026)"
+    url: "https://huggingface.co/blog/deepseekv4"
+    year: 2026
+    accessed: 2026-06-28
+  hai-ai-index-2025:
+    org: "Stanford HAI"
+    title: "2025 AI Index — Technical Performance (open-vs-closed Arena gap 8.04%→1.70%; inference ~280× cheaper; top-10 convergence)"
+    url: "https://hai.stanford.edu/ai-index/2025-ai-index-report/technical-performance"
+    year: 2025
+    accessed: 2026-06-28
+  nadella-commodity:
+    org: "Satya Nadella (Microsoft)"
+    title: "“The models are getting commoditized” — BG2 Pod with Gurley & Gerstner"
+    url: "https://www.the-decoder.com/microsoft-ceo-satya-nadella-says-ai-models-are-getting-commoditized/"
+    year: 2024
+    accessed: 2026-06-28

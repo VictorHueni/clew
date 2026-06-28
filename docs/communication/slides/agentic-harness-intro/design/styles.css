@@ -2152,3 +2152,38 @@
 .s-setup .su-base .arr{color:rgba(255,255,255,.8);font-weight:800;font-size:11px;}
 .s-setup .su-base .tail{font-size:9.5px;color:#fff;font-weight:600;}
 .s-setup .su-base .tail b{color:#fff;}
+
+/* ══════════════════════════════════════════════════════════════
+   THE MODEL IS A COMMODITY (s-commodity) · benchmark treadmill
+   ══════════════════════════════════════════════════════════════ */
+.s-commodity *{box-sizing:border-box;}
+.s-commodity{--cm-sh:0 1px 3px rgba(15,17,23,.08);}
+.s-commodity .section-label{top:34px;left:40px;}
+.s-commodity .slide-title{top:54px;left:40px;right:40px;font-size:26px;}
+.s-commodity .slide-title em{font-style:normal;color:var(--accent);}
+.s-commodity .slide-lede{top:92px;left:40px;right:40px;font-size:12.5px;}
+.s-commodity .slide-lede em{font-style:normal;color:var(--accent);font-weight:600;}
+.s-commodity .cm-cap{position:absolute;font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);}
+.s-commodity .cm-chart{position:absolute;}
+.s-commodity .cm-callout{position:absolute;background:var(--accent);color:#fff;border-radius:7px;padding:5px 8px;
+ font-size:8.5px;font-weight:600;line-height:1.25;max-width:166px;z-index:4;box-shadow:var(--cm-sh);}
+.s-commodity .cm-callout b{font-weight:800;}
+.s-commodity .cm-legend{position:absolute;display:flex;gap:13px;font-family:var(--font-mono);font-size:8px;color:var(--muted);}
+.s-commodity .cm-legend .k{display:flex;align-items:center;gap:4px;}
+.s-commodity .cm-legend .ln{width:15px;height:0;border-top:2px solid var(--accent);}
+.s-commodity .cm-legend .ln.op{border-top:2px dashed var(--accent);opacity:.6;}
+.s-commodity .cm-stat{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:10px;box-shadow:var(--cm-sh);padding:9px 12px;}
+.s-commodity .cm-stat .sh{display:flex;align-items:center;gap:6px;margin-bottom:2px;}
+.s-commodity .cm-stat .sh svg{width:14px;height:14px;color:var(--accent);stroke-width:2.2;}
+.s-commodity .cm-stat .sh .t{font-size:11px;font-weight:800;color:var(--ink);}
+.s-commodity .cm-stat .big{font-family:var(--font-mono);font-size:14px;font-weight:800;color:var(--accent);line-height:1;margin:2px 0 3px;}
+.s-commodity .cm-stat .d{font-size:9px;color:var(--muted);line-height:1.3;}
+.s-commodity .cm-quote{position:absolute;background:color-mix(in srgb,var(--accent) 7%,var(--surface));
+ border:1px solid color-mix(in srgb,var(--accent) 22%,var(--border));border-radius:10px;padding:9px 12px;}
+.s-commodity .cm-quote .q{font-size:11.5px;font-weight:700;color:var(--ink);line-height:1.3;font-style:italic;}
+.s-commodity .cm-quote .a{font-family:var(--font-mono);font-size:8px;color:var(--muted);margin-top:5px;}
+.s-commodity .cm-punch{position:absolute;left:40px;right:40px;border-radius:11px;background:var(--accent);color:#fff;
+ box-shadow:0 6px 18px rgba(128,0,32,.25);display:flex;align-items:center;gap:12px;padding:11px 18px;z-index:3;}
+.s-commodity .cm-punch svg{width:20px;height:20px;color:#fff;flex-shrink:0;}
+.s-commodity .cm-punch .t{font-size:15px;font-weight:800;}
+.s-commodity .cm-punch .s{font-size:11px;color:rgba(255,255,255,.85);font-weight:500;}
