@@ -99,3 +99,26 @@ sources:
     url: "https://docs.anthropic.com/en/docs/claude-code/tools"
     year: 2026
     accessed: 2026-06-28
+  maturity-ladders:
+    org: "Synthesis"
+    title: "Agentic-engineering maturity ladders (Dash0, MindStudio, ELEKS, ASDLC; SAE J3016 analogy; Feng/McDonald/Zhang 2025; Gartner 2026)"
+    year: 2026
+    accessed: 2026-06-28
+  metr-rct:
+    org: "METR"
+    title: "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity (RCT — 19% slower)"
+    url: "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"
+    year: 2025
+    accessed: 2026-06-28
+  anthropic-multiagent:
+    org: "Anthropic"
+    title: "How we built our multi-agent research system (+90.2% vs single-agent on internal eval)"
+    url: "https://www.anthropic.com/engineering/built-multi-agent-research-system"
+    year: 2025
+    accessed: 2026-06-28
+  huntley-ralph:
+    org: "Geoffrey Huntley"
+    title: "Ralph Wiggum as a software engineer (autonomous single-agent loop)"
+    url: "https://ghuntley.com/ralph/"
+    year: 2025
+    accessed: 2026-06-28
