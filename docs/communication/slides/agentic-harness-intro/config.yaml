@@ -36,13 +36,13 @@ slides:
   - file: "05-writing-down.html"
     class: "s-writedown"
     label: "Writing it down isn't memory either"
-  # ── §02 The Agentic Harness ──
-  - file: "06-divider-harness.html"
-    class: "s-divider"
-    label: "§02 — The Agentic Harness"
-  - file: "07-hype-reality.html"
+  - file: "06-hype-reality.html"
     class: "s-hype"
     label: "Hype vs reality — 2025 didn't land"
+  # ── §02 The Agentic Harness ──
+  - file: "07-divider-harness.html"
+    class: "s-divider"
+    label: "§02 — The Agentic Harness"
   - file: "08-proof.html"
     class: "s-proof"
     label: "Proof — same model, better harness"
