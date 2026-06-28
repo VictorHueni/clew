@@ -122,3 +122,33 @@ sources:
     url: "https://ghuntley.com/ralph/"
     year: 2025
     accessed: 2026-06-28
+  github-stars:
+    org: "GitHub"
+    title: "Repository stargazers — live API snapshot (tool popularity)"
+    url: "https://api.github.com"
+    year: 2026
+    accessed: 2026-06-28
+  google-antigravity:
+    org: "Google"
+    title: "Antigravity — agentic development platform (IDE + CLI), launched 2025-11-18"
+    url: "https://antigravity.google/"
+    year: 2026
+    accessed: 2026-06-28
+  gemini-cli-retired:
+    org: "Google"
+    title: "An important update: transitioning Gemini CLI to Antigravity CLI (retired 2026-06-18)"
+    url: "https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/"
+    year: 2026
+    accessed: 2026-06-28
+  zed-acp:
+    org: "Zed Industries"
+    title: "Agent Client Protocol — external agents in any editor"
+    url: "https://zed.dev/acp"
+    year: 2026
+    accessed: 2026-06-28
+  llm-routers:
+    org: "TrueFoundry"
+    title: "LiteLLM vs OpenRouter — LLM gateways front open & proprietary models"
+    url: "https://www.truefoundry.com/blog/litellm-vs-openrouter"
+    year: 2026
+    accessed: 2026-06-28

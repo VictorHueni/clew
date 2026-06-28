@@ -2106,3 +2106,49 @@
   background:color-mix(in srgb,var(--accent) 5%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 18%,var(--border));
   border-radius:8px;padding:7px 12px;z-index:4;}
 .s-maturity .mt-caveat b{color:var(--accent);}
+
+/* ══════════════════════════════════════════════════════════════
+   CHOOSE-YOUR-SETUP (s-setup) · OSS vs proprietary tool stack
+   ══════════════════════════════════════════════════════════════ */
+.s-setup *{box-sizing:border-box;}
+.s-setup{--su-sh:0 1px 3px rgba(15,17,23,.08);}
+.s-setup .section-label{top:34px;left:40px;}
+.s-setup .slide-title{top:54px;left:40px;right:40px;font-size:26px;}
+.s-setup .slide-title em{font-style:normal;color:var(--accent);}
+.s-setup .slide-lede{top:92px;left:40px;right:40px;font-size:12px;}
+.s-setup .slide-lede em{font-style:normal;color:var(--accent);font-weight:600;}
+.s-setup .su-colh{position:absolute;display:flex;align-items:center;gap:6px;top:140px;}
+.s-setup .su-colh svg{width:14px;height:14px;color:var(--accent);stroke-width:2.3;}
+.s-setup .su-colh .t{font-size:11px;font-weight:800;color:var(--accent);letter-spacing:.02em;}
+.s-setup .su-colh .s{font-family:var(--font-mono);font-size:8px;color:var(--dim);}
+.s-setup .su-band{position:absolute;left:40px;right:40px;display:flex;align-items:stretch;border-radius:10px;
+ border:1px solid var(--border);background:var(--surface);box-shadow:var(--su-sh);overflow:hidden;}
+.s-setup .su-band.opt{border-style:dashed;border-color:color-mix(in srgb,var(--accent) 24%,var(--border));}
+.s-setup .su-gut{width:176px;flex-shrink:0;display:flex;align-items:center;gap:9px;padding:0 14px;
+ background:color-mix(in srgb,var(--accent) 5%,var(--surface));border-right:1px solid var(--border);}
+.s-setup .su-band.opt .su-gut{background:color-mix(in srgb,var(--accent) 3%,var(--surface));}
+.s-setup .su-gut svg{width:17px;height:17px;color:var(--accent);stroke-width:2.2;flex-shrink:0;}
+.s-setup .su-gut .t{font-size:11.5px;font-weight:800;color:var(--ink);line-height:1.12;}
+.s-setup .su-gut .n{font-family:var(--font-mono);font-size:7px;color:var(--dim);text-transform:uppercase;letter-spacing:.03em;margin-top:2px;}
+.s-setup .su-otag{display:inline-block;margin-top:4px;font-family:var(--font-mono);font-size:6.5px;font-weight:700;
+ text-transform:uppercase;letter-spacing:.05em;color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface));
+ border:1px solid color-mix(in srgb,var(--accent) 28%,var(--border));border-radius:4px;padding:1px 5px;}
+.s-setup .su-cell{flex:1;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:9px 14px;min-width:0;}
+.s-setup .su-cell.prop{background:var(--surface-2);border-left:1px solid var(--border);}
+.s-setup .su-cell .su-chips{display:flex;flex-wrap:wrap;gap:5px;}
+.s-setup .su-cell .su-cn{font-family:var(--font-mono);font-size:7.5px;color:var(--muted);letter-spacing:.02em;}
+.s-setup .su-chip{display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--border);
+ border-radius:7px;padding:3px 8px;font-size:9.5px;font-weight:600;color:var(--ink);box-shadow:var(--su-sh);}
+.s-setup .su-chip .st{font-family:var(--font-mono);font-size:7px;font-weight:700;color:var(--accent);}
+.s-setup .su-base{position:absolute;left:40px;right:40px;border-radius:11px;background:var(--accent);color:#fff;
+ box-shadow:0 6px 18px rgba(128,0,32,.25);display:flex;align-items:center;gap:14px;padding:0 18px;}
+.s-setup .su-base .lab{flex-shrink:0;display:flex;align-items:center;gap:9px;}
+.s-setup .su-base .lab svg{width:18px;height:18px;color:#fff;}
+.s-setup .su-base .lab .t{font-size:12.5px;font-weight:800;}
+.s-setup .su-base .lab .n{font-family:var(--font-mono);font-size:7.5px;color:rgba(255,255,255,.72);text-transform:uppercase;letter-spacing:.04em;}
+.s-setup .su-base .flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.s-setup .su-base .step{display:inline-flex;align-items:center;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);
+ color:#fff;border-radius:6px;padding:3px 9px;font-size:9.5px;font-weight:700;font-family:var(--font-mono);}
+.s-setup .su-base .arr{color:rgba(255,255,255,.8);font-weight:800;font-size:11px;}
+.s-setup .su-base .tail{font-size:9.5px;color:#fff;font-weight:600;}
+.s-setup .su-base .tail b{color:#fff;}
