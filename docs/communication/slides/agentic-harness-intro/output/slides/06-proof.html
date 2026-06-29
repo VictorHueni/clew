@@ -1,41 +1,41 @@
-<div class="slide s-proof" data-sources="swe-agent-aci,ahe-2604">
+<div class="slide s-proof" data-sources="tbench-2,anthropic-claude4,ahe-2604">
   <div class="section-label">The Lever · Proof</div>
   <h2 class="slide-title">Hold the model fixed, change the harness.</h2>
-  <p class="slide-lede">Three independent results across three benchmarks. In each, the model weights never change; only the harness around them does.</p>
+  <p class="slide-lede">Three current frontier models, 2025 to 2026. In each, the model weights never change; only the harness around them does.</p>
 
   <div class="pf-panels">
     <div class="pf-panel">
       <div class="pf-top">
-        <div class="pf-ctx">SWE-bench Lite · GPT-4 Turbo</div>
-        <div class="pf-change">Raw Linux shell → a purpose-built agent-computer interface.</div>
+        <div class="pf-ctx">Terminal-Bench 2 · Claude Opus 4.6</div>
+        <div class="pf-change">Swap only the agent harness: Terminus 2 → the Meta-Harness.</div>
       </div>
       <div class="pf-mid">
-        <div class="pf-nums"><span class="pf-before">7.3%</span><span class="pf-arrow">→</span><span class="pf-after">18.0%</span></div>
-        <div class="pf-delta">+10.7 points</div>
-        <div class="pf-track"><div class="pf-fill" style="width:18%"></div><div class="pf-tick" style="left:7.3%"></div></div>
+        <div class="pf-nums"><span class="pf-before">62.9%</span><span class="pf-arrow">→</span><span class="pf-after">76.4%</span></div>
+        <div class="pf-delta">+13.5 points</div>
+        <div class="pf-track"><div class="pf-fill" style="width:76.4%"></div><div class="pf-tick" style="left:62.9%"></div></div>
         <div class="pf-scale">share of tasks resolved (0 to 100%)</div>
       </div>
-      <div class="pf-src">SWE-agent · arXiv 2405.15793 · NeurIPS 2024</div>
+      <div class="pf-src">Terminal-Bench 2 leaderboard · tbench.ai · 2026</div>
     </div>
 
     <div class="pf-panel">
       <div class="pf-top">
-        <div class="pf-ctx">SWE-bench full · GPT-4 Turbo</div>
-        <div class="pf-change">RAG retrieval baseline → the same ACI harness.</div>
+        <div class="pf-ctx">SWE-bench Verified · Claude Opus 4</div>
+        <div class="pf-change">Add a control layer: sample in parallel, discard patches that fail the tests, rerank.</div>
       </div>
       <div class="pf-mid">
-        <div class="pf-nums"><span class="pf-before">3.8%</span><span class="pf-arrow">→</span><span class="pf-after">12.5%</span></div>
-        <div class="pf-delta">3.3× higher</div>
-        <div class="pf-track"><div class="pf-fill" style="width:12.5%"></div><div class="pf-tick" style="left:3.8%"></div></div>
+        <div class="pf-nums"><span class="pf-before">72.5%</span><span class="pf-arrow">→</span><span class="pf-after">79.4%</span></div>
+        <div class="pf-delta">+6.9 points</div>
+        <div class="pf-track"><div class="pf-fill" style="width:79.4%"></div><div class="pf-tick" style="left:72.5%"></div></div>
         <div class="pf-scale">share of tasks resolved (0 to 100%)</div>
       </div>
-      <div class="pf-src">SWE-agent · arXiv 2405.15793 · NeurIPS 2024</div>
+      <div class="pf-src">Anthropic · Introducing Claude 4 · 2025</div>
     </div>
 
     <div class="pf-panel">
       <div class="pf-top">
-        <div class="pf-ctx">Terminal-Bench · same model</div>
-        <div class="pf-change">Off-the-shelf harness → one auto-evolved over 10 iterations.</div>
+        <div class="pf-ctx">Terminal-Bench 2 · GPT-5.4</div>
+        <div class="pf-change">Auto-evolve the harness over 10 iterations; it beats the human-built Codex-CLI.</div>
       </div>
       <div class="pf-mid">
         <div class="pf-nums"><span class="pf-before">69.7%</span><span class="pf-arrow">→</span><span class="pf-after">77.0%</span></div>
