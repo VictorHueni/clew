@@ -2192,3 +2192,7 @@
 .s-tooling .dt-glyph{position:absolute;right:64px;top:50%;transform:translateY(-50%);z-index:1;color:var(--dark-surface);}
 .s-tooling .dt-glyph svg{width:300px;height:300px;stroke-width:1.1;}
 .s-tooling .dt-glyph{width:300px;height:300px;stroke-width:1.1;}
+.s-harness-map .fwbar{position:absolute;left:215px;right:215px;top:606px;height:40px;display:flex;align-items:center;gap:8px;background:color-mix(in srgb,var(--accent) 5%,var(--surface));border:1px dashed color-mix(in srgb,var(--accent) 30%,var(--border));border-radius:9px;padding:0 13px;z-index:3;}
+.s-harness-map .fwbar .fwl{font-family:var(--font-mono);font-size:8px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);flex-shrink:0;line-height:1.2;}
+.s-harness-map .fwbar .fwt{font-family:var(--font-mono);font-size:8.5px;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:3px 8px;white-space:nowrap;}
+.s-harness-map .fwbar .fwt .st{color:var(--accent);font-weight:700;}
