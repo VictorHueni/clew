@@ -1923,8 +1923,24 @@
 .s-prd-plan .pp-rel{box-sizing:border-box;width:100%;font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--accent);background:var(--accent-lt);border:1px solid color-mix(in srgb,var(--accent) 20%,var(--border));border-radius:8px;padding:7px 10px;text-align:center;line-height:1.35;}
 
 /* GRILL-ME & PEER REVIEW */
-.s-verify .v-wrap{position:absolute;top:178px;left:40px;right:40px;bottom:150px;display:flex;gap:22px;}
-.s-verify .v-card{flex:1;display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);padding:18px 20px;position:relative;}
+.s-verify .v-talk{position:absolute;top:170px;left:40px;right:40px;height:84px;display:flex;align-items:center;justify-content:center;gap:24px;}
+.s-verify .v-actor{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0;}
+.s-verify .v-av{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.s-verify .v-av i{width:25px;height:25px;}
+.s-verify .v-av.human{background:var(--accent-lt);border:1.5px solid color-mix(in srgb,var(--accent) 30%,var(--border));}
+.s-verify .v-av.human i{color:var(--accent);}
+.s-verify .v-av.bot{background:color-mix(in srgb,var(--accent-bright) 12%,var(--surface));border:1.5px solid color-mix(in srgb,var(--accent-bright) 34%,var(--border));}
+.s-verify .v-av.bot i{color:var(--accent-bright);}
+.s-verify .v-alab{font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+.s-verify .v-bubbles{display:flex;flex-direction:column;gap:7px;max-width:560px;}
+.s-verify .v-bub{font-size:12px;line-height:1.25;border-radius:13px;padding:7px 13px;display:inline-flex;align-items:center;gap:8px;color:var(--ink);}
+.s-verify .v-bub i{width:14px;height:14px;flex-shrink:0;}
+.s-verify .v-bub.q{align-self:flex-end;background:color-mix(in srgb,var(--accent-bright) 10%,var(--surface));border:1px solid color-mix(in srgb,var(--accent-bright) 26%,var(--border));border-bottom-right-radius:3px;}
+.s-verify .v-bub.q i{color:var(--accent-bright);}
+.s-verify .v-bub.a{align-self:flex-start;background:var(--accent-lt);border:1px solid color-mix(in srgb,var(--accent) 22%,var(--border));border-bottom-left-radius:3px;}
+.s-verify .v-bub.a i{color:var(--accent);}
+.s-verify .v-wrap{position:absolute;top:272px;left:40px;right:40px;bottom:150px;display:flex;gap:22px;}
+.s-verify .v-card{flex:1;display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;background:var(--surface);box-shadow:var(--shadow);padding:15px 20px;position:relative;}
 .s-verify .v-card.a{border-top:4px solid var(--accent);}
 .s-verify .v-card.b{border-top:4px solid var(--accent-bright);}
 .s-verify .v-tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);background:var(--accent-lt);border-radius:10px;padding:3px 10px;width:fit-content;}
@@ -3431,6 +3447,14 @@ body.presenting .slide.active {
   <div class="section-label">The Build Workflow · Alignment &amp; verification</div>
   <h2 class="slide-title">Two fresh agents pressure-test the work, before and after the plan.</h2>
   <p class="slide-lede">Grill-me pulls the thinking out of my head; peer-review checks the document. Both run in a clean session.</p>
+  <div class="v-talk">
+    <div class="v-actor"><span class="v-av human"><i data-lucide="user-round"></i></span><span class="v-alab">you</span></div>
+    <div class="v-bubbles">
+      <span class="v-bub q"><i data-lucide="message-circle-question"></i>&ldquo;Why this boundary, and what must stay true?&rdquo;</span>
+      <span class="v-bub a"><i data-lucide="corner-down-left"></i>&ldquo;Because the glossary splits them; these invariants hold.&rdquo;</span>
+    </div>
+    <div class="v-actor"><span class="v-av bot"><i data-lucide="bot"></i></span><span class="v-alab">fresh agent</span></div>
+  </div>
   <div class="v-wrap">
     <div class="v-card a">
       <div class="v-tag"><i data-lucide="refresh-cw" style="width:11px;height:11px"></i>Alignment · before the plan</div>
