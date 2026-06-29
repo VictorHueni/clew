@@ -189,3 +189,9 @@ sources:
     url: "https://arxiv.org/abs/2303.11366"
     year: 2023
     accessed: 2026-06-29
+  rand-ai-failure:
+    org: "RAND Corporation"
+    title: "The Root Causes of Failure for AI Projects (80% fail; causes are problem-alignment, data, integration, not models)"
+    url: "https://www.rand.org/pubs/research_reports/RRA2680-1.html"
+    year: 2024
+    accessed: 2026-06-29
