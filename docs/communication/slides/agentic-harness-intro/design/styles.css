@@ -1893,7 +1893,7 @@
 .s-writedown .wd-cap b { color: var(--accent); }
 .s-writedown .wd-cap code { font-family: var(--font-mono); color: var(--accent); }
 .s-writedown .wd-stage { position: absolute; top: 256px; left: 68px; right: 68px; bottom: 120px; display: flex; gap: 44px; align-items: stretch; }
-.s-writedown .wd-fails { flex: 0 0 290px; display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+.s-writedown .wd-fails { flex: 0 0 290px; display: flex; flex-direction: column; gap: 12px; justify-content: flex-start; }
 .s-writedown .wd-fail { display: flex; align-items: center; gap: 12px; background: var(--accent-lt); border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--border)); border-left: 4px solid var(--accent); border-radius: 10px; padding: 11px 16px; font-size: 14px; font-weight: 700; color: var(--ink); }
 .s-writedown .wd-fail svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
 .s-writedown .wd-mono { flex: 1; display: flex; }
@@ -1906,8 +1906,10 @@
 .s-writedown .wd-doc .dh { font-family: var(--font-mono); font-size: 13.5px; font-weight: 700; color: var(--ink); margin-top: 15px; }
 .s-writedown .wd-doc .dh:first-child { margin-top: 2px; }
 .s-writedown .wd-doc .dh .h { color: var(--accent); }
-.s-writedown .wd-doc .ln { display: block; height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--dim) 72%, var(--surface)); }
-.s-writedown .wd-doc .ln.live { background: color-mix(in srgb, var(--accent) 45%, var(--surface)); }
+.s-writedown .wd-doc .ln { display: block; height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--dim) 70%, var(--surface)); }
+.s-writedown .wd-doc .ln.a { background: color-mix(in srgb, var(--accent) 45%, var(--surface)); }
+.s-writedown .wd-doc .ln.a2 { background: color-mix(in srgb, var(--accent) 24%, var(--surface)); }
+.s-writedown .wd-doc .ln.d { background: color-mix(in srgb, var(--danger) 32%, var(--surface)); }
 .s-writedown .wd-file-more { padding: 6px 20px 12px; font-family: var(--font-mono); font-size: 10.5px; color: var(--danger); }
 
 /* ══════════════════════════════════════════════════════════════
