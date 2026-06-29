@@ -12,22 +12,10 @@
 #      and omit the url field.
 
 sources:
-  li-agentic-coding:
-    org: "Aidan Li"
-    title: "An Opinionated Guide to Agentic Coding"
-    url: "https://aidanli.dev"
-    year: 2026
-    accessed: 2026-06-24
   ahe-2604:
     org: "arXiv 2604.25850"
     title: "Agentic Harness Engineering"
     url: "https://arxiv.org/abs/2604.25850"
-    year: 2026
-    accessed: 2026-06-24
-  config-study-2602:
-    org: "arXiv 2602.14690"
-    title: "Configuring Agentic AI Coding Tools: An Exploratory Study (2,853 repos)"
-    url: "https://arxiv.org/abs/2602.14690"
     year: 2026
     accessed: 2026-06-24
   raschka-coding-agent:
@@ -41,21 +29,10 @@ sources:
     title: "What Makes a Good Agentic Harness: research synthesis"
     year: 2026
     accessed: 2026-06-24
-  clew-research-p01:
-    org: "Internal research"
-    title: "P-01 validation interview: research synthesis (N=1)"
-    year: 2026
-    accessed: 2026-05-24
   nolima-context:
     org: "Adobe Research / LMU Munich"
     title: "NoLiMa: Long-Context Evaluation Beyond Literal Matching (ICML 2025)"
     url: "https://arxiv.org/abs/2502.05167"
-    year: 2025
-    accessed: 2026-06-25
-  chroma-context-rot:
-    org: "Chroma Research"
-    title: "Context Rot: How Increasing Input Tokens Impacts LLM Performance"
-    url: "https://www.trychroma.com/research/context-rot"
     year: 2025
     accessed: 2026-06-25
   anthropic-opus47:
