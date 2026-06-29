@@ -1989,23 +1989,25 @@
 /* ══════════════════════════════════════════════════════════════
    SLIDE — WRITING IT DOWN (s-writedown)  ·  monolithic AGENTS.md rots
    ══════════════════════════════════════════════════════════════ */
-.s-writedown .wd-stage { position: absolute; top: 224px; left: 68px; right: 68px; bottom: 120px; display: flex; gap: 44px; align-items: flex-start; }
-.s-writedown .wd-mono { flex: 1.1; display: flex; flex-direction: column; gap: 11px; }
-.s-writedown .wd-mono-cap { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
-.s-writedown .wd-mono-cap b { color: var(--accent); }
-.s-writedown .wd-mono-cap code { font-family: var(--font-mono); color: var(--accent); }
-.s-writedown .wd-file { background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
+.s-writedown .wd-cap { position: absolute; top: 220px; left: 68px; right: 68px; font-size: 13px; color: var(--muted); line-height: 1.4; white-space: nowrap; }
+.s-writedown .wd-cap b { color: var(--accent); }
+.s-writedown .wd-cap code { font-family: var(--font-mono); color: var(--accent); }
+.s-writedown .wd-stage { position: absolute; top: 256px; left: 68px; right: 68px; bottom: 120px; display: flex; gap: 40px; align-items: stretch; }
+.s-writedown .wd-fails { flex: 1; display: flex; flex-direction: column; gap: 14px; }
+.s-writedown .wd-fail { flex: 1; display: flex; align-items: center; gap: 13px; background: var(--accent-lt); border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--border)); border-left: 4px solid var(--accent); border-radius: 10px; padding: 0 18px; font-size: 15.5px; font-weight: 700; color: var(--ink); }
+.s-writedown .wd-fail svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
+.s-writedown .wd-mono { flex: 1.15; display: flex; }
+.s-writedown .wd-file { flex: 1; display: flex; flex-direction: column; background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
 .s-writedown .wd-file-h { display: flex; align-items: center; gap: 9px; padding: 11px 16px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--ink); }
 .s-writedown .wd-file-h svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
 .s-writedown .wd-file-badge { margin-left: auto; background: var(--danger); color: var(--surface); font-size: 9px; font-weight: 800; letter-spacing: .08em; padding: 3px 9px; border-radius: 20px; }
-.s-writedown .wd-lines { padding: 15px 16px 6px; display: flex; flex-direction: column; gap: 8px;
-  -webkit-mask-image: linear-gradient(180deg, #000 58%, transparent); mask-image: linear-gradient(180deg, #000 58%, transparent); }
-.s-writedown .wd-lines .ln { height: 7px; border-radius: 4px; background: var(--border); }
-.s-writedown .wd-lines .ln.live { background: color-mix(in srgb, var(--accent) 60%, var(--surface)); }
+.s-writedown .wd-tbl { flex: 1; padding: 12px 18px 4px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent); mask-image: linear-gradient(180deg, #000 72%, transparent); }
+.s-writedown .wd-tbl .tr { font-family: var(--font-mono); white-space: pre; font-size: 13px; line-height: 1.72; color: var(--dim); }
+.s-writedown .wd-tbl .tr.head { color: var(--ink); font-weight: 700; }
+.s-writedown .wd-tbl .tr.sep { color: var(--border); }
+.s-writedown .wd-tbl .tr.live { color: var(--accent); font-weight: 600; }
 .s-writedown .wd-file-more { padding: 4px 16px 12px; font-family: var(--font-mono); font-size: 10.5px; color: var(--danger); }
-.s-writedown .wd-fails { flex: 0 0 350px; display: flex; flex-direction: column; gap: 13px; }
-.s-writedown .wd-fail { display: flex; align-items: center; gap: 13px; background: var(--accent-lt); border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--border)); border-left: 4px solid var(--accent); border-radius: 10px; padding: 14px 18px; font-size: 15.5px; font-weight: 700; color: var(--ink); }
-.s-writedown .wd-fail svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
 
 /* ══════════════════════════════════════════════════════════════
    HARNESS MAP (s-harness-map) · capability zones around the agent core
@@ -3011,31 +3013,32 @@ body.presenting .slide.active {
   <p class="slide-lede"><em>Semantic memory</em> is what the agent knows about your project: the <code>AGENTS.md</code> and <code>CLAUDE.md</code> it reads in at the start of every session.</p>
 
   <div class="mem-kicker">Where it breaks</div>
+  <div class="wd-cap"><b>OpenAI</b> built a 1M-line product with zero hand-written code. At that scale, they found one big <code>AGENTS.md</code> broke down, four ways:</div>
   <div class="wd-stage">
-    <div class="wd-mono">
-      <div class="wd-mono-cap"><b>OpenAI</b> built a 1M-line product with zero hand-written code. At that scale, they found one big <code>AGENTS.md</code> broke down, four ways:</div>
-      <div class="wd-file">
-        <div class="wd-file-h"><i data-lucide="file-text"></i><code>AGENTS.md</code><span class="wd-file-badge">ONE BIG FILE</span></div>
-        <div class="wd-lines">
-          <span class="ln live" style="width:78%"></span>
-          <span class="ln" style="width:93%"></span>
-          <span class="ln" style="width:71%"></span>
-          <span class="ln" style="width:88%"></span>
-          <span class="ln live" style="width:64%"></span>
-          <span class="ln" style="width:96%"></span>
-          <span class="ln" style="width:80%"></span>
-          <span class="ln" style="width:90%"></span>
-          <span class="ln" style="width:74%"></span>
-          <span class="ln" style="width:86%"></span>
-        </div>
-        <div class="wd-file-more">+ 900 more rules · no one can tell which still apply</div>
-      </div>
-    </div>
     <div class="wd-fails">
       <div class="wd-fail"><i data-lucide="layers"></i>Crowds out the task</div>
       <div class="wd-fail"><i data-lucide="volume-x"></i>Too much guidance, none</div>
       <div class="wd-fail"><i data-lucide="trending-down"></i>Rots silently</div>
       <div class="wd-fail"><i data-lucide="search-x"></i>Can't be verified</div>
+    </div>
+    <div class="wd-mono">
+      <div class="wd-file">
+        <div class="wd-file-h"><i data-lucide="file-text"></i><code>AGENTS.md</code><span class="wd-file-badge">ONE BIG FILE</span></div>
+        <div class="wd-tbl">
+          <div class="tr head">| Rule                | Live? |</div>
+          <div class="tr sep">|---------------------|-------|</div>
+          <div class="tr stale">| Use Node 16         | ?     |</div>
+          <div class="tr live">| Run npm test        | yes   |</div>
+          <div class="tr stale">| Lint with eslint    | ?     |</div>
+          <div class="tr stale">| Format: prettier    | ?     |</div>
+          <div class="tr stale">| Deploy to Heroku    | ?     |</div>
+          <div class="tr stale">| Use Redux store     | ?     |</div>
+          <div class="tr stale">| Target ES2017       | ?     |</div>
+          <div class="tr stale">| Webpack config      | ?     |</div>
+          <div class="tr live">| Mock the API        | yes   |</div>
+        </div>
+        <div class="wd-file-more">+ 900 more rows · no one can tell which still apply</div>
+      </div>
     </div>
   </div>
 

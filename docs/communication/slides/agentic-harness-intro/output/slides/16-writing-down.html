@@ -4,31 +4,32 @@
   <p class="slide-lede"><em>Semantic memory</em> is what the agent knows about your project: the <code>AGENTS.md</code> and <code>CLAUDE.md</code> it reads in at the start of every session.</p>
 
   <div class="mem-kicker">Where it breaks</div>
+  <div class="wd-cap"><b>OpenAI</b> built a 1M-line product with zero hand-written code. At that scale, they found one big <code>AGENTS.md</code> broke down, four ways:</div>
   <div class="wd-stage">
-    <div class="wd-mono">
-      <div class="wd-mono-cap"><b>OpenAI</b> built a 1M-line product with zero hand-written code. At that scale, they found one big <code>AGENTS.md</code> broke down, four ways:</div>
-      <div class="wd-file">
-        <div class="wd-file-h"><i data-lucide="file-text"></i><code>AGENTS.md</code><span class="wd-file-badge">ONE BIG FILE</span></div>
-        <div class="wd-lines">
-          <span class="ln live" style="width:78%"></span>
-          <span class="ln" style="width:93%"></span>
-          <span class="ln" style="width:71%"></span>
-          <span class="ln" style="width:88%"></span>
-          <span class="ln live" style="width:64%"></span>
-          <span class="ln" style="width:96%"></span>
-          <span class="ln" style="width:80%"></span>
-          <span class="ln" style="width:90%"></span>
-          <span class="ln" style="width:74%"></span>
-          <span class="ln" style="width:86%"></span>
-        </div>
-        <div class="wd-file-more">+ 900 more rules · no one can tell which still apply</div>
-      </div>
-    </div>
     <div class="wd-fails">
       <div class="wd-fail"><i data-lucide="layers"></i>Crowds out the task</div>
       <div class="wd-fail"><i data-lucide="volume-x"></i>Too much guidance, none</div>
       <div class="wd-fail"><i data-lucide="trending-down"></i>Rots silently</div>
       <div class="wd-fail"><i data-lucide="search-x"></i>Can't be verified</div>
+    </div>
+    <div class="wd-mono">
+      <div class="wd-file">
+        <div class="wd-file-h"><i data-lucide="file-text"></i><code>AGENTS.md</code><span class="wd-file-badge">ONE BIG FILE</span></div>
+        <div class="wd-tbl">
+          <div class="tr head">| Rule                | Live? |</div>
+          <div class="tr sep">|---------------------|-------|</div>
+          <div class="tr stale">| Use Node 16         | ?     |</div>
+          <div class="tr live">| Run npm test        | yes   |</div>
+          <div class="tr stale">| Lint with eslint    | ?     |</div>
+          <div class="tr stale">| Format: prettier    | ?     |</div>
+          <div class="tr stale">| Deploy to Heroku    | ?     |</div>
+          <div class="tr stale">| Use Redux store     | ?     |</div>
+          <div class="tr stale">| Target ES2017       | ?     |</div>
+          <div class="tr stale">| Webpack config      | ?     |</div>
+          <div class="tr live">| Mock the API        | yes   |</div>
+        </div>
+        <div class="wd-file-more">+ 900 more rows · no one can tell which still apply</div>
+      </div>
     </div>
   </div>
 
