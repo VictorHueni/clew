@@ -573,7 +573,7 @@ Search "where do we validate subscription status?" even if no file contains that
 | [Weaviate](https://github.com/weaviate/weaviate) | 16.4k | Vector database with built-in hybrid search and module ecosystem |
 | [txtai](https://github.com/neuml/txtai) | 12.7k | All-in-one embeddings database for semantic search and RAG |
 
-**Most popular:** LangChain (140.3k) dominates retrieval tooling; LlamaIndex (50.5k) is the leading dedicated RAG data framework and Milvus (45.0k) the top pure vector store.
+**Most popular:** Among *specialised* retrieval tools, RAGFlow (83.8k) leads the open RAG-engine tier, Milvus (45.0k) is the top pure vector store, and Chroma (28.6k) the popular embedded vector DB. LangChain and LlamaIndex are multi-capability frameworks — tracked under [§1 Agent Core](#1-agent-core).
 
 
 ---
@@ -755,8 +755,8 @@ Edit → test → revert if validation fails.
 
 | Tool | GitHub ★ | What it does |
 |---|---|---|
-| **[Daytona](https://github.com/daytonaio/daytona)** | 72.4k | Secure, elastic infrastructure/sandboxes for running AI-generated code |
 | **[Open Interpreter](https://github.com/OpenInterpreter/open-interpreter)** | 64.1k | Lets LLMs run code locally — natural-language code-execution actuator |
+| **[Aider](https://github.com/Aider-AI/aider)** | 47.0k | AI pair-programmer — edits files, runs tests/commands, commits (code-edit actuator) |
 | **[GitHub CLI](https://github.com/cli/cli)** | 45.0k | `gh` — scriptable git/VCS actions (PRs, issues, repos, releases) |
 | [E2B](https://github.com/e2b-dev/E2B) | 12.8k | Secure cloud sandboxes (SDK) for executing AI-generated code |
 | [Octokit](https://github.com/octokit/octokit.js) | 7.8k | Official GitHub API SDK — programmatic git/repo/PR actuation |
@@ -765,7 +765,7 @@ Edit → test → revert if validation fails.
 | [GitPython](https://github.com/gitpython-developers/GitPython) | 5.1k | Python library for programmatic git actions (commit, branch, diff) |
 | Modal | — (SaaS) | Serverless compute/sandbox for running code & GPU jobs (closed-source) |
 
-**Most popular:** Daytona (72.4k) and Open Interpreter (64.1k) lead code-execution/sandbox actuation; GitHub CLI (45.0k) dominates git-action tooling.
+**Most popular:** Open Interpreter (64.1k) leads code-execution actuation and Aider (47.0k) code-editing actuation; GitHub CLI (45.0k) dominates git-action tooling. Daytona is sandbox *infrastructure* — tracked under [§13 Safety & Governance](#13-safety--governance).
 
 
 ---
@@ -1062,7 +1062,7 @@ Ask before deleting data or changing architecture.
 | [Marvin](https://github.com/PrefectHQ/marvin) | 6.2k | Pydantic toolkit turning functions/types into structured AI tasks |
 | OpenAI Structured Outputs | — (API) | Native JSON-Schema-constrained responses; the de-facto baseline SDKs build on |
 
-**Most popular:** DSPy (35.5k) leads, with SGLang (29.7k) and Guidance (21.5k) the constrained-decoding workhorses.
+**Most popular:** SGLang (29.7k), Guidance (21.5k) and Outlines (14.3k) are the constrained-decoding / structured-output workhorses. DSPy's home is [§12 Learning & Adaptation](#12-learning--adaptation).
 
 
 ---
@@ -1159,7 +1159,7 @@ Schema fix must happen before API test.
 | [OpenAI Agents SDK](https://github.com/openai/openai-agents-python) | 27.5k | Handoffs, guardrails and multi-agent routing |
 | [OpenAI Swarm](https://github.com/openai/swarm) | 21.7k | Lightweight experimental multi-agent handoff/routing pattern |
 
-**Most popular:** LangChain (140.3k) anchors the ecosystem; MetaGPT (69.1k) and AutoGen (59.3k) lead purpose-built multi-agent orchestration.
+**Most popular:** Planning is mostly *framework*-delivered. Among planning-specific tools, BabyAGI (22.3k) is the classic task-decomposition loop, with Plandex (15.5k) and Tree-of-Thoughts (6.0k). The multi-agent frameworks (LangChain, AutoGen, MetaGPT, CrewAI, LangGraph) span many domains — tracked under [§1 Agent Core](#1-agent-core).
 
 
 ---
@@ -1337,7 +1337,7 @@ Pull request, patch, summary, screenshot, or test report.
 | [HumanLayer](https://github.com/humanlayer/humanlayer) | 11.1k | API/SDK adding human approval gates (Slack/email) to agent tool calls |
 | [Panel](https://github.com/holoviz/panel) | 5.7k | Python dashboarding framework for review/monitoring interfaces |
 
-**Most popular:** Streamlit (45.1k) and Gradio (43.0k) dominate review-UI building; LangGraph (35.9k) is the most-used native approval-gate primitive; HumanLayer (11.1k) is the purpose-built approval API.
+**Most popular:** Streamlit (45.1k) and Gradio (43.0k) dominate review-UI building; Chainlit (12.3k) is the popular conversational HITL UI and HumanLayer (11.1k) the purpose-built approval API. LangGraph's approval gates live in the framework — tracked under [§1 Agent Core](#1-agent-core).
 
 
 ---
@@ -1416,8 +1416,8 @@ Compare success rate before and after a new planning rule.
 | Tool | GitHub ★ | What it does |
 |---|---|---|
 | **[DSPy](https://github.com/stanfordnlp/dspy)** | 35.5k | Compiles/optimizes prompts + weights via teleprompters (eval-driven) |
-| **[Promptfoo](https://github.com/promptfoo/promptfoo)** | 22.7k | Eval-driven prompt iteration and A/B comparison feeding optimization |
 | **[Optuna](https://github.com/optuna/optuna)** | 14.4k | Hyperparameter/program optimization used in eval-driven tuning |
+| **[TextGrad](https://github.com/zou-group/textgrad)** | 3.6k | Optimizes prompts/solutions via natural-language "textual gradients" (feedback-driven adaptation) |
 | [Weights & Biases](https://github.com/wandb/wandb) | 11.1k | Experiment tracking + sweeps powering eval-driven improvement |
 | [ell](https://github.com/MadcowD/ell) | 5.9k | LM programming with prompt versioning/optimization first-class |
 | [AdalFlow](https://github.com/SylphAI-Inc/AdalFlow) | 4.2k | Auto-optimizes prompts/pipelines (text-grad style) |
@@ -1425,7 +1425,7 @@ Compare success rate before and after a new planning rule.
 | [Prompty](https://github.com/microsoft/prompty) | 1.2k | Spec + tooling for observable, iterable prompt assets |
 | [OPRO](https://github.com/google-deepmind/opro) | 0.8k | “LLMs as Optimizers” — reference impl of prompt optimization research |
 
-**Most popular:** DSPy (35.5k) is the dominant framework for eval-driven prompt/program optimization, with Promptfoo (22.7k) and Optuna (14.4k) next.
+**Most popular:** DSPy (35.5k) is the dominant framework for eval-driven prompt/program optimization, with Optuna (14.4k) for tuning and TextGrad (3.6k) for textual-gradient optimization. Promptfoo is an eval/red-team tool — tracked under [§6 Controls & Validation](#6-controls--validation).
 
 
 ---
@@ -1511,8 +1511,9 @@ Container, VM, restricted filesystem, or restricted network.
 
 | Tool | GitHub ★ | What it does |
 |---|---|---|
+| **[Daytona](https://github.com/daytonaio/daytona)** | 72.4k | Secure, elastic sandboxes/infrastructure for running AI-generated code |
 | **[Firecracker](https://github.com/firecracker-microvm/firecracker)** | 35.2k | MicroVM for secure, fast sandbox isolation of untrusted agent/code execution |
-| **[gVisor](https://github.com/google/gvisor)** | 18.6k | Application-kernel sandbox: strong container isolation for untrusted workloads |
+| [gVisor](https://github.com/google/gvisor) | 18.6k | Application-kernel sandbox: strong container isolation for untrusted workloads |
 | **[E2B](https://github.com/e2b-dev/E2B)** | 12.8k | Firecracker-based cloud sandboxes for running agent-generated code safely |
 | [Presidio](https://github.com/microsoft/presidio) | 9.7k | PII detection/anonymization — data-governance guardrail for agent I/O |
 | [garak](https://github.com/NVIDIA/garak) | 8.2k | LLM vulnerability scanner / red-team probes (injection, jailbreak, leakage) |
@@ -1523,7 +1524,7 @@ Container, VM, restricted filesystem, or restricted network.
 | [Rebuff](https://github.com/protectai/rebuff) | 1.5k | Self-hardening prompt-injection detector (heuristics + canary tokens) |
 | Lakera Guard | — (SaaS) | Commercial real-time prompt-injection/PII firewall API |
 
-**Most popular:** Firecracker (35.2k) leads sandbox isolation; among LLM-specific guardrails, garak (8.2k) and Guardrails AI (7.1k) are most-starred.
+**Most popular:** Daytona (72.4k) and Firecracker (35.2k) lead sandbox isolation, with E2B (13.0k) the LLM-native sandbox; among LLM-specific guardrails, garak (8.2k) and Guardrails AI (7.1k) are most-starred.
 
 
 ---
