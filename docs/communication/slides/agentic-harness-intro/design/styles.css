@@ -2187,3 +2187,8 @@
 .s-commodity .cm-punch svg{width:20px;height:20px;color:#fff;flex-shrink:0;}
 .s-commodity .cm-punch .t{font-size:15px;font-weight:800;}
 .s-commodity .cm-punch .s{font-size:11px;color:rgba(255,255,255,.85);font-weight:500;}
+
+/* Dev Tooling title slide (s-tooling) — big faded tool glyph in the bignum slot */
+.s-tooling .dt-glyph{position:absolute;right:64px;top:50%;transform:translateY(-50%);z-index:1;color:var(--dark-surface);}
+.s-tooling .dt-glyph svg{width:300px;height:300px;stroke-width:1.1;}
+.s-tooling .dt-glyph{width:300px;height:300px;stroke-width:1.1;}
