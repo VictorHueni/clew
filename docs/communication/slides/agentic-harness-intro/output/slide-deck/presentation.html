@@ -1992,22 +1992,23 @@
 .s-writedown .wd-cap { position: absolute; top: 220px; left: 68px; right: 68px; font-size: 13px; color: var(--muted); line-height: 1.4; white-space: nowrap; }
 .s-writedown .wd-cap b { color: var(--accent); }
 .s-writedown .wd-cap code { font-family: var(--font-mono); color: var(--accent); }
-.s-writedown .wd-stage { position: absolute; top: 256px; left: 68px; right: 68px; bottom: 120px; display: flex; gap: 40px; align-items: stretch; }
-.s-writedown .wd-fails { flex: 1; display: flex; flex-direction: column; gap: 14px; }
-.s-writedown .wd-fail { flex: 1; display: flex; align-items: center; gap: 13px; background: var(--accent-lt); border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--border)); border-left: 4px solid var(--accent); border-radius: 10px; padding: 0 18px; font-size: 15.5px; font-weight: 700; color: var(--ink); }
-.s-writedown .wd-fail svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
-.s-writedown .wd-mono { flex: 1.15; display: flex; }
+.s-writedown .wd-stage { position: absolute; top: 256px; left: 68px; right: 68px; bottom: 120px; display: flex; gap: 44px; align-items: stretch; }
+.s-writedown .wd-fails { flex: 0 0 290px; display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+.s-writedown .wd-fail { display: flex; align-items: center; gap: 12px; background: var(--accent-lt); border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--border)); border-left: 4px solid var(--accent); border-radius: 10px; padding: 11px 16px; font-size: 14px; font-weight: 700; color: var(--ink); }
+.s-writedown .wd-fail svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
+.s-writedown .wd-mono { flex: 1; display: flex; }
 .s-writedown .wd-file { flex: 1; display: flex; flex-direction: column; background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
 .s-writedown .wd-file-h { display: flex; align-items: center; gap: 9px; padding: 11px 16px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--ink); }
 .s-writedown .wd-file-h svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
 .s-writedown .wd-file-badge { margin-left: auto; background: var(--danger); color: var(--surface); font-size: 9px; font-weight: 800; letter-spacing: .08em; padding: 3px 9px; border-radius: 20px; }
-.s-writedown .wd-tbl { flex: 1; padding: 12px 18px 4px; overflow: hidden;
-  -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent); mask-image: linear-gradient(180deg, #000 72%, transparent); }
-.s-writedown .wd-tbl .tr { font-family: var(--font-mono); white-space: pre; font-size: 13px; line-height: 1.72; color: var(--dim); }
-.s-writedown .wd-tbl .tr.head { color: var(--ink); font-weight: 700; }
-.s-writedown .wd-tbl .tr.sep { color: var(--border); }
-.s-writedown .wd-tbl .tr.live { color: var(--accent); font-weight: 600; }
-.s-writedown .wd-file-more { padding: 4px 16px 12px; font-family: var(--font-mono); font-size: 10.5px; color: var(--danger); }
+.s-writedown .wd-doc { flex: 1; padding: 14px 20px 4px; overflow: hidden; display: flex; flex-direction: column; gap: 7px;
+  -webkit-mask-image: linear-gradient(180deg, #000 76%, transparent); mask-image: linear-gradient(180deg, #000 76%, transparent); }
+.s-writedown .wd-doc .dh { font-family: var(--font-mono); font-size: 13.5px; font-weight: 700; color: var(--ink); margin-top: 15px; }
+.s-writedown .wd-doc .dh:first-child { margin-top: 2px; }
+.s-writedown .wd-doc .dh .h { color: var(--accent); }
+.s-writedown .wd-doc .ln { display: block; height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--dim) 72%, var(--surface)); }
+.s-writedown .wd-doc .ln.live { background: color-mix(in srgb, var(--accent) 45%, var(--surface)); }
+.s-writedown .wd-file-more { padding: 6px 20px 12px; font-family: var(--font-mono); font-size: 10.5px; color: var(--danger); }
 
 /* ══════════════════════════════════════════════════════════════
    HARNESS MAP (s-harness-map) · capability zones around the agent core
@@ -3024,20 +3025,24 @@ body.presenting .slide.active {
     <div class="wd-mono">
       <div class="wd-file">
         <div class="wd-file-h"><i data-lucide="file-text"></i><code>AGENTS.md</code><span class="wd-file-badge">ONE BIG FILE</span></div>
-        <div class="wd-tbl">
-          <div class="tr head">| Rule                | Live? |</div>
-          <div class="tr sep">|---------------------|-------|</div>
-          <div class="tr stale">| Use Node 16         | ?     |</div>
-          <div class="tr live">| Run npm test        | yes   |</div>
-          <div class="tr stale">| Lint with eslint    | ?     |</div>
-          <div class="tr stale">| Format: prettier    | ?     |</div>
-          <div class="tr stale">| Deploy to Heroku    | ?     |</div>
-          <div class="tr stale">| Use Redux store     | ?     |</div>
-          <div class="tr stale">| Target ES2017       | ?     |</div>
-          <div class="tr stale">| Webpack config      | ?     |</div>
-          <div class="tr live">| Mock the API        | yes   |</div>
+        <div class="wd-doc">
+          <div class="dh"><span class="h">#</span> Project setup</div>
+          <span class="ln" style="width:90%"></span>
+          <span class="ln" style="width:73%"></span>
+          <div class="dh"><span class="h">#</span> Build &amp; test</div>
+          <span class="ln" style="width:84%"></span>
+          <span class="ln" style="width:67%"></span>
+          <div class="dh"><span class="h">#</span> Code style</div>
+          <span class="ln" style="width:92%"></span>
+          <span class="ln" style="width:60%"></span>
+          <div class="dh"><span class="h">#</span> Conventions</div>
+          <span class="ln" style="width:79%"></span>
+          <span class="ln" style="width:88%"></span>
+          <div class="dh"><span class="h">#</span> Deployment</div>
+          <span class="ln" style="width:75%"></span>
+          <span class="ln" style="width:63%"></span>
         </div>
-        <div class="wd-file-more">+ 900 more rows · no one can tell which still apply</div>
+        <div class="wd-file-more">+ 900 more lines · no one can tell which still apply</div>
       </div>
     </div>
   </div>
