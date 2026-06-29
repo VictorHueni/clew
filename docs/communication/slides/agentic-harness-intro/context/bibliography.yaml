@@ -18,17 +18,6 @@ sources:
     url: "https://arxiv.org/abs/2604.25850"
     year: 2026
     accessed: 2026-06-24
-  raschka-coding-agent:
-    org: "Sebastian Raschka"
-    title: "Components of a Coding Agent"
-    url: "https://magazine.sebastianraschka.com"
-    year: 2026
-    accessed: 2026-06-24
-  clew-research-harness:
-    org: "Internal research"
-    title: "What Makes a Good Agentic Harness: research synthesis"
-    year: 2026
-    accessed: 2026-06-24
   nolima-context:
     org: "Adobe Research / LMU Munich"
     title: "NoLiMa: Long-Context Evaluation Beyond Literal Matching (ICML 2025)"
@@ -206,4 +195,34 @@ sources:
     title: "Memories docs (auto-memories store facts and rules, not codebase architecture)"
     url: "https://docs.windsurf.com/windsurf/cascade/memories"
     year: 2026
+    accessed: 2026-06-29
+  coala:
+    org: "Sumers, Yao, Narasimhan & Griffiths (Princeton)"
+    title: "Cognitive Architectures for Language Agents (CoALA): four memory modules (working, episodic, semantic, procedural) · TMLR 2024"
+    url: "https://arxiv.org/abs/2309.02427"
+    year: 2024
+    accessed: 2026-06-29
+  anthropic-skills:
+    org: "Anthropic Engineering"
+    title: "Equipping agents for the real world with Agent Skills (progressive disclosure: name + description preloaded, SKILL.md + files on demand)"
+    url: "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills"
+    year: 2025
+    accessed: 2026-06-29
+  codex-agents-md:
+    org: "OpenAI / AGENTS.md"
+    title: "AGENTS.md: project instructions loaded eagerly at session start (no relevance gate)"
+    url: "https://agents.md/"
+    year: 2026
+    accessed: 2026-06-29
+  generative-agents:
+    org: "arXiv 2304.03442"
+    title: "Generative Agents: Interactive Simulacra of Human Behavior (memory stream ranked by importance, recency decay, relevance)"
+    url: "https://arxiv.org/abs/2304.03442"
+    year: 2023
+    accessed: 2026-06-29
+  mem0:
+    org: "arXiv 2504.19413"
+    title: "Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory (>90% token-cost saving vs full context)"
+    url: "https://arxiv.org/abs/2504.19413"
+    year: 2025
     accessed: 2026-06-29

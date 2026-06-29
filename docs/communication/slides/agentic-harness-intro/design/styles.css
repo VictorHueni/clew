@@ -1238,106 +1238,6 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
-   SLIDE 05 — MEMORY (s-memory)  ·  3-layer pyramid + stat cards
-   ══════════════════════════════════════════════════════════════ */
-.s-memory .mem-layers {
-  position: absolute;
-  top: 200px; left: 68px; width: 560px; bottom: 96px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-.s-memory .mem-layer {
-  border-radius: 10px;
-  padding: 14px 20px;
-  text-align: center;
-  border: 1.5px solid var(--border);
-  background: var(--surface);
-  box-shadow: var(--shadow);
-}
-.s-memory .mem-layer .ml-name {
-  font-size: 14px; font-weight: 700; color: var(--ink);
-}
-.s-memory .mem-layer .ml-sub {
-  font-size: 10.5px; color: var(--muted); margin-top: 3px; line-height: 1.3;
-}
-.s-memory .mem-layer .ml-how {
-  font-family: var(--font-mono); font-size: 8.5px; color: var(--dim);
-  margin-top: 4px; letter-spacing: .01em; line-height: 1.3;
-}
-.s-memory .mem-layer .ml-how code {
-  font-family: var(--font-mono); color: var(--accent);
-}
-.s-memory .mem-layer.l-working  { width: 56%; }
-.s-memory .mem-layer.l-episodic { width: 78%; }
-.s-memory .mem-layer.l-longterm {
-  width: 100%;
-  background: var(--accent-lt);
-  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
-}
-.s-memory .mem-layer.l-longterm .ml-name { color: var(--accent); }
-.s-memory .mem-shallow {
-  position: absolute;
-  top: 336px; left: 642px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--danger);
-  display: flex; align-items: center; gap: 6px;
-}
-.s-memory .mem-deep {
-  position: absolute;
-  top: 486px; left: 668px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--accent);
-}
-.s-memory .mem-stats {
-  position: absolute;
-  top: 200px; right: 68px; width: 420px; bottom: 96px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 18px;
-}
-.s-memory .stat-card {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-left: 4px solid var(--accent);
-  border-radius: 10px;
-  padding: 18px 20px;
-  box-shadow: var(--shadow);
-}
-.s-memory .stat-big {
-  font-size: 34px; font-weight: 800; color: var(--ink); letter-spacing: -0.02em;
-}
-.s-memory .stat-big em { font-style: normal; color: var(--accent); }
-.s-memory .stat-card.loss { border-left-color: var(--danger); }
-.s-memory .stat-card.loss .stat-big em { color: var(--danger); }
-.s-memory .mem-bridge {
-  position: absolute; left: 68px; right: 68px; bottom: 40px;
-  text-align: center; font-size: 13.5px; font-style: italic;
-  color: var(--ink); line-height: 1.4;
-}
-.s-memory .mem-bridge em { font-style: italic; color: var(--accent); }
-.s-memory .mem-bridge-tag {
-  font-family: var(--font-mono); font-size: 8.5px; font-weight: 700;
-  letter-spacing: .09em; text-transform: uppercase; color: var(--accent);
-  font-style: normal; margin-right: 12px;
-}
-.s-memory .mem-bridge-cue {
-  font-family: var(--font-mono); font-size: 8.5px; font-weight: 700;
-  letter-spacing: .09em; text-transform: uppercase; color: var(--muted);
-  font-style: normal; margin-left: 12px;
-}
-.s-memory .stat-desc {
-  font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 6px;
-}
-
-/* ══════════════════════════════════════════════════════════════
    SLIDE 06 — CLEW (s-clew v2)  ·  problem vs answer columns
    ══════════════════════════════════════════════════════════════ */
 .s-clew .clew2-cols {
@@ -2394,20 +2294,6 @@
 .s-memtools .mt-foot em{font-style:normal; color:var(--accent); font-weight:600;}
 
 /* ── memory section: per-slide solution / key-takeaway highlights ── */
-.s-memory .mem-fix{
-  box-sizing:border-box; position:absolute; top:200px; right:68px; width:420px; bottom:96px;
-  background:var(--accent-lt); border:1px solid color-mix(in srgb,var(--accent) 24%,var(--border));
-  border-left:4px solid var(--accent); border-radius:12px; box-shadow:var(--shadow);
-  padding:24px 26px; display:flex; flex-direction:column;
-}
-.s-memory .mem-fix *{box-sizing:border-box;}
-.s-memory .mem-fix-k{font-family:var(--font-mono); font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:11px;}
-.s-memory .mem-fix-h{font-size:23px; font-weight:800; color:var(--ink); line-height:1.15; margin-bottom:20px;}
-.s-memory .mem-fix-h em{font-style:normal; color:var(--accent);}
-.s-memory .mem-fix-i{display:flex; align-items:flex-start; gap:11px; font-size:13px; color:var(--ink); line-height:1.4; margin-bottom:14px;}
-.s-memory .mem-fix-i:last-child{margin-bottom:0;}
-.s-memory .mem-fix-i svg{width:16px; height:16px; color:var(--accent); flex-shrink:0; margin-top:2px;}
-
 .s-crot .cr-fix{padding-top:14px; border-top:1px solid color-mix(in srgb,var(--accent) 28%,var(--border));}
 .s-crot .cr-fix-k{font-family:var(--font-mono); font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:5px;}
 .s-crot .cr-fix-v{font-size:12px; color:var(--ink); line-height:1.45; font-weight:600;}
@@ -2415,3 +2301,90 @@
 .s-writedown .wd-take{display:flex; align-items:flex-start; gap:9px; background:var(--accent-lt); border:1px solid color-mix(in srgb,var(--accent) 26%,var(--border)); border-left:4px solid var(--accent); border-radius:10px; padding:13px 16px; font-size:12.5px; color:var(--ink); line-height:1.4;}
 .s-writedown .wd-take b{color:var(--accent);}
 .s-writedown .wd-take svg{width:16px; height:16px; color:var(--accent); flex-shrink:0; margin-top:1px;}
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE — CoALA: THE FOUR MEMORIES (s-coala) · 2x2 taxonomy
+   ══════════════════════════════════════════════════════════════ */
+.s-coala *{box-sizing:border-box;}
+.s-coala .slide-lede em{font-style:normal; color:var(--accent); font-weight:600;}
+.s-coala .cm-grid{position:absolute; left:68px; right:68px; top:226px; bottom:84px;
+  display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:17px;}
+.s-coala .cm-card{background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--accent);
+  border-radius:12px; padding:16px 22px; display:flex; flex-direction:column; box-shadow:var(--shadow);}
+.s-coala .cm-top{display:flex; align-items:center; gap:9px; margin-bottom:8px;}
+.s-coala .cm-ic{width:19px; height:19px; color:var(--accent); flex-shrink:0;}
+.s-coala .cm-type{font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--muted);}
+.s-coala .cm-art{font-size:21px; font-weight:800; color:var(--ink); line-height:1.1; letter-spacing:-.01em;}
+.s-coala .cm-art code{font-family:var(--font-mono); font-size:16px; color:var(--accent); font-weight:700;}
+.s-coala .cm-def{font-size:12.5px; color:var(--muted); line-height:1.4; margin-top:7px; flex:1;}
+.s-coala .cm-break{display:inline-flex; align-items:center; gap:6px; margin-top:10px;
+  font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--accent); letter-spacing:.01em;}
+.s-coala .cm-break svg{width:13px; height:13px; flex-shrink:0;}
+.s-coala .cm-foot{position:absolute; left:68px; right:68px; bottom:50px; text-align:center;
+  font-size:12.5px; font-style:italic; color:var(--muted);}
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE — PROCEDURAL MEMORY (s-procmem) · skills + disclosure
+   ══════════════════════════════════════════════════════════════ */
+.s-procmem *{box-sizing:border-box;}
+.s-procmem .slide-lede em{font-style:normal; color:var(--accent); font-weight:600;}
+.s-procmem .pm-cols{position:absolute; left:68px; right:68px; top:208px; bottom:104px; display:flex; gap:26px; align-items:center;}
+.s-procmem .pm-how{flex:1; background:var(--surface); border:1px solid var(--border); border-radius:12px;
+  padding:18px 20px; display:flex; flex-direction:column; box-shadow:var(--shadow);}
+.s-procmem .pm-how-h{font-size:14px; font-weight:800; color:var(--ink); margin-bottom:14px;}
+.s-procmem .pm-step{display:flex; gap:12px; align-items:flex-start; margin-bottom:13px;}
+.s-procmem .pm-step-n{flex-shrink:0; width:22px; height:22px; border-radius:50%; background:var(--accent);
+  color:var(--surface); font-family:var(--font-mono); font-size:12px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;}
+.s-procmem .pm-step-b{font-size:13px; color:var(--ink); line-height:1.4;}
+.s-procmem .pm-step-b code{font-family:var(--font-mono); font-size:11.5px; color:var(--accent);}
+.s-procmem .pm-step-b b{color:var(--ink);}
+.s-procmem .pm-how-foot{margin-top:auto; padding-top:12px; font-size:12px; font-style:italic;
+  color:var(--muted); line-height:1.4; border-top:1px solid var(--border);}
+.s-procmem .pm-cracks{flex:1; display:flex; flex-direction:column;}
+.s-procmem .pm-cracks-h{font-family:var(--font-mono); font-size:12px; font-weight:800; letter-spacing:.04em;
+  text-transform:uppercase; color:var(--accent); margin-bottom:12px;}
+.s-procmem .pm-crack{display:flex; gap:11px; align-items:flex-start; background:var(--accent-lt);
+  border:1px solid color-mix(in srgb,var(--accent) 26%,var(--border)); border-left:4px solid var(--accent);
+  border-radius:10px; padding:10px 14px; margin-bottom:10px; font-size:12px; color:var(--ink); line-height:1.38;}
+.s-procmem .pm-crack:last-child{margin-bottom:0;}
+.s-procmem .pm-crack b{color:var(--accent);}
+.s-procmem .pm-crack code{font-family:var(--font-mono); font-size:11px; color:var(--accent);}
+.s-procmem .pm-crack svg{width:16px; height:16px; color:var(--accent); flex-shrink:0; margin-top:1px;}
+.s-procmem .pm-take{position:absolute; left:68px; right:68px; bottom:48px; display:flex; gap:9px;
+  align-items:flex-start; font-size:13px; color:var(--ink); line-height:1.4;}
+.s-procmem .pm-take b{color:var(--accent);}
+.s-procmem .pm-take svg{width:17px; height:17px; color:var(--accent); flex-shrink:0; margin-top:1px;}
+
+/* ══════════════════════════════════════════════════════════════
+   SLIDE — EPISODIC MEMORY (s-epimem) · keep vs forget
+   ══════════════════════════════════════════════════════════════ */
+.s-epimem *{box-sizing:border-box;}
+.s-epimem .slide-lede em{font-style:normal; color:var(--accent); font-weight:600;}
+.s-epimem .em-cols{position:absolute; left:68px; right:68px; top:208px; bottom:104px; display:flex; gap:26px; align-items:center;}
+.s-epimem .em-fail{flex:1; display:flex; flex-direction:column;}
+.s-epimem .em-fail-h{font-size:14px; font-weight:800; color:var(--ink); margin-bottom:13px;}
+.s-epimem .em-stat{background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--danger);
+  border-radius:10px; padding:13px 16px; margin-bottom:14px; box-shadow:var(--shadow);}
+.s-epimem .em-stat-big{font-size:32px; font-weight:800; color:var(--danger); line-height:1; letter-spacing:-.02em;}
+.s-epimem .em-stat-cap{font-size:12px; color:var(--muted); line-height:1.4; margin-top:6px;}
+.s-epimem .em-pt{display:flex; gap:10px; align-items:flex-start; font-size:12.5px; color:var(--ink);
+  line-height:1.4; margin-bottom:10px;}
+.s-epimem .em-pt svg{width:15px; height:15px; color:var(--danger); flex-shrink:0; margin-top:2px;}
+.s-epimem .em-fix{flex:1; display:flex; flex-direction:column;}
+.s-epimem .em-fix-h{font-family:var(--font-mono); font-size:12px; font-weight:800; letter-spacing:.04em;
+  text-transform:uppercase; color:var(--accent); margin-bottom:13px;}
+.s-epimem .em-mech{background:var(--surface); border:1px solid var(--border); border-left:4px solid color-mix(in srgb,var(--accent) 40%,var(--border));
+  border-radius:10px; padding:12px 16px; margin-bottom:11px;}
+.s-epimem .em-mech.open{background:var(--accent-lt); border-left-color:var(--accent);}
+.s-epimem .em-mech-k{font-size:14px; font-weight:800; color:var(--ink);}
+.s-epimem .em-mech.open .em-mech-k{color:var(--accent);}
+.s-epimem .em-mech-v{font-size:12px; color:var(--muted); line-height:1.42; margin-top:4px;}
+.s-epimem .em-mech-v em{font-style:normal; color:var(--accent); font-weight:700;}
+.s-epimem .em-src{display:inline-block; font-family:var(--font-mono); font-size:9.5px; font-weight:600;
+  letter-spacing:.02em; color:var(--accent); margin-top:3px;}
+.s-epimem .em-take{position:absolute; left:68px; right:68px; bottom:48px; display:flex; gap:9px;
+  align-items:flex-start; font-size:13px; color:var(--ink); line-height:1.4;}
+.s-epimem .em-take b{color:var(--accent);}
+.s-epimem .em-take svg{width:17px; height:17px; color:var(--accent); flex-shrink:0; margin-top:1px;}

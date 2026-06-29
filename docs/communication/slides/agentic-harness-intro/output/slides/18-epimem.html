@@ -1,0 +1,38 @@
+<div class="slide s-epimem" data-sources="coala,generative-agents,mem0,memory-survey-2026">
+  <div class="section-label">Episodic memory · Keep vs forget</div>
+  <h2 class="slide-title">The hard part isn't remembering. It's forgetting.</h2>
+  <p class="slide-lede">Episodic memory is <em>experience from past sessions</em>. Keeping all of it drowns the agent in cost and stale noise.</p>
+
+  <div class="em-cols">
+    <div class="em-fail">
+      <div class="em-fail-h">Why "remember everything" fails</div>
+      <div class="em-stat">
+        <div class="em-stat-big">&gt;90%</div>
+        <div class="em-stat-cap">of the token cost is wasted re-stuffing full history each turn, vs. a managed memory store.</div>
+      </div>
+      <div class="em-pt"><i data-lucide="x"></i><span>A fixed window can't hold months of sessions, so old context is silently dropped.</span></div>
+      <div class="em-pt"><i data-lucide="x"></i><span>Recall gets noisy: the more you retain, the harder the right memory is to find.</span></div>
+      <div class="em-pt"><i data-lucide="x"></i><span>Stale memories don't just bloat, they actively mislead the agent.</span></div>
+    </div>
+
+    <div class="em-fix">
+      <div class="em-fix-h">How the field manages it</div>
+      <div class="em-mech">
+        <div class="em-mech-k">Score &amp; decay</div>
+        <div class="em-mech-v">Rate each memory's importance, decay it by recency, rank by relevance. <span class="em-src">Generative Agents</span></div>
+      </div>
+      <div class="em-mech">
+        <div class="em-mech-k">Extract &amp; consolidate</div>
+        <div class="em-mech-v">Keep only the salient facts, merge them, retrieve a few. <span class="em-src">Mem0</span></div>
+      </div>
+      <div class="em-mech open">
+        <div class="em-mech-k">The open frontier</div>
+        <div class="em-mech-v">What to evict, "learned forgetting," is still listed <em>unsolved</em> in 2026. <span class="em-src">Memory survey</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="em-take"><i data-lucide="arrow-right"></i><span><b>The fix:</b> treat retention as a decision, not a default. Choosing what's worth keeping needs a <b>model of what matters</b>, which is exactly what no off-the-shelf store has.</span></div>
+
+  <div class="slide-number"></div>
+</div>
