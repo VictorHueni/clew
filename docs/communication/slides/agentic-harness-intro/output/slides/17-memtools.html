@@ -1,0 +1,33 @@
+<div class="slide s-memtools" data-sources="databricks-memory,memory-survey-2026,windsurf-memory">
+  <div class="section-label">Memory · The tooling</div>
+  <h2 class="slide-title">The memory tools are real. They stop at recall.</h2>
+  <p class="slide-lede">A whole ecosystem now gives agents memory, even relational memory. What none of it ships is a traceable model of the <em>product</em> that stays coherent across refactors.</p>
+
+  <div class="mt-cols">
+    <div class="mt-card">
+      <div class="mt-h"><i data-lucide="search"></i><span>Flat recall</span></div>
+      <div class="mt-tools">Mem0 · LangMem · vector DBs</div>
+      <div class="mt-desc">Facts, preferences, and past chats, retrieved by similarity. Commodity, bolt-on in an afternoon.</div>
+      <div class="mt-limit"><i data-lucide="x"></i>Flat and lossy; misses the relationships.</div>
+    </div>
+    <div class="mt-card">
+      <div class="mt-h"><i data-lucide="git-fork"></i><span>Relational memory</span></div>
+      <div class="mt-tools">Zep / Graphiti · Cognee</div>
+      <div class="mt-desc">Temporal knowledge graphs: entities and relationships, not just snippets. Real, and benchmark-backed.</div>
+      <div class="mt-limit"><i data-lucide="x"></i>Built for conversation and business facts, not your architecture.</div>
+    </div>
+    <div class="mt-card">
+      <div class="mt-h"><i data-lucide="file-code"></i><span>Coding-agent memory</span></div>
+      <div class="mt-tools">Cursor · Claude Code · Cline · Aider</div>
+      <div class="mt-desc">Flat rules files and auto-noted facts. Windsurf's own docs: “rules only, not codebase architecture.” Aider rebuilds its code map each run.</div>
+      <div class="mt-limit"><i data-lucide="x"></i>Facts and rules, or a map rebuilt each run; never a durable model.</div>
+    </div>
+  </div>
+
+  <div class="mt-gap">
+    <div class="mt-gap-k"><i data-lucide="alert-triangle"></i>The gap</div>
+    <div class="mt-gap-v">None ships a <b>referentially-enforced, traceable model</b> of strategy, architecture, and decisions that stays coherent <b>across refactors</b>. They remember facts and snippets, not <em>what must be true</em> about the product. Cross-session coherence is still, per the 2026 survey, “largely unsolved.”</div>
+  </div>
+
+  <div class="slide-number"></div>
+</div>

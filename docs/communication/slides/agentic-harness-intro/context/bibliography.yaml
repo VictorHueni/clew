@@ -189,3 +189,21 @@ sources:
     url: "https://www.anthropic.com/news/claude-4"
     year: 2025
     accessed: 2026-06-29
+  databricks-memory:
+    org: "Databricks AI Research"
+    title: "Memory scaling for AI agents (as models converge, memory is the differentiator)"
+    url: "https://www.databricks.com/blog/memory-scaling-ai-agents"
+    year: 2026
+    accessed: 2026-06-29
+  memory-survey-2026:
+    org: "arXiv 2603.07670"
+    title: "Memory for Autonomous LLM Agents: cross-session coherence is largely unsolved"
+    url: "https://arxiv.org/abs/2603.07670"
+    year: 2026
+    accessed: 2026-06-29
+  windsurf-memory:
+    org: "Windsurf / Cascade"
+    title: "Memories docs (auto-memories store facts and rules, not codebase architecture)"
+    url: "https://docs.windsurf.com/windsurf/cascade/memories"
+    year: 2026
+    accessed: 2026-06-29
