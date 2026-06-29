@@ -2001,16 +2001,16 @@
 .s-writedown .wd-file-h { display: flex; align-items: center; gap: 9px; padding: 11px 16px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--ink); }
 .s-writedown .wd-file-h svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
 .s-writedown .wd-file-badge { margin-left: auto; background: var(--danger); color: var(--surface); font-size: 9px; font-weight: 800; letter-spacing: .08em; padding: 3px 9px; border-radius: 20px; }
-.s-writedown .wd-doc { flex: 1; padding: 14px 20px 4px; overflow: hidden; display: flex; flex-direction: column; gap: 7px;
-  -webkit-mask-image: linear-gradient(180deg, #000 76%, transparent); mask-image: linear-gradient(180deg, #000 76%, transparent); }
-.s-writedown .wd-doc .dh { font-family: var(--font-mono); font-size: 13.5px; font-weight: 700; color: var(--ink); margin-top: 15px; }
+.s-writedown .wd-doc { flex: 1; padding: 14px 20px 2px; overflow: hidden; display: flex; flex-direction: column; gap: 7px;
+  -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent); mask-image: linear-gradient(180deg, #000 62%, transparent); }
+.s-writedown .wd-doc .dh { flex-shrink: 0; font-family: var(--font-mono); font-size: 13.5px; font-weight: 700; color: var(--ink); margin-top: 15px; }
 .s-writedown .wd-doc .dh:first-child { margin-top: 2px; }
 .s-writedown .wd-doc .dh .h { color: var(--accent); }
-.s-writedown .wd-doc .ln { display: block; height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--dim) 70%, var(--surface)); }
+.s-writedown .wd-doc .ln { flex-shrink: 0; display: block; height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--dim) 70%, var(--surface)); }
 .s-writedown .wd-doc .ln.a { background: color-mix(in srgb, var(--accent) 45%, var(--surface)); }
 .s-writedown .wd-doc .ln.a2 { background: color-mix(in srgb, var(--accent) 24%, var(--surface)); }
 .s-writedown .wd-doc .ln.d { background: color-mix(in srgb, var(--danger) 32%, var(--surface)); }
-.s-writedown .wd-file-more { padding: 6px 20px 12px; font-family: var(--font-mono); font-size: 10.5px; color: var(--danger); }
+.s-writedown .wd-file-more { padding: 8px 20px 14px; font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--danger); }
 
 /* ══════════════════════════════════════════════════════════════
    HARNESS MAP (s-harness-map) · capability zones around the agent core
@@ -3031,18 +3031,23 @@ body.presenting .slide.active {
           <div class="dh"><span class="h">#</span> Project setup</div>
           <span class="ln a" style="width:90%"></span>
           <span class="ln" style="width:73%"></span>
+          <span class="ln a2" style="width:82%"></span>
           <div class="dh"><span class="h">#</span> Build &amp; test</div>
           <span class="ln a2" style="width:84%"></span>
           <span class="ln d" style="width:67%"></span>
+          <span class="ln" style="width:78%"></span>
           <div class="dh"><span class="h">#</span> Code style</div>
           <span class="ln" style="width:92%"></span>
           <span class="ln a" style="width:60%"></span>
+          <span class="ln a2" style="width:71%"></span>
           <div class="dh"><span class="h">#</span> Conventions</div>
           <span class="ln d" style="width:79%"></span>
           <span class="ln a2" style="width:88%"></span>
+          <span class="ln" style="width:64%"></span>
           <div class="dh"><span class="h">#</span> Deployment</div>
           <span class="ln a" style="width:75%"></span>
           <span class="ln" style="width:63%"></span>
+          <span class="ln a2" style="width:85%"></span>
         </div>
         <div class="wd-file-more">+ 900 more lines · no one can tell which still apply</div>
       </div>

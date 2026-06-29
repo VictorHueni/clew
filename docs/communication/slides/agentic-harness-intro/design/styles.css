@@ -1901,16 +1901,16 @@
 .s-writedown .wd-file-h { display: flex; align-items: center; gap: 9px; padding: 11px 16px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--ink); }
 .s-writedown .wd-file-h svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
 .s-writedown .wd-file-badge { margin-left: auto; background: var(--danger); color: var(--surface); font-size: 9px; font-weight: 800; letter-spacing: .08em; padding: 3px 9px; border-radius: 20px; }
-.s-writedown .wd-doc { flex: 1; padding: 14px 20px 4px; overflow: hidden; display: flex; flex-direction: column; gap: 7px;
-  -webkit-mask-image: linear-gradient(180deg, #000 76%, transparent); mask-image: linear-gradient(180deg, #000 76%, transparent); }
-.s-writedown .wd-doc .dh { font-family: var(--font-mono); font-size: 13.5px; font-weight: 700; color: var(--ink); margin-top: 15px; }
+.s-writedown .wd-doc { flex: 1; padding: 14px 20px 2px; overflow: hidden; display: flex; flex-direction: column; gap: 7px;
+  -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent); mask-image: linear-gradient(180deg, #000 62%, transparent); }
+.s-writedown .wd-doc .dh { flex-shrink: 0; font-family: var(--font-mono); font-size: 13.5px; font-weight: 700; color: var(--ink); margin-top: 15px; }
 .s-writedown .wd-doc .dh:first-child { margin-top: 2px; }
 .s-writedown .wd-doc .dh .h { color: var(--accent); }
-.s-writedown .wd-doc .ln { display: block; height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--dim) 70%, var(--surface)); }
+.s-writedown .wd-doc .ln { flex-shrink: 0; display: block; height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--dim) 70%, var(--surface)); }
 .s-writedown .wd-doc .ln.a { background: color-mix(in srgb, var(--accent) 45%, var(--surface)); }
 .s-writedown .wd-doc .ln.a2 { background: color-mix(in srgb, var(--accent) 24%, var(--surface)); }
 .s-writedown .wd-doc .ln.d { background: color-mix(in srgb, var(--danger) 32%, var(--surface)); }
-.s-writedown .wd-file-more { padding: 6px 20px 12px; font-family: var(--font-mono); font-size: 10.5px; color: var(--danger); }
+.s-writedown .wd-file-more { padding: 8px 20px 14px; font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--danger); }
 
 /* ══════════════════════════════════════════════════════════════
    HARNESS MAP (s-harness-map) · capability zones around the agent core
