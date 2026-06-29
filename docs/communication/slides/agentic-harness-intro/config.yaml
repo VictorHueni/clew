@@ -99,8 +99,15 @@ slides:
   - file: "25-ralph.html"
     class: "s-ralph"
     label: "The Ralph loop"
+  # ── Takeaway · Ten commandments ──
+  - file: "26-cmd-company.html"
+    class: "s-cmd"
+    label: "Ten commandments for the company"
+  - file: "27-cmd-dev.html"
+    class: "s-cmd"
+    label: "Ten commandments for the developer"
   # ── Close ──
-  - file: "26-close.html"
+  - file: "28-close.html"
     class: "s-close"
     label: "Engineer the harness"
 
