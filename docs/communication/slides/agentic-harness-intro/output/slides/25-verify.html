@@ -5,12 +5,19 @@
   <div class="v-talk">
     <div class="v-msg bot">
       <div class="v-actor"><span class="v-av bot"><i data-lucide="bot"></i></span><span class="v-alab">fresh agent</span></div>
-      <span class="v-bub q"><span class="v-btxt">&ldquo;Why this boundary, and what must stay true?&rdquo;</span><i data-lucide="check-check" class="v-seen"></i></span>
+      <span class="v-bub q"><span class="v-btxt">The PRD says the importer is &ldquo;fast.&rdquo; What&rsquo;s the p95 budget, and on which dataset?</span><i data-lucide="check-check" class="v-seen"></i></span>
     </div>
     <div class="v-msg human">
-      <span class="v-bub a"><span class="v-btxt">&ldquo;Because the glossary splits them; these invariants hold.&rdquo;</span><i data-lucide="check-check" class="v-seen"></i></span>
+      <span class="v-bub a"><span class="v-btxt">p95 under 200&nbsp;ms on the 10k-artefact repo, asserted in CI.</span><i data-lucide="check-check" class="v-seen"></i></span>
       <div class="v-actor"><span class="v-av human"><i data-lucide="user-round"></i></span><span class="v-alab">you</span></div>
     </div>
+  </div>
+  <div class="v-findings">
+    <div class="vf-h"><i data-lucide="list-checks"></i>Findings, ranked critical &rarr; low</div>
+    <div class="vf-row"><span class="v-chip" style="background:#b3261e">critical</span><span class="vf-t">Inc-3 ships no rollback path</span></div>
+    <div class="vf-row"><span class="v-chip" style="background:#c4660a">major</span><span class="vf-t">No test gate for the p95 latency budget</span></div>
+    <div class="vf-row"><span class="v-chip" style="background:#5c6470">normal</span><span class="vf-t">&ldquo;trace&rdquo; used before the glossary defines it</span></div>
+    <div class="vf-row"><span class="v-chip" style="background:#9aa2ae">low</span><span class="vf-t">Inc-4 and Inc-5 could run in parallel</span></div>
   </div>
   <div class="v-wrap">
     <div class="v-card a">
@@ -28,13 +35,7 @@
       <div class="v-skill">agent-peer-review</div>
       <div class="v-when">Static, independent scan of the finished plan.</div>
       <div class="v-li"><i data-lucide="scan-search"></i><div>Reads the plan end-to-end, builds a requirement map</div></div>
-      <div class="v-li"><i data-lucide="alert-triangle"></i><div>Findings ranked with concrete remediation:</div></div>
-      <div class="v-sev" style="margin:-2px 0 9px 24px">
-        <span class="v-chip" style="background:#b3261e">critical</span>
-        <span class="v-chip" style="background:#c4660a">major</span>
-        <span class="v-chip" style="background:#5c6470">normal</span>
-        <span class="v-chip" style="background:#9aa2ae">low</span>
-      </div>
+      <div class="v-li"><i data-lucide="alert-triangle"></i><div>Every finding carries <b>concrete remediation</b></div></div>
       <div class="v-li"><i data-lucide="wrench"></i><div>I resolve the ones needing guidance &rarr; <b>amend the plan</b></div></div>
       <div class="v-foot">Output: <b>validated plan</b> &rarr; ready for the autonomy audit.</div>
     </div>
