@@ -564,8 +564,10 @@ Search "where do we validate subscription status?" even if no file contains that
 | Tool | GitHub ★ | What it does |
 |---|---|---|
 | **[LangChain](https://github.com/langchain-ai/langchain)** | 140.3k | Broad RAG toolkit: loaders, splitters, retrievers, vector-store glue |
+| **[RAGFlow](https://github.com/infiniflow/ragflow)** | 83.8k | Open RAG engine: deep document understanding + end-to-end retrieval pipeline |
 | **[LlamaIndex](https://github.com/run-llama/llama_index)** | 50.5k | Data framework for indexing/retrieval — the canonical RAG ingestion+query layer |
-| **[Milvus](https://github.com/milvus-io/milvus)** | 45.0k | Distributed, high-scale vector database for similarity search |
+| [Milvus](https://github.com/milvus-io/milvus) | 45.0k | Distributed, high-scale vector database for similarity search |
+| [PageIndex](https://github.com/VectifyAI/PageIndex) | 33.5k | Vectorless, reasoning-based document index (hierarchical tree retrieval) |
 | [Qdrant](https://github.com/qdrant/qdrant) | 32.7k | Rust vector database with rich filtering and hybrid search |
 | [Chroma](https://github.com/chroma-core/chroma) | 28.6k | Developer-friendly embedded/serverable vector store for RAG |
 | [Haystack](https://github.com/deepset-ai/haystack) | 25.8k | Production RAG/search pipelines and retrieval-augmented QA |
@@ -573,7 +575,7 @@ Search "where do we validate subscription status?" even if no file contains that
 | [Weaviate](https://github.com/weaviate/weaviate) | 16.4k | Vector database with built-in hybrid search and module ecosystem |
 | [txtai](https://github.com/neuml/txtai) | 12.7k | All-in-one embeddings database for semantic search and RAG |
 
-**Most popular:** Among *specialised* retrieval tools, RAGFlow (83.8k) leads the open RAG-engine tier, Milvus (45.0k) is the top pure vector store, and Chroma (28.6k) the popular embedded vector DB. LangChain and LlamaIndex are multi-capability frameworks — tracked under [§1 Agent Core](#1-agent-core).
+**Most popular:** Among *specialised* retrieval tools, RAGFlow (83.8k) leads the open RAG-engine tier, Milvus (45.0k) is the top pure vector store, PageIndex (33.5k) the reasoning-based/vectorless indexer, and Chroma (28.6k) the popular embedded vector DB. LangChain and LlamaIndex are multi-capability frameworks — tracked under [§1 Agent Core](#1-agent-core).
 
 
 ---
