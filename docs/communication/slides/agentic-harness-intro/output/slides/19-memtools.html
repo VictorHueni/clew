@@ -1,54 +1,42 @@
-<div class="slide s-memtools" data-sources="databricks-memory,memory-survey-2026,windsurf-memory">
+<div class="slide s-memtools" data-sources="coala,longmemeval,locomo,memory-survey-2026">
   <div class="section-label">Memory · The tooling</div>
-  <h2 class="slide-title">The memory tools are real. They stop at recall.</h2>
-  <p class="slide-lede">A whole ecosystem now gives agents memory, even relational memory. Each thing it ships has a precise counterpart it <em>doesn't</em>.</p>
+  <h2 class="slide-title">There's a tool for every memory. The recall still breaks.</h2>
+  <p class="slide-lede">Map the ecosystem onto CoALA's four memories and every layer is covered. Then the long-term, cross-session benchmarks turn ugly.</p>
 
-  <div class="mt-mirror">
-    <div class="mt-heads">
-      <div class="mt-head solved"><i data-lucide="check"></i>Memory you can buy today</div>
-      <div class="mt-head gap"><i data-lucide="x"></i>Memory you still can't</div>
-    </div>
-
-    <div class="mt-row">
-      <div class="mt-cell solved">
-        <div class="mt-name">Flat recall</div>
-        <div class="mt-tools">Mem0 · LangMem · vector DBs</div>
-        <div class="mt-desc">Facts and past chats, retrieved by similarity.</div>
+  <div class="mt-stage">
+    <div class="mt-map">
+      <div class="mt-maph">What ships today, per memory type</div>
+      <div class="mt-trow">
+        <i data-lucide="square-code" class="mt-ic"></i>
+        <div class="mt-tinfo"><div class="mt-tname">Working memory</div><div class="mt-ttools">LLMLingua · context editing · compaction · RAG</div></div>
       </div>
-      <div class="mt-axis"></div>
-      <div class="mt-cell gap">
-        <div class="mt-name">A model of what must be true</div>
-        <div class="mt-desc">The product itself, not snippets about it.</div>
+      <div class="mt-trow">
+        <i data-lucide="file-text" class="mt-ic"></i>
+        <div class="mt-tinfo"><div class="mt-tname">Semantic memory</div><div class="mt-ttools">Pinecone · Chroma · Mem0 · Zep / Graphiti · Cognee</div></div>
       </div>
-    </div>
-
-    <div class="mt-row">
-      <div class="mt-cell solved">
-        <div class="mt-name">Relational memory</div>
-        <div class="mt-tools">Zep / Graphiti · Cognee</div>
-        <div class="mt-desc">Knowledge graphs of entities and relationships.</div>
+      <div class="mt-trow">
+        <i data-lucide="wrench" class="mt-ic"></i>
+        <div class="mt-tinfo"><div class="mt-tname">Procedural memory</div><div class="mt-ttools">Agent Skills · Cursor Rules · MCP</div></div>
       </div>
-      <div class="mt-axis"></div>
-      <div class="mt-cell gap">
-        <div class="mt-name">Traceability across refactors</div>
-        <div class="mt-desc">Links that stay valid when you restructure.</div>
+      <div class="mt-trow">
+        <i data-lucide="history" class="mt-ic"></i>
+        <div class="mt-tinfo"><div class="mt-tname">Episodic memory</div><div class="mt-ttools">Letta · Zep · Mem0 · Windsurf memories</div></div>
       </div>
     </div>
 
-    <div class="mt-row">
-      <div class="mt-cell solved">
-        <div class="mt-name">Coding-agent memory</div>
-        <div class="mt-tools">Cursor · Claude Code · Aider</div>
-        <div class="mt-desc">Rules files, auto-noted facts, code maps.</div>
+    <div class="mt-gap">
+      <div class="mt-gaph"><i data-lucide="alert-triangle"></i>The measured gap</div>
+      <div class="mt-stat">
+        <div class="mt-stat-big">~30%</div>
+        <div class="mt-stat-cap">accuracy that commercial assistants and long-context LLMs <b>lose</b> recalling across sustained sessions. Up to <b>60%</b> on the hard set.</div>
+        <div class="mt-stat-src">LongMemEval (ICLR 2025) · LoCoMo</div>
       </div>
-      <div class="mt-axis"></div>
-      <div class="mt-cell gap">
-        <div class="mt-name">Referential integrity, enforced</div>
-        <div class="mt-desc">Checked mechanically, not prose that rots.</div>
+      <div class="mt-quote">“Current systems oscillate between <b>hoarding</b> (store everything, drown in noise) and <b>amnesia</b> (compress aggressively, lose rare but vital facts).”<span class="mt-quote-src">2026 memory survey, §9</span></div>
+      <div class="mt-unmeas">
+        <div class="mt-unmeas-k">Not even measured</div>
+        <div class="mt-unmeas-v">No benchmark tests memory that keeps its <b>structure and links valid across a refactor</b>. The field still “lacks a community-standard evaluation harness.”</div>
       </div>
     </div>
   </div>
-
-  <div class="mt-foot">Everything on the left you can assemble. The right is what the harness still has to build, and cross-session coherence is, per the 2026 survey, <em>“largely unsolved.”</em></div>
   <div class="slide-number"></div>
 </div>

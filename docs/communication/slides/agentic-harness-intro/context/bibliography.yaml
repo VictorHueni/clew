@@ -178,22 +178,10 @@ sources:
     url: "https://www.anthropic.com/news/claude-4"
     year: 2025
     accessed: 2026-06-29
-  databricks-memory:
-    org: "Databricks AI Research"
-    title: "Memory scaling for AI agents (as models converge, memory is the differentiator)"
-    url: "https://www.databricks.com/blog/memory-scaling-ai-agents"
-    year: 2026
-    accessed: 2026-06-29
   memory-survey-2026:
     org: "arXiv 2603.07670"
     title: "Memory for Autonomous LLM Agents: cross-session coherence is largely unsolved"
     url: "https://arxiv.org/abs/2603.07670"
-    year: 2026
-    accessed: 2026-06-29
-  windsurf-memory:
-    org: "Windsurf / Cascade"
-    title: "Memories docs (auto-memories store facts and rules, not codebase architecture)"
-    url: "https://docs.windsurf.com/windsurf/cascade/memories"
     year: 2026
     accessed: 2026-06-29
   coala:
@@ -225,4 +213,16 @@ sources:
     title: "Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory (>90% token-cost saving vs full context)"
     url: "https://arxiv.org/abs/2504.19413"
     year: 2025
+    accessed: 2026-06-29
+  longmemeval:
+    org: "arXiv 2410.10813"
+    title: "LongMemEval (ICLR 2025): commercial assistants and long-context LLMs show a ~30% accuracy drop recalling across sustained sessions (30-60% on LongMemEval_S)"
+    url: "https://arxiv.org/abs/2410.10813"
+    year: 2025
+    accessed: 2026-06-29
+  locomo:
+    org: "arXiv 2402.17753"
+    title: "LoCoMo: very long multi-session conversations; LLMs lag human on long-range temporal and causal recall"
+    url: "https://arxiv.org/abs/2402.17753"
+    year: 2024
     accessed: 2026-06-29
