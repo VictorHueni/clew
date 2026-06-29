@@ -1,33 +1,54 @@
 <div class="slide s-memtools" data-sources="databricks-memory,memory-survey-2026,windsurf-memory">
   <div class="section-label">Memory · The tooling</div>
   <h2 class="slide-title">The memory tools are real. They stop at recall.</h2>
-  <p class="slide-lede">A whole ecosystem now gives agents memory, even relational memory. What none of it ships is a traceable model of the <em>product</em> that stays coherent across refactors.</p>
+  <p class="slide-lede">A whole ecosystem now gives agents memory, even relational memory. Each thing it ships has a precise counterpart it <em>doesn't</em>.</p>
 
-  <div class="mt-cols">
-    <div class="mt-card">
-      <div class="mt-h"><i data-lucide="search"></i><span>Flat recall</span></div>
-      <div class="mt-tools">Mem0 · LangMem · vector DBs</div>
-      <div class="mt-desc">Facts, preferences, and past chats, retrieved by similarity. Commodity, bolt-on in an afternoon.</div>
-      <div class="mt-limit"><i data-lucide="x"></i>Flat and lossy; misses the relationships.</div>
+  <div class="mt-mirror">
+    <div class="mt-heads">
+      <div class="mt-head solved"><i data-lucide="check"></i>Memory you can buy today</div>
+      <div class="mt-head gap"><i data-lucide="x"></i>Memory you still can't</div>
     </div>
-    <div class="mt-card">
-      <div class="mt-h"><i data-lucide="git-fork"></i><span>Relational memory</span></div>
-      <div class="mt-tools">Zep / Graphiti · Cognee</div>
-      <div class="mt-desc">Temporal knowledge graphs: entities and relationships, not just snippets. Real, and benchmark-backed.</div>
-      <div class="mt-limit"><i data-lucide="x"></i>Built for conversation and business facts, not your architecture.</div>
+
+    <div class="mt-row">
+      <div class="mt-cell solved">
+        <div class="mt-name">Flat recall</div>
+        <div class="mt-tools">Mem0 · LangMem · vector DBs</div>
+        <div class="mt-desc">Facts and past chats, retrieved by similarity.</div>
+      </div>
+      <div class="mt-axis"></div>
+      <div class="mt-cell gap">
+        <div class="mt-name">A model of what must be true</div>
+        <div class="mt-desc">The product itself, not snippets about it.</div>
+      </div>
     </div>
-    <div class="mt-card">
-      <div class="mt-h"><i data-lucide="file-code"></i><span>Coding-agent memory</span></div>
-      <div class="mt-tools">Cursor · Claude Code · Cline · Aider</div>
-      <div class="mt-desc">Flat rules files and auto-noted facts. Windsurf's own docs: “rules only, not codebase architecture.” Aider rebuilds its code map each run.</div>
-      <div class="mt-limit"><i data-lucide="x"></i>Facts and rules, or a map rebuilt each run; never a durable model.</div>
+
+    <div class="mt-row">
+      <div class="mt-cell solved">
+        <div class="mt-name">Relational memory</div>
+        <div class="mt-tools">Zep / Graphiti · Cognee</div>
+        <div class="mt-desc">Knowledge graphs of entities and relationships.</div>
+      </div>
+      <div class="mt-axis"></div>
+      <div class="mt-cell gap">
+        <div class="mt-name">Traceability across refactors</div>
+        <div class="mt-desc">Links that stay valid when you restructure.</div>
+      </div>
+    </div>
+
+    <div class="mt-row">
+      <div class="mt-cell solved">
+        <div class="mt-name">Coding-agent memory</div>
+        <div class="mt-tools">Cursor · Claude Code · Aider</div>
+        <div class="mt-desc">Rules files, auto-noted facts, code maps.</div>
+      </div>
+      <div class="mt-axis"></div>
+      <div class="mt-cell gap">
+        <div class="mt-name">Referential integrity, enforced</div>
+        <div class="mt-desc">Checked mechanically, not prose that rots.</div>
+      </div>
     </div>
   </div>
 
-  <div class="mt-gap">
-    <div class="mt-gap-k"><i data-lucide="alert-triangle"></i>The gap</div>
-    <div class="mt-gap-v">None ships a <b>referentially-enforced, traceable model</b> of strategy, architecture, and decisions that stays coherent <b>across refactors</b>. They remember facts and snippets, not <em>what must be true</em> about the product. Cross-session coherence is still, per the 2026 survey, “largely unsolved.”</div>
-  </div>
-
+  <div class="mt-foot">Everything on the left you can assemble. The right is what the harness still has to build, and cross-session coherence is, per the 2026 survey, <em>“largely unsolved.”</em></div>
   <div class="slide-number"></div>
 </div>

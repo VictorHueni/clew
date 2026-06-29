@@ -59,10 +59,10 @@ slides:
   - file: "12-maturity.html"
     class: "s-maturity"
     label: "Maturity — vibe coding to agentic engineering"
-  # ── Memory · the moat ──
+  # ── Memory ──
   - file: "13-divider-memory.html"
     class: "s-divider"
-    label: "Memory — the moat"
+    label: "Memory"
   - file: "14-memory.html"
     class: "s-memory"
     label: "Harnesses starve memory"

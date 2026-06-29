@@ -2371,33 +2371,24 @@
    ══════════════════════════════════════════════════════════════ */
 .s-memtools *{box-sizing:border-box;}
 .s-memtools .slide-lede em{font-style:normal; color:var(--accent); font-weight:600;}
-.s-memtools .mt-cols{
-  position:absolute; top:182px; left:68px; right:68px;
-  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+.s-memtools .mt-mirror{
+  position:absolute; top:176px; left:68px; right:68px; bottom:94px;
+  display:flex; flex-direction:column; gap:11px;
 }
-.s-memtools .mt-card{
-  background:var(--surface); border:1px solid var(--border); border-top:4px solid var(--accent);
-  border-radius:12px; box-shadow:var(--shadow); padding:18px 20px; min-height:286px;
-  display:flex; flex-direction:column;
-}
-.s-memtools .mt-h{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
-.s-memtools .mt-h svg{width:20px; height:20px; color:var(--accent); flex-shrink:0;}
-.s-memtools .mt-h span{font-size:17px; font-weight:800; color:var(--ink); line-height:1.1;}
-.s-memtools .mt-tools{font-family:var(--font-mono); font-size:11px; color:var(--accent); margin-bottom:12px; letter-spacing:.01em;}
-.s-memtools .mt-desc{font-size:12.5px; color:var(--muted); line-height:1.42;}
-.s-memtools .mt-limit{display:flex; align-items:flex-start; gap:7px; margin-top:auto; padding-top:13px; font-size:11.5px; color:var(--ink); font-weight:600; line-height:1.35;}
-.s-memtools .mt-limit svg{width:13px; height:13px; color:var(--danger); flex-shrink:0; margin-top:2px;}
-.s-memtools .mt-gap{
-  position:absolute; left:68px; right:68px; bottom:62px;
-  display:flex; align-items:flex-start; gap:16px;
-  background:var(--accent-lt); border:1px solid color-mix(in srgb,var(--accent) 24%,var(--border));
-  border-radius:12px; padding:15px 20px;
-}
-.s-memtools .mt-gap-k{
-  display:flex; align-items:center; gap:8px; flex-shrink:0;
-  font-family:var(--font-mono); font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);
-}
-.s-memtools .mt-gap-k svg{width:16px; height:16px;}
-.s-memtools .mt-gap-v{font-size:13px; color:var(--ink); line-height:1.45;}
-.s-memtools .mt-gap-v b{color:var(--accent); font-weight:800;}
-.s-memtools .mt-gap-v em{font-style:normal; font-weight:700;}
+.s-memtools .mt-heads{display:grid; grid-template-columns:1fr 46px 1fr; align-items:center;}
+.s-memtools .mt-head{display:flex; align-items:center; gap:9px; font-family:var(--font-mono); font-size:12px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;}
+.s-memtools .mt-head svg{width:16px; height:16px;}
+.s-memtools .mt-head.solved{grid-column:1; color:var(--muted);}
+.s-memtools .mt-head.gap{grid-column:3; color:var(--accent);}
+.s-memtools .mt-row{display:grid; grid-template-columns:1fr 46px 1fr; align-items:stretch; flex:1;}
+.s-memtools .mt-cell{border-radius:11px; padding:13px 17px; display:flex; flex-direction:column; justify-content:center;}
+.s-memtools .mt-cell.solved{grid-column:1; background:var(--surface); border:1px solid var(--border); border-left:4px solid color-mix(in srgb,var(--accent) 35%,var(--border)); box-shadow:var(--shadow);}
+.s-memtools .mt-cell.gap{grid-column:3; background:var(--accent-lt); border:1px solid color-mix(in srgb,var(--accent) 30%,var(--border)); border-left:4px solid var(--accent);}
+.s-memtools .mt-axis{grid-column:2; position:relative;}
+.s-memtools .mt-axis::before{content:""; position:absolute; left:50%; transform:translateX(-50%); top:4px; bottom:4px; width:2px; background:color-mix(in srgb,var(--accent) 22%,var(--border));}
+.s-memtools .mt-name{font-size:15px; font-weight:800; color:var(--ink); line-height:1.15;}
+.s-memtools .mt-cell.gap .mt-name{color:var(--accent);}
+.s-memtools .mt-tools{font-family:var(--font-mono); font-size:10px; color:var(--accent); margin-top:4px; letter-spacing:.01em;}
+.s-memtools .mt-desc{font-size:11.5px; color:var(--muted); line-height:1.35; margin-top:5px;}
+.s-memtools .mt-foot{position:absolute; left:68px; right:68px; bottom:46px; text-align:center; font-size:12.5px; font-style:italic; color:var(--ink); line-height:1.4;}
+.s-memtools .mt-foot em{font-style:normal; color:var(--accent); font-weight:600;}

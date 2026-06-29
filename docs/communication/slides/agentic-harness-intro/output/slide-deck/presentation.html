@@ -2471,36 +2471,27 @@
    ══════════════════════════════════════════════════════════════ */
 .s-memtools *{box-sizing:border-box;}
 .s-memtools .slide-lede em{font-style:normal; color:var(--accent); font-weight:600;}
-.s-memtools .mt-cols{
-  position:absolute; top:182px; left:68px; right:68px;
-  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+.s-memtools .mt-mirror{
+  position:absolute; top:176px; left:68px; right:68px; bottom:94px;
+  display:flex; flex-direction:column; gap:11px;
 }
-.s-memtools .mt-card{
-  background:var(--surface); border:1px solid var(--border); border-top:4px solid var(--accent);
-  border-radius:12px; box-shadow:var(--shadow); padding:18px 20px; min-height:286px;
-  display:flex; flex-direction:column;
-}
-.s-memtools .mt-h{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
-.s-memtools .mt-h svg{width:20px; height:20px; color:var(--accent); flex-shrink:0;}
-.s-memtools .mt-h span{font-size:17px; font-weight:800; color:var(--ink); line-height:1.1;}
-.s-memtools .mt-tools{font-family:var(--font-mono); font-size:11px; color:var(--accent); margin-bottom:12px; letter-spacing:.01em;}
-.s-memtools .mt-desc{font-size:12.5px; color:var(--muted); line-height:1.42;}
-.s-memtools .mt-limit{display:flex; align-items:flex-start; gap:7px; margin-top:auto; padding-top:13px; font-size:11.5px; color:var(--ink); font-weight:600; line-height:1.35;}
-.s-memtools .mt-limit svg{width:13px; height:13px; color:var(--danger); flex-shrink:0; margin-top:2px;}
-.s-memtools .mt-gap{
-  position:absolute; left:68px; right:68px; bottom:62px;
-  display:flex; align-items:flex-start; gap:16px;
-  background:var(--accent-lt); border:1px solid color-mix(in srgb,var(--accent) 24%,var(--border));
-  border-radius:12px; padding:15px 20px;
-}
-.s-memtools .mt-gap-k{
-  display:flex; align-items:center; gap:8px; flex-shrink:0;
-  font-family:var(--font-mono); font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);
-}
-.s-memtools .mt-gap-k svg{width:16px; height:16px;}
-.s-memtools .mt-gap-v{font-size:13px; color:var(--ink); line-height:1.45;}
-.s-memtools .mt-gap-v b{color:var(--accent); font-weight:800;}
-.s-memtools .mt-gap-v em{font-style:normal; font-weight:700;}
+.s-memtools .mt-heads{display:grid; grid-template-columns:1fr 46px 1fr; align-items:center;}
+.s-memtools .mt-head{display:flex; align-items:center; gap:9px; font-family:var(--font-mono); font-size:12px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;}
+.s-memtools .mt-head svg{width:16px; height:16px;}
+.s-memtools .mt-head.solved{grid-column:1; color:var(--muted);}
+.s-memtools .mt-head.gap{grid-column:3; color:var(--accent);}
+.s-memtools .mt-row{display:grid; grid-template-columns:1fr 46px 1fr; align-items:stretch; flex:1;}
+.s-memtools .mt-cell{border-radius:11px; padding:13px 17px; display:flex; flex-direction:column; justify-content:center;}
+.s-memtools .mt-cell.solved{grid-column:1; background:var(--surface); border:1px solid var(--border); border-left:4px solid color-mix(in srgb,var(--accent) 35%,var(--border)); box-shadow:var(--shadow);}
+.s-memtools .mt-cell.gap{grid-column:3; background:var(--accent-lt); border:1px solid color-mix(in srgb,var(--accent) 30%,var(--border)); border-left:4px solid var(--accent);}
+.s-memtools .mt-axis{grid-column:2; position:relative;}
+.s-memtools .mt-axis::before{content:""; position:absolute; left:50%; transform:translateX(-50%); top:4px; bottom:4px; width:2px; background:color-mix(in srgb,var(--accent) 22%,var(--border));}
+.s-memtools .mt-name{font-size:15px; font-weight:800; color:var(--ink); line-height:1.15;}
+.s-memtools .mt-cell.gap .mt-name{color:var(--accent);}
+.s-memtools .mt-tools{font-family:var(--font-mono); font-size:10px; color:var(--accent); margin-top:4px; letter-spacing:.01em;}
+.s-memtools .mt-desc{font-size:11.5px; color:var(--muted); line-height:1.35; margin-top:5px;}
+.s-memtools .mt-foot{position:absolute; left:68px; right:68px; bottom:46px; text-align:center; font-size:12.5px; font-style:italic; color:var(--ink); line-height:1.4;}
+.s-memtools .mt-foot em{font-style:normal; color:var(--accent); font-weight:600;}
 
 /* ── Baseline: controls hint ── */
 .controls-hint {
@@ -2884,14 +2875,14 @@ body.presenting .slide.active {
 
 
 
-<!-- slide 13: Memory — the moat -->
+<!-- slide 13: Memory -->
 
 <div class="slide s-divider s-tooling">
   <div class="accent-bar-left"></div>
   <i data-lucide="database" class="dt-glyph"></i>
   <div class="div-wrap">
     <div class="div-kicker">The hardest layer</div>
-    <h1 class="div-title">Memory <em>is the moat</em></h1>
+    <h1 class="div-title"><em>Memory</em></h1>
     <div class="div-tag">Bolt-on memory is now commodity: Mem0, Letta, vector search. What no tool ships is memory that holds its structure and traceability across refactors, and that is what the harness has to build.</div>
   </div>
   <div class="div-bottom-line"></div>
@@ -2904,7 +2895,7 @@ body.presenting .slide.active {
 
 <div class="slide s-memory" data-sources="raschka-coding-agent,clew-research-harness">
   <div class="section-label">Memory · The Gap</div>
-  <h2 class="slide-title">Most harnesses only have the shallowest memory, yet memory is the moat.</h2>
+  <h2 class="slide-title">Most harnesses only have the shallowest memory, yet the deep layer is the one that compounds.</h2>
 
   <div class="mem-layers">
     <div class="mem-layer l-working">
@@ -2925,7 +2916,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="mem-shallow"><i data-lucide="arrow-left" class="icon-sm"></i>&nbsp;most stop here</div>
-  <div class="mem-deep">the moat</div>
+  <div class="mem-deep">what compounds</div>
 
   <div class="mem-stats">
     <div class="stat-card loss">
@@ -3051,34 +3042,55 @@ body.presenting .slide.active {
 <div class="slide s-memtools" data-sources="databricks-memory,memory-survey-2026,windsurf-memory">
   <div class="section-label">Memory · The tooling</div>
   <h2 class="slide-title">The memory tools are real. They stop at recall.</h2>
-  <p class="slide-lede">A whole ecosystem now gives agents memory, even relational memory. What none of it ships is a traceable model of the <em>product</em> that stays coherent across refactors.</p>
+  <p class="slide-lede">A whole ecosystem now gives agents memory, even relational memory. Each thing it ships has a precise counterpart it <em>doesn't</em>.</p>
 
-  <div class="mt-cols">
-    <div class="mt-card">
-      <div class="mt-h"><i data-lucide="search"></i><span>Flat recall</span></div>
-      <div class="mt-tools">Mem0 · LangMem · vector DBs</div>
-      <div class="mt-desc">Facts, preferences, and past chats, retrieved by similarity. Commodity, bolt-on in an afternoon.</div>
-      <div class="mt-limit"><i data-lucide="x"></i>Flat and lossy; misses the relationships.</div>
+  <div class="mt-mirror">
+    <div class="mt-heads">
+      <div class="mt-head solved"><i data-lucide="check"></i>Memory you can buy today</div>
+      <div class="mt-head gap"><i data-lucide="x"></i>Memory you still can't</div>
     </div>
-    <div class="mt-card">
-      <div class="mt-h"><i data-lucide="git-fork"></i><span>Relational memory</span></div>
-      <div class="mt-tools">Zep / Graphiti · Cognee</div>
-      <div class="mt-desc">Temporal knowledge graphs: entities and relationships, not just snippets. Real, and benchmark-backed.</div>
-      <div class="mt-limit"><i data-lucide="x"></i>Built for conversation and business facts, not your architecture.</div>
+
+    <div class="mt-row">
+      <div class="mt-cell solved">
+        <div class="mt-name">Flat recall</div>
+        <div class="mt-tools">Mem0 · LangMem · vector DBs</div>
+        <div class="mt-desc">Facts and past chats, retrieved by similarity.</div>
+      </div>
+      <div class="mt-axis"></div>
+      <div class="mt-cell gap">
+        <div class="mt-name">A model of what must be true</div>
+        <div class="mt-desc">The product itself, not snippets about it.</div>
+      </div>
     </div>
-    <div class="mt-card">
-      <div class="mt-h"><i data-lucide="file-code"></i><span>Coding-agent memory</span></div>
-      <div class="mt-tools">Cursor · Claude Code · Cline · Aider</div>
-      <div class="mt-desc">Flat rules files and auto-noted facts. Windsurf's own docs: “rules only, not codebase architecture.” Aider rebuilds its code map each run.</div>
-      <div class="mt-limit"><i data-lucide="x"></i>Facts and rules, or a map rebuilt each run; never a durable model.</div>
+
+    <div class="mt-row">
+      <div class="mt-cell solved">
+        <div class="mt-name">Relational memory</div>
+        <div class="mt-tools">Zep / Graphiti · Cognee</div>
+        <div class="mt-desc">Knowledge graphs of entities and relationships.</div>
+      </div>
+      <div class="mt-axis"></div>
+      <div class="mt-cell gap">
+        <div class="mt-name">Traceability across refactors</div>
+        <div class="mt-desc">Links that stay valid when you restructure.</div>
+      </div>
+    </div>
+
+    <div class="mt-row">
+      <div class="mt-cell solved">
+        <div class="mt-name">Coding-agent memory</div>
+        <div class="mt-tools">Cursor · Claude Code · Aider</div>
+        <div class="mt-desc">Rules files, auto-noted facts, code maps.</div>
+      </div>
+      <div class="mt-axis"></div>
+      <div class="mt-cell gap">
+        <div class="mt-name">Referential integrity, enforced</div>
+        <div class="mt-desc">Checked mechanically, not prose that rots.</div>
+      </div>
     </div>
   </div>
 
-  <div class="mt-gap">
-    <div class="mt-gap-k"><i data-lucide="alert-triangle"></i>The gap</div>
-    <div class="mt-gap-v">None ships a <b>referentially-enforced, traceable model</b> of strategy, architecture, and decisions that stays coherent <b>across refactors</b>. They remember facts and snippets, not <em>what must be true</em> about the product. Cross-session coherence is still, per the 2026 survey, “largely unsolved.”</div>
-  </div>
-
+  <div class="mt-foot">Everything on the left you can assemble. The right is what the harness still has to build, and cross-session coherence is, per the 2026 survey, <em>“largely unsolved.”</em></div>
   <div class="slide-number">17 / 31</div>
 
 <div class="slide-source-bar">Databricks AI Research · Memory scaling for AI agents (as models converge, memory is the differentiator) (2026) — databricks.com &nbsp;|&nbsp; arXiv 2603.07670 · Memory for Autonomous LLM Agents: cross-session coherence is largely unsolved (2026) — arxiv.org &nbsp;|&nbsp; Windsurf / Cascade · Memories docs (auto-memories store facts and rules, not codebase architecture) (2026) — docs.windsurf.com</div>
