@@ -1965,7 +1965,7 @@
 .s-verify .v-band b{color:var(--accent);}
 
 /* RALPH LOOP */
-.s-ralph .r-left{position:absolute;top:178px;left:64px;width:498px;bottom:60px;}
+.s-ralph .r-left{position:absolute;top:178px;left:48px;width:372px;bottom:60px;}
 .s-ralph .r-h{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:11px;}
 .s-ralph .r-li{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--ink);line-height:1.45;margin-bottom:12px;}
 .s-ralph .r-li i{width:16px;height:16px;color:var(--accent);flex-shrink:0;margin-top:2px;}
@@ -1973,17 +1973,26 @@
 .s-ralph .r-cmd{font-family:var(--font-mono);font-size:11px;color:var(--dark-ink);background:var(--dark-bg);border-radius:8px;padding:11px 13px;margin-top:6px;line-height:1.6;}
 .s-ralph .r-cmd .fl{color:var(--accent-bright);}
 .s-ralph .r-cmd .cm{color:var(--dark-muted);}
-.s-ralph .r-right{position:absolute;top:172px;right:52px;width:520px;bottom:56px;background:var(--loop-bg);border:1.5px solid var(--dark-border);border-radius:14px;padding:18px 20px;color:var(--dark-ink);}
-.s-ralph .r-rh{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:4px;}
-.s-ralph .r-rsub{font-size:11px;color:var(--dark-muted);margin-bottom:16px;}
-.s-ralph .r-node{display:flex;align-items:center;gap:11px;background:var(--dark-surface);border:1px solid var(--dark-border);border-radius:9px;padding:9px 13px;margin-bottom:8px;}
-.s-ralph .r-node .ix{width:24px;height:24px;border-radius:6px;background:color-mix(in srgb,var(--accent-bright) 22%,var(--dark-surface));display:flex;align-items:center;justify-content:center;color:var(--accent-bright);flex-shrink:0;}
-.s-ralph .r-node .ix i{width:14px;height:14px;}
-.s-ralph .r-nt{font-size:12.5px;font-weight:700;color:var(--dark-ink);}
-.s-ralph .r-ns{font-size:10px;color:var(--dark-muted);margin-top:1px;}
-.s-ralph .r-loopback{display:flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:9.5px;color:var(--accent-bright);justify-content:flex-end;margin:2px 4px 8px;}
-.s-ralph .r-done{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700;color:#fff;background:#1a7f4b;border-radius:9px;padding:9px 14px;}
-.s-ralph .r-done i{width:16px;height:16px;}
+.s-ralph .r-right{position:absolute;top:172px;left:440px;right:40px;bottom:44px;background:var(--loop-bg);border:1.5px solid var(--dark-border);border-radius:14px;color:var(--dark-ink);overflow:hidden;}
+.s-ralph .rl-tag{position:absolute;top:13px;left:18px;font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dark-muted);}
+.s-ralph .rl-ring{position:absolute;left:118px;top:70px;width:560px;height:356px;border:2px dashed color-mix(in srgb,var(--accent-bright) 50%,transparent);border-radius:50%;}
+.s-ralph .rl-node{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:7px;background:var(--dark-surface);border:1px solid var(--dark-border);border-radius:22px;padding:5px 12px 5px 6px;box-shadow:0 3px 10px rgba(0,0,0,.34);white-space:nowrap;z-index:1;}
+.s-ralph .rl-num{width:19px;height:19px;border-radius:50%;background:color-mix(in srgb,var(--accent-bright) 26%,var(--dark-surface));color:var(--accent-bright);font-family:var(--font-mono);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.s-ralph .rl-ic{display:flex;flex-shrink:0;}
+.s-ralph .rl-ic i{width:14px;height:14px;color:var(--accent-bright);}
+.s-ralph .rl-lab{font-size:11px;font-weight:600;color:var(--dark-ink);}
+.s-ralph .rl-node.red{border-color:color-mix(in srgb,#e5484d 70%,var(--dark-border));}
+.s-ralph .rl-node.red .rl-num{background:color-mix(in srgb,#e5484d 26%,var(--dark-surface));color:#ff8589;}
+.s-ralph .rl-node.red .rl-ic i{color:#ff8589;}
+.s-ralph .rl-node.green{border-color:color-mix(in srgb,#2ecc71 60%,var(--dark-border));}
+.s-ralph .rl-node.green .rl-num{background:color-mix(in srgb,#2ecc71 24%,var(--dark-surface));color:#4ade80;}
+.s-ralph .rl-node.green .rl-ic i{color:#4ade80;}
+.s-ralph .rl-hub{position:absolute;left:398px;top:248px;transform:translate(-50%,-50%);display:flex;align-items:center;gap:11px;background:color-mix(in srgb,var(--accent-bright) 15%,var(--dark-surface));border:1.5px solid color-mix(in srgb,var(--accent-bright) 42%,var(--dark-border));border-radius:14px;padding:11px 17px;z-index:2;}
+.s-ralph .rl-hub > i{width:27px;height:27px;color:var(--accent-bright);flex-shrink:0;}
+.s-ralph .rl-hub .h{font-family:var(--font-mono);font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-bright);}
+.s-ralph .rl-hub .s{font-size:10px;color:var(--dark-muted);margin-top:2px;}
+.s-ralph .rl-exit{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;white-space:nowrap;font-size:11px;font-weight:700;color:#bdf0d0;background:color-mix(in srgb,#1a7f4b 30%,var(--dark-surface));border:1px solid color-mix(in srgb,#2ecc71 40%,var(--dark-border));border-radius:9px;padding:6px 13px;}
+.s-ralph .rl-exit i{width:15px;height:15px;color:#4ade80;flex-shrink:0;}
 
 /* ══ DEVOPS LOOP (s-devops) ══ */
 .s-devops .slide-title{font-size:28px;}
@@ -3513,14 +3522,18 @@ body.presenting .slide.active {
 <span class="cm"># spawns: claude --print &lt; iteration-prompt</span></div>
   </div>
   <div class="r-right">
-    <div class="r-rh"><i data-lucide="rotate-cw" style="width:13px;height:13px"></i>One iteration · Perceive &rarr; Implement &rarr; Validate &rarr; Commit</div>
-    <div class="r-rsub">Audit must be green before the first run.</div>
-    <div class="r-node"><div class="ix"><i data-lucide="crosshair"></i></div><div><div class="r-nt">Pick next pending increment</div><div class="r-ns">read workspace + plan</div></div></div>
-    <div class="r-node"><div class="ix"><i data-lucide="hammer"></i></div><div><div class="r-nt">Implement its scope</div><div class="r-ns">follow the primary-files list</div></div></div>
-    <div class="r-node"><div class="ix"><i data-lucide="flask-conical"></i></div><div><div class="r-nt">Run the test gate</div><div class="r-ns">pottery wheel, up to 3 retries</div></div></div>
-    <div class="r-node"><div class="ix"><i data-lucide="git-commit-horizontal"></i></div><div><div class="r-nt">Commit the increment</div><div class="r-ns">advance status &rarr; done</div></div></div>
-    <div class="r-loopback"><i data-lucide="corner-left-up" style="width:13px;height:13px"></i>repeat with a fresh agent</div>
-    <div class="r-done"><i data-lucide="check-check"></i>All increments done &rarr; run CI</div>
+    <div class="rl-tag">ralph loop · one increment per pass</div>
+    <div class="rl-ring"></div>
+    <div class="rl-node" style="left:398px;top:70px"><span class="rl-num">1</span><span class="rl-ic"><i data-lucide="folder-open"></i></span><span class="rl-lab">Read the workspace</span></div>
+    <div class="rl-node" style="left:596px;top:122px"><span class="rl-num">2</span><span class="rl-ic"><i data-lucide="list-todo"></i></span><span class="rl-lab">Pick next increment</span></div>
+    <div class="rl-node" style="left:678px;top:248px"><span class="rl-num">3</span><span class="rl-ic"><i data-lucide="file-pen-line"></i></span><span class="rl-lab">Write the test</span></div>
+    <div class="rl-node red" style="left:596px;top:374px"><span class="rl-num">4</span><span class="rl-ic"><i data-lucide="circle-x"></i></span><span class="rl-lab">Run tests &rarr; RED</span></div>
+    <div class="rl-node" style="left:398px;top:426px"><span class="rl-num">5</span><span class="rl-ic"><i data-lucide="hammer"></i></span><span class="rl-lab">Implement the scope</span></div>
+    <div class="rl-node green" style="left:200px;top:374px"><span class="rl-num">6</span><span class="rl-ic"><i data-lucide="circle-check"></i></span><span class="rl-lab">Run tests &rarr; GREEN</span></div>
+    <div class="rl-node" style="left:118px;top:248px"><span class="rl-num">7</span><span class="rl-ic"><i data-lucide="notebook-pen"></i></span><span class="rl-lab">Log learning + progress</span></div>
+    <div class="rl-node" style="left:200px;top:122px"><span class="rl-num">8</span><span class="rl-ic"><i data-lucide="git-commit-horizontal"></i></span><span class="rl-lab">Commit</span></div>
+    <div class="rl-hub"><i data-lucide="rotate-cw"></i><div><div class="h">repeat</div><div class="s">fresh agent each pass</div></div></div>
+    <div class="rl-exit"><i data-lucide="check-check"></i>Every increment done &rarr; run CI &amp; stop</div>
   </div>
   <div class="slide-number">26 / 33</div>
 </div>
