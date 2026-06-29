@@ -1875,7 +1875,7 @@
 .s-ralph .r-cmd .cm{color:var(--dark-muted);}
 .s-ralph .r-right{position:absolute;top:172px;left:440px;right:40px;bottom:44px;background:var(--loop-bg);border:1.5px solid var(--dark-border);border-radius:14px;color:var(--dark-ink);overflow:hidden;}
 .s-ralph .rl-tag{position:absolute;top:13px;left:18px;font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dark-muted);}
-.s-ralph .rl-ring{position:absolute;left:118px;top:70px;width:560px;height:356px;border:2px dashed color-mix(in srgb,var(--accent-bright) 50%,transparent);border-radius:50%;}
+.s-ralph .rl-ring{position:absolute;left:214px;top:58px;width:368px;height:368px;border:2px dashed color-mix(in srgb,var(--accent-bright) 50%,transparent);border-radius:50%;}
 .s-ralph .rl-node{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:7px;background:var(--dark-surface);border:1px solid var(--dark-border);border-radius:22px;padding:5px 12px 5px 6px;box-shadow:0 3px 10px rgba(0,0,0,.34);white-space:nowrap;z-index:1;}
 .s-ralph .rl-num{width:19px;height:19px;border-radius:50%;background:color-mix(in srgb,var(--accent-bright) 26%,var(--dark-surface));color:var(--accent-bright);font-family:var(--font-mono);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .s-ralph .rl-ic{display:flex;flex-shrink:0;}
@@ -1887,7 +1887,7 @@
 .s-ralph .rl-node.green{border-color:color-mix(in srgb,#2ecc71 60%,var(--dark-border));}
 .s-ralph .rl-node.green .rl-num{background:color-mix(in srgb,#2ecc71 24%,var(--dark-surface));color:#4ade80;}
 .s-ralph .rl-node.green .rl-ic i{color:#4ade80;}
-.s-ralph .rl-hub{position:absolute;left:398px;top:248px;transform:translate(-50%,-50%);display:flex;align-items:center;gap:11px;background:color-mix(in srgb,var(--accent-bright) 15%,var(--dark-surface));border:1.5px solid color-mix(in srgb,var(--accent-bright) 42%,var(--dark-border));border-radius:14px;padding:11px 17px;z-index:2;}
+.s-ralph .rl-hub{position:absolute;left:398px;top:242px;transform:translate(-50%,-50%);display:flex;align-items:center;gap:11px;background:color-mix(in srgb,var(--accent-bright) 15%,var(--dark-surface));border:1.5px solid color-mix(in srgb,var(--accent-bright) 42%,var(--dark-border));border-radius:14px;padding:11px 17px;z-index:2;}
 .s-ralph .rl-hub > i{width:27px;height:27px;color:var(--accent-bright);flex-shrink:0;}
 .s-ralph .rl-hub .h{font-family:var(--font-mono);font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-bright);}
 .s-ralph .rl-hub .s{font-size:10px;color:var(--dark-muted);margin-top:2px;}
