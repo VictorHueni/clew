@@ -1,39 +1,39 @@
-<div class="slide s-lever" data-sources="ahe-2604">
+<div class="slide s-lever" data-sources="swe-agent-aci,anthropic-context-eng">
   <div class="section-label">The Lever · Where it lives</div>
   <h2 class="slide-title">Performance lives in the tooling around the model, not the model.</h2>
-  <p class="slide-lede">Ablation studies rank what actually moves agent performance. Model prompt-tuning sits <em>last</em>.</p>
+  <p class="slide-lede">The system prompt most teams obsess over is the smallest lever. The tooling, control layer, and memory wrapped around the model are the <em>big</em> ones.</p>
 
   <div class="rank">
     <div class="rank-row">
-      <span class="rank-rankno">1</span>
+      <span class="rank-rankno hi">●</span>
       <span class="rank-label">Tools</span>
       <div class="rank-track"><div class="rank-fill" style="width: 100%;"></div></div>
     </div>
     <div class="rank-row">
-      <span class="rank-rankno">2</span>
+      <span class="rank-rankno hi">●</span>
       <span class="rank-label">Control layer<span class="rank-sub">context · execution · recovery <em>(middleware)</em></span></span>
-      <div class="rank-track"><div class="rank-fill" style="width: 82%;"></div></div>
+      <div class="rank-track"><div class="rank-fill" style="width: 100%;"></div></div>
     </div>
     <div class="rank-row">
-      <span class="rank-rankno">3</span>
+      <span class="rank-rankno hi">●</span>
       <span class="rank-label">Long-term memory</span>
-      <div class="rank-track"><div class="rank-fill" style="width: 64%;"></div></div>
+      <div class="rank-track"><div class="rank-fill" style="width: 100%;"></div></div>
     </div>
     <div class="rank-row lo">
-      <span class="rank-rankno">4</span>
+      <span class="rank-rankno">○</span>
       <span class="rank-label">System prompt</span>
-      <div class="rank-track"><div class="rank-fill" style="width: 30%;"></div></div>
+      <div class="rank-track"><div class="rank-fill" style="width: 26%;"></div></div>
     </div>
   </div>
 
   <div class="rank-note">
     <div class="note-block">
       <div class="note-k">The inversion</div>
-      <div class="note-v">Most teams pour effort into #4, the prompt. The gains sit in #1–3.</div>
+      <div class="note-v">Most teams pour effort into the prompt. The gains sit in the tooling, control, and memory.</div>
     </div>
     <div class="note-block">
-      <div class="note-k">The model</div>
-      <div class="note-v">Table stakes once it is capable. The harness is the differentiator.</div>
+      <div class="note-k">The proof</div>
+      <div class="note-v">Change only the tool interface and the same model jumps 7.3% to 18.0% on SWE-bench Lite.</div>
     </div>
   </div>
 

@@ -1,23 +1,52 @@
-<div class="slide s-proof" data-sources="li-agentic-coding">
+<div class="slide s-proof" data-sources="swe-agent-aci,ahe-2604">
   <div class="section-label">The Lever · Proof</div>
-  <h2 class="slide-title">Hold the model fixed, swap the harness: 42% → 78%.</h2>
+  <h2 class="slide-title">Hold the model fixed, change the harness.</h2>
+  <p class="slide-lede">Three independent results across three benchmarks. In each, the model weights never change; only the harness around them does.</p>
 
-  <div class="proof-wrap">
-    <div class="bar-col baseline">
-      <div class="bar-val">42%</div>
-      <div class="bar" style="height: 168px;"></div>
-      <div class="bar-cap"><strong>Baseline harness</strong><br>off-the-shelf scaffolding</div>
+  <div class="pf-panels">
+    <div class="pf-panel">
+      <div class="pf-top">
+        <div class="pf-ctx">SWE-bench Lite · GPT-4 Turbo</div>
+        <div class="pf-change">Raw Linux shell → a purpose-built agent-computer interface.</div>
+      </div>
+      <div class="pf-mid">
+        <div class="pf-nums"><span class="pf-before">7.3%</span><span class="pf-arrow">→</span><span class="pf-after">18.0%</span></div>
+        <div class="pf-delta">+10.7 points</div>
+        <div class="pf-track"><div class="pf-fill" style="width:18%"></div><div class="pf-tick" style="left:7.3%"></div></div>
+        <div class="pf-scale">share of tasks resolved (0 to 100%)</div>
+      </div>
+      <div class="pf-src">SWE-agent · arXiv 2405.15793 · NeurIPS 2024</div>
     </div>
 
-    <div class="bar-col hero">
-      <div class="bar-val">78%</div>
-      <div class="bar" style="height: 312px;"></div>
-      <div class="bar-cap"><strong>Engineered harness</strong><br>same model, better tooling</div>
+    <div class="pf-panel">
+      <div class="pf-top">
+        <div class="pf-ctx">SWE-bench full · GPT-4 Turbo</div>
+        <div class="pf-change">RAG retrieval baseline → the same ACI harness.</div>
+      </div>
+      <div class="pf-mid">
+        <div class="pf-nums"><span class="pf-before">3.8%</span><span class="pf-arrow">→</span><span class="pf-after">12.5%</span></div>
+        <div class="pf-delta">3.3× higher</div>
+        <div class="pf-track"><div class="pf-fill" style="width:12.5%"></div><div class="pf-tick" style="left:3.8%"></div></div>
+        <div class="pf-scale">share of tasks resolved (0 to 100%)</div>
+      </div>
+      <div class="pf-src">SWE-agent · arXiv 2405.15793 · NeurIPS 2024</div>
     </div>
 
-    <div class="proof-delta">+36 points · same model weights</div>
+    <div class="pf-panel">
+      <div class="pf-top">
+        <div class="pf-ctx">Terminal-Bench · same model</div>
+        <div class="pf-change">Off-the-shelf harness → one auto-evolved over 10 iterations.</div>
+      </div>
+      <div class="pf-mid">
+        <div class="pf-nums"><span class="pf-before">69.7%</span><span class="pf-arrow">→</span><span class="pf-after">77.0%</span></div>
+        <div class="pf-delta">+7.3 points</div>
+        <div class="pf-track"><div class="pf-fill" style="width:77%"></div><div class="pf-tick" style="left:69.7%"></div></div>
+        <div class="pf-scale">share of tasks resolved (0 to 100%)</div>
+      </div>
+      <div class="pf-src">AHE · arXiv 2604.25850 · 2026 preprint</div>
+    </div>
   </div>
 
-  <div class="proof-same">Claude Opus 4.5 · HAL CORE-Bench · the only thing that changed was the harness</div>
+  <div class="pf-foot">Same weights every time. The harness is the differentiator, <em>not the model</em>.</div>
   <div class="slide-number"></div>
 </div>

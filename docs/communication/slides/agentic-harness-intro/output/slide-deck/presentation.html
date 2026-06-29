@@ -2383,6 +2383,48 @@
 }
 .s-gaps .gap-bridge em{font-style:normal; color:var(--accent); font-weight:700;}
 
+/* ══════════════════════════════════════════════════════════════
+   PROOF (s-proof) · three verified same-model harness deltas
+   ══════════════════════════════════════════════════════════════ */
+.s-proof *{box-sizing:border-box;}
+.s-proof .slide-lede em{font-style:normal;color:var(--accent);font-weight:600;}
+.s-proof .pf-panels{
+  position:absolute; top:188px; left:68px; right:68px; bottom:96px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+}
+.s-proof .pf-panel{
+  background:var(--surface); border:1px solid var(--border);
+  border-top:4px solid var(--accent); border-radius:12px;
+  box-shadow:var(--shadow); padding:18px 18px 16px;
+  display:flex; flex-direction:column; justify-content:space-between;
+}
+.s-proof .pf-ctx{
+  font-family:var(--font-mono); font-size:10px; letter-spacing:.03em;
+  color:var(--accent); text-transform:uppercase; font-weight:700; margin-bottom:6px;
+}
+.s-proof .pf-change{font-size:12px; color:var(--muted); line-height:1.38; min-height:50px;}
+.s-proof .pf-nums{display:flex; align-items:baseline; gap:10px; margin-bottom:12px;}
+.s-proof .pf-before{font-size:24px; font-weight:700; color:var(--muted);}
+.s-proof .pf-arrow{font-size:20px; color:var(--dim);}
+.s-proof .pf-after{font-size:46px; font-weight:800; color:var(--accent); line-height:1; letter-spacing:-0.02em;}
+.s-proof .pf-delta{
+  display:inline-block; font-family:var(--font-mono); font-size:11px; font-weight:700;
+  color:#fff; background:var(--accent); border-radius:6px; padding:3px 9px;
+}
+.s-proof .pf-track{position:relative; margin-top:18px; height:9px; background:var(--surface-2); border-radius:5px;}
+.s-proof .pf-fill{height:100%; background:linear-gradient(90deg, color-mix(in srgb,var(--accent) 50%,var(--surface)) 0%, var(--accent) 100%); border-radius:5px;}
+.s-proof .pf-tick{position:absolute; top:-4px; width:2px; height:17px; background:var(--muted); border-radius:1px;}
+.s-proof .pf-scale{font-family:var(--font-mono); font-size:8px; color:var(--dim); margin-top:8px; letter-spacing:.02em;}
+.s-proof .pf-src{padding-top:14px; font-family:var(--font-mono); font-size:9px; color:var(--dim); line-height:1.3;}
+.s-proof .pf-foot{
+  position:absolute; left:68px; right:68px; bottom:54px;
+  text-align:center; font-size:13.5px; font-style:italic; color:var(--ink);
+}
+.s-proof .pf-foot em{font-style:normal; color:var(--accent); font-weight:700;}
+
+/* lever de-fabrication: leverage dots (replaces fake rank numbers) */
+.s-lever .rank-rankno.hi{color:var(--accent);}
+
 /* ── Baseline: controls hint ── */
 .controls-hint {
   text-align: center;
@@ -2547,48 +2589,48 @@ body.presenting .slide.active {
 
 <!-- slide 4: The lever is the tooling -->
 
-<div class="slide s-lever" data-sources="ahe-2604">
+<div class="slide s-lever" data-sources="swe-agent-aci,anthropic-context-eng">
   <div class="section-label">The Lever · Where it lives</div>
   <h2 class="slide-title">Performance lives in the tooling around the model, not the model.</h2>
-  <p class="slide-lede">Ablation studies rank what actually moves agent performance. Model prompt-tuning sits <em>last</em>.</p>
+  <p class="slide-lede">The system prompt most teams obsess over is the smallest lever. The tooling, control layer, and memory wrapped around the model are the <em>big</em> ones.</p>
 
   <div class="rank">
     <div class="rank-row">
-      <span class="rank-rankno">1</span>
+      <span class="rank-rankno hi">●</span>
       <span class="rank-label">Tools</span>
       <div class="rank-track"><div class="rank-fill" style="width: 100%;"></div></div>
     </div>
     <div class="rank-row">
-      <span class="rank-rankno">2</span>
+      <span class="rank-rankno hi">●</span>
       <span class="rank-label">Control layer<span class="rank-sub">context · execution · recovery <em>(middleware)</em></span></span>
-      <div class="rank-track"><div class="rank-fill" style="width: 82%;"></div></div>
+      <div class="rank-track"><div class="rank-fill" style="width: 100%;"></div></div>
     </div>
     <div class="rank-row">
-      <span class="rank-rankno">3</span>
+      <span class="rank-rankno hi">●</span>
       <span class="rank-label">Long-term memory</span>
-      <div class="rank-track"><div class="rank-fill" style="width: 64%;"></div></div>
+      <div class="rank-track"><div class="rank-fill" style="width: 100%;"></div></div>
     </div>
     <div class="rank-row lo">
-      <span class="rank-rankno">4</span>
+      <span class="rank-rankno">○</span>
       <span class="rank-label">System prompt</span>
-      <div class="rank-track"><div class="rank-fill" style="width: 30%;"></div></div>
+      <div class="rank-track"><div class="rank-fill" style="width: 26%;"></div></div>
     </div>
   </div>
 
   <div class="rank-note">
     <div class="note-block">
       <div class="note-k">The inversion</div>
-      <div class="note-v">Most teams pour effort into #4, the prompt. The gains sit in #1–3.</div>
+      <div class="note-v">Most teams pour effort into the prompt. The gains sit in the tooling, control, and memory.</div>
     </div>
     <div class="note-block">
-      <div class="note-k">The model</div>
-      <div class="note-v">Table stakes once it is capable. The harness is the differentiator.</div>
+      <div class="note-k">The proof</div>
+      <div class="note-v">Change only the tool interface and the same model jumps 7.3% to 18.0% on SWE-bench Lite.</div>
     </div>
   </div>
 
   <div class="slide-number">4 / 30</div>
 
-<div class="slide-source-bar">arXiv 2604.25850 · Agentic Harness Engineering (2026) — arxiv.org</div>
+<div class="slide-source-bar">Princeton · arXiv 2405.15793 · NeurIPS 2024 · SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering (2024) — arxiv.org &nbsp;|&nbsp; Anthropic Engineering · Effective Context Engineering for AI Agents (2025) — anthropic.com</div>
 </div>
 
 
@@ -2822,30 +2864,59 @@ body.presenting .slide.active {
 
 <!-- slide 11: Proof — same model, better harness -->
 
-<div class="slide s-proof" data-sources="li-agentic-coding">
+<div class="slide s-proof" data-sources="swe-agent-aci,ahe-2604">
   <div class="section-label">The Lever · Proof</div>
-  <h2 class="slide-title">Hold the model fixed, swap the harness: 42% → 78%.</h2>
+  <h2 class="slide-title">Hold the model fixed, change the harness.</h2>
+  <p class="slide-lede">Three independent results across three benchmarks. In each, the model weights never change; only the harness around them does.</p>
 
-  <div class="proof-wrap">
-    <div class="bar-col baseline">
-      <div class="bar-val">42%</div>
-      <div class="bar" style="height: 168px;"></div>
-      <div class="bar-cap"><strong>Baseline harness</strong><br>off-the-shelf scaffolding</div>
+  <div class="pf-panels">
+    <div class="pf-panel">
+      <div class="pf-top">
+        <div class="pf-ctx">SWE-bench Lite · GPT-4 Turbo</div>
+        <div class="pf-change">Raw Linux shell → a purpose-built agent-computer interface.</div>
+      </div>
+      <div class="pf-mid">
+        <div class="pf-nums"><span class="pf-before">7.3%</span><span class="pf-arrow">→</span><span class="pf-after">18.0%</span></div>
+        <div class="pf-delta">+10.7 points</div>
+        <div class="pf-track"><div class="pf-fill" style="width:18%"></div><div class="pf-tick" style="left:7.3%"></div></div>
+        <div class="pf-scale">share of tasks resolved (0 to 100%)</div>
+      </div>
+      <div class="pf-src">SWE-agent · arXiv 2405.15793 · NeurIPS 2024</div>
     </div>
 
-    <div class="bar-col hero">
-      <div class="bar-val">78%</div>
-      <div class="bar" style="height: 312px;"></div>
-      <div class="bar-cap"><strong>Engineered harness</strong><br>same model, better tooling</div>
+    <div class="pf-panel">
+      <div class="pf-top">
+        <div class="pf-ctx">SWE-bench full · GPT-4 Turbo</div>
+        <div class="pf-change">RAG retrieval baseline → the same ACI harness.</div>
+      </div>
+      <div class="pf-mid">
+        <div class="pf-nums"><span class="pf-before">3.8%</span><span class="pf-arrow">→</span><span class="pf-after">12.5%</span></div>
+        <div class="pf-delta">3.3× higher</div>
+        <div class="pf-track"><div class="pf-fill" style="width:12.5%"></div><div class="pf-tick" style="left:3.8%"></div></div>
+        <div class="pf-scale">share of tasks resolved (0 to 100%)</div>
+      </div>
+      <div class="pf-src">SWE-agent · arXiv 2405.15793 · NeurIPS 2024</div>
     </div>
 
-    <div class="proof-delta">+36 points · same model weights</div>
+    <div class="pf-panel">
+      <div class="pf-top">
+        <div class="pf-ctx">Terminal-Bench · same model</div>
+        <div class="pf-change">Off-the-shelf harness → one auto-evolved over 10 iterations.</div>
+      </div>
+      <div class="pf-mid">
+        <div class="pf-nums"><span class="pf-before">69.7%</span><span class="pf-arrow">→</span><span class="pf-after">77.0%</span></div>
+        <div class="pf-delta">+7.3 points</div>
+        <div class="pf-track"><div class="pf-fill" style="width:77%"></div><div class="pf-tick" style="left:69.7%"></div></div>
+        <div class="pf-scale">share of tasks resolved (0 to 100%)</div>
+      </div>
+      <div class="pf-src">AHE · arXiv 2604.25850 · 2026 preprint</div>
+    </div>
   </div>
 
-  <div class="proof-same">Claude Opus 4.5 · HAL CORE-Bench · the only thing that changed was the harness</div>
+  <div class="pf-foot">Same weights every time. The harness is the differentiator, <em>not the model</em>.</div>
   <div class="slide-number">11 / 30</div>
 
-<div class="slide-source-bar">Aidan Li · An Opinionated Guide to Agentic Coding (2026) — aidanli.dev</div>
+<div class="slide-source-bar">Princeton · arXiv 2405.15793 · NeurIPS 2024 · SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering (2024) — arxiv.org &nbsp;|&nbsp; arXiv 2604.25850 · Agentic Harness Engineering (2026) — arxiv.org</div>
 </div>
 
 
