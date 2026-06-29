@@ -2396,7 +2396,7 @@
    ══════════════════════════════════════════════════════════════ */
 .s-epimem *{box-sizing:border-box;}
 .s-epimem .slide-lede em{font-style:normal; color:var(--accent); font-weight:600;}
-.s-epimem .ep-stage{position:absolute; left:68px; right:68px; top:222px; bottom:120px; display:flex; gap:34px; align-items:center;}
+.s-epimem .ep-stage{position:absolute; left:68px; right:68px; top:224px; bottom:120px; display:flex; gap:34px; align-items:flex-start;}
 /* left: episodic timeline distilled into kinds */
 .s-epimem .ep-flow{flex:1.05; display:flex; flex-direction:column; gap:12px;}
 .s-epimem .ef-h{font-family:var(--font-mono); font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--muted);}
@@ -2412,11 +2412,15 @@
 .s-epimem .ef-distill{display:flex; align-items:center; justify-content:center; gap:7px; font-family:var(--font-mono);
   font-size:10.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--accent);}
 .s-epimem .ef-distill svg{width:15px; height:15px; color:var(--accent);}
+.s-epimem .ef-group{background:var(--surface); border:1.5px solid var(--border); border-radius:12px; box-shadow:var(--shadow); padding:13px 14px;}
+.s-epimem .ef-group-l{display:flex; align-items:center; gap:7px; font-family:var(--font-mono); font-size:10px; font-weight:800;
+  letter-spacing:.06em; text-transform:uppercase; color:var(--accent); margin-bottom:11px;}
+.s-epimem .ef-group-l svg{width:14px; height:14px; color:var(--accent); flex-shrink:0;}
 .s-epimem .ef-kinds{display:grid; grid-template-columns:1fr 1fr; gap:9px;}
-.s-epimem .ek{display:flex; align-items:center; gap:9px; background:var(--surface); border:1px solid var(--border);
-  border-left:4px solid color-mix(in srgb,var(--accent) 42%,var(--border)); border-radius:9px; padding:11px 13px;
-  font-size:13px; font-weight:700; color:var(--ink); box-shadow:var(--shadow);}
-.s-epimem .ek svg{width:17px; height:17px; color:var(--accent); flex-shrink:0;}
+.s-epimem .ek{display:flex; align-items:center; gap:9px; background:var(--accent-lt); border:1px solid color-mix(in srgb,var(--accent) 22%,var(--border));
+  border-left:4px solid color-mix(in srgb,var(--accent) 45%,var(--border)); border-radius:9px; padding:10px 12px;
+  font-size:12.5px; font-weight:700; color:var(--ink);}
+.s-epimem .ek svg{width:16px; height:16px; color:var(--accent); flex-shrink:0;}
 .s-epimem .ek.good svg{color:var(--accent);}
 .s-epimem .ek.bad{border-left-color:var(--danger);}
 .s-epimem .ek.bad svg{color:var(--danger);}
