@@ -144,34 +144,13 @@
   overflow: hidden;
 }
 
-.s-cover .cover-shape {
+.s-cover .cover-rings {
   position: absolute;
-  right: -80px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 520px;
-  height: 520px;
-  border-radius: 50%;
-  border: 1px solid var(--dark-border);
-}
-
-.s-cover .cover-shape::before {
-  content: '';
-  position: absolute;
-  inset: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--dark-border);
-}
-
-.s-cover .cover-shape::after {
-  content: '';
-  position: absolute;
-  inset: 110px;
-  border-radius: 50%;
-  background: var(--dark-surface);
-  border: 1.5px solid color-mix(in srgb, var(--accent) 60%, transparent);
-  box-shadow: 0 0 80px color-mix(in srgb, var(--accent) 18%, transparent),
-              inset 0 0 40px color-mix(in srgb, var(--accent) 8%, transparent);
+  top: 0;
+  left: 0;
+  width: 560px;
+  height: 720px;
+  pointer-events: none;
 }
 
 .s-cover .cover-loop {

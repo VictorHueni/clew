@@ -244,34 +244,13 @@
   overflow: hidden;
 }
 
-.s-cover .cover-shape {
+.s-cover .cover-rings {
   position: absolute;
-  right: -80px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 520px;
-  height: 520px;
-  border-radius: 50%;
-  border: 1px solid var(--dark-border);
-}
-
-.s-cover .cover-shape::before {
-  content: '';
-  position: absolute;
-  inset: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--dark-border);
-}
-
-.s-cover .cover-shape::after {
-  content: '';
-  position: absolute;
-  inset: 110px;
-  border-radius: 50%;
-  background: var(--dark-surface);
-  border: 1.5px solid color-mix(in srgb, var(--accent) 60%, transparent);
-  box-shadow: 0 0 80px color-mix(in srgb, var(--accent) 18%, transparent),
-              inset 0 0 40px color-mix(in srgb, var(--accent) 8%, transparent);
+  top: 0;
+  left: 0;
+  width: 560px;
+  height: 720px;
+  pointer-events: none;
 }
 
 .s-cover .cover-loop {
@@ -2434,7 +2413,20 @@ body.presenting .slide.active {
   </div>
 
   <div class="cover-right">
-    <div class="cover-shape"></div>
+    <svg class="cover-rings" viewBox="0 0 560 720" width="560" height="720" fill="none" aria-hidden="true">
+      <defs>
+        <radialGradient id="cv-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#c04060" stop-opacity="0.16"/>
+          <stop offset="55%" stop-color="#800020" stop-opacity="0.06"/>
+          <stop offset="100%" stop-color="#800020" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <circle cx="380" cy="360" r="230" fill="url(#cv-glow)"/>
+      <circle cx="380" cy="360" r="238" stroke="#252d42" stroke-width="1"/>
+      <circle cx="380" cy="360" r="196" stroke="#252d42" stroke-width="1"/>
+      <circle cx="380" cy="360" r="150" fill="#181d2c"/>
+      <circle cx="380" cy="360" r="150" stroke="#c04060" stroke-opacity="0.55" stroke-width="1.5"/>
+    </svg>
     <div class="cover-loop">
       <div class="loop-step"><div class="loop-dot"></div>Sense</div>
       <div class="loop-step"><div class="loop-dot"></div>Retrieve</div>
