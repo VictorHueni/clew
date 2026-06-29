@@ -1,48 +1,28 @@
 <div class="slide s-procmem" data-sources="anthropic-skills,codex-agents-md">
   <div class="section-label">Procedural memory · Skills</div>
   <h2 class="slide-title">Skills tame context bloat, but only if the agent picks the right one.</h2>
-  <p class="slide-lede"><em>Progressive disclosure</em> loads a procedure only when it's needed. Elegant, until you ask what decides "needed."</p>
+  <p class="slide-lede"><em>Procedural memory</em> is the agent's reusable know-how: skills, surfaced by progressive disclosure. Names sit in context; the full instructions load only when judged relevant.</p>
 
-  <div class="pm-cols">
-    <div class="pm-how">
-      <div class="pm-how-h">How progressive disclosure works</div>
-      <div class="pm-step">
-        <div class="pm-step-n">1</div>
-        <div class="pm-step-b"><b>Names + descriptions</b> of every installed skill sit in the system prompt.</div>
-      </div>
-      <div class="pm-step">
-        <div class="pm-step-n">2</div>
-        <div class="pm-step-b">The full <code>SKILL.md</code> is read <b>only when Claude judges it relevant.</b></div>
-      </div>
-      <div class="pm-step">
-        <div class="pm-step-n">3</div>
-        <div class="pm-step-b">Bundled files and scripts load <b>on demand</b>; zero tokens until touched.</div>
-      </div>
-      <div class="pm-how-foot">So a skill's depth is effectively unbounded, the window stays lean.</div>
+  <div class="mem-kicker">Where it breaks</div>
+  <div class="pm-cracks2">
+    <div class="pm-crack">
+      <i data-lucide="search-x"></i>
+      <div><b>Discovery rides on one sentence.</b> Claude chooses from 100+ skills using only each description. A vague one never fires.</div>
     </div>
-
-    <div class="pm-cracks">
-      <div class="pm-cracks-h">Where it cracks</div>
-      <div class="pm-crack">
-        <i data-lucide="search-x"></i>
-        <div><b>Discovery rides on one sentence.</b> Claude chooses from 100+ skills using only each description. A vague one never fires.</div>
-      </div>
-      <div class="pm-crack">
-        <i data-lucide="weight"></i>
-        <div><b>The metadata is never free.</b> Every skill's description permanently shares the context budget with your task.</div>
-      </div>
-      <div class="pm-crack">
-        <i data-lucide="trending-down"></i>
-        <div><b>It rots silently.</b> Bundled instructions drift; "avoid time-sensitive information" is the only guardrail.</div>
-      </div>
-      <div class="pm-crack">
-        <i data-lucide="layers"></i>
-        <div><b>The eager alternative is worse.</b> Codex <code>AGENTS.md</code> and Aider conventions load every turn, no relevance gate.</div>
-      </div>
+    <div class="pm-crack">
+      <i data-lucide="weight"></i>
+      <div><b>The metadata is never free.</b> Every skill's description permanently shares the context budget with your task.</div>
+    </div>
+    <div class="pm-crack">
+      <i data-lucide="trending-down"></i>
+      <div><b>It rots silently.</b> Bundled instructions drift; "avoid time-sensitive information" is the only guardrail.</div>
+    </div>
+    <div class="pm-crack">
+      <i data-lucide="layers"></i>
+      <div><b>The eager alternative is worse.</b> Codex <code>AGENTS.md</code> and Aider conventions load every turn, no relevance gate.</div>
     </div>
   </div>
 
-  <div class="pm-take"><i data-lucide="arrow-right"></i><span><b>The fix:</b> a curated, sharply-described, version-controlled skill set. The procedure layer rewards <b>structure</b>, not accumulation.</span></div>
-
+  <div class="mem-fixbar"><i data-lucide="arrow-right"></i><span><span class="k">The fix:</span> a curated, sharply-described, version-controlled skill set. The procedure layer rewards <b>structure</b>, not accumulation.</span></div>
   <div class="slide-number"></div>
 </div>

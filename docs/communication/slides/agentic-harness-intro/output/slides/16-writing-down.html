@@ -1,15 +1,10 @@
 <div class="slide s-writedown" data-sources="openai-harness">
   <div class="section-label">Semantic memory · The one big file</div>
   <h2 class="slide-title">Writing it down isn't memory either.</h2>
-  <p class="slide-lede">OpenAI shipped a 1M-line product with <em>zero</em> hand-written code, then found the obvious fix, one big context file, fails.</p>
+  <p class="slide-lede"><em>Semantic memory</em> is what the agent knows about your project: the <code>AGENTS.md</code> and <code>CLAUDE.md</code> it reads in at the start of every session.</p>
 
-  <div class="wd-strip">
-    <div class="wd-chip"><em>1M</em>&nbsp; lines of code</div>
-    <div class="wd-chip"><em>0</em>&nbsp; hand-written</div>
-    <div class="wd-chip"><em>1,500</em>&nbsp; PRs merged</div>
-  </div>
-
-  <div class="wd-cols">
+  <div class="mem-kicker">Where it breaks</div>
+  <div class="wd-cols2">
     <div class="wd-modes">
       <div class="wd-modes-h">“One big <code>AGENTS.md</code>” failed four ways</div>
       <div class="wd-mode"><i data-lucide="layers" class="wd-ic"></i><div><b>Crowds out the task.</b> Context is scarce: the giant file pushes out the code and the docs.</div></div>
@@ -17,17 +12,20 @@
       <div class="wd-mode"><i data-lucide="trending-down" class="wd-ic"></i><div><b>It rots instantly.</b> A graveyard of stale rules: the agent can't tell what's still true.</div></div>
       <div class="wd-mode"><i data-lucide="search-x" class="wd-ic"></i><div><b>It can't be verified.</b> Drift is inevitable without mechanical checks.</div></div>
     </div>
-    <div class="wd-side">
+    <div class="wd-ev">
+      <div class="wd-ev-h">OpenAI shipped this, for real</div>
+      <div class="wd-ev-stats">
+        <div class="wd-ev-stat"><em>1M</em> lines of code</div>
+        <div class="wd-ev-stat"><em>0</em> hand-written</div>
+        <div class="wd-ev-stat"><em>1,500</em> PRs merged</div>
+      </div>
       <div class="wd-illeg">
         <div class="wd-illeg-k">If it's not in-context, it doesn't exist</div>
         <div class="wd-illeg-v">Anything in Slack, Google Docs, or someone's head is invisible to the agent.</div>
       </div>
-      <div class="wd-fix">
-        <div class="wd-fix-k">OpenAI's fix</div>
-        <div class="wd-fix-v">A <b>~100-line table of contents</b> pointing into a <b>structured <code>docs/</code> tree</b>: a map, not an encyclopedia.</div>
-      </div>
-      <div class="wd-take"><i data-lucide="arrow-right"></i><span>The lesson: memory has to be a <b>structured, checkable map</b>, not a flat file you hope holds.</span></div>
     </div>
   </div>
+
+  <div class="mem-fixbar"><i data-lucide="arrow-right"></i><span><span class="k">The fix:</span> a ~100-line table of contents pointing into a structured <code>docs/</code> tree. Memory has to be a <b>checkable map</b>, not a flat file you hope holds.</span></div>
   <div class="slide-number"></div>
 </div>
