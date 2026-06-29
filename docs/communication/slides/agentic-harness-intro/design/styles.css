@@ -2324,3 +2324,45 @@
 
 /* lever de-fabrication: leverage dots (replaces fake rank numbers) */
 .s-lever .rank-rankno.hi{color:var(--accent);}
+
+/* ══════════════════════════════════════════════════════════════
+   LEVER · The Inversion (s-lever, replaces ranking bars)
+   ══════════════════════════════════════════════════════════════ */
+.s-lever *{box-sizing:border-box;}
+.s-lever .slide-lede em{font-style:normal; color:var(--accent); font-weight:600;}
+.s-lever .inv{
+  position:absolute; top:180px; left:68px; right:68px; bottom:118px;
+  display:flex; align-items:center; gap:26px;
+}
+.s-lever .inv-look{
+  flex:0 0 312px; align-self:stretch;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  background:var(--surface-2); border:1px solid var(--border); border-radius:14px; padding:24px 22px;
+}
+.s-lever .inv-look-ey{font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:14px;}
+.s-lever .inv-look-ic{color:var(--dim); margin-bottom:12px; line-height:0;}
+.s-lever .inv-look-ic svg{width:40px; height:40px;}
+.s-lever .inv-look-name{font-size:24px; font-weight:800; color:var(--muted); line-height:1.12;}
+.s-lever .inv-look-sub{font-size:12px; color:var(--dim); margin-top:10px;}
+.s-lever .inv-look-tag{margin-top:16px; font-family:var(--font-mono); font-size:9.5px; color:var(--muted); background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:5px 12px;}
+.s-lever .inv-mid{flex:0 0 64px; display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--accent);}
+.s-lever .inv-swap{line-height:0;}
+.s-lever .inv-swap svg{width:30px; height:30px;}
+.s-lever .inv-swaptxt{font-family:var(--font-mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); text-align:center; line-height:1.3; font-weight:700;}
+.s-lever .inv-lever{flex:1; align-self:stretch; display:flex; flex-direction:column; justify-content:center;}
+.s-lever .inv-head{font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); font-weight:700; margin-bottom:16px;}
+.s-lever .inv-row{display:flex; align-items:center; gap:14px; margin-bottom:12px;}
+.s-lever .inv-row:last-child{margin-bottom:0;}
+.s-lever .inv-lab{flex:0 0 134px; font-size:14px; font-weight:700; color:var(--ink);}
+.s-lever .inv-track{flex:1; height:26px; background:var(--surface-2); border-radius:7px; overflow:hidden;}
+.s-lever .inv-fill{height:100%; background:linear-gradient(90deg, color-mix(in srgb,var(--accent) 78%,var(--surface)) 0%, var(--accent) 100%); border-radius:7px;}
+.s-lever .inv-row.lo .inv-lab{color:var(--muted); font-weight:600;}
+.s-lever .inv-row.lo .inv-fill{background:color-mix(in srgb,var(--accent) 26%,var(--surface-2));}
+.s-lever .inv-smallest{font-family:var(--font-mono); font-size:9px; color:var(--muted); flex-shrink:0;}
+.s-lever .inv-proof{
+  position:absolute; left:68px; right:68px; bottom:54px;
+  background:var(--accent-lt); border:1px solid color-mix(in srgb,var(--accent) 22%,var(--border));
+  border-radius:10px; padding:11px 16px; font-size:12.5px; color:var(--ink); line-height:1.4;
+}
+.s-lever .inv-proofk{font-family:var(--font-mono); font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-right:10px;}
+.s-lever .inv-proof b{color:var(--accent); font-weight:800;}

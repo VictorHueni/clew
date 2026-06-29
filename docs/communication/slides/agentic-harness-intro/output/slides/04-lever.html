@@ -1,41 +1,45 @@
 <div class="slide s-lever" data-sources="swe-agent-aci,anthropic-context-eng">
   <div class="section-label">The Lever · Where it lives</div>
   <h2 class="slide-title">Performance lives in the tooling around the model, not the model.</h2>
-  <p class="slide-lede">The system prompt most teams obsess over is the smallest lever. The tooling, control layer, and memory wrapped around the model are the <em>big</em> ones.</p>
+  <p class="slide-lede">The effort runs one way; the leverage runs the other. Teams tune the prompt, but performance comes from the tooling, control, and memory wrapped around the model.</p>
 
-  <div class="rank">
-    <div class="rank-row">
-      <span class="rank-rankno hi">●</span>
-      <span class="rank-label">Tools</span>
-      <div class="rank-track"><div class="rank-fill" style="width: 100%;"></div></div>
+  <div class="inv">
+    <div class="inv-look">
+      <div class="inv-look-ey">Where teams look</div>
+      <i data-lucide="cpu" class="inv-look-ic"></i>
+      <div class="inv-look-name">The model<br>+ the prompt</div>
+      <div class="inv-look-sub">swapped, tuned, and re-prompted</div>
+      <div class="inv-look-tag">table stakes once it is capable</div>
     </div>
-    <div class="rank-row">
-      <span class="rank-rankno hi">●</span>
-      <span class="rank-label">Control layer<span class="rank-sub">context · execution · recovery <em>(middleware)</em></span></span>
-      <div class="rank-track"><div class="rank-fill" style="width: 100%;"></div></div>
+
+    <div class="inv-mid">
+      <i data-lucide="arrow-left-right" class="inv-swap"></i>
+      <div class="inv-swaptxt">the<br>inversion</div>
     </div>
-    <div class="rank-row">
-      <span class="rank-rankno hi">●</span>
-      <span class="rank-label">Long-term memory</span>
-      <div class="rank-track"><div class="rank-fill" style="width: 100%;"></div></div>
-    </div>
-    <div class="rank-row lo">
-      <span class="rank-rankno">○</span>
-      <span class="rank-label">System prompt</span>
-      <div class="rank-track"><div class="rank-fill" style="width: 26%;"></div></div>
+
+    <div class="inv-lever">
+      <div class="inv-head">Where performance actually lives</div>
+      <div class="inv-row">
+        <span class="inv-lab">Tools</span>
+        <div class="inv-track"><div class="inv-fill" style="width:100%"></div></div>
+      </div>
+      <div class="inv-row">
+        <span class="inv-lab">Control layer</span>
+        <div class="inv-track"><div class="inv-fill" style="width:100%"></div></div>
+      </div>
+      <div class="inv-row">
+        <span class="inv-lab">Long-term memory</span>
+        <div class="inv-track"><div class="inv-fill" style="width:100%"></div></div>
+      </div>
+      <div class="inv-row lo">
+        <span class="inv-lab">System prompt</span>
+        <div class="inv-track"><div class="inv-fill" style="width:18%"></div></div>
+        <span class="inv-smallest">smallest lever</span>
+      </div>
     </div>
   </div>
 
-  <div class="rank-note">
-    <div class="note-block">
-      <div class="note-k">The inversion</div>
-      <div class="note-v">Most teams pour effort into the prompt. The gains sit in the tooling, control, and memory.</div>
-    </div>
-    <div class="note-block">
-      <div class="note-k">The proof</div>
-      <div class="note-v">Change only the tool interface and the same model jumps 7.3% to 18.0% on SWE-bench Lite.</div>
-    </div>
-  </div>
+  <div class="inv-proof"><span class="inv-proofk">The proof</span>Hold the model fixed and swap the raw shell for a real tool interface: SWE-agent lifts GPT-4 Turbo from <b>7.3% to 18.0%</b> on SWE-bench Lite.</div>
 
   <div class="slide-number"></div>
 </div>
