@@ -1,4 +1,4 @@
-# Bibliography — source registry for this presentation
+# Bibliography: source registry for this presentation
 # ─────────────────────────────────────────────────────
 # Instructions:
 #   1. Add one entry per external source with a unique lowercase-kebab key.
@@ -38,12 +38,12 @@ sources:
     accessed: 2026-06-24
   clew-research-harness:
     org: "Internal research"
-    title: "What Makes a Good Agentic Harness — research synthesis"
+    title: "What Makes a Good Agentic Harness: research synthesis"
     year: 2026
     accessed: 2026-06-24
   clew-research-p01:
     org: "Internal research"
-    title: "P-01 validation interview — research synthesis (N=1)"
+    title: "P-01 validation interview: research synthesis (N=1)"
     year: 2026
     accessed: 2026-05-24
   nolima-context:
@@ -72,13 +72,13 @@ sources:
     accessed: 2026-06-26
   mit-genai-divide:
     org: "MIT Project NANDA"
-    title: "The GenAI Divide: State of AI in Business 2025 (95% of pilots — no measurable P&L impact) · via Fortune"
+    title: "The GenAI Divide: State of AI in Business 2025 (95% of pilots: no measurable P&L impact) · via Fortune"
     url: "https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/"
     year: 2025
     accessed: 2026-06-27
   swe-bench-pro:
     org: "Scale AI (SEAL)"
-    title: "SWE-bench Pro — standardized public leaderboard · 1,865 real tasks across 41 professional repos"
+    title: "SWE-bench Pro: standardized public leaderboard · 1,865 real tasks across 41 professional repos"
     url: "https://labs.scale.com/leaderboard/swe_bench_pro_public"
     year: 2026
     accessed: 2026-06-27
@@ -90,12 +90,12 @@ sources:
     accessed: 2026-06-27
   clew-harness-caps:
     org: "Internal research"
-    title: "Agentic Harness — Capabilities map (15 functional domains, 80+ real shipping tools)"
+    title: "Agentic Harness: Capabilities map (15 functional domains, 80+ real shipping tools)"
     year: 2026
     accessed: 2026-06-28
   claude-code-tools:
     org: "Anthropic"
-    title: "Claude Code — tools reference (Read · Grep · Edit · Bash · MCP · subagents · hooks)"
+    title: "Claude Code: tools reference (Read · Grep · Edit · Bash · MCP · subagents · hooks)"
     url: "https://docs.anthropic.com/en/docs/claude-code/tools"
     year: 2026
     accessed: 2026-06-28
@@ -106,7 +106,7 @@ sources:
     accessed: 2026-06-28
   metr-rct:
     org: "METR"
-    title: "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity (RCT — 19% slower)"
+    title: "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity (RCT: 19% slower)"
     url: "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/"
     year: 2025
     accessed: 2026-06-28
@@ -124,13 +124,13 @@ sources:
     accessed: 2026-06-28
   github-stars:
     org: "GitHub"
-    title: "Repository stargazers — live API snapshot (tool popularity)"
+    title: "Repository stargazers: live API snapshot (tool popularity)"
     url: "https://api.github.com"
     year: 2026
     accessed: 2026-06-28
   google-antigravity:
     org: "Google"
-    title: "Antigravity — agentic development platform (IDE + CLI), launched 2025-11-18"
+    title: "Antigravity: agentic development platform (IDE + CLI), launched 2025-11-18"
     url: "https://antigravity.google/"
     year: 2026
     accessed: 2026-06-28
@@ -142,13 +142,13 @@ sources:
     accessed: 2026-06-28
   zed-acp:
     org: "Zed Industries"
-    title: "Agent Client Protocol — external agents in any editor"
+    title: "Agent Client Protocol: external agents in any editor"
     url: "https://zed.dev/acp"
     year: 2026
     accessed: 2026-06-28
   llm-routers:
     org: "TrueFoundry"
-    title: "LiteLLM vs OpenRouter — LLM gateways front open & proprietary models"
+    title: "LiteLLM vs OpenRouter: LLM gateways front open & proprietary models"
     url: "https://www.truefoundry.com/blog/litellm-vs-openrouter"
     year: 2026
     accessed: 2026-06-28
@@ -166,25 +166,25 @@ sources:
     accessed: 2026-06-28
   epoch-eci-gap:
     org: "Epoch AI"
-    title: "Gap between open and closed frontier models — ~4 months / 8 ECI points (Jan–May 2026)"
+    title: "Gap between open and closed frontier models: ~4 months / 8 ECI points (Jan–May 2026)"
     url: "https://epoch.ai/data-insights/open-closed-eci-gap"
     year: 2026
     accessed: 2026-06-28
   deepseek-v4:
     org: "DeepSeek"
-    title: "DeepSeek-V4-Pro ≈ 80.6% SWE-bench Verified — open weights at parity with the closed frontier (Apr 2026)"
+    title: "DeepSeek-V4-Pro ≈ 80.6% SWE-bench Verified: open weights at parity with the closed frontier (Apr 2026)"
     url: "https://huggingface.co/blog/deepseekv4"
     year: 2026
     accessed: 2026-06-28
   hai-ai-index-2025:
     org: "Stanford HAI"
-    title: "2025 AI Index — Technical Performance (open-vs-closed Arena gap 8.04%→1.70%; inference ~280× cheaper; top-10 convergence)"
+    title: "2025 AI Index: Technical Performance (open-vs-closed Arena gap 8.04%→1.70%; inference ~280× cheaper; top-10 convergence)"
     url: "https://hai.stanford.edu/ai-index/2025-ai-index-report/technical-performance"
     year: 2025
     accessed: 2026-06-28
   nadella-commodity:
     org: "Satya Nadella (Microsoft)"
-    title: "“The models are getting commoditized” — BG2 Pod with Gurley & Gerstner"
+    title: "“The models are getting commoditized”: BG2 Pod with Gurley & Gerstner"
     url: "https://www.the-decoder.com/microsoft-ceo-satya-nadella-says-ai-models-are-getting-commoditized/"
     year: 2024
     accessed: 2026-06-28

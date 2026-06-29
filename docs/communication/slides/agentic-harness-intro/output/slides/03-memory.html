@@ -1,16 +1,16 @@
 <div class="slide s-memory" data-sources="raschka-coding-agent,clew-research-harness">
   <div class="section-label">The Gap</div>
-  <h2 class="slide-title">Most harnesses only have the shallowest memory — yet memory is the moat.</h2>
+  <h2 class="slide-title">Most harnesses only have the shallowest memory, yet memory is the moat.</h2>
 
   <div class="mem-layers">
     <div class="mem-layer l-working">
       <div class="ml-name">Working memory</div>
-      <div class="ml-sub">the active task — recent files, notes, distilled</div>
+      <div class="ml-sub">the active task: recent files, notes, distilled</div>
       <div class="ml-how">compacted into the prompt each turn · lost at session end</div>
     </div>
     <div class="mem-layer l-episodic">
       <div class="ml-name">Episodic memory</div>
-      <div class="ml-sub">full transcript of this session — every request, tool call, result</div>
+      <div class="ml-sub">full transcript of this session: every request, tool call, result</div>
       <div class="ml-how">saved to a file → <code>/resume</code> · but locked to this one thread</div>
     </div>
     <div class="mem-layer l-longterm">
@@ -26,15 +26,15 @@
   <div class="mem-stats">
     <div class="stat-card loss">
       <div class="stat-big"><em>2 of 3</em> session-bound</div>
-      <div class="stat-desc">Working memory is distilled, then discarded at session end; episodic is a resumable transcript but locked to its own thread. Only long-term — plain files — crosses into the next session.</div>
+      <div class="stat-desc">Working memory is distilled, then discarded at session end; episodic is a resumable transcript but locked to its own thread. Only long-term (plain files) crosses into the next session.</div>
     </div>
     <div class="stat-card">
       <div class="stat-big"><em>0</em> tokens / fetch</div>
-      <div class="stat-desc">And it's a local file read — no MCP API roundtrip, no token cost, reloaded at the start of every session.</div>
+      <div class="stat-desc">And it's a local file read, no MCP API roundtrip, no token cost, reloaded at the start of every session.</div>
     </div>
   </div>
 
-  <div class="mem-bridge"><span class="mem-bridge-tag">the obvious objection</span>“A frontier window holds a million tokens now — so why not just let the <em>window</em> be the memory?”<span class="mem-bridge-cue">answered next&nbsp;→</span></div>
+  <div class="mem-bridge"><span class="mem-bridge-tag">the obvious objection</span>“A frontier window holds a million tokens now, so why not just let the <em>window</em> be the memory?”<span class="mem-bridge-cue">answered next&nbsp;→</span></div>
 
   <div class="slide-number"></div>
 </div>

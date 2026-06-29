@@ -2375,7 +2375,7 @@ body.presenting .slide.active {
       The <em>harness</em><br>
       is the car.
     </h1>
-    <div class="cover-sub">What makes a good agentic coding harness — and how clew keeps it coherent.</div>
+    <div class="cover-sub">What makes a good agentic coding harness, and how clew keeps it coherent.</div>
     <div class="cover-author">Victor Hueni &nbsp;·&nbsp; June 2026</div>
   </div>
 
@@ -2406,7 +2406,7 @@ body.presenting .slide.active {
   <div class="div-wrap">
     <div class="div-kicker">Section 01 / 05</div>
     <h1 class="div-title">The <em>Problem</em></h1>
-    <div class="div-tag">Agents can't remember between sessions — and every obvious fix for it fails.</div>
+    <div class="div-tag">Agents can't remember between sessions, and every obvious fix for it fails.</div>
   </div>
   <div class="div-bottom-line"></div>
   <div class="slide-number">2 / 25</div>
@@ -2418,17 +2418,17 @@ body.presenting .slide.active {
 
 <div class="slide s-memory" data-sources="raschka-coding-agent,clew-research-harness">
   <div class="section-label">The Gap</div>
-  <h2 class="slide-title">Most harnesses only have the shallowest memory — yet memory is the moat.</h2>
+  <h2 class="slide-title">Most harnesses only have the shallowest memory, yet memory is the moat.</h2>
 
   <div class="mem-layers">
     <div class="mem-layer l-working">
       <div class="ml-name">Working memory</div>
-      <div class="ml-sub">the active task — recent files, notes, distilled</div>
+      <div class="ml-sub">the active task: recent files, notes, distilled</div>
       <div class="ml-how">compacted into the prompt each turn · lost at session end</div>
     </div>
     <div class="mem-layer l-episodic">
       <div class="ml-name">Episodic memory</div>
-      <div class="ml-sub">full transcript of this session — every request, tool call, result</div>
+      <div class="ml-sub">full transcript of this session: every request, tool call, result</div>
       <div class="ml-how">saved to a file → <code>/resume</code> · but locked to this one thread</div>
     </div>
     <div class="mem-layer l-longterm">
@@ -2444,19 +2444,19 @@ body.presenting .slide.active {
   <div class="mem-stats">
     <div class="stat-card loss">
       <div class="stat-big"><em>2 of 3</em> session-bound</div>
-      <div class="stat-desc">Working memory is distilled, then discarded at session end; episodic is a resumable transcript but locked to its own thread. Only long-term — plain files — crosses into the next session.</div>
+      <div class="stat-desc">Working memory is distilled, then discarded at session end; episodic is a resumable transcript but locked to its own thread. Only long-term (plain files) crosses into the next session.</div>
     </div>
     <div class="stat-card">
       <div class="stat-big"><em>0</em> tokens / fetch</div>
-      <div class="stat-desc">And it's a local file read — no MCP API roundtrip, no token cost, reloaded at the start of every session.</div>
+      <div class="stat-desc">And it's a local file read, no MCP API roundtrip, no token cost, reloaded at the start of every session.</div>
     </div>
   </div>
 
-  <div class="mem-bridge"><span class="mem-bridge-tag">the obvious objection</span>“A frontier window holds a million tokens now — so why not just let the <em>window</em> be the memory?”<span class="mem-bridge-cue">answered next&nbsp;→</span></div>
+  <div class="mem-bridge"><span class="mem-bridge-tag">the obvious objection</span>“A frontier window holds a million tokens now, so why not just let the <em>window</em> be the memory?”<span class="mem-bridge-cue">answered next&nbsp;→</span></div>
 
   <div class="slide-number">3 / 25</div>
 
-<div class="slide-source-bar">Sebastian Raschka · Components of a Coding Agent (2026) — magazine.sebastianraschka.com &nbsp;|&nbsp; Internal research · What Makes a Good Agentic Harness — research synthesis (2026)</div>
+<div class="slide-source-bar">Sebastian Raschka · Components of a Coding Agent (2026) — magazine.sebastianraschka.com &nbsp;|&nbsp; Internal research · What Makes a Good Agentic Harness: research synthesis (2026)</div>
 </div>
 
 
@@ -2465,7 +2465,7 @@ body.presenting .slide.active {
 
 <div class="slide s-crot" data-sources="anthropic-opus47,anthropic-opus46,nolima-context">
   <div class="section-label">The Gap · Context Rot &middot; <span class="sl-answer">the answer</span></div>
-  <h2 class="slide-title">No — a bigger context window is not bigger memory.</h2>
+  <h2 class="slide-title">No. A bigger context window is not bigger memory.</h2>
   <p class="slide-lede">Bury one fact in a million-token prompt and ask for it back: the frontier model returns it barely <em>1 in 3</em> times. The window <em>forgets</em> as you fill it.</p>
 
   <svg class="cr-svg" viewBox="0 0 1280 720" width="1280" height="720">
@@ -2506,11 +2506,11 @@ body.presenting .slide.active {
     </div>
     <div class="cr-fact">
       <div class="k">Codex too</div>
-      <div class="v">the GPT-5.x line behind Codex CLI drops ~87% &rarr; 74% at long context — a proxy; no per-length figure is published for the Codex-tuned model.</div>
+      <div class="v">the GPT-5.x line behind Codex CLI drops ~87% &rarr; 74% at long context, a proxy; no per-length figure is published for the Codex-tuned model.</div>
     </div>
     <div class="cr-fact">
       <div class="k"><em>11 of 13</em></div>
-      <div class="v">models fell below half their accuracy by 32K tokens — context rot isn't new (NoLiMa, 2025).</div>
+      <div class="v">models fell below half their accuracy by 32K tokens. Context rot isn't new (NoLiMa, 2025).</div>
     </div>
   </div>
 
@@ -2526,7 +2526,7 @@ body.presenting .slide.active {
 <div class="slide s-writedown" data-sources="openai-harness">
   <div class="section-label">The Problem · Written memory rots</div>
   <h2 class="slide-title">Writing it down isn't memory either.</h2>
-  <p class="slide-lede">OpenAI shipped a 1M-line product with <em>zero</em> hand-written code — then found the obvious fix, one big context file, fails.</p>
+  <p class="slide-lede">OpenAI shipped a 1M-line product with <em>zero</em> hand-written code, then found the obvious fix, one big context file, fails.</p>
 
   <div class="wd-strip">
     <div class="wd-chip"><em>1M</em>&nbsp; lines of code</div>
@@ -2537,9 +2537,9 @@ body.presenting .slide.active {
   <div class="wd-cols">
     <div class="wd-modes">
       <div class="wd-modes-h">“One big <code>AGENTS.md</code>” failed four ways</div>
-      <div class="wd-mode"><i data-lucide="layers" class="wd-ic"></i><div><b>Crowds out the task.</b> Context is scarce — the giant file pushes out the code and the docs.</div></div>
+      <div class="wd-mode"><i data-lucide="layers" class="wd-ic"></i><div><b>Crowds out the task.</b> Context is scarce: the giant file pushes out the code and the docs.</div></div>
       <div class="wd-mode"><i data-lucide="volume-x" class="wd-ic"></i><div><b>Too much guidance becomes none.</b> When everything is “important,” nothing is.</div></div>
-      <div class="wd-mode"><i data-lucide="trending-down" class="wd-ic"></i><div><b>It rots instantly.</b> A graveyard of stale rules — the agent can't tell what's still true.</div></div>
+      <div class="wd-mode"><i data-lucide="trending-down" class="wd-ic"></i><div><b>It rots instantly.</b> A graveyard of stale rules: the agent can't tell what's still true.</div></div>
       <div class="wd-mode"><i data-lucide="search-x" class="wd-ic"></i><div><b>It can't be verified.</b> Drift is inevitable without mechanical checks.</div></div>
     </div>
     <div class="wd-side">
@@ -2549,7 +2549,7 @@ body.presenting .slide.active {
       </div>
       <div class="wd-fix">
         <div class="wd-fix-k">OpenAI's fix</div>
-        <div class="wd-fix-v">A <b>~100-line table of contents</b> pointing into a <b>structured <code>docs/</code> tree</b> — a map, not an encyclopedia.</div>
+        <div class="wd-fix-v">A <b>~100-line table of contents</b> pointing into a <b>structured <code>docs/</code> tree</b>: a map, not an encyclopedia.</div>
       </div>
     </div>
   </div>
@@ -2565,25 +2565,25 @@ body.presenting .slide.active {
 <div class="slide s-hype" data-sources="mit-genai-divide,swe-bench-pro">
   <div class="section-label">The Lever · Reality check</div>
   <h2 class="slide-title">2025 was the “Year of the Agent.” It didn't land.</h2>
-  <p class="slide-lede">The hype was model-led — but in production, the model alone fell short, expensively.</p>
+  <p class="slide-lede">The hype was model-led, but in production, the model alone fell short, expensively.</p>
 
   <div class="hype-stats">
     <div class="hype-card">
       <div class="hype-big">95%</div>
       <div class="hype-k">of enterprise GenAI pilots showed <em>no measurable P&amp;L impact</em></div>
-      <div class="hype-v">MIT studied 300 deployments + 350 leaders. The blocker wasn't model IQ — it was integrating AI into real workflows.</div>
+      <div class="hype-v">MIT studied 300 deployments + 350 leaders. The blocker wasn't model IQ; it was integrating AI into real workflows.</div>
     </div>
     <div class="hype-card">
       <div class="hype-big">~59%</div>
       <div class="hype-k">is the <em>best</em> frontier model's score on realistic enterprise tasks</div>
-      <div class="hype-v">Scale's SWE-bench Pro — 1,865 real tasks across 41 professional repos (2026). The same models score 80–95% on the benchmark everyone quotes; the gap is the reality.</div>
+      <div class="hype-v">Scale's SWE-bench Pro: 1,865 real tasks across 41 professional repos (2026). The same models score 80–95% on the benchmark everyone quotes; the gap is the reality.</div>
     </div>
   </div>
 
-  <div class="hype-foot">The missing variable wasn't intelligence — it was the <b>harness around the model</b>.</div>
+  <div class="hype-foot">The missing variable wasn't intelligence; it was the <b>harness around the model</b>.</div>
   <div class="slide-number">6 / 25</div>
 
-<div class="slide-source-bar">MIT Project NANDA · The GenAI Divide: State of AI in Business 2025 (95% of pilots — no measurable P&L impact) · via Fortune (2025) — fortune.com &nbsp;|&nbsp; Scale AI (SEAL) · SWE-bench Pro — standardized public leaderboard · 1,865 real tasks across 41 professional repos (2026) — labs.scale.com</div>
+<div class="slide-source-bar">MIT Project NANDA · The GenAI Divide: State of AI in Business 2025 (95% of pilots: no measurable P&L impact) · via Fortune (2025) — fortune.com &nbsp;|&nbsp; Scale AI (SEAL) · SWE-bench Pro: standardized public leaderboard · 1,865 real tasks across 41 professional repos (2026) — labs.scale.com</div>
 </div>
 
 
@@ -2592,13 +2592,13 @@ body.presenting .slide.active {
 
 <div class="slide s-commodity" data-sources="swe-bench-cards,openai-swe-retired,epoch-eci-gap,deepseek-v4,hai-ai-index-2025,nadella-commodity">
   <div class="section-label">The Problem · the model is not the moat</div>
-  <h2 class="slide-title">Models leapfrog every benchmark — then <em>commoditize</em>.</h2>
+  <h2 class="slide-title">Models leapfrog every benchmark, then <em>commoditize</em>.</h2>
   <p class="slide-lede">A new frontier model tops every benchmark… until the next does, <em>days</em> later. Then it saturates ~81%, open weights reach <em>parity</em>, and the benchmark itself gets retired.</p>
-  <div class="cm-cap" style="left:40px;top:152px">The treadmill · 8 SWE-bench records in 13 months — then a ceiling</div><div class="cm-legend" style="left:560px;top:152px"><span class="k"><span class="ln"></span>closed frontier</span><span class="k"><span class="ln op"></span>open weights</span></div><svg class="cm-chart" style="left:34px;top:176px;width:760px;height:340px" viewBox="0 0 760 340"><line x1="58" y1="252" x2="720" y2="252" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="255" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">50</text><line x1="58" y1="179" x2="720" y2="179" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="182" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">60</text><line x1="58" y1="106" x2="720" y2="106" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="109" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">70</text><line x1="58" y1="33" x2="720" y2="33" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="36" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">80</text><text x="58" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Oct ’24</text><text x="200" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Feb ’25</text><text x="343" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Jun ’25</text><text x="485" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Oct ’25</text><text x="610" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Feb ’26</text><text x="699" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Apr ’26</text><text x="28" y="153" transform="rotate(-90 28 153)" text-anchor="middle" font-family="JetBrains Mono" font-size="9" font-weight="700" fill="#800020">SWE-bench Verified %</text><line x1="514" y1="25" x2="720" y2="25" stroke="#800020" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/><text x="521" y="20" text-anchor="start" font-family="JetBrains Mono" font-size="7.5" font-weight="700" fill="#800020">saturation ceiling ~81%</text><polyline points="58.0,258.8 203.9,161.8 264.4,93.2 307.1,87.3 392.6,72.7 410.4,69.8 456.6,53.0 524.2,26.0 609.7,26.8" fill="none" stroke="#800020" stroke-width="2.4"/><polyline points="367.6,136.2 698.6,28.2" fill="none" stroke="#800020" stroke-width="1.8" stroke-dasharray="3 3" opacity=".6"/><circle cx="58.0" cy="258.8" r="3.2" fill="#800020"/><circle cx="203.9" cy="161.8" r="3.2" fill="#800020"/><circle cx="264.4" cy="93.2" r="3.2" fill="#800020"/><circle cx="307.1" cy="87.3" r="3.2" fill="#800020"/><circle cx="392.6" cy="72.7" r="3.2" fill="#800020"/><circle cx="410.4" cy="69.8" r="3.2" fill="#800020"/><circle cx="456.6" cy="53.0" r="3.2" fill="#800020"/><circle cx="524.2" cy="26.0" r="3.2" fill="#800020"/><circle cx="609.7" cy="26.8" r="3.2" fill="#800020"/><circle cx="367.6" cy="136.2" r="3.6" fill="#fff" stroke="#800020" stroke-width="1.8"/><circle cx="698.6" cy="28.2" r="3.6" fill="#fff" stroke="#800020" stroke-width="1.8"/><text x="58.0" y="249.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">3.5 Sonnet</text><text x="203.9" y="175.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">3.7 Sonnet</text><text x="264.4" y="84.2" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">o3</text><text x="307.1" y="101.3" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4</text><text x="392.6" y="63.7" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4.1</text><text x="410.4" y="83.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">GPT-5</text><text x="456.6" y="44.0" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Sonnet 4.5</text><text x="524.2" y="40.0" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4.5</text><text x="609.7" y="40.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4.6</text><text x="367.6" y="151.2" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#5c6470">Kimi K2 (open)</text><text x="698.6" y="43.2" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#5c6470">DeepSeek V4 (open)</text></svg><div class="cm-callout" style="left:300px;top:302px"><b>GPT-5</b> broke the record <b>2 days</b> after Opus 4.1</div>
-  <div class="cm-stat" style="left:812px;top:176px;width:428px;height:86px"><div class="sh"><i data-lucide="git-merge"></i><span class="t">Open weights — now at parity</span></div><div class="big">≈ 80.6% = the frontier</div><div class="d">DeepSeek V4-Pro matches the closed SOTA on SWE-bench Verified (Apr ’26). Composite gap now ~<b>4 months / 8 ECI pts</b> (Epoch AI, May ’26).</div></div><div class="cm-stat" style="left:812px;top:272px;width:428px;height:86px"><div class="sh"><i data-lucide="alert-triangle"></i><span class="t">The benchmark itself broke</span></div><div class="big">59% of hard tests flawed</div><div class="d">OpenAI <b>retired SWE-bench Verified</b> (Feb ’26): frontier models had trained on the answers; it’s saturated. → SWE-bench Pro.</div></div><div class="cm-stat" style="left:812px;top:368px;width:428px;height:72px"><div class="sh"><i data-lucide="trending-down"></i><span class="t">Inference is collapsing</span></div><div class="big">≈ 280× cheaper / 18 mo</div><div class="d">GPT-3.5-level tokens: $20.00 → $0.07 per M. ~10× every year — “LLMflation.”</div></div><div class="cm-quote" style="left:812px;top:450px;width:428px;height:62px"><div class="q">“The models are getting commoditized.”</div><div class="a">Satya Nadella · Microsoft CEO · BG2 Pod, Dec 2024</div></div><div class="cm-punch" style="top:532px;height:60px"><i data-lucide="gem"></i><div><span class="t">The model is a commodity — not a moat.</span><br><span class="s">Whatever tops the leaderboard this week is matched, undercut and open-weighted within months — and the benchmark itself gets retired.</span></div></div>
+  <div class="cm-cap" style="left:40px;top:152px">The treadmill · 8 SWE-bench records in 13 months, then a ceiling</div><div class="cm-legend" style="left:560px;top:152px"><span class="k"><span class="ln"></span>closed frontier</span><span class="k"><span class="ln op"></span>open weights</span></div><svg class="cm-chart" style="left:34px;top:176px;width:760px;height:340px" viewBox="0 0 760 340"><line x1="58" y1="252" x2="720" y2="252" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="255" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">50</text><line x1="58" y1="179" x2="720" y2="179" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="182" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">60</text><line x1="58" y1="106" x2="720" y2="106" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="109" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">70</text><line x1="58" y1="33" x2="720" y2="33" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="36" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">80</text><text x="58" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Oct ’24</text><text x="200" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Feb ’25</text><text x="343" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Jun ’25</text><text x="485" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Oct ’25</text><text x="610" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Feb ’26</text><text x="699" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Apr ’26</text><text x="28" y="153" transform="rotate(-90 28 153)" text-anchor="middle" font-family="JetBrains Mono" font-size="9" font-weight="700" fill="#800020">SWE-bench Verified %</text><line x1="514" y1="25" x2="720" y2="25" stroke="#800020" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/><text x="521" y="20" text-anchor="start" font-family="JetBrains Mono" font-size="7.5" font-weight="700" fill="#800020">saturation ceiling ~81%</text><polyline points="58.0,258.8 203.9,161.8 264.4,93.2 307.1,87.3 392.6,72.7 410.4,69.8 456.6,53.0 524.2,26.0 609.7,26.8" fill="none" stroke="#800020" stroke-width="2.4"/><polyline points="367.6,136.2 698.6,28.2" fill="none" stroke="#800020" stroke-width="1.8" stroke-dasharray="3 3" opacity=".6"/><circle cx="58.0" cy="258.8" r="3.2" fill="#800020"/><circle cx="203.9" cy="161.8" r="3.2" fill="#800020"/><circle cx="264.4" cy="93.2" r="3.2" fill="#800020"/><circle cx="307.1" cy="87.3" r="3.2" fill="#800020"/><circle cx="392.6" cy="72.7" r="3.2" fill="#800020"/><circle cx="410.4" cy="69.8" r="3.2" fill="#800020"/><circle cx="456.6" cy="53.0" r="3.2" fill="#800020"/><circle cx="524.2" cy="26.0" r="3.2" fill="#800020"/><circle cx="609.7" cy="26.8" r="3.2" fill="#800020"/><circle cx="367.6" cy="136.2" r="3.6" fill="#fff" stroke="#800020" stroke-width="1.8"/><circle cx="698.6" cy="28.2" r="3.6" fill="#fff" stroke="#800020" stroke-width="1.8"/><text x="58.0" y="249.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">3.5 Sonnet</text><text x="203.9" y="175.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">3.7 Sonnet</text><text x="264.4" y="84.2" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">o3</text><text x="307.1" y="101.3" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4</text><text x="392.6" y="63.7" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4.1</text><text x="410.4" y="83.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">GPT-5</text><text x="456.6" y="44.0" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Sonnet 4.5</text><text x="524.2" y="40.0" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4.5</text><text x="609.7" y="40.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4.6</text><text x="367.6" y="151.2" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#5c6470">Kimi K2 (open)</text><text x="698.6" y="43.2" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#5c6470">DeepSeek V4 (open)</text></svg><div class="cm-callout" style="left:300px;top:302px"><b>GPT-5</b> broke the record <b>2 days</b> after Opus 4.1</div>
+  <div class="cm-stat" style="left:812px;top:176px;width:428px;height:86px"><div class="sh"><i data-lucide="git-merge"></i><span class="t">Open weights, now at parity</span></div><div class="big">≈ 80.6% = the frontier</div><div class="d">DeepSeek V4-Pro matches the closed SOTA on SWE-bench Verified (Apr ’26). Composite gap now ~<b>4 months / 8 ECI pts</b> (Epoch AI, May ’26).</div></div><div class="cm-stat" style="left:812px;top:272px;width:428px;height:86px"><div class="sh"><i data-lucide="alert-triangle"></i><span class="t">The benchmark itself broke</span></div><div class="big">59% of hard tests flawed</div><div class="d">OpenAI <b>retired SWE-bench Verified</b> (Feb ’26): frontier models had trained on the answers; it’s saturated. → SWE-bench Pro.</div></div><div class="cm-stat" style="left:812px;top:368px;width:428px;height:72px"><div class="sh"><i data-lucide="trending-down"></i><span class="t">Inference is collapsing</span></div><div class="big">≈ 280× cheaper / 18 mo</div><div class="d">GPT-3.5-level tokens: $20.00 → $0.07 per M. ~10× every year: “LLMflation.”</div></div><div class="cm-quote" style="left:812px;top:450px;width:428px;height:62px"><div class="q">“The models are getting commoditized.”</div><div class="a">Satya Nadella · Microsoft CEO · BG2 Pod, Dec 2024</div></div><div class="cm-punch" style="top:532px;height:60px"><i data-lucide="gem"></i><div><span class="t">The model is a commodity, not a moat.</span><br><span class="s">Whatever tops the leaderboard this week is matched, undercut and open-weighted within months, and the benchmark itself gets retired.</span></div></div>
   <div class="slide-number">7 / 25</div>
 
-<div class="slide-source-bar">Vendor model cards / Artificial Analysis · SWE-bench Verified scores per frontier model release (2024–2026) (2026) — artificialanalysis.ai &nbsp;|&nbsp; OpenAI · Why SWE-bench Verified no longer measures frontier coding capabilities (retired Feb 2026; 59% of hard tests flawed; training contamination) (2026) — openai.com &nbsp;|&nbsp; Epoch AI · Gap between open and closed frontier models — ~4 months / 8 ECI points (Jan–May 2026) (2026) — epoch.ai &nbsp;|&nbsp; DeepSeek · DeepSeek-V4-Pro ≈ 80.6% SWE-bench Verified — open weights at parity with the closed frontier (Apr 2026) (2026) — huggingface.co &nbsp;|&nbsp; Stanford HAI · 2025 AI Index — Technical Performance (open-vs-closed Arena gap 8.04%→1.70%; inference ~280× cheaper; top-10 convergence) (2025) — hai.stanford.edu &nbsp;|&nbsp; Satya Nadella (Microsoft) · “The models are getting commoditized” — BG2 Pod with Gurley & Gerstner (2024) — the-decoder.com</div>
+<div class="slide-source-bar">Vendor model cards / Artificial Analysis · SWE-bench Verified scores per frontier model release (2024–2026) (2026) — artificialanalysis.ai &nbsp;|&nbsp; OpenAI · Why SWE-bench Verified no longer measures frontier coding capabilities (retired Feb 2026; 59% of hard tests flawed; training contamination) (2026) — openai.com &nbsp;|&nbsp; Epoch AI · Gap between open and closed frontier models: ~4 months / 8 ECI points (Jan–May 2026) (2026) — epoch.ai &nbsp;|&nbsp; DeepSeek · DeepSeek-V4-Pro ≈ 80.6% SWE-bench Verified: open weights at parity with the closed frontier (Apr 2026) (2026) — huggingface.co &nbsp;|&nbsp; Stanford HAI · 2025 AI Index: Technical Performance (open-vs-closed Arena gap 8.04%→1.70%; inference ~280× cheaper; top-10 convergence) (2025) — hai.stanford.edu &nbsp;|&nbsp; Satya Nadella (Microsoft) · “The models are getting commoditized”: BG2 Pod with Gurley & Gerstner (2024) — the-decoder.com</div>
 </div>
 
 
@@ -2611,7 +2611,7 @@ body.presenting .slide.active {
   <div class="div-wrap">
     <div class="div-kicker">Section 02 / 05</div>
     <h1 class="div-title">The Agentic <em>Harness</em></h1>
-    <div class="div-tag">Why the tooling around the model — not the model — is the performance lever.</div>
+    <div class="div-tag">Why the tooling around the model, not the model, is the performance lever.</div>
   </div>
   <div class="div-bottom-line"></div>
   <div class="slide-number">8 / 25</div>
@@ -2653,7 +2653,7 @@ body.presenting .slide.active {
 
 <div class="slide s-lever" data-sources="ahe-2604">
   <div class="section-label">The Lever · Where it lives</div>
-  <h2 class="slide-title">Performance lives in the tooling around the model — not the model.</h2>
+  <h2 class="slide-title">Performance lives in the tooling around the model, not the model.</h2>
   <p class="slide-lede">Ablation studies rank what actually moves agent performance. Model prompt-tuning sits <em>last</em>.</p>
 
   <div class="rank">
@@ -2682,7 +2682,7 @@ body.presenting .slide.active {
   <div class="rank-note">
     <div class="note-block">
       <div class="note-k">The inversion</div>
-      <div class="note-v">Most teams pour effort into #4 — the prompt. The gains sit in #1–3.</div>
+      <div class="note-v">Most teams pour effort into #4, the prompt. The gains sit in #1–3.</div>
     </div>
     <div class="note-block">
       <div class="note-k">The model</div>
@@ -2701,13 +2701,13 @@ body.presenting .slide.active {
 
 <div class="slide s-harness-map" data-sources="clew-harness-caps,claude-code-tools">
   <div class="section-label">The Lever · Anatomy in the wild · top tools by GitHub ★</div>
-  <h2 class="slide-title">The agent core, wrapped in <em>14 capabilities</em> — and who leads each.</h2>
+  <h2 class="slide-title">The agent core, wrapped in <em>14 capabilities</em>, and who leads each.</h2>
   <svg class="wire" viewBox="0 0 1280 720"><g stroke="#aab0bd" stroke-width="1.6" fill="none" stroke-linejoin="miter"><polyline points="439,402 550,402"/><polyline points="730,402 841,402"/><polyline points="465,300 465,311 600,311 600,322"/><polyline points="897,300 897,311 680,311 680,322"/><polyline points="383,504 383,493 600,493 600,482"/><polyline points="815,504 815,493 680,493 680,482"/></g></svg>
   <div class="zone cross" style="left:215px;top:212px;width:500px;height:88px"></div><div class="zlabel cross" style="left:227px;top:220px">② KNOW <span class="sm">· acquire · retain · improve</span></div><div class="lc" style="left:223px;top:236px;width:156px;height:56px"><div class="lh"><i data-lucide="database"></i><h4>Memory</h4></div><div class="tt"><span class="tn">Mem0</span> (60k) · <span class="tn">Cognee</span> (24k) · <span class="tn">Letta</span> (23k)</div></div><div class="lc" style="left:387px;top:236px;width:156px;height:56px"><div class="lh"><i data-lucide="book-open"></i><h4>Knowledge</h4></div><div class="tt"><span class="tn">LangChain</span> (140k) · <span class="tn">LlamaIndex</span> (51k) · <span class="tn">Milvus</span> (45k)</div></div><div class="lc" style="left:551px;top:236px;width:156px;height:56px"><div class="lh"><i data-lucide="trending-up"></i><h4>Learning & Adapt.</h4></div><div class="tt"><span class="tn">DSPy</span> (36k) · <span class="tn">Promptfoo</span> (23k) · <span class="tn">Optuna</span> (14k)</div></div><div class="zone loop" style="left:729px;top:212px;width:336px;height:88px"></div><div class="zlabel loop" style="left:741px;top:220px">③ DIRECT <span class="sm">· intent & plan</span></div><div class="lc" style="left:737px;top:236px;width:156px;height:56px"><div class="lh"><i data-lucide="target"></i><h4>Goals & Tasking</h4></div><div class="tt"><span class="tn">DSPy</span> (36k) · <span class="tn">SGLang</span> (30k) · <span class="tn">Guidance</span> (22k)</div></div><div class="lc" style="left:901px;top:236px;width:156px;height:56px"><div class="lh"><i data-lucide="git-branch"></i><h4>Planning & Decomp.</h4></div><div class="tt"><span class="tn">LangChain</span> (140k) · <span class="tn">MetaGPT</span> (69k) · <span class="tn">AutoGen</span> (59k)</div></div><div class="zone loop" style="left:215px;top:326px;width:224px;height:152px"></div><div class="zlabel loop" style="left:227px;top:334px">① PERCEIVE <span class="sm">· sense the world</span></div><div class="lc" style="left:223px;top:350px;width:208px;height:56px"><div class="lh"><i data-lucide="eye"></i><h4>Sensors / Perception</h4></div><div class="tt"><span class="tn">browser-use</span> (101k) · <span class="tn">Puppeteer</span> (95k) · <span class="tn">Playwright</span> (92k)</div></div><div class="lc" style="left:223px;top:414px;width:208px;height:56px"><div class="lh"><i data-lucide="box"></i><h4>Environment State</h4></div><div class="tt"><span class="tn">Docker</span> (72k) · <span class="tn">Git</span> (62k) · <span class="tn">Compose</span> (38k)</div></div><div class="zone loop" style="left:841px;top:326px;width:224px;height:152px"></div><div class="zlabel loop" style="left:853px;top:334px">④ ACT <span class="sm">· change the world</span></div><div class="lc" style="left:849px;top:350px;width:208px;height:56px"><div class="lh"><i data-lucide="hammer"></i><h4>Actuators / Actions</h4></div><div class="tt"><span class="tn">Daytona</span> (72k) · <span class="tn">Open-Interp</span> (64k) · <span class="tn">gh CLI</span> (45k)</div></div><div class="lc" style="left:849px;top:414px;width:208px;height:56px"><div class="lh"><i data-lucide="plug"></i><h4>Tools & Skills</h4></div><div class="tt"><span class="tn">MCP servers</span> (88k) · <span class="tn">Composio</span> (29k) · <span class="tn">FastMCP</span> (26k)</div></div><div class="zone cross" style="left:215px;top:504px;width:336px;height:88px"></div><div class="zlabel cross" style="left:227px;top:512px">⑤ VERIFY <span class="sm">· is the work correct?</span></div><div class="lc" style="left:223px;top:528px;width:156px;height:56px"><div class="lh"><i data-lucide="circle-check"></i><h4>Controls & Valid.</h4></div><div class="tt"><span class="tn">Playwright</span> (92k) · <span class="tn">Promptfoo</span> (23k) · <span class="tn">OpenAI Evals</span> (19k)</div></div><div class="lc" style="left:387px;top:528px;width:156px;height:56px"><div class="lh"><i data-lucide="activity"></i><h4>Observability</h4></div><div class="tt"><span class="tn">LangFuse</span> (30k) · <span class="tn">Opik</span> (20k) · <span class="tn">Phoenix</span> (10k)</div></div><div class="zone cross" style="left:565px;top:504px;width:500px;height:88px"></div><div class="zlabel cross" style="left:577px;top:512px">⑥ GOVERN <span class="sm">· safe & in-bounds</span></div><div class="lc" style="left:573px;top:528px;width:156px;height:56px"><div class="lh"><i data-lucide="shield"></i><h4>Safety & Govern.</h4></div><div class="tt"><span class="tn">Firecracker</span> (35k) · <span class="tn">gVisor</span> (19k) · <span class="tn">E2B</span> (13k)</div></div><div class="lc" style="left:737px;top:528px;width:156px;height:56px"><div class="lh"><i data-lucide="key"></i><h4>Identity & Access</h4></div><div class="tt"><span class="tn">Vault</span> (36k) · <span class="tn">Keycloak</span> (35k) · <span class="tn">Infisical</span> (28k)</div></div><div class="lc" style="left:901px;top:528px;width:156px;height:56px"><div class="lh"><i data-lucide="user-check"></i><h4>Human Feedback</h4></div><div class="tt"><span class="tn">Streamlit</span> (45k) · <span class="tn">Gradio</span> (43k) · <span class="tn">LangGraph</span> (36k)</div></div>
   <div class="core"><div class="ch"><i data-lucide="cpu"></i><h4>Agent Core</h4></div><div class="fl">reason · choose · loop</div><div class="md">the model</div><div class="mdl">Opus · GPT-5 · Gemini</div></div>
   <div class="slide-number">11 / 25</div>
 
-<div class="slide-source-bar">Internal research · Agentic Harness — Capabilities map (15 functional domains, 80+ real shipping tools) (2026) &nbsp;|&nbsp; Anthropic · Claude Code — tools reference (Read · Grep · Edit · Bash · MCP · subagents · hooks) (2026) — docs.anthropic.com</div>
+<div class="slide-source-bar">Internal research · Agentic Harness: Capabilities map (15 functional domains, 80+ real shipping tools) (2026) &nbsp;|&nbsp; Anthropic · Claude Code: tools reference (Read · Grep · Edit · Bash · MCP · subagents · hooks) (2026) — docs.anthropic.com</div>
 </div>
 
 
@@ -2720,7 +2720,7 @@ body.presenting .slide.active {
   <div class="div-wrap">
     <div class="div-kicker">Building with agents · in practice</div>
     <h1 class="div-title">Dev <em>Tooling</em></h1>
-    <div class="div-tag">The editor, model, agent-CLI and IDE you build with — open-source or proprietary — and how engineers climb from vibe-coding to real agentic engineering. The harness and the method underneath stay the same.</div>
+    <div class="div-tag">The editor, model, agent-CLI and IDE you build with, open-source or proprietary, and how engineers climb from vibe-coding to real agentic engineering. The harness and the method underneath stay the same.</div>
   </div>
   <div class="div-bottom-line"></div>
   <div class="slide-number">12 / 25</div>
@@ -2732,14 +2732,14 @@ body.presenting .slide.active {
 
 <div class="slide s-setup" data-sources="github-stars,google-antigravity,gemini-cli-retired,zed-acp,llm-routers">
   <div class="section-label">The Build Workflow · Your setup</div>
-  <h2 class="slide-title">Open-source or proprietary — <em>your setup, your call</em>.</h2>
-  <p class="slide-lede">Three tiers — bring a model, compose a custom harness, or run a full IDE — each available <em>fully open</em> or <em>fully proprietary</em>. What doesn’t change is the method underneath.</p>
+  <h2 class="slide-title">Open-source or proprietary: <em>your setup, your call</em>.</h2>
+  <p class="slide-lede">Three tiers: bring a model, compose a custom harness, or run a full IDE, each available <em>fully open</em> or <em>fully proprietary</em>. What doesn’t change is the method underneath.</p>
   <div class="su-colh" style="left:392px"><i data-lucide="package-open"></i><span class="t">OPEN-SOURCE</span><span class="s">· self-hostable</span></div><div class="su-colh" style="left:908px"><i data-lucide="lock"></i><span class="t">PROPRIETARY</span><span class="s">· hosted</span></div>
   <div class="su-band" style="top:178px;height:74px"><div class="su-gut"><i data-lucide="box"></i><div><div class="t">Full IDE</div><div class="n">all-in-one</div></div></div><div class="su-cell oss"><div class="su-chips"><span class="su-chip">VS Code<span class="st">★187k</span></span><span class="su-chip">Zed<span class="st">★86k</span></span><span class="su-chip">Continue<span class="st">★35k</span></span><span class="su-chip">Tabby<span class="st">★34k</span></span></div><div class="su-cn">Zed standalone · VS Code + ext</div></div><div class="su-cell prop"><div class="su-chips"><span class="su-chip">Cursor</span><span class="su-chip">Windsurf</span><span class="su-chip">Antigravity</span><span class="su-chip">Kiro</span></div><div class="su-cn">closed-source · bundled</div></div></div><div class="su-band" style="top:256px;height:74px"><div class="su-gut"><i data-lucide="terminal"></i><div><div class="t">Custom harness</div><div class="n">editor + agent</div></div></div><div class="su-cell oss"><div class="su-chips"><span class="su-chip">opencode<span class="st">★180k</span></span><span class="su-chip">Cline<span class="st">★64k</span></span><span class="su-chip">Goose<span class="st">★50k</span></span><span class="su-chip">Aider<span class="st">★47k</span></span><span class="su-chip">Crush<span class="st">★26k</span></span></div><div class="su-cn">open + model-agnostic</div></div><div class="su-cell prop"><div class="su-chips"><span class="su-chip">Claude Code<span class="st">★135k</span></span><span class="su-chip">Codex<span class="st">★94k</span></span><span class="su-chip">Copilot</span><span class="su-chip">Antigravity CLI</span><span class="su-chip">Amp</span></div><div class="su-cn">proprietary · vendor-hosted</div></div></div><div class="su-band opt" style="top:334px;height:74px"><div class="su-gut"><i data-lucide="route"></i><div><div class="t">Inference & routing</div><span class="su-otag">optional</span></div></div><div class="su-cell oss"><div class="su-chips"><span class="su-chip">Ollama<span class="st">★175k</span></span><span class="su-chip">llama.cpp<span class="st">★118k</span></span><span class="su-chip">vLLM<span class="st">★85k</span></span><span class="su-chip">LiteLLM<span class="st">★52k</span></span></div><div class="su-cn">self-host · open</div></div><div class="su-cell prop"><div class="su-chips"><span class="su-chip">OpenRouter</span><span class="su-chip">Groq</span><span class="su-chip">Hugging Face</span><span class="su-chip">Bedrock</span><span class="su-chip">Vertex AI</span><span class="su-chip">Azure OpenAI</span></div><div class="su-cn">managed · cloud gateway</div></div></div><div class="su-band" style="top:412px;height:74px"><div class="su-gut"><i data-lucide="brain"></i><div><div class="t">Bring your own model</div><div class="n">the model</div></div></div><div class="su-cell oss"><div class="su-chips"><span class="su-chip">DeepSeek</span><span class="su-chip">Llama</span><span class="su-chip">Qwen</span><span class="su-chip">gpt-oss</span><span class="su-chip">Mistral</span></div><div class="su-cn">open weights · self-hostable</div></div><div class="su-cell prop"><div class="su-chips"><span class="su-chip">Claude</span><span class="su-chip">GPT-5</span><span class="su-chip">Gemini 3</span><span class="su-chip">Grok</span></div><div class="su-cn">frontier · hosted</div></div></div>
-  <div class="su-base" style="top:498px;height:96px"><div class="lab"><i data-lucide="anchor"></i><div><div class="t">The method</div><div class="n">the constant — either side</div></div></div><div class="flow"><span class="step">spec</span><span class="arr">→</span><span class="step">plan</span><span class="arr">→</span><span class="step">grill-me</span><span class="arr">→</span><span class="step">peer-review</span><span class="arr">→</span><span class="step">loop</span><span class="tail">&nbsp;· artefacts · rules · skills · the <b>metamodel</b></span></div></div>
+  <div class="su-base" style="top:498px;height:96px"><div class="lab"><i data-lucide="anchor"></i><div><div class="t">The method</div><div class="n">the constant, either side</div></div></div><div class="flow"><span class="step">spec</span><span class="arr">→</span><span class="step">plan</span><span class="arr">→</span><span class="step">grill-me</span><span class="arr">→</span><span class="step">peer-review</span><span class="arr">→</span><span class="step">loop</span><span class="tail">&nbsp;· artefacts · rules · skills · the <b>metamodel</b></span></div></div>
   <div class="slide-number">13 / 25</div>
 
-<div class="slide-source-bar">GitHub · Repository stargazers — live API snapshot (tool popularity) (2026) — api.github.com &nbsp;|&nbsp; Google · Antigravity — agentic development platform (IDE + CLI), launched 2025-11-18 (2026) — antigravity.google &nbsp;|&nbsp; Google · An important update: transitioning Gemini CLI to Antigravity CLI (retired 2026-06-18) (2026) — developers.googleblog.com &nbsp;|&nbsp; Zed Industries · Agent Client Protocol — external agents in any editor (2026) — zed.dev &nbsp;|&nbsp; TrueFoundry · LiteLLM vs OpenRouter — LLM gateways front open & proprietary models (2026) — truefoundry.com</div>
+<div class="slide-source-bar">GitHub · Repository stargazers: live API snapshot (tool popularity) (2026) — api.github.com &nbsp;|&nbsp; Google · Antigravity: agentic development platform (IDE + CLI), launched 2025-11-18 (2026) — antigravity.google &nbsp;|&nbsp; Google · An important update: transitioning Gemini CLI to Antigravity CLI (retired 2026-06-18) (2026) — developers.googleblog.com &nbsp;|&nbsp; Zed Industries · Agent Client Protocol: external agents in any editor (2026) — zed.dev &nbsp;|&nbsp; TrueFoundry · LiteLLM vs OpenRouter: LLM gateways front open & proprietary models (2026) — truefoundry.com</div>
 </div>
 
 
@@ -2748,8 +2748,8 @@ body.presenting .slide.active {
 
 <div class="slide s-maturity" data-sources="maturity-ladders,metr-rct,swe-bench-pro,anthropic-multiagent,huntley-ralph">
   <div class="section-label">The Build Workflow · Maturity model</div>
-  <h2 class="slide-title">From “vibe coding” to <em>agentic engineering</em> — five levels.</h2>
-  <p class="slide-lede">Autonomy climbs and the harness thickens — but the human moves <em>up</em> the stack (prompter → orchestrator), never out of it.</p>
+  <h2 class="slide-title">From “vibe coding” to <em>agentic engineering</em>: five levels.</h2>
+  <p class="slide-lede">Autonomy climbs and the harness thickens, but the human moves <em>up</em> the stack (prompter → orchestrator), never out of it.</p>
   <svg class="mt-rail" viewBox="0 0 1280 720"><defs><marker id="mtax" markerWidth="12" markerHeight="12" refX="6.5" refY="3.4" orient="auto"><path d="M0,0 L8,3.4 L0,6.8 Z" fill="var(--accent)"/></marker></defs><line x1="40" y1="552" x2="1198" y2="552" stroke="var(--accent)" stroke-width="2.2" marker-end="url(#mtax)"/></svg>
   <div class="mt-rowt" style="left:40px;top:384px"><i data-lucide="messages-square"></i><span class="l">Process</span></div><div class="mt-rowt" style="left:40px;top:424px"><i data-lucide="folder"></i><span class="l">Tooling</span></div><div class="mt-rowt" style="left:40px;top:464px"><i data-lucide="cpu"></i><span class="l">Harness</span></div><div class="mt-rowt" style="left:40px;top:511px"><i data-lucide="user-round"></i><span class="l">Human</span></div><div class="mt-rowcap" style="top:350px">what changes per level ↓</div>
   <div class="mt-card" style="left:140px;top:320px;width:208px;height:226px;border-top:3px solid color-mix(in srgb,var(--accent) 24%,#fff)"><div class="mt-chead" style="height:52px;background:color-mix(in srgb,var(--accent) 24%,#fff);color:var(--accent)"><div class="mt-hcap">Ad-hoc · “vibe coding”</div><div class="mt-hbig" style="font-size:20px;color:var(--accent)">1</div></div><div class="mt-body"><div class="mt-cell">Chat prompts; accept what runs</div><div class="mt-cell">none</div><div class="mt-cell">raw model</div><div class="mt-hrow"><span class="mt-hwrap"><span class="mt-rolepill"><i data-lucide="user-round"></i>Prompter</span><span class="mt-hitl">every turn · shallow</span></span><span class="mt-anchor">Karpathy<br><b>vibe coding</b></span></div></div></div><div class="mt-card" style="left:362px;top:300px;width:208px;height:246px;border-top:3px solid color-mix(in srgb,var(--accent) 44%,#fff)"><div class="mt-chead" style="height:72px;background:color-mix(in srgb,var(--accent) 44%,#fff);color:var(--accent)"><div class="mt-hcap">Assisted</div><div class="mt-hbig" style="font-size:30px;color:var(--accent)">2</div></div><div class="mt-body"><div class="mt-cell">Deliberate prompts; review each diff</div><div class="mt-cell">CLAUDE.md / AGENTS.md</div><div class="mt-cell">thin: one context file</div><div class="mt-hrow"><span class="mt-hwrap"><span class="mt-rolepill"><i data-lucide="user-round"></i>Author</span><span class="mt-hitl">reviews every line</span></span><span class="mt-anchor">Cursor<br><b>Copilot</b></span></div></div></div><div class="mt-card" style="left:584px;top:280px;width:208px;height:266px;border-top:3px solid color-mix(in srgb,var(--accent) 64%,#fff)"><div class="mt-chead" style="height:92px;background:color-mix(in srgb,var(--accent) 64%,#fff);color:#fff"><div class="mt-hcap">Spec-driven + harness</div><div class="mt-hbig" style="font-size:40px;color:#fff">3</div></div><div class="mt-body"><div class="mt-cell">Spec/PRD → agent runs build/test loop</div><div class="mt-cell">docs/ · rules · skills</div><div class="mt-cell">guides + first sensors (hooks)</div><div class="mt-hrow"><span class="mt-hwrap"><span class="mt-rolepill"><i data-lucide="user-round"></i>Director</span><span class="mt-hitl">approves at gates</span></span><span class="mt-anchor">Spec Kit · Kiro<br><b>clew</b></span></div></div></div><div class="mt-card" style="left:806px;top:260px;width:208px;height:286px;border-top:3px solid color-mix(in srgb,var(--accent) 82%,#fff)"><div class="mt-chead" style="height:112px;background:color-mix(in srgb,var(--accent) 82%,#fff);color:#fff"><div class="mt-hcap">Full harness · loop</div><div class="mt-hbig" style="font-size:50px;color:#fff">4</div></div><div class="mt-body"><div class="mt-cell">Agent owns implement→test→commit</div><div class="mt-cell">+ hooks · MCP · fix_plan · tests</div><div class="mt-cell">complete + loop driver (ralph.sh)</div><div class="mt-hrow"><span class="mt-hwrap"><span class="mt-rolepill"><i data-lucide="user-round"></i>Supervisor</span><span class="mt-hitl">goals + escalations</span></span><span class="mt-anchor"><b>Ralph loop</b><br>Huntley</span></div></div></div><div class="mt-card" style="left:1028px;top:240px;width:208px;height:306px;border-top:3px solid color-mix(in srgb,var(--accent) 100%,#fff)"><div class="mt-chead" style="height:132px;background:color-mix(in srgb,var(--accent) 100%,#fff);color:#fff"><div class="mt-hcap">Multi-agent fleet</div><div class="mt-hbig" style="font-size:60px;color:#fff">5</div></div><div class="mt-body"><div class="mt-cell">Orchestrator → parallel agents → PRs</div><div class="mt-cell">+ git worktree per agent</div><div class="mt-cell">fleet: subagents · worktrees · critic</div><div class="mt-hrow"><span class="mt-hwrap"><span class="mt-rolepill"><i data-lucide="user-round"></i>Orchestrator</span><span class="mt-hitl">writes specs · tunes</span></span><span class="mt-anchor">Anthropic<br><b>+90%</b></span></div></div></div>
@@ -2758,7 +2758,7 @@ body.presenting .slide.active {
   <div class="mt-caveat">⚠ <b>Even L5 is *supervised* autonomy, not hands-off.</b> METR: experienced devs were 19% <i>slower</i> on mature codebases; SWE-bench Pro tops out ~23%; Ralph’s author: “no way I’d use it on an existing codebase.” The guardrail against Thoughtworks’ <b>“cognitive debt”</b> is keeping humans on standards, architecture &amp; final sign-off.</div>
   <div class="slide-number">14 / 25</div>
 
-<div class="slide-source-bar">Synthesis · Agentic-engineering maturity ladders (Dash0, MindStudio, ELEKS, ASDLC; SAE J3016 analogy; Feng/McDonald/Zhang 2025; Gartner 2026) (2026) &nbsp;|&nbsp; METR · Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity (RCT — 19% slower) (2025) — metr.org &nbsp;|&nbsp; Scale AI (SEAL) · SWE-bench Pro — standardized public leaderboard · 1,865 real tasks across 41 professional repos (2026) — labs.scale.com &nbsp;|&nbsp; Anthropic · How we built our multi-agent research system (+90.2% vs single-agent on internal eval) (2025) — anthropic.com &nbsp;|&nbsp; Geoffrey Huntley · Ralph Wiggum as a software engineer (autonomous single-agent loop) (2025) — ghuntley.com</div>
+<div class="slide-source-bar">Synthesis · Agentic-engineering maturity ladders (Dash0, MindStudio, ELEKS, ASDLC; SAE J3016 analogy; Feng/McDonald/Zhang 2025; Gartner 2026) (2026) &nbsp;|&nbsp; METR · Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity (RCT: 19% slower) (2025) — metr.org &nbsp;|&nbsp; Scale AI (SEAL) · SWE-bench Pro: standardized public leaderboard · 1,865 real tasks across 41 professional repos (2026) — labs.scale.com &nbsp;|&nbsp; Anthropic · How we built our multi-agent research system (+90.2% vs single-agent on internal eval) (2025) — anthropic.com &nbsp;|&nbsp; Geoffrey Huntley · Ralph Wiggum as a software engineer (autonomous single-agent loop) (2025) — ghuntley.com</div>
 </div>
 
 
@@ -2771,7 +2771,7 @@ body.presenting .slide.active {
   <div class="div-wrap">
     <div class="div-kicker">Section 03 / 05</div>
     <h1 class="div-title">The <em>Metamodel</em></h1>
-    <div class="div-tag">How an agent armed with skills and rules turns business context into deployable artefacts — every step traceable.</div>
+    <div class="div-tag">How an agent armed with skills and rules turns business context into deployable artefacts, every step traceable.</div>
   </div>
   <div class="div-bottom-line"></div>
   <div class="slide-number">15 / 25</div>
@@ -2783,7 +2783,7 @@ body.presenting .slide.active {
 
 <div class="slide s-devops">
   <div class="section-label">The Metamodel · The cycle</div>
-  <h2 class="slide-title">Skills &amp; rules wrap the whole lifecycle — from discovery to operations.</h2>
+  <h2 class="slide-title">Skills &amp; rules wrap the whole lifecycle, from discovery to operations.</h2>
   <p class="slide-lede">Far beyond DevOps: eight phases from business discovery to operations, each owned by a prefix, all tracing back to one metamodel.</p>
   <div class="dv-stage">
     <svg class="dv-svg" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
@@ -2815,22 +2815,22 @@ body.presenting .slide.active {
 <polyline points="853.5,535.3 823.0,520.0 826.5,488.5" fill="none" stroke="#f6f8fc" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/>
 <polyline points="927.0,408.0 898.5,426.8 873.0,408.0" fill="none" stroke="#f6f8fc" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/>
 <polyline points="853.5,280.7 855.5,314.7 826.5,327.5" fill="none" stroke="#f6f8fc" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/>
-<rect x="464" y="278" width="72" height="20" rx="10" fill="#800020"/>
-<text x="500" y="292" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#ffffff">DISCOVER</text>
-<rect x="367" y="338" width="58" height="20" rx="10" fill="#800020"/>
-<text x="396" y="352" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#ffffff">DEFINE</text>
-<rect x="370" y="458" width="52" height="20" rx="10" fill="#800020"/>
-<text x="396" y="472" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#ffffff">MODEL</text>
-<rect x="461" y="518" width="78" height="20" rx="10" fill="#800020"/>
-<text x="500" y="532" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#ffffff">ARCHITECT</text>
-<rect x="748" y="278" width="65" height="20" rx="10" fill="#c04060"/>
-<text x="780" y="292" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#ffffff">SPECIFY</text>
-<rect x="858" y="338" width="52" height="20" rx="10" fill="#c04060"/>
-<text x="884" y="352" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#ffffff">BUILD</text>
-<rect x="848" y="458" width="72" height="20" rx="10" fill="#c04060"/>
-<text x="884" y="472" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#ffffff">VALIDATE</text>
-<rect x="748" y="518" width="65" height="20" rx="10" fill="#c04060"/>
-<text x="780" y="532" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#ffffff">OPERATE</text>
+<rect x="464" y="278" width="72" height="20" rx="10" fill="#ffffff" stroke="#800020" stroke-width="1.2"/>
+<text x="500" y="292" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#800020">DISCOVER</text>
+<rect x="367" y="338" width="58" height="20" rx="10" fill="#ffffff" stroke="#800020" stroke-width="1.2"/>
+<text x="396" y="352" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#800020">DEFINE</text>
+<rect x="370" y="458" width="52" height="20" rx="10" fill="#ffffff" stroke="#800020" stroke-width="1.2"/>
+<text x="396" y="472" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#800020">MODEL</text>
+<rect x="461" y="518" width="78" height="20" rx="10" fill="#ffffff" stroke="#800020" stroke-width="1.2"/>
+<text x="500" y="532" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#800020">ARCHITECT</text>
+<rect x="748" y="278" width="65" height="20" rx="10" fill="#ffffff" stroke="#c04060" stroke-width="1.2"/>
+<text x="780" y="292" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#c04060">SPECIFY</text>
+<rect x="858" y="338" width="52" height="20" rx="10" fill="#ffffff" stroke="#c04060" stroke-width="1.2"/>
+<text x="884" y="352" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#c04060">BUILD</text>
+<rect x="848" y="458" width="72" height="20" rx="10" fill="#ffffff" stroke="#c04060" stroke-width="1.2"/>
+<text x="884" y="472" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#c04060">VALIDATE</text>
+<rect x="748" y="518" width="65" height="20" rx="10" fill="#ffffff" stroke="#c04060" stroke-width="1.2"/>
+<text x="780" y="532" text-anchor="middle" font-size="11" font-weight="800" letter-spacing="0.5" fill="#c04060">OPERATE</text>
 </svg>
   <div class="dv-cl dv-l" style="left:238px;top:156px;width:184px;min-height:66px"><div class="dv-clh"><span class="dv-clt">DISCOVERY</span><span class="dv-cln">3</span></div><div class="dv-cls">Idea · Research · Workshop</div></div>
   <div class="dv-cl dv-l" style="left:40px;top:272px;width:182px;min-height:118px"><div class="dv-clh"><span class="dv-clt">BUSINESS</span><span class="dv-cln">9</span></div><div class="dv-cls">Vision · Persona · Capability map · Value stream · Objective · Process · Model canvas · Quant model · Competitive landscape</div></div>
@@ -2850,7 +2850,7 @@ body.presenting .slide.active {
 
 <div class="slide s-phase p1">
   <div class="section-label">The SDLC · Discover</div>
-  <h2 class="slide-title">Discover &amp; Define <span style="color:var(--accent)">—</span> make the context real.</h2>
+  <h2 class="slide-title">Discover &amp; Define <span style="color:var(--accent)">·</span> make the context real.</h2>
   <div class="ph-stepper"><span class="ph-step on">① Discover</span><span class="ph-step-arr">›</span><span class="ph-step">② Architect</span><span class="ph-step-arr">›</span><span class="ph-step">③ Deliver</span></div>
   <div class="ph-left">
     <div class="ph-h">What the agentic engineer does here</div>
@@ -2867,7 +2867,7 @@ body.presenting .slide.active {
 
 <div class="slide s-phase p2">
   <div class="section-label">The SDLC · Architect</div>
-  <h2 class="slide-title">Architect the solution <span style="color:var(--accent)">—</span> turn context into a solution.</h2>
+  <h2 class="slide-title">Architect the solution <span style="color:var(--accent)">·</span> turn context into a solution.</h2>
   <div class="ph-stepper"><span class="ph-step">① Discover</span><span class="ph-step-arr">›</span><span class="ph-step on">② Architect</span><span class="ph-step-arr">›</span><span class="ph-step">③ Deliver</span></div>
   <div class="ph-left">
     <div class="ph-h">What the agentic engineer does here</div>
@@ -2884,7 +2884,7 @@ body.presenting .slide.active {
 
 <div class="slide s-phase p3">
   <div class="section-label">The SDLC · Deliver</div>
-  <h2 class="slide-title">Execute &amp; Deliver <span style="color:var(--accent)">—</span> plan, build, test, ship.</h2>
+  <h2 class="slide-title">Execute &amp; Deliver <span style="color:var(--accent)">·</span> plan, build, test, ship.</h2>
   <div class="ph-stepper"><span class="ph-step">① Discover</span><span class="ph-step-arr">›</span><span class="ph-step">② Architect</span><span class="ph-step-arr">›</span><span class="ph-step on">③ Deliver</span></div>
   <div class="ph-left">
     <div class="ph-h">What the agentic engineer does here</div>
@@ -2905,7 +2905,7 @@ body.presenting .slide.active {
   <div class="div-wrap">
     <div class="div-kicker">Section 04 / 05</div>
     <h1 class="div-title">The Build <em>Workflow</em></h1>
-    <div class="div-tag">From a PRD to merged code — how one engineer drives agents through alignment and verification gates, then lets them run autonomously.</div>
+    <div class="div-tag">From a PRD to merged code: how one engineer drives agents through alignment and verification gates, then lets them run autonomously.</div>
   </div>
   <div class="div-bottom-line"></div>
   <div class="slide-number">20 / 25</div>
@@ -2917,7 +2917,7 @@ body.presenting .slide.active {
 
 <div class="slide s-wf-flow">
   <div class="section-label">The Build Workflow · End to end</div>
-  <h2 class="slide-title">From PRD to merged code — two fresh-session gates, then autonomy.</h2>
+  <h2 class="slide-title">From PRD to merged code: two fresh-session gates, then autonomy.</h2>
   <p class="slide-lede">Business context and discovery are done; the roadmap gives one PRD per epic. The loop below runs per PRD.</p>
   <div class="wf-row">
     <div class="wf-card"><div class="wf-hd"><div class="wf-num">1</div><div class="wf-name">Spec ready</div></div><div class="wf-fresh wf-given"><i data-lucide="check"></i>already done</div><div class="wf-step"><i data-lucide="map" class="wf-ic"></i><div>Delivery roadmap &rarr; <b>one PRD per epic</b></div></div><div class="wf-step"><i data-lucide="target" class="wf-ic"></i><div>Each PRD states what must be true</div></div><div class="wf-out"><i data-lucide="check-circle-2" class="wf-ic"></i>PRD in hand</div></div>
@@ -2938,17 +2938,17 @@ body.presenting .slide.active {
 
 <div class="slide s-prd-plan">
   <div class="section-label">The Build Workflow · Artefacts</div>
-  <h2 class="slide-title">PRD says what must be true; the plan says how — safely.</h2>
+  <h2 class="slide-title">PRD says what must be true; the plan says how, safely.</h2>
   <p class="slide-lede">Two artefacts, one chain: the PRD scopes the epic, the implementation plan breaks it into runnable increments.</p>
   <div class="pp-wrap">
     <div class="pp-card left">
       <div class="pp-kick">Build by feature · one per epic</div>
       <div class="pp-name">PRD</div>
       <div class="pp-q">&ldquo;What must be true, and why.&rdquo;</div>
-      <div class="pp-li"><i data-lucide="target"></i><div><b>Problem, goals &amp; non-goals</b> — the scope boundary</div></div>
+      <div class="pp-li"><i data-lucide="target"></i><div><b>Problem, goals &amp; non-goals</b>: the scope boundary</div></div>
       <div class="pp-li"><i data-lucide="users"></i><div><b>User stories</b> grounded in personas (P-NN)</div></div>
       <div class="pp-li"><i data-lucide="check-square"></i><div><b>Acceptance criteria</b> + success metrics</div></div>
-      <div class="pp-li"><i data-lucide="link"></i><div><b>§0 traceability</b> — the epic and its dependencies</div></div>
+      <div class="pp-li"><i data-lucide="link"></i><div><b>§0 traceability</b>: the epic and its dependencies</div></div>
       <div class="pp-tags">E-NN · P-NN · C-N.M.FXX · QA-XXNN · UC-NN</div>
     </div>
     <div class="pp-mid">
@@ -2977,13 +2977,13 @@ body.presenting .slide.active {
 
 <div class="slide s-verify">
   <div class="section-label">The Build Workflow · Alignment &amp; verification</div>
-  <h2 class="slide-title">Two fresh agents pressure-test the work — before and after the plan.</h2>
+  <h2 class="slide-title">Two fresh agents pressure-test the work, before and after the plan.</h2>
   <p class="slide-lede">Grill-me pulls the thinking out of my head; peer-review checks the document. Both run in a clean session.</p>
   <div class="v-wrap">
     <div class="v-card a">
       <div class="v-tag"><i data-lucide="refresh-cw" style="width:11px;height:11px"></i>Alignment · before the plan</div>
       <div class="v-skill">agent-grill-me</div>
-      <div class="v-when">Live Socratic session on the PRD — one question at a time.</div>
+      <div class="v-when">Live Socratic session on the PRD, one question at a time.</div>
       <div class="v-li"><i data-lucide="help-circle"></i><div>Agent asks ~10 focused Q on <b>implementation &amp; architecture</b></div></div>
       <div class="v-li"><i data-lucide="book-marked"></i><div>Vocabulary checked against the <b>domain glossary</b></div></div>
       <div class="v-li"><i data-lucide="file-signature"></i><div>Decisions crystallised into <b>ADRs</b> while context is live</div></div>
@@ -3016,10 +3016,10 @@ body.presenting .slide.active {
 
 <div class="slide s-ralph">
   <div class="section-label">The Build Workflow · Autonomous execution</div>
-  <h2 class="slide-title">The Ralph loop — a fresh agent per increment, until the plan is done.</h2>
+  <h2 class="slide-title">The Ralph loop: a fresh agent per increment, until the plan is done.</h2>
   <div class="r-left">
     <div class="r-h">What the loop is</div>
-    <div class="r-li"><i data-lucide="repeat"></i><div>A bash script (<b>ralph.sh</b>) drives the plan to completion — one increment per iteration.</div></div>
+    <div class="r-li"><i data-lucide="repeat"></i><div>A bash script (<b>ralph.sh</b>) drives the plan to completion, one increment per iteration.</div></div>
     <div class="r-li"><i data-lucide="refresh-cw"></i><div><b>Fresh agent each iteration</b> &rarr; clean context, no drift or context rot.</div></div>
     <div class="r-li"><i data-lucide="flag"></i><div>Loops while increments are <b>pending</b>; stops when every one is <b>Status: done</b>.</div></div>
     <div class="r-cmd">ralph.sh <span class="fl">&lt;workspace&gt;</span> \<br>
@@ -3031,7 +3031,7 @@ body.presenting .slide.active {
     <div class="r-rsub">Audit must be green before the first run.</div>
     <div class="r-node"><div class="ix"><i data-lucide="crosshair"></i></div><div><div class="r-nt">Pick next pending increment</div><div class="r-ns">read workspace + plan</div></div></div>
     <div class="r-node"><div class="ix"><i data-lucide="hammer"></i></div><div><div class="r-nt">Implement its scope</div><div class="r-ns">follow the primary-files list</div></div></div>
-    <div class="r-node"><div class="ix"><i data-lucide="flask-conical"></i></div><div><div class="r-nt">Run the test gate</div><div class="r-ns">pottery wheel — up to 3 retries</div></div></div>
+    <div class="r-node"><div class="ix"><i data-lucide="flask-conical"></i></div><div><div class="r-nt">Run the test gate</div><div class="r-ns">pottery wheel, up to 3 retries</div></div></div>
     <div class="r-node"><div class="ix"><i data-lucide="git-commit-horizontal"></i></div><div><div class="r-nt">Commit the increment</div><div class="r-ns">advance status &rarr; done</div></div></div>
     <div class="r-loopback"><i data-lucide="corner-left-up" style="width:13px;height:13px"></i>repeat with a fresh agent</div>
     <div class="r-done"><i data-lucide="check-check"></i>All increments done &rarr; run CI</div>
@@ -3058,7 +3058,7 @@ body.presenting .slide.active {
       <span class="close-pos">Not a SaaS</span>
       <span class="close-pos">The repo is the source of truth</span>
     </div>
-    <div class="close-metaphor"><em>Git for product architecture</em> — manage what must be true, not what's in progress.</div>
+    <div class="close-metaphor"><em>Git for product architecture</em>: manage what must be true, not what's in progress.</div>
   </div>
 
   <div class="close-bottom-line"></div>
