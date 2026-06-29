@@ -2196,3 +2196,37 @@
 .s-harness-map .fwbar .fwl{font-family:var(--font-mono);font-size:8px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);flex-shrink:0;line-height:1.2;}
 .s-harness-map .fwbar .fwt{font-family:var(--font-mono);font-size:8.5px;font-weight:600;color:var(--ink);background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:3px 8px;white-space:nowrap;}
 .s-harness-map .fwbar .fwt .st{color:var(--accent);font-weight:700;}
+
+/* ══════════════════════════════════════════════════════════════
+   IS SE DEAD? (s-shock) · 50 tools + the ladder of abstraction
+   ══════════════════════════════════════════════════════════════ */
+.s-shock *{box-sizing:border-box;}
+.s-shock{--sk-sh:0 1px 3px rgba(15,17,23,.08);}
+.s-shock .section-label{top:34px;left:40px;}
+.s-shock .slide-title{top:54px;left:40px;right:40px;font-size:26px;}
+.s-shock .slide-title em{font-style:normal;color:var(--accent);}
+.s-shock .slide-lede{top:92px;left:40px;right:40px;font-size:12.5px;}
+.s-shock .slide-lede em{font-style:normal;color:var(--accent);font-weight:600;}
+.s-shock .sk-colh{position:absolute;font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
+.s-shock .sk-colh .sm{color:var(--dim);font-weight:500;text-transform:none;letter-spacing:.02em;}
+.s-shock .sk-bignum{position:absolute;left:40px;top:158px;display:flex;align-items:baseline;gap:12px;}
+.s-shock .sk-bignum .n{font-family:var(--font-mono);font-size:74px;font-weight:800;color:var(--accent);line-height:.85;letter-spacing:-.03em;}
+.s-shock .sk-bignum .lab{font-size:15px;font-weight:800;color:var(--ink);line-height:1.15;}
+.s-shock .sk-bignum .lab .s{display:block;font-size:9px;font-weight:500;color:var(--muted);margin-top:4px;font-family:var(--font-mono);}
+.s-shock .sk-cx{position:absolute;left:40px;width:560px;display:flex;gap:11px;align-items:flex-start;}
+.s-shock .sk-cx .ic{width:30px;height:30px;border-radius:8px;background:color-mix(in srgb,var(--accent) 9%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 22%,var(--border));display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.s-shock .sk-cx .ic svg{width:16px;height:16px;color:var(--accent);}
+.s-shock .sk-cx .t{font-size:13px;font-weight:800;color:var(--ink);line-height:1.2;}
+.s-shock .sk-cx .d{font-size:10.5px;color:var(--muted);line-height:1.35;margin-top:2px;}
+.s-shock .sk-rung{position:absolute;left:706px;right:40px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-radius:8px;border:1px solid var(--border);background:var(--surface);box-shadow:var(--sk-sh);padding:0 13px;}
+.s-shock .sk-rung .rl{font-size:12px;font-weight:700;color:var(--ink);}
+.s-shock .sk-rung .re{font-family:var(--font-mono);font-size:9px;color:var(--dim);}
+.s-shock .sk-rung.top{background:var(--accent);border-color:var(--accent);box-shadow:0 4px 14px rgba(128,0,32,.25);}
+.s-shock .sk-rung.top .rl{color:#fff;font-weight:800;}
+.s-shock .sk-rung.top .re{color:rgba(255,255,255,.8);}
+.s-shock .sk-arrow{position:absolute;left:678px;display:flex;flex-direction:column;align-items:center;color:var(--accent);font-size:13px;line-height:1;}
+.s-shock .sk-arrow .ln{width:2px;background:color-mix(in srgb,var(--accent) 35%,var(--border));}
+.s-shock .sk-punch{position:absolute;left:40px;right:40px;border-radius:12px;background:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(128,0,32,.25);display:flex;align-items:center;gap:14px;padding:13px 20px;}
+.s-shock .sk-punch svg{width:26px;height:26px;color:#fff;flex-shrink:0;}
+.s-shock .sk-punch .t{font-size:17px;font-weight:800;line-height:1.15;}
+.s-shock .sk-punch .s{font-size:11.5px;color:rgba(255,255,255,.85);font-weight:500;margin-top:3px;}
