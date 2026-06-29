@@ -1889,7 +1889,7 @@
 /* ══════════════════════════════════════════════════════════════
    SLIDE — WRITING IT DOWN (s-writedown)  ·  monolithic AGENTS.md rots
    ══════════════════════════════════════════════════════════════ */
-.s-writedown .wd-cols2 { position: absolute; top: 226px; left: 68px; right: 68px; bottom: 102px; display: flex; gap: 28px; align-items: flex-start; }
+.s-writedown .wd-cols2 { position: absolute; top: 226px; left: 68px; right: 68px; bottom: 122px; display: flex; gap: 28px; align-items: flex-start; }
 .s-writedown .wd-modes { flex: 1.25; display: flex; flex-direction: column; gap: 13px; }
 .s-writedown .wd-modes-h { font-size: 14px; font-weight: 800; color: var(--ink); }
 .s-writedown .wd-modes-h code { font-family: var(--font-mono); color: var(--accent); }
@@ -2335,7 +2335,7 @@
    ══════════════════════════════════════════════════════════════ */
 .mem-kicker{position:absolute; top:196px; left:68px; z-index:3;
   font-family:var(--font-mono); font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--accent);}
-.mem-fixbar{position:absolute; left:68px; right:68px; bottom:42px; z-index:3;
+.mem-fixbar{position:absolute; left:68px; right:68px; bottom:64px; z-index:3;
   display:flex; align-items:flex-start; gap:11px; background:var(--accent-lt);
   border:1px solid color-mix(in srgb,var(--accent) 26%,var(--border)); border-left:4px solid var(--accent);
   border-radius:10px; padding:11px 16px; font-size:12.5px; color:var(--ink); line-height:1.4;}
@@ -2349,7 +2349,7 @@
    ══════════════════════════════════════════════════════════════ */
 .s-procmem *{box-sizing:border-box;}
 .s-procmem .slide-lede em{font-style:normal; color:var(--accent); font-weight:600;}
-.s-procmem .pm-cracks2{position:absolute; left:68px; right:68px; top:226px; bottom:102px;
+.s-procmem .pm-cracks2{position:absolute; left:68px; right:68px; top:226px; bottom:122px;
   display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:14px;}
 .s-procmem .pm-crack{display:flex; gap:11px; align-items:flex-start; background:var(--accent-lt);
   border:1px solid color-mix(in srgb,var(--accent) 26%,var(--border)); border-left:4px solid var(--accent);
@@ -2363,7 +2363,7 @@
    ══════════════════════════════════════════════════════════════ */
 .s-epimem *{box-sizing:border-box;}
 .s-epimem .slide-lede em{font-style:normal; color:var(--accent); font-weight:600;}
-.s-epimem .em-cols{position:absolute; left:68px; right:68px; top:226px; bottom:102px; display:flex; gap:26px; align-items:flex-start;}
+.s-epimem .em-cols{position:absolute; left:68px; right:68px; top:226px; bottom:122px; display:flex; gap:26px; align-items:flex-start;}
 .s-epimem .em-fail{flex:1; display:flex; flex-direction:column;}
 .s-epimem .em-fail-h{font-size:14px; font-weight:800; color:var(--ink); margin-bottom:13px;}
 .s-epimem .em-stat{background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--danger);
