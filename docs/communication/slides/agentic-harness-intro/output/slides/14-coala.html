@@ -5,17 +5,19 @@
 
   <!-- working memory: the volatile hub everything passes through -->
   <div class="cm-window">
-    <div class="cm-wtag">VOLATILE · rebuilt on every LLM call</div>
-    <div class="cm-wname">Working memory <em>· the context window</em></div>
-    <div class="cm-wdef">the active state the model is given each call</div>
+    <div class="cm-whead">
+      <div class="cm-wtag"><i data-lucide="square-code" class="cm-ic"></i>Working memory · volatile</div>
+      <div class="cm-wname">The context window</div>
+      <div class="cm-wdef">the active state the model is given on every LLM call, rebuilt each turn</div>
+    </div>
     <div class="cm-wbreak"><i data-lucide="arrow-down-right"></i>Context rot</div>
   </div>
 
   <!-- the three persistent stores feed up into the window -->
-  <svg class="cm-arrows" viewBox="0 0 1280 128" width="1280" height="128">
-    <line x1="260" y1="120" x2="260" y2="28"/><polygon points="254,34 266,34 260,18"/>
-    <line x1="640" y1="120" x2="640" y2="28"/><polygon points="634,34 646,34 640,18"/>
-    <line x1="1020" y1="120" x2="1020" y2="28"/><polygon points="1014,34 1026,34 1020,18"/>
+  <svg class="cm-arrows" viewBox="0 0 1280 80" width="1280" height="80">
+    <line x1="260" y1="74" x2="260" y2="16"/><polygon points="254,22 266,22 260,6"/>
+    <line x1="640" y1="74" x2="640" y2="16"/><polygon points="634,22 646,22 640,6"/>
+    <line x1="1020" y1="74" x2="1020" y2="16"/><polygon points="1014,22 1026,22 1020,6"/>
   </svg>
   <div class="cm-persist">PERSISTENT · survives across sessions · loaded into the window on demand</div>
 

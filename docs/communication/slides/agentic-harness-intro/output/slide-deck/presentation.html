@@ -1989,21 +1989,23 @@
 /* ══════════════════════════════════════════════════════════════
    SLIDE — WRITING IT DOWN (s-writedown)  ·  monolithic AGENTS.md rots
    ══════════════════════════════════════════════════════════════ */
-.s-writedown .wd-cols2 { position: absolute; top: 226px; left: 68px; right: 68px; bottom: 122px; display: flex; gap: 28px; align-items: flex-start; }
-.s-writedown .wd-modes { flex: 1.25; display: flex; flex-direction: column; gap: 13px; }
-.s-writedown .wd-modes-h { font-size: 14px; font-weight: 800; color: var(--ink); }
-.s-writedown .wd-modes-h code { font-family: var(--font-mono); color: var(--accent); }
-.s-writedown .wd-mode { display: flex; gap: 11px; align-items: flex-start; font-size: 13px; color: var(--ink); line-height: 1.4; }
-.s-writedown .wd-mode b { color: var(--ink); }
-.s-writedown .wd-ic { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
-.s-writedown .wd-ev { flex: 1; display: flex; flex-direction: column; gap: 14px; }
-.s-writedown .wd-ev-h { font-family: var(--font-mono); font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
-.s-writedown .wd-ev-stats { display: flex; gap: 9px; }
-.s-writedown .wd-ev-stat { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 10px 8px; text-align: center; font-size: 10px; color: var(--muted); line-height: 1.2; box-shadow: var(--shadow); }
-.s-writedown .wd-ev-stat em { display: block; font-style: normal; font-size: 22px; font-weight: 800; color: var(--accent); letter-spacing: -.02em; margin-bottom: 3px; }
-.s-writedown .wd-illeg { background: var(--surface); border: 1.5px solid var(--border); border-left: 4px solid var(--danger); border-radius: 10px; padding: 14px 16px; }
-.s-writedown .wd-illeg-k { font-size: 13.5px; font-weight: 800; color: var(--ink); }
-.s-writedown .wd-illeg-v { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+.s-writedown .wd-stage { position: absolute; top: 224px; left: 68px; right: 68px; bottom: 120px; display: flex; gap: 44px; align-items: flex-start; }
+.s-writedown .wd-mono { flex: 1.1; display: flex; flex-direction: column; gap: 11px; }
+.s-writedown .wd-mono-cap { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
+.s-writedown .wd-mono-cap b { color: var(--accent); }
+.s-writedown .wd-mono-cap code { font-family: var(--font-mono); color: var(--accent); }
+.s-writedown .wd-file { background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; }
+.s-writedown .wd-file-h { display: flex; align-items: center; gap: 9px; padding: 11px 16px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--ink); }
+.s-writedown .wd-file-h svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
+.s-writedown .wd-file-badge { margin-left: auto; background: var(--danger); color: var(--surface); font-size: 9px; font-weight: 800; letter-spacing: .08em; padding: 3px 9px; border-radius: 20px; }
+.s-writedown .wd-lines { padding: 15px 16px 6px; display: flex; flex-direction: column; gap: 8px;
+  -webkit-mask-image: linear-gradient(180deg, #000 58%, transparent); mask-image: linear-gradient(180deg, #000 58%, transparent); }
+.s-writedown .wd-lines .ln { height: 7px; border-radius: 4px; background: var(--border); }
+.s-writedown .wd-lines .ln.live { background: color-mix(in srgb, var(--accent) 60%, var(--surface)); }
+.s-writedown .wd-file-more { padding: 4px 16px 12px; font-family: var(--font-mono); font-size: 10.5px; color: var(--danger); }
+.s-writedown .wd-fails { flex: 0 0 350px; display: flex; flex-direction: column; gap: 13px; }
+.s-writedown .wd-fail { display: flex; align-items: center; gap: 13px; background: var(--accent-lt); border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--border)); border-left: 4px solid var(--accent); border-radius: 10px; padding: 14px 18px; font-size: 15.5px; font-weight: 700; color: var(--ink); }
+.s-writedown .wd-fail svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
 
 /* ══════════════════════════════════════════════════════════════
    HARNESS MAP (s-harness-map) · capability zones around the agent core
@@ -2391,24 +2393,24 @@
    ══════════════════════════════════════════════════════════════ */
 .s-coala *{box-sizing:border-box;}
 .s-coala .slide-lede em{font-style:normal; color:var(--accent); font-weight:600;}
-/* the volatile working-memory window (hub) */
-.s-coala .cm-window{position:absolute; left:340px; right:340px; top:192px; height:96px;
+/* the volatile working-memory window (hub) — full-width hero banner */
+.s-coala .cm-window{position:absolute; left:90px; right:90px; top:174px; height:166px;
   background:var(--accent-lt); border:1.5px solid var(--accent); border-radius:13px; box-shadow:var(--shadow);
-  display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:8px 20px;}
-.s-coala .cm-wtag{font-family:var(--font-mono); font-size:9.5px; font-weight:700; letter-spacing:.1em;
-  text-transform:uppercase; color:var(--accent);}
-.s-coala .cm-wname{font-size:19px; font-weight:800; color:var(--ink); line-height:1.1; margin-top:2px;}
-.s-coala .cm-wname em{font-style:normal; color:var(--accent); font-weight:700; font-size:15px;}
-.s-coala .cm-wdef{font-size:11.5px; color:var(--muted); margin-top:3px;}
-.s-coala .cm-wbreak{position:absolute; bottom:-12px; left:50%; transform:translateX(-50%);
-  display:inline-flex; align-items:center; gap:5px; background:var(--accent); color:var(--surface);
-  border-radius:20px; padding:3px 12px; font-family:var(--font-mono); font-size:10px; font-weight:700; white-space:nowrap;}
-.s-coala .cm-wbreak svg{width:12px; height:12px; flex-shrink:0;}
+  display:flex; flex-direction:row; align-items:center; justify-content:space-between; gap:30px; padding:0 44px;}
+.s-coala .cm-whead{display:flex; flex-direction:column;}
+.s-coala .cm-wtag{display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:11px; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--accent);}
+.s-coala .cm-wtag .cm-ic{width:16px; height:16px; color:var(--accent); flex-shrink:0;}
+.s-coala .cm-wname{font-size:30px; font-weight:800; color:var(--ink); line-height:1.05; letter-spacing:-.01em; margin-top:7px;}
+.s-coala .cm-wdef{font-size:13px; color:var(--muted); margin-top:8px; max-width:640px; line-height:1.4;}
+.s-coala .cm-wbreak{display:inline-flex; align-items:center; gap:6px; background:var(--accent); color:var(--surface);
+  border-radius:22px; padding:7px 16px; font-family:var(--font-mono); font-size:12px; font-weight:700; white-space:nowrap; flex-shrink:0;}
+.s-coala .cm-wbreak svg{width:14px; height:14px; flex-shrink:0;}
 /* feed arrows from stores into the window */
-.s-coala .cm-arrows{position:absolute; left:0; top:288px; z-index:0;}
+.s-coala .cm-arrows{position:absolute; left:0; top:340px; z-index:0;}
 .s-coala .cm-arrows line{stroke:color-mix(in srgb,var(--accent) 45%,var(--border)); stroke-width:2;}
 .s-coala .cm-arrows polygon{fill:color-mix(in srgb,var(--accent) 60%,var(--border));}
-.s-coala .cm-persist{position:absolute; top:386px; left:50%; transform:translateX(-50%); z-index:2;
+.s-coala .cm-persist{position:absolute; top:372px; left:50%; transform:translateX(-50%); z-index:2;
   background:var(--canvas-bg); padding:3px 14px; white-space:nowrap;
   font-family:var(--font-mono); font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted);}
 /* the three persistent stores */
@@ -2893,17 +2895,19 @@ body.presenting .slide.active {
 
   <!-- working memory: the volatile hub everything passes through -->
   <div class="cm-window">
-    <div class="cm-wtag">VOLATILE · rebuilt on every LLM call</div>
-    <div class="cm-wname">Working memory <em>· the context window</em></div>
-    <div class="cm-wdef">the active state the model is given each call</div>
+    <div class="cm-whead">
+      <div class="cm-wtag"><i data-lucide="square-code" class="cm-ic"></i>Working memory · volatile</div>
+      <div class="cm-wname">The context window</div>
+      <div class="cm-wdef">the active state the model is given on every LLM call, rebuilt each turn</div>
+    </div>
     <div class="cm-wbreak"><i data-lucide="arrow-down-right"></i>Context rot</div>
   </div>
 
   <!-- the three persistent stores feed up into the window -->
-  <svg class="cm-arrows" viewBox="0 0 1280 128" width="1280" height="128">
-    <line x1="260" y1="120" x2="260" y2="28"/><polygon points="254,34 266,34 260,18"/>
-    <line x1="640" y1="120" x2="640" y2="28"/><polygon points="634,34 646,34 640,18"/>
-    <line x1="1020" y1="120" x2="1020" y2="28"/><polygon points="1014,34 1026,34 1020,18"/>
+  <svg class="cm-arrows" viewBox="0 0 1280 80" width="1280" height="80">
+    <line x1="260" y1="74" x2="260" y2="16"/><polygon points="254,22 266,22 260,6"/>
+    <line x1="640" y1="74" x2="640" y2="16"/><polygon points="634,22 646,22 640,6"/>
+    <line x1="1020" y1="74" x2="1020" y2="16"/><polygon points="1014,22 1026,22 1020,6"/>
   </svg>
   <div class="cm-persist">PERSISTENT · survives across sessions · loaded into the window on demand</div>
 
@@ -3007,25 +3011,31 @@ body.presenting .slide.active {
   <p class="slide-lede"><em>Semantic memory</em> is what the agent knows about your project: the <code>AGENTS.md</code> and <code>CLAUDE.md</code> it reads in at the start of every session.</p>
 
   <div class="mem-kicker">Where it breaks</div>
-  <div class="wd-cols2">
-    <div class="wd-modes">
-      <div class="wd-modes-h">“One big <code>AGENTS.md</code>” failed four ways</div>
-      <div class="wd-mode"><i data-lucide="layers" class="wd-ic"></i><div><b>Crowds out the task.</b> Context is scarce: the giant file pushes out the code and the docs.</div></div>
-      <div class="wd-mode"><i data-lucide="volume-x" class="wd-ic"></i><div><b>Too much guidance becomes none.</b> When everything is “important,” nothing is.</div></div>
-      <div class="wd-mode"><i data-lucide="trending-down" class="wd-ic"></i><div><b>It rots instantly.</b> A graveyard of stale rules: the agent can't tell what's still true.</div></div>
-      <div class="wd-mode"><i data-lucide="search-x" class="wd-ic"></i><div><b>It can't be verified.</b> Drift is inevitable without mechanical checks.</div></div>
+  <div class="wd-stage">
+    <div class="wd-mono">
+      <div class="wd-mono-cap">OpenAI shipped <b>1M lines</b>, <b>0 hand-written</b>. Then one big <code>AGENTS.md</code> broke.</div>
+      <div class="wd-file">
+        <div class="wd-file-h"><i data-lucide="file-text"></i><code>AGENTS.md</code><span class="wd-file-badge">ONE BIG FILE</span></div>
+        <div class="wd-lines">
+          <span class="ln live" style="width:78%"></span>
+          <span class="ln" style="width:93%"></span>
+          <span class="ln" style="width:71%"></span>
+          <span class="ln" style="width:88%"></span>
+          <span class="ln live" style="width:64%"></span>
+          <span class="ln" style="width:96%"></span>
+          <span class="ln" style="width:80%"></span>
+          <span class="ln" style="width:90%"></span>
+          <span class="ln" style="width:74%"></span>
+          <span class="ln" style="width:86%"></span>
+        </div>
+        <div class="wd-file-more">+ 900 more rules · no one can tell which still apply</div>
+      </div>
     </div>
-    <div class="wd-ev">
-      <div class="wd-ev-h">OpenAI shipped this, for real</div>
-      <div class="wd-ev-stats">
-        <div class="wd-ev-stat"><em>1M</em> lines of code</div>
-        <div class="wd-ev-stat"><em>0</em> hand-written</div>
-        <div class="wd-ev-stat"><em>1,500</em> PRs merged</div>
-      </div>
-      <div class="wd-illeg">
-        <div class="wd-illeg-k">If it's not in-context, it doesn't exist</div>
-        <div class="wd-illeg-v">Anything in Slack, Google Docs, or someone's head is invisible to the agent.</div>
-      </div>
+    <div class="wd-fails">
+      <div class="wd-fail"><i data-lucide="layers"></i>Crowds out the task</div>
+      <div class="wd-fail"><i data-lucide="volume-x"></i>Too much guidance, none</div>
+      <div class="wd-fail"><i data-lucide="trending-down"></i>Rots silently</div>
+      <div class="wd-fail"><i data-lucide="search-x"></i>Can't be verified</div>
     </div>
   </div>
 
