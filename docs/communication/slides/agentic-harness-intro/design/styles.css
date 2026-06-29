@@ -2365,3 +2365,7 @@
 }
 .s-lever .inv-proofk{font-family:var(--font-mono); font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-right:10px;}
 .s-lever .inv-proof b{color:var(--accent); font-weight:800;}
+
+/* lever: memory marked as the moat (asymmetry justification) */
+.s-lever .inv-layer.moat{background:var(--accent-lt); border-color:color-mix(in srgb,var(--accent) 25%,var(--border));}
+.s-lever .inv-moat{display:inline-block; margin-left:9px; font-family:var(--font-mono); font-size:9px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#fff; background:var(--accent); border-radius:20px; padding:2px 9px; vertical-align:middle;}
