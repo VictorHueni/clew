@@ -2225,3 +2225,58 @@
 .s-cmd .tc-foot{position:absolute;left:40px;right:40px;bottom:48px;border-radius:10px;padding:9px 15px;background:color-mix(in srgb,var(--accent) 6%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 22%,var(--border));font-size:11px;color:var(--ink);font-weight:600;display:flex;align-items:center;gap:9px;}
 .s-cmd .tc-foot svg{width:15px;height:15px;color:var(--accent);flex-shrink:0;}
 .s-cmd .tc-foot b{color:var(--accent);}
+
+/* ══════════════════════════════════════════════════════════════
+   THE OTHER TWO GAPS (s-gaps) · tools + control layer (light)
+   ══════════════════════════════════════════════════════════════ */
+.s-gaps *{box-sizing:border-box;}
+.s-gaps .slide-lede em{font-style:normal;color:var(--accent);font-weight:700;}
+.s-gaps .gap-cards{
+  position:absolute; top:196px; left:68px; right:68px; bottom:104px;
+  display:grid; grid-template-columns:1fr 1fr; gap:24px;
+}
+.s-gaps .gap-card{
+  background:var(--surface); border:1px solid var(--border);
+  border-left:4px solid var(--accent); border-radius:12px;
+  box-shadow:var(--shadow); padding:20px 22px;
+  display:flex; flex-direction:column;
+}
+.s-gaps .gc-head{display:flex; align-items:center; gap:13px; margin-bottom:14px;}
+.s-gaps .gc-rank{
+  font-family:var(--font-mono); font-size:13px; font-weight:800; color:#fff;
+  background:var(--accent); border-radius:7px; padding:4px 9px; flex-shrink:0;
+}
+.s-gaps .gc-ic{
+  width:38px; height:38px; border-radius:9px; flex-shrink:0;
+  background:var(--accent-lt);
+  border:1px solid color-mix(in srgb,var(--accent) 22%,var(--border));
+  display:flex; align-items:center; justify-content:center;
+}
+.s-gaps .gc-ic svg{width:20px; height:20px; color:var(--accent);}
+.s-gaps .gc-name{font-size:19px; font-weight:800; color:var(--ink); line-height:1.1;}
+.s-gaps .gc-sub{font-family:var(--font-mono); font-size:10px; color:var(--dim); margin-top:3px; letter-spacing:.02em;}
+.s-gaps .gc-sub em{font-style:normal; color:var(--muted);}
+.s-gaps .gc-gap{font-size:13px; color:var(--ink); line-height:1.42; margin-bottom:13px;}
+.s-gaps .gc-k, .s-gaps .gc-levk{
+  display:block; font-family:var(--font-mono); font-size:9px; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:4px;
+}
+.s-gaps .gc-fails{display:flex; flex-direction:column; gap:7px; margin-bottom:15px;}
+.s-gaps .gc-fail{
+  display:flex; align-items:flex-start; gap:8px;
+  font-size:11.5px; color:var(--muted); line-height:1.32;
+}
+.s-gaps .gc-fail svg{width:13px; height:13px; color:var(--danger); flex-shrink:0; margin-top:1px;}
+.s-gaps .gc-lev{
+  margin-top:auto;
+  background:var(--accent-lt);
+  border:1px solid color-mix(in srgb,var(--accent) 22%,var(--border));
+  border-radius:9px; padding:10px 13px;
+  font-size:12px; color:var(--ink); font-weight:600; line-height:1.38;
+}
+.s-gaps .gc-lev .gc-levk{color:var(--accent);}
+.s-gaps .gap-bridge{
+  position:absolute; left:68px; right:68px; bottom:40px;
+  text-align:center; font-size:13.5px; font-style:italic; color:var(--ink); line-height:1.4;
+}
+.s-gaps .gap-bridge em{font-style:normal; color:var(--accent); font-weight:700;}
