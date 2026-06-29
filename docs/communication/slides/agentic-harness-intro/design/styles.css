@@ -2275,8 +2275,10 @@
   font-size:12px; color:var(--ink); font-weight:600; line-height:1.38;
 }
 .s-gaps .gc-lev .gc-levk{color:var(--accent);}
+.s-gaps .gc-fail b{color:var(--danger); font-weight:800;}
+.s-gaps .gc-lev b{color:var(--accent); font-weight:800;}
 .s-gaps .gap-bridge{
-  position:absolute; left:68px; right:68px; bottom:40px;
+  position:absolute; left:68px; right:68px; bottom:56px;
   text-align:center; font-size:13.5px; font-style:italic; color:var(--ink); line-height:1.4;
 }
 .s-gaps .gap-bridge em{font-style:normal; color:var(--accent); font-weight:700;}

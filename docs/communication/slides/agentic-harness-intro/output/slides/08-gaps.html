@@ -1,42 +1,39 @@
-<div class="slide s-gaps" data-sources="ahe-2604">
+<div class="slide s-gaps" data-sources="swe-agent-aci,rag-mcp,anthropic-context-eng,reflexion">
   <div class="section-label">The Lever · The other two gaps</div>
   <h2 class="slide-title">Memory was one of three. Tools and control are the other two.</h2>
-  <p class="slide-lede">The same harness that starves memory also under-tools the agent and skips its control layer. On the lever these rank <em>#1</em> and <em>#2</em>; memory is only #3.</p>
+  <p class="slide-lede">The same harness that starves memory also under-tools the agent and skips its control layer. Each one moves performance on its own, with the <em>model held fixed</em>.</p>
 
   <div class="gap-cards">
     <div class="gap-card">
       <div class="gc-head">
-        <span class="gc-rank">#1</span>
         <span class="gc-ic"><i data-lucide="wrench"></i></span>
         <div class="gc-titles">
           <div class="gc-name">Tools</div>
           <div class="gc-sub">read · run · search · sandbox</div>
         </div>
       </div>
-      <div class="gc-gap"><span class="gc-k">The gap</span>A model with no tools can only talk. It can't read the repo, run the tests, search the web, or touch a sandbox.</div>
+      <div class="gc-gap"><span class="gc-k">The gap</span>A model with no tools can only talk: it can't read the repo, run the tests, or touch a sandbox.</div>
       <div class="gc-fails">
-        <div class="gc-fail"><i data-lucide="x"></i>Too few tools and it works blind.</div>
-        <div class="gc-fail"><i data-lucide="x"></i>Too many or flaky ones and it thrashes, picks wrong, and burns the context.</div>
+        <div class="gc-fail"><i data-lucide="x"></i>Dump every tool in the prompt and tool-selection accuracy falls to <b>13.6%</b>; retrieve only the relevant ones and it jumps to <b>43.1%</b>.</div>
+        <div class="gc-fail"><i data-lucide="x"></i>Too many or overlapping tools distract the agent and bloat the window.</div>
       </div>
-      <div class="gc-lev"><span class="gc-levk">The leverage</span>Ranked #1. The right, reliable tools move performance more than any prompt or model swap.</div>
+      <div class="gc-lev"><span class="gc-levk">The leverage</span>Change only the tool interface, same model weights: SWE-agent lifts GPT-4 Turbo from <b>7.3% to 18.0%</b> on SWE-bench Lite.</div>
     </div>
 
     <div class="gap-card">
       <div class="gc-head">
-        <span class="gc-rank">#2</span>
         <span class="gc-ic"><i data-lucide="git-merge"></i></span>
         <div class="gc-titles">
           <div class="gc-name">Control layer</div>
           <div class="gc-sub">context · execution · recovery <em>(middleware)</em></div>
         </div>
       </div>
-      <div class="gc-gap"><span class="gc-k">The gap</span>Left to loop on its own, an agent drifts, repeats itself, and fails silently. Nothing curates the window, drives the loop, or recovers from error.</div>
+      <div class="gc-gap"><span class="gc-k">The gap</span>Left to loop on its own, an agent drifts, repeats failing tool calls, and ships wrong answers silently.</div>
       <div class="gc-fails">
-        <div class="gc-fail"><i data-lucide="x"></i>No context curation, so the window rots.</div>
-        <div class="gc-fail"><i data-lucide="x"></i>No execution control, so loops run away.</div>
-        <div class="gc-fail"><i data-lucide="x"></i>No recovery, so wrong answers ship silently.</div>
+        <div class="gc-fail"><i data-lucide="x"></i>Context is a finite attention budget: recall drops as the window fills, so curating it is the engineer's <b>#1 job</b>.</div>
+        <div class="gc-fail"><i data-lucide="x"></i>Nothing decides what enters the window, when to retry, or how to recover.</div>
       </div>
-      <div class="gc-lev"><span class="gc-levk">The leverage</span>Ranked #2. The middleware that curates context, drives the loop, and verifies is what makes the agent reliable.</div>
+      <div class="gc-lev"><span class="gc-levk">The leverage</span>Add a verify-and-retry loop, same model: Reflexion lifts HumanEval pass@1 from <b>80% to 91%</b>.</div>
     </div>
   </div>
 
