@@ -23,18 +23,14 @@
   <div class="mem-shallow"><i data-lucide="arrow-left" class="icon-sm"></i>&nbsp;most stop here</div>
   <div class="mem-deep">what compounds</div>
 
-  <div class="mem-stats">
-    <div class="stat-card loss">
-      <div class="stat-big"><em>2 of 3</em> session-bound</div>
-      <div class="stat-desc">Working memory is distilled, then discarded at session end; episodic is a resumable transcript but locked to its own thread. Only long-term (plain files) crosses into the next session.</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-big"><em>0</em> tokens / fetch</div>
-      <div class="stat-desc">And it's a local file read, no MCP API roundtrip, no token cost, reloaded at the start of every session.</div>
-    </div>
+  <div class="mem-fix">
+    <div class="mem-fix-k">How to bridge it</div>
+    <div class="mem-fix-h">Build the <em>long-term</em> layer.</div>
+    <div class="mem-fix-i"><i data-lucide="check"></i><span>Plain files the agent reloads at the start of every session.</span></div>
+    <div class="mem-fix-i"><i data-lucide="check"></i><span>It crosses sessions, where working and episodic memory don't.</span></div>
+    <div class="mem-fix-i"><i data-lucide="check"></i><span>A local file read: no API roundtrip, zero token cost.</span></div>
+    <div class="mem-fix-i"><i data-lucide="check"></i><span>Structured and versioned, so it stays legible as it grows.</span></div>
   </div>
-
-  <div class="mem-bridge"><span class="mem-bridge-tag">the obvious objection</span>“A frontier window holds a million tokens now, so why not just let the <em>window</em> be the memory?”<span class="mem-bridge-cue">answered next&nbsp;→</span></div>
 
   <div class="slide-number"></div>
 </div>

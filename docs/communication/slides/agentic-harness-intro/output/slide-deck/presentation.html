@@ -2493,6 +2493,29 @@
 .s-memtools .mt-foot{position:absolute; left:68px; right:68px; bottom:46px; text-align:center; font-size:12.5px; font-style:italic; color:var(--ink); line-height:1.4;}
 .s-memtools .mt-foot em{font-style:normal; color:var(--accent); font-weight:600;}
 
+/* ── memory section: per-slide solution / key-takeaway highlights ── */
+.s-memory .mem-fix{
+  box-sizing:border-box; position:absolute; top:200px; right:68px; width:420px; bottom:96px;
+  background:var(--accent-lt); border:1px solid color-mix(in srgb,var(--accent) 24%,var(--border));
+  border-left:4px solid var(--accent); border-radius:12px; box-shadow:var(--shadow);
+  padding:24px 26px; display:flex; flex-direction:column;
+}
+.s-memory .mem-fix *{box-sizing:border-box;}
+.s-memory .mem-fix-k{font-family:var(--font-mono); font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:11px;}
+.s-memory .mem-fix-h{font-size:23px; font-weight:800; color:var(--ink); line-height:1.15; margin-bottom:20px;}
+.s-memory .mem-fix-h em{font-style:normal; color:var(--accent);}
+.s-memory .mem-fix-i{display:flex; align-items:flex-start; gap:11px; font-size:13px; color:var(--ink); line-height:1.4; margin-bottom:14px;}
+.s-memory .mem-fix-i:last-child{margin-bottom:0;}
+.s-memory .mem-fix-i svg{width:16px; height:16px; color:var(--accent); flex-shrink:0; margin-top:2px;}
+
+.s-crot .cr-fix{padding-top:14px; border-top:1px solid color-mix(in srgb,var(--accent) 28%,var(--border));}
+.s-crot .cr-fix-k{font-family:var(--font-mono); font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:5px;}
+.s-crot .cr-fix-v{font-size:12px; color:var(--ink); line-height:1.45; font-weight:600;}
+
+.s-writedown .wd-take{display:flex; align-items:flex-start; gap:9px; background:var(--accent-lt); border:1px solid color-mix(in srgb,var(--accent) 26%,var(--border)); border-left:4px solid var(--accent); border-radius:10px; padding:13px 16px; font-size:12.5px; color:var(--ink); line-height:1.4;}
+.s-writedown .wd-take b{color:var(--accent);}
+.s-writedown .wd-take svg{width:16px; height:16px; color:var(--accent); flex-shrink:0; margin-top:1px;}
+
 /* ── Baseline: controls hint ── */
 .controls-hint {
   text-align: center;
@@ -2918,18 +2941,14 @@ body.presenting .slide.active {
   <div class="mem-shallow"><i data-lucide="arrow-left" class="icon-sm"></i>&nbsp;most stop here</div>
   <div class="mem-deep">what compounds</div>
 
-  <div class="mem-stats">
-    <div class="stat-card loss">
-      <div class="stat-big"><em>2 of 3</em> session-bound</div>
-      <div class="stat-desc">Working memory is distilled, then discarded at session end; episodic is a resumable transcript but locked to its own thread. Only long-term (plain files) crosses into the next session.</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-big"><em>0</em> tokens / fetch</div>
-      <div class="stat-desc">And it's a local file read, no MCP API roundtrip, no token cost, reloaded at the start of every session.</div>
-    </div>
+  <div class="mem-fix">
+    <div class="mem-fix-k">How to bridge it</div>
+    <div class="mem-fix-h">Build the <em>long-term</em> layer.</div>
+    <div class="mem-fix-i"><i data-lucide="check"></i><span>Plain files the agent reloads at the start of every session.</span></div>
+    <div class="mem-fix-i"><i data-lucide="check"></i><span>It crosses sessions, where working and episodic memory don't.</span></div>
+    <div class="mem-fix-i"><i data-lucide="check"></i><span>A local file read: no API roundtrip, zero token cost.</span></div>
+    <div class="mem-fix-i"><i data-lucide="check"></i><span>Structured and versioned, so it stays legible as it grows.</span></div>
   </div>
-
-  <div class="mem-bridge"><span class="mem-bridge-tag">the obvious objection</span>“A frontier window holds a million tokens now, so why not just let the <em>window</em> be the memory?”<span class="mem-bridge-cue">answered next&nbsp;→</span></div>
 
   <div class="slide-number">14 / 31</div>
 
@@ -2989,6 +3008,10 @@ body.presenting .slide.active {
       <div class="k"><em>11 of 13</em></div>
       <div class="v">models fell below half their accuracy by 32K tokens. Context rot isn't new (NoLiMa, 2025).</div>
     </div>
+    <div class="cr-fix">
+      <div class="cr-fix-k">The fix</div>
+      <div class="cr-fix-v">Curate, don't cram. Retrieve only the few high-signal tokens the task needs into a fresh window; treat context as a budget, not a bucket.</div>
+    </div>
   </div>
 
   <div class="slide-number">15 / 31</div>
@@ -3028,6 +3051,7 @@ body.presenting .slide.active {
         <div class="wd-fix-k">OpenAI's fix</div>
         <div class="wd-fix-v">A <b>~100-line table of contents</b> pointing into a <b>structured <code>docs/</code> tree</b>: a map, not an encyclopedia.</div>
       </div>
+      <div class="wd-take"><i data-lucide="arrow-right"></i><span>The lesson: memory has to be a <b>structured, checkable map</b>, not a flat file you hope holds.</span></div>
     </div>
   </div>
   <div class="slide-number">16 / 31</div>
