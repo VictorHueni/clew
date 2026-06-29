@@ -1,25 +1,34 @@
 <div class="slide s-procmem" data-sources="anthropic-skills,codex-agents-md">
   <div class="section-label">Procedural memory · Skills</div>
   <h2 class="slide-title">Skills tame context bloat, but only if the agent picks the right one.</h2>
-  <p class="slide-lede"><em>Procedural memory</em> is the agent's reusable know-how: skills, surfaced by progressive disclosure. Names sit in context; the full instructions load only when judged relevant.</p>
+  <p class="slide-lede"><em>Procedural memory</em> is the agent's reusable know-how: skills, surfaced by progressive disclosure and loaded just-in-time on a matching prompt.</p>
 
-  <div class="mem-kicker">Where it breaks</div>
-  <div class="pm-cracks2">
-    <div class="pm-crack">
-      <i data-lucide="search-x"></i>
-      <div><b>Discovery rides on one sentence.</b> Claude chooses from 100+ skills using only each description. A vague one never fires.</div>
+  <div class="pm-stage">
+    <div class="pm-flow">
+      <div class="pf-h">How a skill loads</div>
+      <div class="pf-ctx">
+        <div class="pf-ctx-l"><i data-lucide="square-code"></i>Agent context · system prompt</div>
+        <div class="pf-chips">
+          <span class="pf-chip">skill-a</span>
+          <span class="pf-chip on">skill-b</span>
+          <span class="pf-chip">skill-c</span>
+          <span class="pf-chip more">+ 97</span>
+        </div>
+        <div class="pf-note">names + descriptions only, always loaded (cheap)</div>
+      </div>
+      <div class="pf-jit"><i data-lucide="corner-down-right"></i><span>user prompt matches <b>skill-b</b> &rarr; load it</span></div>
+      <div class="pf-load">
+        <div class="pf-load-h">skill-b, just-in-time</div>
+        <div class="pf-row"><i data-lucide="file-text"></i><span><b>SKILL.md</b> full instructions</span><em>on match</em></div>
+        <div class="pf-row"><i data-lucide="folder"></i><span>scripts / references</span><em>on demand</em></div>
+      </div>
     </div>
-    <div class="pm-crack">
-      <i data-lucide="weight"></i>
-      <div><b>The metadata is never free.</b> Every skill's description permanently shares the context budget with your task.</div>
-    </div>
-    <div class="pm-crack">
-      <i data-lucide="trending-down"></i>
-      <div><b>It rots silently.</b> Bundled instructions drift; "avoid time-sensitive information" is the only guardrail.</div>
-    </div>
-    <div class="pm-crack">
-      <i data-lucide="layers"></i>
-      <div><b>The eager alternative is worse.</b> Codex <code>AGENTS.md</code> and Aider conventions load every turn, no relevance gate.</div>
+    <div class="pm-cracks">
+      <div class="pc-h">Where it breaks</div>
+      <div class="pm-crack"><i data-lucide="search-x"></i><div><b>Discovery rides on one sentence.</b> Claude picks from 100+ skills using only each description; a vague one never fires.</div></div>
+      <div class="pm-crack"><i data-lucide="weight"></i><div><b>The metadata is never free.</b> Every description permanently shares the context budget.</div></div>
+      <div class="pm-crack"><i data-lucide="trending-down"></i><div><b>It rots silently.</b> Bundled instructions drift; the only guardrail is "avoid time-sensitive info."</div></div>
+      <div class="pm-crack"><i data-lucide="layers"></i><div><b>The eager alternative is worse.</b> Codex <code>AGENTS.md</code> and Aider load every turn, no relevance gate.</div></div>
     </div>
   </div>
 
