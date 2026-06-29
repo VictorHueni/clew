@@ -100,14 +100,17 @@ slides:
     class: "s-ralph"
     label: "The Ralph loop"
   # ── Takeaway · Ten commandments ──
-  - file: "26-cmd-company.html"
-    class: "s-cmd"
-    label: "Ten commandments for the company"
+  - file: "26-divider-takeaway.html"
+    class: "s-divider"
+    label: "Key takeaways"
   - file: "27-cmd-dev.html"
     class: "s-cmd"
     label: "Ten commandments for the developer"
+  - file: "28-cmd-company.html"
+    class: "s-cmd"
+    label: "Ten commandments for the company"
   # ── Close ──
-  - file: "28-close.html"
+  - file: "29-close.html"
     class: "s-close"
     label: "Engineer the harness"
 
