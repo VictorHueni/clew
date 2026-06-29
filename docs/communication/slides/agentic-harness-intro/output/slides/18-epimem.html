@@ -3,33 +3,33 @@
   <h2 class="slide-title">The hard part isn't remembering. It's forgetting.</h2>
   <p class="slide-lede"><em>Episodic memory</em> is experience from past sessions: the transcripts of what the agent did, and what they taught.</p>
 
-  <div class="mem-kicker">Where it breaks</div>
-  <div class="em-cols">
-    <div class="em-fail">
-      <div class="em-fail-h">Why "remember everything" fails</div>
-      <div class="em-stat">
-        <div class="em-stat-big">&gt;90%</div>
-        <div class="em-stat-cap">of the token cost is wasted re-stuffing full history each turn, vs. a managed memory store.</div>
+  <div class="ep-stage">
+    <div class="ep-flow">
+      <div class="ef-h">What it captures</div>
+      <div class="ef-tl">
+        <div class="ef-tlrow">
+          <span class="ef-node"><i data-lucide="message-square"></i></span>
+          <span class="ef-node"><i data-lucide="message-square"></i></span>
+          <span class="ef-node"><i data-lucide="message-square"></i></span>
+          <span class="ef-node on"><i data-lucide="message-square"></i></span>
+          <i data-lucide="arrow-right" class="ef-arrow"></i>
+        </div>
+        <div class="ef-tllabel">every past session, oldest &rarr; newest</div>
       </div>
-      <div class="em-pt"><i data-lucide="x"></i><span>A fixed window can't hold months of sessions, so old context is silently dropped.</span></div>
-      <div class="em-pt"><i data-lucide="x"></i><span>Recall gets noisy: the more you retain, the harder the right memory is to find.</span></div>
-      <div class="em-pt"><i data-lucide="x"></i><span>Stale memories don't just bloat, they actively mislead the agent.</span></div>
+      <div class="ef-distill"><i data-lucide="chevrons-down"></i>distilled into</div>
+      <div class="ef-kinds">
+        <div class="ek"><i data-lucide="messages-square"></i>Past interactions</div>
+        <div class="ek"><i data-lucide="hash"></i>Conversation keywords</div>
+        <div class="ek good"><i data-lucide="circle-check"></i>What worked</div>
+        <div class="ek bad"><i data-lucide="circle-x"></i>What didn't work</div>
+      </div>
     </div>
-
-    <div class="em-fix">
-      <div class="em-fix-h">How the field manages it</div>
-      <div class="em-mech">
-        <div class="em-mech-k">Score &amp; decay</div>
-        <div class="em-mech-v">Rate each memory's importance, decay it by recency, rank by relevance. <span class="em-src">Generative Agents</span></div>
-      </div>
-      <div class="em-mech">
-        <div class="em-mech-k">Extract &amp; consolidate</div>
-        <div class="em-mech-v">Keep only the salient facts, merge them, retrieve a few. <span class="em-src">Mem0</span></div>
-      </div>
-      <div class="em-mech open">
-        <div class="em-mech-k">The open frontier</div>
-        <div class="em-mech-v">What to evict, "learned forgetting," is still listed <em>unsolved</em> in 2026. <span class="em-src">Memory survey</span></div>
-      </div>
+    <div class="ep-cracks">
+      <div class="pc-h">Where it breaks</div>
+      <div class="ep-crack"><i data-lucide="coins"></i><div><b>Keeping it all is too costly.</b> &gt;90% of tokens go to re-stuffing full history each turn.</div></div>
+      <div class="ep-crack"><i data-lucide="search"></i><div><b>More memory, noisier recall.</b> The more you retain, the harder the right memory is to find.</div></div>
+      <div class="ep-crack"><i data-lucide="trending-down"></i><div><b>Stale memories mislead.</b> Old context isn't just bloat; it points the agent the wrong way.</div></div>
+      <div class="ep-crack"><i data-lucide="help-circle"></i><div><b>What to forget is unsolved.</b> Even scored by importance, recency and relevance, "learned forgetting" is still open (2026).</div></div>
     </div>
   </div>
 
