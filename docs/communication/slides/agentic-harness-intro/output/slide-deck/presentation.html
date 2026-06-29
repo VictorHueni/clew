@@ -2460,7 +2460,83 @@ body.presenting .slide.active {
 
 
 
-<!-- slide 3: Harnesses starve memory -->
+<!-- slide 3: Hype vs reality — 2025 didn't land -->
+
+<div class="slide s-hype" data-sources="mit-genai-divide,swe-bench-pro">
+  <div class="section-label">The Lever · Reality check</div>
+  <h2 class="slide-title">2025 was the “Year of the Agent.” It didn't land.</h2>
+  <p class="slide-lede">The hype was model-led, but in production, the model alone fell short, expensively.</p>
+
+  <div class="hype-stats">
+    <div class="hype-card">
+      <div class="hype-big">95%</div>
+      <div class="hype-k">of enterprise GenAI pilots showed <em>no measurable P&amp;L impact</em></div>
+      <div class="hype-v">MIT studied 300 deployments + 350 leaders. The blocker wasn't model IQ; it was integrating AI into real workflows.</div>
+    </div>
+    <div class="hype-card">
+      <div class="hype-big">~59%</div>
+      <div class="hype-k">is the <em>best</em> frontier model's score on realistic enterprise tasks</div>
+      <div class="hype-v">Scale's SWE-bench Pro: 1,865 real tasks across 41 professional repos (2026). The same models score 80–95% on the benchmark everyone quotes; the gap is the reality.</div>
+    </div>
+  </div>
+
+  <div class="hype-foot">The missing variable wasn't intelligence; it was the <b>harness around the model</b>.</div>
+  <div class="slide-number">3 / 29</div>
+
+<div class="slide-source-bar">MIT Project NANDA · The GenAI Divide: State of AI in Business 2025 (95% of pilots: no measurable P&L impact) · via Fortune (2025) — fortune.com &nbsp;|&nbsp; Scale AI (SEAL) · SWE-bench Pro: standardized public leaderboard · 1,865 real tasks across 41 professional repos (2026) — labs.scale.com</div>
+</div>
+
+
+
+<!-- slide 4: The lever is the tooling -->
+
+<div class="slide s-lever" data-sources="ahe-2604">
+  <div class="section-label">The Lever · Where it lives</div>
+  <h2 class="slide-title">Performance lives in the tooling around the model, not the model.</h2>
+  <p class="slide-lede">Ablation studies rank what actually moves agent performance. Model prompt-tuning sits <em>last</em>.</p>
+
+  <div class="rank">
+    <div class="rank-row">
+      <span class="rank-rankno">1</span>
+      <span class="rank-label">Tools</span>
+      <div class="rank-track"><div class="rank-fill" style="width: 100%;"></div></div>
+    </div>
+    <div class="rank-row">
+      <span class="rank-rankno">2</span>
+      <span class="rank-label">Control layer<span class="rank-sub">context · execution · recovery <em>(middleware)</em></span></span>
+      <div class="rank-track"><div class="rank-fill" style="width: 82%;"></div></div>
+    </div>
+    <div class="rank-row">
+      <span class="rank-rankno">3</span>
+      <span class="rank-label">Long-term memory</span>
+      <div class="rank-track"><div class="rank-fill" style="width: 64%;"></div></div>
+    </div>
+    <div class="rank-row lo">
+      <span class="rank-rankno">4</span>
+      <span class="rank-label">System prompt</span>
+      <div class="rank-track"><div class="rank-fill" style="width: 30%;"></div></div>
+    </div>
+  </div>
+
+  <div class="rank-note">
+    <div class="note-block">
+      <div class="note-k">The inversion</div>
+      <div class="note-v">Most teams pour effort into #4, the prompt. The gains sit in #1–3.</div>
+    </div>
+    <div class="note-block">
+      <div class="note-k">The model</div>
+      <div class="note-v">Table stakes once it is capable. The harness is the differentiator.</div>
+    </div>
+  </div>
+
+  <div class="slide-number">4 / 29</div>
+
+<div class="slide-source-bar">arXiv 2604.25850 · Agentic Harness Engineering (2026) — arxiv.org</div>
+</div>
+
+
+
+<!-- slide 5: Harnesses starve memory -->
 
 <div class="slide s-memory" data-sources="raschka-coding-agent,clew-research-harness">
   <div class="section-label">The Gap</div>
@@ -2500,14 +2576,14 @@ body.presenting .slide.active {
 
   <div class="mem-bridge"><span class="mem-bridge-tag">the obvious objection</span>“A frontier window holds a million tokens now, so why not just let the <em>window</em> be the memory?”<span class="mem-bridge-cue">answered next&nbsp;→</span></div>
 
-  <div class="slide-number">3 / 29</div>
+  <div class="slide-number">5 / 29</div>
 
 <div class="slide-source-bar">Sebastian Raschka · Components of a Coding Agent (2026) — magazine.sebastianraschka.com &nbsp;|&nbsp; Internal research · What Makes a Good Agentic Harness: research synthesis (2026)</div>
 </div>
 
 
 
-<!-- slide 4: Context rot — the window isn't the memory -->
+<!-- slide 6: Context rot — the window isn't the memory -->
 
 <div class="slide s-crot" data-sources="anthropic-opus47,anthropic-opus46,nolima-context">
   <div class="section-label">The Gap · Context Rot &middot; <span class="sl-answer">the answer</span></div>
@@ -2560,14 +2636,14 @@ body.presenting .slide.active {
     </div>
   </div>
 
-  <div class="slide-number">4 / 29</div>
+  <div class="slide-number">6 / 29</div>
 
 <div class="slide-source-bar">Anthropic · Claude Opus 4.7 System Card · MRCR v2 (vendor-reported) (2026) — anthropic.com &nbsp;|&nbsp; Anthropic · Claude Opus 4.6 System Card · MRCR v2 (vendor-reported) (2026) — anthropic.com &nbsp;|&nbsp; Adobe Research / LMU Munich · NoLiMa: Long-Context Evaluation Beyond Literal Matching (ICML 2025) (2025) — arxiv.org</div>
 </div>
 
 
 
-<!-- slide 5: Writing it down isn't memory either -->
+<!-- slide 7: Writing it down isn't memory either -->
 
 <div class="slide s-writedown" data-sources="openai-harness">
   <div class="section-label">The Problem · Written memory rots</div>
@@ -2599,42 +2675,14 @@ body.presenting .slide.active {
       </div>
     </div>
   </div>
-  <div class="slide-number">5 / 29</div>
+  <div class="slide-number">7 / 29</div>
 
 <div class="slide-source-bar">OpenAI · Harness Engineering: Leveraging Codex in an Agent-First World (2026) — openai.com</div>
 </div>
 
 
 
-<!-- slide 6: Hype vs reality — 2025 didn't land -->
-
-<div class="slide s-hype" data-sources="mit-genai-divide,swe-bench-pro">
-  <div class="section-label">The Lever · Reality check</div>
-  <h2 class="slide-title">2025 was the “Year of the Agent.” It didn't land.</h2>
-  <p class="slide-lede">The hype was model-led, but in production, the model alone fell short, expensively.</p>
-
-  <div class="hype-stats">
-    <div class="hype-card">
-      <div class="hype-big">95%</div>
-      <div class="hype-k">of enterprise GenAI pilots showed <em>no measurable P&amp;L impact</em></div>
-      <div class="hype-v">MIT studied 300 deployments + 350 leaders. The blocker wasn't model IQ; it was integrating AI into real workflows.</div>
-    </div>
-    <div class="hype-card">
-      <div class="hype-big">~59%</div>
-      <div class="hype-k">is the <em>best</em> frontier model's score on realistic enterprise tasks</div>
-      <div class="hype-v">Scale's SWE-bench Pro: 1,865 real tasks across 41 professional repos (2026). The same models score 80–95% on the benchmark everyone quotes; the gap is the reality.</div>
-    </div>
-  </div>
-
-  <div class="hype-foot">The missing variable wasn't intelligence; it was the <b>harness around the model</b>.</div>
-  <div class="slide-number">6 / 29</div>
-
-<div class="slide-source-bar">MIT Project NANDA · The GenAI Divide: State of AI in Business 2025 (95% of pilots: no measurable P&L impact) · via Fortune (2025) — fortune.com &nbsp;|&nbsp; Scale AI (SEAL) · SWE-bench Pro: standardized public leaderboard · 1,865 real tasks across 41 professional repos (2026) — labs.scale.com</div>
-</div>
-
-
-
-<!-- slide 7: The model is a commodity — not a moat -->
+<!-- slide 8: The model is a commodity — not a moat -->
 
 <div class="slide s-commodity" data-sources="swe-bench-cards,openai-swe-retired,epoch-eci-gap,deepseek-v4,hai-ai-index-2025,nadella-commodity">
   <div class="section-label">The Problem · the model is not the moat</div>
@@ -2642,14 +2690,14 @@ body.presenting .slide.active {
   <p class="slide-lede">A new frontier model tops every benchmark… until the next does, <em>days</em> later. Then it saturates ~81%, open weights reach <em>parity</em>, and the benchmark itself gets retired.</p>
   <div class="cm-cap" style="left:40px;top:152px">The treadmill · 8 SWE-bench records in 13 months, then a ceiling</div><div class="cm-legend" style="left:560px;top:152px"><span class="k"><span class="ln"></span>closed frontier</span><span class="k"><span class="ln op"></span>open weights</span></div><svg class="cm-chart" style="left:34px;top:176px;width:760px;height:340px" viewBox="0 0 760 340"><line x1="58" y1="252" x2="720" y2="252" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="255" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">50</text><line x1="58" y1="179" x2="720" y2="179" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="182" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">60</text><line x1="58" y1="106" x2="720" y2="106" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="109" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">70</text><line x1="58" y1="33" x2="720" y2="33" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="36" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">80</text><text x="58" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Oct ’24</text><text x="200" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Feb ’25</text><text x="343" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Jun ’25</text><text x="485" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Oct ’25</text><text x="610" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Feb ’26</text><text x="699" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Apr ’26</text><text x="28" y="153" transform="rotate(-90 28 153)" text-anchor="middle" font-family="JetBrains Mono" font-size="9" font-weight="700" fill="#800020">SWE-bench Verified %</text><line x1="514" y1="25" x2="720" y2="25" stroke="#800020" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/><text x="521" y="20" text-anchor="start" font-family="JetBrains Mono" font-size="7.5" font-weight="700" fill="#800020">saturation ceiling ~81%</text><polyline points="58.0,258.8 203.9,161.8 264.4,93.2 307.1,87.3 392.6,72.7 410.4,69.8 456.6,53.0 524.2,26.0 609.7,26.8" fill="none" stroke="#800020" stroke-width="2.4"/><polyline points="367.6,136.2 698.6,28.2" fill="none" stroke="#800020" stroke-width="1.8" stroke-dasharray="3 3" opacity=".6"/><circle cx="58.0" cy="258.8" r="3.2" fill="#800020"/><circle cx="203.9" cy="161.8" r="3.2" fill="#800020"/><circle cx="264.4" cy="93.2" r="3.2" fill="#800020"/><circle cx="307.1" cy="87.3" r="3.2" fill="#800020"/><circle cx="392.6" cy="72.7" r="3.2" fill="#800020"/><circle cx="410.4" cy="69.8" r="3.2" fill="#800020"/><circle cx="456.6" cy="53.0" r="3.2" fill="#800020"/><circle cx="524.2" cy="26.0" r="3.2" fill="#800020"/><circle cx="609.7" cy="26.8" r="3.2" fill="#800020"/><circle cx="367.6" cy="136.2" r="3.6" fill="#fff" stroke="#800020" stroke-width="1.8"/><circle cx="698.6" cy="28.2" r="3.6" fill="#fff" stroke="#800020" stroke-width="1.8"/><text x="58.0" y="249.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">3.5 Sonnet</text><text x="203.9" y="175.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">3.7 Sonnet</text><text x="264.4" y="84.2" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">o3</text><text x="307.1" y="101.3" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4</text><text x="392.6" y="63.7" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4.1</text><text x="410.4" y="83.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">GPT-5</text><text x="456.6" y="44.0" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Sonnet 4.5</text><text x="524.2" y="40.0" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4.5</text><text x="609.7" y="40.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4.6</text><text x="367.6" y="151.2" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#5c6470">Kimi K2 (open)</text><text x="698.6" y="43.2" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#5c6470">DeepSeek V4 (open)</text></svg><div class="cm-callout" style="left:300px;top:302px"><b>GPT-5</b> broke the record <b>2 days</b> after Opus 4.1</div>
   <div class="cm-stat" style="left:812px;top:176px;width:428px;height:86px"><div class="sh"><i data-lucide="git-merge"></i><span class="t">Open weights, now at parity</span></div><div class="big">≈ 80.6% = the frontier</div><div class="d">DeepSeek V4-Pro matches the closed SOTA on SWE-bench Verified (Apr ’26). Composite gap now ~<b>4 months / 8 ECI pts</b> (Epoch AI, May ’26).</div></div><div class="cm-stat" style="left:812px;top:272px;width:428px;height:86px"><div class="sh"><i data-lucide="alert-triangle"></i><span class="t">The benchmark itself broke</span></div><div class="big">59% of hard tests flawed</div><div class="d">OpenAI <b>retired SWE-bench Verified</b> (Feb ’26): frontier models had trained on the answers; it’s saturated. → SWE-bench Pro.</div></div><div class="cm-stat" style="left:812px;top:368px;width:428px;height:72px"><div class="sh"><i data-lucide="trending-down"></i><span class="t">Inference is collapsing</span></div><div class="big">≈ 280× cheaper / 18 mo</div><div class="d">GPT-3.5-level tokens: $20.00 → $0.07 per M. ~10× every year: “LLMflation.”</div></div><div class="cm-quote" style="left:812px;top:450px;width:428px;height:62px"><div class="q">“The models are getting commoditized.”</div><div class="a">Satya Nadella · Microsoft CEO · BG2 Pod, Dec 2024</div></div><div class="cm-punch" style="top:532px;height:60px"><i data-lucide="gem"></i><div><span class="t">The model is a commodity, not a moat.</span><br><span class="s">Whatever tops the leaderboard this week is matched, undercut and open-weighted within months, and the benchmark itself gets retired.</span></div></div>
-  <div class="slide-number">7 / 29</div>
+  <div class="slide-number">8 / 29</div>
 
 <div class="slide-source-bar">Vendor model cards / Artificial Analysis · SWE-bench Verified scores per frontier model release (2024–2026) (2026) — artificialanalysis.ai &nbsp;|&nbsp; OpenAI · Why SWE-bench Verified no longer measures frontier coding capabilities (retired Feb 2026; 59% of hard tests flawed; training contamination) (2026) — openai.com &nbsp;|&nbsp; Epoch AI · Gap between open and closed frontier models: ~4 months / 8 ECI points (Jan–May 2026) (2026) — epoch.ai &nbsp;|&nbsp; DeepSeek · DeepSeek-V4-Pro ≈ 80.6% SWE-bench Verified: open weights at parity with the closed frontier (Apr 2026) (2026) — huggingface.co &nbsp;|&nbsp; Stanford HAI · 2025 AI Index: Technical Performance (open-vs-closed Arena gap 8.04%→1.70%; inference ~280× cheaper; top-10 convergence) (2025) — hai.stanford.edu &nbsp;|&nbsp; Satya Nadella (Microsoft) · “The models are getting commoditized”: BG2 Pod with Gurley & Gerstner (2024) — the-decoder.com</div>
 </div>
 
 
 
-<!-- slide 8: §02 — The Agentic Harness -->
+<!-- slide 9: §02 — The Agentic Harness -->
 
 <div class="slide s-divider">
   <div class="accent-bar-left"></div>
@@ -2660,12 +2708,12 @@ body.presenting .slide.active {
     <div class="div-tag">Why the tooling around the model, not the model, is the performance lever.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">8 / 29</div>
+  <div class="slide-number">9 / 29</div>
 </div>
 
 
 
-<!-- slide 9: Proof — same model, better harness -->
+<!-- slide 10: Proof — same model, better harness -->
 
 <div class="slide s-proof" data-sources="li-agentic-coding">
   <div class="section-label">The Lever · Proof</div>
@@ -2688,57 +2736,9 @@ body.presenting .slide.active {
   </div>
 
   <div class="proof-same">Claude Opus 4.5 · HAL CORE-Bench · the only thing that changed was the harness</div>
-  <div class="slide-number">9 / 29</div>
-
-<div class="slide-source-bar">Aidan Li · An Opinionated Guide to Agentic Coding (2026) — aidanli.dev</div>
-</div>
-
-
-
-<!-- slide 10: The lever is the tooling -->
-
-<div class="slide s-lever" data-sources="ahe-2604">
-  <div class="section-label">The Lever · Where it lives</div>
-  <h2 class="slide-title">Performance lives in the tooling around the model, not the model.</h2>
-  <p class="slide-lede">Ablation studies rank what actually moves agent performance. Model prompt-tuning sits <em>last</em>.</p>
-
-  <div class="rank">
-    <div class="rank-row">
-      <span class="rank-rankno">1</span>
-      <span class="rank-label">Tools</span>
-      <div class="rank-track"><div class="rank-fill" style="width: 100%;"></div></div>
-    </div>
-    <div class="rank-row">
-      <span class="rank-rankno">2</span>
-      <span class="rank-label">Control layer<span class="rank-sub">context · execution · recovery <em>(middleware)</em></span></span>
-      <div class="rank-track"><div class="rank-fill" style="width: 82%;"></div></div>
-    </div>
-    <div class="rank-row">
-      <span class="rank-rankno">3</span>
-      <span class="rank-label">Long-term memory</span>
-      <div class="rank-track"><div class="rank-fill" style="width: 64%;"></div></div>
-    </div>
-    <div class="rank-row lo">
-      <span class="rank-rankno">4</span>
-      <span class="rank-label">System prompt</span>
-      <div class="rank-track"><div class="rank-fill" style="width: 30%;"></div></div>
-    </div>
-  </div>
-
-  <div class="rank-note">
-    <div class="note-block">
-      <div class="note-k">The inversion</div>
-      <div class="note-v">Most teams pour effort into #4, the prompt. The gains sit in #1–3.</div>
-    </div>
-    <div class="note-block">
-      <div class="note-k">The model</div>
-      <div class="note-v">Table stakes once it is capable. The harness is the differentiator.</div>
-    </div>
-  </div>
-
   <div class="slide-number">10 / 29</div>
 
-<div class="slide-source-bar">arXiv 2604.25850 · Agentic Harness Engineering (2026) — arxiv.org</div>
+<div class="slide-source-bar">Aidan Li · An Opinionated Guide to Agentic Coding (2026) — aidanli.dev</div>
 </div>
 
 
