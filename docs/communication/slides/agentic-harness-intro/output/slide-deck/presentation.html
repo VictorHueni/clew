@@ -2684,11 +2684,15 @@
 .s-lsp .lsp-bh{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:800;color:var(--ink);margin-bottom:13px;}
 .s-lsp .lsp-bh i{width:18px;height:18px;color:var(--accent);}
 .s-lsp .lsp-box.lineage .lsp-bh i{color:var(--accent-bright);}
-.s-lsp .lsp-reach{display:flex;align-items:center;gap:9px;margin-bottom:11px;}
-.s-lsp .lsp-tchip{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--muted);background:var(--surface-2);border:1px solid var(--border);border-radius:7px;padding:6px 11px;}
-.s-lsp .lsp-rarr{width:20px;height:20px;color:var(--dim);flex-shrink:0;margin:0 2px;}
-.s-lsp .lsp-cap-pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:13px;font-weight:800;color:#fff;background:var(--accent);border-radius:8px;padding:6px 14px;}
-.s-lsp .lsp-cap-pill i{width:15px;height:15px;}
+.s-lsp .lsp-axis{margin-left:auto;font-family:var(--font-mono);font-size:8.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:3px 8px;}
+.s-lsp .lsp-axis.bright{color:var(--accent-bright);background:color-mix(in srgb,var(--accent-bright) 9%,var(--surface));border-color:color-mix(in srgb,var(--accent-bright) 26%,var(--border));}
+.s-lsp .lsp-layer{display:flex;align-items:center;gap:11px;margin-bottom:9px;}
+.s-lsp .lsp-llab{flex-shrink:0;width:92px;font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--ink);}
+.s-lsp .lsp-llt{display:block;font-size:8.5px;font-weight:600;color:var(--dim);text-transform:none;letter-spacing:0;margin-top:1px;}
+.s-lsp .lsp-lchips{display:flex;flex-wrap:wrap;gap:6px;}
+.s-lsp .lsp-tchip{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--muted);background:var(--surface-2);border:1px solid var(--border);border-radius:7px;padding:5px 10px;}
+.s-lsp .lsp-cchip{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:5px 10px;}
+.s-lsp .lsp-cchip.on{color:#fff;background:var(--accent);border-color:var(--accent);}
 .s-lsp .lsp-bnote{font-size:11.5px;color:var(--muted);line-height:1.45;}
 .s-lsp .lsp-bnote b{color:var(--ink);font-weight:700;}
 .s-lsp .lsp-eq{display:flex;align-items:baseline;gap:9px;font-size:14px;color:var(--ink);margin-bottom:9px;font-family:var(--font-mono);}
@@ -3192,21 +3196,22 @@ body.presenting .slide.active {
 
   <div class="lsp-right">
     <div class="lsp-box">
-      <div class="lsp-bh"><i data-lucide="layers"></i>Capability, not transport</div>
-      <div class="lsp-reach">
-        <span class="lsp-tchip">CLI</span>
-        <span class="lsp-tchip">MCP</span>
-        <span class="lsp-tchip">API</span>
-        <i data-lucide="arrow-right" class="lsp-rarr"></i>
-        <span class="lsp-cap-pill"><i data-lucide="braces"></i>LSP</span>
+      <div class="lsp-bh"><i data-lucide="layers"></i>Capability, not transport<span class="lsp-axis">runtime · how you reach it</span></div>
+      <div class="lsp-layer">
+        <span class="lsp-llab">transport <span class="lsp-llt">how</span></span>
+        <div class="lsp-lchips"><span class="lsp-tchip">CLI</span><span class="lsp-tchip">MCP</span><span class="lsp-tchip">API</span></div>
       </div>
-      <div class="lsp-bnote">You reach LSP through a transport: a CLI wrapper, an <b>lsp-mcp</b> server, or its own JSON-RPC. The transport is how; LSP is what.</div>
+      <div class="lsp-layer">
+        <span class="lsp-llab">capability <span class="lsp-llt">what</span></span>
+        <div class="lsp-lchips"><span class="lsp-cchip on">LSP</span><span class="lsp-cchip">database</span><span class="lsp-cchip">web search</span><span class="lsp-cchip">files</span></div>
+      </div>
+      <div class="lsp-bnote">LSP lives in the <b>what</b> layer. The agent reaches it through any transport above, e.g. an <b>lsp-mcp</b> server. The transport is plumbing; LSP is the ability.</div>
     </div>
     <div class="lsp-box lineage">
-      <div class="lsp-bh"><i data-lucide="git-compare-arrows"></i>Where MCP came from</div>
+      <div class="lsp-bh"><i data-lucide="git-compare-arrows"></i>Where MCP came from<span class="lsp-axis bright">design heritage · not a call path</span></div>
       <div class="lsp-eq"><span class="lsp-eqk">LSP</span> M editors &times; N languages <span class="lsp-arr">&rarr;</span> <b>M + N</b></div>
       <div class="lsp-eq"><span class="lsp-eqk">MCP</span> M agents &times; N tools <span class="lsp-arr">&rarr;</span> <b>M + N</b></div>
-      <div class="lsp-bnote">MCP is explicitly modelled on LSP: same client-server JSON-RPC, refocused from code analysis to tool execution. The pattern already worked once.</div>
+      <div class="lsp-bnote">MCP's <b>design</b> was copied from LSP: same client-server JSON-RPC, the same M-by-N to M+N bet, refocused from code analysis to tool execution. The pattern already worked once.</div>
     </div>
   </div>
   <div class="slide-number">14 / 38</div>
