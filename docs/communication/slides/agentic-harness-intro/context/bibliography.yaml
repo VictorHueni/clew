@@ -269,8 +269,8 @@ sources:
     year: 2016
     accessed: 2026-06-30
   mcp-lsp:
-    org: "Model Context Protocol / Wikipedia"
-    title: "MCP is explicitly inspired by the Language Server Protocol: same client-server JSON-RPC and M-by-N to M+N standardization, refocused from code analysis to tool execution"
-    url: "https://en.wikipedia.org/wiki/Model_Context_Protocol"
-    year: 2026
+    org: "Model Context Protocol specification"
+    title: "MCP spec: 'MCP takes some inspiration from the Language Server Protocol, which standardizes how to add support for programming languages across a whole ecosystem'; shares JSON-RPC 2.0, client-server and capability negotiation"
+    url: "https://modelcontextprotocol.io/specification/2024-11-05"
+    year: 2024
     accessed: 2026-06-30

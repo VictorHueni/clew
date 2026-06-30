@@ -3176,7 +3176,7 @@ body.presenting .slide.active {
 <div class="slide s-lsp" data-sources="lsp-spec,mcp-lsp">
   <div class="section-label">Tools · Zoom on LSP</div>
   <h2 class="slide-title">LSP: a capability the agent reaches, not another transport.</h2>
-  <p class="slide-lede">The Language Server Protocol gives a model IDE-grade understanding of code. It is reached <em>through</em> CLI, MCP or API, and it is the very pattern MCP was modelled on.</p>
+  <p class="slide-lede">The Language Server Protocol gives a model IDE-grade understanding of code. It is reached <em>through</em> CLI, MCP or API, and it is the protocol MCP's own spec says it took inspiration from.</p>
 
   <div class="lsp-left">
     <div class="lsp-h">What LSP gives an agent</div>
@@ -3208,15 +3208,15 @@ body.presenting .slide.active {
       <div class="lsp-bnote">LSP lives in the <b>what</b> layer. The agent reaches it through any transport above, e.g. an <b>lsp-mcp</b> server. The transport is plumbing; LSP is the ability.</div>
     </div>
     <div class="lsp-box lineage">
-      <div class="lsp-bh"><i data-lucide="git-compare-arrows"></i>Where MCP came from<span class="lsp-axis bright">design heritage · not a call path</span></div>
+      <div class="lsp-bh"><i data-lucide="git-compare-arrows"></i>What inspired MCP<span class="lsp-axis bright">design heritage · not a call path</span></div>
       <div class="lsp-eq"><span class="lsp-eqk">LSP</span> M editors &times; N languages <span class="lsp-arr">&rarr;</span> <b>M + N</b></div>
       <div class="lsp-eq"><span class="lsp-eqk">MCP</span> M agents &times; N tools <span class="lsp-arr">&rarr;</span> <b>M + N</b></div>
-      <div class="lsp-bnote">MCP's <b>design</b> was copied from LSP: same client-server JSON-RPC, the same M-by-N to M+N bet, refocused from code analysis to tool execution. The pattern already worked once.</div>
+      <div class="lsp-bnote">MCP's spec says it <b>&ldquo;takes some inspiration from&rdquo;</b> LSP: it shares the client-server JSON-RPC and the same M-by-N to M+N bet, refocused from code analysis to tool execution.</div>
     </div>
   </div>
   <div class="slide-number">14 / 38</div>
 
-<div class="slide-source-bar">Microsoft · Language Server Protocol: one open JSON-RPC standard so a language server works in any editor (definitions, references, diagnostics, hover, rename); turns M editors x N languages into M+N (2016) — microsoft.github.io &nbsp;|&nbsp; Model Context Protocol / Wikipedia · MCP is explicitly inspired by the Language Server Protocol: same client-server JSON-RPC and M-by-N to M+N standardization, refocused from code analysis to tool execution (2026) — en.wikipedia.org</div>
+<div class="slide-source-bar">Microsoft · Language Server Protocol: one open JSON-RPC standard so a language server works in any editor (definitions, references, diagnostics, hover, rename); turns M editors x N languages into M+N (2016) — microsoft.github.io &nbsp;|&nbsp; Model Context Protocol specification · MCP spec: 'MCP takes some inspiration from the Language Server Protocol, which standardizes how to add support for programming languages across a whole ecosystem'; shares JSON-RPC 2.0, client-server and capability negotiation (2024) — modelcontextprotocol.io</div>
 </div>
 
 
