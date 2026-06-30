@@ -1,0 +1,34 @@
+<div class="slide s-mcp" data-sources="mcp-protocol">
+  <div class="section-label">Tools · The protocol</div>
+  <h2 class="slide-title">MCP: one protocol for every tool an agent can reach.</h2>
+  <p class="slide-lede">The open standard Anthropic shipped in November 2024. Think USB-C for AI: expose a tool through one server, and every MCP client can call it.</p>
+
+  <div class="mc-flow">
+    <div class="mc-col">
+      <div class="mc-colh">MCP clients</div>
+      <span class="mc-chip">Claude</span>
+      <span class="mc-chip">Claude Code</span>
+      <span class="mc-chip">Cursor</span>
+      <span class="mc-chip">any agent</span>
+    </div>
+    <i data-lucide="arrow-right" class="mc-arr"></i>
+    <div class="mc-hub"><i data-lucide="plug"></i><div class="mc-hubt">MCP</div><div class="mc-hubs">open client-server protocol</div></div>
+    <i data-lucide="arrow-right" class="mc-arr"></i>
+    <div class="mc-col">
+      <div class="mc-colh">MCP servers</div>
+      <span class="mc-chip">GitHub</span>
+      <span class="mc-chip">Postgres</span>
+      <span class="mc-chip">Slack</span>
+      <span class="mc-chip">filesystem</span>
+    </div>
+  </div>
+
+  <div class="mc-prims">
+    <div class="mc-prim"><div class="mc-ph"><i data-lucide="wrench"></i>Tools</div><div class="mc-pd">Functions the model can <b>invoke</b>: the verbs (create issue, run query).</div></div>
+    <div class="mc-prim"><div class="mc-ph"><i data-lucide="file-text"></i>Resources</div><div class="mc-pd">Data and context it can <b>read</b>: the nouns (files, records, docs).</div></div>
+    <div class="mc-prim"><div class="mc-ph"><i data-lucide="message-square-quote"></i>Prompts</div><div class="mc-pd">Reusable <b>templates</b> the server offers the client to call well.</div></div>
+  </div>
+
+  <div class="mc-nbym"><i data-lucide="git-compare-arrows"></i><div><b>Solves the N-by-M problem.</b> Without a standard, M apps each wire N tools &rarr; M&times;N bespoke connectors. With MCP it is M&nbsp;+&nbsp;N: write a server once, every client uses it.</div></div>
+  <div class="slide-number"></div>
+</div>

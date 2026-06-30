@@ -226,3 +226,39 @@ sources:
     url: "https://arxiv.org/abs/2402.17753"
     year: 2024
     accessed: 2026-06-29
+  mcp-protocol:
+    org: "Anthropic"
+    title: "Introducing the Model Context Protocol: an open standard for connecting AI assistants to tools and data (client-server; tools, resources, prompts)"
+    url: "https://www.anthropic.com/news/model-context-protocol"
+    year: 2024
+    accessed: 2026-06-30
+  ronacher-mcp-code:
+    org: "Armin Ronacher"
+    title: "Your MCP Doesn't Need 30 Tools: It Needs Code (compose a few CLI/code primitives instead of bloating context with tool schemas)"
+    url: "https://lucumr.pocoo.org/2025/8/18/code-mcps/"
+    year: 2025
+    accessed: 2026-06-30
+  mcp-overhead:
+    org: "arXiv 2508.12566"
+    title: "RAG-MCP / MCPGauge: MCP integration inflates input tokens 3.25x to 236.5x and automated tool access reduces accuracy by an average of 9.5%"
+    url: "https://arxiv.org/html/2508.12566v1"
+    year: 2025
+    accessed: 2026-06-30
+  mcpverse:
+    org: "arXiv 2508.16260"
+    title: "MCPVerse: 65 servers / 552 tools (147K+ token schemas); best agent task success falls from 62% to 44% at full scale"
+    url: "https://arxiv.org/html/2508.16260v2"
+    year: 2025
+    accessed: 2026-06-30
+  anthropic-code-mcp:
+    org: "Anthropic Engineering"
+    title: "Code execution with MCP: wrap servers as code for on-demand tool discovery (illustrative 150K to 2K token reduction)"
+    url: "https://www.anthropic.com/engineering/code-execution-with-mcp"
+    year: 2025
+    accessed: 2026-06-30
+  anthropic-adv-tool:
+    org: "Anthropic Engineering"
+    title: "Advanced tool use: Tool Search Tool loads definitions on demand (~85% less context; tool-selection accuracy 49% to 74% on Opus 4)"
+    url: "https://www.anthropic.com/engineering/advanced-tool-use"
+    year: 2026
+    accessed: 2026-06-30
