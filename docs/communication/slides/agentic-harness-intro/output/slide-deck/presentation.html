@@ -2678,6 +2678,34 @@
 .s-lsp .lsp-vsrow.rich{background:var(--accent-lt);border:1px solid color-mix(in srgb,var(--accent) 24%,var(--border));}
 .s-lsp .lsp-vsrow.rich i{color:var(--accent);}
 .s-lsp .lsp-vsrow b{font-weight:700;}
+.s-lsp .ide{background:var(--dark-bg);border:1px solid var(--dark-border);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:16px;}
+.s-lsp .ide-bar{display:flex;align-items:center;gap:7px;background:var(--dark-surface);border-bottom:1px solid var(--dark-border);padding:8px 12px;}
+.s-lsp .ide-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.s-lsp .ide-dot.r{background:#ec6a5e;}
+.s-lsp .ide-dot.y{background:#f4bf4f;}
+.s-lsp .ide-dot.g{background:#61c554;}
+.s-lsp .ide-tab{margin-left:8px;font-family:var(--font-mono);font-size:10px;color:var(--dark-muted);background:var(--dark-bg);border:1px solid var(--dark-border);border-radius:5px;padding:3px 11px;}
+.s-lsp .ide-body{position:relative;padding:10px 0;}
+.s-lsp .ide-code{font-family:var(--font-mono);font-size:12px;line-height:1.7;}
+.s-lsp .ide-row{display:flex;}
+.s-lsp .ide-num{width:36px;flex-shrink:0;text-align:right;padding-right:13px;color:var(--dark-muted);opacity:.55;}
+.s-lsp .ide-tx{white-space:pre;color:#c8cdd6;}
+.s-lsp .tk-kw{color:#c98ac9;}
+.s-lsp .tk-cls{color:#e5c07b;}
+.s-lsp .tk-fn{color:#8fb6e0;}
+.s-lsp .tk-ty{color:#7fc4a8;}
+.s-lsp .tk-self{color:#9aa2ae;font-style:italic;}
+.s-lsp .tk-op{color:#9aa2ae;}
+.s-lsp .tk-str{color:#c0966b;}
+.s-lsp .tk-sel{background:rgba(255,255,255,.17);border-radius:3px;color:#fff;padding:0 1px;}
+.s-lsp .ide-menu{position:absolute;top:46px;right:14px;width:208px;background:var(--dark-surface);border:1px solid var(--dark-border);border-radius:8px;box-shadow:0 10px 26px rgba(0,0,0,.5);padding:5px;z-index:2;}
+.s-lsp .im-item{display:flex;align-items:center;gap:9px;font-size:11px;color:#d7dbe2;padding:6px 9px;border-radius:5px;line-height:1;}
+.s-lsp .im-item i{width:14px;height:14px;color:var(--dark-muted);flex-shrink:0;}
+.s-lsp .im-key{margin-left:auto;font-family:var(--font-mono);font-size:9px;color:var(--dark-muted);}
+.s-lsp .im-item.on{background:var(--accent);color:#fff;}
+.s-lsp .im-item.on i{color:#fff;}
+.s-lsp .im-item.on .im-key{color:rgba(255,255,255,.82);}
+.s-lsp .im-sep{height:1px;background:var(--dark-border);margin:5px 7px;}
 .s-lsp .lsp-right{position:absolute;right:48px;top:186px;width:600px;bottom:62px;display:flex;flex-direction:column;gap:16px;}
 .s-lsp .lsp-box{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:12px;box-shadow:var(--shadow);padding:16px 18px;}
 .s-lsp .lsp-box.lineage{border-top-color:var(--accent-bright);}
@@ -3180,13 +3208,28 @@ body.presenting .slide.active {
 
   <div class="lsp-left">
     <div class="lsp-h">What LSP gives an agent</div>
-    <div class="lsp-grid">
-      <div class="lsp-cap"><i data-lucide="locate-fixed"></i>Go to definition</div>
-      <div class="lsp-cap"><i data-lucide="search"></i>Find references</div>
-      <div class="lsp-cap"><i data-lucide="info"></i>Hover &amp; types</div>
-      <div class="lsp-cap"><i data-lucide="triangle-alert"></i>Diagnostics</div>
-      <div class="lsp-cap"><i data-lucide="pencil-line"></i>Rename symbol</div>
-      <div class="lsp-cap"><i data-lucide="list-tree"></i>Workspace symbols</div>
+    <div class="ide">
+      <div class="ide-bar"><span class="ide-dot r"></span><span class="ide-dot y"></span><span class="ide-dot g"></span><span class="ide-tab">user.py</span></div>
+      <div class="ide-body">
+        <div class="ide-code">
+          <div class="ide-row"><span class="ide-num">1</span><span class="ide-tx"><span class="tk-kw">class</span> <span class="tk-cls">User</span>:</span></div>
+          <div class="ide-row"><span class="ide-num">2</span><span class="ide-tx">    <span class="tk-kw">def</span> <span class="tk-sel">save</span>(<span class="tk-self">self</span>) <span class="tk-op">-&gt;</span> <span class="tk-ty">None</span>: ...</span></div>
+          <div class="ide-row"><span class="ide-num">3</span><span class="ide-tx">    <span class="tk-kw">def</span> <span class="tk-fn">has_role</span>(<span class="tk-self">self</span>, r: <span class="tk-ty">str</span>) <span class="tk-op">-&gt;</span> <span class="tk-ty">bool</span>: ...</span></div>
+          <div class="ide-row"><span class="ide-num">4</span><span class="ide-tx">    <span class="tk-kw">def</span> <span class="tk-fn">email</span>(<span class="tk-self">self</span>) <span class="tk-op">-&gt;</span> <span class="tk-ty">str</span>: ...</span></div>
+          <div class="ide-row"><span class="ide-num">5</span><span class="ide-tx"></span></div>
+          <div class="ide-row"><span class="ide-num">6</span><span class="ide-tx">u = <span class="tk-cls">User</span>()</span></div>
+          <div class="ide-row"><span class="ide-num">7</span><span class="ide-tx">u.<span class="tk-fn">save</span>()</span></div>
+          <div class="ide-row"><span class="ide-num">8</span><span class="ide-tx">u.<span class="tk-fn">has_role</span>(<span class="tk-str">&quot;admin&quot;</span>)</span></div>
+          <div class="ide-row"><span class="ide-num">9</span><span class="ide-tx"><span class="tk-fn">print</span>(u.<span class="tk-fn">email</span>())</span></div>
+        </div>
+        <div class="ide-menu">
+          <div class="im-item on"><i data-lucide="locate-fixed"></i>Go to Definition<span class="im-key">F12</span></div>
+          <div class="im-item"><i data-lucide="search"></i>Find All References<span class="im-key">&#8679;F12</span></div>
+          <div class="im-item"><i data-lucide="eye"></i>Peek Definition</div>
+          <div class="im-sep"></div>
+          <div class="im-item"><i data-lucide="pencil-line"></i>Rename Symbol<span class="im-key">F2</span></div>
+        </div>
+      </div>
     </div>
     <div class="lsp-vs">
       <div class="lsp-vsrow plain"><i data-lucide="file-search"></i><div><b>grep / CLI</b> returns <b>text</b> matches, line by line.</div></div>

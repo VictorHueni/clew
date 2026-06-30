@@ -5,13 +5,28 @@
 
   <div class="lsp-left">
     <div class="lsp-h">What LSP gives an agent</div>
-    <div class="lsp-grid">
-      <div class="lsp-cap"><i data-lucide="locate-fixed"></i>Go to definition</div>
-      <div class="lsp-cap"><i data-lucide="search"></i>Find references</div>
-      <div class="lsp-cap"><i data-lucide="info"></i>Hover &amp; types</div>
-      <div class="lsp-cap"><i data-lucide="triangle-alert"></i>Diagnostics</div>
-      <div class="lsp-cap"><i data-lucide="pencil-line"></i>Rename symbol</div>
-      <div class="lsp-cap"><i data-lucide="list-tree"></i>Workspace symbols</div>
+    <div class="ide">
+      <div class="ide-bar"><span class="ide-dot r"></span><span class="ide-dot y"></span><span class="ide-dot g"></span><span class="ide-tab">user.py</span></div>
+      <div class="ide-body">
+        <div class="ide-code">
+          <div class="ide-row"><span class="ide-num">1</span><span class="ide-tx"><span class="tk-kw">class</span> <span class="tk-cls">User</span>:</span></div>
+          <div class="ide-row"><span class="ide-num">2</span><span class="ide-tx">    <span class="tk-kw">def</span> <span class="tk-sel">save</span>(<span class="tk-self">self</span>) <span class="tk-op">-&gt;</span> <span class="tk-ty">None</span>: ...</span></div>
+          <div class="ide-row"><span class="ide-num">3</span><span class="ide-tx">    <span class="tk-kw">def</span> <span class="tk-fn">has_role</span>(<span class="tk-self">self</span>, r: <span class="tk-ty">str</span>) <span class="tk-op">-&gt;</span> <span class="tk-ty">bool</span>: ...</span></div>
+          <div class="ide-row"><span class="ide-num">4</span><span class="ide-tx">    <span class="tk-kw">def</span> <span class="tk-fn">email</span>(<span class="tk-self">self</span>) <span class="tk-op">-&gt;</span> <span class="tk-ty">str</span>: ...</span></div>
+          <div class="ide-row"><span class="ide-num">5</span><span class="ide-tx"></span></div>
+          <div class="ide-row"><span class="ide-num">6</span><span class="ide-tx">u = <span class="tk-cls">User</span>()</span></div>
+          <div class="ide-row"><span class="ide-num">7</span><span class="ide-tx">u.<span class="tk-fn">save</span>()</span></div>
+          <div class="ide-row"><span class="ide-num">8</span><span class="ide-tx">u.<span class="tk-fn">has_role</span>(<span class="tk-str">&quot;admin&quot;</span>)</span></div>
+          <div class="ide-row"><span class="ide-num">9</span><span class="ide-tx"><span class="tk-fn">print</span>(u.<span class="tk-fn">email</span>())</span></div>
+        </div>
+        <div class="ide-menu">
+          <div class="im-item on"><i data-lucide="locate-fixed"></i>Go to Definition<span class="im-key">F12</span></div>
+          <div class="im-item"><i data-lucide="search"></i>Find All References<span class="im-key">&#8679;F12</span></div>
+          <div class="im-item"><i data-lucide="eye"></i>Peek Definition</div>
+          <div class="im-sep"></div>
+          <div class="im-item"><i data-lucide="pencil-line"></i>Rename Symbol<span class="im-key">F2</span></div>
+        </div>
+      </div>
     </div>
     <div class="lsp-vs">
       <div class="lsp-vsrow plain"><i data-lucide="file-search"></i><div><b>grep / CLI</b> returns <b>text</b> matches, line by line.</div></div>
