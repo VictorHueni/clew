@@ -1,0 +1,42 @@
+<div class="slide s-lsp" data-sources="lsp-spec,mcp-lsp">
+  <div class="section-label">Tools · Zoom on LSP</div>
+  <h2 class="slide-title">LSP: a capability the agent reaches, not another transport.</h2>
+  <p class="slide-lede">The Language Server Protocol gives a model IDE-grade understanding of code. It is reached <em>through</em> CLI, MCP or API, and it is the very pattern MCP was modelled on.</p>
+
+  <div class="lsp-left">
+    <div class="lsp-h">What LSP gives an agent</div>
+    <div class="lsp-grid">
+      <div class="lsp-cap"><i data-lucide="locate-fixed"></i>Go to definition</div>
+      <div class="lsp-cap"><i data-lucide="search"></i>Find references</div>
+      <div class="lsp-cap"><i data-lucide="info"></i>Hover &amp; types</div>
+      <div class="lsp-cap"><i data-lucide="triangle-alert"></i>Diagnostics</div>
+      <div class="lsp-cap"><i data-lucide="pencil-line"></i>Rename symbol</div>
+      <div class="lsp-cap"><i data-lucide="list-tree"></i>Workspace symbols</div>
+    </div>
+    <div class="lsp-vs">
+      <div class="lsp-vsrow plain"><i data-lucide="file-search"></i><div><b>grep / CLI</b> returns <b>text</b> matches, line by line.</div></div>
+      <div class="lsp-vsrow rich"><i data-lucide="git-fork"></i><div><b>LSP</b> returns the program's <b>semantic graph</b>: what is defined where, what calls what, what is type-broken.</div></div>
+    </div>
+  </div>
+
+  <div class="lsp-right">
+    <div class="lsp-box">
+      <div class="lsp-bh"><i data-lucide="layers"></i>Capability, not transport</div>
+      <div class="lsp-reach">
+        <span class="lsp-tchip">CLI</span>
+        <span class="lsp-tchip">MCP</span>
+        <span class="lsp-tchip">API</span>
+        <i data-lucide="arrow-right" class="lsp-rarr"></i>
+        <span class="lsp-cap-pill"><i data-lucide="braces"></i>LSP</span>
+      </div>
+      <div class="lsp-bnote">You reach LSP through a transport: a CLI wrapper, an <b>lsp-mcp</b> server, or its own JSON-RPC. The transport is how; LSP is what.</div>
+    </div>
+    <div class="lsp-box lineage">
+      <div class="lsp-bh"><i data-lucide="git-compare-arrows"></i>Where MCP came from</div>
+      <div class="lsp-eq"><span class="lsp-eqk">LSP</span> M editors &times; N languages <span class="lsp-arr">&rarr;</span> <b>M + N</b></div>
+      <div class="lsp-eq"><span class="lsp-eqk">MCP</span> M agents &times; N tools <span class="lsp-arr">&rarr;</span> <b>M + N</b></div>
+      <div class="lsp-bnote">MCP is explicitly modelled on LSP: same client-server JSON-RPC, refocused from code analysis to tool execution. The pattern already worked once.</div>
+    </div>
+  </div>
+  <div class="slide-number"></div>
+</div>
