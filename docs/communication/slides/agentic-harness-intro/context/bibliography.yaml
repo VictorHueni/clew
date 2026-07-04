@@ -274,3 +274,9 @@ sources:
     url: "https://modelcontextprotocol.io/specification/2024-11-05"
     year: 2024
     accessed: 2026-06-30
+  okf-spec:
+    org: "Google Cloud"
+    title: "Open Knowledge Format (OKF) v0.1 — SPEC: knowledge as plain markdown + YAML frontmatter, cross-linked into a graph; single hard rule is a non-empty type field; index.md/log.md reserved per directory"
+    url: "https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md"
+    year: 2026
+    accessed: 2026-07-04

@@ -1,0 +1,37 @@
+<div class="slide s-mcpwrap" data-sources="mcp-protocol,ronacher-mcp-code,anthropic-code-mcp">
+  <div class="section-label">Tools · Under the hood</div>
+  <h2 class="slide-title">Most of MCP is a wrapper that makes CLI &amp; API tools <em>discoverable</em>.</h2>
+  <p class="slide-lede">Peel back a typical MCP server and you find a shell command or an HTTP call it already had. What MCP adds on top isn't capability, it's a self-describing, standardized way for the agent to <em>find</em> and call it.</p>
+
+  <div class="mw-left">
+    <div class="mw-lh">Peel back an MCP server</div>
+    <div class="mw-onion">
+      <div class="mw-skin">
+        <span class="mw-skin-lab"><i data-lucide="plug"></i>MCP protocol · the discoverability skin</span>
+        <span class="mw-skin-sub">JSON-RPC · <code>tools/list</code> · JSON schemas</span>
+        <div class="mw-core">
+          <span class="mw-core-lab"><i data-lucide="box"></i>what actually runs</span>
+          <div class="mw-run"><span class="mw-tool">create_issue</span><i data-lucide="arrow-right"></i><code>gh issue create</code><span class="mw-kind cli">CLI</span></div>
+          <div class="mw-run"><span class="mw-tool">query</span><i data-lucide="arrow-right"></i><code>POST /v1/sql</code><span class="mw-kind api">API</span></div>
+          <div class="mw-run"><span class="mw-tool">search_files</span><i data-lucide="arrow-right"></i><code>rg &lt;pattern&gt;</code><span class="mw-kind cli">CLI</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="mw-thin"><i data-lucide="layers"></i>A thin translation shim: same command, wrapped in a schema.</div>
+  </div>
+
+  <div class="mw-right">
+    <div class="mw-card add">
+      <div class="mw-ch"><i data-lucide="search"></i>What it <b>adds</b> &mdash; discoverability</div>
+      <div class="mw-crow"><i data-lucide="list"></i><div><b>Self-description.</b> <code>tools/list</code> hands back names + typed schemas, so the agent calls a tool it has never seen.</div></div>
+      <div class="mw-crow"><i data-lucide="git-compare-arrows"></i><div><b>Standardization.</b> One protocol, reusable across every client, plus auth and a common error shape.</div></div>
+    </div>
+    <div class="mw-card keep">
+      <div class="mw-ch dim"><i data-lucide="minus-circle"></i>What it <b>doesn't</b> &mdash; the capability</div>
+      <div class="mw-crow"><i data-lucide="terminal"></i><div>The CLI or API still does the work. A bare <code>gh</code> or <code>curl</code> does the same thing, with no schema to load.</div></div>
+    </div>
+  </div>
+
+  <div class="mw-punch"><i data-lucide="help-circle"></i><div><span class="t">So the question is rarely &ldquo;CLI or MCP?&rdquo; but &ldquo;does the agent need to <b>discover</b> this tool at runtime?&rdquo;</span> If it already knows the command, the CLI is enough; MCP earns its context cost when cross-client discoverability does.</div></div>
+  <div class="slide-number"></div>
+</div>
