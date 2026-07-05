@@ -1,0 +1,43 @@
+<div class="slide s-toolways" data-sources="mcp-protocol,ronacher-mcp-code,mcp-overhead,mcpverse,anthropic-code-mcp,anthropic-adv-tool">
+  <div class="section-label">Appendix · Tools</div>
+  <h2 class="slide-title">CLI, MCP &amp; API: three ways in, <em>combined</em> per task.</h2>
+  <p class="slide-lede">Same goal, different sweet spot. The harness uses all three, matched to the job, then minds MCP's one real tax.</p>
+
+  <div class="tw2-grid">
+    <div class="tw2-card cli">
+      <div class="tw2-h"><i data-lucide="terminal"></i>CLI</div>
+      <div class="tw2-sub">shell + filesystem, via a Bash tool</div>
+      <div class="tw2-best"><i data-lucide="target"></i>The local build / test / commit loop</div>
+      <div class="tw2-row good"><i data-lucide="check"></i>Composable, token-cheap, tools the model already knows (git, docker)</div>
+      <div class="tw2-row bad"><i data-lucide="x"></i>Must be installed; unstructured text; no discovery</div>
+    </div>
+    <div class="tw2-card mcp">
+      <div class="tw2-h"><i data-lucide="plug"></i>MCP</div>
+      <div class="tw2-sub">a standardized server protocol</div>
+      <div class="tw2-best"><i data-lucide="target"></i>Standardized access to external systems</div>
+      <div class="tw2-row good"><i data-lucide="check"></i>Discoverable &amp; reusable across clients; wire once, every app uses it</div>
+      <div class="tw2-row bad"><i data-lucide="x"></i>Tool defs loaded upfront &rarr; context bloat</div>
+    </div>
+    <div class="tw2-card api">
+      <div class="tw2-h"><i data-lucide="webhook"></i>API</div>
+      <div class="tw2-sub">a direct HTTP / REST / SDK call</div>
+      <div class="tw2-best"><i data-lucide="target"></i>Hot paths where control &amp; speed matter</div>
+      <div class="tw2-row good"><i data-lucide="check"></i>Full control, best latency, exact bespoke fit</div>
+      <div class="tw2-row bad"><i data-lucide="x"></i>Bespoke wiring per service (the N&times;M tax); you own auth &amp; retries</div>
+    </div>
+  </div>
+
+  <div class="tw2-one"><i data-lucide="layers"></i>One agent &middot; three mechanisms &middot; chosen per task</div>
+
+  <div class="tw2-tax">
+    <div class="tw2-cave">
+      <div class="tw2-caveh"><i data-lucide="alert-triangle"></i>MCP's one real tax: context</div>
+      <div class="tw2-caved"><b>50K&ndash;134K tokens</b> of tool defs loaded before the request is read; task success falls <b>62&rarr;44%</b> when all 65 servers load at once. <span class="tw2-src">arXiv 2508.16260</span></div>
+    </div>
+    <div class="tw2-fix">
+      <div class="tw2-fixh"><i data-lucide="arrow-down-narrow-wide"></i>The fix: progressive disclosure</div>
+      <div class="tw2-fixd">Load tools <b>on demand</b> (code execution / Tool Search), not all upfront. <b>~85%</b> less context; tool-selection <b>49&rarr;74%</b>. <span class="tw2-src">Anthropic</span></div>
+    </div>
+  </div>
+  <div class="slide-number"></div>
+</div>
