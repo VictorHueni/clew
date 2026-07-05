@@ -1,0 +1,35 @@
+<div class="slide s-llmwiki" data-sources="karpathy-llm-wiki">
+  <div class="section-label">The Metamodel · The LLM Wiki (Karpathy)</div>
+  <h2 class="slide-title">The LLM Wiki is a loop that <em>compounds</em>: every answer makes it smarter.</h2>
+
+  <div class="lw-side">
+    <div class="lw-srow"><div class="sic"><i data-lucide="files"></i></div><div><div class="st">Raw sources <span class="mono">raw/</span></div><div class="sd">Immutable docs feed in. The LLM reads, never edits.</div></div></div>
+    <div class="lw-srow"><div class="sic"><i data-lucide="file-cog"></i></div><div><div class="st">Schema <span class="mono">CLAUDE.md</span></div><div class="sd">Governs structure, conventions &amp; workflows.</div></div></div>
+    <div class="lw-srow"><div class="sic"><i data-lucide="folder-tree"></i></div><div><div class="st">Reserved files</div><div class="sd"><span class="mono">index.md</span> catalogue · <span class="mono">log.md</span> append-only history.</div></div></div>
+  </div>
+
+  <div class="lw-ring">
+    <svg class="lw-loop" viewBox="0 0 472 380">
+      <defs><marker id="lw-ar" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z"/></marker></defs>
+      <g class="lw-arc" fill="none" stroke-width="2" marker-end="url(#lw-ar)">
+        <path d="M300,66 A150,150 0 0 1 396,190"/>
+        <path d="M396,200 A150,150 0 0 1 300,314"/>
+        <path d="M172,314 A150,150 0 0 1 76,200"/>
+        <path d="M76,190 A150,150 0 0 1 172,66"/>
+      </g>
+    </svg>
+    <div class="lw-hub"><i data-lucide="library"></i><div class="ht">The wiki</div><div class="hs">persistent · compounds</div></div>
+    <div class="lw-node n-top"><span class="rnum">1</span><div class="rh"><i data-lucide="arrow-down-to-line"></i>Ingest</div><div class="rd">Summarise a source into a page.</div></div>
+    <div class="lw-node n-right"><span class="rnum">2</span><div class="rh"><i data-lucide="link-2"></i>Interlink</div><div class="rd">Cross-reference &amp; update the index.</div></div>
+    <div class="lw-node n-bottom"><span class="rnum">3</span><div class="rh"><i data-lucide="search"></i>Query</div><div class="rd">Answer with citations from pages.</div></div>
+    <div class="lw-node n-left"><span class="rnum">4</span><div class="rh"><i data-lucide="save"></i>File back</div><div class="rd">Good answers become new pages.</div></div>
+  </div>
+
+  <div class="lw-lint">
+    <div class="lh"><i data-lucide="stethoscope"></i>Lint<span class="lc">· the guardrail</span></div>
+    <div class="ld">Periodic health-check across the whole wiki: <b>contradictions, stale claims, orphan pages, missing cross-references</b>.</div>
+  </div>
+
+  <div class="lw-punch"><i data-lucide="anchor"></i><div><span class="t">Compile once, not per query.</span> Ask a question and the wiki now knows the answer too, knowledge that accrues instead of being re-derived each turn.</div></div>
+  <div class="slide-number"></div>
+</div>

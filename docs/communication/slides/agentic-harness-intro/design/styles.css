@@ -2605,6 +2605,44 @@
 .s-mcpwrap .mw-punch .t{color:var(--ink);font-weight:600;}
 .s-mcpwrap .mw-punch b{color:var(--accent);font-weight:800;}
 
+/* THE LLM WIKI · s-llmwiki (compounding loop) */
+.s-llmwiki *{box-sizing:border-box;}
+.s-llmwiki .slide-title{font-size:29px;}
+.s-llmwiki .lw-side{position:absolute;left:64px;top:214px;width:296px;display:flex;flex-direction:column;gap:11px;}
+.s-llmwiki .lw-srow{display:flex;gap:11px;align-items:flex-start;}
+.s-llmwiki .lw-srow .sic{width:34px;height:34px;border-radius:9px;background:var(--accent-lt);border:1px solid color-mix(in srgb,var(--accent) 22%,var(--border));display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.s-llmwiki .lw-srow .sic i{width:18px;height:18px;color:var(--accent);}
+.s-llmwiki .lw-srow .st{font-size:13px;font-weight:800;color:var(--ink);}
+.s-llmwiki .lw-srow .st .mono{font-family:var(--font-mono);font-size:10.5px;color:var(--accent);font-weight:600;}
+.s-llmwiki .lw-srow .sd{font-size:11px;color:var(--muted);line-height:1.35;margin-top:2px;}
+.s-llmwiki .lw-ring{position:absolute;left:404px;top:196px;width:472px;height:380px;}
+.s-llmwiki .lw-loop{position:absolute;inset:0;overflow:visible;}
+.s-llmwiki .lw-loop .lw-arc{stroke:var(--accent);opacity:.55;}
+.s-llmwiki .lw-loop marker path{fill:var(--accent);}
+.s-llmwiki .lw-hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:186px;height:186px;border-radius:50%;background:var(--accent);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 14px 34px rgba(128,0,32,.28);z-index:3;}
+.s-llmwiki .lw-hub i{width:30px;height:30px;margin-bottom:5px;}
+.s-llmwiki .lw-hub .ht{font-size:19px;font-weight:800;letter-spacing:-.01em;}
+.s-llmwiki .lw-hub .hs{font-family:var(--font-mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.82);margin-top:3px;}
+.s-llmwiki .lw-node{position:absolute;width:172px;background:var(--surface);border:1px solid var(--border);border-radius:11px;box-shadow:var(--shadow);padding:10px 13px;z-index:4;}
+.s-llmwiki .lw-node .rh{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800;color:var(--ink);}
+.s-llmwiki .lw-node .rh i{width:15px;height:15px;color:var(--accent);}
+.s-llmwiki .lw-node .rd{font-size:10.5px;color:var(--muted);line-height:1.3;margin-top:3px;}
+.s-llmwiki .lw-node.n-top{left:150px;top:-14px;}
+.s-llmwiki .lw-node.n-right{right:-58px;top:150px;}
+.s-llmwiki .lw-node.n-bottom{left:150px;bottom:-14px;}
+.s-llmwiki .lw-node.n-left{left:-58px;top:150px;}
+.s-llmwiki .lw-node .rnum{position:absolute;top:-8px;left:-8px;width:19px;height:19px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--font-mono);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.s-llmwiki .lw-lint{position:absolute;left:900px;top:214px;width:320px;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent-bright);border-radius:11px;box-shadow:var(--shadow);padding:13px 15px;}
+.s-llmwiki .lw-lint .lh{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;color:var(--ink);margin-bottom:6px;}
+.s-llmwiki .lw-lint .lh i{width:16px;height:16px;color:var(--accent-bright);}
+.s-llmwiki .lw-lint .lc{font-family:var(--font-mono);font-size:9px;color:var(--accent-bright);font-weight:600;margin-left:6px;}
+.s-llmwiki .lw-lint .ld{font-size:11px;color:var(--muted);line-height:1.4;}
+.s-llmwiki .lw-lint .ld b{color:var(--ink);font-weight:700;}
+.s-llmwiki .lw-punch{position:absolute;left:64px;right:60px;bottom:60px;display:flex;align-items:center;gap:11px;background:var(--surface-2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:11px;padding:11px 16px;font-size:12px;color:var(--muted);line-height:1.4;}
+.s-llmwiki .lw-punch i{width:19px;height:19px;color:var(--accent);flex-shrink:0;}
+.s-llmwiki .lw-punch b{color:var(--accent);font-weight:800;}
+.s-llmwiki .lw-punch .t{color:var(--ink);font-weight:600;}
+
 /* ANATOMY OF A METAMODEL ARTEFACT · s-artanat (blueprint dissection) */
 .s-artanat *{box-sizing:border-box;}
 .s-artanat .slide-title{font-size:29px;}

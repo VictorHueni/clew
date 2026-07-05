@@ -274,6 +274,12 @@ sources:
     url: "https://modelcontextprotocol.io/specification/2024-11-05"
     year: 2024
     accessed: 2026-06-30
+  karpathy-llm-wiki:
+    org: "Andrej Karpathy"
+    title: "LLM Wiki: compile raw sources into a persistent, interlinked markdown wiki the LLM owns and maintains — ingest / query / lint, reserved index.md + log.md, a compounding artifact (heir to Vannevar Bush's Memex)"
+    url: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
+    year: 2026
+    accessed: 2026-07-05
   okf-spec:
     org: "Google Cloud"
     title: "Open Knowledge Format (OKF) v0.1 — SPEC: knowledge as plain markdown + YAML frontmatter, cross-linked into a graph; single hard rule is a non-empty type field; index.md/log.md reserved per directory"
