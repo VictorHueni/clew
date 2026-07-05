@@ -23,10 +23,39 @@
     </div>
   </div>
 
-  <div class="mc-prims">
-    <div class="mc-prim"><div class="mc-ph"><i data-lucide="wrench"></i>Tools</div><div class="mc-pd">Functions the model can <b>invoke</b>: the verbs (create issue, run query).</div></div>
-    <div class="mc-prim"><div class="mc-ph"><i data-lucide="file-text"></i>Resources</div><div class="mc-pd">Data and context it can <b>read</b>: the nouns (files, records, docs).</div></div>
-    <div class="mc-prim"><div class="mc-ph"><i data-lucide="message-square-quote"></i>Prompts</div><div class="mc-pd">Reusable <b>templates</b> the server offers the client to call well.</div></div>
+  <div class="mc-exph"><i data-lucide="corner-left-down"></i>Through MCP, each server exposes three primitives <span class="sub">&mdash; invoked by the model, read by the app, run by the user</span></div>
+
+  <div class="mca">
+    <div class="mca-card">
+      <div class="mca-h"><span class="mca-ic"><i data-lucide="wrench"></i></span><span class="mca-nm">Tools</span><span class="mca-verb">model-controlled</span></div>
+      <div class="mca-def">The model <b>invokes</b> them to act (a human approves). The verbs.</div>
+      <div class="mca-egh">e.g.</div>
+      <div class="mca-chips">
+        <span class="mca-chip"><i data-lucide="database"></i>query a database</span>
+        <span class="mca-chip"><i data-lucide="webhook"></i>call an API</span>
+        <span class="mca-chip"><i data-lucide="terminal"></i>run a CLI command</span>
+      </div>
+    </div>
+    <div class="mca-card">
+      <div class="mca-h"><span class="mca-ic"><i data-lucide="file-text"></i></span><span class="mca-nm">Resources</span><span class="mca-verb">app-controlled</span></div>
+      <div class="mca-def">Read-only data the client <b>loads as context</b>, by URI. The nouns.</div>
+      <div class="mca-egh">e.g.</div>
+      <div class="mca-chips">
+        <span class="mca-chip"><i data-lucide="file-text"></i>documents</span>
+        <span class="mca-chip"><i data-lucide="table"></i>database records</span>
+        <span class="mca-chip"><i data-lucide="scroll-text"></i>logs</span>
+      </div>
+    </div>
+    <div class="mca-card">
+      <div class="mca-h"><span class="mca-ic"><i data-lucide="message-square-quote"></i></span><span class="mca-nm">Prompts</span><span class="mca-verb">user-controlled</span></div>
+      <div class="mca-def">Templates the <b>user triggers</b>, often as slash commands. The workflows.</div>
+      <div class="mca-egh">e.g.</div>
+      <div class="mca-chips">
+        <span class="mca-chip"><i data-lucide="slash"></i>slash commands</span>
+        <span class="mca-chip"><i data-lucide="git-commit-horizontal"></i>git commit msg</span>
+        <span class="mca-chip"><i data-lucide="workflow"></i>guided workflows</span>
+      </div>
+    </div>
   </div>
 
   <div class="mc-nbym"><i data-lucide="git-compare-arrows"></i><div><b>Solves the N-by-M problem.</b> Without a standard, M apps each wire N tools &rarr; M&times;N bespoke connectors. With MCP it is M&nbsp;+&nbsp;N: write a server once, every client uses it.</div></div>
