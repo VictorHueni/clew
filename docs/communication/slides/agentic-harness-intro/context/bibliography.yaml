@@ -280,6 +280,12 @@ sources:
     url: "https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f"
     year: 2026
     accessed: 2026-07-05
+  a16z-llmflation:
+    org: "Andreessen Horowitz (a16z)"
+    title: "Welcome to LLMflation — LLM inference cost falls ~10x/year at fixed quality (GPT-3-grade: $60/M tokens Nov 2021 → $0.06/M, ~1,000x in 3 years); term coined by Guido Appenzeller"
+    url: "https://a16z.com/llmflation-llm-inference-cost/"
+    year: 2024
+    accessed: 2026-07-05
   okf-spec:
     org: "Google Cloud"
     title: "Open Knowledge Format (OKF) v0.1 — SPEC: knowledge as plain markdown + YAML frontmatter, cross-linked into a graph; single hard rule is a non-empty type field; index.md/log.md reserved per directory"
