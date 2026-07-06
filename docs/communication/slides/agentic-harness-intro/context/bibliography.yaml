@@ -286,6 +286,12 @@ sources:
     url: "https://a16z.com/llmflation-llm-inference-cost/"
     year: 2024
     accessed: 2026-07-05
+  mcp-lifecycle:
+    org: "Model Context Protocol specification"
+    title: "Lifecycle: initialize handshake + capability negotiation, operation, shutdown — initialize / notifications/initialized / resources/subscribe / notifications/resources/updated / {tools,resources,prompts}/list_changed (JSON-RPC 2.0 over stdio or HTTP)"
+    url: "https://modelcontextprotocol.io/specification/2025-06-18/basic/lifecycle"
+    year: 2025
+    accessed: 2026-07-06
   okf-spec:
     org: "Google Cloud"
     title: "Open Knowledge Format (OKF) v0.1 — SPEC: knowledge as plain markdown + YAML frontmatter, cross-linked into a graph; single hard rule is a non-empty type field; index.md/log.md reserved per directory"

@@ -153,6 +153,9 @@ slides:
   - file: "41-llm-wiki.html"
     class: "s-llmwiki"
     label: "The LLM Wiki (Karpathy) — knowledge that compounds"
+  - file: "42-mcp-lifecycle.html"
+    class: "s-mcplife"
+    label: "MCP protocol lifecycle — negotiate, operate, notify"
 paths:
   slides_dir:        "output/slides"
   styles_file:       "design/styles.css"

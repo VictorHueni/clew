@@ -2574,6 +2574,49 @@
 .s-toolmix .tm-fixb{font-size:12px;color:var(--ink);line-height:1.45;}
 .s-toolmix .tm-fixb b{color:var(--accent);font-weight:800;}
 
+/* APPENDIX · MCP protocol lifecycle · s-mcplife */
+.s-mcplife *{box-sizing:border-box;}
+.s-mcplife .slide-title{font-size:29px;}
+.s-mcplife .slide-lede code{font-family:var(--font-mono);font-size:12px;color:var(--accent);}
+.s-mcplife .ml-seq{position:absolute;left:48px;top:184px;width:712px;bottom:44px;}
+.s-mcplife .ml-seq svg{width:100%;height:100%;}
+.s-mcplife .band.a{fill:var(--accent-lt);}
+.s-mcplife .band.b{fill:var(--surface-2);}
+.s-mcplife .phase{font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:.06em;fill:var(--accent);}
+.s-mcplife .head{fill:var(--surface);stroke:var(--border);stroke-width:1;}
+.s-mcplife .head.srv{fill:var(--accent);stroke:var(--accent);}
+.s-mcplife .headt{font-family:var(--font-sans);font-size:13px;font-weight:800;fill:var(--ink);text-anchor:middle;}
+.s-mcplife .head.srv ~ .headt,.s-mcplife text.headt:last-of-type{}
+.s-mcplife .life{stroke:var(--dim);stroke-width:1.2;stroke-dasharray:3 4;}
+.s-mcplife .arr{stroke-width:1.8;fill:none;}
+.s-mcplife .arr.req{stroke:var(--accent);}
+.s-mcplife .arr.res{stroke:var(--dim);stroke-dasharray:5 4;}
+.s-mcplife .arr.res.async{stroke:var(--accent-bright);stroke-dasharray:2 4;}
+.s-mcplife .mk-req{fill:var(--accent);}
+.s-mcplife .mk-res{fill:var(--dim);}
+.s-mcplife .lbl{font-family:var(--font-mono);font-size:10.5px;text-anchor:middle;}
+.s-mcplife .lbl.req{fill:var(--ink);font-weight:600;}
+.s-mcplife .lbl.res{fill:var(--muted);}
+.s-mcplife .lbl.sm{font-size:9px;fill:var(--dim);}
+.s-mcplife .note{font-family:var(--font-mono);font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;fill:var(--accent-bright);text-anchor:start;}
+/* right reference panel */
+.s-mcplife .ml-side{position:absolute;left:788px;right:48px;top:196px;display:flex;flex-direction:column;gap:14px;}
+.s-mcplife .ml-card{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--accent);border-radius:12px;box-shadow:var(--shadow);padding:14px 16px;}
+.s-mcplife .ml-ch{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800;color:var(--ink);margin-bottom:11px;}
+.s-mcplife .ml-ch i{width:17px;height:17px;color:var(--accent);}
+.s-mcplife .ml-cs{font-family:var(--font-mono);font-size:9.5px;font-weight:500;color:var(--dim);letter-spacing:.02em;}
+.s-mcplife .ml-cap{display:flex;align-items:center;gap:11px;margin-bottom:9px;}
+.s-mcplife .ml-who{width:96px;flex-shrink:0;font-size:11px;font-weight:700;color:var(--muted);}
+.s-mcplife .ml-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.s-mcplife .ml-chip{font-family:var(--font-mono);font-size:10.5px;font-weight:600;color:var(--muted);background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:4px 8px;}
+.s-mcplife .ml-chip.on{color:var(--accent);background:var(--accent-lt);border-color:color-mix(in srgb,var(--accent) 26%,var(--border));}
+.s-mcplife .ml-note{font-size:11px;color:var(--muted);line-height:1.4;margin-top:8px;padding-top:9px;border-top:1px dashed var(--border);}
+.s-mcplife .ml-note code{font-family:var(--font-mono);font-size:10px;color:var(--accent);}
+.s-mcplife .ml-note b{color:var(--ink);font-weight:700;}
+.s-mcplife .ml-nrow{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--ink);line-height:1.4;margin-bottom:9px;}
+.s-mcplife .ml-nrow i{width:15px;height:15px;color:var(--accent);flex-shrink:0;margin-top:2px;}
+.s-mcplife .ml-nrow code{font-family:var(--font-mono);font-size:10.5px;color:var(--accent);}
+
 /* APPENDIX · CLI/MCP/API merged · s-toolways */
 .s-toolways *{box-sizing:border-box;}
 .s-toolways .slide-title{font-size:29px;}

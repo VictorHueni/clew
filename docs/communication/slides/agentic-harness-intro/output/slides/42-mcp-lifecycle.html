@@ -1,0 +1,77 @@
+<div class="slide s-mcplife" data-sources="mcp-lifecycle,mcp-protocol">
+  <div class="section-label">Appendix · MCP protocol lifecycle</div>
+  <h2 class="slide-title">One JSON-RPC session: <em>negotiate</em>, operate, notify.</h2>
+  <p class="slide-lede">Over stdio or HTTP. Capabilities are negotiated once at <code>initialize</code>; then it's discovery, use, and change notifications, until the transport closes.</p>
+
+  <div class="ml-seq">
+    <svg viewBox="0 0 704 476" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <marker id="mlreq" markerWidth="8" markerHeight="8" refX="6.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" class="mk-req"/></marker>
+        <marker id="mlres" markerWidth="8" markerHeight="8" refX="6.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" class="mk-res"/></marker>
+      </defs>
+
+      <!-- phase bands -->
+      <rect class="band a" x="4" y="40" width="696" height="112" rx="8"/>
+      <rect class="band b" x="4" y="160" width="696" height="238" rx="8"/>
+      <rect class="band a" x="4" y="406" width="696" height="52" rx="8"/>
+      <text class="phase" x="16" y="58">① INITIALIZE</text>
+      <text class="phase" x="16" y="178">② OPERATE</text>
+      <text class="phase" x="16" y="424">③ SHUTDOWN</text>
+
+      <!-- lifelines -->
+      <rect class="head cli" x="80" y="2" width="80" height="26" rx="7"/>
+      <text class="headt" x="120" y="19">Client</text>
+      <rect class="head srv" x="560" y="2" width="80" height="26" rx="7"/>
+      <text class="headt" x="600" y="19">Server</text>
+      <line class="life" x1="120" y1="28" x2="120" y2="460"/>
+      <line class="life" x1="600" y1="28" x2="600" y2="460"/>
+
+      <!-- initialization -->
+      <text class="lbl req" x="360" y="74">initialize · version · client capabilities</text>
+      <line class="arr req" x1="120" y1="82" x2="594" y2="82" marker-end="url(#mlreq)"/>
+      <text class="lbl res" x="360" y="106">result · server capabilities · serverInfo</text>
+      <line class="arr res" x1="600" y1="114" x2="126" y2="114" marker-end="url(#mlres)"/>
+      <text class="lbl res" x="360" y="138">notifications/initialized</text>
+      <line class="arr res" x1="120" y1="146" x2="594" y2="146" marker-end="url(#mlres)"/>
+
+      <!-- operation -->
+      <text class="note" x="602" y="201">discover</text>
+      <text class="lbl req" x="360" y="196">tools/list · resources/list · prompts/list</text>
+      <line class="arr req" x1="120" y1="204" x2="594" y2="204" marker-end="url(#mlreq)"/>
+      <line class="arr res" x1="600" y1="230" x2="126" y2="230" marker-end="url(#mlres)"/>
+      <text class="lbl res sm" x="360" y="224">catalogues</text>
+
+      <text class="note" x="602" y="269">use</text>
+      <text class="lbl req" x="360" y="264">tools/call · resources/read · prompts/get</text>
+      <line class="arr req" x1="120" y1="272" x2="594" y2="272" marker-end="url(#mlreq)"/>
+      <line class="arr res" x1="600" y1="298" x2="126" y2="298" marker-end="url(#mlres)"/>
+      <text class="lbl res sm" x="360" y="292">results</text>
+
+      <text class="note" x="602" y="337">live</text>
+      <text class="lbl req" x="360" y="332">resources/subscribe</text>
+      <line class="arr req" x1="120" y1="340" x2="594" y2="340" marker-end="url(#mlreq)"/>
+      <text class="lbl res" x="360" y="372">notifications/resources/updated · …/list_changed</text>
+      <line class="arr res async" x1="600" y1="380" x2="126" y2="380" marker-end="url(#mlres)"/>
+
+      <!-- shutdown -->
+      <text class="lbl req" x="360" y="446">transport close · stdio EOF → SIGTERM · HTTP close</text>
+      <line class="arr req" x1="120" y1="452" x2="594" y2="452" marker-end="url(#mlreq)"/>
+    </svg>
+  </div>
+
+  <div class="ml-side">
+    <div class="ml-card">
+      <div class="ml-ch"><i data-lucide="handshake"></i>Capability negotiation <span class="ml-cs">· once, at initialize</span></div>
+      <div class="ml-cap"><span class="ml-who">Client declares</span><span class="ml-chips"><span class="ml-chip">roots</span><span class="ml-chip">sampling</span><span class="ml-chip">elicitation</span></span></div>
+      <div class="ml-cap"><span class="ml-who">Server declares</span><span class="ml-chips"><span class="ml-chip on">tools</span><span class="ml-chip on">resources</span><span class="ml-chip on">prompts</span><span class="ml-chip">logging</span></span></div>
+      <div class="ml-note">Sub-caps gate the extras: <code>listChanged</code> (tools · resources · prompts) and <code>subscribe</code> (resources only). Both sides use <b>only</b> what was negotiated.</div>
+    </div>
+    <div class="ml-card">
+      <div class="ml-ch"><i data-lucide="bell-ring"></i>Kept live by notifications <span class="ml-cs">· server → client</span></div>
+      <div class="ml-nrow"><i data-lucide="refresh-cw"></i><div><code>notifications/resources/updated</code> &rarr; the client re-reads that resource.</div></div>
+      <div class="ml-nrow"><i data-lucide="list-restart"></i><div><code>…/list_changed</code> &rarr; the client re-lists tools, resources or prompts.</div></div>
+      <div class="ml-note">No polling: the session stays in sync as the server's surface changes.</div>
+    </div>
+  </div>
+  <div class="slide-number"></div>
+</div>
