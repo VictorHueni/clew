@@ -2674,6 +2674,27 @@
 .s-toolmix .tm-fixb{font-size:12px;color:var(--ink);line-height:1.45;}
 .s-toolmix .tm-fixb b{color:var(--accent);font-weight:800;}
 
+/* STAR THE REPOS · s-star (dark CTA) */
+.s-star{background:var(--dark-bg);color:var(--dark-ink);}
+.s-star *{box-sizing:border-box;}
+.s-star .star-wordmark{position:absolute;top:44px;left:68px;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dark-muted);}
+.s-star .star-wrap{position:absolute;left:68px;right:68px;top:132px;}
+.s-star .star-eyebrow{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:14px;}
+.s-star .star-title{font-size:44px;font-weight:800;line-height:1.08;letter-spacing:-.02em;color:var(--dark-ink);margin:0;}
+.s-star .star-title em{font-style:normal;color:var(--accent-bright);}
+.s-star .star-sub{font-size:15px;color:var(--dark-muted);margin-top:14px;max-width:780px;line-height:1.5;}
+.s-star .star-cards{display:flex;gap:20px;margin-top:32px;}
+.s-star .star-card{flex:1;display:block;text-decoration:none;background:var(--dark-surface);border:1px solid var(--dark-border);border-radius:14px;padding:20px 22px;transition:border-color .15s;}
+.s-star .star-card:hover{border-color:var(--accent-bright);}
+.s-star .sc-h{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:18px;font-weight:700;color:var(--dark-ink);}
+.s-star .sc-h i{width:20px;height:20px;color:var(--accent-bright);flex-shrink:0;}
+.s-star .sc-d{font-size:13px;color:var(--dark-muted);line-height:1.5;margin:11px 0 16px;}
+.s-star .sc-u{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--accent-bright);}
+.s-star .sc-u i{width:15px;height:15px;flex-shrink:0;}
+.s-star .star-foot{position:absolute;left:68px;right:68px;bottom:38px;display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;color:var(--dark-muted);}
+.s-star .star-foot::before{content:"";width:22px;height:3px;border-radius:2px;background:var(--accent-bright);flex-shrink:0;}
+.s-star .star-foot b{color:var(--dark-ink);font-weight:600;}
+
 /* APPENDIX · MCP protocol lifecycle · s-mcplife */
 .s-mcplife *{box-sizing:border-box;}
 .s-mcplife .slide-title{font-size:29px;}
@@ -3047,7 +3068,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="cover-bottom-line"></div>
-  <div class="slide-number">1 / 42</div>
+  <div class="slide-number">1 / 43</div>
 </div>
 
 
@@ -3063,7 +3084,7 @@ body.presenting .slide.active {
     <div class="div-tag">Two years into the agent era, the honest read: the 2025 hype didn't land, and the model itself is commoditizing.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">2 / 42</div>
+  <div class="slide-number">2 / 43</div>
 </div>
 
 
@@ -3089,7 +3110,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="hype-foot">Across MIT and RAND, one verdict: the missing variable wasn't intelligence, it was the <b>harness around the model</b>.</div>
-  <div class="slide-number">3 / 42</div>
+  <div class="slide-number">3 / 43</div>
 
 <div class="slide-source-bar">MIT Project NANDA · The GenAI Divide: State of AI in Business 2025 (95% of pilots: no measurable P&L impact) · via Fortune (2025) — fortune.com &nbsp;|&nbsp; RAND Corporation · The Root Causes of Failure for AI Projects (80% fail; causes are problem-alignment, data, integration, not models) (2024) — rand.org</div>
 </div>
@@ -3104,7 +3125,7 @@ body.presenting .slide.active {
   <p class="slide-lede">A new frontier model tops every benchmark… until the next does, <em>days</em> later. Then it saturates ~81%, open weights reach <em>parity</em>, and the benchmark itself gets retired.</p>
   <div class="cm-cap" style="left:40px;top:152px">The treadmill · 8 SWE-bench records in 13 months, then a ceiling</div><div class="cm-legend" style="left:560px;top:152px"><span class="k"><span class="ln"></span>closed frontier</span><span class="k"><span class="ln op"></span>open weights</span></div><svg class="cm-chart" style="left:34px;top:176px;width:760px;height:340px" viewBox="0 0 760 340"><line x1="58" y1="252" x2="720" y2="252" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="255" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">50</text><line x1="58" y1="179" x2="720" y2="179" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="182" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">60</text><line x1="58" y1="106" x2="720" y2="106" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="109" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">70</text><line x1="58" y1="33" x2="720" y2="33" stroke="#e3e6ee" stroke-width="1"/><text x="51" y="36" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="#9aa2ae">80</text><text x="58" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Oct ’24</text><text x="200" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Feb ’25</text><text x="343" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Jun ’25</text><text x="485" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Oct ’25</text><text x="610" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Feb ’26</text><text x="699" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#9aa2ae">Apr ’26</text><text x="28" y="153" transform="rotate(-90 28 153)" text-anchor="middle" font-family="JetBrains Mono" font-size="9" font-weight="700" fill="#800020">SWE-bench Verified %</text><line x1="514" y1="25" x2="720" y2="25" stroke="#800020" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/><text x="521" y="20" text-anchor="start" font-family="JetBrains Mono" font-size="7.5" font-weight="700" fill="#800020">saturation ceiling ~81%</text><polyline points="58.0,258.8 203.9,161.8 264.4,93.2 307.1,87.3 392.6,72.7 410.4,69.8 456.6,53.0 524.2,26.0 609.7,26.8" fill="none" stroke="#800020" stroke-width="2.4"/><polyline points="367.6,136.2 698.6,28.2" fill="none" stroke="#800020" stroke-width="1.8" stroke-dasharray="3 3" opacity=".6"/><circle cx="58.0" cy="258.8" r="3.2" fill="#800020"/><circle cx="203.9" cy="161.8" r="3.2" fill="#800020"/><circle cx="264.4" cy="93.2" r="3.2" fill="#800020"/><circle cx="307.1" cy="87.3" r="3.2" fill="#800020"/><circle cx="392.6" cy="72.7" r="3.2" fill="#800020"/><circle cx="410.4" cy="69.8" r="3.2" fill="#800020"/><circle cx="456.6" cy="53.0" r="3.2" fill="#800020"/><circle cx="524.2" cy="26.0" r="3.2" fill="#800020"/><circle cx="609.7" cy="26.8" r="3.2" fill="#800020"/><circle cx="367.6" cy="136.2" r="3.6" fill="#fff" stroke="#800020" stroke-width="1.8"/><circle cx="698.6" cy="28.2" r="3.6" fill="#fff" stroke="#800020" stroke-width="1.8"/><text x="58.0" y="249.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">3.5 Sonnet</text><text x="203.9" y="175.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">3.7 Sonnet</text><text x="264.4" y="84.2" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">o3</text><text x="307.1" y="101.3" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4</text><text x="392.6" y="63.7" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4.1</text><text x="410.4" y="83.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">GPT-5</text><text x="456.6" y="44.0" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Sonnet 4.5</text><text x="524.2" y="40.0" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4.5</text><text x="609.7" y="40.8" text-anchor="middle" font-family="JetBrains Mono" font-size="7" font-weight="700" fill="#0f1117">Opus 4.6</text><text x="367.6" y="151.2" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#5c6470">Kimi K2 (open)</text><text x="698.6" y="43.2" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#5c6470">DeepSeek V4 (open)</text></svg><div class="cm-callout" style="left:300px;top:344px"><b>GPT-5</b> broke the record <b>2 days</b> after Opus 4.1</div>
   <div class="cm-stat" style="left:812px;top:176px;width:428px;height:86px"><div class="sh"><i data-lucide="git-merge"></i><span class="t">Open weights, now at parity</span></div><div class="big">≈ 80.6% = the frontier</div><div class="d">DeepSeek V4-Pro matches the closed SOTA on SWE-bench Verified (Apr ’26). Composite gap now ~<b>4 months / 8 ECI pts</b> (Epoch AI, May ’26).</div></div><div class="cm-stat" style="left:812px;top:272px;width:428px;height:86px"><div class="sh"><i data-lucide="alert-triangle"></i><span class="t">The benchmark itself broke</span></div><div class="big">59% of hard tests flawed</div><div class="d">OpenAI <b>retired SWE-bench Verified</b> (Feb ’26): frontier models had trained on the answers; it’s saturated. → SWE-bench Pro.</div></div><div class="cm-stat" style="left:812px;top:368px;width:428px;height:72px"><div class="sh"><i data-lucide="trending-down"></i><span class="t">Inference is collapsing</span></div><div class="big">≈ 280× cheaper / 18 mo</div><div class="d">GPT-3.5-level tokens: $20.00 → $0.07 per M. ~10× every year: “LLMflation.”</div></div><div class="cm-quote" style="left:812px;top:450px;width:428px;height:62px"><div class="q">“The models are getting commoditized.”</div><div class="a">Satya Nadella · Microsoft CEO · BG2 Pod, Dec 2024</div></div><div class="cm-punch" style="top:532px;height:60px"><i data-lucide="gem"></i><div><span class="t">The model is a commodity, not a moat.</span><br><span class="s">Whatever tops the leaderboard this week is matched, undercut and open-weighted within months, and the benchmark itself gets retired.</span></div></div>
-  <div class="slide-number">4 / 42</div>
+  <div class="slide-number">4 / 43</div>
 
 <div class="slide-source-bar">Vendor model cards / Artificial Analysis · SWE-bench Verified scores per frontier model release (2024–2026) (2026) — artificialanalysis.ai &nbsp;|&nbsp; OpenAI · Why SWE-bench Verified no longer measures frontier coding capabilities (retired Feb 2026; 59% of hard tests flawed; training contamination) (2026) — openai.com &nbsp;|&nbsp; Epoch AI · Gap between open and closed frontier models: ~4 months / 8 ECI points (Jan–May 2026) (2026) — epoch.ai &nbsp;|&nbsp; DeepSeek · DeepSeek-V4-Pro ≈ 80.6% SWE-bench Verified: open weights at parity with the closed frontier (Apr 2026) (2026) — huggingface.co &nbsp;|&nbsp; Stanford HAI · 2025 AI Index: Technical Performance (open-vs-closed Arena gap 8.04%→1.70%; inference ~280× cheaper; top-10 convergence) (2025) — hai.stanford.edu &nbsp;|&nbsp; Andreessen Horowitz (a16z) · Welcome to LLMflation — LLM inference cost falls ~10x/year at fixed quality (GPT-3-grade: $60/M tokens Nov 2021 → $0.06/M, ~1,000x in 3 years); term coined by Guido Appenzeller (2024) — a16z.com &nbsp;|&nbsp; Satya Nadella (Microsoft) · “The models are getting commoditized”: BG2 Pod with Gurley & Gerstner (2024) — the-decoder.com</div>
 </div>
@@ -3122,7 +3143,7 @@ body.presenting .slide.active {
     <div class="div-tag">The pilots that stalled tuned the model. The ones that shipped engineered the harness.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">5 / 42</div>
+  <div class="slide-number">5 / 43</div>
 </div>
 
 
@@ -3179,7 +3200,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="pf-foot">Same weights every time. The harness is the differentiator, <em>not the model</em>.</div>
-  <div class="slide-number">6 / 42</div>
+  <div class="slide-number">6 / 43</div>
 
 <div class="slide-source-bar">Laude Institute / Stanford · Terminal-Bench 2.0 leaderboard (same model, harness swap: Opus 4.6 62.9% to 76.4%) (2026) — tbench.ai &nbsp;|&nbsp; Anthropic · Introducing Claude 4 (SWE-bench Verified: same model, scaffold 72.5% to 79.4%) (2025) — anthropic.com &nbsp;|&nbsp; arXiv 2604.25850 · Agentic Harness Engineering (2026) — arxiv.org</div>
 </div>
@@ -3224,7 +3245,7 @@ body.presenting .slide.active {
     </div>
   </div>
 
-  <div class="slide-number">7 / 42</div>
+  <div class="slide-number">7 / 43</div>
 
 <div class="slide-source-bar">Laude Institute / Stanford · Terminal-Bench 2.0 leaderboard (same model, harness swap: Opus 4.6 62.9% to 76.4%) (2026) — tbench.ai &nbsp;|&nbsp; Anthropic Engineering · Effective Context Engineering for AI Agents (2025) — anthropic.com</div>
 </div>
@@ -3240,7 +3261,7 @@ body.presenting .slide.active {
   <div class="zone cross" style="left:215px;top:212px;width:500px;height:88px"></div><div class="zlabel cross" style="left:227px;top:220px">② KNOW <span class="sm">· acquire · retain · improve</span></div><div class="lc" style="left:223px;top:236px;width:156px;height:56px"><div class="lh"><i data-lucide="database"></i><h4>Memory</h4></div><div class="tt"><span class="tn">Mem0</span> (60k) · <span class="tn">Cognee</span> (24k) · <span class="tn">Letta</span> (23k)</div></div><div class="lc" style="left:387px;top:236px;width:156px;height:56px"><div class="lh"><i data-lucide="book-open"></i><h4>Knowledge</h4></div><div class="tt"><span class="tn">RAGFlow</span> (84k) · <span class="tn">Milvus</span> (45k) · <span class="tn">PageIndex</span> (33k) · <span class="tn">Chroma</span> (29k)</div></div><div class="lc" style="left:551px;top:236px;width:156px;height:56px"><div class="lh"><i data-lucide="trending-up"></i><h4>Learning & Adapt.</h4></div><div class="tt"><span class="tn">DSPy</span> (36k) · <span class="tn">Optuna</span> (14k) · <span class="tn">TextGrad</span> (4k)</div></div><div class="zone loop" style="left:729px;top:212px;width:336px;height:88px"></div><div class="zlabel loop" style="left:741px;top:220px">③ DIRECT <span class="sm">· intent & plan</span></div><div class="lc" style="left:737px;top:236px;width:156px;height:56px"><div class="lh"><i data-lucide="target"></i><h4>Goals & Tasking</h4></div><div class="tt"><span class="tn">SGLang</span> (30k) · <span class="tn">Guidance</span> (22k) · <span class="tn">Outlines</span> (14k)</div></div><div class="lc" style="left:901px;top:236px;width:156px;height:56px"><div class="lh"><i data-lucide="git-branch"></i><h4>Planning & Decomp.</h4></div><div class="tt"><span class="tn">BabyAGI</span> (22k) · <span class="tn">Plandex</span> (15k) · <span class="tn">Tree-of-Thoughts</span> (6k)</div></div><div class="zone loop" style="left:215px;top:326px;width:224px;height:152px"></div><div class="zlabel loop" style="left:227px;top:334px">① PERCEIVE <span class="sm">· sense the world</span></div><div class="lc" style="left:223px;top:350px;width:208px;height:56px"><div class="lh"><i data-lucide="eye"></i><h4>Sensors / Perception</h4></div><div class="tt"><span class="tn">browser-use</span> (101k) · <span class="tn">Puppeteer</span> (95k) · <span class="tn">Playwright</span> (92k)</div></div><div class="lc" style="left:223px;top:414px;width:208px;height:56px"><div class="lh"><i data-lucide="box"></i><h4>Environment State</h4></div><div class="tt"><span class="tn">Docker</span> (72k) · <span class="tn">Git</span> (62k) · <span class="tn">Compose</span> (38k)</div></div><div class="zone loop" style="left:841px;top:326px;width:224px;height:152px"></div><div class="zlabel loop" style="left:853px;top:334px">④ ACT <span class="sm">· change the world</span></div><div class="lc" style="left:849px;top:350px;width:208px;height:56px"><div class="lh"><i data-lucide="hammer"></i><h4>Actuators / Actions</h4></div><div class="tt"><span class="tn">Open-Interp</span> (64k) · <span class="tn">Aider</span> (47k) · <span class="tn">gh CLI</span> (45k)</div></div><div class="lc" style="left:849px;top:414px;width:208px;height:56px"><div class="lh"><i data-lucide="plug"></i><h4>Tools & Skills</h4></div><div class="tt"><span class="tn">MCP servers</span> (88k) · <span class="tn">Composio</span> (29k) · <span class="tn">FastMCP</span> (26k)</div></div><div class="zone cross" style="left:215px;top:504px;width:336px;height:88px"></div><div class="zlabel cross" style="left:227px;top:512px">⑤ VERIFY <span class="sm">· is the work correct?</span></div><div class="lc" style="left:223px;top:528px;width:156px;height:56px"><div class="lh"><i data-lucide="circle-check"></i><h4>Controls & Valid.</h4></div><div class="tt"><span class="tn">Playwright</span> (92k) · <span class="tn">Promptfoo</span> (23k) · <span class="tn">OpenAI Evals</span> (19k)</div></div><div class="lc" style="left:387px;top:528px;width:156px;height:56px"><div class="lh"><i data-lucide="activity"></i><h4>Observability</h4></div><div class="tt"><span class="tn">LangFuse</span> (30k) · <span class="tn">Opik</span> (20k) · <span class="tn">Phoenix</span> (10k)</div></div><div class="zone cross" style="left:565px;top:504px;width:500px;height:88px"></div><div class="zlabel cross" style="left:577px;top:512px">⑥ GOVERN <span class="sm">· safe & in-bounds</span></div><div class="lc" style="left:573px;top:528px;width:156px;height:56px"><div class="lh"><i data-lucide="shield"></i><h4>Safety & Govern.</h4></div><div class="tt"><span class="tn">Daytona</span> (72k) · <span class="tn">Firecracker</span> (35k) · <span class="tn">E2B</span> (13k)</div></div><div class="lc" style="left:737px;top:528px;width:156px;height:56px"><div class="lh"><i data-lucide="key"></i><h4>Identity & Access</h4></div><div class="tt"><span class="tn">Vault</span> (36k) · <span class="tn">Keycloak</span> (35k) · <span class="tn">Infisical</span> (28k)</div></div><div class="lc" style="left:901px;top:528px;width:156px;height:56px"><div class="lh"><i data-lucide="user-check"></i><h4>Human Feedback</h4></div><div class="tt"><span class="tn">Streamlit</span> (45k) · <span class="tn">Gradio</span> (43k) · <span class="tn">Chainlit</span> (12k)</div></div>
   <div class="core"><div class="ch"><i data-lucide="cpu"></i><h4>Agent Core</h4></div><div class="fl">reason · choose · loop</div><div class="md">the model</div><div class="mdl">Opus · GPT-5 · Gemini</div></div>
   <div class="fwbar"><span class="fwl">Frameworks span<br>many of these</span><span class="fwt">LangChain <span class="st">140k</span></span><span class="fwt">MetaGPT <span class="st">69k</span></span><span class="fwt">AutoGen <span class="st">59k</span></span><span class="fwt">CrewAI <span class="st">55k</span></span><span class="fwt">LlamaIndex <span class="st">51k</span></span><span class="fwt">LangGraph <span class="st">36k</span></span><span class="fwt">OpenAI Agents SDK <span class="st">27k</span></span></div>
-  <div class="slide-number">8 / 42</div>
+  <div class="slide-number">8 / 43</div>
 
 <div class="slide-source-bar">Internal research · Agentic Harness: Capabilities map (15 functional domains, 80+ real shipping tools) (2026) &nbsp;|&nbsp; Anthropic · Claude Code: tools reference (Read · Grep · Edit · Bash · MCP · subagents · hooks) (2026) — docs.anthropic.com</div>
 </div>
@@ -3258,7 +3279,7 @@ body.presenting .slide.active {
   <div class="sk-colh" style="left:706px;top:150px">The ladder of abstraction <span class="sm">· every rung was once “the end of programming”</span></div>
   <div class="sk-arrow" style="top:184px;height:308px">▲<div class="ln" style="flex:1"></div></div><div class="sk-rung top" style="top:176px;height:46px"><span class="rl">The agentic harness</span><span class="re">2025 · you are here</span></div><div class="sk-rung " style="top:232px;height:46px"><span class="rl">Cloud · serverless · DevOps</span><span class="re">2010s</span></div><div class="sk-rung " style="top:288px;height:46px"><span class="rl">Libraries & frameworks</span><span class="re">1990s–2000s</span></div><div class="sk-rung " style="top:344px;height:46px"><span class="rl">Compilers & high-level languages</span><span class="re">1950s–70s</span></div><div class="sk-rung " style="top:400px;height:46px"><span class="rl">Assembly</span><span class="re">1950s</span></div><div class="sk-rung " style="top:456px;height:46px"><span class="rl">Machine code · punch cards</span><span class="re">1940s</span></div>
   <div class="sk-punch" style="top:548px;height:74px"><i data-lucide="trending-up"></i><div><div class="t">No. We’ve just climbed another rung on the ladder of abstraction.</div><div class="s">Software engineering didn’t disappear; building and maintaining this harness <b>is</b> the engineering now.</div></div></div>
-  <div class="slide-number">9 / 42</div>
+  <div class="slide-number">9 / 43</div>
 
 <div class="slide-source-bar">Internal research · Agentic Harness: Capabilities map (15 functional domains, 80+ real shipping tools) (2026)</div>
 </div>
@@ -3276,7 +3297,7 @@ body.presenting .slide.active {
     <div class="div-tag">An agent is only as capable as the tools it can call. There are three ways to hand it some: the CLI, MCP, and a direct API. They are not rivals to pick between; each pays off in a different place, and the harness wires up all three.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">10 / 42</div>
+  <div class="slide-number">10 / 43</div>
 </div>
 
 
@@ -3344,7 +3365,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="mc-nbym"><i data-lucide="git-compare-arrows"></i><div><b>Solves the N-by-M problem.</b> Without a standard, M apps each wire N tools &rarr; M&times;N bespoke connectors. With MCP it is M&nbsp;+&nbsp;N: write a server once, every client uses it.</div></div>
-  <div class="slide-number">11 / 42</div>
+  <div class="slide-number">11 / 43</div>
 
 <div class="slide-source-bar">Anthropic · Introducing the Model Context Protocol: an open standard for connecting AI assistants to tools and data (client-server; tools, resources, prompts) (2024) — anthropic.com</div>
 </div>
@@ -3388,7 +3409,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="mw-punch"><i data-lucide="help-circle"></i><div><span class="t">So the question is rarely &ldquo;CLI or MCP?&rdquo; but &ldquo;does the agent need to <b>discover</b> this tool at runtime?&rdquo;</span> If it already knows the command, the CLI is enough; MCP earns its context cost when cross-client discoverability does.</div></div>
-  <div class="slide-number">12 / 42</div>
+  <div class="slide-number">12 / 43</div>
 
 <div class="slide-source-bar">Anthropic · Introducing the Model Context Protocol: an open standard for connecting AI assistants to tools and data (client-server; tools, resources, prompts) (2024) — anthropic.com &nbsp;|&nbsp; Armin Ronacher · Your MCP Doesn't Need 30 Tools: It Needs Code (compose a few CLI/code primitives instead of bloating context with tool schemas) (2025) — lucumr.pocoo.org &nbsp;|&nbsp; Anthropic Engineering · Code execution with MCP: wrap servers as code for on-demand tool discovery (illustrative 150K to 2K token reduction) (2025) — anthropic.com</div>
 </div>
@@ -3406,7 +3427,7 @@ body.presenting .slide.active {
     <div class="div-tag">Bolt-on memory is now commodity: Mem0, Letta, vector search. What no tool ships is memory that holds its structure and traceability across refactors, and that is what the harness has to build.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">13 / 42</div>
+  <div class="slide-number">13 / 43</div>
 </div>
 
 
@@ -3458,7 +3479,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="cm-foot">One volatile window, three persistent stores. Each fails in its own way, next four slides.</div>
-  <div class="slide-number">14 / 42</div>
+  <div class="slide-number">14 / 43</div>
 
 <div class="slide-source-bar">Sumers, Yao, Narasimhan & Griffiths (Princeton) · Cognitive Architectures for Language Agents (CoALA): four memory modules (working, episodic, semantic, procedural) · TMLR 2024 (2024) — arxiv.org</div>
 </div>
@@ -3521,7 +3542,7 @@ body.presenting .slide.active {
 
   <div class="mem-fixbar"><i data-lucide="arrow-right"></i><span><span class="k">The fix:</span> curate, don't cram. Retrieve only the few high-signal tokens the task needs into a fresh window; treat context as a budget, not a bucket.</span></div>
 
-  <div class="slide-number">15 / 42</div>
+  <div class="slide-number">15 / 43</div>
 
 <div class="slide-source-bar">Anthropic · Claude Opus 4.7 System Card · MRCR v2 (vendor-reported) (2026) — anthropic.com &nbsp;|&nbsp; Anthropic · Claude Opus 4.6 System Card · MRCR v2 (vendor-reported) (2026) — anthropic.com &nbsp;|&nbsp; Adobe Research / LMU Munich · NoLiMa: Long-Context Evaluation Beyond Literal Matching (ICML 2025) (2025) — arxiv.org</div>
 </div>
@@ -3575,7 +3596,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="mem-fixbar"><i data-lucide="arrow-right"></i><span><span class="k">OpenAI's fix:</span> they replaced it with a ~100-line table of contents over a structured <code>docs/</code> tree. Memory has to be a <b>checkable map</b>, not a flat file you hope holds.</span></div>
-  <div class="slide-number">16 / 42</div>
+  <div class="slide-number">16 / 43</div>
 
 <div class="slide-source-bar">OpenAI · Harness Engineering: Leveraging Codex in an Agent-First World (2026) — openai.com</div>
 </div>
@@ -3619,7 +3640,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="mem-fixbar"><i data-lucide="arrow-right"></i><span><span class="k">The fix:</span> a curated, sharply-described, version-controlled skill set. The procedure layer rewards <b>structure</b>, not accumulation.</span></div>
-  <div class="slide-number">17 / 42</div>
+  <div class="slide-number">17 / 43</div>
 
 <div class="slide-source-bar">Anthropic Engineering · Equipping agents for the real world with Agent Skills (progressive disclosure: name + description preloaded, SKILL.md + files on demand) (2025) — anthropic.com &nbsp;|&nbsp; OpenAI / AGENTS.md · AGENTS.md: project instructions loaded eagerly at session start (no relevance gate) (2026) — agents.md</div>
 </div>
@@ -3667,7 +3688,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="mem-fixbar"><i data-lucide="arrow-right"></i><span><span class="k">The fix:</span> treat retention as a decision, not a default. Choosing what's worth keeping needs a <b>model of what matters</b>, which is exactly what no off-the-shelf store has.</span></div>
-  <div class="slide-number">18 / 42</div>
+  <div class="slide-number">18 / 43</div>
 
 <div class="slide-source-bar">Sumers, Yao, Narasimhan & Griffiths (Princeton) · Cognitive Architectures for Language Agents (CoALA): four memory modules (working, episodic, semantic, procedural) · TMLR 2024 (2024) — arxiv.org &nbsp;|&nbsp; arXiv 2304.03442 · Generative Agents: Interactive Simulacra of Human Behavior (memory stream ranked by importance, recency decay, relevance) (2023) — arxiv.org &nbsp;|&nbsp; arXiv 2504.19413 · Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory (>90% token-cost saving vs full context) (2025) — arxiv.org &nbsp;|&nbsp; arXiv 2603.07670 · Memory for Autonomous LLM Agents: cross-session coherence is largely unsolved (2026) — arxiv.org</div>
 </div>
@@ -3685,7 +3706,7 @@ body.presenting .slide.active {
     <div class="div-tag">How an agent armed with skills and rules turns business context into deployable artefacts, every step traceable.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">19 / 42</div>
+  <div class="slide-number">19 / 43</div>
 </div>
 
 
@@ -3753,7 +3774,7 @@ body.presenting .slide.active {
   <div class="dv-cl dv-r" style="left:1058px;top:452px;width:182px;min-height:96px"><div class="dv-clh"><span class="dv-clt">QA</span><span class="dv-cln">5 · planned</span></div><div class="dv-cls">Test strategy · Test scenario · Test plan · Acceptance test · Eval harness</div></div>
   <div class="dv-cl dv-r" style="left:794px;top:596px;width:200px;min-height:72px"><div class="dv-clh"><span class="dv-clt">OPS</span><span class="dv-cln">3</span></div><div class="dv-cls">Runbook · Bug RCA · Terraform (Exoscale)</div></div>
   </div>
-  <div class="slide-number">20 / 42</div>
+  <div class="slide-number">20 / 43</div>
 </div>
 
 
@@ -3813,7 +3834,7 @@ body.presenting .slide.active {
   </div>
 
   <div class="aa-flag">OKF makes it portable; the skill makes it <b>true</b>.</div>
-  <div class="slide-number">21 / 42</div>
+  <div class="slide-number">21 / 43</div>
 
 <div class="slide-source-bar">Google Cloud · Open Knowledge Format (OKF) v0.1 — SPEC: knowledge as plain markdown + YAML frontmatter, cross-linked into a graph; single hard rule is a non-empty type field; index.md/log.md reserved per directory (2026) — github.com &nbsp;|&nbsp; Internal research · Agentic Harness: Capabilities map (15 functional domains, 80+ real shipping tools) (2026)</div>
 </div>
@@ -3832,7 +3853,7 @@ body.presenting .slide.active {
   </div>
   <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Business<span>9 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Vision</span><span class="ph-sub">north star</span></div><div class="ph-node"><span class="ph-nm">Persona</span><span class="ph-sub">who we serve</span></div><div class="ph-node"><span class="ph-nm">Model canvas</span><span class="ph-sub">value model</span></div><div class="ph-node"><span class="ph-nm">Capability map</span><span class="ph-sub">what it can do</span></div><div class="ph-node"><span class="ph-nm">Competitive landscape</span><span class="ph-sub">market position</span></div><div class="ph-node"><span class="ph-nm">Value stream</span><span class="ph-sub">how value flows</span></div><div class="ph-node"><span class="ph-nm">Objective</span><span class="ph-sub">goals & KRs</span></div><div class="ph-node"><span class="ph-nm">Process</span><span class="ph-sub">operations</span></div><div class="ph-node"><span class="ph-nm">Quant model</span><span class="ph-sub">unit economics</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Discovery<span>3 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Idea</span><span class="ph-sub">capture & graduate</span></div><div class="ph-node"><span class="ph-nm">Research</span><span class="ph-sub">1:1 interviews</span></div><div class="ph-node"><span class="ph-nm">Workshop</span><span class="ph-sub">group facilitation</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Domain<span>3 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Bounded context</span><span class="ph-sub">boundaries</span></div><div class="ph-node"><span class="ph-nm">Glossary</span><span class="ph-sub">ubiquitous language</span></div><div class="ph-node"><span class="ph-nm">Domain model</span><span class="ph-sub">aggregates & events</span></div></div></div></div>
   <div class="ph-feed"><span></span><span>feeds → Design</span></div>
-  <div class="slide-number">22 / 42</div>
+  <div class="slide-number">22 / 43</div>
 </div>
 
 
@@ -3849,7 +3870,7 @@ body.presenting .slide.active {
   </div>
   <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Architecture<span>9 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">ADR</span><span class="ph-sub">decisions</span></div><div class="ph-node"><span class="ph-nm">Research</span><span class="ph-sub">arch notes</span></div><div class="ph-node"><span class="ph-nm">Service contract</span><span class="ph-sub">API surface</span></div><div class="ph-node"><span class="ph-nm">CLI contract</span><span class="ph-sub">command surface</span></div><div class="ph-node"><span class="ph-nm">Structurizr</span><span class="ph-sub">C4 workspace</span></div><div class="ph-node"><span class="ph-nm">C4</span><span class="ph-sub">context → component</span></div><div class="ph-node"><span class="ph-nm">PlantUML</span><span class="ph-sub">UML pipeline</span></div><div class="ph-node"><span class="ph-nm">UML</span><span class="ph-sub">sequence/class/state</span></div><div class="ph-node"><span class="ph-nm">arc42</span><span class="ph-sub">arch narrative</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Specification<span>6 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Functional breakdown</span><span class="ph-sub">feature tree</span></div><div class="ph-node"><span class="ph-nm">Use case</span><span class="ph-sub">actor scenarios</span></div><div class="ph-node"><span class="ph-nm">Quality attributes</span><span class="ph-sub">ISO 25010</span></div><div class="ph-node"><span class="ph-nm">PRD</span><span class="ph-sub">one per epic</span></div><div class="ph-node"><span class="ph-nm">Peer review</span><span class="ph-sub">PRD/plan review</span></div><div class="ph-node"><span class="ph-nm">Grill-me</span><span class="ph-sub">adversarial review</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">UX<span>1 skill</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Design system</span><span class="ph-sub">tokens & brand</span></div></div></div></div>
   <div class="ph-feed"><span>fed by ← Context</span><span>feeds → Execution</span></div>
-  <div class="slide-number">23 / 42</div>
+  <div class="slide-number">23 / 43</div>
 </div>
 
 
@@ -3866,7 +3887,7 @@ body.presenting .slide.active {
   </div>
   <div class="ph-right"><div class="ph-lane"><div class="ph-lane-h">Specification<span>2 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Delivery roadmap</span><span class="ph-sub">epics & phases</span></div><div class="ph-node"><span class="ph-nm">Implementation plan</span><span class="ph-sub">atomic increments</span></div></div></div><div class="ph-lane plan"><div class="ph-lane-h">QA<span>5 · planned</span></div><div class="ph-nodes"><div class="ph-node plan"><span class="ph-nm">Test strategy</span><span class="ph-sub">pyramid & coverage</span></div><div class="ph-node plan"><span class="ph-nm">Test scenario</span><span class="ph-sub">from use cases</span></div><div class="ph-node plan"><span class="ph-nm">Test plan</span><span class="ph-sub">per release</span></div><div class="ph-node plan"><span class="ph-nm">Acceptance test</span><span class="ph-sub">Given–When–Then</span></div><div class="ph-node plan"><span class="ph-nm">Eval harness</span><span class="ph-sub">agent evals</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Development<span>8 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Agent config</span><span class="ph-sub">CLAUDE.md & rules</span></div><div class="ph-node"><span class="ph-nm">Getting started</span><span class="ph-sub">onboarding</span></div><div class="ph-node"><span class="ph-nm">Stack guide</span><span class="ph-sub">tech patterns</span></div><div class="ph-node"><span class="ph-nm">Git init</span><span class="ph-sub">repo setup</span></div><div class="ph-node"><span class="ph-nm">Git commit</span><span class="ph-sub">commits</span></div><div class="ph-node"><span class="ph-nm">Git worktree</span><span class="ph-sub">worktrees</span></div><div class="ph-node"><span class="ph-nm">PR</span><span class="ph-sub">pull requests</span></div><div class="ph-node"><span class="ph-nm">Ralph loop</span><span class="ph-sub">autonomous loop</span></div></div></div><div class="ph-lane"><div class="ph-lane-h">Ops<span>3 skills</span></div><div class="ph-nodes"><div class="ph-node"><span class="ph-nm">Runbook</span><span class="ph-sub">operations</span></div><div class="ph-node"><span class="ph-nm">Bug RCA</span><span class="ph-sub">incident analysis</span></div><div class="ph-node"><span class="ph-nm">Terraform</span><span class="ph-sub">Exoscale infra</span></div></div></div></div>
   <div class="ph-feed"><span>fed by ← Design</span><span></span></div>
-  <div class="slide-number">24 / 42</div>
+  <div class="slide-number">24 / 43</div>
 </div>
 
 
@@ -3882,7 +3903,7 @@ body.presenting .slide.active {
     <div class="div-tag">From a PRD to merged code: how one engineer drives agents through alignment and verification gates, then lets them run autonomously.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">25 / 42</div>
+  <div class="slide-number">25 / 43</div>
 </div>
 
 
@@ -3903,7 +3924,7 @@ body.presenting .slide.active {
     <div class="wf-card"><div class="wf-hd"><div class="wf-num">4</div><div class="wf-name">Execute &amp; ship</div></div><div class="wf-fresh wf-given"><i data-lucide="terminal"></i>separate CLI</div><div class="wf-step"><i data-lucide="repeat" class="wf-ic"></i><div><span class='wf-skill'>agent-ralph-loop</span> <span class='wf-skill'>ralph.sh</span>: fresh agent per increment</div></div><div class="wf-step"><i data-lucide="git-commit-horizontal" class="wf-ic"></i><div>implement &rarr; test gate &rarr; commit, until done</div></div><div class="wf-step"><i data-lucide="check-check" class="wf-ic"></i><div>run CI on the finished work</div></div><div class="wf-out"><i data-lucide="check-circle-2" class="wf-ic"></i>Merged</div></div>
   </div>
   <div class="wf-foot">Two <b>fresh-session</b> checks (grill-me before, peer-review after) keep me and the agent aligned; the loop only runs once the plan is proven autonomous.</div>
-  <div class="slide-number">26 / 42</div>
+  <div class="slide-number">26 / 43</div>
 </div>
 
 
@@ -3949,7 +3970,7 @@ body.presenting .slide.active {
       <div class="pp-tags">Plan-NNNN · Inc-N · Status: pending &rarr; done</div>
     </div>
   </div>
-  <div class="slide-number">27 / 42</div>
+  <div class="slide-number">27 / 43</div>
 </div>
 
 
@@ -3999,7 +4020,7 @@ body.presenting .slide.active {
     </div>
   </div>
   <div class="v-band"><i data-lucide="info" style="width:13px;height:13px"></i>Peer-review finds the <b>mechanical</b> gaps automatically; grill-me surfaces the <b>thinking</b> gaps under questioning.</div>
-  <div class="slide-number">28 / 42</div>
+  <div class="slide-number">28 / 43</div>
 </div>
 
 
@@ -4032,7 +4053,7 @@ body.presenting .slide.active {
     <div class="rl-hub"><i data-lucide="rotate-cw"></i><div><div class="h">repeat</div><div class="s">fresh agent each pass</div></div></div>
     <div class="rl-exit"><i data-lucide="check-check"></i>Every increment done &rarr; run CI &amp; stop</div>
   </div>
-  <div class="slide-number">29 / 42</div>
+  <div class="slide-number">29 / 43</div>
 </div>
 
 
@@ -4048,7 +4069,7 @@ body.presenting .slide.active {
     <div class="div-tag">The editor, model, agent-CLI and IDE you build with, open-source or proprietary, and how engineers climb from vibe-coding to real agentic engineering. The harness and the method underneath stay the same.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">30 / 42</div>
+  <div class="slide-number">30 / 43</div>
 </div>
 
 
@@ -4062,7 +4083,7 @@ body.presenting .slide.active {
   <div class="su-colh" style="left:392px"><i data-lucide="package-open"></i><span class="t">OPEN-SOURCE</span><span class="s">· self-hostable</span></div><div class="su-colh" style="left:908px"><i data-lucide="lock"></i><span class="t">PROPRIETARY</span><span class="s">· hosted</span></div>
   <div class="su-band" style="top:178px;height:74px"><div class="su-gut"><i data-lucide="box"></i><div><div class="t">Full IDE</div><div class="n">all-in-one</div></div></div><div class="su-cell oss"><div class="su-chips"><span class="su-chip">VS Code<span class="st">★187k</span></span><span class="su-chip">Zed<span class="st">★86k</span></span><span class="su-chip">Continue<span class="st">★35k</span></span><span class="su-chip">Tabby<span class="st">★34k</span></span></div><div class="su-cn">Zed standalone · VS Code + ext</div></div><div class="su-cell prop"><div class="su-chips"><span class="su-chip">Cursor</span><span class="su-chip">Windsurf</span><span class="su-chip">Antigravity</span><span class="su-chip">Kiro</span></div><div class="su-cn">closed-source · bundled</div></div></div><div class="su-band" style="top:256px;height:74px"><div class="su-gut"><i data-lucide="terminal"></i><div><div class="t">Custom harness</div><div class="n">editor + agent</div></div></div><div class="su-cell oss"><div class="su-chips"><span class="su-chip">opencode<span class="st">★180k</span></span><span class="su-chip">Cline<span class="st">★64k</span></span><span class="su-chip">Goose<span class="st">★50k</span></span><span class="su-chip">Aider<span class="st">★47k</span></span><span class="su-chip">Crush<span class="st">★26k</span></span></div><div class="su-cn">open + model-agnostic</div></div><div class="su-cell prop"><div class="su-chips"><span class="su-chip">Claude Code<span class="st">★135k</span></span><span class="su-chip">Codex<span class="st">★94k</span></span><span class="su-chip">Copilot</span><span class="su-chip">Antigravity CLI</span><span class="su-chip">Amp</span></div><div class="su-cn">proprietary · vendor-hosted</div></div></div><div class="su-band opt" style="top:334px;height:74px"><div class="su-gut"><i data-lucide="route"></i><div><div class="t">Inference & routing</div><span class="su-otag">optional</span></div></div><div class="su-cell oss"><div class="su-chips"><span class="su-chip">Ollama<span class="st">★175k</span></span><span class="su-chip">llama.cpp<span class="st">★118k</span></span><span class="su-chip">vLLM<span class="st">★85k</span></span><span class="su-chip">LiteLLM<span class="st">★52k</span></span></div><div class="su-cn">self-host · open</div></div><div class="su-cell prop"><div class="su-chips"><span class="su-chip">OpenRouter</span><span class="su-chip">Groq</span><span class="su-chip">Hugging Face</span><span class="su-chip">Bedrock</span><span class="su-chip">Vertex AI</span><span class="su-chip">Azure OpenAI</span></div><div class="su-cn">managed · cloud gateway</div></div></div><div class="su-band" style="top:412px;height:74px"><div class="su-gut"><i data-lucide="brain"></i><div><div class="t">Bring your own model</div><div class="n">the model</div></div></div><div class="su-cell oss"><div class="su-chips"><span class="su-chip">DeepSeek</span><span class="su-chip">Llama</span><span class="su-chip">Qwen</span><span class="su-chip">gpt-oss</span><span class="su-chip">Mistral</span></div><div class="su-cn">open weights · self-hostable</div></div><div class="su-cell prop"><div class="su-chips"><span class="su-chip">Claude</span><span class="su-chip">GPT-5</span><span class="su-chip">Gemini 3</span><span class="su-chip">Grok</span></div><div class="su-cn">frontier · hosted</div></div></div>
   <div class="su-base" style="top:498px;height:96px"><div class="lab"><i data-lucide="anchor"></i><div><div class="t">The method</div><div class="n">the constant, either side</div></div></div><div class="flow"><span class="step">spec</span><span class="arr">→</span><span class="step">plan</span><span class="arr">→</span><span class="step">grill-me</span><span class="arr">→</span><span class="step">peer-review</span><span class="arr">→</span><span class="step">loop</span><span class="tail">&nbsp;· artefacts · rules · skills · the <b>metamodel</b></span></div></div>
-  <div class="slide-number">31 / 42</div>
+  <div class="slide-number">31 / 43</div>
 
 <div class="slide-source-bar">GitHub · Repository stargazers: live API snapshot (tool popularity) (2026) — api.github.com &nbsp;|&nbsp; Google · Antigravity: agentic development platform (IDE + CLI), launched 2025-11-18 (2026) — antigravity.google &nbsp;|&nbsp; Google · An important update: transitioning Gemini CLI to Antigravity CLI (retired 2026-06-18) (2026) — developers.googleblog.com &nbsp;|&nbsp; Zed Industries · Agent Client Protocol: external agents in any editor (2026) — zed.dev &nbsp;|&nbsp; TrueFoundry · LiteLLM vs OpenRouter: LLM gateways front open & proprietary models (2026) — truefoundry.com</div>
 </div>
@@ -4081,7 +4102,7 @@ body.presenting .slide.active {
   <div class="mt-axis" style="left:40px;top:562px;color:var(--accent)">increasing autonomy · deeper harness →</div>
   <div class="mt-axis" style="right:46px;top:562px;color:var(--dim);text-transform:none;font-weight:500;letter-spacing:.02em">role rises with every step ↗, never leaves the loop</div>
   <div class="mt-caveat">⚠ <b>Even L5 is *supervised* autonomy, not hands-off.</b> METR: experienced devs were 19% <i>slower</i> on mature codebases; SWE-bench Pro tops out ~23%; Ralph’s author: “no way I’d use it on an existing codebase.” The guardrail against Thoughtworks’ <b>“cognitive debt”</b> is keeping humans on standards, architecture &amp; final sign-off.</div>
-  <div class="slide-number">32 / 42</div>
+  <div class="slide-number">32 / 43</div>
 
 <div class="slide-source-bar">Synthesis · Agentic-engineering maturity ladders (Dash0, MindStudio, ELEKS, ASDLC; SAE J3016 analogy; Feng/McDonald/Zhang 2025; Gartner 2026) (2026) &nbsp;|&nbsp; METR · Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity (RCT: 19% slower) (2025) — metr.org &nbsp;|&nbsp; Scale AI (SEAL) · SWE-bench Pro: standardized public leaderboard · 1,865 real tasks across 41 professional repos (2026) — labs.scale.com &nbsp;|&nbsp; Anthropic · How we built our multi-agent research system (+90.2% vs single-agent on internal eval) (2025) — anthropic.com &nbsp;|&nbsp; Geoffrey Huntley · Ralph Wiggum as a software engineer (autonomous single-agent loop) (2025) — ghuntley.com</div>
 </div>
@@ -4099,7 +4120,7 @@ body.presenting .slide.active {
     <div class="div-tag">Ten commandments for the developer, ten for the company. What to actually do on Monday.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">33 / 42</div>
+  <div class="slide-number">33 / 43</div>
 </div>
 
 
@@ -4137,7 +4158,7 @@ body.presenting .slide.active {
     </div>
   </div>
   <div class="tc-foot"><i data-lucide="anchor"></i><div>Engineer the harness, not just the prompt. The craft moved <b>up a rung</b>; it didn’t disappear.</div></div>
-  <div class="slide-number">34 / 42</div>
+  <div class="slide-number">34 / 43</div>
 </div>
 
 
@@ -4175,7 +4196,7 @@ body.presenting .slide.active {
     </div>
   </div>
   <div class="tc-foot"><i data-lucide="anchor"></i><div>The model is a commodity. Your edge is the <b>method and memory</b> you build around it.</div></div>
-  <div class="slide-number">35 / 42</div>
+  <div class="slide-number">35 / 43</div>
 </div>
 
 
@@ -4200,12 +4221,43 @@ body.presenting .slide.active {
   </div>
 
   <div class="close-bottom-line"></div>
-  <div class="slide-number">36 / 42</div>
+  <div class="slide-number">36 / 43</div>
 </div>
 
 
 
-<!-- slide 37: Appendix — reference -->
+<!-- slide 37: Star the repos — homemade-claude-kit & clew -->
+
+<div class="slide s-star">
+  <div class="accent-bar-left"></div>
+  <div class="star-wordmark">The Agentic Development Stack</div>
+
+  <div class="star-wrap">
+    <div class="star-eyebrow">Open source · built with agents, of course</div>
+    <h1 class="star-title">Found it useful? <em>Star the repos.</em></h1>
+    <div class="star-sub">The toolkit and the metamodel behind this talk are both public. Fork them, break them, and send the patterns that work back.</div>
+
+    <div class="star-cards">
+      <a class="star-card" href="https://github.com/VictorHueni/homemade-claude-kit" target="_blank">
+        <div class="sc-h"><i data-lucide="package"></i>homemade-claude-kit</div>
+        <div class="sc-d">The skills &amp; metamodel toolkit — the build order, artefacts and Claude skills that produced this deck.</div>
+        <div class="sc-u"><i data-lucide="star"></i>github.com/VictorHueni/homemade-claude-kit</div>
+      </a>
+      <a class="star-card" href="https://github.com/VictorHueni/clew" target="_blank">
+        <div class="sc-h"><i data-lucide="git-merge"></i>clew</div>
+        <div class="sc-d">Product intelligence &amp; architectural memory — the referentially-enforced metamodel itself, source of truth.</div>
+        <div class="sc-u"><i data-lucide="star"></i>github.com/VictorHueni/clew</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="star-foot">Victor Hueni &nbsp;·&nbsp; <b>Engineer the harness, not just the prompt.</b></div>
+  <div class="slide-number">37 / 43</div>
+</div>
+
+
+
+<!-- slide 38: Appendix — reference -->
 
 <div class="slide s-divider s-tooling">
   <div class="accent-bar-left"></div>
@@ -4216,12 +4268,12 @@ body.presenting .slide.active {
     <div class="div-tag">For Q&amp;A: how the tool mechanisms compare and combine, LSP as a capability, the memory-tooling landscape, and Karpathy's LLM Wiki pattern.</div>
   </div>
   <div class="div-bottom-line"></div>
-  <div class="slide-number">37 / 42</div>
+  <div class="slide-number">38 / 43</div>
 </div>
 
 
 
-<!-- slide 38: CLI / MCP / API — three ways, combined -->
+<!-- slide 39: CLI / MCP / API — three ways, combined -->
 
 <div class="slide s-toolways" data-sources="mcp-protocol,ronacher-mcp-code,mcp-overhead,mcpverse,anthropic-code-mcp,anthropic-adv-tool">
   <div class="section-label">Appendix · Tools</div>
@@ -4264,14 +4316,14 @@ body.presenting .slide.active {
       <div class="tw2-fixd">Load tools <b>on demand</b> (code execution / Tool Search), not all upfront. <b>~85%</b> less context; tool-selection <b>49&rarr;74%</b>. <span class="tw2-src">Anthropic</span></div>
     </div>
   </div>
-  <div class="slide-number">38 / 42</div>
+  <div class="slide-number">39 / 43</div>
 
 <div class="slide-source-bar">Anthropic · Introducing the Model Context Protocol: an open standard for connecting AI assistants to tools and data (client-server; tools, resources, prompts) (2024) — anthropic.com &nbsp;|&nbsp; Armin Ronacher · Your MCP Doesn't Need 30 Tools: It Needs Code (compose a few CLI/code primitives instead of bloating context with tool schemas) (2025) — lucumr.pocoo.org &nbsp;|&nbsp; arXiv 2508.12566 · RAG-MCP / MCPGauge: MCP integration inflates input tokens 3.25x to 236.5x and automated tool access reduces accuracy by an average of 9.5% (2025) — arxiv.org &nbsp;|&nbsp; arXiv 2508.16260 · MCPVerse: 65 servers / 552 tools (147K+ token schemas); best agent task success falls from 62% to 44% at full scale (2025) — arxiv.org &nbsp;|&nbsp; Anthropic Engineering · Code execution with MCP: wrap servers as code for on-demand tool discovery (illustrative 150K to 2K token reduction) (2025) — anthropic.com &nbsp;|&nbsp; Anthropic Engineering · Advanced tool use: Tool Search Tool loads definitions on demand (~85% less context; tool-selection accuracy 49% to 74% on Opus 4) (2026) — anthropic.com</div>
 </div>
 
 
 
-<!-- slide 39: Zoom on LSP — capability vs transport, MCP's ancestor -->
+<!-- slide 40: Zoom on LSP — capability vs transport, MCP's ancestor -->
 
 <div class="slide s-lsp" data-sources="lsp-spec,mcp-lsp">
   <div class="section-label">Appendix · Zoom on LSP</div>
@@ -4329,14 +4381,14 @@ body.presenting .slide.active {
       <div class="lsp-bnote">MCP's spec says it <b>&ldquo;takes some inspiration from&rdquo;</b> LSP: it shares the client-server JSON-RPC and the same M-by-N to M+N bet, refocused from code analysis to tool execution.</div>
     </div>
   </div>
-  <div class="slide-number">39 / 42</div>
+  <div class="slide-number">40 / 43</div>
 
 <div class="slide-source-bar">Microsoft · Language Server Protocol: one open JSON-RPC standard so a language server works in any editor (definitions, references, diagnostics, hover, rename); turns M editors x N languages into M+N (2016) — microsoft.github.io &nbsp;|&nbsp; Model Context Protocol specification · MCP spec: 'MCP takes some inspiration from the Language Server Protocol, which standardizes how to add support for programming languages across a whole ecosystem'; shares JSON-RPC 2.0, client-server and capability negotiation (2024) — modelcontextprotocol.io</div>
 </div>
 
 
 
-<!-- slide 40: Memory tooling — what ships vs the gap -->
+<!-- slide 41: Memory tooling — what ships vs the gap -->
 
 <div class="slide s-memtools" data-sources="coala,longmemeval,locomo,memory-survey-2026">
   <div class="section-label">Appendix · Memory tooling</div>
@@ -4378,14 +4430,14 @@ body.presenting .slide.active {
       </div>
     </div>
   </div>
-  <div class="slide-number">40 / 42</div>
+  <div class="slide-number">41 / 43</div>
 
 <div class="slide-source-bar">Sumers, Yao, Narasimhan & Griffiths (Princeton) · Cognitive Architectures for Language Agents (CoALA): four memory modules (working, episodic, semantic, procedural) · TMLR 2024 (2024) — arxiv.org &nbsp;|&nbsp; arXiv 2410.10813 · LongMemEval (ICLR 2025): commercial assistants and long-context LLMs show a ~30% accuracy drop recalling across sustained sessions (30-60% on LongMemEval_S) (2025) — arxiv.org &nbsp;|&nbsp; arXiv 2402.17753 · LoCoMo: very long multi-session conversations; LLMs lag human on long-range temporal and causal recall (2024) — arxiv.org &nbsp;|&nbsp; arXiv 2603.07670 · Memory for Autonomous LLM Agents: cross-session coherence is largely unsolved (2026) — arxiv.org</div>
 </div>
 
 
 
-<!-- slide 41: The LLM Wiki (Karpathy) — knowledge that compounds -->
+<!-- slide 42: The LLM Wiki (Karpathy) — knowledge that compounds -->
 
 <div class="slide s-llmwiki" data-sources="karpathy-llm-wiki">
   <div class="section-label">Appendix · The LLM Wiki (Karpathy)</div>
@@ -4420,14 +4472,14 @@ body.presenting .slide.active {
   </div>
 
   <div class="lw-punch"><i data-lucide="anchor"></i><div><span class="t">Compile once, not per query.</span> Ask a question and the wiki now knows the answer too, knowledge that accrues instead of being re-derived each turn.</div></div>
-  <div class="slide-number">41 / 42</div>
+  <div class="slide-number">42 / 43</div>
 
 <div class="slide-source-bar">Andrej Karpathy · LLM Wiki: compile raw sources into a persistent, interlinked markdown wiki the LLM owns and maintains — ingest / query / lint, reserved index.md + log.md, a compounding artifact (heir to Vannevar Bush's Memex) (2026) — gist.github.com</div>
 </div>
 
 
 
-<!-- slide 42: MCP protocol lifecycle — negotiate, operate, notify -->
+<!-- slide 43: MCP protocol lifecycle — negotiate, operate, notify -->
 
 <div class="slide s-mcplife" data-sources="mcp-lifecycle,mcp-protocol">
   <div class="section-label">Appendix · MCP protocol lifecycle</div>
@@ -4504,7 +4556,7 @@ body.presenting .slide.active {
       <div class="ml-note">No polling: the session stays in sync as the server's surface changes.</div>
     </div>
   </div>
-  <div class="slide-number">42 / 42</div>
+  <div class="slide-number">43 / 43</div>
 
 <div class="slide-source-bar">Model Context Protocol specification · Lifecycle: initialize handshake + capability negotiation, operation, shutdown — initialize / notifications/initialized / resources/subscribe / notifications/resources/updated / {tools,resources,prompts}/list_changed (JSON-RPC 2.0 over stdio or HTTP) (2025) — modelcontextprotocol.io &nbsp;|&nbsp; Anthropic · Introducing the Model Context Protocol: an open standard for connecting AI assistants to tools and data (client-server; tools, resources, prompts) (2024) — anthropic.com</div>
 </div>

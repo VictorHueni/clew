@@ -2574,6 +2574,27 @@
 .s-toolmix .tm-fixb{font-size:12px;color:var(--ink);line-height:1.45;}
 .s-toolmix .tm-fixb b{color:var(--accent);font-weight:800;}
 
+/* STAR THE REPOS · s-star (dark CTA) */
+.s-star{background:var(--dark-bg);color:var(--dark-ink);}
+.s-star *{box-sizing:border-box;}
+.s-star .star-wordmark{position:absolute;top:44px;left:68px;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dark-muted);}
+.s-star .star-wrap{position:absolute;left:68px;right:68px;top:132px;}
+.s-star .star-eyebrow{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:14px;}
+.s-star .star-title{font-size:44px;font-weight:800;line-height:1.08;letter-spacing:-.02em;color:var(--dark-ink);margin:0;}
+.s-star .star-title em{font-style:normal;color:var(--accent-bright);}
+.s-star .star-sub{font-size:15px;color:var(--dark-muted);margin-top:14px;max-width:780px;line-height:1.5;}
+.s-star .star-cards{display:flex;gap:20px;margin-top:32px;}
+.s-star .star-card{flex:1;display:block;text-decoration:none;background:var(--dark-surface);border:1px solid var(--dark-border);border-radius:14px;padding:20px 22px;transition:border-color .15s;}
+.s-star .star-card:hover{border-color:var(--accent-bright);}
+.s-star .sc-h{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:18px;font-weight:700;color:var(--dark-ink);}
+.s-star .sc-h i{width:20px;height:20px;color:var(--accent-bright);flex-shrink:0;}
+.s-star .sc-d{font-size:13px;color:var(--dark-muted);line-height:1.5;margin:11px 0 16px;}
+.s-star .sc-u{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--accent-bright);}
+.s-star .sc-u i{width:15px;height:15px;flex-shrink:0;}
+.s-star .star-foot{position:absolute;left:68px;right:68px;bottom:38px;display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:12px;color:var(--dark-muted);}
+.s-star .star-foot::before{content:"";width:22px;height:3px;border-radius:2px;background:var(--accent-bright);flex-shrink:0;}
+.s-star .star-foot b{color:var(--dark-ink);font-weight:600;}
+
 /* APPENDIX · MCP protocol lifecycle · s-mcplife */
 .s-mcplife *{box-sizing:border-box;}
 .s-mcplife .slide-title{font-size:29px;}
