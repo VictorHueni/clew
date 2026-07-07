@@ -61,13 +61,23 @@ clew
 
 5 L0, 17 L1. Within TOGAF + Cutter sizing (3 to 8 L0; ≤ 25 L1 total).
 
+## §Scope discipline (ADR-0013)
+
+Per [ADR-0013 (minimal-model / perfect-sync, not repo-native EA)](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md), clew keeps the *mandatory* model as small as possible and spends its differentiation budget on the **read side** — serving the graph into the agent's context. This reshapes the map below:
+
+- **Elevated — C1.2 Selective context loading → Differentiator.** The read-side context-serving surface (`clew context <task>`, token-costed) is the least-contested differentiation vs. requirements/spec tools. A planned `clew guard "<change>"` (agent change-guardrail) lives here too — shipped *after* the graph is dense and drift-free, since guarding on a sparse graph gives confidently-wrong answers.
+- **Delegated — C4.3 Audit trail → git (VCS).** Git on `snapshot/` already gives durable who/when/before-after; a DB-resident audit is non-durable across the gitignored-DB rebuild. Not a modelled clew capability for v1.
+- **Deferred — C4.4 Schema migration → hand-rolled.** A 4-table no-DDL schema ([ADR-0003](../architecture/decisions/adr-0003-schema-design-typed-property-graph.md)) does not warrant a migration framework at v1; hand-roll `PRAGMA user_version` steps ([ADR-0012](../architecture/decisions/adr-0012-schema-migration-framework.md) adoption deferred).
+- **Out of scope — delivery accounting.** Effort estimation / complexity→day rollups are removed (VISION: not a PM tool); the former `clew estimate` view and the `complexity` property go with it.
+- **Kit scope — C5 Methodology Distillation.** C5 is realised by [homemade-claude-kit](https://github.com/VictorHueni/homemade-claude-kit) (BC-02 candidate per [02b-bounded-contexts.md](../domain/02b-bounded-contexts.md)), *not* the clew CLI build surface. It stays on the map as context, but clew's own CLI capabilities are C1–C4.
+
 ## §Capability index
 
 | ID | Name | L0 parent | Strategic Importance | One-line definition |
 |---|---|---|---|---|
 | C1 | Authoring | (root) | (composite) | Capabilities that mediate the act of creating metamodel artefacts. |
 | C1.1 | Methodology-mediated artefact creation | C1 | **Differentiator** | Distills external methodology (BIZBOK, BABOK, Strategyzer, Sommerville, planned DDD / ATDD / BDD / SRE) into an authoring discipline the agent invokes at write time. |
-| C1.2 | Selective context loading | C1 | Necessary | Loads exactly the metamodel slice relevant to the current task into the agent session. |
+| C1.2 | Selective context loading | C1 | **Differentiator** | The read-side context-serving surface (`clew context`): loads exactly the metamodel slice relevant to the current task into the agent session, token-costed. Least-contested differentiation vs. requirements/spec tools; home of the planned `clew guard`. |
 | C2 | Persistence | (root) | (composite) | Capabilities that store and retrieve structured artefacts deterministically. |
 | C2.1 | Stable identifier generation | C2 | Necessary | Deterministic, collision-free identifier assignment. Never LLM-generated. |
 | C2.2 | Schema enforcement | C2 | Necessary | Write-time validation of typed metamodel constraints (required fields, types, references). |
@@ -79,8 +89,8 @@ clew
 | C4 | Integrity and Audit | (root) | (composite) | Capabilities for detecting and preventing drift between intended and actual state. |
 | C4.1 | Write-time reference validation | C4 | **Differentiator** | Rejects writes that would introduce broken references at the moment they are attempted. |
 | C4.2 | Drift detection | C4 | Necessary | Detects discrepancies between DB state and the markdown layer; reports orphans and hand-edits. |
-| C4.3 | Audit trail | C4 | Commodity | Replayable record of every DB write (create, update, delete) with timestamp and actor. |
-| C4.4 | Schema migration | C4 | Commodity | Forward-compatible evolution of the metamodel across clew versions. |
+| C4.3 | Audit trail | C4 | Commodity | *Delegated to git (VCS) for v1 — see §Scope discipline.* Replayable record of every write; git on `snapshot/` already provides who/when/before-after, durably. |
+| C4.4 | Schema migration | C4 | Commodity | *Deferred for v1 — hand-rolled `PRAGMA user_version`, not a framework (ADR-0012/0013).* Forward-compatible evolution of the metamodel across clew versions. |
 | C5 | Methodology Distillation | (root) | (composite) | Capabilities that encode external bodies of practice as authoring discipline, sustained as a compounding catalogue. |
 | C5.1 | Skill catalogue management | C5 | **Differentiator** | Lifecycle of homemade-claude-kit skills: authoring, versioning, distribution, deprecation. |
 | C5.2 | Per-methodology pattern encoding | C5 | Necessary | Translates each external body of practice into a structured authoring pattern. |
@@ -88,7 +98,7 @@ clew
 | C5.4 | Cross-methodology referencing | C5 | Necessary | Type-aware references from an artefact in one methodology to an artefact in another. |
 | C5.5 | Methodology canon coverage assessment | C5 | Necessary | Audits which methodologies are encoded vs. which lifecycle layers are bare. |
 
-**Strategic Importance distribution:** 4 Differentiators · 11 Necessary · 2 Commodity. Healthy spread per Cutter (3 to 6 true Differentiators expected).
+**Strategic Importance distribution:** 5 Differentiators · 10 Necessary · 2 Commodity. Within Cutter's 3-to-6 range. (C1.2 elevated to Differentiator 2026-07-07, aligning the map with the FBS's ★ on C1.2.F01 and with [ADR-0013](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md)'s read-side wedge.)
 
 ## C1 · Authoring
 
@@ -120,7 +130,7 @@ Capabilities that mediate the act of creating metamodel artefacts. The operator 
 
 **Business object.** Agent context window.
 
-**Strategic importance.** Necessary. Maps to [P-01 §Goal 5](01a-personas.md#goals) (Tested wave 1: *"the real advantage is I can pick and choose the level of context I would give my agent depending on the work I need to do"*). Also a precondition for the local-first token-economics differentiator: smaller context = lower per-session API cost.
+**Strategic importance.** **Differentiator** (elevated 2026-07-07 per [ADR-0013](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md); the read-side context-serving surface is clew's least-contested differentiation). Maps to [P-01 §Goal 5](01a-personas.md#goals) (Tested wave 1: *"the real advantage is I can pick and choose the level of context I would give my agent depending on the work I need to do"*). Also a precondition for the local-first token-economics differentiator: smaller context = lower per-session API cost.
 
 **Outcomes.**
 - Agent boots with the right context for the current task type, not the entire repo.
@@ -442,7 +452,7 @@ Per the [`business-capability-map` skill](https://github.com/VictorHueni/homemad
 - **Technology-independence test:** no capability name contains a vendor, system, or tool (DuckDB, YAML, GFM, MCP, Claude all kept out of capability *names*; some appear in *definitions* as implementation hints, which is allowed).
 - **Anti-overlap test:** each capability appears once; the closest pair (C2.2 schema enforcement vs. C4.1 write-time reference validation) is disambiguated by scope (schema covers required fields and types; write-time reference validation is the FK-specific subset, called out for adoption reasons).
 - **Sizing:** 5 L0 (within 3 to 8); 17 L1 total (≤ 25); per-L0 L1 counts: 2 / 4 / 2 / 4 / 5 (2 for C1 and C3 are below the 5-to-12 recommended floor but defensible: C1's authoring scope is intentionally narrow — citation discipline is embedded in kit skills via `rules/writing-citations.md`, not a clew infrastructure concern; C3 collapses two tightly-related navigation modes; `clew history` was folded into C4.3 rather than inflating C3).
-- **Differentiator distribution:** 4 Differentiators (within Cutter's 3 to 6 recommended range).
+- **Differentiator distribution:** 5 Differentiators (within Cutter's 3 to 6 recommended range) after C1.2 was elevated per ADR-0013.
 
 ## Open Items
 
@@ -458,6 +468,7 @@ Per the [`business-capability-map` skill](https://github.com/VictorHueni/homemad
 
 | Date | Change | Evidence | Cascading effects |
 |---|---|---|---|
+| 2026-07-07 | §Scope discipline (ADR-0013) added. C1.2 elevated Necessary→**Differentiator** (now 5 Differentiators · 10 Necessary · 2 Commodity), aligning the map with the FBS ★ on C1.2.F01. C4.3 (Audit) annotated *delegated to git*; C4.4 (Migration) annotated *deferred/hand-rolled*; delivery-accounting (`clew estimate` + `complexity`) marked out of scope; C5 marked kit/BC-02 scope, not clew CLI. | [ADR-0013](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md) + [competitive scan 2026-07-07](../discovery/competitive-landscape-2026-07-07-agentic-architecture-tools.md). | [07a-fbs.md](../product-specs/07a-fbs.md): C3.2.F04 estimate cut; C4.3/C4.4 descoped; C1.2 grown + `clew guard` added. [cli-clew.md](../architecture/interfaces/cli-clew.md): `clew estimate`/`set complexity` removed; `clew context` added. [artefact-store.md](../domain/07b-models/artefact-store.md): `clew estimate` consumer removed; audit-delegation + canonicity notes. Downstream per-capability soft-links (value streams etc.) intentionally **not** chased row-by-row — the §Scope discipline note is authoritative; backlinks are advisory. |
 | 2026-05-25 | C1.3 (External evidence integration) retired. Rationale: citation discipline is embedded in kit skills via `rules/writing-citations.md` (inline links in markdown artefacts, bibliography.yaml in slide decks) and realised by the evidence-production skills (arch-research, business-competitive-landscape, business-quantitative-model, business-research, com-slide-deck). No clew DB field or CLI command is needed. L1 count: 18 → 17. Strategic Importance distribution: 12 Necessary → 11 Necessary. | C1.3 scope review. | [07a-fbs.md](../product-specs/07a-fbs.md): C1.3 section removed (F01/F02/F03 retired), counts updated 60 → 57. [04a-value-streams.md](04a-value-streams.md): C1.3 backlinks removed from VS-1.2 enabling capabilities + exit criteria, VS-1.3 enabling capabilities, VS-2 scope anchor, VS-2.3 enabling capabilities + exit criteria. Pre-existing C3.3 orphan reference in VS-2.3 cleaned up in same pass. |
 | 2026-05-25 | C3.3 (Bidirectional time traceability) retired. Rationale: artefact content and kit methodology already carry the "why backward" intent; "what next forward" is covered by epics (C3.2 impact view + delivery roadmap); `clew history` (C3.3.F03) folded into C4.3 as C4.3.F04 — it is an audit query, not a traceability view. L1 count: 19 → 18. Strategic Importance distribution: 13 Necessary → 12 Necessary. Soft-link count: 16 of 19 → 15 of 18. Discipline checks + Open Issues updated accordingly. | FBS redesign session. | [07a-fbs.md](../product-specs/07a-fbs.md): C3.3 section removed, C4.3.F04 added, counts updated. No cascade to value streams (C3.3's VS-2.3 backlink is simply removed). |
 | 2026-05-24 | Scaffold + structure + fill in one pass. 5 L0 (Authoring · Persistence · Querying and Traceability · Integrity and Audit · Methodology Distillation), 19 L1 capabilities. 4 Differentiators (C1.1 methodology-mediated artefact creation, C3.2 pre-built traceability views, C4.1 write-time reference validation, C5.1 skill catalogue management), 13 Necessary, 2 Commodity. Strategic Importance assigned now per [wave-1 synthesis](../discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md) signal. | Drafted hybrid (top-down framework cross-validated against VISION, P-01, Lean Canvas, OBJ-01/02/03, ADR-0001, ADR-0002, wave-1 synthesis). | [VISION.md](../VISION.md), [Lean Canvas](02a-lean-canvas.md), [OBJ doc](04b-objectives.md), [persona](01a-personas.md), [ADR-0001](../architecture/decisions/adr-0001-metamodel-persistence-layer.md), [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md): existing soft-link slots filled. Value streams / processes / FBS / domain model: still _TODO_ (no artefact to soft-link to yet). |

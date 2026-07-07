@@ -27,7 +27,7 @@ This CLI is the BC-scoped Open Host Service for **BC-01 Artefact Store** ([bound
 | `clew new` (creation) | C2.1 Stable identifier generation · C2.2 Schema enforcement · C2.3 File binding management · C4.1 Write-time reference validation (Differentiator) |
 | `clew link` (relationships) | C4.1 Write-time reference validation |
 | `clew set` (updates) | C2.2 Schema enforcement · C4.3 Audit trail |
-| `clew list` / `clew estimate` | C3.1 Ad-hoc cross-artefact query surface · C3.2 Pre-built traceability views (Differentiator, via canonical views) |
+| `clew list` / `clew context` | C3.1 Ad-hoc cross-artefact query surface · C1.2 Selective context loading (Differentiator, read-side) · C3.2 Pre-built traceability views (Differentiator, via canonical views) |
 | `clew layout` / `clew where` | C2.3 File binding management |
 | `clew check` (health) | C4.1 Write-time reference validation · C4.2 Drift detection · C2.3 File binding management |
 | `clew export` / `clew import snapshot` | C2.4 Deterministic structural export · C2.1 Stable identifier generation |
@@ -195,7 +195,6 @@ clew set <id> <field> <value>
 | Type | Field | Allowed values |
 |---|---|---|
 | `fbs_functionality` | `status` | `planned`, `in-progress`, `done` |
-| `fbs_functionality` | `complexity` | `XS`, `S`, `M`, `L`, `XL` |
 | `capability` | `strategic-importance` | `Differentiator`, `Necessary`, `Commodity` |
 | any | `name` | non-empty string |
 | any | `status` | `active`, `retired`, `superseded` |
@@ -218,26 +217,23 @@ clew list [persona|capability|functionality|epic|objective|...]
 
 Prints a table of matching artefact records. With no `type` argument, lists all artefacts.
 
-#### `clew estimate epic <E-NN>`
+#### `clew context <task-type>`
 
-Rolls up complexity estimates for all functionalities linked to the epic via `GROUPS` edges.
-
-```
-clew estimate epic <E-NN>
-```
-
-Output (stdout, one line per row):
+Assembles exactly the metamodel slice relevant to a task type and emits it for the agent session, with a token-cost estimate on stderr. clew's read-side differentiator (C1.2); realises [OBJ-01 KR-01.2](../../business/04b-objectives.md#obj-01--ava-ships-coherent-product-thinking-at-agent-speed).
 
 ```
-epic    functionalities    XS    S    M    L    XL    best(d)    likely(d)    worst(d)
-E-NN    12                 2     4    3    2    1     8          12           18
+clew context <task-type>          e.g. orient | prd | test | refactor
+  [--format markdown|json]        default: markdown
 ```
 
-Complexity → day mapping: `XS=0.5d`, `S=1d`, `M=2d`, `L=3d`, `XL=5d`. Best = sum of lower bounds; likely = sum of modal; worst = sum of upper bounds.
+- **stdout:** the assembled slice (artefact records + their narrative bindings) in the chosen format.
+- **stderr:** a `~<N> tokens` cost estimate for the slice, so the caller can size the load before injecting it into the session.
 
-#### `clew estimate phase <N>`
+#### `clew guard "<change>"` *(planned — v0.2)*
 
-Same as `clew estimate epic` but aggregated across all epics in the phase.
+Given a proposed change, returns what it may touch, what it must preserve, and which artefacts must be updated first. **Planned, not v1:** guard is only trustworthy on a dense, drift-free graph — guarding a sparse or stale graph produces confidently-wrong guardrails ([ADR-0013](../decisions/adr-0013-minimal-model-not-repo-native-ea.md)). Documented here to reserve the surface; ships after the walking-skeleton graph is proven.
+
+> **Removed (ADR-0013):** `clew estimate epic` / `clew estimate phase` (effort rollups) are out of scope — delivery accounting belongs to PM tools, per VISION. The `complexity` field and `clew set complexity` are removed with them.
 
 #### `clew layout <type>`
 
@@ -411,7 +407,7 @@ The CLI separates **structured result** (stdout) from **human-readable narrative
 | `clew new <type> …` | A single line: the minted business ID (e.g. `P-01`, `C1.2.F03`, `ADR-NNNN`). No surrounding noise. |
 | `clew link …` / `clew set …` | Empty. Success indicated by exit code `0`. |
 | `clew list [type] [--format table\|csv\|json]` | Table by default; CSV (RFC 4180-compliant); or a JSON array of objects (one per row). `--format json` is the canonical shape for callers piping to `jq` or similar. |
-| `clew estimate epic <E-NN>` / `clew estimate phase <N>` | One row per rollup, columns: `epic, functionalities, XS, S, M, L, XL, best(d), likely(d), worst(d)`. |
+| `clew context <task-type>` | stdout: the assembled artefact slice (markdown or JSON). stderr: a `~<N> tokens` cost line for the slice. |
 | `clew layout <type>` | One line of `key=value` pairs separated by two spaces, machine-parseable (e.g. `type=persona  layout=single-collection  default_path=docs/business/01a-personas.md  parent_type=`). |
 | `clew where <id>` | One line: `<relative-path>#<section-anchor>`. Empty stdout + exit `1` if the artefact has no `file_bindings` record. |
 | `clew check [--path]` | A report block per check category (Orphan in DB, Orphan in file, Layout violation, Content drift) with one row per finding. Empty report on a clean run. |
@@ -419,7 +415,8 @@ The CLI separates **structured result** (stdout) from **human-readable narrative
 
 ### Determinism guarantees
 
-- Same DB state + same command + same flags → byte-identical stdout (modulo timestamps in `clew list` rows, which surface from the audit trail and are themselves deterministic per row).
+- Same DB state + same command + same flags → byte-identical stdout (modulo timestamps in `clew list` rows, which surface from each record's `created_at` and are themselves deterministic per row).
+- **Integrity boundary ([ADR-0013](../decisions/adr-0013-minimal-model-not-repo-native-ea.md)).** Reference integrity *between artefact records* is enforced **at write time** (`clew new` / `clew link` reject dangling or type-invalid references). Prose↔store drift is a **check-time** guarantee (`clew check`), because the markdown narrative is authored as a separate step after the ID is minted. The CLI does not claim write-time integrity across the markdown boundary.
 - `clew export` produces byte-identical YAML files for the same DB state, per [C2.4 Deterministic structural export](../../business/03a-capability-map.md#c24--deterministic-structural-export). This is the substrate that makes git-diff of snapshots meaningful.
 - No locale-dependent formatting on stdout (numbers use `.` decimal separator, dates use ISO 8601).
 
@@ -469,4 +466,5 @@ None at present.
 
 | Date | Change | Evidence | Cascading effects |
 |---|---|---|---|
+| 2026-07-07 | Scope discipline (ADR-0013). Removed `clew estimate epic` / `clew estimate phase` and the `complexity` settable field (delivery accounting, out of scope). Added `clew context <task-type>` (read-side context assembly with token-cost) and reserved `clew guard "<change>"` as planned v0.2. Added the write-time vs check-time **integrity boundary** note to §5; corrected the `clew list` timestamp source from "audit trail" to record `created_at` (audit delegated to git). §0 capability table updated. | [ADR-0013](../decisions/adr-0013-minimal-model-not-repo-native-ea.md) + [competitive scan 2026-07-07](../../discovery/competitive-landscape-2026-07-07-agentic-architecture-tools.md). | Companion to the capability-map / FBS / domain-model / business-layer scope cuts of the same date. ADR-0004 cross-ref (`python-typer-duckdb` slug) left as-is per its stable-filename note. |
 | 2026-05-26 | File renamed `clew-cli-v1.md` → `cli-clew.md` and moved from `docs/architecture/interface-contracts/` to canonical `docs/architecture/interfaces/`. Headings aligned to the `arch-cli-contract` template: added §0 Traceability (capability + domain-model + ADR provenance), renamed §Command reference → §2 Command catalogue, renumbered §Validation rules → §4, added §5 Output contract (channels + per-command output shapes + determinism + atomicity + colour), renumbered §Error contract → §7. §Changelog added. | Metamodel audit 2026-05-26 (§2 + §9 findings); `rules/metamodel.md` Step 8.5 canonical path. | Cross-references in [ADR-0001](../decisions/adr-0001-metamodel-persistence-layer.md), [ADR-0002](../decisions/adr-0002-artefact-file-binding.md), [ADR-0003](../decisions/adr-0003-schema-design-typed-property-graph.md), [02b-bounded-contexts.md](../../domain/02b-bounded-contexts.md), [02b-context-map.md](../../domain/02b-context-map.md), [02c-glossary.md](../../domain/02c-glossary.md) updated to the new path in the same pass. |

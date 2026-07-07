@@ -16,6 +16,10 @@ review_interval: 180d
 
 > "An aggregate is a cluster of associated objects that we treat as a unit for the purpose of data changes. Each aggregate has a root and a boundary." — Evans, *Domain-Driven Design* (2003), Chapter 8
 
+> **Scope & canonicity ([ADR-0013](../../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md)).** This model is deliberately **minimal — three aggregates, four tables** — and the minimalism *is* the strategy: every modelled entity is drift surface clew must keep in sync. Two consequences, made explicit:
+> - **Canonicity is partitioned by field-class.** The store (SQLite → `snapshot/` YAML) is canonical for *structure* — business IDs, artefact types, relationships, lifecycle status. The markdown narrative is canonical for *prose* and, per [ADR-0005](../../architecture/decisions/adr-0005-frontmatter-persistence-policy.md), for frontmatter. The git-tracked `snapshot/` is the durable form; the `.db` is a disposable rebuild. Reference integrity between records is enforced **at write time**; prose↔store drift is detected **at check time** (`clew check`) — the substrate must not overclaim "100% at all times" across the prose boundary.
+> - **Audit is delegated to git, not modelled.** There is intentionally no Audit aggregate or audit table: git on `snapshot/` already provides a durable, replayable who/when/before-after history, and a DB-resident audit would evaporate on `clew import snapshot` rebuild. This resolves the former capability-map C4.3 vs. domain-model gap in the honest direction.
+
 ---
 
 ## Aggregate catalogue
@@ -395,7 +399,7 @@ Example: `P-01` + heading "P-01 · Ava the agent-first product engineer" → `p-
 **Consumers:**
 - CLI (prints confirmation)
 - `clew matrix` / `clew trace` / `clew impact` (the new edge appears in next query)
-- `clew estimate` (rolls up effort along GROUPS edges)
+- `clew context` / `clew guard` (the read-side surface traverses the new edge to assemble a slice or evaluate a proposed change)
 
 **Business significance:** a semantic dependency between two metamodel artefacts is now queryable; traceability views will include this edge. This is the mechanism by which the metamodel becomes a graph.
 
@@ -848,6 +852,7 @@ SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY dept
 
 | Date | Author | Change |
 |---|---|---|
+| 2026-07-07 | Victor Hueni | Scope & canonicity callout added (ADR-0013): three-aggregate / four-table minimalism stated as deliberate; canonicity partitioned by field-class (store=structure, markdown=prose/frontmatter, snapshot=durable, `.db`=disposable); write-time vs check-time integrity distinction made explicit; **audit trail delegated to git** (no Audit aggregate — resolves the C4.3 vs. domain-model gap). `ArtefactLinked` (EVT-03) consumer list: `clew estimate` (cut) replaced with the read-side `clew context` / `clew guard`. | Victor Hueni |
 | 2026-05-25 | Victor Hueni | Initial draft drawn from ADR-0001 + ADR-0002 + ADR-0003 (under DuckDB). |
 | 2026-05-25 | Victor Hueni | SQLite cascade: DDL rewritten for SQLite syntax (INTEGER PK AUTOINCREMENT, `datetime('now')`, `json_valid()` CHECK); PRAGMAs documented; transaction reference updated. |
 | 2026-05-25 | Victor Hueni | Template alignment pass (`domain-model` skill v1.0): H1 reformatted, Subdomain type + Ubiquitous language headers added, aggregate catalogue columns aligned to template, per-aggregate Commands → Events tables + Size check lines + Member listings added, dedicated Entity catalogue + Value object catalogue + Domain event catalogue sections introduced (entity sections now document behaviour methods explicitly to fix anemic-model finding), AGG-02 invariant rephrased to business language (`source ≠ target`), Implementation supplement clearly demarcated per ADR-0003 deviation, Open Items populated with glossary + supplement-location items, Changelog added. |
