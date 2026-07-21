@@ -48,6 +48,7 @@ none is agent-native by design (R5).
 | **Doorstop** | ❌ | ✅ | 🟡 | ✅ | 🟡 | 🟡 | Partial overlap, low maintenance |
 | **TRLC (BMW)** | ❌ | ✅ | 🟡 | 🟡 | ❌ | 🟡 | Different category (safety-critical RM DSL) |
 | **OpenFastTrace** | ❌ | 🟡 | ✅ | ✅ | ❌ | ❌ | Different category (trace checker, no authoring model) |
+| **ReqView** | ❌ | ✅ | ✅ | 🟡 | ❌ | 🟡 | Partial overlap (file-based commercial RE) |
 
 - **[Sphinx-Needs](https://sphinx-needs.readthedocs.io/)** (useblocks; active, v8.x, 2026).
   Fully user-definable need types with typed link options — you *could* declare `persona`,
@@ -74,6 +75,15 @@ none is agent-native by design (R5).
 - **[TRLC](https://github.com/bmw-software-engineering/trlc)** / **OpenFastTrace**: serious
   typed-requirements DSLs with static analysis (TRLC's LRM is at v3.x, active), but aimed at
   automotive/safety compliance, requirements-only, no markdown, no agent story.
+- **[ReqView](https://www.reqview.com/)** (commercial, desktop): the one commercial RE tool
+  matching clew's storage posture — projects are human-readable JSON files managed directly
+  in git, offline-first, open format, with end-to-end traceability, baselines, and git-diff
+  change review. Gaps: requirements domain only, editing goes through the proprietary app
+  (JSON is readable but not authorable-by-agent in practice), no metamodel beyond
+  requirements documents, no agent surface. Strong evidence that "file-based + git-native RE"
+  is a commercially viable posture — without touching clew's strategy layer or R5.
+- **ReqIF** is an exchange *format* (OEM/supplier requirements interchange), not a tool — a
+  potential future export target for clew, not a competitor.
 
 ## 2 · Spec-driven agent development
 
@@ -157,17 +167,62 @@ clew's architecture package overlaps them; they cannot absorb clew.
 
 ## 6 · Enterprise RM / EA / PM suites
 
-**Verdict: different category on posture alone.** Jama Connect, Polarion, IBM DOORS Next
-(requirements: strong R1-subset/R2/R3/R6 within their domain) and Ardoq/LeanIX (EA
-metamodels with capability maps — the only tools besides clew that treat *business
-architecture* as first-class typed data) are all cloud/server platforms: not markdown, not
-git-source-of-truth, not local-first, not single-writer, API-metered for agents. They violate
-R4/R5 by construction and clew's "Not a cloud SaaS" boundary. Atlassian+MCP was already
-tried and rejected in [wave 1](interviews/research-synthesis-2026-05-24-P-01-validation.md)
-(API complexity, token cost). Emerging SaaS "decision layers for AI-native teams" (e.g.
+**Verdict: different category on posture alone.** Jama Connect, Polarion, IBM DOORS Next,
+Codebeamer (PTC), Visure, and objectiF RM (requirements: strong R1-subset/R2/R3/R6 within
+their domain, and by 2026 all shipping AI-assist features — authoring, quality checks,
+impact analysis) and Ardoq/LeanIX (EA metamodels with capability maps as first-class typed
+data) are all cloud/server platforms: not markdown, not git-source-of-truth, not
+local-first, not single-writer, API-metered for agents. They violate R4/R5 by construction
+and clew's "Not a cloud SaaS" boundary. Atlassian+MCP was already tried and rejected in
+[wave 1](interviews/research-synthesis-2026-05-24-P-01-validation.md) (API complexity,
+token cost). Emerging SaaS "decision layers for AI-native teams" (e.g.
 [Bagel AI](https://bagel.ai/) — customer-signal decisions served to Cursor/Claude Code over
 MCP) confirm the "agents need product context" thesis but from the opposite architecture:
 cloud-hosted, signal-driven, token-metered.
+
+## 7 · Modeling-centric EA & MBSE tools (Sparx EA, Archi/ArchiMate, objectiF-style)
+
+The EA modeling tradition deserves separate treatment from the SaaS EA platforms above,
+because two of its tools land much closer to clew than expected:
+
+| Tool | R1 | R2 | R3 | R4 | R5 | R6 | Verdict |
+|---|---|---|---|---|---|---|---|
+| **Sparx Enterprise Architect** | 🟡 | 🟡 | ✅ | ❌ | 🟡 | 🟡 | **Partial overlap — broadest single-repository trace; now agent-queryable via MCP** |
+| **Archi + coArchi (ArchiMate)** | 🟡 | 🟡 | 🟡 | 🟡 | ❌ | 🟡 | **Partial overlap — free, git-native, typed EA metamodel** |
+| **Eclipse Capella / SysML MBSE** | ❌ | 🟡 | 🟡 | ❌ | ❌ | 🟡 | Different category (systems engineering) |
+
+- **[Sparx Enterprise Architect](https://sparxsystems.com/products/ea/)**: the incumbent
+  that comes closest to R1's *breadth* — business processes, strategy, requirements, data,
+  application, and technology models with typed relationships and end-to-end traceability in
+  one repository (UML/SysML/BPMN/ArchiMate). Critically, **Sparx released an official
+  [MCP server](https://sparxsystems.com/forums/smf/index.php?topic=49025.0) (2026)** so AI
+  assistants can query the repository as a semantic layer — an EA incumbent explicitly
+  moving onto the "agents need architectural context" ground. Gaps remain structural: the
+  repository is a binary/DB model, not markdown in git (R4 ❌); artefacts are diagram
+  elements, not prose documents (no Lean Canvas, persona narrative, or PRD as first-class
+  text); agent access is exactly the token-metered MCP round-trip economics wave 1 rejected;
+  and the Lean Canvas already scopes Sparx-tooling teams out of v1. Still: the single most
+  capable "one connected graph" product on the market, and now the most important incumbent
+  to watch on R5.
+- **[Archi](https://www.archimatetool.com/) + [coArchi](https://github.com/archimatetool/archi-modelrepository-plugin2)**
+  (free, open source): ArchiMate is itself an *opinionated typed metamodel* — capabilities,
+  value streams, business actors, goals/drivers/requirements (Motivation layer) with
+  relationship-validity rules enforced at modeling time — and coArchi stores the model
+  **file-per-element in a git repository** (GRAFICO format). That is the closest existing
+  analog to clew's "typed business-architecture graph, versioned in git" on a zero-cost
+  stack. Gaps: elements are diagram nodes with XML persistence, not readable markdown
+  artefacts (a persona is a named box, not a researched document); the Motivation layer is
+  far coarser than RM-grade requirements; no deterministic ID minting story beyond internal
+  GUIDs; no agent-native surface (jArchi scripting exists, but nothing MCP/file-read
+  friendly); integrity holds *within* the model, with no binding to prose docs or code.
+- **Eclipse Capella / SysML tools**: model-based *systems* engineering — hardware/software
+  co-design lineage, not product-strategy memory. Out of scope.
+
+**The pattern across RE and EA tooling:** requirements engineering tools own R2/R3 depth
+(IDs, links, impact analysis, baselines) but stop at the requirements layer; EA tools own
+R1 breadth (strategy-to-technology typed graphs) but live in diagram models or SaaS
+platforms. **No tool in either tradition combines its half with markdown-prose artefacts in
+git plus an agent-native authoring surface — that seam is exactly where clew sits.**
 
 ## Synthesis
 
@@ -179,7 +234,8 @@ together are clew's core, every candidate fails on at least one of them:
 - Spec-driven tools have the agent surface but LLM-authored, unenforced artefacts.
 - Memory layers have the agent surface but probabilistic, non-artefact storage.
 - PKM has the files but no enforcement.
-- EA suites have the metamodel breadth but the wrong (SaaS) architecture.
+- EA suites have the metamodel breadth but the wrong (SaaS) architecture; modeling EA
+  (Sparx, Archi) has typed graphs but diagram-element artefacts, not prose-in-git.
 
 **2 · The realistic replacement combination** is Sphinx-Needs/sphinx-modeling (typed graph +
 validation) + Spec Kit (agent workflow) + log4brains (ADRs) + hand-written business-layer
@@ -196,6 +252,8 @@ skills themselves, which is precisely the founder-time moat named in
 | **basic-memory** | local-first markdown graph, MCP-native, entity/relation model | typed schema enforcement, product metamodel, deterministic IDs/audit |
 | **Spec Kit / BMAD ecosystem** | agent-workflow mindshare, distribution (93k★) | persistent typed substrate under the generated artefacts |
 | **StrictDoc** | MID design, traceability DAG, diff/changelog rigor | markdown, strategy layer, agent surface |
+| **Sparx EA (+ MCP server)** | broadest strategy→tech typed repository, incumbent installed base | markdown/git artefacts, file-read agent economics, prose documents |
+| **Archi + coArchi** | free typed ArchiMate metamodel, file-per-element in git | prose artefacts, RM-grade requirements, agent surface, ID minting |
 
 **4 · Where clew's differentiation is thinnest.** (a) *Versus a determined Sphinx-Needs
 user*: everything except the packaged metamodel + skills is reproducible — the moat is
@@ -222,7 +280,10 @@ Key sources: [StrictDoc FAQ (tool comparisons)](https://strictdoc.readthedocs.io
 [ADR tooling index](https://adr.github.io/adr-tooling/) · [LikeC4](https://likec4.dev/) ·
 [Tessl review (spec-as-source status)](https://codemyspec.com/blog/tessl-review) · [Bagel AI](https://bagel.ai/platform-overview/) ·
 [reqSuite RM tools 2026 comparison](https://www.reqsuite.io/en/blog/requirements-management-tools-2026-a-comparison-for-medium-sized-product-developers) ·
-[Stanislaw Pankevich's OSS RM tools list](https://gist.github.com/stanislaw/aa40eb7de9f522ad482e5d239c435ff8).
+[Stanislaw Pankevich's OSS RM tools list](https://gist.github.com/stanislaw/aa40eb7de9f522ad482e5d239c435ff8) ·
+[ReqView (git collaboration docs)](https://www.reqview.com/doc/git-collaboration/) ·
+[Sparx EA overview](https://sparxsystems.com/products/ea/) · [Sparx MCP server announcement](https://sparxsystems.com/forums/smf/index.php?topic=49025.0) ·
+[Archi](https://www.archimatetool.com/) · [coArchi2 plugin](https://github.com/archimatetool/archi-modelrepository-plugin2).
 
 ## Open Items
 
@@ -230,8 +291,9 @@ Key sources: [StrictDoc FAQ (tool comparisons)](https://strictdoc.readthedocs.io
 | :---- | :--- | :------ | :------------ | :------------- | :-------------- | :------- | :----- | :---- | :---------------- | :---------- |
 | OI-0001 | execution-item | Findings are single-pass desk research; the four "nearest competitor" claims (Sphinx-Needs, basic-memory, Spec Kit/BMAD, StrictDoc) deserve hands-on trials before informing positioning or roadmap bets. | #synthesis | Synthesis | Run a 1-day hands-on spike per nearest competitor; capture per-requirement evidence; upgrade this scan's verdicts from Assumed to Tested. | medium | open | Victor Hueni | 2026-09-30 | _TBD_ |
 | OI-0002 | doc-gap | Lean Canvas §1 "existing alternatives" and §9 Unfair Advantage do not yet reference this scan; the competitive set named there (grep, prose-discipline triad, Atlassian+MCP) predates it. | #synthesis | Synthesis | Backfill Lean Canvas soft-links to this artefact on next canvas revision; consider whether §9 honest-gap bullet should name Sphinx-Needs/basic-memory explicitly. | low | open | Victor Hueni | 2026-09-30 | _TBD_ |
-| OI-0003 | execution-item | Watch-list monitoring: spec-driven tools (Spec Kit, BMAD) adding stable IDs/link-checking, or basic-memory adding schema enforcement, would materially change the threat model. | #synthesis | Synthesis | Re-run this scan at review interval (90d); diff verdict tables. | medium | open | Victor Hueni | 2026-10-21 | _TBD_ |
+| OI-0003 | execution-item | Watch-list monitoring: spec-driven tools (Spec Kit, BMAD) adding stable IDs/link-checking, basic-memory adding schema enforcement, or Sparx EA's MCP server gaining adoption among agent-first teams would materially change the threat model. | #synthesis | Synthesis | Re-run this scan at review interval (90d); diff verdict tables. | medium | open | Victor Hueni | 2026-10-21 | _TBD_ |
 
 ## Changelog
 
 - 2026-07-21 · Initial scan · Six categories swept (docs-as-code RM, spec-driven agent dev, agent memory, PKM, architecture-as-code, enterprise RM/EA) against six replacement criteria derived from VISION + Lean Canvas. Verdict: no full replacement; nearest competitors Sphinx-Needs, basic-memory, StrictDoc, and the Spec Kit/BMAD ecosystem.
+- 2026-07-21 · RE/EA deep-dive · §1 gains ReqView (file-based commercial RE on git) + ReqIF note; §6 extended with Codebeamer/Visure/objectiF RM; new §7 covers modeling-centric EA (Sparx EA incl. its 2026 MCP server, Archi+coArchi's git-native typed ArchiMate metamodel, Capella). Synthesis + watch-list updated: Sparx EA is now the most important incumbent to watch on the agent-access flank; the RE-depth/EA-breadth seam remains unoccupied.
