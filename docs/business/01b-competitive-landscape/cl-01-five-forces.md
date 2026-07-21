@@ -54,8 +54,11 @@ and substitutes are free, yet the 2026-07-21 replacement scan found **zero tools
 clew's six requirements together** — the seam between RE-grade enforcement, EA-grade breadth,
 and agent-native local-first economics is unoccupied. Rivalry therefore concentrates in
 *adjacent* categories: basic-memory (agent-native markdown graphs) from one flank, the Spec
-Kit/BMAD spec-driven wave (93k★ distribution, throwaway artefacts) from another, and Sparx EA
-(broadest typed repository, now MCP-queryable) from above. On the value curve, clew wins on
+Kit/BMAD spec-driven wave (93k★ distribution, throwaway artefacts) from another, Sparx EA
+(broadest typed repository, now MCP-queryable) from above — and, as of the 2026-07 wave,
+SARA (markdown+YAML knowledge graph with validation) plus OpenLore (deterministic
+code-architecture guardrails) closing in on the mechanism from below, which removes generic
+"git-native traceability for agents" as available positioning. On the value curve, clew wins on
 enforcement rigor, deterministic traceability, and agent read economics, and is structurally
 behind on distribution and maturity everywhere. Strategic implication: **occupy the
 "architecture-anchored" position fast** — raise write-time integrity and methodology depth
@@ -69,7 +72,7 @@ the mechanism alone is reproducible by any of the four flanking groups.
 
 | Force | Rating | Rationale | Key drivers | Evidence sources |
 |---|---|---|---|---|
-| **1. Threat of new entrants** | **Very High** | Near-zero capital or regulatory barrier; a funded startup or OSS side-project can ship a comparable substrate in months. | LLMs lower authoring cost; $125M funded entrants exist (Tessl); Spec Kit went 0→93k★ in ~8 months; no lock-in norms in dev tools. | [Tessl Series A](https://tessl.io/blog/announcing-our-series-a-for-ai-native-software-development/) · [Spec Kit growth](https://reenbit.com/bmad-vs-spec-kit-vs-openspec-choosing-your-spec-driven-ai-framework/) · Last verified: 2026-07-21 · Confidence: Tested |
+| **1. Threat of new entrants** | **Very High** | Near-zero capital or regulatory barrier; a funded startup or OSS side-project can ship a comparable substrate in months — **empirically confirmed by the 2026-07 wave** (SARA, Reqord, RTMX, OpenLore all surfaced within days of the initial scan). | LLMs lower authoring cost; $125M funded entrants exist (Tessl); Spec Kit went 0→93k★ in ~8 months; no lock-in norms in dev tools; four new quadrant entrants in the first half of 2026. | [Tessl Series A](https://tessl.io/blog/announcing-our-series-a-for-ai-native-software-development/) · [Spec Kit growth](https://reenbit.com/bmad-vs-spec-kit-vs-openspec-choosing-your-spec-driven-ai-framework/) · [SARA Show HN](https://news.ycombinator.com/item?id=46752826) · Last verified: 2026-07-21 · Confidence: Tested |
 | **2. Bargaining power of suppliers** | **Medium** | clew's "suppliers" are harness/model vendors (Anthropic, etc.): their conventions (skills, MCP, CLAUDE.md) define the integration surface and can shift it unilaterally. | High model-vendor concentration; harness memory features evolve fast (auto-memory layers, 2026); mitigated by markdown/git being vendor-neutral. | [Claude Code memory practices 2026](https://orchestrator.dev/blog/2026-04-06--claude-code-agent-memory-2026/) · Last verified: 2026-07-21 · Confidence: Assumed |
 | **3. Bargaining power of buyers** | **High** | Individual agent-first engineers expect dev tools free/OSS, switch at zero cost, and can always fall back to plain markdown. | OSS-first norms in the segment; clew v1 deliberately free ([Lean Canvas §6](../02a-lean-canvas.md)); exit ramp is built-in by design (markdown readable without clew). | [Lean Canvas §6 Revenue](../02a-lean-canvas.md) · Last verified: 2026-07-21 · Confidence: Tested |
 | **4. Threat of substitutes** | **Very High** | The dominant "competitor" is the free status quo: hand-rolled markdown + grep + prose discipline, PKM vaults, or generic memory MCPs — all feel good-enough until drift bites. | Zero cost; wave-1 evidence that prose discipline *fails* (the founding pain) cuts both ways — most users haven't felt the failure yet. | [Wave-1 synthesis](../../discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md) · [Dataview integrity gaps](https://github.com/blacksmithgu/obsidian-dataview/issues/2019) · Last verified: 2026-07-21 · Confidence: Tested |
@@ -98,6 +101,8 @@ Indirect players, profiled because each owns one flank of clew's position.*
 | GitHub Spec Kit | Indirect | Agent-first engineers | Constitution→spec→plan→tasks workflow for AI coding agents | [CO-04](CO-04-github-spec-kit.md) | 2026-07-21 |
 | BMAD-METHOD | Indirect | Agent-first engineers/teams | Simulated agile team of AI agents with file-based artefact handoffs | [CO-05](CO-05-bmad-method.md) | 2026-07-21 |
 | Sparx Enterprise Architect | Indirect | Enterprise/system architects | Strategy-to-technology typed model repository, now MCP-queryable | [CO-06](CO-06-sparx-enterprise-architect.md) | 2026-07-21 |
+| SARA | Direct-adjacent | Git/markdown engineering teams | Solution/architecture/requirements knowledge graph with validation + matrices | [CO-07](CO-07-sara.md) | 2026-07-21 |
+| OpenLore | Indirect (complement) | Agent-first developers | Deterministic code-architecture memory + pre-commit guardrails over MCP | [CO-08](CO-08-openlore.md) | 2026-07-21 |
 
 ### Tier 2 — Indirect competitors (not profiled)
 
@@ -108,6 +113,9 @@ Indirect players, profiled because each owns one flank of clew's position.*
 | Doorstop / ReqView / TRLC | File-based requirements in git | Requirements-only; no strategy layer, no agent surface | Long | [Scan §1](../../discovery/competitive-landscape-2026-07-21-clew-replacement-scan.md) · 2026-07-21 |
 | Ardoq / LeanIX | SaaS EA platforms with capability metamodels | Cloud/enterprise posture; wrong segment and economics | Long | [Scan §6](../../discovery/competitive-landscape-2026-07-21-clew-replacement-scan.md) · 2026-07-21 |
 | Letta / mem0 / Zep / cognee | LLM-extracted conversational memory | Probabilistic memories, not typed artefacts; DB-backed, not files | Long | [Scan §3](../../discovery/competitive-landscape-2026-07-21-clew-replacement-scan.md) · 2026-07-21 |
+| Reqord | YAML+markdown requirements lifecycle + Claude Code plugin | Requirements-only; no typed cross-artefact graph or enforcement | Near | [Scan §1, 2026-07 wave](../../discovery/competitive-landscape-2026-07-21-clew-replacement-scan.md) · 2026-07-21 |
+| RTMX | CSV-in-git requirements ⇄ tests, MCP, test-derived status | Narrow closed-loop scope (requirements ⇄ tests) | Near | [Scan §1, 2026-07 wave](../../discovery/competitive-landscape-2026-07-21-clew-replacement-scan.md) · 2026-07-21 |
+| shtracer / Cairn | Tag tracing / declared code plan for agents | Minimal scope; code-level object | Long | [Scan §1+§3](../../discovery/competitive-landscape-2026-07-21-clew-replacement-scan.md) · 2026-07-21 |
 
 ### Tier 3 — Substitutes
 
@@ -181,3 +189,4 @@ traceability · local-first markdown/git posture · agent-native economics · me
 | Date | Mode | Change | Author | Reviewed by |
 |---|---|---|---|---|
 | 2026-07-21 | Scaffold + Industry analysis + Profiles + Mapping | Initial landscape persisted from the [discovery full-replacement scan](../../discovery/competitive-landscape-2026-07-21-clew-replacement-scan.md): Five Forces, 4-tier table, 6 Tier-1 profiles (CO-01…CO-06), strategic group map, value curve. All content desk-research based. | Victor Hueni (agent-drafted) | _TODO_ |
+| 2026-07-21 | Refresh (2026-07 wave, founder-sourced) | Tier-1 +2 profiles: [CO-07 SARA](CO-07-sara.md) (closest new tool to clew's mechanism) and [CO-08 OpenLore](CO-08-openlore.md) (deterministic code-architecture guardrails — the guard/gate mechanism one layer down). Tier-2 +3 rows (Reqord, RTMX, shtracer/Cairn). Force 1 (new entrants) evidence hardened: wave empirically confirms Very High. Exec summary updated: generic "git-native traceability for agents" positioning no longer available. | Victor Hueni (agent-drafted) | _TODO_ |

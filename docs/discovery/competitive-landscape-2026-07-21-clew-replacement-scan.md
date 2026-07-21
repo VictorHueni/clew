@@ -50,6 +50,10 @@ none is agent-native by design (R5).
 | **OpenFastTrace** | ❌ | 🟡 | ✅ | ✅ | ❌ | ❌ | Different category (trace checker, no authoring model) |
 | **ReqView** | ❌ | ✅ | ✅ | 🟡 | ❌ | 🟡 | Partial overlap (file-based commercial RE) |
 | **reqT** | 🟡 | 🟡 | 🟡 | ✅ | 🟡 | ❌ | Partial overlap (academic ancestor of the approach) |
+| **SARA** | 🟡 | ✅ | ✅ | ✅ | 🟡 | 🟡 | **Partial overlap — closest new entrant (2026-07 wave)** |
+| **Reqord** | ❌ | 🟡 | 🟡 | ✅ | ✅ | 🟡 | Partial overlap (agent-era RM lifecycle) |
+| **RTMX** | ❌ | 🟡 | ✅ | 🟡 | ✅ | 🟡 | Partial overlap (test-loop traceability for agents) |
+| **shtracer** | ❌ | 🟡 | 🟡 | ✅ | ❌ | ❌ | Different category (lightweight tag tracing) |
 
 - **[Sphinx-Needs](https://sphinx-needs.readthedocs.io/)** (useblocks; active, v8.x, 2026).
   Fully user-definable need types with typed link options — you *could* declare `persona`,
@@ -96,6 +100,32 @@ none is agent-native by design (R5).
   model is per-file/in-memory, with no repo-wide persistence, minted IDs, write-time FK
   enforcement, or audit trail; no agent integration despite the agent-friendly text format.
   Worth reading for metamodel-design prior art, not a replacement.
+
+**The 2026-07 wave — agent-era git-native traceability.** Three young tools (surfaced
+2026-07-21, days after the initial scan) confirm the quadrant is filling fast:
+
+- **[SARA](https://github.com/cledouarec/sara)** (Rust CLI, Show HN Jan 2026): markdown +
+  YAML frontmatter as a knowledge graph across solution / architecture / requirements, with
+  a custom YAML model schema, validation (broken refs, orphaned items, circular deps,
+  duplicate IDs), traceability queries, matrix reports, multi-repo aggregation, and diff
+  between git refs. **The closest single new tool to clew's mechanism** — typed graph over
+  markdown-in-git with real validation. Gaps: scope is solution/architecture/requirements,
+  not business strategy → domain → plans (R1 partial); IDs are author-assigned and checks
+  run at validate time, not write time; no minted-ID/audit substrate; no explicit agent
+  surface or methodology layer.
+- **[Reqord](https://github.com/kicchann/reqord)**: "git-native requirements management for
+  the AI coding era" — YAML metadata + markdown content per requirement, lifecycle states,
+  a Claude Code plugin, and a `.reqord/context/` directory for persistent AI project
+  context. Strong R4+R5 posture; requirements-only scope, no typed cross-artefact graph or
+  enforcement.
+- **[RTMX](https://github.com/rtmx-ai/rtmx)** (Go, MCP server): requirements as CSV in git,
+  each with ID, spec, linked tests; status *derived from test results*; `rtmx next` /
+  `rtmx verify` close the agent build loop. The sharpest "closed-loop intent for agents"
+  story — and the narrowest scope (requirements ⇄ tests only).
+- **[shtracer](https://github.com/qq3g7bad/shtracer)** (shell): markdown-tag tracing
+  requirements → architecture → implementation → tests with orphan/duplicate detection.
+  Same traceability primitive, minimal scope.
+
 - **[OpenReq](https://github.com/OpenReqEU/OpenReq)** (EU Horizon 2020, 2017–2020, ended):
   research project on *recommendation and decision support* for community-driven RE —
   requirements intelligence from user feedback, dependency detection, release-planning
@@ -159,6 +189,7 @@ metamodel.
 | Tool | R1 | R2 | R3 | R4 | R5 | R6 | Verdict |
 |---|---|---|---|---|---|---|---|
 | **basic-memory** | ❌ | 🟡 | 🟡 | ✅ | ✅ | 🟡 | **Partial overlap — nearest agent-native competitor** |
+| **OpenLore (/ Cairn)** | ❌ | ✅ | 🟡 | 🟡 | ✅ | ✅ | **Partial overlap — the guardrail mechanism, one layer down (code)** |
 | **Letta / mem0 / Zep (Graphiti) / cognee** | ❌ | ❌ | ❌ | ❌ | ✅ | 🟡 | Different category (conversational memory) |
 | **Microsoft GraphRAG** | ❌ | ❌ | 🟡 | ❌ | 🟡 | ❌ | Different category (corpus indexing) |
 
@@ -170,6 +201,19 @@ metamodel.
   wikilink-loose, not FK-enforced (no write-time integrity, no impact analysis, R2); the
   graph is derived, best-effort, not audited (R6). "clew = basic-memory + an opinionated,
   enforced metamodel" is a fair one-line positioning check.
+- **[OpenLore](https://github.com/clay-good/OpenLore)** (and the adjacent **Cairn**;
+  surfaced 2026-07-21): deterministic, local-first **code-architecture** memory and
+  guardrails — "no LLM in the hot path." Builds a navigable graph of the codebase (static
+  analysis + living specs via OpenSpec), exposes 45 graph-native MCP tools, and gates
+  changes: agents call `record_decision` before writing code and a pre-commit hook blocks
+  the commit until verified decisions are reviewed. **Strategically the most important
+  find of the wave: it ships the exact guard/gate mechanism clew envisions — one layer
+  down.** OpenLore governs whether a change respects the *code* architecture; clew's claim
+  is the *product* layer (why it exists, who it's for, what must remain true). Gaps vs
+  clew: no product/business metamodel (R1 ❌), graph derived from code rather than authored
+  strategy artefacts, no markdown-prose artefact layer. Complement and integration
+  candidate more than rival — but it proves "deterministic agent guardrails" alone is not
+  ownable positioning.
 - **Letta, mem0, Zep/Graphiti, cognee** ([2026 comparisons](https://www.graphlit.com/blog/survey-of-ai-agent-memory-frameworks)):
   all optimize conversational recall (extracted facts, temporal graphs, vector stores).
   Storage is a DB/service, not readable markdown; facts are minted by the LLM; there is no
@@ -285,6 +329,17 @@ skills themselves, which is precisely the founder-time moat named in
 | **StrictDoc** | MID design, traceability DAG, diff/changelog rigor | markdown, strategy layer, agent surface |
 | **Sparx EA (+ MCP server)** | broadest strategy→tech typed repository, incumbent installed base | markdown/git artefacts, file-read agent economics, prose documents |
 | **Archi + coArchi** | free typed ArchiMate metamodel, file-per-element in git | prose artefacts, RM-grade requirements, agent surface, ID minting |
+| **SARA** (2026-07 wave) | markdown+YAML typed graph in git, validation, matrices, git-ref diff | business/strategy layers, minted IDs, write-time enforcement, agent surface, methodology |
+| **OpenLore** (2026-07 wave) | deterministic guard/gate mechanism, MCP-native, pre-commit governance | the product/business layer entirely — governs code architecture, not product truth |
+
+**3b · The 2026-07 wave changes the tempo, not the verdict.** SARA, Reqord, RTMX, and
+OpenLore — all surfaced within days of the initial scan — collectively occupy "git-native
+traceability/guardrails for agents" from four angles, without any of them holding the full
+seam (business→implementation metamodel + minted IDs + write-time enforcement + prose
+artefacts + agent economics). Verdict unchanged: still no full replacement. But two
+consequences: (a) generic "Git-native traceability for AI agents" is no longer available as
+positioning — clew must claim the product-architecture integrity layer explicitly; (b) the
+90-day watch cadence assumed by OI-0003 is too slow for this quadrant.
 
 **4 · Where clew's differentiation is thinnest.** (a) *Versus a determined Sphinx-Needs
 user*: everything except the packaged metamodel + skills is reproducible — the moat is
@@ -326,10 +381,12 @@ Key sources: [StrictDoc FAQ (tool comparisons)](https://strictdoc.readthedocs.io
 | OI-0001 | execution-item | Findings are single-pass desk research; the four "nearest competitor" claims (Sphinx-Needs, basic-memory, Spec Kit/BMAD, StrictDoc) deserve hands-on trials before informing positioning or roadmap bets. | #synthesis | Synthesis | Run a 1-day hands-on spike per nearest competitor; capture per-requirement evidence; upgrade this scan's verdicts from Assumed to Tested. | medium | open | Victor Hueni | 2026-09-30 | _TBD_ |
 | OI-0002 | doc-gap | Lean Canvas §1 "existing alternatives" and §9 Unfair Advantage do not yet reference this scan; the competitive set named there (grep, prose-discipline triad, Atlassian+MCP) predates it. | #synthesis | Synthesis | ~~Backfill Lean Canvas soft-links~~ Done 2026-07-21: §1 competitive-landscape bullet + §9 honest-gap flanks named (Sphinx-Needs, basic-memory, Spec Kit/BMAD, Sparx EA) + §9 positioning soft-links, in the canvas changelog. | low | done | Victor Hueni | 2026-07-21 | _TBD_ |
 | OI-0003 | execution-item | Watch-list monitoring: spec-driven tools (Spec Kit, BMAD) adding stable IDs/link-checking, basic-memory adding schema enforcement, or Sparx EA's MCP server gaining adoption among agent-first teams would materially change the threat model. | #synthesis | Synthesis | Re-run this scan at review interval (90d); diff verdict tables. | medium | open | Victor Hueni | 2026-10-21 | _TBD_ |
+| OI-0004 | execution-item | Watch cadence falsified: the 2026-07 wave (SARA, Reqord, RTMX, OpenLore) was found days after the initial scan, showing the git-native-traceability quadrant moves faster than a 90-day cycle. | #synthesis | Synthesis | Set up passive monitoring (GitHub topic/HN alerts for "requirements traceability agents", "architectural memory MCP"); do a lightweight monthly sweep of the quadrant between full 90-day refreshes. | medium | open | Victor Hueni | 2026-08-21 | _TBD_ |
 
 ## Changelog
 
 - 2026-07-21 · Initial scan · Six categories swept (docs-as-code RM, spec-driven agent dev, agent memory, PKM, architecture-as-code, enterprise RM/EA) against six replacement criteria derived from VISION + Lean Canvas. Verdict: no full replacement; nearest competitors Sphinx-Needs, basic-memory, StrictDoc, and the Spec Kit/BMAD ecosystem.
 - 2026-07-21 · RE/EA deep-dive · §1 gains ReqView (file-based commercial RE on git) + ReqIF note; §6 extended with Codebeamer/Visure/objectiF RM; new §7 covers modeling-centric EA (Sparx EA incl. its 2026 MCP server, Archi+coArchi's git-native typed ArchiMate metamodel, Capella). Synthesis + watch-list updated: Sparx EA is now the most important incumbent to watch on the agent-access flank; the RE-depth/EA-breadth seam remains unoccupied.
-- 2026-07-21 · Graduated to strategy layer · Findings persisted as the business competitive landscape: hub + 6 Tier-1 profiles + strategic group map + value curve at [`docs/business/01b-competitive-landscape/`](../business/01b-competitive-landscape/cl-01-five-forces.md). This scan remains the evidence base; strategic read-outs live there.
 - 2026-07-21 · Reader-suggested candidates · §1 gains reqT (Lund; typed metamodel in markdown-subset text — closest philosophical ancestor, academic posture, no persistence/agent layer) and OpenReq (ended H2020 research on RE recommendation; different category, lineage only). §2 gains Böckeler's spec-first/spec-anchored/spec-as-source taxonomy (martinfowler.com) with the "architecture-anchored" positioning read-out. ReqView and the Augment SDD roundup were already covered.
+- 2026-07-21 · Graduated to strategy layer · Findings persisted as the business competitive landscape: hub + 6 Tier-1 profiles + strategic group map + value curve at [`docs/business/01b-competitive-landscape/`](../business/01b-competitive-landscape/cl-01-five-forces.md). This scan remains the evidence base; strategic read-outs live there.
+- 2026-07-21 · 2026-07 wave (founder-sourced) · §1 gains SARA (closest new entrant: markdown+YAML typed graph, validation, matrices, git-ref diff), Reqord (agent-era RM lifecycle + Claude Code plugin), RTMX (test-derived closed-loop traceability over MCP), shtracer. §3 gains OpenLore/Cairn (deterministic code-architecture guardrails — the guard/gate mechanism one layer down). Synthesis: new §3b (quadrant filled from four angles; verdict unchanged; "git-native traceability for agents" no longer available as positioning); nearest-competitor table +2 rows. New OI-0004: watch cadence falsified, add monthly quadrant sweep.

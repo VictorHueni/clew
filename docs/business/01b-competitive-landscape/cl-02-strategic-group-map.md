@@ -48,9 +48,9 @@ Convention└──────────────────────�
 | Group | Members | Shared strategic profile | Intra-group rivalry |
 |---|---|---|---|
 | **A: Spec-workflow tools** | Spec Kit, BMAD, OpenSpec, Kiro | Agent-first audience, per-feature markdown artefacts, convention-only discipline | **High** (fast-moving, feature-copying) |
-| **B: Docs-as-code RM** | Sphinx-Needs, StrictDoc, Doorstop, ReqView, TRLC | Requirements-scope typed graphs with build/write-time validation, engineering-docs segment | Medium |
+| **B: Docs-as-code RM** | Sphinx-Needs, StrictDoc, Doorstop, ReqView, TRLC, **SARA, Reqord, RTMX** (2026-07 wave) | Requirements/architecture-scope typed graphs with validation; the wave adds agent-era posture to this group | **High** (wave raised entry tempo) |
 | **C: EA modeling** | Sparx EA, Archi/coArchi, Ardoq, LeanIX | Strategy-to-technology typed metamodels, architect segment, model-repository posture | Medium |
-| **D: Agent memory** | basic-memory, mem0, Letta, Zep, cognee | Agent-first audience, persistent recall, loose/probabilistic structure | High |
+| **D: Agent memory** | basic-memory, mem0, Letta, Zep, cognee, **OpenLore/Cairn** (deterministic code-architecture guardrails) | Agent-first audience, persistent recall; OpenLore adds a deterministic-governance sub-cluster | High |
 
 **Our position:** the upper-right quadrant (broad scope × enforced) is occupied only by
 Group C — and Group C holds it with diagram-model repositories, not prose artefacts. clew
@@ -105,6 +105,11 @@ None       │  [Group E: Local, no agent surface]──────────
 - **Closest approachers:** Sparx EA (upper-right Map 1, moving up Map 2 via MCP — but capped
   by token-metered access and DB storage) and basic-memory (upper-right Map 2, far left on
   Map 1's enforcement axis).
+- **2026-07 wave update:** SARA is the first player near-upper-right on *both* maps'
+  mechanism axes (validated graph + markdown/git; agent surface still missing) but at
+  requirements/architecture scope, not full product architecture. OpenLore is fully
+  agent-native + deterministic but its object is code, not product. The double-quadrant at
+  *product* scope remains empty — the margin, however, shrank measurably within one quarter.
 
 ## Strategic implications
 
@@ -117,3 +122,4 @@ None       │  [Group E: Local, no agent surface]──────────
 | Date | Change | Author |
 |---|---|---|
 | 2026-07-21 | Initial draft from discovery scan | Victor Hueni (agent-drafted) |
+| 2026-07-21 | 2026-07 wave folded in: SARA/Reqord/RTMX join Group B (rivalry raised to High), OpenLore/Cairn join Group D as deterministic-governance sub-cluster; cross-map analysis gains wave update (seam still empty at product scope, margin shrinking) | Victor Hueni (agent-drafted) |

@@ -37,15 +37,15 @@ Assumed until dogfooding validates it.
 
 ## Value curves (Low / Medium / High per factor)
 
-| Factor | clew (target) | Sphinx-Needs | basic-memory | Spec Kit | Sparx EA |
-|---|---|---|---|---|---|
-| 1 Metamodel breadth | **High** | Med (BYO types) | Low (generic) | Low | **High** |
-| 2 Integrity enforcement | **High** | Med-High (build-time) | Low | Low | Med (in-model) |
-| 3 Deterministic traceability | **High** | Med | Low | Low | High |
-| 4 Local-first markdown/git | **High** | Med (RST build) | **High** | **High** | Low |
-| 5 Agent-native economics | **High** | Low | **High** | **High** | Low-Med (MCP) |
-| 6 Methodology depth | **High** | Low | Low | Low-Med (constitution) | Med (notations, not practice) |
-| 7 Distribution & maturity | **Low** | Med-High | Med | **High** | High |
+| Factor | clew (target) | Sphinx-Needs | basic-memory | Spec Kit | Sparx EA | SARA |
+|---|---|---|---|---|---|---|
+| 1 Metamodel breadth | **High** | Med (BYO types) | Low (generic) | Low | **High** | Med (BYO schema; arch+reqs scope) |
+| 2 Integrity enforcement | **High** | Med-High (build-time) | Low | Low | Med (in-model) | Med-High (validate-time) |
+| 3 Deterministic traceability | **High** | Med | Low | Low | High | Med-High (queries, matrices, diff) |
+| 4 Local-first markdown/git | **High** | Med (RST build) | **High** | **High** | Low | **High** |
+| 5 Agent-native economics | **High** | Low | **High** | **High** | Low-Med (MCP) | Med (plain files, no agent surface) |
+| 6 Methodology depth | **High** | Low | Low | Low-Med (constitution) | Med (notations, not practice) | Low |
+| 7 Distribution & maturity | **Low** | Med-High | Med | **High** | High | **Low** (new, Jan 2026) |
 
 ```text
         F1      F2      F3      F4      F5      F6      F7
@@ -59,6 +59,13 @@ Low   ──●───────●───────●─────�
 The pattern: **every competitor is High on some factors and structurally Low on others; only
 clew's designed curve is High on F1–F6 simultaneously — and alone at Low on F7.** That last
 cell is the honest cost of the position.
+
+**2026-07 wave note:** SARA's curve is the most clew-shaped yet (Med to Med-High across
+F1–F4 with F4 High) — but it plateaus at Med on the factors clew must own (breadth,
+write-time enforcement, methodology, agent surface) and shares clew's F7 weakness without
+clew's differentiation. The differentiating gap is now clearly F1+F2+F6 *together*: full
+product-architecture scope, write-time (not validate-time) integrity, and embedded
+methodology.
 
 ---
 
@@ -121,3 +128,4 @@ read. No 2026-07-21 competitor curve crosses F1–F6 High together; the position
 | Date | Change | Author |
 |---|---|---|
 | 2026-07-21 | Initial draft from discovery scan R1–R6 verdicts | Victor Hueni (agent-drafted) |
+| 2026-07-21 | 2026-07 wave: SARA column added (most clew-shaped competitor curve; plateaus at Med on F1/F2/F6); wave note on the differentiating gap | Victor Hueni (agent-drafted) |
