@@ -49,6 +49,7 @@ none is agent-native by design (R5).
 | **TRLC (BMW)** | ❌ | ✅ | 🟡 | 🟡 | ❌ | 🟡 | Different category (safety-critical RM DSL) |
 | **OpenFastTrace** | ❌ | 🟡 | ✅ | ✅ | ❌ | ❌ | Different category (trace checker, no authoring model) |
 | **ReqView** | ❌ | ✅ | ✅ | 🟡 | ❌ | 🟡 | Partial overlap (file-based commercial RE) |
+| **reqT** | 🟡 | 🟡 | 🟡 | ✅ | 🟡 | ❌ | Partial overlap (academic ancestor of the approach) |
 
 - **[Sphinx-Needs](https://sphinx-needs.readthedocs.io/)** (useblocks; active, v8.x, 2026).
   Fully user-definable need types with typed link options — you *could* declare `persona`,
@@ -84,6 +85,24 @@ none is agent-native by design (R5).
   is a commercially viable posture — without touching clew's strategy layer or R5.
 - **ReqIF** is an exchange *format* (OEM/supplier requirements interchange), not a tool — a
   potential future export target for clew, not a competitor.
+- **[reqT](https://reqt.github.io/)** (Björn Regnell, Lund University): open-source RE tool
+  whose `reqT-lang` is a **markdown-subset language** (indented bullet lists + keywords)
+  expressing typed entities, relations, and attributes over natural-language requirements —
+  "structure to natural language, enabling analysis, visualization and automation." Its
+  published metamodel even includes Stakeholder/Goal/Product/Release concepts beyond bare
+  requirements. This is the closest *philosophical ancestor* to clew found in the scan: a
+  semi-formal typed metamodel embedded in markdown-like plain text. Gaps: academic/education
+  posture (used for teaching RE at Lund; Scala library + desktop app, small community); the
+  model is per-file/in-memory, with no repo-wide persistence, minted IDs, write-time FK
+  enforcement, or audit trail; no agent integration despite the agent-friendly text format.
+  Worth reading for metamodel-design prior art, not a replacement.
+- **[OpenReq](https://github.com/OpenReqEU/OpenReq)** (EU Horizon 2020, 2017–2020, ended):
+  research project on *recommendation and decision support* for community-driven RE —
+  requirements intelligence from user feedback, dependency detection, release-planning
+  group decisions — delivered as open-source microservices, largely dormant since project
+  end. Different category: it recommends and prioritises requirements held elsewhere; it is
+  not a persistence substrate. Relevant only as research lineage for a possible future
+  "requirements intelligence" capability on top of clew's graph.
 
 ## 2 · Spec-driven agent development
 
@@ -91,6 +110,18 @@ The category that shares clew's *audience* (agent-first engineers) and R4/R5 pos
 its *object* — these tools manage per-feature implementation specs, not a persistent product
 architecture. Artefacts are LLM-authored prose files: no typed graph, no minted IDs, no
 referential enforcement.
+
+[Böckeler's analysis on martinfowler.com](https://www.martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html)
+(Oct 2025) gives the category its sharpest frame — three rigor levels: **spec-first** (spec
+gives initial clarity, then is discarded or drifts — the default behaviour of Spec Kit and
+Kiro), **spec-anchored** (spec maintained alongside code for the system's life), and
+**spec-as-source** (humans edit only specs; Tessl's still-unshipped bet). The criticism cuts
+in clew's favour twice: the dominant tools are spec-*first* — their artefacts are throwaway
+by default, the exact anti-pattern clew's persistent substrate exists to prevent — and even
+"spec-anchored," the level Böckeler calls the sweet spot, is defined per-system at code
+level, with nothing above it holding strategy, domain, and decisions together. clew is in
+effect *architecture-anchored*: the anchored-artefact idea applied to the whole product
+stack, with enforcement rather than convention keeping it aligned.
 
 | Tool | R1 | R2 | R3 | R4 | R5 | R6 | Verdict |
 |---|---|---|---|---|---|---|---|
@@ -283,7 +314,10 @@ Key sources: [StrictDoc FAQ (tool comparisons)](https://strictdoc.readthedocs.io
 [Stanislaw Pankevich's OSS RM tools list](https://gist.github.com/stanislaw/aa40eb7de9f522ad482e5d239c435ff8) ·
 [ReqView (git collaboration docs)](https://www.reqview.com/doc/git-collaboration/) ·
 [Sparx EA overview](https://sparxsystems.com/products/ea/) · [Sparx MCP server announcement](https://sparxsystems.com/forums/smf/index.php?topic=49025.0) ·
-[Archi](https://www.archimatetool.com/) · [coArchi2 plugin](https://github.com/archimatetool/archi-modelrepository-plugin2).
+[Archi](https://www.archimatetool.com/) · [coArchi2 plugin](https://github.com/archimatetool/archi-modelrepository-plugin2) ·
+[reqT](https://reqt.github.io/) ([metamodel paper, Lund](https://lup.lub.lu.se/search/publication/4191773)) ·
+[OpenReq (H2020)](https://github.com/OpenReqEU/OpenReq) ·
+[Böckeler — Understanding SDD: Kiro, spec-kit, Tessl (martinfowler.com)](https://www.martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html).
 
 ## Open Items
 
@@ -297,3 +331,4 @@ Key sources: [StrictDoc FAQ (tool comparisons)](https://strictdoc.readthedocs.io
 
 - 2026-07-21 · Initial scan · Six categories swept (docs-as-code RM, spec-driven agent dev, agent memory, PKM, architecture-as-code, enterprise RM/EA) against six replacement criteria derived from VISION + Lean Canvas. Verdict: no full replacement; nearest competitors Sphinx-Needs, basic-memory, StrictDoc, and the Spec Kit/BMAD ecosystem.
 - 2026-07-21 · RE/EA deep-dive · §1 gains ReqView (file-based commercial RE on git) + ReqIF note; §6 extended with Codebeamer/Visure/objectiF RM; new §7 covers modeling-centric EA (Sparx EA incl. its 2026 MCP server, Archi+coArchi's git-native typed ArchiMate metamodel, Capella). Synthesis + watch-list updated: Sparx EA is now the most important incumbent to watch on the agent-access flank; the RE-depth/EA-breadth seam remains unoccupied.
+- 2026-07-21 · Reader-suggested candidates · §1 gains reqT (Lund; typed metamodel in markdown-subset text — closest philosophical ancestor, academic posture, no persistence/agent layer) and OpenReq (ended H2020 research on RE recommendation; different category, lineage only). §2 gains Böckeler's spec-first/spec-anchored/spec-as-source taxonomy (martinfowler.com) with the "architecture-anchored" positioning read-out. ReqView and the Augment SDD roundup were already covered.
