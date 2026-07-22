@@ -72,7 +72,7 @@ AGENT (Claude / Codex)
   │     clew new functionality "Schedule surgery" --cap C-N.M → C-N.M.FXX
   │     clew set complexity C-N.M.FXX M
   │     clew link C-N.M.FXX E-NN
-  │     clew estimate epic E-NN → { best: 8d, likely: 12d, worst: 18d }
+  │     clew impact C-N.M.FXX → { affected: [E-NN, PRD-0007, VS-1.3, …] }
   └── writes markdown prose referencing returned IDs
 
 CLEW CLI (Typer, installed via uvx / pip)

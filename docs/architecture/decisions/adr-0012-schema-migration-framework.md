@@ -8,6 +8,19 @@ review_interval: 180d
 
 # Schema migration framework — Alembic + SQLAlchemy Core
 
+<!-- Renumbered 2026-07-07 from ADR-0007 → ADR-0012 to resolve a duplicate ADR-0007 (this file
+     collided with adr-0007-file-binding-content-hash-strategy). Inbound references in ADR-0004
+     updated in the same pass. clew must pass its own referential-integrity rule. -->
+
+> **Adoption deferred (2026-07-07, [ADR-0013](adr-0013-minimal-model-not-repo-native-ea.md)).**
+> ADR-0013 (minimal-model / perfect-sync) **amends this ADR's urgency**: the *decision* to use
+> Alembic + SQLAlchemy Core at the point migrations become load-bearing stands, but v1
+> **defers** it in favour of a hand-rolled `PRAGMA user_version` + numbered-step path (option A
+> below). Rationale: a 4-table schema built so new artefact types need no DDL does not warrant a
+> full migration framework before the core spine actually churns. **Revisit trigger:** the first
+> real change to the three-table spine or `id_sequences` that a hand-rolled step cannot cover
+> cleanly, or the v3 Postgres port — whichever comes first.
+
 ## Context and Problem Statement
 
 [ADR-0001](adr-0001-metamodel-persistence-layer.md) chose CLI + SQLite + YAML export and documented the engine upgrade path **MVP SQLite → v2 MCP → v3 FastAPI + Postgres**. [ADR-0003](adr-0003-schema-design-typed-property-graph.md) chose a typed property graph: three core tables (`artefacts`, `artefact_references`, `file_bindings`) plus an `id_sequences` counter table, with type-specific fields in a JSON `properties` column so that **adding a new artefact type or relationship type requires no DDL**. [ADR-0004](adr-0004-python-typer-duckdb-implementation-stack.md) chose Python + Typer + stdlib `sqlite3` + Pydantic, valuing a zero-non-stdlib-DB-dependency install.
