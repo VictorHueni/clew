@@ -1,5 +1,9 @@
 ---
+type: Idea
 title: IDEA-0001 — Reposition clew as the product-architecture integrity layer
+description: Pre-formal capture of the founder's 2026-07-21 moat/positioning rework prompted by the 2026-07 competitor wave.
+tags: [discovery, ideation, positioning]
+timestamp: 2026-07-21T17:06:15Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-07-21
@@ -77,9 +81,11 @@ Supporting evidence and four caveats, from the
 
 | OI-ID | Type | Summary | Source anchor | Source heading | Resolution path | Priority | Status | Owner | Due / Review date | Tracker ref |
 | :---- | :--- | :------ | :------------ | :------------- | :-------------- | :------- | :----- | :---- | :---------------- | :---------- |
-| OI-0001 | execution-item | Founder decision pending: adopt "Product Architecture Management" category language and the integrity-layer elevator pitch into VISION + canvas, or keep current framing. | #graduation-path | Graduation path | Decide; then graduate rows 1–2 of the table via the vision + business-model skills. | high | open | Victor Hueni | 2026-08-15 | _TBD_ |
-| OI-0002 | execution-item | Draft the deterministic-guard positioning ADR (no LLM in the integrity hot path; constraints are authored artefacts) — decidable independently of the category question. | #assessment-agent-review-2026-07-21 | Assessment | Author ADR via `architecture-adr` skill; link OpenLore precedent as prior art. | medium | open | Victor Hueni | 2026-08-31 | _TBD_ |
+| OI-0066 | execution-item | Founder decision pending: adopt "Product Architecture Management" category language and the integrity-layer elevator pitch into VISION + canvas, or keep current framing. | #graduation-path | Graduation path | Decide; then graduate rows 1–2 of the table via the vision + business-model skills. | high | open | Victor Hueni | 2026-08-15 | _TBD_ |
+| OI-0067 | execution-item | Draft the deterministic-guard positioning ADR (no LLM in the integrity hot path; constraints are authored artefacts) — decidable independently of the category question. | #assessment-agent-review-2026-07-21 | Assessment | Author ADR via `architecture-adr` skill; link OpenLore precedent as prior art. | medium | open | Victor Hueni | 2026-08-31 | _TBD_ |
+| OI-0071 | decision-gap | Positioning reconciliation cascade (companion to OI-0066, which owns the category decision): once IDEA-0001 is adopted or parked, propagate the [2026-07-21 scan](../competitive-landscape-2026-07-21-clew-replacement-scan.md) conclusion ("git-native traceability for agents" no longer available as positioning) into VISION, reconcile the Lean Canvas full-lifecycle north-star wording and the value-curve breadth targets with [ADR-0013](../../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md)'s minimal-model stance, and align the slide-deck brief's category language. | #graduation-path | Graduation path | Decide OI-0066 first; then run the reconciliation pass across VISION, Lean Canvas, `cl-03-value-curve.md`, and the slide-deck brief in one cascade, citing the decision. | high | open | Victor Hueni | 2026-08-31 | _TBD_ |
 
 ## Changelog
 
 - 2026-07-21 · Captured · Founder's moat/positioning rework + agent assessment persisted as IDEA-0001, following the 2026-07 competitor wave.
+- 2026-07-24 · Open-items renumber + reconciliation item · Rows OI-0001/OI-0002 collided with ledger-owned OI-0001/OI-0002 (canonical since the 2026-05-26 sync); renumbered to OI-0066/OI-0067 per the central ledger (`project-control/open-items/open-items.md`) mapping. New OI-0071 filed: the positioning-reconciliation cascade (VISION propagation, Lean Canvas north-star + value-curve breadth vs ADR-0013, slide-deck category language) as a companion to OI-0066.

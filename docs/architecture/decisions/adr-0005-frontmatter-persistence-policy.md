@@ -1,5 +1,9 @@
 ---
+type: Architecture Decision Record
 title: Frontmatter persistence policy — markdown remains source of truth; clew caches a read-only subset
+description: Frontmatter persistence policy — markdown remains source of truth while clew caches a read-only subset, with ownership split by field class.
+tags: [architecture, adr, frontmatter]
+timestamp: 2026-05-26T15:48:42Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-26

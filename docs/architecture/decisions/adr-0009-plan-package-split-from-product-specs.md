@@ -1,5 +1,9 @@
 ---
+type: Architecture Decision Record
 title: Build-planning artefacts move to a `plan-` package, split from Product Specs
+description: Moves build-planning artefacts to a plan- package, split from Product Specs.
+tags: [architecture, adr, packaging]
+timestamp: 2026-06-27T15:01:07Z
 status: active
 owner: Victor Hueni
 last_reviewed: 2026-06-27
@@ -82,8 +86,8 @@ This takes the metamodel package taxonomy from 7 to **8**.
 
 | OI-ID  | Type           | Summary                                                                                              | Source anchor      | Source heading      | Resolution path                                                                                   | Priority | Status | Owner        | Due / Review date | Tracker ref |
 | :----- | :------------- | :--------------------------------------------------------------------------------------------------- | :----------------- | :------------------ | :------------------------------------------------------------------------------------------------ | :------- | :----- | :----------- | :---------------- | :---------- |
-| OI-0034 | doc-gap        | Apply the `plan-` package across clew's metamodel docs (planning.md, product-specs.md, README, slide, flowchart). | #decision-outcome  | Decision Outcome    | This change.                                                                                       | high     | closed | Victor Hueni | 2026-06-27        | This commit |
-| OI-0035 | execution-item | Kit cascade — rename `spec-delivery-roadmap`→`plan-delivery-roadmap`, `spec-implementation-plan`→`plan-implementation`; update `artefact-types-registry.md` + `metamodel.md`; migrate instance paths to `docs/plans/`. | #consequences      | Consequences        | Kit-side PR (manual, ahead of `clew metamodel export`). | medium   | closed | Victor Hueni | 2026-06-27        | [kit PR #51](https://github.com/VictorHueni/homemade-claude-kit/pull/51) merged (`5d4da46`); 33 files; kit issue #15 relabelled `plan-release` |
+| OI-0060 | doc-gap        | Apply the `plan-` package across clew's metamodel docs (planning.md, product-specs.md, README, slide, flowchart). | #decision-outcome  | Decision Outcome    | This change.                                                                                       | high     | closed | Victor Hueni | 2026-06-27        | This commit |
+| OI-0061 | execution-item | Kit cascade — rename `spec-delivery-roadmap`→`plan-delivery-roadmap`, `spec-implementation-plan`→`plan-implementation`; update `artefact-types-registry.md` + `metamodel.md`; migrate instance paths to `docs/plans/`. | #consequences      | Consequences        | Kit-side PR (manual, ahead of `clew metamodel export`). | medium   | closed | Victor Hueni | 2026-06-27        | [kit PR #51](https://github.com/VictorHueni/homemade-claude-kit/pull/51) merged (`5d4da46`); 33 files; kit issue #15 relabelled `plan-release` |
 
 ## Changelog
 
@@ -91,3 +95,4 @@ This takes the metamodel package taxonomy from 7 to **8**.
 | :-- | :-- | :-- |
 | 2026-06-27 | Initial draft. Split build-planning (`delivery-roadmap`, `implementation-plan`) out of `spec-` into a new `plan-` package; artefact types/IDs unchanged. Exercises ADR-0008 (clew as SoT); kit cascade tracked as OI-0035. | Victor Hueni |
 | 2026-06-27 | Activated (`draft → active`). Both open items closed: clew docs applied (OI-0034) and the kit cascade merged (OI-0035, kit PR #51). | Victor Hueni |
+| 2026-07-24 | Open-items renumber (governance sync, no content change): this ADR's rows OI-0034/OI-0035 collided with ADR-0007's post-sync mints; renumbered to OI-0060/OI-0061 per the [central ledger](../../../project-control/open-items/open-items.md) mapping (earlier changelog rows narrate the pre-renumber IDs). Cross-reference in `docs/metamodel/packages/planning.md` updated in the same pass. | Victor Hueni |

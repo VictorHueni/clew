@@ -1,5 +1,9 @@
 ---
+type: Glossary Term
 title: clew Ubiquitous Language Glossary
+description: Ubiquitous-language glossary for clew, defining the domain terms of each bounded context.
+tags: [domain, glossary]
+timestamp: 2026-05-25T15:11:56Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-25
@@ -130,7 +134,7 @@ review_interval: 180d
 
 **Status:** Active
 
-**Definition:** The lifecycle state of an Artefact — one of `active` (the default at registration), `retired` (the artefact is no longer in use but is preserved for history), or `superseded` (replaced by another Artefact whose Business ID is recorded). Transitions are one-way: an artefact cannot return to `active` once retired or superseded.
+**Definition:** The lifecycle state of an Artefact — one of `draft` (the default at registration; not yet authoritative), `active`, `superseded` (replaced by another Artefact whose Business ID is recorded), or `deprecated` (no longer in use but preserved for history). The enum is aligned with the kit frontmatter lifecycle per the [artefact-store DDL](07b-models/artefact-store.md#physical-schema) (2026-06-11 changelog row: `artefacts.status` aligned to the authoritative `artefact-frontmatter.md` enum; the former `retired` value maps to `deprecated`). Transitions are one-way: `draft` advances only to `active`, and an artefact cannot return to `active` or `draft` once superseded or deprecated.
 
 **Example:** "When ADR-0001 is replaced by a future `ADR-NNNN`, the operator runs `clew set ADR-0001 status superseded --by ADR-NNNN`; the old ADR's Status moves from `active` to `superseded` and stays there."
 
@@ -138,11 +142,11 @@ review_interval: 180d
 
 **Anti-patterns:**
 - Status is NOT a workflow stage (planned / in-progress / done) — those are properties on certain Artefact types (e.g. `fbs_functionality.status`) and live in the Artefact's `properties`, not on the lifecycle Status.
-- Status is NOT reversible — `retired` and `superseded` are terminal; never write code that promotes a non-`active` Artefact back to `active`.
+- Status is NOT reversible — `deprecated` and `superseded` are terminal; never write code that promotes a terminal Artefact back to `active` or `draft`.
 
 **Cross-context:** N/A — concept owned entirely by BC-01.
 
-**Code convention:** `Status` is a string-valued enum at the persistence layer (`'active' | 'retired' | 'superseded'`); the lifecycle is documented in the [Artefact Store domain model §BC-01.AGG-01 Lifecycle states](07b-models/artefact-store.md#artefact--bc-01agg-01)
+**Code convention:** `Status` is a string-valued enum at the persistence layer (`'draft' | 'active' | 'superseded' | 'deprecated'`, default `'draft'`); the lifecycle is documented in the [Artefact Store domain model §BC-01.AGG-01 Lifecycle states](07b-models/artefact-store.md#artefact--bc-01agg-01)
 
 **First referenced:** [Artefact Store domain model §BC-01.AGG-01](07b-models/artefact-store.md#artefact--bc-01agg-01) · 2026-05-25
 
@@ -290,20 +294,20 @@ review_interval: 180d
 
 **Status:** Active
 
-**Definition:** The chronological record of every structural write to the artefact store — every `register`, every `link`, every `unlink`, every `retire`, every Snapshot operation — captured with timestamp, actor identity, and before/after state. Replayable to reconstruct any historical store state. Surfaced to the operator via `clew log` and `clew history <id>`.
+**Definition:** The chronological record of every structural write to the artefact store — every `register`, every `link`, every `unlink`, every `retire`, every Snapshot operation. Per [ADR-0013](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md) the Audit trail is **delegated to git**, not modelled in the store: git commit history over the committed `snapshot/` directory provides the durable who/when/before-after record, and each structural write becomes visible as a Snapshot diff. There is no audit table and no dedicated audit CLI command — a DB-resident audit would evaporate on `clew import snapshot` rebuild.
 
-**Example:** "`clew history OBJ-02` returns the chronological Audit trail for OBJ-02 — the registration, every subsequent property update, every Relationship added or removed, the eventual retirement."
+**Example:** "`git log -p docs/clew/snapshot/` returns the chronological Audit trail — every structural write appears as a Snapshot diff in the commit that exported it, with git's author and timestamp as the who/when."
 
-**Aliases (deprecated):** History (deprecated as a noun for the audit data — the CLI verb is `clew history` but the underlying concept is "Audit trail") · Log (deprecated — too generic; "the log" in modern engineering usually means stdout/stderr)
+**Aliases (deprecated):** History (deprecated as a noun for the audit data — the underlying concept is "Audit trail") · Log (deprecated — too generic; "the log" in modern engineering usually means stdout/stderr)
 
 **Anti-patterns:**
-- An Audit trail is NOT a backup — it cannot reconstruct the full store from nothing (only the deltas); the Snapshot is what bootstraps a rebuild, the Audit trail is what tells you what happened between Snapshots.
-- An Audit trail is NOT compliance-grade by default — clew's v1 trail is sufficient for project accountability ("why does this Artefact look like this?") but not SOC2/GDPR; treat that as v3 scope.
-- An Audit trail does NOT record markdown edits — only structural writes to the artefact store; changes to Narrative prose are tracked by git on the markdown files themselves.
+- An Audit trail is NOT a clew-owned store — there is no `audit_events` table and no replayable event log inside the DB ([ADR-0013](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md) cut C4.3; the [capability map §Scope discipline](../business/03a-capability-map.md#scope-discipline-adr-0013) records the delegation); git on `snapshot/` is the mechanism.
+- An Audit trail is NOT compliance-grade by default — git history is sufficient for project accountability ("why does this Artefact look like this?") but not SOC2/GDPR; treat that as v3 scope.
+- An Audit trail granularity is commit-level, not write-level — structural writes between two Snapshot commits collapse into one diff; changes to Narrative prose are tracked by git on the markdown files themselves, outside this term.
 
 **Cross-context:** N/A — concept owned entirely by BC-01.
 
-**Code convention:** `AuditTrail` (conceptual; in v1 implemented as an `audit_events` table rather than a typed aggregate) · `audit_event` (each row); the CLI commands are `clew log` (full chronological trail) and `clew history <id>` (trail scoped to one Artefact)
+**Code convention:** `AuditTrail` does not surface as a class, table, or aggregate in clew (delegation to git per [ADR-0013](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md)); the trail is read with plain git tooling (`git log` / `git diff` over `snapshot/`)
 
 **First referenced:** [Capability Map C4.3 + Wave-1 synthesis F2](../business/03a-capability-map.md#c43--audit-trail) · 2026-05-25
 
@@ -359,14 +363,14 @@ review_interval: 180d
 
 **Status:** Active (borrowed from upstream kit)
 
-**Definition:** An external body of practice — BIZBOK, BABOK, Strategyzer, Sommerville, planned DDD / ATDD / BDD / SRE — encoded by the upstream `homemade-claude-kit` as a structured authoring discipline (templates, fields, validation rules) and consumed by clew's BC-01 as Conformist input ([context map](02b-context-map.md#bc-01--conformist--homemade-claude-kit-external-upstream)). Inside BC-01 the term appears only to disambiguate cross-Methodology references (Capability `C5.4`): clew validates that a reference from a Strategyzer artefact to a BIZBOK artefact uses the correct types.
+**Definition:** An external body of practice — BIZBOK, BABOK, Strategyzer, Sommerville, planned DDD / ATDD / BDD / SRE — encoded by the `homemade-claude-kit` as a structured authoring discipline (templates, fields, validation rules). Per [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md) the *semantic* Methodology definitions stay kit-side, consumed by agents at authoring time — never by clew at runtime ([context map §skills → semantics → agents](02b-context-map.md#homemade-claude-kit-skills--semantics--agents-orthogonal-to-clew)); the *structural* definitions (artefact types, ID formats, relationships) are clew-owned. Inside BC-01 the term appears only to disambiguate cross-Methodology references (Capability `C5.4`): clew validates that a reference from a Strategyzer artefact to a BIZBOK artefact uses the correct types.
 
 **Example:** "When a Strategyzer Value Proposition cites a BIZBOK persona, the cross-Methodology Relationship `REFERENCES` is validated for type compatibility at write time even though the underlying Methodologies are kit-defined."
 
 **Aliases (deprecated):** Framework (deprecated — "framework" is overloaded with software-framework meaning) · Discipline (deprecated within BC-01 — "discipline" is fine when discussing authoring practice in general but "Methodology" is the canonical noun for BIZBOK/BABOK/etc. specifically)
 
 **Anti-patterns:**
-- A Methodology is NOT a clew-owned concept — clew accepts the kit's Methodology definitions as Conformist input; do not encode Methodology specifics inside the clew CLI source ([context map "no translation" rationale](02b-context-map.md#bc-01--conformist--homemade-claude-kit-external-upstream)).
+- A Methodology is NOT a clew-owned concept — per [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md) the kit's skills retain the semantic Methodology definitions, consumed by agents rather than by clew; do not encode Methodology specifics inside the clew CLI source ([context map §skills → semantics → agents](02b-context-map.md#homemade-claude-kit-skills--semantics--agents-orthogonal-to-clew)).
 - A Methodology is NOT an Artefact type — Methodologies *group* Artefact types ("BIZBOK contains persona + capability + value_stream + …"); the grouping itself does not surface as a row in the `artefacts` table.
 
 **Cross-context:**
@@ -382,14 +386,14 @@ review_interval: 180d
 
 **Status:** Active (homonym warning)
 
-**Definition:** Within BC-01, "Skill" refers only to the upstream Conformist source that defines Artefact types, Layouts, and authoring templates ([context map](02b-context-map.md#bc-01--conformist--homemade-claude-kit-external-upstream)). It is not a domain concept that clew CLI reasons about directly — clew never registers an Artefact of type `skill`, never queries skills, never enforces a constraint on a skill. The term appears in BC-01 vocabulary only to mark a homonym warning so contributors crossing the kit ↔ clew boundary do not import the kit's rich Skill model into clew's prose.
+**Definition:** Within BC-01, "Skill" refers only to the kit-side package that carries the *semantic* authoring methodology and templates for artefact types. Per [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md) the *structural* definitions — Artefact types, ID formats, Layouts — are owned by clew and flow clew → kit as a Customer-Supplier / Published Language projection ([context map §the ADR-0008 flip](02b-context-map.md#bc-01--customer-supplier--homemade-claude-kit-structural-registry-the-adr-0008-flip)); only the kit's cross-cutting *doc conventions* still flow kit → clew as Conformist input ([context map §Conformist residual](02b-context-map.md#bc-01--conformist--homemade-claude-kit-conventions-residual)). A Skill is not a domain concept that clew CLI reasons about directly — clew never registers an Artefact of type `skill`, never queries skills, never enforces a constraint on a skill. The term appears in BC-01 vocabulary only to mark a homonym warning so contributors crossing the kit ↔ clew boundary do not import the kit's rich Skill model into clew's prose.
 
 **Example:** "When discussing how `clew new persona` works, do not say 'the Skill validates the input' — say 'clew's `crud.py` validates the input using the property schema, which was authored to match the kit's `business-persona` Skill's template'. The Skill lives in the kit; the validation lives in clew."
 
 **Aliases (deprecated):** _(none)_ — the term is only used in BC-01 to flag the boundary; no aliases necessary
 
 **Anti-patterns:**
-- A Skill is NOT a runtime dependency of the clew CLI — the kit is consumed at design time (to populate `ARTEFACT_TYPE_CONFIGS`); the CLI does not invoke kit Skills at runtime.
+- A Skill is NOT a runtime dependency of the clew CLI — the CLI does not invoke kit Skills at runtime, and per [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md) `ARTEFACT_TYPE_CONFIGS` is clew-owned (the kit's structural registry regenerates from clew, not the other way round).
 - A Skill is NOT a clew Artefact type — the kit's Skill concept is rich (`SKILL.md`, `references/`, modes, triggers); none of that surfaces inside BC-01.
 
 **Cross-context:**
@@ -426,4 +430,5 @@ None at present. *(The decision to elevate the kit to BC-02 is tracked in [`02b-
 
 | Date | Mode | Change summary | Author |
 |---|---|---|---|
+| 2026-07-24 | Cascade (decided ADRs) | Three already-decided changes cascaded in. **GT-04 Status**: enum aligned to the artefact-store DDL / kit frontmatter lifecycle (`draft`/`active`/`superseded`/`deprecated`, default `draft`; `retired` → `deprecated`), per the [artefact-store 2026-06-11 changelog row](07b-models/artefact-store.md#changelog). **GT-11 Audit trail**: redefined as delegated to git per [ADR-0013](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md) (C4.3 cut) — `audit_events` table and `clew log`/`clew history` removed from the definition; term kept because it is referenced elsewhere. **GT-14 Methodology + GT-15 Skill**: rewritten for the [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md) flip (structural definitions flow clew → kit as Customer-Supplier / Published Language; doc conventions remain kit → clew Conformist; semantics stay kit-side for agents); three dead `02b-context-map.md#bc-01--conformist--homemade-claude-kit-external-upstream` anchors repointed at the v2.0 context-map headings. | Victor Hueni |
 | 2026-05-25 | Scaffold + Seed + Enrich (one pass) | Initial 15 terms minted for BC-01 Artefact Store. Sources: 7 terms from [02b-bounded-contexts.md §BC-01 Ubiquitous language scope](02b-bounded-contexts.md#bc-01--artefact-store) (Artefact, Business ID, Relationship, File binding, Snapshot, Layout, Skill homonym warning); 4 derived from the [Artefact Store domain model](07b-models/artefact-store.md) entities + VOs (Artefact type, Status, Section anchor, plus IdCounter folded into Business ID's code convention); 4 from the [capability map](../business/03a-capability-map.md) BC-01 capabilities (Narrative, Audit trail, Drift, Traceability view); 1 borrowed from upstream kit (Methodology) for cross-reference validation context. All terms passed Evans 4-condition definition quality test. Cross-context matrix populated with 3 entries documenting kit ↔ BC-01 term divergence. | Victor Hueni |

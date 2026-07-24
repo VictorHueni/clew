@@ -36,7 +36,7 @@ flowchart TD
         P["persona · P-NN"]:::biz
         CV["canvas · BMC / Lean"]:::biz
         CAP["capability · C-N.M"]:::biz
-        VS["value-stream · VS-N.M"]:::biz
+        VS["value-stream · VS-N"]:::biz
         OBJ["objective · OBJ-NN · KR-NN.M"]:::biz
         PROC["process"]:::biz
         QM["quantitative-model"]:::biz
@@ -59,7 +59,7 @@ flowchart TD
     CAP -->|"GROUPS_INTO"| BC
     CAP -->|"inherited by"| FBS
     P -->|"ACTOR_OF"| UC
-    OBJ -->|"SERVES"| EPIC
+    EPIC -->|"SERVES"| OBJ
 ```
 
 > `MEASURES` is drawn as a self-loop on objective because Key Results (`KR-NN.M`) are sub-elements of
@@ -73,7 +73,7 @@ flowchart TD
 | `persona` | `P-NN` | `business-persona` | single-collection | `docs/business/01a-personas.md` | Who the product serves; the most-referenced business artefact. Props: `role`, `goals`, `pain_points`. |
 | `canvas` | — _(blocks `[A-Z]{2}-NN`)_ | `business-model-canvas` | one-per-artefact | `02a-bmc.md` / `02a-lean-canvas.md` | Commercial wrapper — nine blocks with confidence ratings. |
 | `capability` | `C-N.M` | `business-capability-map` | single-collection | `docs/business/03a-capability-map.md` | Business ability (tech-independent noun) — the metamodel **hub**. Prop: `strategic_importance`. |
-| `value_stream` | `VS-NN` _(+ `vs_stage VS-NN.M`)_ | `business-value-stream` | single-collection | `docs/business/04a-value-streams.md` | How value flows to a persona; stages consume capabilities. Props: `value_proposition`, `pain_index`. |
+| `value_stream` | `VS-N` _(+ `vs_stage VS-N.M`)_ | `business-value-stream` | single-collection | `docs/business/04a-value-streams.md` | How value flows to a persona; stages consume capabilities. Props: `value_proposition`, `pain_index`. |
 | `objective` | `OBJ-NN` _(+ `KR-NN.M`)_ | `business-objective` | single-collection | `docs/business/04b-objectives.md` | Strategic intent measured by outcome KRs. Props: `perspective`, `timeframe`, `owner`. |
 | `process` | — | `business-process` | one-per-artefact | `docs/business/05a-processes/proc-NN-{slug}.md` | Operational workflow operationalising a VS stage (BPMN-ready). |
 | `quantitative_model` | — | `business-quantitative-model` | one-per-artefact | `docs/business/06a-models/qm-NN-{topic}.md` | The numbers — TAM/SAM/SOM, unit economics; quantifies the canvas. |
@@ -100,6 +100,8 @@ Out-ports into Domain and Product Specs (in-ports are advisory flows from Discov
 | `INHERITS` | fbs_functionality → capability | N:1 | hard | Product Specs | The FBS inherits the capability map's L0/L1 |
 | `ACTOR_OF` | persona → use_case | 1:N | hard | Product Specs | A persona is a use case's primary actor |
 | `SERVES` | epic → objective | N:M | soft | Product Specs | Epics serve objectives (Objective×Epic matrix) |
+| `REALIZES` | fbs_functionality → vs_stage | N:M | hard | Product Specs | Functionality realises a VS stage |
+| `GROUNDS_QA` | persona → quality_attribute | N:M | soft | Product Specs | Persona grounds IC/PE quality attributes |
 
 ---
 

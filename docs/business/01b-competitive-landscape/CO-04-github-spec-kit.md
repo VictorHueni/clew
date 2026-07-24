@@ -1,5 +1,9 @@
 ---
+type: Competitor Profile
 title: Competitor — GitHub Spec Kit (CO-04)
+description: "Tier-1 Indirect competitor profile — GitHub Spec Kit: the category's distribution leader with the same audience and markdown-in-git posture, but per-feature."
+tags: [business, competitive-landscape, competitor]
+timestamp: 2026-07-21T10:13:21Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-07-21

@@ -1,5 +1,9 @@
 ---
+type: Architecture Decision Record
 title: Choose Python + Typer + SQLite + Pydantic as the clew implementation stack
+description: Chooses Python 3.12+, Typer, stdlib sqlite3, and Pydantic v2 as the clew implementation stack.
+tags: [architecture, adr, implementation-stack]
+timestamp: 2026-05-25T11:58:25Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-06-11

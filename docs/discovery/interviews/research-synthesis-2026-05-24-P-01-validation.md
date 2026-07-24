@@ -1,5 +1,9 @@
 ---
+type: Research Note
 title: Research synthesis · P-01 wave 1 · persona + UVP validation
+description: Research synthesis of the P-01 wave-1 validation interview, mapping findings to per-artefact updates.
+tags: [discovery, research, p-01]
+timestamp: 2026-05-24T19:09:19Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-24
@@ -16,7 +20,7 @@ wave: 1 of OBJ-03 KR-03.2 (target 3 to 5)
 
 | Field | Value |
 |---|---|
-| Interviews this wave | 1 of target 3 to 5 (per [OBJ-03 KR-03.2](../../04b-objectives.md#obj-03--validate-the-core-hypotheses-before-scaling)) |
+| Interviews this wave | 1 of target 3 to 5 (per [OBJ-03 KR-03.2](../../business/04b-objectives.md#obj-03--validate-the-core-hypotheses-before-scaling)) |
 | Interviewee | Victor Hueni, founder, self-identified P-01 instance |
 | Date | 2026-05-24 |
 | Channel | Text-based, in-session |
@@ -74,7 +78,7 @@ clew's value proposition resonates strongly with the founder-instance of P-01, b
 - **External evidence-backing on claims.** Verbatim: *"I like that for some documents, I can enrich them with proof found on the internet and add the url."* Not in §Goals today. New goal candidate.
 - **Selective compositional context.** Refined elaboration: *"the real advantage is I can pick and choose the level of context I would give my agent depending on the work I need to do"* (VISION/BMC for general task; glossary/domain for PRD; test strategy for QA). Not in §Goals or §System Needs today. New system need candidate.
 
-**Magic-wand finding:** *"a mechanism on place that can make 100% sure that all internal reference are up to date at all time. a easy audit and fix way to control this."* This is sharper than [OBJ-02 KR-02.1](../../04b-objectives.md#obj-02--the-architectural-substrate-is-trustworthy-enough-that-agents-depend-on-it)'s current ≥99% target. Two options for synthesis: tighten KR-02.1 to 100%, or keep ≥99% as engineering tolerance with explicit note that 100% is the user-stated trust criterion.
+**Magic-wand finding:** *"a mechanism on place that can make 100% sure that all internal reference are up to date at all time. a easy audit and fix way to control this."* This is sharper than [OBJ-02 KR-02.1](../../business/04b-objectives.md#obj-02--the-architectural-substrate-is-trustworthy-enough-that-agents-depend-on-it)'s current ≥99% target. Two options for synthesis: tighten KR-02.1 to 100%, or keep ≥99% as engineering tolerance with explicit note that 100% is the user-stated trust criterion.
 
 **Trust-threshold finding:** *"I think that I can built the traceability matrix consistently and deterministically."* This is the singular adoption pivot. Not a feature list. The README headline should lead with this capability rather than a feature laundry-list.
 
@@ -151,15 +155,15 @@ These emerged but cannot be answered by N = 1; they should inform wave-2 intervi
 
 | File | § | Before (current) | After (proposed) | Confidence shift |
 |---|---|---|---|---|
-| [01a-personas.md](../../01a-personas.md) | §Frustrations | PR-1 drift > PR-2 lookup latency > PR-3 methodology skip | F1 traceability/relation-graph > F2 determinism + audit > F3 refactor effort. PR-3 removed or demoted. | Assumed → Tested (N=1) + reordered |
-| [01a-personas.md](../../01a-personas.md) | §Goals | 5 items | Add: external evidence-backing on claims; selective compositional context. | Assumed → Tested (N=1); +2 items |
-| [01a-personas.md](../../01a-personas.md) | §System Needs | Existing list | Add: token-economics awareness (local-first as unit-economics decision). | Assumed → Tested (N=1); +1 item |
-| [01a-personas.md](../../01a-personas.md) | §Research Grounding | Proto, next review 2026-08-22 | Wave 1 complete on 2026-05-24 with this synthesis; partial promotion (researched, N=1 internal, founder-as-instance); external wave pending. | Promotion partial |
-| [02a-lean-canvas.md](../../02a-lean-canvas.md) | §1 Problem | PR-1 / PR-2 / PR-3 + 5-item alternatives | Rewrite PR items per F1 / F2 / F3 ranking. Trim alternatives list to {markdown+grep; trust-the-agent; prose-discipline triad incl. rules.md}. | Assumed → Tested (N=1) |
-| [02a-lean-canvas.md](../../02a-lean-canvas.md) | §3 UVP | 6 bullets | Adopt interviewee's 3 sentences as basis. Widen scope language throughout. Preserve 3 concrete wins. Soften anti-promise on knowledge-graph + linting. | Assumed → Tested (N=1) |
-| [02a-lean-canvas.md](../../02a-lean-canvas.md) | §5 Channels OR §9 Unfair Advantage | Existing | Add: token-economics differentiator (local file reads vs. MCP-API roundtrips). | New positioning insight |
-| [04b-objectives.md](../../04b-objectives.md) | OBJ-02 KR-02.1 | ≥99% references resolve cleanly | Decision needed: tighten to 100% per magic-wand, or keep ≥99% with explicit note that 100% is the user-stated trust criterion. | Refinement candidate |
-| [04b-objectives.md](../../04b-objectives.md) | OBJ-03 KR-03.2 | 0 of 3 to 5 interviews | 1 of 3 to 5 interviews complete (this synthesis is the deliverable) | Progress recorded |
+| [01a-personas.md](../../business/01a-personas.md) | §Frustrations | PR-1 drift > PR-2 lookup latency > PR-3 methodology skip | F1 traceability/relation-graph > F2 determinism + audit > F3 refactor effort. PR-3 removed or demoted. | Assumed → Tested (N=1) + reordered |
+| [01a-personas.md](../../business/01a-personas.md) | §Goals | 5 items | Add: external evidence-backing on claims; selective compositional context. | Assumed → Tested (N=1); +2 items |
+| [01a-personas.md](../../business/01a-personas.md) | §System Needs | Existing list | Add: token-economics awareness (local-first as unit-economics decision). | Assumed → Tested (N=1); +1 item |
+| [01a-personas.md](../../business/01a-personas.md) | §Research Grounding | Proto, next review 2026-08-22 | Wave 1 complete on 2026-05-24 with this synthesis; partial promotion (researched, N=1 internal, founder-as-instance); external wave pending. | Promotion partial |
+| [02a-lean-canvas.md](../../business/02a-lean-canvas.md) | §1 Problem | PR-1 / PR-2 / PR-3 + 5-item alternatives | Rewrite PR items per F1 / F2 / F3 ranking. Trim alternatives list to {markdown+grep; trust-the-agent; prose-discipline triad incl. rules.md}. | Assumed → Tested (N=1) |
+| [02a-lean-canvas.md](../../business/02a-lean-canvas.md) | §3 UVP | 6 bullets | Adopt interviewee's 3 sentences as basis. Widen scope language throughout. Preserve 3 concrete wins. Soften anti-promise on knowledge-graph + linting. | Assumed → Tested (N=1) |
+| [02a-lean-canvas.md](../../business/02a-lean-canvas.md) | §5 Channels OR §9 Unfair Advantage | Existing | Add: token-economics differentiator (local file reads vs. MCP-API roundtrips). | New positioning insight |
+| [04b-objectives.md](../../business/04b-objectives.md) | OBJ-02 KR-02.1 | ≥99% references resolve cleanly | Decision needed: tighten to 100% per magic-wand, or keep ≥99% with explicit note that 100% is the user-stated trust criterion. | Refinement candidate |
+| [04b-objectives.md](../../business/04b-objectives.md) | OBJ-03 KR-03.2 | 0 of 3 to 5 interviews | 1 of 3 to 5 interviews complete (this synthesis is the deliverable) | Progress recorded |
 
 ## Confidence summary
 
@@ -173,10 +177,10 @@ These emerged but cannot be answered by N = 1; they should inform wave-2 intervi
 
 **Cascading edits to apply across the repository** (proposed, await go-ahead before mass-editing):
 
-- [ ] **[01a-personas.md](../../01a-personas.md)**: rewrite §Frustrations per F1 / F2 / F3; add §Goals items for external-evidence-backing and selective-compositional-context; add §System Need for token-economics; update §Research Grounding to wave-1-complete with partial promotion.
-- [ ] **[02a-lean-canvas.md](../../02a-lean-canvas.md)**: rewrite §1 Problem PR items per F1 / F2 / F3; trim §1 existing alternatives list; rewrite §3 UVP per interviewee's three README sentences plus scope-widening across north-star, metaphor, anti-promise; add token-economics differentiator to §5 Channels or §9 Unfair Advantage.
-- [ ] **[04b-objectives.md](../../04b-objectives.md)**: update OBJ-03 KR-03.2 progress (1 of 3 to 5); decide on OBJ-02 KR-02.1 refinement (100% vs. ≥99%).
-- [ ] **[VISION.md](../../../VISION.md)**: no immediate update required; the lifecycle-scope finding may eventually inform a north-star metric refinement, but not blocking.
+- [ ] **[01a-personas.md](../../business/01a-personas.md)**: rewrite §Frustrations per F1 / F2 / F3; add §Goals items for external-evidence-backing and selective-compositional-context; add §System Need for token-economics; update §Research Grounding to wave-1-complete with partial promotion.
+- [ ] **[02a-lean-canvas.md](../../business/02a-lean-canvas.md)**: rewrite §1 Problem PR items per F1 / F2 / F3; trim §1 existing alternatives list; rewrite §3 UVP per interviewee's three README sentences plus scope-widening across north-star, metaphor, anti-promise; add token-economics differentiator to §5 Channels or §9 Unfair Advantage.
+- [ ] **[04b-objectives.md](../../business/04b-objectives.md)**: update OBJ-03 KR-03.2 progress (1 of 3 to 5); decide on OBJ-02 KR-02.1 refinement (100% vs. ≥99%).
+- [ ] **[VISION.md](../../VISION.md)**: no immediate update required; the lifecycle-scope finding may eventually inform a north-star metric refinement, but not blocking.
 
 **Open follow-ups (separate work, not part of this synthesis):**
 
@@ -188,4 +192,4 @@ These emerged but cannot be answered by N = 1; they should inform wave-2 intervi
 
 ## Methodology references
 
-This synthesis follows the post-interview template from the [`business-research` skill](https://github.com/VictorHueni/homemade-claude-kit/tree/claude/metamodel-personal-skills-naecw/business-research). Frameworks: BABOK §10.25 (interviews), Portigal *Interviewing Users* (2nd ed., 2022) for probing discipline, Tomer Sharon assumption-testing for hypothesis grounding, NN/g for sample-size and saturation.
+This synthesis follows the post-interview template from the [`business-research` skill](https://github.com/VictorHueni/homemade-claude-kit/tree/main/business-research). Frameworks: BABOK §10.25 (interviews), Portigal *Interviewing Users* (2nd ed., 2022) for probing discipline, Tomer Sharon assumption-testing for hypothesis grounding, NN/g for sample-size and saturation.

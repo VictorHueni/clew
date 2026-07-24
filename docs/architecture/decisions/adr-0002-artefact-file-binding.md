@@ -1,5 +1,9 @@
 ---
+type: Architecture Decision Record
 title: Bind metamodel artefacts to narrative files via a typed layout convention
+description: Binds metamodel artefacts to narrative files via a typed layout convention with a schema field, CLI query, and write-time validation.
+tags: [architecture, adr, file-binding]
+timestamp: 2026-05-24T14:58:13Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-06-11

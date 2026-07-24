@@ -1,5 +1,9 @@
 ---
+type: Competitor Profile
 title: Competitor — OpenLore (CO-08)
+description: "Tier-1 Indirect/complement competitor profile — OpenLore: deterministic, local-first code-architecture memory and guardrails for AI agents."
+tags: [business, competitive-landscape, competitor]
+timestamp: 2026-07-21T17:06:15Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-07-21

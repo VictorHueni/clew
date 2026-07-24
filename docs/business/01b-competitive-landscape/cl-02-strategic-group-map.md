@@ -1,5 +1,9 @@
 ---
+type: Competitor Profile
 title: Strategic Group Map — clew competitive landscape
+description: Strategic group map clustering competitors of persistent product-knowledge substrates for agent-first builders on two dimensions, with a second validation map.
+tags: [business, competitive-landscape, strategic-groups]
+timestamp: 2026-07-21T10:13:21Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-07-21

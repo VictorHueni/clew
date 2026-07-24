@@ -1,3 +1,15 @@
+---
+type: Product Vision
+title: clew — Product Vision
+description: "The product intelligence and architectural memory layer for AI-native product engineers: every strategic and architectural artefact persisted in an opinionated, referentially-enforced metamodel."
+tags: [vision, strategy, product-intent]
+timestamp: 2026-05-24T08:31:53Z
+status: active
+owner: Victor Hueni
+last_reviewed: 2026-07-22
+review_interval: 180d
+---
+
 # VISION
 
 > *A clew is the corner of a sail you pull to steer, and the thread that guides you through the labyrinth.*

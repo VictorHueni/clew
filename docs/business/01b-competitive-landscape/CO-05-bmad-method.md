@@ -1,5 +1,9 @@
 ---
+type: Competitor Profile
 title: Competitor — BMAD-METHOD (CO-05)
+description: "Tier-1 Indirect competitor profile — BMAD-METHOD: the only tool touching clew's upstream layers, simulating an agile team of specialised AI agents."
+tags: [business, competitive-landscape, competitor]
+timestamp: 2026-07-21T10:13:21Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-07-21

@@ -28,10 +28,10 @@ flowchart TD
     classDef ext    fill:#ffffff,stroke:#cbd5e1,color:#94a3b8,stroke-dasharray:3 3
 
     C3["capability · C-N.M"]:::ext
-    VS["value-stream · VS-N.M"]:::ext
+    VS["value-stream · VS-N"]:::ext
     P["persona · P-NN"]:::ext
     FBS["FBS · C-N.M.FXX"]:::ext
-    CTR["interface-contract · CTR-NN"]:::ext
+    CTR["interface-contract · BC-NN.CTR-NN"]:::ext
     PRD["PRD-NNNN"]:::ext
 
     subgraph DOM["Domain"]

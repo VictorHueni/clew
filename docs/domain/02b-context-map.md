@@ -18,7 +18,7 @@ This document maps the integration patterns for clew's bounded contexts (catalog
 > *structure & relationships*** (the kit's structural registry is generated from clew); the kit's
 > **skills remain the source for *semantics*** (authoring methodology), consumed by agents not by clew;
 > and clew stays a **Conformist** consumer of the kit's **cross-cutting doc conventions** only. This
-> resolves OI-0032.
+> resolves OI-0058.
 
 > **Methodology:** [Evans DDD (2003) Chapter 14 — eight integration patterns + Vernon DDD Distilled (2016) Chapter 4](https://github.com/VictorHueni/homemade-claude-kit/tree/main/domain-bounded-context/references/methodology-references.md).
 
@@ -135,7 +135,7 @@ If clew ever introduces a second writer (a web UI, an MCP server with mutating t
 
 ## Open Items
 
-None at present. *(OI-0032 — the partitioned-boundary rewrite — is resolved by this version. The elevation of the kit to BC-02 remains tracked as [`02b-bounded-contexts.md` OI-0018](02b-bounded-contexts.md#open-items), now reframed by ADR-0008.)*
+None at present. *(OI-0058 — the partitioned-boundary rewrite — is resolved by this version. The elevation of the kit to BC-02 remains tracked as [`02b-bounded-contexts.md` OI-0018](02b-bounded-contexts.md#open-items), now reframed by ADR-0008.)*
 
 ---
 
@@ -145,3 +145,4 @@ None at present. *(OI-0032 — the partitioned-boundary rewrite — is resolved 
 |---|---|---|
 | 2026-05-25 | Initial scaffold + fill in one pass. Single-BC v1 scope (BC-01 Artefact Store) with one external upstream Conformist relationship (`homemade-claude-kit` skill catalogue). | Victor Hueni |
 | 2026-06-27 | **v2.0 — partitioned boundary per [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md).** Replaced the single "clew ← Conformist ← kit" edge with three: clew → **Customer-Supplier / Published Language** → kit structural registry (the SoT flip); clew ← **Conformist** ← kit *doc conventions* (residual, scoped); kit skills → *semantics* → agents (orthogonal, not a clew dependency). Overview diagram + pattern list + relationship sections rewritten. Resolves OI-0032; reframes OI-0018. | Victor Hueni |
+| 2026-07-24 | Open-items reference renumber (governance sync, no content change): ADR-0008's OI-0032 was renumbered to OI-0058 in the repo-wide collision cleanup (see the central ledger `project-control/open-items/open-items.md`); the banner and §Open Items references here updated to OI-0058 (the 2026-06-27 changelog row above narrates the pre-renumber ID). | Victor Hueni |

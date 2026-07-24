@@ -1,5 +1,9 @@
 ---
+type: Competitor Profile
 title: Competitor — Sphinx-Needs (CO-02)
+description: "Tier-1 Indirect competitor profile — Sphinx-Needs: the most mature open typed-artefact graph in docs-as-code."
+tags: [business, competitive-landscape, competitor]
+timestamp: 2026-07-21T10:13:21Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-07-21

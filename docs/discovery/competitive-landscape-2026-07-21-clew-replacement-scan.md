@@ -1,5 +1,9 @@
 ---
+type: Research Note
 title: Competitive Landscape — Full-Replacement Scan for clew
+description: Desk-research sweep across six tool categories asking whether any existing tool or realistic combination fully replaces clew as a local-first, agent-native product-intelligence and architectural-memory layer.
+tags: [discovery, competitive-landscape, research]
+timestamp: 2026-07-21T08:34:30Z
 status: active
 owner: Victor Hueni
 last_reviewed: 2026-07-21
@@ -339,7 +343,7 @@ seam (business→implementation metamodel + minted IDs + write-time enforcement 
 artefacts + agent economics). Verdict unchanged: still no full replacement. But two
 consequences: (a) generic "Git-native traceability for AI agents" is no longer available as
 positioning — clew must claim the product-architecture integrity layer explicitly; (b) the
-90-day watch cadence assumed by OI-0003 is too slow for this quadrant.
+90-day watch cadence assumed by OI-0064 is too slow for this quadrant.
 
 **4 · Where clew's differentiation is thinnest.** (a) *Versus a determined Sphinx-Needs
 user*: everything except the packaged metamodel + skills is reproducible — the moat is
@@ -378,10 +382,10 @@ Key sources: [StrictDoc FAQ (tool comparisons)](https://strictdoc.readthedocs.io
 
 | OI-ID | Type | Summary | Source anchor | Source heading | Resolution path | Priority | Status | Owner | Due / Review date | Tracker ref |
 | :---- | :--- | :------ | :------------ | :------------- | :-------------- | :------- | :----- | :---- | :---------------- | :---------- |
-| OI-0001 | execution-item | Findings are single-pass desk research; the four "nearest competitor" claims (Sphinx-Needs, basic-memory, Spec Kit/BMAD, StrictDoc) deserve hands-on trials before informing positioning or roadmap bets. | #synthesis | Synthesis | Run a 1-day hands-on spike per nearest competitor; capture per-requirement evidence; upgrade this scan's verdicts from Assumed to Tested. | medium | open | Victor Hueni | 2026-09-30 | _TBD_ |
-| OI-0002 | doc-gap | Lean Canvas §1 "existing alternatives" and §9 Unfair Advantage do not yet reference this scan; the competitive set named there (grep, prose-discipline triad, Atlassian+MCP) predates it. | #synthesis | Synthesis | ~~Backfill Lean Canvas soft-links~~ Done 2026-07-21: §1 competitive-landscape bullet + §9 honest-gap flanks named (Sphinx-Needs, basic-memory, Spec Kit/BMAD, Sparx EA) + §9 positioning soft-links, in the canvas changelog. | low | done | Victor Hueni | 2026-07-21 | _TBD_ |
-| OI-0003 | execution-item | Watch-list monitoring: spec-driven tools (Spec Kit, BMAD) adding stable IDs/link-checking, basic-memory adding schema enforcement, or Sparx EA's MCP server gaining adoption among agent-first teams would materially change the threat model. | #synthesis | Synthesis | Re-run this scan at review interval (90d); diff verdict tables. | medium | open | Victor Hueni | 2026-10-21 | _TBD_ |
-| OI-0004 | execution-item | Watch cadence falsified: the 2026-07 wave (SARA, Reqord, RTMX, OpenLore) was found days after the initial scan, showing the git-native-traceability quadrant moves faster than a 90-day cycle. | #synthesis | Synthesis | Set up passive monitoring (GitHub topic/HN alerts for "requirements traceability agents", "architectural memory MCP"); do a lightweight monthly sweep of the quadrant between full 90-day refreshes. | medium | open | Victor Hueni | 2026-08-21 | _TBD_ |
+| OI-0062 | execution-item | Findings are single-pass desk research; the four "nearest competitor" claims (Sphinx-Needs, basic-memory, Spec Kit/BMAD, StrictDoc) deserve hands-on trials before informing positioning or roadmap bets. | #synthesis | Synthesis | Run a 1-day hands-on spike per nearest competitor; capture per-requirement evidence; upgrade this scan's verdicts from Assumed to Tested. | medium | open | Victor Hueni | 2026-09-30 | _TBD_ |
+| OI-0063 | doc-gap | Lean Canvas §1 "existing alternatives" and §9 Unfair Advantage do not yet reference this scan; the competitive set named there (grep, prose-discipline triad, Atlassian+MCP) predates it. | #synthesis | Synthesis | ~~Backfill Lean Canvas soft-links~~ Done 2026-07-21: §1 competitive-landscape bullet + §9 honest-gap flanks named (Sphinx-Needs, basic-memory, Spec Kit/BMAD, Sparx EA) + §9 positioning soft-links, in the canvas changelog. | low | closed | Victor Hueni | 2026-07-21 | [Lean Canvas changelog 2026-07-21](../business/02a-lean-canvas.md#changelog) |
+| OI-0064 | execution-item | Watch-list monitoring: spec-driven tools (Spec Kit, BMAD) adding stable IDs/link-checking, basic-memory adding schema enforcement, or Sparx EA's MCP server gaining adoption among agent-first teams would materially change the threat model. | #synthesis | Synthesis | Re-run this scan at review interval (90d); diff verdict tables. | medium | open | Victor Hueni | 2026-10-21 | _TBD_ |
+| OI-0065 | execution-item | Watch cadence falsified: the 2026-07 wave (SARA, Reqord, RTMX, OpenLore) was found days after the initial scan, showing the git-native-traceability quadrant moves faster than a 90-day cycle. | #synthesis | Synthesis | Set up passive monitoring (GitHub topic/HN alerts for "requirements traceability agents", "architectural memory MCP"); do a lightweight monthly sweep of the quadrant between full 90-day refreshes. | medium | open | Victor Hueni | 2026-08-21 | _TBD_ |
 
 ## Changelog
 
@@ -390,3 +394,4 @@ Key sources: [StrictDoc FAQ (tool comparisons)](https://strictdoc.readthedocs.io
 - 2026-07-21 · Reader-suggested candidates · §1 gains reqT (Lund; typed metamodel in markdown-subset text — closest philosophical ancestor, academic posture, no persistence/agent layer) and OpenReq (ended H2020 research on RE recommendation; different category, lineage only). §2 gains Böckeler's spec-first/spec-anchored/spec-as-source taxonomy (martinfowler.com) with the "architecture-anchored" positioning read-out. ReqView and the Augment SDD roundup were already covered.
 - 2026-07-21 · Graduated to strategy layer · Findings persisted as the business competitive landscape: hub + 6 Tier-1 profiles + strategic group map + value curve at [`docs/business/01b-competitive-landscape/`](../business/01b-competitive-landscape/cl-01-five-forces.md). This scan remains the evidence base; strategic read-outs live there.
 - 2026-07-21 · 2026-07 wave (founder-sourced) · §1 gains SARA (closest new entrant: markdown+YAML typed graph, validation, matrices, git-ref diff), Reqord (agent-era RM lifecycle + Claude Code plugin), RTMX (test-derived closed-loop traceability over MCP), shtracer. §3 gains OpenLore/Cairn (deterministic code-architecture guardrails — the guard/gate mechanism one layer down). Synthesis: new §3b (quadrant filled from four angles; verdict unchanged; "git-native traceability for agents" no longer available as positioning); nearest-competitor table +2 rows. New OI-0004: watch cadence falsified, add monthly quadrant sweep.
+- 2026-07-24 · Open-items renumber (governance sync, no content change) · This scan's rows OI-0001–OI-0004 collided with ledger-owned OI-0001–OI-0004 (canonical since the 2026-05-26 sync); renumbered to OI-0062–OI-0065 per the central ledger (`project-control/open-items/open-items.md`) mapping. OI-0063 lifecycle status normalised `done` → `closed` with the Lean Canvas changelog as tracker ref (work was already complete 2026-07-21). Cross-reference in `CO-07-sara.md` updated in the same pass.

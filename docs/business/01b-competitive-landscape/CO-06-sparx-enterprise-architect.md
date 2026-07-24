@@ -1,5 +1,9 @@
 ---
+type: Competitor Profile
 title: Competitor — Sparx Enterprise Architect (CO-06)
+description: "Tier-1 Indirect competitor profile — Sparx Enterprise Architect: the incumbent closest to clew's breadth claim."
+tags: [business, competitive-landscape, competitor]
+timestamp: 2026-07-21T10:13:21Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-07-21

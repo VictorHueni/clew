@@ -1,5 +1,9 @@
 ---
+type: Functionality
 title: clew — Functional Breakdown Structure
+description: The functionality registry for clew — a canonical, status-tracked enumeration of what the product does, organised by the capabilities of the Business Capability Map.
+tags: [product-specs, fbs]
+timestamp: 2026-05-25T10:06:27Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-25
@@ -9,6 +13,8 @@ review_interval: 90d
 <!-- doc-version: 1.0 | created: 2026-05-25 -->
 
 # clew — Functional Breakdown Structure
+
+`slug: clew`
 
 This document is the functionality registry for clew: a canonical, status-tracked enumeration of what the product does, organised by the capabilities defined in the [Business Capability Map](../business/03a-capability-map.md). Each capability groups the functionalities that realise it; each functionality has a stable ID, a status (✅ Shipped / 🔄 Planned / ⬜ Backlog), and a soft-link to the value-stream stage it primarily supports.
 
@@ -38,6 +44,8 @@ This document is the functionality registry for clew: a canonical, status-tracke
 | 🔄 | **Planned** — committed in an active PRD or execution plan |
 | ⬜ | **Backlog** — identified, not yet committed |
 | ★ | **Differentiator** — anchors its own epic; drives Reliability QA targets |
+
+A `⬜ *(cut)*` annotation marks a row descoped by an ADR: retained for ID history (IDs are never recycled) but not a build target, and excluded from the ⬜ backlog count.
 
 ---
 
@@ -73,7 +81,7 @@ clew
 │
 ├── C3 · Querying and Traceability
 │   ├── C3.1 · Ad-hoc cross-artefact query surface     (functionalities: 0 ✅ · 0 🔄 · 3 ⬜)
-│   └── C3.2 · Pre-built traceability views            (functionalities: 0 ✅ · 0 🔄 · 4 ⬜)
+│   └── C3.2 · Pre-built traceability views            (functionalities: 0 ✅ · 0 🔄 · 3 ⬜ · 1 cut)
 │
 ├── C4 · Integrity and Audit
 │   ├── C4.1 · Write-time reference validation         (functionalities: 0 ✅ · 0 🔄 · 3 ⬜)
@@ -89,7 +97,7 @@ clew
     └── C5.5 · Methodology canon coverage assessment   (functionalities: 0 ✅ · 0 🔄 · 2 ⬜)
 ```
 
-**Total:** 57 functionalities · 5 ✅ shipped · 0 🔄 planned · 52 ⬜ backlog. The 5 shipped functionalities are realised by [`homemade-claude-kit`](https://github.com/VictorHueni/homemade-claude-kit) — no clew CLI code required for them. The remaining ⬜ are the clew CLI build surface.
+**Total:** 58 rows catalogued (57 active + 1 cut) · 5 ✅ shipped · 0 🔄 planned · 52 ⬜ backlog · 1 ⬜ *(cut)* (C3.2.F04, retained for ID history, not a build target). The 5 shipped functionalities are realised by [`homemade-claude-kit`](https://github.com/VictorHueni/homemade-claude-kit) — no clew CLI code required for them. The remaining ⬜ are the clew CLI build surface.
 
 ## Scope discipline (ADR-0013)
 
@@ -98,8 +106,8 @@ clew
 - **Cut — C3.2.F04 (`clew estimate epic`).** Delivery accounting; contradicts VISION ("not a PM tool"). Removed from the build surface, along with the `complexity` property and `clew set complexity`.
 - **Delegated to git — C4.3 Audit trail (F01–F04).** Git on `snapshot/` provides durable who/when/before-after; the DB is gitignored, so a DB-resident audit is non-durable across rebuild. Descoped as clew CLI features.
 - **Deferred — C4.4 Schema migration (F01–F03).** Hand-rolled `PRAGMA user_version` for v1; no framework ([ADR-0012](../architecture/decisions/adr-0012-schema-migration-framework.md)/0013).
-- **Grown — C1.2 Selective context loading (now Differentiator).** The read-side wedge: `clew context <task>` (F01/F02) is first-class, and **C1.2.F04 `clew guard` (planned)** is added — the change-guardrail, shipped only after the graph is dense + drift-free.
-- **Kit scope — C5.** Realised by homemade-claude-kit (BC-02), outside the clew CLI build surface.
+- **Grown — C1.2 Selective context loading (now Differentiator).** The read-side wedge: `clew context <task>` (F01/F02) is first-class, and **C1.2.F04 `clew guard` (⬜ backlog)** is added — the change-guardrail, sequenced after the graph is dense and drift-free (ADR-0013).
+- **Kit scope — C5.** Realised by homemade-claude-kit (external; BC-02 not minted, its creation deferred — see [02b-bounded-contexts.md OI-0018](../domain/02b-bounded-contexts.md#open-items)), outside the clew CLI build surface.
 
 *Net functionality count is unchanged at 57 (one added: C1.2.F04 `clew guard`; one cut: C3.2.F04 `clew estimate`).*
 
@@ -109,6 +117,8 @@ clew
 
 ## C1 · Authoring
 
+`slug: authoring`
+
 Capabilities that mediate the act of creating metamodel artefacts. The operator (or the agent on their behalf) does authoring; clew makes the authoring structured.
 
 > **Implementation note — C1.1:** [`homemade-claude-kit`](https://github.com/VictorHueni/homemade-claude-kit) is the full implementation of C1.1. The skill invocation pattern (`rules/metamodel.md` trigger words), per-skill `SKILL.md` authoring instructions, embedded `references/template.md` scaffolds, and `rules/artefact-frontmatter.md` schema rules collectively realise every C1.1 functionality. No clew CLI component is needed here. C1.2 (selective context loading) still requires clew-side implementation.
@@ -116,6 +126,8 @@ Capabilities that mediate the act of creating metamodel artefacts. The operator 
 ---
 
 ### C1.1 · Methodology-mediated artefact creation
+
+`slug: artefact-creation`
 
 Distils external methodology into an authoring discipline the agent invokes at write time.
 
@@ -133,6 +145,8 @@ Distils external methodology into an authoring discipline the agent invokes at w
 
 ### C1.2 · Selective context loading
 
+`slug: context-loading`
+
 Loads exactly the metamodel slice relevant to the current task into the agent session — clew's **read-side differentiator** (elevated to Differentiator 2026-07-07, [ADR-0013](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md)). This is where "the metamodel becomes the agent's memory" pays off, and where the competition (requirements/spec tools) is weakest. Surfaced as `clew context <task>` and, once the graph is trustworthy, `clew guard`.
 
 **BC Map:** [C1.2 in `03a-capability-map.md`](../business/03a-capability-map.md#c12--selective-context-loading)
@@ -144,17 +158,21 @@ Loads exactly the metamodel slice relevant to the current task into the agent se
 | C1.2.F01 | ★ Task-scoped slice assembly — load exactly the artefact subset relevant to a task type (e.g. VISION+BMC for orientation, glossary+domain model for PRD authoring, QA attributes for test design) | ⬜ | [VS-1.2](../business/04a-value-streams.md#vs-12--load-methodology-context) |
 | C1.2.F02 | Slice composition preview — expose the artefact list and size estimate for a proposed context slice before loading | ⬜ | [VS-1.2](../business/04a-value-streams.md#vs-12--load-methodology-context) |
 | C1.2.F03 | Multi-project context isolation — prevent artefacts from one project leaking into another project's loaded context | ⬜ | [VS-1.2](../business/04a-value-streams.md#vs-12--load-methodology-context) |
-| C1.2.F04 | ★ Change-guardrail (`clew guard "<change>"`) — given a proposed change, return what it may touch, what it must preserve, and which artefacts must be updated first. **Planned; ships only once the graph is dense + drift-free** — guarding a sparse or stale graph produces confidently-wrong guardrails, worse than none (ADR-0013). | ⬜ | [VS-3.2](../business/04a-value-streams.md#vs-32--preview-downstream-impact) |
+| C1.2.F04 | ★ Change-guardrail (`clew guard "<change>"`) — given a proposed change, return what it may touch, what it must preserve, and which artefacts must be updated first. **Backlog; ships only once the graph is dense and drift-free** — guarding a sparse or stale graph produces confidently-wrong guardrails, worse than none (ADR-0013). | ⬜ | [VS-3.2](../business/04a-value-streams.md#vs-32--preview-downstream-impact) |
 
 ---
 
 ## C2 · Persistence
+
+`slug: persistence`
 
 Capabilities that store and retrieve structured artefacts deterministically. The artefact store is canonical; the documentation layer is narrative; the snapshot is the deterministic, git-tracked structural export. Per [ADR-0001](../architecture/decisions/adr-0001-metamodel-persistence-layer.md).
 
 ---
 
 ### C2.1 · Stable identifier generation
+
+`slug: id-generation`
 
 Provides deterministic, collision-free identifier assignment for every artefact, generated by the system rather than the agent.
 
@@ -173,6 +191,8 @@ Provides deterministic, collision-free identifier assignment for every artefact,
 
 ### C2.2 · Schema enforcement
 
+`slug: schema-enforcement`
+
 Provides write-time validation that each new or updated artefact conforms to the typed metamodel.
 
 **BC Map:** [C2.2 in `03a-capability-map.md`](../business/03a-capability-map.md#c22--schema-enforcement)
@@ -189,6 +209,8 @@ Provides write-time validation that each new or updated artefact conforms to the
 ---
 
 ### C2.3 · File binding management
+
+`slug: file-binding`
 
 Maintains the mapping between each persisted artefact and its location in the documentation layer. Per [ADR-0002](../architecture/decisions/adr-0002-artefact-file-binding.md).
 
@@ -207,6 +229,8 @@ Maintains the mapping between each persisted artefact and its location in the do
 
 ### C2.4 · Deterministic structural export
 
+`slug: structural-export`
+
 Produces a deterministic, git-trackable serialisation of the artefact store state such that the same state always produces bit-identical output.
 
 **BC Map:** [C2.4 in `03a-capability-map.md`](../business/03a-capability-map.md#c24--deterministic-structural-export)
@@ -224,11 +248,15 @@ Produces a deterministic, git-trackable serialisation of the artefact store stat
 
 ## C3 · Querying and Traceability
 
+`slug: traceability`
+
 Capabilities for navigating the relationships between artefacts. Pre-built views deliver canonical traceability deterministically; the ad-hoc surface supports everything else.
 
 ---
 
 ### C3.1 · Ad-hoc cross-artefact query surface
+
+`slug: query-surface`
 
 Enables arbitrary cross-artefact questions answerable in seconds from inside an agent session.
 
@@ -245,6 +273,8 @@ Enables arbitrary cross-artefact questions answerable in seconds from inside an 
 ---
 
 ### C3.2 · Pre-built traceability views
+
+`slug: traceability-views`
 
 Provides canonical, named views over the artefact graph that anyone can run deterministically without composing queries.
 
@@ -263,11 +293,15 @@ Provides canonical, named views over the artefact graph that anyone can run dete
 
 ## C4 · Integrity and Audit
 
+`slug: integrity`
+
 Capabilities for detecting and preventing drift between intended and actual state. Write-time enforcement is the headline; drift detection and audit replay are the safety nets.
 
 ---
 
 ### C4.1 · Write-time reference validation
+
+`slug: reference-validation`
 
 Rejects writes that would introduce broken references at the moment they are attempted.
 
@@ -285,6 +319,8 @@ Rejects writes that would introduce broken references at the moment they are att
 
 ### C4.2 · Drift detection
 
+`slug: drift-detection`
+
 Detects discrepancies between the artefact store and the documentation layer.
 
 **BC Map:** [C4.2 in `03a-capability-map.md`](../business/03a-capability-map.md#c42--drift-detection)
@@ -300,6 +336,8 @@ Detects discrepancies between the artefact store and the documentation layer.
 ---
 
 ### C4.3 · Audit trail
+
+`slug: audit-trail`
 
 Records every write to the artefact store with timestamp, actor, and before/after state, replayable in chronological order.
 
@@ -320,6 +358,8 @@ Records every write to the artefact store with timestamp, actor, and before/afte
 
 ### C4.4 · Schema migration
 
+`slug: schema-migration`
+
 Manages forward-compatible evolution of the metamodel schema across clew versions.
 
 > **Deferred for v1 (ADR-0013).** The 4-table no-DDL schema ([ADR-0003](../architecture/decisions/adr-0003-schema-design-typed-property-graph.md)) makes core-schema change rare; v1 uses a hand-rolled `PRAGMA user_version` + numbered-step path, not a framework. The Alembic + SQLAlchemy adoption ([ADR-0012](../architecture/decisions/adr-0012-schema-migration-framework.md)) is deferred until the spine actually churns or the v3 Postgres port. F01–F03 below describe the eventual mechanism, not a v1 build target.
@@ -338,6 +378,8 @@ Manages forward-compatible evolution of the metamodel schema across clew version
 
 ## C5 · Methodology Distillation
 
+`slug: methodology`
+
 Capabilities that encode external bodies of practice (BIZBOK, BABOK, Strategyzer, Sommerville; planned DDD, ATDD/BDD, SRE) as authoring discipline, sustained as a compounding catalogue.
 
 > **Implementation note:** [`homemade-claude-kit`](https://github.com/VictorHueni/homemade-claude-kit) is the implementation substrate for the *authoring* side of C5. The kit skills, embedded templates, and schema-aware rules encode each methodology as an authoring discipline agents can invoke without any clew CLI. C5.2 functionalities below represent the *persistence* side — encoding methodologies as typed DB tables — which still requires clew CLI work. C5.1.F01 and C5.3.F01 are already shipped via the kit.
@@ -345,6 +387,8 @@ Capabilities that encode external bodies of practice (BIZBOK, BABOK, Strategyzer
 ---
 
 ### C5.1 · Skill catalogue management
+
+`slug: skill-catalogue`
 
 Maintains the lifecycle of homemade-claude-kit skills: authoring, versioning, distribution, deprecation.
 
@@ -361,6 +405,8 @@ Maintains the lifecycle of homemade-claude-kit skills: authoring, versioning, di
 ---
 
 ### C5.2 · Per-methodology pattern encoding
+
+`slug: pattern-encoding`
 
 Translates each external body of practice into a structured authoring pattern: template, fields, validation rules, cross-artefact relationships.
 
@@ -380,6 +426,8 @@ Translates each external body of practice into a structured authoring pattern: t
 
 ### C5.3 · Artefact template management
 
+`slug: artefact-templates`
+
 Maintains the canonical template for each artefact type.
 
 **BC Map:** [C5.3 in `03a-capability-map.md`](../business/03a-capability-map.md#c53--artefact-template-management)
@@ -396,6 +444,8 @@ Maintains the canonical template for each artefact type.
 
 ### C5.4 · Cross-methodology referencing
 
+`slug: cross-referencing`
+
 Enables an artefact in one methodology to reference an artefact in another by stable ID, with type-aware validation.
 
 **BC Map:** [C5.4 in `03a-capability-map.md`](../business/03a-capability-map.md#c54--cross-methodology-referencing)
@@ -410,6 +460,8 @@ Enables an artefact in one methodology to reference an artefact in another by st
 ---
 
 ### C5.5 · Methodology canon coverage assessment
+
+`slug: canon-coverage`
 
 Audits which methodologies are encoded vs. which lifecycle layers are bare.
 
@@ -444,6 +496,8 @@ None at present. *(Functionality-level status is tracked via the ⬜/🔄/✅ co
 
 | Date | Change | Author |
 |---|---|---|
+| 2026-07-24 | Canonical slug backfill (audit Check 19). The H1 gains the mandatory product slug (`slug: clew`) and every L0/L1 C-heading gains its `slug:` code-line — byte-identical to the slugs minted in [03a-capability-map.md](../business/03a-capability-map.md) in the same pass (same C-ID → same slug, per the registry slug contract). No status, ID, or row changes. | Victor Hueni |
+| 2026-07-24 | Count + status hygiene. Global-overview total restated to exclude the cut row: 58 rows catalogued (57 active + 1 cut) · 5 ✅ · 0 🔄 · 52 ⬜ (the previous "57 · 52 ⬜" silently counted C3.2.F04 `⬜ *(cut)*` in the tree's C3.2 line while excluding it from the summary); C3.2 tree line now reads 3 ⬜ · 1 cut. Legend gains a one-line note defining the `⬜ *(cut)*` annotation. C1.2.F04 `clew guard` prose de-escalated from "planned" to backlog (its status column is ⬜ and the legend reserves 🔄 Planned for PRD-committed work; sequencing unchanged: after the graph is dense and drift-free, per ADR-0013). §Scope discipline C5 note reworded: BC-02 is not minted — kit is external, BC creation deferred per [02b-bounded-contexts.md OI-0018](../domain/02b-bounded-contexts.md#open-items). No status changes, no ID changes, no rows added or removed. | Victor Hueni |
 | 2026-07-07 | Scope discipline (ADR-0013) applied. Added §Scope discipline + Walking skeleton. C3.2.F04 (`clew estimate`) **cut** (delivery accounting, out of scope). C4.3 (Audit) delegated to git; C4.4 (Migration) deferred to a hand-rolled v1 path — both retained for history, not build targets. C1.2 elevated to Differentiator (★) and grown with **C1.2.F04 `clew guard`** (planned read-side change-guardrail). Net count unchanged at 57 (one added, one cut). The `complexity` property + `clew set complexity` removed with the estimate cut. | Victor Hueni |
 | 2026-05-25 | C1.3 (External evidence integration) retired as a capability. Rationale: citation discipline is a kit methodology concern embedded in `rules/writing-citations.md` and the evidence-production skills (arch-research, business-competitive-landscape, business-quantitative-model, business-research, com-slide-deck). F01 (evidence reference recording), F02 (reference reachability check), and F03 (reference archiving) all removed — none require a clew DB field or CLI command. Total: 60 → 57 functionalities · 55 → 52 ⬜ backlog. C1 now has 2 L1 capabilities (C1.1, C1.2). | Victor Hueni |
 | 2026-05-25 | C3.3 (Bidirectional time traceability) retired as a capability. F01 (rationale recording) and F02 (planned-state tagging) removed — both covered by artefact content and kit methodology; no dedicated clew feature needed. F03 (`clew history <ID>`) relocated to C4.3 as C4.3.F04 — conceptually an audit query, not a traceability view. C3 now has 2 L1 capabilities (C3.1, C3.2). Total: 60 functionalities · 5 ✅ · 55 ⬜. | Victor Hueni |

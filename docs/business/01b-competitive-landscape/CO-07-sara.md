@@ -1,5 +1,9 @@
 ---
+type: Competitor Profile
 title: Competitor — SARA (CO-07)
+description: "Tier-1 Direct-adjacent competitor profile — SARA: a Rust CLI treating markdown + YAML frontmatter documents as a typed graph, the closest single tool to clew's mechanism found to date."
+tags: [business, competitive-landscape, competitor]
+timestamp: 2026-07-21T17:06:15Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-07-21
@@ -62,7 +66,7 @@ January 2026 as a DOORS alternative for modern workflows.
 - Confirms the repositioning imperative: clew's claim must be the *product-architecture
   integrity layer* (minted IDs, write-time enforcement, full metamodel, agent contract), not
   generic traceability.
-- Hands-on spike warranted (scan OI-0001): verify depth of its validation and schema
+- Hands-on spike warranted (scan OI-0062): verify depth of its validation and schema
   flexibility first-hand.
 
 ## Evidence sources
@@ -79,3 +83,4 @@ January 2026 as a DOORS alternative for modern workflows.
 | Date | Change | Source | Confidence change |
 |---|---|---|---|
 | 2026-07-21 | Initial profile (founder-sourced discovery, verified) | Desk research | Baseline Tested/Assumed |
+| 2026-07-24 | Open-items reference renumber (governance sync, no content change): the discovery scan's OI-0001 was renumbered to OI-0062 in the repo-wide collision cleanup; the §Strategic implications spike reference updated. | Central ledger `project-control/open-items/open-items.md` | None |

@@ -1,5 +1,9 @@
 ---
+type: CLI Surface Contract
 title: clew CLI — Interface Contract v1
+description: The authoritative contract between the clew CLI (v0.1–v0.3 MVP scope) and its callers, specifying command signatures, I/O contracts, validation rules, and error behaviour.
+tags: [architecture, interface, cli]
+timestamp: 2026-05-25T11:58:25Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-25
@@ -26,12 +30,14 @@ This CLI is the BC-scoped Open Host Service for **BC-01 Artefact Store** ([bound
 |---|---|
 | `clew new` (creation) | C2.1 Stable identifier generation · C2.2 Schema enforcement · C2.3 File binding management · C4.1 Write-time reference validation (Differentiator) |
 | `clew link` (relationships) | C4.1 Write-time reference validation |
-| `clew set` (updates) | C2.2 Schema enforcement · C4.3 Audit trail |
+| `clew set` (updates) | C2.2 Schema enforcement · C4.1 Write-time reference validation |
 | `clew list` / `clew context` | C3.1 Ad-hoc cross-artefact query surface · C1.2 Selective context loading (Differentiator, read-side) · C3.2 Pre-built traceability views (Differentiator, via canonical views) |
 | `clew layout` / `clew where` | C2.3 File binding management |
 | `clew check` (health) | C4.1 Write-time reference validation · C4.2 Drift detection · C2.3 File binding management |
 | `clew export` / `clew import snapshot` | C2.4 Deterministic structural export · C2.1 Stable identifier generation |
 | `clew import md` (bootstrap) | C2.3 File binding management · C2.1 Stable identifier generation |
+
+Audit trail (formerly C4.3) is not a CLI capability: it is delegated to git per [ADR-0013](../decisions/adr-0013-minimal-model-not-repo-native-ea.md).
 
 **Domain model anchors:** every command shape derives from BC-01's aggregates (`Artefact`, `Reference`, `FileBinding`, `IdSequence`) and domain events (`ArtefactRegistered`, `ArtefactLinked`, `FileBindingRecorded`, `SnapshotExported`, `SnapshotRestored`). Full mapping: [Artefact Store §Aggregate catalogue](../../domain/07b-models/artefact-store.md#aggregate-catalogue).
 
@@ -56,7 +62,7 @@ pip install clew  # persistent install
 | **stderr** | All human-readable messages, warnings, and errors. |
 | **Exit codes** | `0` = success. `1` = user error (bad input, layout violation, FK violation). `2` = internal error (DB inaccessible, schema mismatch). |
 | **DB location** | `docs/clew/clew.db` relative to the repo root (detected via `git rev-parse --show-toplevel`). |
-| **Single-writer** | v1 serialises concurrent invocations via an OS flock on the DB file. The second process waits; it does not fail. |
+| **Single-writer** | v1 opens the DB in SQLite WAL mode; concurrent writers are serialised by the engine's own locking with a bounded busy-timeout, per [ADR-0001](../decisions/adr-0001-metamodel-persistence-layer.md). The second process waits; it does not fail. |
 
 ---
 
@@ -115,7 +121,7 @@ clew new epic <name>
   [--file PATH]           required (layout: single-collection)
 ```
 
-- `--file` must match `docs/product-specs/08a-delivery-roadmap.md`.
+- `--file` must match `docs/plans/delivery-roadmap.md` (moved from `docs/product-specs/08a-delivery-roadmap.md` per [ADR-0009](../decisions/adr-0009-plan-package-split-from-product-specs.md)).
 - Returns: `E-{nn}` on stdout.
 
 #### `clew new objective <statement>`
@@ -271,16 +277,22 @@ Audits DB ↔ file consistency. Prints a report to stdout; exits non-zero if any
 clew check [--path PATH]    scope check to one file; default: all bound files
 ```
 
-**Reports:**
+**Reports** — the four canonical drift categories per [ADR-0007](../decisions/adr-0007-file-binding-content-hash-strategy.md); each binding is classified into exactly one (or reports OK):
 
-| Check | Description |
+| Category | Description |
 |---|---|
-| Orphan in DB | Artefact has a `file_bindings` record but the file does not exist |
-| Orphan in file | ID-shaped heading in the file has no matching `artefacts` row |
-| Layout violation | Artefact's `file_path` does not conform to its type's `default_path` rule |
-| Content drift | `content_hash` differs from the current hash of the artefact's section |
+| `file-missing` | The binding's `file_path` does not exist on disk |
+| `anchor-missing` | File exists but no heading resolves to the stored `section_anchor` |
+| `content-drift` | File and anchor resolve, but the canonicalised SHA-256 of the section body differs from the stored `content_hash` |
+| `canonicaliser-changed` | The binding's `canonicaliser_version` does not match the current dprint config hash |
 
-`clew check` updates `content_hash` and `last_seen_at` in `file_bindings` for any section it successfully hashes. It never modifies markdown files.
+Layout conformance is not a `clew check` drift category: it is enforced at write time by `clew new` (§4 layout enforcement, error category `layout-violation`, per [ADR-0002](../decisions/adr-0002-artefact-file-binding.md)).
+
+`clew check` populates `content_hash`, `canonicaliser_version`, and `last_seen_at` in `file_bindings` on a section's first successful hash; subsequent drift is reconciled via `clew bind --update` ([ADR-0007](../decisions/adr-0007-file-binding-content-hash-strategy.md)). It never modifies markdown files.
+
+#### `clew bind --update <id>` / `clew bind --update --all`
+
+Re-hashes the bound section under the current canonicaliser and stores the refreshed `(content_hash, canonicaliser_version, last_seen_at)` triple — the reconciliation path for `content-drift` (per ID) and, with `--all`, the one-shot bulk rehash after a canonicaliser bump (`canonicaliser-changed`), per [ADR-0007](../decisions/adr-0007-file-binding-content-hash-strategy.md).
 
 ---
 
@@ -361,6 +373,10 @@ clew import md <path>
 
 `clew import md` does not write or modify markdown files.
 
+#### `clew migrate` *(reserved)*
+
+Reserved; applies pending numbered schema steps per [ADR-0012](../decisions/adr-0012-schema-migration-framework.md)'s deferred v1 path (`PRAGMA user_version` + numbered steps) — full contract TBD with ADR-0012's revisit.
+
 ---
 
 ## §4 Validation rules
@@ -373,7 +389,7 @@ clew import md <path>
 | `one-per-artefact` | Required | Path does not match the `default_path` template with `{nn}`/`{nnnn}` and `{slug}` interpolated, or the file already exists |
 | `inherits-from-parent` | Optional | If provided, path must satisfy the parent's layout constraint; if omitted, the parent's `file_path` is inherited from `file_bindings` |
 
-**Transaction ordering for `one-per-artefact` types:** the CLI pre-reads `id_sequences.next_val` (without incrementing) to compute the tentative path, validates it, then calls `next_business_id()` to atomically increment and write. Under v1's single-writer flock, the pre-read and increment are serialised — no race condition and no rollback required on validation failure.
+**Transaction ordering for `one-per-artefact` types:** the CLI pre-reads `id_sequences.next_val` (without incrementing) to compute the tentative path, validates it, then calls `next_business_id()` to atomically increment and write. Pre-read and increment happen within a single write transaction, which WAL mode's engine locking and busy-timeout serialise against any concurrent writer ([ADR-0001](../decisions/adr-0001-metamodel-persistence-layer.md)) — no race condition and no rollback required on validation failure.
 
 ### FK checks (`clew link`)
 
@@ -410,7 +426,7 @@ The CLI separates **structured result** (stdout) from **human-readable narrative
 | `clew context <task-type>` | stdout: the assembled artefact slice (markdown or JSON). stderr: a `~<N> tokens` cost line for the slice. |
 | `clew layout <type>` | One line of `key=value` pairs separated by two spaces, machine-parseable (e.g. `type=persona  layout=single-collection  default_path=docs/business/01a-personas.md  parent_type=`). |
 | `clew where <id>` | One line: `<relative-path>#<section-anchor>`. Empty stdout + exit `1` if the artefact has no `file_bindings` record. |
-| `clew check [--path]` | A report block per check category (Orphan in DB, Orphan in file, Layout violation, Content drift) with one row per finding. Empty report on a clean run. |
+| `clew check [--path]` | A report block per drift category (`file-missing`, `anchor-missing`, `content-drift`, `canonicaliser-changed`, per [ADR-0007](../decisions/adr-0007-file-binding-content-hash-strategy.md)) with one row per finding. Empty report on a clean run. |
 | `clew export` / `clew import snapshot` / `clew import md` | Empty stdout. Progress messages on stderr; final summary line on stderr. |
 
 ### Determinism guarantees
@@ -460,11 +476,15 @@ Error: <category>: <human-readable message>
 
 ## Open Items
 
-None at present.
+| OI-ID | Type | Summary | Source anchor | Source heading | Resolution path | Priority | Status | Owner | Due / Review date | Tracker ref |
+| :---- | :--- | :------ | :------------ | :------------- | :-------------- | :------- | :----- | :---- | :---------------- | :---------- |
+| OI-0076 | decision-gap | The pre-ADR-0007 "Orphan in file" check (an ID-shaped heading in markdown with no corresponding `artefacts` row) lost its home when `clew check`'s categories were canonicalised to ADR-0007's four per-binding drift categories — decide where it lives: `clew import md`'s report only (current state), or a fifth `clew check` category. | #changelog | Changelog | Decide the check's home; if it stays import-only, state that explicitly in the `clew check` contract; if it becomes a fifth category, amend ADR-0007. | medium | open | Victor Hueni | 2026-09-30 | _TBD_ |
 
 ## Changelog
 
 | Date | Change | Evidence | Cascading effects |
 |---|---|---|---|
+| 2026-07-24 | Open item filed: OI-0076 (decision-gap) — the pre-ADR-0007 "Orphan in file" check needs a decided home (import-report-only vs a fifth `clew check` category). §Open Items converted from "None at present" to the canonical table. Same-day changelog references to ADR-0007's OI-0032 updated to its post-renumber ID OI-0050 (repo-wide OI collision cleanup; mapping in the central ledger `project-control/open-items/open-items.md`). | Central ledger sync 2026-07-24. | None; contract text unchanged — the check's home is deferred to OI-0076. |
+| 2026-07-24 | Sync with decided ADRs (mechanical, no new decisions). Concurrency: flock wording in §1 and §4 replaced with SQLite WAL + busy-timeout serialization per ADR-0001. Epic `--file` path updated to `docs/plans/delivery-roadmap.md` per ADR-0009. `clew check` drift categories replaced with the four canonical ones (`file-missing` / `anchor-missing` / `content-drift` / `canonicaliser-changed`) per ADR-0007, with layout conformance noted as a write-time `clew new` error (ADR-0002); `clew bind --update [--all]` documented as the reconciliation path (closes ADR-0007 OI-0050, pre-renumber OI-0032). §0: `clew set` C4.3 mapping removed — audit trail delegated to git per ADR-0013. `clew migrate` added to the Migration group as a reserved command per ADR-0012's deferred v1 path, un-dangling the §7 `schema-mismatch` error message. | [ADR-0001](../decisions/adr-0001-metamodel-persistence-layer.md) · [ADR-0002](../decisions/adr-0002-artefact-file-binding.md) · [ADR-0007](../decisions/adr-0007-file-binding-content-hash-strategy.md) · [ADR-0009](../decisions/adr-0009-plan-package-split-from-product-specs.md) · [ADR-0012](../decisions/adr-0012-schema-migration-framework.md) · [ADR-0013](../decisions/adr-0013-minimal-model-not-repo-native-ea.md) | ADR-0007 OI-0050 (pre-renumber OI-0032) closed in the same pass; pre-ADR-0007 "Orphan in file" check (ID-shaped heading with no `artefacts` row) has no home in ADR-0007's four per-binding categories and no longer appears in `clew check`'s contract (it remains in `clew import md`'s report). |
 | 2026-07-07 | Scope discipline (ADR-0013). Removed `clew estimate epic` / `clew estimate phase` and the `complexity` settable field (delivery accounting, out of scope). Added `clew context <task-type>` (read-side context assembly with token-cost) and reserved `clew guard "<change>"` as planned v0.2. Added the write-time vs check-time **integrity boundary** note to §5; corrected the `clew list` timestamp source from "audit trail" to record `created_at` (audit delegated to git). §0 capability table updated. | [ADR-0013](../decisions/adr-0013-minimal-model-not-repo-native-ea.md) + [competitive scan 2026-07-07](../../discovery/competitive-landscape-2026-07-07-agentic-architecture-tools.md). | Companion to the capability-map / FBS / domain-model / business-layer scope cuts of the same date. ADR-0004 cross-ref (`python-typer-duckdb` slug) left as-is per its stable-filename note. |
 | 2026-05-26 | File renamed `clew-cli-v1.md` → `cli-clew.md` and moved from `docs/architecture/interface-contracts/` to canonical `docs/architecture/interfaces/`. Headings aligned to the `arch-cli-contract` template: added §0 Traceability (capability + domain-model + ADR provenance), renamed §Command reference → §2 Command catalogue, renumbered §Validation rules → §4, added §5 Output contract (channels + per-command output shapes + determinism + atomicity + colour), renumbered §Error contract → §7. §Changelog added. | Metamodel audit 2026-05-26 (§2 + §9 findings); `rules/metamodel.md` Step 8.5 canonical path. | Cross-references in [ADR-0001](../decisions/adr-0001-metamodel-persistence-layer.md), [ADR-0002](../decisions/adr-0002-artefact-file-binding.md), [ADR-0003](../decisions/adr-0003-schema-design-typed-property-graph.md), [02b-bounded-contexts.md](../../domain/02b-bounded-contexts.md), [02b-context-map.md](../../domain/02b-context-map.md), [02c-glossary.md](../../domain/02c-glossary.md) updated to the new path in the same pass. |

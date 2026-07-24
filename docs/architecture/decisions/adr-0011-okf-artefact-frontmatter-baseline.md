@@ -1,5 +1,9 @@
 ---
+type: Architecture Decision Record
 title: Adopt Google OKF v0.1 as the artefact frontmatter interchange baseline (superset)
+description: Adopts Google OKF v0.1 as a backward-compatible superset baseline for artefact frontmatter, with type sourced from the registry's okf_type display names.
+tags: [architecture, adr, frontmatter, okf]
+timestamp: 2026-07-01T19:30:31Z
 status: active
 owner: Victor Hueni
 last_reviewed: 2026-07-01

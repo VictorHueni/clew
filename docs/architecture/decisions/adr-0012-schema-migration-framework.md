@@ -1,5 +1,9 @@
 ---
+type: Architecture Decision Record
 title: Schema migration framework — Alembic + SQLAlchemy Core
+description: Chooses Alembic + SQLAlchemy Core as the schema migration framework.
+tags: [architecture, adr, schema-migration]
+timestamp: 2026-06-11T02:53:22Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-06-11

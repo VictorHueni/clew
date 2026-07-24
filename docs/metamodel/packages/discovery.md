@@ -31,7 +31,7 @@ flowchart TD
     OBJ["objective · OBJ-NN"]:::ext
     PRD["PRD-NNNN"]:::ext
     BC["bounded-context · BC-NN"]:::ext
-    VS["value-stream · VS-N.M"]:::ext
+    VS["value-stream · VS-N"]:::ext
 
     subgraph DISC["Discovery"]
         IDEA["idea · IDEA-NNNN"]:::disc
