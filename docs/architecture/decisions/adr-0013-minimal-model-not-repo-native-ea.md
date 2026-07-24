@@ -12,6 +12,10 @@ review_interval: 180d
 
 # clew is minimal-model / perfect-sync, not repo-native enterprise architecture
 
+> **Positioning clauses amended (2026-07-24, [ADR-0014](adr-0014-product-architecture-management-positioning.md)).** The no-public-reframe stance is replaced: clew's public category is now **"Product Architecture Management for AI-native builders and small teams"**, pitched as the integrity layer. The ban on "repo-native EA" as a public term is **retained** — it survives on the term, dies on the substance.
+
+> **Scope clause amended (2026-07-24, [ADR-0015](adr-0015-opt-in-layer-packages.md)).** Mandatory-model minimalism is **retained**; §In scope's "the ~11 persisted types … and no more" now reads "…and no more *in the mandatory model*; opt-in layer packages extend the enforced graph per-repo" — the sanctioned growth path. All out-of-scope cuts stand.
+
 ## Context and Problem Statement
 
 clew's positioning has been circling three framings: "AI-native product intelligence,"

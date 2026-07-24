@@ -12,6 +12,8 @@ review_interval: 90d
 
 # Schema design — typed property graph
 
+> **Edge schema amended (2026-07-24, [ADR-0016](adr-0016-two-speed-integrity-edge-property-bag.md)).** `artefact_references` gains a JSON property bag (mirroring the `artefacts` table's `properties` idiom) carrying at minimum `validation_status` (`proposed | validated | rejected`), `confidence` (`stated | inferred`), `rationale`, and `source_doc` — plus a relationship review lifecycle: agents propose, human review validates, rejected edges are kept for provenance. Existing edge metadata (e.g. the CONSUMES `role`) lives in the same bag. Node-side design unchanged.
+
 ## Context and Problem Statement
 
 [ADR-0001](adr-0001-metamodel-persistence-layer.md) chose CLI + SQLite as the persistence engine. This ADR decides **how the schema is designed within that engine** — two orthogonal concerns in one decision:
