@@ -12,6 +12,8 @@ review_interval: 90d
 
 # Bind metamodel artefacts to narrative files via a typed layout convention
 
+> **Amended (2026-07-24, [ADR-0017](adr-0017-multi-artefact-file-contract.md)).** The §Layout taxonomy table gains `prd` (one-per-artefact, `docs/product-specs/prds/prd-{nnnn}-{slug}.md`) and `user_story` (inherits-from-parent, parent `prd`, ID `PRD-NNNN.US-NN`) rows, and the layout-taxonomy derivation rule — which of the three categories a future type registration takes — is now recorded (ADR-0017 D5). The three-category enum, the anchor convention, and the multi-anchor out-of-scope clause are unchanged; this is the row growth this ADR anticipated.
+
 ## Context and Problem Statement
 
 [ADR-0001](adr-0001-metamodel-persistence-layer.md) establishes SQLite as the canonical store, YAML as the deterministic structural export, and markdown as agent-authored narrative referencing CLI-returned IDs. ADR-0001 does **not** say *where* each artefact's narrative lives on disk, nor how the CLI should know whether `clew new <type>` should expect a new file or a new section in an existing file.
