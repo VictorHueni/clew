@@ -42,18 +42,21 @@ review_interval: 180d
 **Invariants:**
 - **INV-1:** A registered artefact's `business_id` is unique across the artefact store and is immutable after registration.
 - **INV-2:** A registered artefact's `artefact_type` is immutable; changing what kind of thing an artefact is requires creating a new artefact, not mutating the existing one.
-- **INV-3:** Status transitions are one-way: `active → retired` or `active → superseded`. A retired or superseded artefact cannot return to `active`.
+- **INV-3:** Status transitions are one-way: `draft → active`, `active → deprecated`, or `active → superseded`. `draft` may only advance to `active` (no `draft → superseded` / `draft → deprecated` — not sanctioned anywhere); a deprecated or superseded artefact cannot return to `active` or `draft`.
 
-**Lifecycle states:**
+**Lifecycle states** *(enum mirrors the §Physical schema DDL — `draft`/`active`/`superseded`/`deprecated`, default `draft`, aligned to `artefact-frontmatter.md` per the 2026-06-11 changelog row; the former `retired` state is `deprecated`)*:
 
 ```mermaid
 stateDiagram-v2
-    [*] --> active : register()
-    active --> retired : retire()
+    [*] --> draft : register()
+    draft --> active
+    active --> deprecated : retire()
     active --> superseded : supersede(replacement_id)
-    retired --> [*]
+    deprecated --> [*]
     superseded --> [*]
 ```
+
+> The `draft → active` promotion is the only legal exit from `draft`; it is not yet bound to a named command. The `retire()` / `supersede()` transition matrix is otherwise unchanged.
 
 **Commands → Events:**
 
@@ -94,7 +97,7 @@ stateDiagram-v2
 | Command | Precondition | Domain Event |
 |---|---|---|
 | `link(source, relationship, target, role?)` | all 3 INVs satisfied | `ArtefactLinked` (BC-01.EVT-03) |
-| `unlink(source, relationship, target)` | edge exists | (no event in v1 — recorded in audit trail only) |
+| `unlink(source, relationship, target)` | edge exists | (no event in v1 — an unlink leaves no record beyond the subsequent `snapshot/` diff in git; see Open Items) |
 
 **Member entities:** root only — `ArtefactReference` (BC-01.ENT-02)
 **Member value objects:** (none — relationship is a string from the registry; role is free text or registry-constrained)
@@ -156,7 +159,7 @@ stateDiagram-v2
 | `business_id` | `BusinessId` (VO) | The stable semantic key agents write in markdown prose; survives DB drop-and-restore cycles |
 | `artefact_type` | `ArtefactType` (VO) | What kind of thing this is (persona, capability, epic, …); determines property schema and ID format |
 | `name` | string | Human-readable label for the artefact; appears in CLI listings and traceability views |
-| `status` | enum `active` \| `retired` \| `superseded` | Lifecycle state; gates which commands are permitted |
+| `status` | enum `draft` \| `active` \| `superseded` \| `deprecated` | Lifecycle state (default `draft`; mirrors the §Physical schema DDL); gates which commands are permitted |
 | `properties` | JSON | Type-specific payload validated by the Pydantic model for `artefact_type` before write |
 
 **Behaviour methods:**
@@ -164,11 +167,11 @@ stateDiagram-v2
 | Method | Parameters | What it does + invariant enforced |
 |---|---|---|
 | `register()` | `(type, name, file?)` | Mints `business_id` from `id_sequences`, validates `properties` against type schema, writes the artefact and (if `file` provided) the FileBinding in one transaction; raises `ArtefactRegistered`. Enforces INV-1 + INV-2. |
-| `retire()` | () | Sets `status = retired`; rejects if INV-3 is violated. |
+| `retire()` | () | Sets `status = deprecated`; rejects if INV-3 is violated. |
 | `supersede(replacement_id)` | (id of the replacing artefact) | Sets `status = superseded`; verifies the replacement artefact exists; rejects if INV-3 is violated. |
 | `adoptFromMarkdown(file_path)` | (path) | Class-level operation: scans the file for ID-shaped headings, calls `register()` for each unseen ID without re-minting (uses the parsed ID), advances `id_sequences.next_val` to `max(suffix) + 1`. Raises `ArtefactImported` per heading. |
 
-**Lifecycle:** Created on `clew new` or `clew import md` → mutated only via `retire()` / `supersede()` → never deleted (audit trail intact).
+**Lifecycle:** Created on `clew new` or `clew import md` → mutated only via `retire()` / `supersede()` → never deleted (history stays visible via git on the committed `snapshot/`).
 
 ---
 
@@ -193,9 +196,9 @@ stateDiagram-v2
 | Method | Parameters | What it does + invariant enforced |
 |---|---|---|
 | `link()` | `(source, relationship, target, role?)` | Resolves both endpoints, checks registry membership and type-safety, writes the edge; raises `ArtefactLinked`. Enforces INV-1, INV-2, INV-3. |
-| `unlink()` | (matching triple) | Removes the edge; recorded in audit trail. |
+| `unlink()` | (matching triple) | Removes the edge; visible only via the subsequent `snapshot/` diff in git. |
 
-**Lifecycle:** Created on `clew link` → immutable while present → deleted by `clew unlink` (no soft-delete; the audit trail is the history).
+**Lifecycle:** Created on `clew link` → immutable while present → deleted by `clew unlink` (no soft-delete; git diffs on the committed `snapshot/` are the history).
 
 ---
 
@@ -659,9 +662,11 @@ Business identifiers are **generated exclusively by the application layer** from
 | `epic` | `E-{nn}` | `E-NN` |
 | `objective` | `OBJ-{nn}` | `OBJ-02` |
 | `key_result` | `KR-{parent_id}.{m}` | `KR-02.3` |
+| `value_stream` | `VS-{n}` | `VS-1` |
 | `vs_stage` | `{parent_id}.{m}` | `VS-1.3` |
 | `fbs_functionality` | `{parent_id}.F{nn}` | `C1.2.F03` |
 | `adr` | `ADR-{nnnn}` | `ADR-0004` |
+| `bounded_context` | `BC-{nn}` | `BC-01` |
 | `glossary_term` | `BC-{nn}.GT-{nn}` | `BC-01.GT-05` |
 
 **Generation contract:** `next_business_id(conn, artefact_type, parent_business_id?)` — atomically increments `id_sequences.next_val` for the type and returns the formatted ID. The increment and the artefact insert are in the same SQLite transaction; partial writes are not possible.
@@ -793,7 +798,7 @@ Type-specific fields are stored in `artefacts.properties` (a JSON text blob vali
 | `vs_stage` | `description` (value milestone, not activity), `pain` (`Low`/`Medium`/`High`/`Critical`) | Consumed capabilities are `CONSUMES` edges; ID inherits parent `value_stream` |
 | `objective` | `perspective` (BSC tag), `timeframe`, `owner` | `perspective`: `financial`/`customer`/`internal`/`learning` |
 | `key_result` | `metric`, `baseline`, `target`, `unit`, `measurement_method` | `target` is numeric |
-| `fbs_functionality` | `description`, `vs_stage` (soft-link), `is_differentiator` (bool), `status` (`planned`/`in-progress`/`done`), `complexity` (`XS`/`S`/`M`/`L`/`XL`) | `vs_stage` is a business ID reference, not a FK |
+| `fbs_functionality` | `description`, `vs_stage` (soft-link), `is_differentiator` (bool), `status` (`planned`/`in-progress`/`done`) | `vs_stage` is a business ID reference, not a FK |
 | `epic` | `phase`, `value_statement` | `phase` is a positive integer |
 | `bounded_context` | `subdomain_type` (`Core`/`Supporting`/`Generic`), `responsibility` (definition), `rationale`, `team_owner` | `subdomain_type` validated against enum; owned capabilities are `GROUPS_INTO` edges |
 | `glossary_term` | `definition`, `example` (example sentence), `aliases` (deprecated synonyms, list), `code_convention` | Term lifecycle (`Active`/`Retired` in the glossary) maps to `artefacts.status` (`active`/`deprecated`) |
@@ -845,6 +850,8 @@ SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY dept
 | :----- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------- | :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ | :------- | :----- | :------ | :---------------- | :---------- |
 | OI-0019 | doc-gap        | Glossary `docs/domain/02c-glossary.md` does not exist; every entity / VO / event in this model carries `_TODO_ — BC-01.GT-NN` for its glossary-term link. | #ubiquitous-language         | Domain Model — BC-01 Artefact Store (header)  | Run the `domain-glossary` skill against BC-01 to seed `GT-NN` terms (artefact, business ID, relationship, file binding, snapshot, …); then replace every `_TODO_ — BC-01.GT-NN` placeholder in this file with the actual term ID. | high     | closed | victor  | 2026-05-25        | 2026-05-25 commit on main — glossary authored with 15 BC-01 terms in commit `8cea266`; every entity (3) + VO (5) Glossary-term placeholder in this file replaced with live `02c-glossary.md#{term}--bc-01gt-{nn}` links in the same pass; header Ubiquitous language line points at the glossary's BC-01 section |
 | OI-0020 | decision-gap   | Whether the Implementation supplement (Physical schema / Property schemas / Graph traversal pattern) stays in this file or moves to a separate data-model contract document. ADR-0003 currently sanctions it being here. | #implementation-supplement   | Implementation supplement                     | Decide once a second domain model file is created and the duplication / divergence cost becomes visible; if it moves, update ADR-0003 §Dependent artefacts to point at the new location. | low      | open   | victor  | 2026-09-01        | _TBD_       |
+| OI-TBD | decision-gap   | `unlink` produces no domain event; only visible via a git `snapshot/` diff — decide whether v1 needs an `ArtefactUnlinked` event. | #artefactreference--bc-01agg-02 | ArtefactReference · BC-01.AGG-02 | Decide event vs. snapshot-diff-only; if an event is added, extend AGG-02's Commands → Events table and the §Domain event catalogue. | medium   | open   | victor  | 2026-09-01        | _TBD_       |
+| OI-TBD | decision-gap   | `id_sequences` PK is `artefact_type` alone — cannot mint parent-scoped IDs (`KR-NN.M`, `C-N.M.FXX`) required by the §Business identity ID-format table; needs a composite-key decision. | #physical-schema             | Physical schema                               | Decide the composite key (e.g. `(artefact_type, parent_business_id)`) or an alternative minting scheme for parent-scoped types; update the DDL and the generation contract accordingly. | medium   | open   | victor  | 2026-09-01        | _TBD_       |
 
 ---
 
@@ -852,6 +859,7 @@ SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY dept
 
 | Date | Author | Change |
 |---|---|---|
+| 2026-07-24 | Victor Hueni | Decided-cascade cleanup. **Status lifecycle**: AGG-01 state diagram, INV-3, the ENT-01 attribute table, and `retire()` now mirror the §Physical schema DDL enum (`draft`/`active`/`superseded`/`deprecated`, default `draft` — the 2026-06-11 alignment): `register()` enters `draft`, `draft → active` added as the only legal exit from `draft` (promotion not yet bound to a command), `retired` → `deprecated`; `retire()`/`supersede()` matrix otherwise unchanged. **Audit delegation (ADR-0013)**: AGG-02 `unlink` no longer claims "recorded in audit trail" — an unlink leaves no record beyond the subsequent `snapshot/` diff in git (ENT-01/ENT-02 lifecycle lines reworded to match); whether v1 needs an `ArtefactUnlinked` event filed as an OI-TBD open item. **§Property schemas**: `complexity` removed from `fbs_functionality`, matching the [FBS C3.2.F04 `clew estimate` cut](../../product-specs/07a-fbs.md) (ADR-0013 delivery-accounting scope-out). **§Business identity**: `value_stream` (`VS-{n}`) and `bounded_context` (`BC-{nn}`) rows added — both v1 persisted types missing from the ID-format table (formats per the metamodel package pages / kit registry). `id_sequences` single-column PK vs parent-scoped ID formats filed as an OI-TBD open item (schema decision pending, DDL untouched). |
 | 2026-07-07 | Victor Hueni | Scope & canonicity callout added (ADR-0013): three-aggregate / four-table minimalism stated as deliberate; canonicity partitioned by field-class (store=structure, markdown=prose/frontmatter, snapshot=durable, `.db`=disposable); write-time vs check-time integrity distinction made explicit; **audit trail delegated to git** (no Audit aggregate — resolves the C4.3 vs. domain-model gap). `ArtefactLinked` (EVT-03) consumer list: `clew estimate` (cut) replaced with the read-side `clew context` / `clew guard`. | Victor Hueni |
 | 2026-05-25 | Victor Hueni | Initial draft drawn from ADR-0001 + ADR-0002 + ADR-0003 (under DuckDB). |
 | 2026-05-25 | Victor Hueni | SQLite cascade: DDL rewritten for SQLite syntax (INTEGER PK AUTOINCREMENT, `datetime('now')`, `json_valid()` CHECK); PRAGMAs documented; transaction reference updated. |
