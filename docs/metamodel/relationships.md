@@ -85,7 +85,7 @@ table on each [package page](packages/). This catalogue is the flat master list.
 | `DECIDES` ⚠ | `adr` → `quality_attribute` | N:M | soft | — | ADR decision informs QA (Security/Flexibility) |
 | `DECIDES` ⚠ | `adr` → `prd` | N:M | soft | — | ADR decision informs PRD architecture |
 | `GOVERNS` ⚠ | `adr` → `interface_contract` | N:M | soft | versioning, auth | ADR governs contract versioning/auth |
-| `GRADUATES_TO` ⚠ | `idea` → `persona` / `objective` / `canvas` / `process` / `research` / `adr` / `fbs_functionality` / `prd` | N:0..1 | soft | — | One-way; target carries **no** back-FK (recorded in target body text). `research` is a graduation target only, not a persisted entity |
+| `GRADUATES_TO` ⚠ | `idea` → `persona` / `objective` / `canvas` / `process` / `research` / `adr` / `fbs_functionality` / `prd` | N:0..1 | soft | — | One-way; target carries **no** back-FK (recorded in target body text). `research` is a graduation target only, not a persisted entity — here it means Discovery's ID-less `research` notes, distinct from the Architecture package's `research` type, which does mint `Research-NNNN` |
 | `REFERENCES` | `any` → `any` | N:M | soft | (free text) | Generic catch-all cross-link; no type constraint |
 
 ## Flagged judgment calls

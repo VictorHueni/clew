@@ -74,6 +74,8 @@ flowchart TD
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | `INHERITS` | fbs_functionality → capability | N:1 | hard | Business Architecture | FBS inherits the capability map's L0/L1 |
 | `ACTOR_OF` | persona → use_case | 1:N | hard | Business Architecture | Persona is the use case's primary actor |
+| `REALIZES` | fbs_functionality → vs_stage | N:M | hard | Business Architecture | Functionality realises a VS stage |
+| `GROUNDS_QA` | persona → quality_attribute | N:M | soft | Business Architecture | Persona grounds IC/PE quality attributes |
 | `GROUPS` | epic → fbs_functionality | 1:N | hard | Planning | Epic groups FBS functionalities |
 | `SPECIFIES` | epic → prd | 1:1 | hard | Planning | One PRD per epic |
 | `DETAILS` | prd → implementation_plan | 1:1 | hard | Planning | One implementation plan per PRD |
@@ -81,7 +83,7 @@ flowchart TD
 | `REFERENCES_DM` | prd → aggregate | N:M | soft | Domain | PRD references AGG/EVT IDs |
 | `DECIDES` | adr → quality_attribute / prd | N:M | soft | Architecture | ADR decisions inform QAs and PRDs |
 | `MAPS_TO` | cli_command → fbs_functionality | N:M | hard | Architecture | CLI commands map to functionalities |
-| realises | use_case → test_scenario | N:M | hard | Quality Assurance | A use case's flows become test scenarios |
+| realises | use_case → test_scenario | N:M | soft | Quality Assurance | A use case's flows become test scenarios |
 | defines tests for | quality_attribute → test_strategy | N:M | soft | Quality Assurance | QAs are what the tests verify |
 
 ---

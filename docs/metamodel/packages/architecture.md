@@ -34,13 +34,13 @@ flowchart TD
         RES["research · Research-NNNN"]:::arch
         ADR["adr · ADR-NNNN"]:::arch
         CTR["interface-contract · BC-NN.CTR-NN"]:::arch
-        CLI["cli-surface · CLI-NN · CMD-NN"]:::arch
+        CLI["cli-surface · CLI-NN · CLI-NN.CMD-NN"]:::arch
         DIAG["C4 / arc42 / UML views"]:::arch
     end
 
     RES -->|"informs"| ADR
     ADR -->|"GOVERNS"| CTR
-    ADR -->|"DECIDES"| CLI
+    ADR -->|"DECIDES ⚠ (proposed, not in catalogue)"| CLI
     CLI -->|"CONTAINS"| CLI
     CLI -->|"WRAPS"| CTR
     DIAG -->|"visualise"| ADR
@@ -54,7 +54,9 @@ flowchart TD
 > `CONTAINS` is drawn as a self-loop on cli-surface because CLI commands (`CLI-NN.CMD-NN`) are
 > sub-elements of the surface, not a separate node. The C4/arc42/UML node represents diagram
 > producers — they mint diagram IDs (`SYS/CON/CMP/DN-NN`, `SCN/CST/CC/RSK-NN`) but are **derived
-> views**, deliberately outside the persisted relationship set.
+> views**, deliberately outside the persisted relationship set. The `adr → cli-surface` `DECIDES`
+> edge is ⚠ diagram-only: the [catalogue](../relationships.md) defines `DECIDES` only for
+> `adr → quality_attribute` and `adr → prd` — ratify or drop when `ALLOWED_RELATIONSHIPS` lands.
 
 ## Artefacts in this package
 

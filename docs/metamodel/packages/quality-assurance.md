@@ -62,7 +62,7 @@ All in-ports; none enforced yet (no skill). They activate when the first `qa-` s
 | Verb | Source → Target | Strength | Neighbour package | Meaning |
 | :-- | :-- | :-- | :-- | :-- |
 | defines tests for | quality_attribute → test_strategy | soft | Product Specs | The QAs are what the tests verify |
-| realises | use_case → test_scenario | hard | Product Specs | Use-case flows become test scenarios |
+| realises | use_case → test_scenario | soft | Product Specs | Use-case flows become test scenarios |
 | is oracle for | prd → test_scenario | soft | Product Specs | PRD acceptance criteria are the pass/fail oracle |
 | verified by | implementation_plan → test_plan | soft | Product Specs | Increments are checked against the plan |
 

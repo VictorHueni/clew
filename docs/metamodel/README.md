@@ -67,7 +67,7 @@ The whole metamodel as one build-order graph (overview, all packages at once) li
 > artefacts — they are tooling, described under [Supporting packages](#supporting-packages--tooling)
 > below.
 
-> **Status:** all seven package pages drafted, each ending with a **Planned additions** table of
+> **Status:** all eight package pages drafted, each ending with a **Planned additions** table of
 > candidate skills from the [kit backlog](https://github.com/VictorHueni/homemade-claude-kit/issues)
 > (qa-*, `domain-event-storming`, `arch-threat-model`, `ops-slo`, …); the
 > [`relationships.md`](relationships.md) catalogue is in place. Still to come: reducing the duplicate
@@ -79,8 +79,8 @@ The whole metamodel as one build-order graph (overview, all packages at once) li
 
 ## Supporting packages — tooling
 
-These prefixes are **not metamodel packages** — they mint no IDs, hold no typed relationships, and
-appear in no registry. They *operate on* or *render from* the metamodel rather than being part of it.
+These prefixes are **not metamodel packages** — they hold no governed artefact types, participate in
+no typed relationships, and appear in no registry. They *operate on* or *render from* the metamodel rather than being part of it.
 Documented here for completeness, and because clew will eventually own how they read the model.
 
 | Package | Prefix | Role | Page |
