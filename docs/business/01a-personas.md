@@ -94,6 +94,7 @@ _TODO_ (quality attributes with persona-specific rationale: speed, accuracy, tra
 | ID | Name | Role | Cooper type | Surface | Key job outcome | Status |
 |---|---|---|---|---|---|---|
 | P-01 | Ava | Agent-first product engineer | Primary | clew (daily authoring) | Coherent multi-artefact product thinking at agent-speed | Proto |
+| P-03 | Arno | AI-augmented architect-builder | Primary | Opt-in layer packages (multi-layer modelling + cartography export) | Full-layer coherent modelling, affordable and drift-free at repo scale | Proto |
 
 ### §Tier 2 · Secondary
 
@@ -125,6 +126,8 @@ _TODO_ (quality attributes with persona-specific rationale: speed, accuracy, tra
 ---
 
 ## §Personas
+
+> **Two-tier persona model** per [ADR-0015 — opt-in layer packages](../architecture/decisions/adr-0015-opt-in-layer-packages.md): P-01 Ava owns the mandatory core (the wedge persona) and never pays an unopted layer's drift cost; P-03 Arno owns the opt-in layer packages (the depth persona). Distinct surfaces, so Cooper's one-primary-per-surface discipline holds.
 
 ### P-01 · Ava, the agent-first product engineer
 
@@ -216,9 +219,93 @@ Ordered by priority per the [wave-1 P-01 validation synthesis](../discovery/inte
 
 ---
 
+### P-03 · Arno, the AI-augmented architect-builder
+
+| Field | Value |
+|---|---|
+| Persona type | Primary |
+| Tier | 1 |
+| Lifecycle status | Proto-persona |
+| Quote | "Agents made the modelling cheap. Rot is the only thing still priced at enterprise scale." |
+
+#### §Snapshot
+
+| Field | Value |
+|---|---|
+| Role | Solo architect-builder: an enterprise-architecture-literate engineer who models software AND business AND strategy for the products they build |
+| Org | Solo or small company (1–10 people); EA background without an enterprise-architecture team or a procurement budget |
+| Domain experience | 10+ years spanning software delivery and enterprise-architecture practice (ArchiMate/TOGAF-literate); in the last 12 months uses AI agents to make full-layer modelling affordable at repo scale |
+| Usage frequency | Modelling campaigns in bursts (a domain per day with agents), plus continuous coherence upkeep across sessions |
+| Usage context | Local terminal alongside coding agents; one repo per product, the enforced graph extended by exactly the layer packages that repo opted into |
+| Primary language | English (working) |
+
+#### §Bio
+
+Arno has an enterprise-architecture background — capable of modelling software, business, and strategy — but works solo or in a small company where a hand-maintained EA repository never survived contact with delivery. With agents as co-modellers, the historical cost wall has collapsed: full-layer coherent modelling is now a day's work instead of an architecture team's quarter. What Arno still lacks is the enforcement substrate underneath — something that keeps the agent-built multi-layer model referentially true through every refactor, instead of rotting the way every hand-maintained model before it did.
+
+#### §Goals
+
+1. **When** I take on a new product or domain, **I want** to model business, application, and technology layers step-by-step with an agent, **so I can** reach full-layer coverage in days instead of quarters. *(Tested · N=1, founder-as-instance)*
+2. **When** my repo needs more model, **I want** to enable exactly the artefact types it needs — with prerequisites scaffolded for me — **so I** choose my drift surface deliberately instead of inheriting a maximal model. *(Assumed)*
+3. **When** an upstream driver changes (a regulation, a platform, a strategy shift), **I want** cross-layer influence chains queryable, **so** blast-radius questions get deterministic answers instead of workshop archaeology. *(Tested · N=1, founder-as-instance)*
+4. **When** I share the architecture, **I want** cartography views generated from the enforced graph, **so** the picture can never quietly diverge from the model. *(Tested · N=1, founder-as-instance)*
+5. **When** an agent proposes relationships faster than I can vet them, **I want** proposals quarantined until I validate them, **so** agent speed never contaminates what counts as a fact. *(Tested · N=1, founder-as-instance)*
+
+#### §Scenarios
+
+**Scenario 1 · The five-domain day.** Arno needs an enterprise cartography for a regulated product: business actors, application services, technology stack, plus the regulatory environment around them. With agents as co-modellers, five ArchiMate domains are modelled, tiered, in a single day — the cartography prototype did exactly this — but outside any enforcement substrate, so every subsequent refactor silently invalidates edges nobody re-checks. With clew, the same day of modelling lands in an enforced graph: every edge validated at write time, every later change surfacing its blast radius before it lands.
+
+**Scenario 2 · The regulator's question.** A tariff regime changes. Arno asks which application services, capabilities, and product commitments sit downstream of that driver. With hand-maintained diagrams, the answer is a meeting and a week of doubt; with the enforced graph, it is one impact query and a regenerated cartography view.
+
+#### §Frustrations
+
+1. **Hand-maintained EA models rot.** The classic Sparx-repository failure: the model is current the week of the workshop and fiction a month later, because upkeep is manual and nothing enforces coherence between model and reality. *(Tested · N=1, founder-as-instance)*
+2. **Multi-layer coherence has historically been priced at enterprise-team cost.** The tooling (Ardoq, BiZZdesign, LeanIX) and the upkeep both assume a team of architects and a procurement budget; below that scale, full-layer modelling was simply forgone. *(Tested · N=1, founder-as-instance)*
+3. **Existing agent-native tools stop at the spec/plan layers.** Spec-driven development and traceability tools connect requirement to code, but nothing enforces business, application, and technology layers — or the influence chains between them. *(Tested · N=1, founder-as-instance)*
+4. **Agent-generated models leak unreviewed assertions as facts.** An agent proposes edges faster than a human can vet them; without a review lifecycle, the inferred and the validated become indistinguishable in every view. *(Tested · N=1, founder-as-instance)*
+
+#### §Key Tasks
+
+- Enable the artefact types a repo's model needs and model business + application + technology layers step-by-step, guided by prerequisite scaffolding. *(Realised by the opt-in layer packages per [ADR-0015 — opt-in layer packages](../architecture/decisions/adr-0015-opt-in-layer-packages.md).)*
+- Keep cross-layer influence chains queryable: which capabilities, services, and commitments sit downstream of a given driver.
+- Generate cartography views of the enforced graph for sharing and review. *(The fourth read-side surface per [ADR-0015](../architecture/decisions/adr-0015-opt-in-layer-packages.md) — projection, never a second source of truth.)*
+- Review agent-proposed relationships: validate or reject proposals so only human-confirmed edges become facts. *(Per [ADR-0016 — two-speed integrity](../architecture/decisions/adr-0016-two-speed-integrity-edge-property-bag.md).)*
+
+#### §System Needs
+
+- **Identical strictness on everything enabled.** An opted-in type must get the same 100% write-time guarantee as the core; a "lite" tier would recreate the rich-model / weak-sync failure that killed every previous EA repository. *(Tested · N=1, founder-as-instance)*
+- **Honest partial models.** Unfilled slots are declared absences (info-level), never violations — a model in progress must be legal, not nagging. *(Assumed)*
+- **Deterministic integrity verdicts.** Integrity output derives from graph facts and authored constraints only; agent-inferred judgment never reaches the hot path. *(Tested · N=1, founder-as-instance)*
+- **Projection is never a second source of truth.** Views are regenerated from the graph, never hand-edited into divergence. *(Tested · N=1, founder-as-instance)*
+- **Cheap, reversible enablement.** Type definitions are registry data, not schema migrations — trying a layer must not be a commitment. *(Assumed)*
+
+#### §Stakeholder Profile
+
+| Dimension | Value |
+|---|---|
+| Authority | High; sole (or lead) architect with unilateral say over the model and its tooling. |
+| Interest | Very high; the opt-in layer packages exist for this persona. |
+| Attitude | Supportive but standards-literate and wary: has watched EA tooling fail before, and will reject any tool that imposes a mandatory ontology (ArchiMate must stay an export-time mapping, never the required model). |
+| RACI | Responsible and Accountable (their repo, their model, their call). |
+| Engagement strategy | Let the prerequisite scaffolding carry the teaching burden — enablement should feel like guided growth, not configuration. Prove the rot problem solved on one layer before proposing five. Never market "EA" at this persona; the term stays internal per [ADR-0014 — Product Architecture Management positioning](../architecture/decisions/adr-0014-product-architecture-management-positioning.md). |
+
+#### §Research Grounding
+
+| Field | Value |
+|---|---|
+| Evidence type | Proto-persona (assumption). N=1, founder-as-instance — mirroring P-01's wave-1 grounding pattern. |
+| Sample | 1 instance · Victor Hueni (founder, self-identified P-03 instance) · 2026-07-24. Wave 2 must interview **both** personas, ≥1 each (P-01 and P-03), extending [OI-0016](../../project-control/open-items/open-items.md)'s interview-mix requirement. |
+| Sources | The cartography prototype as proof-of-need (external: `swiss-aos-drug-reimbursement-model` Plans 0138/0139 — five ArchiMate domains modelled, tiered, in one day with agents); its clew fit assessment imported at [`docs/discovery/cartography-prototype-clew-fit-2026-07-24.md`](../discovery/cartography-prototype-clew-fit-2026-07-24.md); the [2026-07-24 grill-me session record](../../var/reports/grill-me/2026-07-24-positioning-layer-packages.md) (D5); [ADR-0014 — Product Architecture Management positioning](../architecture/decisions/adr-0014-product-architecture-management-positioning.md); [ADR-0015 — opt-in layer packages](../architecture/decisions/adr-0015-opt-in-layer-packages.md). |
+| Created | 2026-07-24 |
+| Last validated | 2026-07-24 (N=1, founder-as-instance; promotion to research-grounded requires external instances). |
+| Next review | 2026-10-22 (≤90 days for proto-personas). |
+| Conversion plan | Wave 2 to find and interview at least one external architect-builder (≥1 interview per persona across P-01/P-03, per D5, extending OI-0016). The second external instance also gates layer-package content reaching the public roadmap ([ADR-0015 — opt-in layer packages](../architecture/decisions/adr-0015-opt-in-layer-packages.md) sequencing). |
+
+---
+
 ## Open Items
 
-None at present. *(P-01 wave-2 follow-ups are tracked in [`docs/discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md` §Open Items](../discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md#open-items); P-02 / P-03 backlog work surfaces through the relevant Tier table rows above rather than as separate OI rows.)*
+None at present. *(P-01 wave-2 follow-ups are tracked in [`docs/discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md` §Open Items](../discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md#open-items); P-03's wave-2 interview requirement rides [OI-0016](../../project-control/open-items/open-items.md) per the two-persona mix decided in D5; P-02 backlog work surfaces through the relevant Tier table rows above rather than as separate OI rows.)*
 
 ---
 
@@ -235,3 +322,4 @@ None at present. *(P-01 wave-2 follow-ups are tracked in [`docs/discovery/interv
 - 2026-05-25 · VS-2 cascade · P-01 §Key Tasks bullet 3 (cross-cutting questions) upgraded from "VS-2 catalogued; stages not yet decomposed" to a full per-stage mapping: scope at VS-2.1, deterministic answer at VS-2.2 Resolve from Canonical Source, provenance drill-down at VS-2.3 Surface Provenance, drift validation at VS-2.4 Validate Against Current State. Cascade companion to today's value-streams VS-2 fill. Bullets for the other 4 Key Tasks unchanged.
 - 2026-05-25 · VS-3 cascade · P-01 §Key Tasks bullet 4 (refactor with confidence) upgraded from "VS-3 catalogued; stages not yet decomposed; partial VS-1.4 realisation" to a full per-stage mapping: identify the change at VS-3.1, preview full downstream impact at VS-3.2 Preview Downstream Impact (the value-gating stage where C3.2 turns the magic-wand into a mechanical preview), execute atomically at VS-3.3 Execute Change with Integrity (C4.1 across the full change-set), confirm no drift at VS-3.4. Note added that VS-1.4 realises write-time integrity for new artefacts and VS-3.3 extends it to change-sets. Cascade companion to today's value-streams VS-3 fill. Bullets for the other 4 Key Tasks unchanged.
 - 2026-05-25 · VS-4 cascade · P-01 §Key Tasks bullet 5 (share architecture) upgraded from "VS-4 catalogued; stages not yet decomposed" to a full per-stage mapping: confirm current state at VS-4.1, materialise self-contained views at VS-4.2 (pre-render canonical views as static markdown so no clew runtime is required to read), publish at VS-4.3, provide reader orientation at VS-4.4. Honest note added: overall pain Medium, the only Key Task whose realising stream does not inherit Critical pain, reflecting that the consumer instance does not yet exist for wave-1 validation. This closes the per-Key-Task value-stream wiring loop: all 5 Key Tasks now point to filled streams. Cascade companion to today's value-streams VS-4 fill.
+- 2026-07-24 · Mint · P-03 Arno (AI-augmented architect-builder) added as proto-persona, Primary, Tier 1 — the depth persona owning the opt-in layer packages per [ADR-0015 — opt-in layer packages](../architecture/decisions/adr-0015-opt-in-layer-packages.md), within the widened audience of [ADR-0014 — Product Architecture Management positioning](../architecture/decisions/adr-0014-product-architecture-management-positioning.md); decided in the [2026-07-24 grill-me session](../../var/reports/grill-me/2026-07-24-positioning-layer-packages.md) (D5). N=1, founder-as-instance; proof-of-need is the cartography prototype (`swiss-aos-drug-reimbursement-model` Plans 0138/0139). Tier-1 backlog table gained the P-03 row; §Personas gained the two-tier intro note (Ava = mandatory core, Arno = layer packages); wave-2 requirement recorded as ≥1 interview per persona, extending OI-0016. P-01 unmodified.
