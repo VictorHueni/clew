@@ -38,8 +38,13 @@ review_interval: 180d
 | [Artefact type](#artefact-type--bc-01gt-02) | BC-01 | BC-01.GT-02 | Active |
 | [Audit trail](#audit-trail--bc-01gt-11) | BC-01 | BC-01.GT-11 | Active |
 | [Business ID](#business-id--bc-01gt-03) | BC-01 | BC-01.GT-03 | Active |
+| [Cartography export](#cartography-export--bc-01gt-21) | BC-01 | BC-01.GT-21 | Active |
+| [Declared absence](#declared-absence--bc-01gt-19) | BC-01 | BC-01.GT-19 | Active |
 | [Drift](#drift--bc-01gt-12) | BC-01 | BC-01.GT-12 | Active |
+| [Edge proposal](#edge-proposal--bc-01gt-20) | BC-01 | BC-01.GT-20 | Active |
+| [Enablement](#enablement--bc-01gt-17) | BC-01 | BC-01.GT-17 | Active |
 | [File binding](#file-binding--bc-01gt-07) | BC-01 | BC-01.GT-07 | Active |
+| [Layer package](#layer-package--bc-01gt-16) | BC-01 | BC-01.GT-16 | Active |
 | [Layout](#layout--bc-01gt-09) | BC-01 | BC-01.GT-09 | Active |
 | [Methodology](#methodology--bc-01gt-14) | BC-01 | BC-01.GT-14 | Active (borrowed from upstream kit) |
 | [Narrative](#narrative--bc-01gt-05) | BC-01 | BC-01.GT-05 | Active |
@@ -48,6 +53,7 @@ review_interval: 180d
 | [Skill](#skill--bc-01gt-15) | BC-01 | BC-01.GT-15 | Active (homonym warning) |
 | [Snapshot](#snapshot--bc-01gt-10) | BC-01 | BC-01.GT-10 | Active |
 | [Status](#status--bc-01gt-04) | BC-01 | BC-01.GT-04 | Active |
+| [Stub parent](#stub-parent--bc-01gt-18) | BC-01 | BC-01.GT-18 | Active |
 | [Traceability view](#traceability-view--bc-01gt-13) | BC-01 | BC-01.GT-13 | Active |
 
 ---
@@ -405,6 +411,146 @@ review_interval: 180d
 
 ---
 
+#### Layer package · BC-01.GT-16
+
+**Status:** Active
+
+**Definition:** An opt-in set of Artefact types, Relationships, and checks that a repo enables beyond the mandatory core — the sanctioned growth path for multi-layer coverage (strategy/motivation → business → application → technology → implementation & migration) per [ADR-0015 — opt-in layer packages](../architecture/decisions/adr-0015-opt-in-layer-packages.md). The mandatory core never grows; each repo's enforced graph is the core plus exactly the packages (and individual types) it opted into. Everything enabled receives the identical 100% write-time guarantee as the core — the enablement choice prices drift surface, never check honesty.
+
+**Example:** "A repo that enables a technology-layer package's types extends its own enforced graph; a repo that never opts in never carries that drift surface — P-01 Ava never pays for a layer she did not choose."
+
+**Aliases (deprecated):** _(none)_ — "package" alone is acceptable shorthand where the layer context is unambiguous; "module" and "plugin" are wrong (they connote code, not registry data)
+
+**Anti-patterns:**
+- A Layer package is NOT a soft tier — there is no enabled-with-warnings mode; enabled types get the same write-time strictness as the core ([ADR-0015 §Decision Outcome](../architecture/decisions/adr-0015-opt-in-layer-packages.md)).
+- A Layer package is NOT a schema migration — type-definitions are registry data, not code, per [ADR-0003](../architecture/decisions/adr-0003-schema-design-typed-property-graph.md)'s no-DDL design.
+- A Layer package is NOT part of the mandatory model — the minimal spine of [ADR-0013](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md) is the only model every repo carries.
+
+**Cross-context:** N/A — concept owned entirely by BC-01.
+
+**Code convention:** `LayerPackage` does not surface as a class at v0.1 — packages are registry data (package definitions under `docs/metamodel/packages/` per [ADR-0015 §Dependent artefacts](../architecture/decisions/adr-0015-opt-in-layer-packages.md)); appears in CLI prose as "package" and in enablement output as the package name
+
+**First referenced:** [ADR-0015 — opt-in layer packages](../architecture/decisions/adr-0015-opt-in-layer-packages.md) · 2026-07-24
+
+---
+
+#### Enablement · BC-01.GT-17
+
+**Status:** Active
+
+**Definition:** The per-Artefact-type activation by which a repo extends its enforced graph — users pick and choose individual Artefact types, not whole layers, per [ADR-0015 — opt-in layer packages](../architecture/decisions/adr-0015-opt-in-layer-packages.md). clew knows each type's prerequisites (e.g. `fbs` requires `capability`) as a prerequisite DAG persisted in the metamodel registry, and enforces it as guide-and-scaffold: enabling a type auto-enables/scaffolds its prerequisites, minting Stub parents where identity requires them.
+
+**Example:** "Enabling `fbs_functionality` triggers Enablement of its prerequisite `capability`; clew scaffolds the prerequisite rather than rejecting the request, so the graph stays well-formed at every step."
+
+**Aliases (deprecated):** Activation (deprecated — "activation" connotes licensing; "Enablement" is the canonical term for the per-type opt-in) · Install (deprecated — nothing is installed; a registry flag flips)
+
+**Anti-patterns:**
+- Enablement is NOT per-layer — the granularity is the individual Artefact type; whole-layer switches were considered and rejected ([ADR-0015 §Considered Options C](../architecture/decisions/adr-0015-opt-in-layer-packages.md)).
+- Enablement is NOT a weaker integrity tier — an enabled type gets the identical write-time guarantee as the core ([OBJ-02 KR-02.1](../business/04b-objectives.md)).
+- Enablement does NOT bypass prerequisites — the DAG is always honoured; the semantics are guide-and-scaffold, never silent skip and never hard refusal.
+
+**Cross-context:** N/A — concept owned entirely by BC-01.
+
+**Code convention:** Enablement state is persisted in the artefact store ([ADR-0015 §Dependent artefacts](../architecture/decisions/adr-0015-opt-in-layer-packages.md)); the prerequisite DAG lives in the clew-owned metamodel registry per [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md); appears in CLI prose as "enable"/"enabled type"
+
+**First referenced:** [ADR-0015 — opt-in layer packages](../architecture/decisions/adr-0015-opt-in-layer-packages.md) · 2026-07-24
+
+---
+
+#### Stub parent · BC-01.GT-18
+
+**Status:** Active
+
+**Definition:** A parent Artefact minted with a **real Business ID** and `_TODO_` content when identity requires a parent — i.e. when a child carries a parent-scoped Business ID (like `C2.1.F01`) and the parent does not yet exist. Part of [ADR-0015](../architecture/decisions/adr-0015-opt-in-layer-packages.md)'s guide-and-scaffold semantics: the graph stays well-formed (no dangling reference is ever representable) while the prose debt stays visible.
+
+**Example:** "Registering functionality `C2.1.F01` in a repo without capability `C2.1` mints `C2.1` as a Stub parent — a real, permanent Business ID whose Narrative is `_TODO_` until the operator fills it."
+
+**Aliases (deprecated):** Placeholder (deprecated — a placeholder implies a fake or temporary ID; a Stub parent's Business ID is real and permanent) · Ghost node (deprecated — too informal, and wrongly implies the node is not a first-class Artefact)
+
+**Anti-patterns:**
+- A Stub parent is NOT a fake ID — the Business ID is minted from the per-type counter like any other and survives for the Artefact's lifetime; only the content is pending.
+- A Stub parent is NOT a Declared absence — a Stub parent is a real node with pending prose; a Declared absence is no node and no edge at all.
+- A Stub parent is NOT hidden debt — `clew check` keeps the `_TODO_` content visible; a repo that enables aggressively sees its prose debt, by design ([ADR-0015 §Negative Consequences](../architecture/decisions/adr-0015-opt-in-layer-packages.md)).
+
+**Cross-context:** N/A — concept owned entirely by BC-01.
+
+**Code convention:** stub minting is part of the Enablement/registration write path; the stub state is carried by the `_TODO_` content sentinel, not by a dedicated status value — lifecycle Status stays `draft` until the operator fills and promotes the Artefact
+
+**First referenced:** [ADR-0015 — opt-in layer packages](../architecture/decisions/adr-0015-opt-in-layer-packages.md) · 2026-07-24
+
+---
+
+#### Declared absence · BC-01.GT-19
+
+**Status:** Active
+
+**Definition:** A `_TODO_` sentinel in a soft-link slot for an unenabled or unfilled target — legal and first-class per [ADR-0015](../architecture/decisions/adr-0015-opt-in-layer-packages.md): **no edge row is persisted**, and `clew check` reports it as info-level "declared absences", never a violation. Distinct from a dangling reference — an edge to a non-existent Business ID — which is never representable and hard-blocked at write time, no exceptions, regardless of what is enabled.
+
+**Example:** "A persona's `Realised by: _TODO_` slot is a Declared absence: `clew check` lists it under info-level declared absences, no Relationship row exists, and nothing blocks — the pending link is honest, not broken."
+
+**Aliases (deprecated):** Soft gap (deprecated — invented shorthand; the canonical term is Declared absence) · Missing link (deprecated — ambiguous with dangling reference, which is a different and hard-blocked concept)
+
+**Anti-patterns:**
+- A Declared absence is NOT a dangling reference — the three-way distinction of [ADR-0015 §Decision Outcome](../architecture/decisions/adr-0015-opt-in-layer-packages.md) is load-bearing: declared absence = no edge, info-level; dangling reference = never representable, hard-blocked.
+- A Declared absence is NOT an edge with a null target — no Relationship row exists at all; the sentinel lives only in the Narrative slot.
+- A Declared absence is NOT a violation — treating info-level declared-absence reports as failures would punish honest partial models and push users back to silent gaps.
+
+**Cross-context:** N/A — concept owned entirely by BC-01.
+
+**Code convention:** the sentinel literal is `_TODO_` (exact casing and underscores); `clew check` output groups these under "declared absences" at info severity, disjoint from the error-level drift and violation categories
+
+**First referenced:** [ADR-0015 — opt-in layer packages](../architecture/decisions/adr-0015-opt-in-layer-packages.md) · 2026-07-24
+
+---
+
+#### Edge proposal · BC-01.GT-20
+
+**Status:** Active
+
+**Definition:** A Relationship row whose property bag carries `validation_status: proposed` — an agent-proposed edge awaiting human review, per [ADR-0016 — two-speed integrity](../architecture/decisions/adr-0016-two-speed-integrity-edge-property-bag.md). Agents may propose relationships; only a human review flips `proposed → validated`; rejected edges are kept for provenance, never deleted by the lifecycle. Proposals are quarantined from the integrity hot path: `clew guard` and `clew check` derive from validated edges and authored constraints only.
+
+**Example:** "The agent's inferred INFORMS edge lands as an Edge proposal (`validation_status: proposed`, `confidence: inferred`, with `rationale` and `source_doc`); it becomes a fact only when the operator validates it — until then no view that reads facts will show it."
+
+**Aliases (deprecated):** Suggested link (deprecated — "link" is already deprecated for the noun; "Edge proposal" is canonical) · Draft edge (deprecated — "draft" collides with the Artefact lifecycle Status value)
+
+**Anti-patterns:**
+- An Edge proposal is NOT a fact — the fact set is exactly the validated + authored subset; a query that forgets to filter `proposed`/`rejected` silently reads non-facts ([ADR-0016 §Negative Consequences](../architecture/decisions/adr-0016-two-speed-integrity-edge-property-bag.md)).
+- An Edge proposal is NOT a separate table — proposals live in `artefact_references` with lifecycle state as edge data; a proposals sidecar was considered and rejected ([ADR-0016 §Considered Options B/C](../architecture/decisions/adr-0016-two-speed-integrity-edge-property-bag.md)).
+- An Edge proposal is NOT deleted on rejection — rejected edges carry provenance (why was this considered? why was it wrong?) and stay queryable.
+- An Edge proposal is NOT input to guard/check — no LLM-inferred judgment enters the integrity hot path; LLM output always lands quarantined as a proposal.
+
+**Cross-context:** N/A — concept owned entirely by BC-01.
+
+**Code convention:** property-bag keys on `artefact_references` per [ADR-0016](../architecture/decisions/adr-0016-two-speed-integrity-edge-property-bag.md): `validation_status` (`proposed | validated | rejected`), `confidence` (`stated | inferred`), `rationale`, `source_doc`; the review workflow surfaces in the CLI as list/validate/reject commands ([CLI contract](../architecture/interfaces/cli-clew.md))
+
+**First referenced:** [ADR-0016 — two-speed integrity](../architecture/decisions/adr-0016-two-speed-integrity-edge-property-bag.md) · 2026-07-24
+
+---
+
+#### Cartography export · BC-01.GT-21
+
+**Status:** Active
+
+**Definition:** The deterministic projection of the enforced graph into an external view tool (e.g. LikeC4) — `clew export likec4`, the fourth read-side surface joining `context`/`trace`/`impact` per [ADR-0015](../architecture/decisions/adr-0015-opt-in-layer-packages.md) (D7). The projection is never a second source of truth: views are regenerated from the store, and ArchiMate is an export-time mapping only, never clew's mandatory ontology.
+
+**Example:** "`clew export likec4` regenerates the cartography views from the current store state; hand-editing a generated view is Drift by definition — the enforced graph remains the only source."
+
+**Aliases (deprecated):** Diagram export (deprecated — undersells the concept; the export is a projection of the whole enforced graph, not a picture) · ArchiMate export (deprecated — names the mapping, not the concept; ArchiMate is one export-time vocabulary, not the ontology)
+
+**Anti-patterns:**
+- A Cartography export is NOT a second source of truth — the governing principle lifted from the cartography prototype's ontology ([ADR-0015 §Decision Outcome](../architecture/decisions/adr-0015-opt-in-layer-packages.md)): projection is never a second source of truth.
+- A Cartography export is NOT ArchiMate persistence — "just persist the ArchiMate model" requests are the boundary to defend ([ADR-0015 §Negative Consequences](../architecture/decisions/adr-0015-opt-in-layer-packages.md)); clew's store keeps its own type catalogue.
+- A Cartography export is NOT a hand-maintained diagram — hand-maintained EA views are exactly the rot failure the enforced graph exists to prevent.
+
+**Cross-context:**
+- LikeC4 (and any future view tool) sits outside clew's boundary: "LikeC4 is a view tool; clew is an enforcement substrate — they compose" (cartography prototype, Plan 0138; imported at [`../discovery/cartography-prototype-clew-fit-2026-07-24.md`](../discovery/cartography-prototype-clew-fit-2026-07-24.md)).
+
+**Code convention:** CLI command `clew export likec4` (the `export` verb namespace already carries the Snapshot's `clew export`; the `likec4` argument selects the cartography projection); deterministic output — same store state, byte-identical views
+
+**First referenced:** [ADR-0015 — opt-in layer packages](../architecture/decisions/adr-0015-opt-in-layer-packages.md) · 2026-07-24
+
+---
+
 ## Cross-context translation matrix
 
 > When the same real-world concept is modelled differently in two or more bounded contexts,
@@ -430,5 +576,6 @@ None at present. *(The decision to elevate the kit to BC-02 is tracked in [`02b-
 
 | Date | Mode | Change summary | Author |
 |---|---|---|---|
+| 2026-07-24 | Mint (decided ADRs) | Six terms added for BC-01 from the [2026-07-24 grill-me session](../../var/reports/grill-me/2026-07-24-positioning-layer-packages.md) decisions: **GT-16 Layer package**, **GT-17 Enablement**, **GT-18 Stub parent**, **GT-19 Declared absence**, **GT-21 Cartography export** per [ADR-0015 — opt-in layer packages](../architecture/decisions/adr-0015-opt-in-layer-packages.md) (D1/D2/D3/D7), and **GT-20 Edge proposal** per [ADR-0016 — two-speed integrity](../architecture/decisions/adr-0016-two-speed-integrity-edge-property-bag.md) (D8). Quick index extended to 21 terms. | Victor Hueni |
 | 2026-07-24 | Cascade (decided ADRs) | Three already-decided changes cascaded in. **GT-04 Status**: enum aligned to the artefact-store DDL / kit frontmatter lifecycle (`draft`/`active`/`superseded`/`deprecated`, default `draft`; `retired` → `deprecated`), per the [artefact-store 2026-06-11 changelog row](07b-models/artefact-store.md#changelog). **GT-11 Audit trail**: redefined as delegated to git per [ADR-0013](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md) (C4.3 cut) — `audit_events` table and `clew log`/`clew history` removed from the definition; term kept because it is referenced elsewhere. **GT-14 Methodology + GT-15 Skill**: rewritten for the [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md) flip (structural definitions flow clew → kit as Customer-Supplier / Published Language; doc conventions remain kit → clew Conformist; semantics stay kit-side for agents); three dead `02b-context-map.md#bc-01--conformist--homemade-claude-kit-external-upstream` anchors repointed at the v2.0 context-map headings. | Victor Hueni |
 | 2026-05-25 | Scaffold + Seed + Enrich (one pass) | Initial 15 terms minted for BC-01 Artefact Store. Sources: 7 terms from [02b-bounded-contexts.md §BC-01 Ubiquitous language scope](02b-bounded-contexts.md#bc-01--artefact-store) (Artefact, Business ID, Relationship, File binding, Snapshot, Layout, Skill homonym warning); 4 derived from the [Artefact Store domain model](07b-models/artefact-store.md) entities + VOs (Artefact type, Status, Section anchor, plus IdCounter folded into Business ID's code convention); 4 from the [capability map](../business/03a-capability-map.md) BC-01 capabilities (Narrative, Audit trail, Drift, Traceability view); 1 borrowed from upstream kit (Methodology) for cross-reference validation context. All terms passed Evans 4-condition definition quality test. Cross-context matrix populated with 3 entries documenting kit ↔ BC-01 term divergence. | Victor Hueni |

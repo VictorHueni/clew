@@ -25,7 +25,7 @@ The single visual source of truth for clew's communication layer. Every generate
 clew is a precision tool for an audience that lives in terminals, reads code reviews, and trusts structure over decoration. The design language reflects the product's core promise: coherence, determinism, and traceability without friction.
 
 - **Personality:** Precise, structured, minimal — intelligent tooling with calm confidence. Not playful; not cold. The tone of a well-designed developer dashboard.
-- **Primary audience:** P-01 Ava — solo technical founders and agent-first product engineers who evaluate tools by their structural integrity, not their marketing surface.
+- **Primary audience:** P-01 Ava (core) + P-03 Arno (depth) — AI-native builders and small teams, from agent-first product engineers to AI-augmented architect-builders, who evaluate tools by their structural integrity, not their marketing surface.
 - **Accent reasoning:** Burgundy-crimson (`#800020`). The product name "clew" is the thread that guides you through the labyrinth — the archetypal thread is red (Ariadne's clew). Deep burgundy is authoritative and instantly distinctive in a sea of blue/indigo dev tools, while carrying the literal semantic of the product name. It signals confidence, precision, and the single thread that keeps everything coherent.
 - **Typography reasoning:** Inter for body and UI — the default of the developer-tooling world, universally legible, mathematically precise. JetBrains Mono for IDs, code, and labels — it gives every `P-01`, `C2.3`, `OBJ-02` identifier the fixed-width authority it deserves. The monospace choice signals that IDs are stable references, not prose.
 - **Light mode first:** presentations consume this palette. A near-white canvas keeps slide backgrounds from feeling like a slide tool; the surfaces feel like an IDE or a well-structured doc.
@@ -102,3 +102,4 @@ _None at present._
 |---|---|---|
 | 2026-06-24 | Initial scaffold | Victor Hueni |
 | 2026-06-24 | Brand rationale authored: burgundy-crimson accent #800020 (Ariadne's clew / literal thread metaphor), Inter + JetBrains Mono type pair, light-mode-first cool palette | Victor Hueni |
+| 2026-07-24 | Brand-audience line widened from P-01-only to the two-tier persona set (P-01 Ava core + P-03 Arno depth) per ADR-0014/ADR-0015 | Victor Hueni |
