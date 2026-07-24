@@ -52,7 +52,7 @@ flowchart TD
 
 > **Skill renames (ADR-0009).** `spec-delivery-roadmap` → `plan-delivery-roadmap`;
 > `spec-implementation-plan` → `plan-implementation`. Artefact types and IDs are unchanged — only the
-> skill, package, and path moved. The kit cascade (registry + path migration) is OI-0035 on ADR-0009.
+> skill, package, and path moved. The kit cascade (registry + path migration) is OI-0061 on ADR-0009.
 
 ## Boundary relationships
 

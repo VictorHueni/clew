@@ -184,9 +184,16 @@ traceability · local-first markdown/git posture · agent-native economics · me
 
 ---
 
+## Open Items
+
+None at present — profile-level watch triggers live in the CO-NN profiles, and watch-list monitoring for this landscape is tracked in the discovery scan's open items ([OI-0064 / OI-0065](../../discovery/competitive-landscape-2026-07-21-clew-replacement-scan.md#open-items)).
+
+---
+
 ## Changelog
 
 | Date | Mode | Change | Author | Reviewed by |
 |---|---|---|---|---|
 | 2026-07-21 | Scaffold + Industry analysis + Profiles + Mapping | Initial landscape persisted from the [discovery full-replacement scan](../../discovery/competitive-landscape-2026-07-21-clew-replacement-scan.md): Five Forces, 4-tier table, 6 Tier-1 profiles (CO-01…CO-06), strategic group map, value curve. All content desk-research based. | Victor Hueni (agent-drafted) | _TODO_ |
 | 2026-07-21 | Refresh (2026-07 wave, founder-sourced) | Tier-1 +2 profiles: [CO-07 SARA](CO-07-sara.md) (closest new tool to clew's mechanism) and [CO-08 OpenLore](CO-08-openlore.md) (deterministic code-architecture guardrails — the guard/gate mechanism one layer down). Tier-2 +3 rows (Reqord, RTMX, shtracer/Cairn). Force 1 (new entrants) evidence hardened: wave empirically confirms Very High. Exec summary updated: generic "git-native traceability for agents" positioning no longer available. | Victor Hueni (agent-drafted) | _TODO_ |
+| 2026-07-24 | Governance hygiene | `## Open Items` section added per repo convention ("None at present" with pointers: watch triggers in the CO-NN profiles, watch-list monitoring in the discovery scan's OI-0064/OI-0065 — post-renumber IDs). No analytical content change. | Victor Hueni (agent-drafted) | _TODO_ |

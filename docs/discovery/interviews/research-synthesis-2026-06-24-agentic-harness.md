@@ -343,8 +343,8 @@ The taxonomy used for the clew slide deck maps cleanly onto the research finding
 
 | OI-ID | Type | Summary | Source anchor | Source heading | Resolution path | Priority | Status | Owner | Due / Review date | Tracker ref |
 | :---- | :--- | :------ | :------------ | :------------- | :-------------- | :------- | :----- | :---- | :---------------- | :---------- |
-| OI-0030 | execution-item | Deep-dive the AHE paper (arXiv 2604.25850) methodology — the observability-driven automatic harness evolution approach is directly relevant to a future `util-harness-audit` skill. | #observation-observability | §2.5 Observability | Obtain and read full paper; assess whether AHE's three observability pillars map onto a clew skill concept. | medium | open | Victor Hueni | 2026-09-30 | _TBD_ |
-| OI-0031 | decision-gap | Whether clew's `homemade-claude-kit` should adopt `AGENTS.md` as the cross-tool interoperability surface (alongside the existing `CLAUDE.md`), given the empirical study's finding that `AGENTS.md` is the emerging cross-tool standard. | #configuration-patterns | §4 Configuration Patterns in the Wild | Review arXiv 2602.14690 §4 configuration-mechanism taxonomy; decide whether to add `AGENTS.md` generation to `util-metamodel-scaffold`. | medium | open | Victor Hueni | 2026-08-31 | _TBD_ |
+| OI-0053 | execution-item | Deep-dive the AHE paper (arXiv 2604.25850) methodology — the observability-driven automatic harness evolution approach is directly relevant to a future `util-harness-audit` skill. | #observation-observability | §2.5 Observability | Obtain and read full paper; assess whether AHE's three observability pillars map onto a clew skill concept. | medium | open | Victor Hueni | 2026-09-30 | _TBD_ |
+| OI-0054 | decision-gap | Whether clew's `homemade-claude-kit` should adopt `AGENTS.md` as the cross-tool interoperability surface (alongside the existing `CLAUDE.md`), given the empirical study's finding that `AGENTS.md` is the emerging cross-tool standard. | #configuration-patterns | §4 Configuration Patterns in the Wild | Review arXiv 2602.14690 §4 configuration-mechanism taxonomy; decide whether to add `AGENTS.md` generation to `util-metamodel-scaffold`. | medium | open | Victor Hueni | 2026-08-31 | _TBD_ |
 
 ---
 
@@ -353,3 +353,4 @@ The taxonomy used for the clew slide deck maps cleanly onto the research finding
 | Date | Change | Author |
 |---|---|---|
 | 2026-06-24 | Initial synthesis from 7 ranked sources — Raschka, Fowler/Li, arXiv 2602.14690, arXiv 2604.25850, Claude Code docs, Codex CLI docs. Structured around the 6-layer harness anatomy and 10 design principles. | Victor Hueni |
+| 2026-07-24 | Open-items renumber (governance sync, no content change): this note's rows OI-0030/OI-0031 collided with ledger-owned IDs (canonical since the 2026-05-26 sync); renumbered to OI-0053/OI-0054 per the central ledger (`project-control/open-items/open-items.md`) mapping. | Victor Hueni |

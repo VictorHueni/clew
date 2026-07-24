@@ -1,5 +1,9 @@
 ---
+type: Research Note
 title: Agentic Harness — Capabilities, Techniques, and Real Tool Ecosystem
+description: Reference taxonomy of the agentic harness — fifteen functional domains grouped into capability zones, each decomposed into capabilities, techniques, and real tools ranked by adoption.
+tags: [agentic-harness, discovery, capabilities, tooling]
+timestamp: 2026-07-24T08:19:00Z
 status: active
 owner: Victor Hueni
 last_reviewed: 2026-06-28
@@ -1931,3 +1935,9 @@ End-to-end examples showing how the 15 domains compose in production agentic sys
 ```
 
 **Stack:** [Stagehand](https://github.com/browserbase/stagehand) · [LangGraph](https://langchain-ai.github.io/langgraph/) · [Mem0](https://mem0.ai/) · [LangFuse](https://github.com/langfuse/langfuse)
+
+---
+
+## Open Items
+
+None at present.

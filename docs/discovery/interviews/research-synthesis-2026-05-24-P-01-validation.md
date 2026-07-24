@@ -188,4 +188,4 @@ These emerged but cannot be answered by N = 1; they should inform wave-2 intervi
 
 ## Methodology references
 
-This synthesis follows the post-interview template from the [`business-research` skill](https://github.com/VictorHueni/homemade-claude-kit/tree/claude/metamodel-personal-skills-naecw/business-research). Frameworks: BABOK §10.25 (interviews), Portigal *Interviewing Users* (2nd ed., 2022) for probing discipline, Tomer Sharon assumption-testing for hypothesis grounding, NN/g for sample-size and saturation.
+This synthesis follows the post-interview template from the [`business-research` skill](https://github.com/VictorHueni/homemade-claude-kit/tree/main/business-research). Frameworks: BABOK §10.25 (interviews), Portigal *Interviewing Users* (2nd ed., 2022) for probing discipline, Tomer Sharon assumption-testing for hypothesis grounding, NN/g for sample-size and saturation.

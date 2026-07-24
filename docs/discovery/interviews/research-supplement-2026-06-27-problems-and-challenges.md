@@ -294,10 +294,10 @@ Open problems in harness engineering (LangChain DeepAgents team):
 
 ## Open Items
 
-| OI-ID | Type | Summary | Source anchor | Resolution path | Priority | Status | Owner | Due / Review date | Tracker ref |
-|---|---|---|---|---|---|---|---|---|---|
-| OI-0045 | execution-item | Merge relevant findings from this supplement into the main research synthesis document (§2 context crisis numbers, §3 agent sprawl data, §5 safety figures) | Cross-document | Determine whether to inline into main synthesis or keep as standalone supplement | medium | open | Victor Hueni | 2026-07-31 | _TBD_ |
-| OI-0046 | decision-gap | Whether clew's harness design should target the "primitive configuration phase" finding — most users use only context files, not skills/subagents | §6.3 | Review whether clew should invest in skills/subagents or double down on context-file excellence | medium | open | Victor Hueni | 2026-08-31 | _TBD_ |
+| OI-ID | Type | Summary | Source anchor | Source heading | Resolution path | Priority | Status | Owner | Due / Review date | Tracker ref |
+|---|---|---|---|---|---|---|---|---|---|---|
+| OI-0045 | execution-item | Merge relevant findings from this supplement into the main research synthesis document (§2 context crisis numbers, §3 agent sprawl data, §5 safety figures) | Cross-document | §2 — The Context Crisis · §3 — Agent Sprawl: The New Technical Debt · §5 — Safety and Security Crises | Determine whether to inline into main synthesis or keep as standalone supplement | medium | open | Victor Hueni | 2026-07-31 | _TBD_ |
+| OI-0046 | decision-gap | Whether clew's harness design should target the "primitive configuration phase" finding — most users use only context files, not skills/subagents | §6.3 | §6.3 The Configuration Primitive | Review whether clew should invest in skills/subagents or double down on context-file excellence | medium | open | Victor Hueni | 2026-08-31 | _TBD_ |
 
 ---
 
@@ -329,3 +329,4 @@ Open problems in harness engineering (LangChain DeepAgents team):
 | Date | Change | Author |
 |---|---|---|
 | 2026-06-27 | Initial supplement compiled from web research across 18+ sources focused on problems/challenges agentic harnesses solve — context crisis, performance gap, agent sprawl, 2025 failure, safety, engineering gap, OpenAI Codex lessons, open problems. | Victor Hueni |
+| 2026-07-24 | Open Items table brought onto the canonical 11-column schema: missing `Source heading` column added (per the kit open-items governance contract), values filled from the rows' actual source sections (§2/§3/§5 for OI-0045; §6.3 for OI-0046). Row IDs unchanged — OI-0045/OI-0046 do not collide with the central ledger. | Victor Hueni |

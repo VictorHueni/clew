@@ -219,4 +219,4 @@ This interview deliberately does **not** test:
 
 ## Methodology references
 
-This script follows: BABOK §10.25 (interviews), Portigal *Interviewing Users* (2nd ed., 2022), NN/g semi-structured guidance, Tomer Sharon's assumption-testing pattern. See the [`business-research` skill in homemade-claude-kit](https://github.com/VictorHueni/homemade-claude-kit/tree/claude/metamodel-personal-skills-naecw/business-research) for the full bibliography.
+This script follows: BABOK §10.25 (interviews), Portigal *Interviewing Users* (2nd ed., 2022), NN/g semi-structured guidance, Tomer Sharon's assumption-testing pattern. See the [`business-research` skill in homemade-claude-kit](https://github.com/VictorHueni/homemade-claude-kit/tree/main/business-research) for the full bibliography.

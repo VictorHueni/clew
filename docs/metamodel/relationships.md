@@ -16,7 +16,7 @@ review_interval: 180d
 > [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md) this
 > page is the canonical home for the relationship vocabulary. An identical transcription currently
 > also lives in [`artefact-store.md` §Relationship registry](../domain/07b-models/artefact-store.md#relationship-registry);
-> that copy will be reduced to a pointer here (OI-0029) — **not done yet**, so for now treat this page
+> that copy will be reduced to a pointer here (OI-0055) — **not done yet**, so for now treat this page
 > and that registry as the same list. Eventually both, plus clew's runtime config, generate from one
 > machine-readable spec.
 
@@ -109,3 +109,9 @@ Carried over from the source transcription — resolve when clew's `ALLOWED_RELA
 
 *Full provenance and the property-schema scope notes live in
 [`artefact-store.md`](../domain/07b-models/artefact-store.md#registry-open-items--flagged-judgment-calls).*
+
+## Open Items
+
+| OI-ID | Type | Summary | Source anchor | Source heading | Resolution path | Priority | Status | Owner | Due / Review date | Tracker ref |
+| :---- | :--- | :------ | :------------ | :------------- | :-------------- | :------- | :----- | :---- | :---------------- | :---------- |
+| OI-0074 | decision-gap | Relationship-catalogue ratification debt: 37 ⚠ proposed verbs; hard edges on ID-less endpoints (`SEGMENTS` / `OPERATIONALISES` / `QUANTIFIES` touch `canvas` blocks and `process`, which mint no enforceable IDs); 1:N side-binding semantics unstated (which endpoint carries the constraint); the `REALIZES`/"realise" verb overload across catalogue and prose; the canvas block-ID pattern `[A-Z]{2}-NN` collides with other two-letter ID families (`CO-NN`, `GT-NN`, …); and mixed-case `Plan-`/`Research-` ID formats sit beside all-caps families. All to ratify in one pass when `ALLOWED_RELATIONSHIPS` (`crud.py`) is authored. | #flagged-judgment-calls | Flagged judgment calls | Author `ALLOWED_RELATIONSHIPS`; ratify or amend every ⚠ verb + direction, decide the ID-less-endpoint and side-binding rules, resolve the block-ID collision and ID-case conventions; update this catalogue and `artefact-store.md` §Relationship registry together. | high | open | Victor Hueni | 2026-10-31 | _TBD_ |

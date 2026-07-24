@@ -39,7 +39,7 @@ Three lenses on the same model, from coarse to fine:
    verb, source→target, cardinality, strength (hard/soft), role vocabulary, and meaning. The
    human-readable form of clew's `ALLOWED_RELATIONSHIPS`. *(Transitional: an identical copy still
    lives in [`artefact-store.md` §Relationship registry](../domain/07b-models/artefact-store.md#relationship-registry)
-   until OI-0029 reduces it to a pointer.)*
+   until OI-0055 reduces it to a pointer.)*
 
 The whole metamodel as one build-order graph (overview, all packages at once) lives in the
 [repository README](../../README.md#artefact-layers-and-build-order).
@@ -72,7 +72,7 @@ The whole metamodel as one build-order graph (overview, all packages at once) li
 > (qa-*, `domain-event-storming`, `arch-threat-model`, `ops-slo`, …); the
 > [`relationships.md`](relationships.md) catalogue is in place. Still to come: reducing the duplicate
 > registry in `artefact-store.md` to a pointer, and later generation from clew's schema. Tracked as
-> OI-0029 on
+> OI-0055 on
 > [ADR-0008](../architecture/decisions/adr-0008-clew-canonical-source-of-truth-for-metamodel.md).
 
 ---
