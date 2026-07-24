@@ -89,9 +89,18 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 
 ## Objective × Epic Traceability Matrix
 
+Epics are minted in the [delivery roadmap](../plans/delivery-roadmap.md); each row links the epic to the objective(s) its value statement serves.
+
 | Epic | Name | Objective | KRs served |
 |---|---|---|---|
-| _TODO_ | (no epics defined yet; delivery roadmap pending) | | |
+| [E-01](../plans/delivery-roadmap.md#e-01--trustworthy-artefact-persistence) | Trustworthy Artefact Persistence | OBJ-02 (primary) · OBJ-01 | KR-02.1, KR-02.2, KR-02.3, KR-02.4 · KR-01.1 |
+| [E-02](../plans/delivery-roadmap.md#e-02--deterministic-architecture-answers) | Deterministic Architecture Answers | OBJ-01 | KR-01.2, KR-01.3, KR-01.4 (read-side) |
+| [E-03](../plans/delivery-roadmap.md#e-03--core-methodology-schema-coverage) | Core Methodology Schema Coverage | OBJ-01 · OBJ-02 | KR-01.1 · KR-02.1 (widens the artefact set the 100% target quantifies over) |
+| [E-04](../plans/delivery-roadmap.md#e-04--change-guardrail) | Change Guardrail *(Phase 2, wave-2 gated)* | OBJ-01 · OBJ-02 | KR-01.4 · KR-02.2 (forward-looking); v1 OKR set will have expired — successor KRs minted at the gate |
+| [E-05](../plans/delivery-roadmap.md#e-05--opt-in-layer-packages) | Opt-in Layer Packages *(Phase 2, wave-2 gated)* | — | No P-03 objective exists yet (this OKR set is v1-MVP-scoped and predates [ADR-0015](../architecture/decisions/adr-0015-opt-in-layer-packages.md)); minting one is Phase-2 gate work |
+| [E-06](../plans/delivery-roadmap.md#e-06--methodology-catalogue-upkeep) | Methodology Catalogue Upkeep *(Phase 3)* | — | Serves OBJ-01 indirectly; no KR measures catalogue upkeep |
+
+*(OBJ-03 intentionally maps to no epic: it is a research/validation objective whose KRs are activities — its wave-2 interviews are the **gate** on E-04/E-05, not a delivery scope.)*
 
 ## Open Items
 
@@ -105,6 +114,7 @@ Methodology and bibliography: see the [`business-objective` skill in homemade-cl
 
 | Date | Change | Evidence | Effects |
 |---|---|---|---|
+| 2026-07-24 | Objective × Epic matrix backfilled from the newly minted [delivery roadmap](../plans/delivery-roadmap.md) (E-01–E-06). E-01→OBJ-02+OBJ-01, E-02→OBJ-01, E-03→OBJ-01+OBJ-02; E-04/E-05 flagged wave-2-gated with the v1-OKR-expiry caveat; E-05 and E-06 honestly unmapped (no P-03 objective yet; no catalogue-upkeep KR). OBJ-03 recorded as the gate on E-04/E-05 rather than a mapped objective. | [docs/plans/delivery-roadmap.md](../plans/delivery-roadmap.md) changelog 2026-07-24. | None outside this commit; no OBJ wording or KR target changes. |
 | 2026-07-24 | Open item filed: OI-0073 (decision-gap) — KR-01.4 read-side + Lean Canvas VS-2.3 now cite C4.3, which ADR-0013 delegates to git; the surviving read-side capability mapping (likely C3.2) needs a decision. §Open Items converted from "None at present" to the canonical table; indirect KR-baseline note retained. | Central ledger `project-control/open-items/open-items.md` sync 2026-07-24. | None outside this commit; the mapping decision itself is deferred to OI-0073. |
 | 2026-07-24 | Reference hygiene. OBJ-01 §Realised by KR-01.4 read-side link repointed from the retired C3.3 to [C4.3 Audit trail](03a-capability-map.md#c43--audit-trail), mirroring the C3.3 retirement rationale in the [capability-map changelog](03a-capability-map.md#changelog) (`clew history` folded into C4.3 as C4.3.F04; rationale carried by artefact content; forward state by C3.2's impact view). §Upstream gaps: stale "VS-4 catalogued but not yet stage-decomposed" claim replaced with the current state (fully stage-decomposed 2026-05-25; Medium pain, Assumed confidence, OI-0013 caveat). No OBJ wording or KR target changes. | [03a-capability-map.md](03a-capability-map.md) C3.3 retirement entry + [04a-value-streams.md VS-4](04a-value-streams.md#vs-4--share-architecture). | None outside this commit; mechanical link repair only. |
 | 2026-07-07 | KR-02.1 reworded to split the guarantee: reference integrity is enforced **at write time in the store**, while prose↔store drift is a **check-time** guarantee (`clew check`) — closing an overclaim on the DB↔markdown boundary. OBJ-03 gained a **persona↔rigor make-or-break** test for wave-2 (will a solo builder author the upstream capability/value-stream rigor, or only specs?). | [ADR-0013](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md) + [competitive scan 2026-07-07](../discovery/competitive-landscape-2026-07-07-agentic-architecture-tools.md). | Companion to the VISION not-EA guardrail and the capability-map / FBS / CLI / domain scope cuts. KR-02.1 measurement method split into store-query + drift-scan. |
