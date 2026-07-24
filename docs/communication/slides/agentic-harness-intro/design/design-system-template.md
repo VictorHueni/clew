@@ -27,7 +27,7 @@ presentation convey? What principles guide layout and decoration choices?_
 
 The deck uses the **project design system as its single source of truth**: the
 base palette and typography are defined once in `docs/ux/tokens.css` by the
-[`ux-design-system`](../../../../ux-design-system/SKILL.md) skill and inlined by
+[`ux-design-system`](../../../../../../homemade-claude-kit/plugins/delivery-comms/skills/ux-design-system/SKILL.md) skill and inlined by
 `build.py` **before** this stylesheet. **Do NOT redefine base palette values
 here** — reference them with `var()` and adopt the contract token names. Run
 `ux-design-system scaffold` (then `generate`) if `docs/ux/tokens.css` does not

@@ -1,5 +1,9 @@
 ---
+type: Business Model Canvas
 title: Lean Canvas
+description: Lean Canvas (Maurya variant) for the clew v1 MVP, current-state only.
+tags: [business, lean-canvas, strategy]
+timestamp: 2026-05-24T11:14:36Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-24

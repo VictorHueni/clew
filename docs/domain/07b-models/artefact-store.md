@@ -1,5 +1,9 @@
 ---
+type: Domain Model
 title: Artefact Store — Domain Model
+description: Domain model for BC-01 Artefact Store, the core subdomain where clew's integrity guarantee lives.
+tags: [domain, domain-model, bc-01]
+timestamp: 2026-05-25T11:58:25Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-25
@@ -553,7 +557,7 @@ types, and the allowed types. New relationship types are added in code — no DD
 required (the generic `artefact_references` table holds any edge).
 
 This table is the documentation mirror of `crud.py`'s `ALLOWED_RELATIONSHIPS`. It is a
-**first full transcription** of [`metamodel.md`](../../../homemade-claude-kit/rules/metamodel.md)'s
+**first full transcription** of [`metamodel.md`](../../../../homemade-claude-kit/rules/metamodel.md)'s
 ER diagram + "hard rules of the graph", expressed in clew's snake_case artefact types.
 
 **Columns.** `card` = cardinality (`1:1`, `1:N`, `N:M`, `N:0..1`). `str` = strength:
@@ -859,6 +863,7 @@ SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY dept
 
 | Date | Author | Change |
 |---|---|---|
+| 2026-07-24 | Victor Hueni | Link repair (audit Check 3): the cross-repo link to the kit's `metamodel.md` rule (§Relationship registry note) was one `../` level short (resolved inside the clew repo); corrected to the sibling-checkout depth (`../../../../homemade-claude-kit/…`). |
 | 2026-07-24 | Victor Hueni | Open-items ID assignment (governance sync): the two `OI-TBD` rows filed earlier today received canonical IDs from the central ledger sequence — `id_sequences` composite-key decision → OI-0068; `ArtefactUnlinked` event decision → OI-0069. Row content unchanged. |
 | 2026-07-24 | Victor Hueni | Decided-cascade cleanup. **Status lifecycle**: AGG-01 state diagram, INV-3, the ENT-01 attribute table, and `retire()` now mirror the §Physical schema DDL enum (`draft`/`active`/`superseded`/`deprecated`, default `draft` — the 2026-06-11 alignment): `register()` enters `draft`, `draft → active` added as the only legal exit from `draft` (promotion not yet bound to a command), `retired` → `deprecated`; `retire()`/`supersede()` matrix otherwise unchanged. **Audit delegation (ADR-0013)**: AGG-02 `unlink` no longer claims "recorded in audit trail" — an unlink leaves no record beyond the subsequent `snapshot/` diff in git (ENT-01/ENT-02 lifecycle lines reworded to match); whether v1 needs an `ArtefactUnlinked` event filed as an OI-TBD open item. **§Property schemas**: `complexity` removed from `fbs_functionality`, matching the [FBS C3.2.F04 `clew estimate` cut](../../product-specs/07a-fbs.md) (ADR-0013 delivery-accounting scope-out). **§Business identity**: `value_stream` (`VS-{n}`) and `bounded_context` (`BC-{nn}`) rows added — both v1 persisted types missing from the ID-format table (formats per the metamodel package pages / kit registry). `id_sequences` single-column PK vs parent-scoped ID formats filed as an OI-TBD open item (schema decision pending, DDL untouched). |
 | 2026-07-07 | Victor Hueni | Scope & canonicity callout added (ADR-0013): three-aggregate / four-table minimalism stated as deliberate; canonicity partitioned by field-class (store=structure, markdown=prose/frontmatter, snapshot=durable, `.db`=disposable); write-time vs check-time integrity distinction made explicit; **audit trail delegated to git** (no Audit aggregate — resolves the C4.3 vs. domain-model gap). `ArtefactLinked` (EVT-03) consumer list: `clew estimate` (cut) replaced with the read-side `clew context` / `clew guard`. | Victor Hueni |

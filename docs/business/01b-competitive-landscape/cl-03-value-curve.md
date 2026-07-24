@@ -1,5 +1,9 @@
 ---
+type: Competitor Profile
 title: Strategy Canvas / Value Curve — clew
+description: Strategy canvas / value curve showing how the industry competes across the factors of competition and where clew's target state sits versus Tier-1 competitors.
+tags: [business, competitive-landscape, value-curve]
+timestamp: 2026-07-21T10:13:21Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-07-21

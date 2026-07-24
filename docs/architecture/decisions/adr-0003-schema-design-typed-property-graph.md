@@ -1,5 +1,9 @@
 ---
+type: Architecture Decision Record
 title: Schema design — typed property graph
+description: Designs the persistence schema as a typed property graph — a single artefacts table with JSON properties plus a typed edge table.
+tags: [architecture, adr, schema]
+timestamp: 2026-05-25T11:21:59Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-25

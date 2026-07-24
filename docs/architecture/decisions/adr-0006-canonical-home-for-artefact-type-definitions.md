@@ -1,5 +1,9 @@
 ---
+type: Architecture Decision Record
 title: Canonical home for artefact-type definitions — semantic in SKILL.md, structural in a new kit rule
+description: Splits artefact-type definitions by fact-class — semantic definitions live in each skill's SKILL.md, structural facts in a kit registry rule.
+tags: [architecture, adr, metamodel]
+timestamp: 2026-05-26T16:11:06Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-26
@@ -73,7 +77,7 @@ Phase 2 (next kit-side increment):
   - `id_format` — the canonical regex (`P-\d{2}`, `KR-\d+\.\d+`, …).
   - `layout` — one of `single-collection`, `one-per-artefact`, `inherits-from-parent` per [ADR-0002](adr-0002-artefact-file-binding.md).
   - `default_path` — the canonical output location template.
-  - `default review_interval` — per [`rules/artefact-frontmatter.md`](../../../homemade-claude-kit/rules/artefact-frontmatter.md) (30d / 60d / 90d / 180d).
+  - `default review_interval` — per [`rules/artefact-frontmatter.md`](../../../../homemade-claude-kit/rules/artefact-frontmatter.md) (30d / 60d / 90d / 180d).
   - `frontmatter_conditionals` — list of any per-type conditional frontmatter fields beyond the universal `supersedes` / `superseded_by` pair (initially empty for most types; may grow).
   - `property_schema_ref` — pointer to the Pydantic property model when clew's Phase 2 lands one (`_TBD_` until then).
 - Backfill the table from existing scattered sources (no semantic loss; this is a consolidation pass).
@@ -129,7 +133,7 @@ The decision is confirmed when all of the following hold:
 **Neutral**
 
 - `## Canonical definition` becomes a required section for any new skill that mints an artefact type. The kit's `skill-creation-sync.md` rule will need an update to enforce this — caught by `OI-0027` below.
-- The registry's `frontmatter_conditionals` column is mostly empty today (only `supersedes` / `superseded_by` apply, and they are universal per [`rules/artefact-frontmatter.md`](../../../homemade-claude-kit/rules/artefact-frontmatter.md)). The column exists for future expansion (e.g. an ADR-specific `decision_date`, a PRD-specific `linked_epic`); the empty state today is correct, not a placeholder.
+- The registry's `frontmatter_conditionals` column is mostly empty today (only `supersedes` / `superseded_by` apply, and they are universal per [`rules/artefact-frontmatter.md`](../../../../homemade-claude-kit/rules/artefact-frontmatter.md)). The column exists for future expansion (e.g. an ADR-specific `decision_date`, a PRD-specific `linked_epic`); the empty state today is correct, not a placeholder.
 
 ## Pros and Cons of the Options
 
@@ -208,3 +212,4 @@ The decision is confirmed when all of the following hold:
 | 2026-06-11 | OI-0024 → `in-progress`: kit `rules/artefact-types-registry.md` created and pushed on branch `claude/metamodel-intent-report-svy6cm` (commit `0690d6f`), backfilled from `metamodel.md` + ADR-0002 + `artefact-frontmatter.md`, with 9 discrepancies flagged in-file. Closes on merge to kit `main`. (NB: this ADR's `OI-0024` is distinct from the kit's own `OI-0024` / GitHub #28, the unrelated `util-provenance --c2pa` item — a cross-repo ID collision.) | Victor Hueni |
 | 2026-06-11 | OI-0024 → `closed`: kit PR #45 (artefact-types-registry) merged to kit `main` (merge `ea9a7ec`). Registry-creation phase complete. | Victor Hueni |
 | 2026-06-27 | **Amended by [ADR-0008](adr-0008-clew-canonical-source-of-truth-for-metamodel.md).** The semantic/structural *split* this ADR established stands; ADR-0008 flips the **structural** fact-class home (kit → clew) and reverses this ADR's **Phase 4** derivation direction — clew's `ARTEFACT_TYPE_CONFIGS` no longer derives *from* the kit registry; instead the kit registry is generated *from* clew via `clew metamodel export`. Skills retain `## Canonical definition` (Phase 3) unchanged. | Victor Hueni |
+| 2026-07-24 | Link repair (audit Check 3): the two cross-repo links to the kit's `rules/artefact-frontmatter.md` were one `../` level short (resolved inside the clew repo); corrected to the sibling-checkout depth (`../../../../homemade-claude-kit/…`). | Victor Hueni |

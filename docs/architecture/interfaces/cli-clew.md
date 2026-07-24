@@ -1,5 +1,9 @@
 ---
+type: CLI Surface Contract
 title: clew CLI — Interface Contract v1
+description: The authoritative contract between the clew CLI (v0.1–v0.3 MVP scope) and its callers, specifying command signatures, I/O contracts, validation rules, and error behaviour.
+tags: [architecture, interface, cli]
+timestamp: 2026-05-25T11:58:25Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-25

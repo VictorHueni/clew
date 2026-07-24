@@ -1,5 +1,9 @@
 ---
+type: Competitor Profile
 title: Competitor — SARA (CO-07)
+description: "Tier-1 Direct-adjacent competitor profile — SARA: a Rust CLI treating markdown + YAML frontmatter documents as a typed graph, the closest single tool to clew's mechanism found to date."
+tags: [business, competitive-landscape, competitor]
+timestamp: 2026-07-21T17:06:15Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-07-21

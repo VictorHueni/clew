@@ -1,5 +1,9 @@
 ---
+type: Architecture Decision Record
 title: Build-planning artefacts move to a `plan-` package, split from Product Specs
+description: Moves build-planning artefacts to a plan- package, split from Product Specs.
+tags: [architecture, adr, packaging]
+timestamp: 2026-06-27T15:01:07Z
 status: active
 owner: Victor Hueni
 last_reviewed: 2026-06-27

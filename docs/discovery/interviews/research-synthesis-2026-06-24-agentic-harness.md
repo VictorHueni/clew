@@ -1,5 +1,9 @@
 ---
+type: Research Note
 title: Research Synthesis — What Makes a Good Agentic Harness (2025-2026)
+description: Systematic review of seven ranked sources on what makes a well-engineered agentic coding harness (2025–2026).
+tags: [discovery, research, agentic-harness]
+timestamp: 2026-06-24T16:59:31Z
 status: active
 owner: Victor Hueni
 last_reviewed: 2026-06-24

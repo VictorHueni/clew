@@ -1,5 +1,9 @@
 ---
+type: Competitor Profile
 title: Competitive Landscape — clew (hub)
+description: Strategic analysis hub for clew's competitive landscape — Porter's Five Forces industry structure and Direct/Indirect/Substitute/Potential competitor tiering.
+tags: [business, competitive-landscape, five-forces]
+timestamp: 2026-07-21T10:13:21Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-07-21

@@ -1,5 +1,9 @@
 ---
+type: Bounded Context
 title: clew Bounded Context Map
+description: Catalogues clew's bounded contexts — named islands of consistent domain meaning, their subdomain classification, owned capabilities, and owning teams.
+tags: [domain, bounded-contexts]
+timestamp: 2026-05-25T11:58:25Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-25

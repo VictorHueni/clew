@@ -1,5 +1,9 @@
 ---
+type: Architecture Decision Record
 title: File-binding content-hash strategy — canonicalised section body via dprint, single hash, four drift categories
+description: File-binding content-hash strategy — canonicalise the section body via dprint then SHA-256, with a single hash and four drift categories surfaced by clew check.
+tags: [architecture, adr, file-binding]
+timestamp: 2026-06-24T16:59:31Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-27

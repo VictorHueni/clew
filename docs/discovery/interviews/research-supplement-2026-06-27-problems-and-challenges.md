@@ -1,5 +1,9 @@
 ---
+type: Research Note
 title: Research Supplement — Problems & Challenges Agentic Harnesses Solve (2025-2026)
+description: Research supplement documenting the concrete pain points, failure modes, and industry crises that drive demand for agentic harness engineering.
+tags: [discovery, research, agentic-harness]
+timestamp: 2026-06-28T09:02:52Z
 status: active
 owner: Victor Hueni
 last_reviewed: 2026-06-27

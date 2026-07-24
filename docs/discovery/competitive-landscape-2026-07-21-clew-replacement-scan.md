@@ -1,5 +1,9 @@
 ---
+type: Research Note
 title: Competitive Landscape — Full-Replacement Scan for clew
+description: Desk-research sweep across six tool categories asking whether any existing tool or realistic combination fully replaces clew as a local-first, agent-native product-intelligence and architectural-memory layer.
+tags: [discovery, competitive-landscape, research]
+timestamp: 2026-07-21T08:34:30Z
 status: active
 owner: Victor Hueni
 last_reviewed: 2026-07-21

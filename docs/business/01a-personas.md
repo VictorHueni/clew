@@ -1,5 +1,9 @@
 ---
+type: Persona
 title: Personas
+description: Singleton hub for every user, stakeholder, and negative persona that clew is designed for or explicitly designed against.
+tags: [business, personas]
+timestamp: 2026-05-24T09:05:21Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-24

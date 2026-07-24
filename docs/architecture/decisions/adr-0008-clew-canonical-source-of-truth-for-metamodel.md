@@ -1,5 +1,9 @@
 ---
+type: Architecture Decision Record
 title: clew is the canonical source of truth for metamodel structure & relationships
+description: Makes clew the canonical source of truth for metamodel structure and relationships, with the kit registry as a generated projection.
+tags: [architecture, adr, metamodel]
+timestamp: 2026-06-27T13:04:38Z
 status: active
 owner: Victor Hueni
 last_reviewed: 2026-06-27
@@ -14,7 +18,7 @@ review_interval: 180d
 definitions by *fact-class*: **semantic** definitions ("what a good persona *is*", Evans
 discipline, anti-patterns, examples) live in each kit `SKILL.md` § `## Canonical definition`;
 **structural** definitions (id_format, layout, default_path, frontmatter conditionals) live in
-the kit's [`rules/artefact-types-registry.md`](../../../homemade-claude-kit/rules/artefact-types-registry.md).
+the kit's [`rules/artefact-types-registry.md`](../../../../homemade-claude-kit/rules/artefact-types-registry.md).
 clew's `ARTEFACT_TYPE_CONFIGS` was to **derive from** that kit registry (ADR-0006 Phase 4), and
 [`02b-context-map.md`](../../domain/02b-context-map.md) models clew as a **Conformist consumer** of
 the kit.
@@ -231,3 +235,4 @@ Confirmed when all hold:
 | 2026-06-27 | Initial draft. Amends ADR-0006: clew becomes the canonical source of truth for the structural + relational metamodel (skills retain semantics); kit registry + `metamodel.md` structural blocks become generated projections via a future `clew metamodel export`. Motivated by the metamodel being a tool-agnostic standard wrongly coupled to a Claude-specific skills repo. Four-phase rollout (this ADR → `docs/metamodel/` → machine-readable spec → kit export). | Victor Hueni |
 | 2026-06-27 | Activated (`draft → active`). Phases 1–2 in place (`docs/metamodel/` authored) and the SoT pattern exercised twice — ADR-0009 (`plan-` split) and ADR-0010 (`agent-` package) — with kit PRs #51/#52 merged. Phases 3–4 (machine-readable spec, `clew metamodel export`) remain future work. | Victor Hueni |
 | 2026-07-24 | Open-items renumber (governance sync, no content change): this ADR's rows OI-0029–OI-0033 collided with ledger-owned OI-0029–OI-0033 (canonical since the 2026-05-26 sync); renumbered to OI-0055–OI-0059 per the [central ledger](../../../project-control/open-items/open-items.md) mapping. Cross-references in `docs/metamodel/README.md`, `docs/metamodel/relationships.md`, and `02b-context-map.md` updated in the same pass. | Victor Hueni |
+| 2026-07-24 | Link repair (audit Check 3): the cross-repo link to the kit's `rules/artefact-types-registry.md` was one `../` level short (resolved inside the clew repo); corrected to the sibling-checkout depth (`../../../../homemade-claude-kit/…`). | Victor Hueni |

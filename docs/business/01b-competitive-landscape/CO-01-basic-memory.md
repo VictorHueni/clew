@@ -1,5 +1,9 @@
 ---
+type: Competitor Profile
 title: Competitor — basic-memory (CO-01)
+description: "Tier-1 Direct competitor profile — basic-memory: same segment, same local-first markdown-in-git storage philosophy, overlapping persistent-memory value proposition."
+tags: [business, competitive-landscape, competitor]
+timestamp: 2026-07-21T10:13:21Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-07-21

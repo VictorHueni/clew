@@ -1,5 +1,9 @@
 ---
+type: Value Stream
 title: Value Streams
+description: Catalogue of value streams describing how value flows from P-01 Ava through stages to the value she receives, with stages soft-linked to capabilities.
+tags: [business, value-streams]
+timestamp: 2026-05-25T06:14:14Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-25

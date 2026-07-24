@@ -1,5 +1,9 @@
 ---
+type: Architecture Decision Record
 title: Introduce a persistence layer for the strategic-architecture metamodel
+description: Introduces a persistence layer for the strategic-architecture metamodel — a CLI tool with SQLite as canonical store and deterministic YAML export.
+tags: [architecture, adr, persistence]
+timestamp: 2026-05-24T06:37:52Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-25

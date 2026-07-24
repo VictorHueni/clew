@@ -1,5 +1,9 @@
 ---
+type: Architecture Decision Record
 title: Agent-tooling skills regroup into an `agent-` package (Agent-Centric Development Cycle)
+description: Regroups agent-tooling skills into an agent- package framed on the Agent-Centric Development Cycle.
+tags: [architecture, adr, packaging]
+timestamp: 2026-06-27T16:10:30Z
 status: active
 owner: Victor Hueni
 last_reviewed: 2026-06-27

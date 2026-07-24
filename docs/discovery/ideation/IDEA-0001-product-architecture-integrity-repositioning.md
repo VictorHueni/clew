@@ -1,5 +1,9 @@
 ---
+type: Idea
 title: IDEA-0001 — Reposition clew as the product-architecture integrity layer
+description: Pre-formal capture of the founder's 2026-07-21 moat/positioning rework prompted by the 2026-07 competitor wave.
+tags: [discovery, ideation, positioning]
+timestamp: 2026-07-21T17:06:15Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-07-21

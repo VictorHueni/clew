@@ -1,5 +1,9 @@
 ---
+type: Design System
 title: clew — Design System
+description: The single visual source of truth for clew's communication layer — every generated deck and visualisation themes from the tokens defined here.
+tags: [ux, design-system, tokens]
+timestamp: 2026-06-24T16:59:31Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-06-24

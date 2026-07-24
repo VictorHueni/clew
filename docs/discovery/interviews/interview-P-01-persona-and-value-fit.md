@@ -1,5 +1,9 @@
 ---
+type: Research Note
 title: Interview script · P-01 Ava · persona + UVP validation (wave 1)
+description: Interview script for P-01 Ava persona and UVP validation (wave 1), elevating four Assumed claims toward Tested.
+tags: [discovery, interview, p-01]
+timestamp: 2026-05-24T16:08:53Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-24
@@ -7,7 +11,7 @@ review_interval: 90d
 interview_target: P-01
 language: English
 style: semi-structured
-session_context: Interview 1 of [OBJ-03 KR-03.2](../../04b-objectives.md#obj-03--validate-the-core-hypotheses-before-scaling) (target 3 to 5). Interviewee self-identifies as a direct instance of P-01.
+session_context: Interview 1 of [OBJ-03 KR-03.2](../../business/04b-objectives.md#obj-03--validate-the-core-hypotheses-before-scaling) (target 3 to 5). Interviewee self-identifies as a direct instance of P-01.
 duration_target: 55 minutes
 ---
 
@@ -19,18 +23,18 @@ This interview elevates four specific Assumed claims toward Tested. Each hypothe
 
 | # | Hypothesis | Source artefact | Current state | Target state |
 |---|---|---|---|---|
-| H1 | P-01's §Frustrations are the top 3 pains an agent-first product engineer faces, in the right priority order. | [01a-personas.md §Frustrations](../../01a-personas.md) | Assumed | Tested (confirmed / refuted / refined per item) |
-| H2 | P-01's §Goals (1 to 5) and §System Needs cover the outcomes the persona actually wants. | [01a-personas.md §Goals + §System Needs](../../01a-personas.md) | Assumed | Tested |
-| H3 | The Lean Canvas §3 UVP bullets (north-star, high-concept, three concrete wins, anti-promise) resonate as a pitch that would prompt the persona to try clew. | [02a-lean-canvas.md §3 UVP](../../02a-lean-canvas.md#3-unique-value-proposition--confidence-tested-n1-founder-as-instance-with-refinement) | Assumed | Tested |
-| H4 | The existing alternatives listed in PR-1 (markdown + grep, Notion DBs, bespoke YAML metamodels, spreadsheets, "trust the agent") are real tools the persona has used. | [02a-lean-canvas.md §1 Problem](../../02a-lean-canvas.md#1-problem--confidence-tested-n1-founder-as-instance) | Assumed | Tested |
+| H1 | P-01's §Frustrations are the top 3 pains an agent-first product engineer faces, in the right priority order. | [01a-personas.md §Frustrations](../../business/01a-personas.md) | Assumed | Tested (confirmed / refuted / refined per item) |
+| H2 | P-01's §Goals (1 to 5) and §System Needs cover the outcomes the persona actually wants. | [01a-personas.md §Goals + §System Needs](../../business/01a-personas.md) | Assumed | Tested |
+| H3 | The Lean Canvas §3 UVP bullets (north-star, high-concept, three concrete wins, anti-promise) resonate as a pitch that would prompt the persona to try clew. | [02a-lean-canvas.md §3 UVP](../../business/02a-lean-canvas.md#3-unique-value-proposition--confidence-tested-n1-founder-as-instance-with-refinement) | Assumed | Tested |
+| H4 | The existing alternatives listed in PR-1 (markdown + grep, Notion DBs, bespoke YAML metamodels, spreadsheets, "trust the agent") are real tools the persona has used. | [02a-lean-canvas.md §1 Problem](../../business/02a-lean-canvas.md#1-problem--confidence-tested-n1-founder-as-instance) | Assumed | Tested |
 
 ## Pre-interview prep checklist
 
 | Done | Item | Why |
 |---|---|---|
-| ☐ | Open [01a-personas.md](../../01a-personas.md) to §Frustrations, §Goals, §System Needs. | Need exact bullets in working memory to cross-check against interviewee's answers in Sections 1 to 3. |
-| ☐ | Open [02a-lean-canvas.md](../../02a-lean-canvas.md) to §1 Problem (existing alternatives) and §3 UVP (all 6 bullets). | These are what gets read aloud in Section 4. Order them by bullet for clean delivery. |
-| ☐ | Re-read [04b-objectives.md](../../04b-objectives.md) OBJ-03 KR-03.2 (interview-count target). | Shapes how aggressively to push for saturation signal in this wave. |
+| ☐ | Open [01a-personas.md](../../business/01a-personas.md) to §Frustrations, §Goals, §System Needs. | Need exact bullets in working memory to cross-check against interviewee's answers in Sections 1 to 3. |
+| ☐ | Open [02a-lean-canvas.md](../../business/02a-lean-canvas.md) to §1 Problem (existing alternatives) and §3 UVP (all 6 bullets). | These are what gets read aloud in Section 4. Order them by bullet for clean delivery. |
+| ☐ | Re-read [04b-objectives.md](../../business/04b-objectives.md) OBJ-03 KR-03.2 (interview-count target). | Shapes how aggressively to push for saturation signal in this wave. |
 | ☐ | Mental check: ready to listen, not ready to defend. Close other tabs. | Founder-as-author bias is the largest risk for this specific interview; presence reduces it. |
 | ☐ | Have synthesis template open in a second tab. | Goal: complete §Post-interview synthesis within 1h of the interview ending. |
 
@@ -209,9 +213,9 @@ This interview deliberately does **not** test:
 
 ## What to do after
 
-- [ ] Update [01a-personas.md §Research Grounding](../../01a-personas.md#research-grounding) with this interview's date, method, and confidence shifts.
-- [ ] Update [01a-personas.md §Frustrations](../../01a-personas.md) per-item confidence labels (Assumed / Tested / Refined-by-wave-1).
-- [ ] Update [02a-lean-canvas.md §1 Problem and §3 UVP](../../02a-lean-canvas.md) confidence per bullet, and amend any bullet that the interview refuted or refined.
+- [ ] Update [01a-personas.md §Research Grounding](../../business/01a-personas.md#research-grounding) with this interview's date, method, and confidence shifts.
+- [ ] Update [01a-personas.md §Frustrations](../../business/01a-personas.md) per-item confidence labels (Assumed / Tested / Refined-by-wave-1).
+- [ ] Update [02a-lean-canvas.md §1 Problem and §3 UVP](../../business/02a-lean-canvas.md) confidence per bullet, and amend any bullet that the interview refuted or refined.
 - [ ] Increment OBJ-03 KR-03.2 baseline-to-current: 0 → 1 interview complete.
 - [ ] Capture warm-intro names (if any) in a queue for wave 2.
 - [ ] Schedule wave 2 (target: 2 to 4 more interviews with external candidates) per KR-03.2.

@@ -1,5 +1,9 @@
 ---
+type: Business Objective
 title: Business Objectives
+description: Defines the outcomes clew v1 MVP must achieve as qualitative time-bounded objectives with measurable Key Results.
+tags: [business, objectives, okr]
+timestamp: 2026-05-24T10:35:31Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-24

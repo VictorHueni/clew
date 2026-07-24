@@ -1,5 +1,9 @@
 ---
+type: Glossary Term
 title: clew Ubiquitous Language Glossary
+description: Ubiquitous-language glossary for clew, defining the domain terms of each bounded context.
+tags: [domain, glossary]
+timestamp: 2026-05-25T15:11:56Z
 status: draft
 owner: Victor Hueni
 last_reviewed: 2026-05-25
