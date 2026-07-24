@@ -220,7 +220,7 @@ stateDiagram-v2
 | `artefact` | reference to `Artefact` by business ID | The artefact whose narrative this binding locates |
 | `file_path` | string (relative repo path) | Where the narrative lives on disk |
 | `section_anchor` | `SectionAnchor` (VO) | The GFM autoanchor within `file_path` that scopes the artefact's narrative |
-| `content_hash` | string \| null | Hash of the section content at last `check()`; null until first observation |
+| `content_hash` | string \| null | Hash of the section content at last `check()`, excluding any child section that carries its own binding — parent hash = the parent's own prose only ([ADR-0017](../../architecture/decisions/adr-0017-multi-artefact-file-contract.md) D2, amending ADR-0007's scope rule); null until first observation |
 | `last_seen_at` | timestamp \| null | When `check()` last successfully observed the section; null until first observation |
 
 **Behaviour methods:**
@@ -672,10 +672,12 @@ Business identifiers are **generated exclusively by the application layer** from
 | `adr` | `ADR-{nnnn}` | `ADR-0004` |
 | `bounded_context` | `BC-{nn}` | `BC-01` |
 | `glossary_term` | `BC-{nn}.GT-{nn}` | `BC-01.GT-05` |
+| `prd` | `PRD-{nnnn}` | `PRD-0001` |
+| `user_story` | `{parent_id}.US-{nn}` | `PRD-0001.US-01` |
 
-**Generation contract:** `next_business_id(conn, artefact_type, parent_business_id?)` — atomically increments `id_sequences.next_val` for the type and returns the formatted ID. The increment and the artefact insert are in the same SQLite transaction; partial writes are not possible.
+**Generation contract:** `next_business_id(conn, artefact_type, parent_business_id?)` — atomically increments `id_sequences.next_val` for the `(artefact_type, parent_business_id)` counter (`parent_business_id = ''` for root types — [ADR-0017](../../architecture/decisions/adr-0017-multi-artefact-file-contract.md) D4) and returns the formatted ID. The increment and the artefact insert are in the same SQLite transaction; partial writes are not possible.
 
-**Snapshot contract:** `clew export` serialises the `id_sequences` table alongside all artefact records. `clew import snapshot` writes artefacts with their existing `business_id` values; it then sets `id_sequences.next_val` to `max(suffix) + 1` for each type from the imported records, ensuring no future collision.
+**Snapshot contract:** `clew export` serialises the `id_sequences` table alongside all artefact records. `clew import snapshot` writes artefacts with their existing `business_id` values; it then sets `id_sequences.next_val` to `max(suffix) + 1` for each `(artefact_type, parent_business_id)` counter from the imported records, ensuring no future collision.
 
 ---
 
@@ -721,7 +723,8 @@ erDiagram
         text    last_seen_at "NULL until first clew check"
     }
     id_sequences {
-        text    artefact_type PK "one counter per type"
+        text    artefact_type PK "composite PK with parent_business_id (ADR-0017 D4)"
+        text    parent_business_id PK "empty string for root types; parent business ID for parent-scoped types"
         integer next_val "next suffix to mint; CHECK next_val >= 1"
     }
 
@@ -741,9 +744,14 @@ erDiagram
 -- Surrogate PKs are intentionally regenerated on DB recreation; only business_id is stable.
 
 -- Business ID counter (application-managed; included in YAML snapshot)
+-- One counter per (artefact_type, parent_business_id); parent_business_id = '' for root
+-- types, so parent-scoped formats (KR-NN.M, C-N.M.FXX, PRD-NNNN.US-NN, BC-NN.GT-NN) are
+-- mintable — ADR-0017 D4, closing OI-0068.
 CREATE TABLE id_sequences (
-  artefact_type  TEXT     PRIMARY KEY,
-  next_val       INTEGER  NOT NULL DEFAULT 1 CHECK (next_val >= 1)
+  artefact_type       TEXT     NOT NULL,
+  parent_business_id  TEXT     NOT NULL DEFAULT '',
+  next_val            INTEGER  NOT NULL DEFAULT 1 CHECK (next_val >= 1),
+  PRIMARY KEY (artefact_type, parent_business_id)
 );
 
 -- Universal artefact table — maps to BC-01.AGG-01
@@ -813,7 +821,9 @@ Type-specific fields are stored in `artefacts.properties` (a JSON text blob vali
 1. **v1 persisted set (self-dogfooding spine, 11 types):** `persona`, `capability`,
    `value_stream`, `vs_stage`, `objective`, `key_result`, `fbs_functionality`, `epic`,
    `bounded_context`, `glossary_term`, `adr`. All other kit types (`process`, `canvas`,
-   `bmc_block`, `quantitative_model`, `prd`, `implementation_plan`, `use_case`,
+   `bmc_block`, `quantitative_model`, `prd`, `user_story` (minted per
+   [ADR-0017](../../architecture/decisions/adr-0017-multi-artefact-file-contract.md) D1 but
+   not in the mandatory v1 spine), `implementation_plan`, `use_case`,
    `interface_contract`, `cli_surface`/`cli_command`, the domain sub-types, `idea`,
    `competitor`) are **deferred to v2** — their §Relationship-registry rows stay inert until
    their schema is added here.
@@ -855,7 +865,7 @@ SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY dept
 | OI-0019 | doc-gap        | Glossary `docs/domain/02c-glossary.md` does not exist; every entity / VO / event in this model carries `_TODO_ — BC-01.GT-NN` for its glossary-term link. | #ubiquitous-language         | Domain Model — BC-01 Artefact Store (header)  | Run the `domain-glossary` skill against BC-01 to seed `GT-NN` terms (artefact, business ID, relationship, file binding, snapshot, …); then replace every `_TODO_ — BC-01.GT-NN` placeholder in this file with the actual term ID. | high     | closed | victor  | 2026-05-25        | 2026-05-25 commit on main — glossary authored with 15 BC-01 terms in commit `8cea266`; every entity (3) + VO (5) Glossary-term placeholder in this file replaced with live `02c-glossary.md#{term}--bc-01gt-{nn}` links in the same pass; header Ubiquitous language line points at the glossary's BC-01 section |
 | OI-0020 | decision-gap   | Whether the Implementation supplement (Physical schema / Property schemas / Graph traversal pattern) stays in this file or moves to a separate data-model contract document. ADR-0003 currently sanctions it being here. | #implementation-supplement   | Implementation supplement                     | Decide once a second domain model file is created and the duplication / divergence cost becomes visible; if it moves, update ADR-0003 §Dependent artefacts to point at the new location. | low      | open   | victor  | 2026-09-01        | _TBD_       |
 | OI-0069 | decision-gap   | `unlink` produces no domain event; only visible via a git `snapshot/` diff — decide whether v1 needs an `ArtefactUnlinked` event. | #artefactreference--bc-01agg-02 | ArtefactReference · BC-01.AGG-02 | Decide event vs. snapshot-diff-only; if an event is added, extend AGG-02's Commands → Events table and the §Domain event catalogue. | medium   | open   | victor  | 2026-09-01        | _TBD_       |
-| OI-0068 | decision-gap   | `id_sequences` PK is `artefact_type` alone — cannot mint parent-scoped IDs (`KR-NN.M`, `C-N.M.FXX`) required by the §Business identity ID-format table; needs a composite-key decision. | #physical-schema             | Physical schema                               | Decide the composite key (e.g. `(artefact_type, parent_business_id)`) or an alternative minting scheme for parent-scoped types; update the DDL and the generation contract accordingly. | medium   | open   | victor  | 2026-09-01        | _TBD_       |
+| OI-0068 | decision-gap   | `id_sequences` PK is `artefact_type` alone — cannot mint parent-scoped IDs (`KR-NN.M`, `C-N.M.FXX`) required by the §Business identity ID-format table; needs a composite-key decision. | #physical-schema             | Physical schema                               | Decide the composite key (e.g. `(artefact_type, parent_business_id)`) or an alternative minting scheme for parent-scoped types; update the DDL and the generation contract accordingly. | medium   | closed | victor  | 2026-07-24        | [ADR-0017](../../architecture/decisions/adr-0017-multi-artefact-file-contract.md) — composite key `(artefact_type, parent_business_id)` decided 2026-07-24 (D4, `parent_business_id = ''` for root types); DDL, physical ER, and generation contract updated in this file in the same pass |
 
 ---
 
@@ -863,6 +873,7 @@ SELECT business_id, artefact_type, relationship, depth FROM impact ORDER BY dept
 
 | Date | Author | Change |
 |---|---|---|
+| 2026-07-24 | Victor Hueni | [ADR-0017](../../architecture/decisions/adr-0017-multi-artefact-file-contract.md) cascade (multi-artefact file contract). **§Business identity**: `prd` (`PRD-{nnnn}`) and `user_story` (`{parent_id}.US-{nn}`) rows added to the ID-format table. **§Physical schema**: `id_sequences` PK becomes composite `(artefact_type, parent_business_id)` with `parent_business_id = ''` for root types (D4) — DDL, physical ER, generation contract, and snapshot contract updated; closes OI-0068. **ENT-03 `content_hash`**: child-exclusion clause added (D2 — parent hash = the parent's own prose only, amending ADR-0007's scope rule). **§Property schemas**: deferred-to-v2 list now names `user_story` beside `prd` (not in the mandatory v1 spine, per ADR-0015 pick-and-choose). |
 | 2026-07-24 | Victor Hueni | Link repair (audit Check 3): the cross-repo link to the kit's `metamodel.md` rule (§Relationship registry note) was one `../` level short (resolved inside the clew repo); corrected to the sibling-checkout depth (`../../../../homemade-claude-kit/…`). |
 | 2026-07-24 | Victor Hueni | Open-items ID assignment (governance sync): the two `OI-TBD` rows filed earlier today received canonical IDs from the central ledger sequence — `id_sequences` composite-key decision → OI-0068; `ArtefactUnlinked` event decision → OI-0069. Row content unchanged. |
 | 2026-07-24 | Victor Hueni | Decided-cascade cleanup. **Status lifecycle**: AGG-01 state diagram, INV-3, the ENT-01 attribute table, and `retire()` now mirror the §Physical schema DDL enum (`draft`/`active`/`superseded`/`deprecated`, default `draft` — the 2026-06-11 alignment): `register()` enters `draft`, `draft → active` added as the only legal exit from `draft` (promotion not yet bound to a command), `retired` → `deprecated`; `retire()`/`supersede()` matrix otherwise unchanged. **Audit delegation (ADR-0013)**: AGG-02 `unlink` no longer claims "recorded in audit trail" — an unlink leaves no record beyond the subsequent `snapshot/` diff in git (ENT-01/ENT-02 lifecycle lines reworded to match); whether v1 needs an `ArtefactUnlinked` event filed as an OI-TBD open item. **§Property schemas**: `complexity` removed from `fbs_functionality`, matching the [FBS C3.2.F04 `clew estimate` cut](../../product-specs/07a-fbs.md) (ADR-0013 delivery-accounting scope-out). **§Business identity**: `value_stream` (`VS-{n}`) and `bounded_context` (`BC-{nn}`) rows added — both v1 persisted types missing from the ID-format table (formats per the metamodel package pages / kit registry). `id_sequences` single-column PK vs parent-scoped ID formats filed as an OI-TBD open item (schema decision pending, DDL untouched). |
