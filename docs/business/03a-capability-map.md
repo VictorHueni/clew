@@ -14,7 +14,7 @@ This document is clew's strategic "what" layer. It answers one question: *what d
 
 **Hard scope rule.** This map stops at L0 + L1. Features, functionalities, user stories, and code-organisation hints do **not** belong here; they live in the FBS (Functional Breakdown Structure) once it exists. If a row reads "the system shall…" or names a backend module, it has crossed into FBS territory.
 
-**Methodology and bibliography:** see the [`business-capability-map` skill in homemade-claude-kit](https://github.com/VictorHueni/homemade-claude-kit/tree/claude/metamodel-personal-skills-naecw/business-capability-map). The skill composes TOGAF G189, Cutter Rosetta Stone, SAP Business Architecture, BABOK, Cesar Gonzalez (naming), and Miller (sizing).
+**Methodology and bibliography:** see the [`business-capability-map` skill in homemade-claude-kit](https://github.com/VictorHueni/homemade-claude-kit/tree/main/business-capability-map). The skill composes TOGAF G189, Cutter Rosetta Stone, SAP Business Architecture, BABOK, Cesar Gonzalez (naming), and Miller (sizing).
 
 **Companion docs (existing):**
 - [`docs/VISION.md`](../VISION.md): north star this map operationalises.
@@ -309,7 +309,7 @@ Capabilities for detecting and preventing drift between intended and actual stat
 
 ### C4.3 · Audit trail
 
-**Definition.** Records every write to the DB (create, update, delete) with timestamp, actor, and before/after state, replayable in chronological order.
+**Definition.** Records every write to the DB (create, update, delete) with timestamp, actor, and before/after state, replayable in chronological order. *Delegated to git (VCS) for v1 — git on `snapshot/` already gives durable who/when/before-after (ADR-0013); see §Scope discipline.*
 
 **Business object.** Audit-trail record.
 
@@ -328,7 +328,7 @@ Capabilities for detecting and preventing drift between intended and actual stat
 
 ### C4.4 · Schema migration
 
-**Definition.** Manages forward-compatible evolution of the metamodel schema: adding entity types, adding fields, renaming relationships, deprecating items, without breaking existing projects.
+**Definition.** *Deferred for v1 — hand-rolled `PRAGMA user_version`, not a framework (ADR-0012/0013); see [§Scope discipline](#scope-discipline-adr-0013).* Manages forward-compatible evolution of the metamodel schema: adding entity types, adding fields, renaming relationships, deprecating items, without breaking existing projects.
 
 **Business object.** Schema migration script.
 
@@ -446,7 +446,7 @@ Capabilities that encode external bodies of practice (BIZBOK, BABOK, Strategyzer
 
 ## Discipline checks (pass)
 
-Per the [`business-capability-map` skill](https://github.com/VictorHueni/homemade-claude-kit/tree/claude/metamodel-personal-skills-naecw/business-capability-map):
+Per the [`business-capability-map` skill](https://github.com/VictorHueni/homemade-claude-kit/tree/main/business-capability-map):
 
 - **Noun test:** every L0 and L1 capability name is a noun phrase, not a verb phrase.
 - **Technology-independence test:** no capability name contains a vendor, system, or tool (DuckDB, YAML, GFM, MCP, Claude all kept out of capability *names*; some appear in *definitions* as implementation hints, which is allowed).
@@ -468,6 +468,7 @@ Per the [`business-capability-map` skill](https://github.com/VictorHueni/homemad
 
 | Date | Change | Evidence | Cascading effects |
 |---|---|---|---|
+| 2026-07-24 | Reference hygiene. C4.4 L1 block gains the *deferred for v1* annotation already carried by its §Capability index row (hand-rolled `PRAGMA user_version`, ADR-0012/0013; see §Scope discipline) — block content otherwise unchanged, so the rollback/versioned-migration outcomes now read under the deferral banner. §Methodology link repointed from the stale `claude/metamodel-personal-skills-naecw` branch to `main`. | [ADR-0013](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md) §Scope discipline entry of 2026-07-07 (annotation was applied to the index row but not the block). | None outside this commit; mechanical annotation only. |
 | 2026-07-07 | §Scope discipline (ADR-0013) added. C1.2 elevated Necessary→**Differentiator** (now 5 Differentiators · 10 Necessary · 2 Commodity), aligning the map with the FBS ★ on C1.2.F01. C4.3 (Audit) annotated *delegated to git*; C4.4 (Migration) annotated *deferred/hand-rolled*; delivery-accounting (`clew estimate` + `complexity`) marked out of scope; C5 marked kit/BC-02 scope, not clew CLI. | [ADR-0013](../architecture/decisions/adr-0013-minimal-model-not-repo-native-ea.md) + [competitive scan 2026-07-07](../discovery/competitive-landscape-2026-07-07-agentic-architecture-tools.md). | [07a-fbs.md](../product-specs/07a-fbs.md): C3.2.F04 estimate cut; C4.3/C4.4 descoped; C1.2 grown + `clew guard` added. [cli-clew.md](../architecture/interfaces/cli-clew.md): `clew estimate`/`set complexity` removed; `clew context` added. [artefact-store.md](../domain/07b-models/artefact-store.md): `clew estimate` consumer removed; audit-delegation + canonicity notes. Downstream per-capability soft-links (value streams etc.) intentionally **not** chased row-by-row — the §Scope discipline note is authoritative; backlinks are advisory. |
 | 2026-05-25 | C1.3 (External evidence integration) retired. Rationale: citation discipline is embedded in kit skills via `rules/writing-citations.md` (inline links in markdown artefacts, bibliography.yaml in slide decks) and realised by the evidence-production skills (arch-research, business-competitive-landscape, business-quantitative-model, business-research, com-slide-deck). No clew DB field or CLI command is needed. L1 count: 18 → 17. Strategic Importance distribution: 12 Necessary → 11 Necessary. | C1.3 scope review. | [07a-fbs.md](../product-specs/07a-fbs.md): C1.3 section removed (F01/F02/F03 retired), counts updated 60 → 57. [04a-value-streams.md](04a-value-streams.md): C1.3 backlinks removed from VS-1.2 enabling capabilities + exit criteria, VS-1.3 enabling capabilities, VS-2 scope anchor, VS-2.3 enabling capabilities + exit criteria. Pre-existing C3.3 orphan reference in VS-2.3 cleaned up in same pass. |
 | 2026-05-25 | C3.3 (Bidirectional time traceability) retired. Rationale: artefact content and kit methodology already carry the "why backward" intent; "what next forward" is covered by epics (C3.2 impact view + delivery roadmap); `clew history` (C3.3.F03) folded into C4.3 as C4.3.F04 — it is an audit query, not a traceability view. L1 count: 19 → 18. Strategic Importance distribution: 13 Necessary → 12 Necessary. Soft-link count: 16 of 19 → 15 of 18. Discipline checks + Open Issues updated accordingly. | FBS redesign session. | [07a-fbs.md](../product-specs/07a-fbs.md): C3.3 section removed, C4.3.F04 added, counts updated. No cascade to value streams (C3.3's VS-2.3 backlink is simply removed). |
