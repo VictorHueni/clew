@@ -71,6 +71,8 @@ clew's differentiation. The differentiating gap is now clearly F1+F2+F6 *togethe
 product-architecture scope, write-time (not validate-time) integrity, and embedded
 methodology.
 
+**2026-07-24 reconciliation note:** F1's High (designed) score is delivered as **opt-in layer packages over a minimal mandatory core** — breadth a repo enables type-by-type under the same full write-time enforcement as the core, never a maximal mandatory model. The designed High-breadth curve and ADR-0013's minimal-model stance are therefore no longer in tension: the mandatory model stays minimal, the curve's breadth is the opt-in ceiling ([ADR-0014 — Product Architecture Management positioning](../../architecture/decisions/adr-0014-product-architecture-management-positioning.md) · [ADR-0015 — opt-in layer packages](../../architecture/decisions/adr-0015-opt-in-layer-packages.md)).
+
 ---
 
 ## Four Actions Framework
@@ -133,3 +135,4 @@ read. No 2026-07-21 competitor curve crosses F1–F6 High together; the position
 |---|---|---|
 | 2026-07-21 | Initial draft from discovery scan R1–R6 verdicts | Victor Hueni (agent-drafted) |
 | 2026-07-21 | 2026-07 wave: SARA column added (most clew-shaped competitor curve; plateaus at Med on F1/F2/F6); wave note on the differentiating gap | Victor Hueni (agent-drafted) |
+| 2026-07-24 | Reconciliation note: F1 High (designed) breadth is delivered as opt-in layer packages over the minimal mandatory core (ADR-0014/ADR-0015); no tension with ADR-0013. Scores unchanged | Victor Hueni (agent-drafted) |

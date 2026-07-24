@@ -1,7 +1,7 @@
 # Presentation Brief
 
 ## Summary
-A lean ~10-slide visual deck (plus one appendix) for a dev audience, making one argument: in agentic development the harness — not the model — is the dominant performance lever, and the highest-leverage, least-engineered piece of harness is durable long-term memory, which is exactly what clew is. Style modelled on BCG / McKinsey: action-title slides, one graphic per slide, minimal body text.
+A lean ~10-slide visual deck (plus one appendix) for a dev audience, making one argument: in agentic development the harness — not the model — is the dominant performance lever, and the highest-leverage, least-engineered piece of harness is durable long-term memory — the layer clew engineers as product architecture management: the integrity layer where agents write prose and only clew creates facts. Style modelled on BCG / McKinsey: action-title slides, one graphic per slide, minimal body text.
 
 ## Goal
 Leave developers understanding two things: (a) the harness, not the model, is the performance lever (proven, not asserted), and (b) clew engineers the deepest memory layer as a typed, referentially-enforced metamodel — so the agent always knows where it is and why, and references never rot.
@@ -13,7 +13,7 @@ Dev colleagues. Technically fluent. Familiar with LLMs and coding agents. Unfami
 Authoritative, graphic-first, terse. Action titles carry the conclusion; the graphic is the evidence. One big idea per slide. Consulting-quality layout: wide whitespace, strong typographic hierarchy, single visual per content slide. Burgundy accent used as the single punch of colour.
 
 ## Governing thought
-The harness — not the model — is the dominant performance lever. The highest-leverage piece of harness almost nobody engineers is durable, deterministic long-term memory. That is what clew is.
+The harness — not the model — is the dominant performance lever. The highest-leverage piece of harness almost nobody engineers is durable, deterministic long-term memory. That is the layer clew engineers — product architecture management, the integrity layer: agents write prose, only clew creates facts.
 
 ## Narrative arc (SCQA)
 - Situation: every month a better model ships; the field tunes the engine.
@@ -31,7 +31,7 @@ The harness — not the model — is the dominant performance lever. The highest
 7. Metamodel — product thinking as a typed graph, VISION → code
 8. Mechanism — IDs minted by the app, links checked at write time, never by the LLM
 9. Payoff — trace upstream, measure blast radius, prove integrity (clew trace / impact / check)
-10. Close — engineer the harness, not the prompt; positioning + "Git for product architecture"
+10. Close — engineer the harness, not the prompt; positioning + "product architecture memory for AI agents"
 - A1 (appendix) — the full 15-capability map for Q&A
 
 ## Sources
@@ -43,6 +43,7 @@ The harness — not the model — is the dominant performance lever. The highest
 - docs/discovery/interviews/research-synthesis-2026-05-24-P-01-validation.md (P-01 pains)
 
 ## Constraints
+- Positioning language for clew follows [ADR-0014 — Product Architecture Management positioning](../../../../architecture/decisions/adr-0014-product-architecture-management-positioning.md): category "Product Architecture Management for AI-native builders and small teams", pitch "agents write prose, only clew creates facts", taglines in the "product architecture memory for AI agents" direction; "repo-scale EA" / "repo-native EA" never appear in outbound material
 - ~10 core slides + 1 appendix; one idea per slide
 - No bullet-point slides — every content slide has a primary graphic; the action title is the takeaway
 - Minimal body text per slide
