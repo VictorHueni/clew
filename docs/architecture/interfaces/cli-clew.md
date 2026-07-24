@@ -6,7 +6,7 @@ tags: [architecture, interface, cli]
 timestamp: 2026-05-25T11:58:25Z
 status: draft
 owner: Victor Hueni
-last_reviewed: 2026-05-25
+last_reviewed: 2026-07-24
 review_interval: 90d
 ---
 
@@ -14,7 +14,7 @@ review_interval: 90d
 
 Covers `clew` v0.1–v0.3 (MVP scope). This document is the authoritative contract between the CLI and its callers — AI agents (Claude Code via Bash), shell scripts, and human operators. It specifies command signatures, I/O contracts, validation rules, and error behaviour.
 
-**Related ADRs:** [ADR-0001](../decisions/adr-0001-metamodel-persistence-layer.md) · [ADR-0002](../decisions/adr-0002-artefact-file-binding.md) · [ADR-0003](../decisions/adr-0003-schema-design-typed-property-graph.md) · [ADR-0004](../decisions/adr-0004-python-typer-duckdb-implementation-stack.md)
+**Related ADRs:** [ADR-0001](../decisions/adr-0001-metamodel-persistence-layer.md) · [ADR-0002](../decisions/adr-0002-artefact-file-binding.md) · [ADR-0003](../decisions/adr-0003-schema-design-typed-property-graph.md) · [ADR-0004](../decisions/adr-0004-python-typer-duckdb-implementation-stack.md) · [ADR-0007](../decisions/adr-0007-file-binding-content-hash-strategy.md) · [ADR-0013](../decisions/adr-0013-minimal-model-not-repo-native-ea.md) · [ADR-0016](../decisions/adr-0016-two-speed-integrity-edge-property-bag.md) · [ADR-0017](../decisions/adr-0017-multi-artefact-file-contract.md)
 
 **Domain model:** [Artefact Store](../../domain/07b-models/artefact-store.md)
 
@@ -28,10 +28,12 @@ This CLI is the BC-scoped Open Host Service for **BC-01 Artefact Store** ([bound
 
 | Command group | Capabilities realised |
 |---|---|
+| `clew init` (bootstrap) | C2.1 Stable identifier generation (C2.1.F01) |
 | `clew new` (creation) | C2.1 Stable identifier generation · C2.2 Schema enforcement · C2.3 File binding management · C4.1 Write-time reference validation (Differentiator) |
-| `clew link` (relationships) | C4.1 Write-time reference validation |
+| `clew link` (relationships) | C4.1 Write-time reference validation · C5.4 Cross-methodology referencing |
 | `clew set` (updates) | C2.2 Schema enforcement · C4.1 Write-time reference validation |
-| `clew list` / `clew context` | C3.1 Ad-hoc cross-artefact query surface · C1.2 Selective context loading (Differentiator, read-side) · C3.2 Pre-built traceability views (Differentiator, via canonical views) |
+| `clew list` / `clew context` | C3.1 Ad-hoc cross-artefact query surface · C1.2 Selective context loading (Differentiator, read-side) |
+| `clew matrix` / `clew trace` / `clew impact` | C3.2 Pre-built traceability views (Differentiator) |
 | `clew layout` / `clew where` | C2.3 File binding management |
 | `clew check` (health) | C4.1 Write-time reference validation · C4.2 Drift detection · C2.3 File binding management |
 | `clew export` / `clew import snapshot` | C2.4 Deterministic structural export · C2.1 Stable identifier generation |
@@ -67,6 +69,21 @@ pip install clew  # persistent install
 ---
 
 ## §2 Command catalogue
+
+### Bootstrap group — `clew init`
+
+Initialises the artefact store for the current repo: creates `docs/clew/clew.db` (WAL mode per [ADR-0001](../decisions/adr-0001-metamodel-persistence-layer.md)), seeds `id_sequences` with one row per registered artefact type, and creates the `docs/clew/snapshot/` directory. Realises C2.1.F01.
+
+```
+clew init
+  [--force]    re-initialise over an existing store (destructive: drops the DB; snapshot files are untouched)
+```
+
+- If the DB already exists, exits `1` with `already-initialised` — a deliberate wrong-repo guard, not idempotent no-op. Recovery from an intact snapshot is `clew init --force` + `clew import snapshot`.
+- Parent-scoped `id_sequences` rows for `inherits-from-parent` types (composite key `(artefact_type, parent_business_id)` per [ADR-0017](../decisions/adr-0017-multi-artefact-file-contract.md) D4) are **not** pre-seeded: they are created lazily on the first child mint for a given parent, since parents are unknown at init time. Parent-less types seed with `parent_business_id = ''`.
+- Returns: nothing on stdout; summary line on stderr.
+
+---
 
 ### Creation group — `clew new`
 
@@ -161,6 +178,31 @@ clew new adr <title>
 - Generates the file at `docs/architecture/decisions/adr-{nnnn}-{slug}.md` (layout: `one-per-artefact`). Rejects if the file already exists.
 - Returns: `ADR-{nnnn}` on stdout (e.g. `ADR-NNNN`).
 
+#### `clew new prd <title>`
+
+```
+clew new prd <title>
+  [--epic E-NN]           the epic this PRD specifies (SPECIFIES epic → prd is 1:1; rejected if the epic already has a PRD)
+  [--status draft|active|superseded|deprecated]
+```
+
+- Generates the file at `docs/product-specs/prds/prd-{nnnn}-{slug}.md` (layout: `one-per-artefact`, per [ADR-0017](../decisions/adr-0017-multi-artefact-file-contract.md)). Rejects if the file already exists.
+- The PRD file is an **umbrella file**: it carries the parent PRD's frontmatter and hosts child `user_story` sections ([ADR-0017](../decisions/adr-0017-multi-artefact-file-contract.md) D3).
+- Returns: `PRD-{nnnn}` on stdout.
+
+#### `clew new user-story <title>`
+
+```
+clew new user-story <title>
+  --parent PRD-NNNN       required; must exist with artefact_type = 'prd'
+  [--covers UC-NN]        soft edge to the use case this story exercises (`covers` proposal, ADR-0017 D1 — pending OI-0074 ratification)
+  [--file PATH]           optional; inherits the parent PRD's file_path (layout: inherits-from-parent)
+```
+
+- ID is minted from the **parent-scoped sequence** — `id_sequences` composite key `(artefact_type='user_story', parent_business_id='PRD-NNNN')` per [ADR-0017](../decisions/adr-0017-multi-artefact-file-contract.md) D4 — so numbering restarts per PRD.
+- File binding anchors to the story's own heading (`### PRD-NNNN.US-NN · <title>`) inside the parent's file, per [ADR-0002](../decisions/adr-0002-artefact-file-binding.md) anchor derivation.
+- Returns: `PRD-{nnnn}.US-{nn}` on stdout (e.g. `PRD-0001.US-03`).
+
 ---
 
 ### Relationship group — `clew link`
@@ -170,9 +212,11 @@ Creates a typed edge in `artefact_references`. Enforces source/target type const
 ```
 clew link <source-id> <relationship> <target-id>
   [--role TEXT]           optional annotation (e.g. Differentiator, Necessary)
+  [--rationale TEXT]      optional; stored in the edge property bag (ADR-0016)
+  [--source-doc PATH]     optional; stored in the edge property bag (ADR-0016)
 ```
 
-**Allowed relationships and type constraints:**
+**Allowed relationships and type constraints** *(pre-ratification set — the authoritative catalogue is [docs/metamodel/relationships.md](../../metamodel/relationships.md); every verb below ratifies or amends in the [OI-0074](../../metamodel/relationships.md#open-items) `ALLOWED_RELATIONSHIPS` pass)*:
 
 | `<relationship>` | Source type | Target type | `--role` values |
 |---|---|---|---|
@@ -181,10 +225,15 @@ clew link <source-id> <relationship> <target-id>
 | `REALIZES` | `fbs_functionality` | `vs_stage` | `Differentiator` |
 | `GROUPS` | `epic` | `fbs_functionality` | — |
 | `INFORMS` | `objective` | `vs_stage` | — |
+| `SPECIFIES` ⚠ | `epic` | `prd` | — (1:1: rejected if either endpoint already holds a `SPECIFIES` edge) |
+| `DETAILS` ⚠ | `prd` | `implementation_plan` | — (1:1) |
+| `covers` ⚠ | `user_story` | `use_case` | — (soft; [ADR-0017](../decisions/adr-0017-multi-artefact-file-contract.md) D1 proposal, filed on the [product-specs package page](../../metamodel/packages/product-specs.md), not yet a catalogue row) |
 | `REFERENCES` | any | any | free text |
 
 - Returns: nothing on stdout (exit 0 on success).
 - Error (exit 1): if source or target ID does not exist, or if type constraints are violated.
+
+**Edge property bag ([ADR-0016](../decisions/adr-0016-two-speed-integrity-edge-property-bag.md)).** Every edge carries `validation_status` (`proposed | validated | rejected`), `confidence` (`stated | inferred`), `rationale`, and `source_doc`. A direct `clew link` invocation is the **authored write path** — it writes `validation_status = validated`, `confidence = stated`: the operator (or the agent at the operator's explicit direction) is asserting a fact, FK-checked at write time. The quarantine lifecycle — LLM-*inferred* edges landing as `validation_status = proposed` and flipping to `validated`/`rejected` only on human review — is a **reserved surface** (`clew link --propose`, `clew review`), sequenced with the layer-package phase ([delivery roadmap E-05](../../plans/delivery-roadmap.md#e-05--opt-in-layer-packages)). Guard/check derive from the validated + authored subset only; proposals never enter the integrity hot path.
 
 ---
 
@@ -234,6 +283,38 @@ clew context <task-type>          e.g. orient | prd | test | refactor
 
 - **stdout:** the assembled slice (artefact records + their narrative bindings) in the chosen format.
 - **stderr:** a `~<N> tokens` cost estimate for the slice, so the caller can size the load before injecting it into the session.
+
+#### `clew matrix`
+
+Renders the full cross-artefact relationship matrix (persona × capability × VS stage × FBS × epic) deterministically from the store. Realises C3.2.F01 (★); the wave-1 trust-threshold view.
+
+```
+clew matrix
+  [--format table|csv|json]   default: table
+```
+
+- Same DB state → byte-identical output (§5 determinism).
+
+#### `clew trace <id>`
+
+Shows the full upstream lineage of an artefact: the personas, capabilities, value-stream stages, and objectives that trace to it. Realises C3.2.F02 (★).
+
+```
+clew trace <id>
+  [--format table|csv|json]   default: table
+```
+
+#### `clew impact <id>`
+
+Shows every artefact that references the given ID — direct and transitive — and would be affected by a change to it. Realises C3.2.F03 (★); the [VS-3.2 Preview Downstream Impact](../../business/04a-value-streams.md#vs-32--preview-downstream-impact) surface.
+
+```
+clew impact <id>
+  [--format table|csv|json]   default: table
+  [--transitive/--direct]     default: --transitive
+```
+
+- Derives from validated edges and authored constraints only ([ADR-0016](../decisions/adr-0016-two-speed-integrity-edge-property-bag.md)); proposals are excluded from the impact set.
 
 #### `clew guard "<change>"` *(planned — v0.2)*
 
@@ -287,6 +368,8 @@ clew check [--path PATH]    scope check to one file; default: all bound files
 | `canonicaliser-changed` | The binding's `canonicaliser_version` does not match the current dprint config hash |
 
 Layout conformance is not a `clew check` drift category: it is enforced at write time by `clew new` (§4 layout enforcement, error category `layout-violation`, per [ADR-0002](../decisions/adr-0002-artefact-file-binding.md)).
+
+**Umbrella files ([ADR-0017](../decisions/adr-0017-multi-artefact-file-contract.md) D2).** In a file hosting child-bound sections (e.g. a PRD with embedded `PRD-NNNN.US-NN` stories), the parent binding's `content_hash` **excludes** every child-bound section; each child section hashes independently against its own binding. Editing a story therefore flags `content-drift` on that story only, never on the parent PRD.
 
 `clew check` populates `content_hash`, `canonicaliser_version`, and `last_seen_at` in `file_bindings` on a section's first successful hash; subsequent drift is reconciled via `clew bind --update` ([ADR-0007](../decisions/adr-0007-file-binding-content-hash-strategy.md)). It never modifies markdown files.
 
@@ -391,6 +474,8 @@ Reserved; applies pending numbered schema steps per [ADR-0012](../decisions/adr-
 
 **Transaction ordering for `one-per-artefact` types:** the CLI pre-reads `id_sequences.next_val` (without incrementing) to compute the tentative path, validates it, then calls `next_business_id()` to atomically increment and write. Pre-read and increment happen within a single write transaction, which WAL mode's engine locking and busy-timeout serialise against any concurrent writer ([ADR-0001](../decisions/adr-0001-metamodel-persistence-layer.md)) — no race condition and no rollback required on validation failure.
 
+**Parent-scoped sequences for `inherits-from-parent` types:** the sequence row is keyed `(artefact_type, parent_business_id)` ([ADR-0017](../decisions/adr-0017-multi-artefact-file-contract.md) D4) and created lazily on the first child mint for a parent; the same single-transaction pre-read/increment contract applies per composite key.
+
 ### FK checks (`clew link`)
 
 Before writing to `artefact_references`:
@@ -420,7 +505,9 @@ The CLI separates **structured result** (stdout) from **human-readable narrative
 
 | Command | stdout shape |
 |---|---|
-| `clew new <type> …` | A single line: the minted business ID (e.g. `P-01`, `C1.2.F03`, `ADR-NNNN`). No surrounding noise. |
+| `clew init` | Empty stdout. Summary line on stderr. |
+| `clew new <type> …` | A single line: the minted business ID (e.g. `P-01`, `C1.2.F03`, `ADR-NNNN`, `PRD-0001.US-03`). No surrounding noise. |
+| `clew matrix` / `clew trace <id>` / `clew impact <id>` | Table by default; CSV or JSON via `--format`, same shapes as `clew list`. Deterministic: same DB state → byte-identical output. |
 | `clew link …` / `clew set …` | Empty. Success indicated by exit code `0`. |
 | `clew list [type] [--format table\|csv\|json]` | Table by default; CSV (RFC 4180-compliant); or a JSON array of objects (one per row). `--format json` is the canonical shape for callers piping to `jq` or similar. |
 | `clew context <task-type>` | stdout: the assembled artefact slice (markdown or JSON). stderr: a `~<N> tokens` cost line for the slice. |
@@ -469,6 +556,9 @@ Error: <category>: <human-readable message>
 | 1 | `unknown-relationship` | `'DRIVES' is not a known relationship type; known: TRIGGERS, CONSUMES, REALIZES, GROUPS, INFORMS, REFERENCES` |
 | 1 | `unknown-field` | `field 'priority' is not settable on persona; settable fields: name, status` |
 | 1 | `no-binding` | `P-01 has no file binding; run 'clew new persona … --file <path>' or 'clew import md <path>' first` |
+| 1 | `already-initialised` | `docs/clew/clew.db already exists; use --force to re-initialise (destructive)` |
+| 1 | `not-initialised` | `no artefact store found at docs/clew/clew.db; run 'clew init' first` |
+| 1 | `cardinality-violation` | `SPECIFIES is 1:1: E-01 already specified by PRD-0001` |
 | 2 | `db-locked` | `DB is locked by another process (PID 12345); retrying…` |
 | 2 | `schema-mismatch` | `DB schema version 0.0 is older than clew 0.1; run 'clew migrate'` |
 
@@ -484,6 +574,7 @@ Error: <category>: <human-readable message>
 
 | Date | Change | Evidence | Cascading effects |
 |---|---|---|---|
+| 2026-07-24 | Pre-PRD-0001 sync with ADR-0016/0017 and the delivery roadmap. Added: **`clew init`** bootstrap group (C2.1.F01; `already-initialised` guard, `--force`, lazy parent-scoped sequence seeding); **`clew new prd`** + **`clew new user-story`** per [ADR-0017](../decisions/adr-0017-multi-artefact-file-contract.md) (umbrella file, composite `id_sequences` key, `--covers` soft edge); **`clew matrix` / `clew trace` / `clew impact`** query commands (C3.2.F01–F03, walking-skeleton scope per the [delivery roadmap](../../plans/delivery-roadmap.md)); umbrella-file hash-exclusion note on `clew check` (ADR-0017 D2); §4 parent-scoped sequence transaction note. `clew link`: edge property bag documented per [ADR-0016](../decisions/adr-0016-two-speed-integrity-edge-property-bag.md) — **recorded interpretation: a direct `clew link` is the authored write path and writes `validation_status = validated`, `confidence = stated`; the `proposed` quarantine lifecycle (`--propose`, `clew review`) is reserved for E-05** — plus `--rationale`/`--source-doc` flags; relationship table marked pre-ratification (OI-0074) and extended with ⚠ `SPECIFIES` (epic → prd, 1:1), ⚠ `DETAILS` (prd → implementation_plan, 1:1), ⚠ `covers` (user_story → use_case, soft). §0 capability table + header ADR list + §5 output shapes + §7 errors (`already-initialised`, `not-initialised`, `cardinality-violation`) updated accordingly. | [ADR-0016](../decisions/adr-0016-two-speed-integrity-edge-property-bag.md) · [ADR-0017](../decisions/adr-0017-multi-artefact-file-contract.md) · [delivery roadmap](../../plans/delivery-roadmap.md) · [relationships.md](../../metamodel/relationships.md) catalogue directions | PRD-0001 acceptance criteria can now cite contract sections instead of inventing command shapes. The ⚠ rows and the `validated`-default interpretation ratify or amend in the OI-0074 `ALLOWED_RELATIONSHIPS` pass. |
 | 2026-07-24 | Open item filed: OI-0076 (decision-gap) — the pre-ADR-0007 "Orphan in file" check needs a decided home (import-report-only vs a fifth `clew check` category). §Open Items converted from "None at present" to the canonical table. Same-day changelog references to ADR-0007's OI-0032 updated to its post-renumber ID OI-0050 (repo-wide OI collision cleanup; mapping in the central ledger `project-control/open-items/open-items.md`). | Central ledger sync 2026-07-24. | None; contract text unchanged — the check's home is deferred to OI-0076. |
 | 2026-07-24 | Sync with decided ADRs (mechanical, no new decisions). Concurrency: flock wording in §1 and §4 replaced with SQLite WAL + busy-timeout serialization per ADR-0001. Epic `--file` path updated to `docs/plans/delivery-roadmap.md` per ADR-0009. `clew check` drift categories replaced with the four canonical ones (`file-missing` / `anchor-missing` / `content-drift` / `canonicaliser-changed`) per ADR-0007, with layout conformance noted as a write-time `clew new` error (ADR-0002); `clew bind --update [--all]` documented as the reconciliation path (closes ADR-0007 OI-0050, pre-renumber OI-0032). §0: `clew set` C4.3 mapping removed — audit trail delegated to git per ADR-0013. `clew migrate` added to the Migration group as a reserved command per ADR-0012's deferred v1 path, un-dangling the §7 `schema-mismatch` error message. | [ADR-0001](../decisions/adr-0001-metamodel-persistence-layer.md) · [ADR-0002](../decisions/adr-0002-artefact-file-binding.md) · [ADR-0007](../decisions/adr-0007-file-binding-content-hash-strategy.md) · [ADR-0009](../decisions/adr-0009-plan-package-split-from-product-specs.md) · [ADR-0012](../decisions/adr-0012-schema-migration-framework.md) · [ADR-0013](../decisions/adr-0013-minimal-model-not-repo-native-ea.md) | ADR-0007 OI-0050 (pre-renumber OI-0032) closed in the same pass; pre-ADR-0007 "Orphan in file" check (ID-shaped heading with no `artefacts` row) has no home in ADR-0007's four per-binding categories and no longer appears in `clew check`'s contract (it remains in `clew import md`'s report). |
 | 2026-07-07 | Scope discipline (ADR-0013). Removed `clew estimate epic` / `clew estimate phase` and the `complexity` settable field (delivery accounting, out of scope). Added `clew context <task-type>` (read-side context assembly with token-cost) and reserved `clew guard "<change>"` as planned v0.2. Added the write-time vs check-time **integrity boundary** note to §5; corrected the `clew list` timestamp source from "audit trail" to record `created_at` (audit delegated to git). §0 capability table updated. | [ADR-0013](../decisions/adr-0013-minimal-model-not-repo-native-ea.md) + [competitive scan 2026-07-07](../../discovery/competitive-landscape-2026-07-07-agentic-architecture-tools.md). | Companion to the capability-map / FBS / domain-model / business-layer scope cuts of the same date. ADR-0004 cross-ref (`python-typer-duckdb` slug) left as-is per its stable-filename note. |
