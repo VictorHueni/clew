@@ -38,9 +38,15 @@ Methodology (kit-only): `spec-use-case/references/methodology.md` — Cockburn t
 |---|---|---|---|---|---|---|
 | [UC-04](uc-04-link-artefacts-with-typed-relationship.md) | Link two artefacts with a typed, validated relationship | 🌊 | system | [P-01](../../business/01a-personas.md#p-01--ava-the-agent-first-product-engineer) | C5.4.F01–F02 · C4.1.F01/F03 | ⬜ |
 
+### C2.4 · Deterministic structural export (`structural-export`)
+
+| ID | Use case (goal) | Level | Scope | Primary actor | Realises (FBS) | Status |
+|---|---|---|---|---|---|---|
+| [UC-05](uc-05-rebuild-store-from-snapshot.md) | Rebuild the store deterministically from snapshot *(casual)* | 🌊 | system | [P-01](../../business/01a-personas.md#p-01--ava-the-agent-first-product-engineer) | C2.4.F01–F03 · C2.1.F01 | ⬜ |
+
 ### Planned (not yet authored)
 
-Queued per the [pre-PRD use-case prioritisation](../../plans/delivery-roadmap.md): UC-05 Rebuild the store deterministically from snapshot (VS-4.1) · UC-06+ with E-02's PRD (query, context) · brownfield adoption at dogfood start.
+The pre-PRD set (UC-01–UC-05) is complete. Queued next: UC-06+ with E-02's PRD (ad-hoc query, task-scoped context) · brownfield adoption (`clew import md`) at dogfood start · `clew guard`, layer-package enablement, and edge-proposal review are wave-2-gated with [E-04/E-05](../../plans/delivery-roadmap.md#epic-table).
 
 ## Actor / use-case overview (optional)
 
@@ -51,8 +57,10 @@ flowchart LR
   uc2(["UC-02 Refactor an artefact with foreseen impact"])
   uc3(["UC-03 Detect and reconcile drift after out-of-band edits"])
   uc4(["UC-04 Link two artefacts with a typed, validated relationship"])
+  uc5(["UC-05 Rebuild the store deterministically from snapshot"])
   ava --> uc1
   ava --> uc2
   ava --> uc3
   ava --> uc4
+  ava --> uc5
 ```

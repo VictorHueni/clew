@@ -1,0 +1,31 @@
+---
+type: Use Case
+title: "UC-05 — Rebuild the store deterministically from snapshot"
+description: "Ava reconstructs a byte-faithful artefact store from the git-tracked snapshot — on a second machine, after a clone, or after losing the local database — with business identifiers and relationships identical to the exported state."
+tags: [product-specs, use-case, structural-export]
+timestamp: 2026-07-25T11:26:57Z
+status: draft
+owner: Victor Hueni
+last_reviewed: 2026-07-25
+review_interval: 180d
+---
+
+# UC-05 — Rebuild the store deterministically from snapshot
+
+> Casual format (Cockburn). Promote to fully-dressed without re-numbering when the goal earns it — likely triggers: the first real recovery under time pressure, or [OI-0086](../../../project-control/open-items/open-items.md) deciding a non-trivial reconciliation path. Methodology: kit `spec-use-case/references/methodology.md`. Command signatures and the restore contract live in the [CLI contract §Snapshot group](../../architecture/interfaces/cli-clew.md#snapshot-group) and are cited, never restated.
+
+| **Scope** | system | **Level** | user-goal 🌊 | **Primary Actor** | [P-01 Ava](../../business/01a-personas.md#p-01--ava-the-agent-first-product-engineer) | **Realises** | [C2.4.F01–F03](../07a-fbs.md#c24--deterministic-structural-export) · [C2.1.F01](../07a-fbs.md#c21--stable-identifier-generation) |
+|---|---|---|---|---|---|---|---|
+
+**Main scenario.** The database is gitignored and rebuildable by design ([ADR-0001](../../architecture/decisions/adr-0001-metamodel-persistence-layer.md)); the snapshot is the durable, git-tracked structural truth. Ava arrives at a repo with no usable store — a fresh clone on a second machine, a colleague's checkout, or her own machine after the database was lost or corrupted — while the snapshot sits in git alongside the markdown. She initialises a store and restores it from the snapshot ([§Snapshot group](../../architecture/interfaces/cli-clew.md#snapshot-group)). The system reads every artefact record by business identifier, re-inserts it under fresh internal keys, remaps every relationship and file binding onto those new keys, and sets each identifier sequence from the snapshot rather than inferring it from the restored maximum — so the next mint continues the real series instead of silently reusing a retired number. When it completes, the store is functionally identical to the exported state: same business identifiers, same relationships, same bindings; only the invisible internal keys differ. Ava confirms with a drift scan ([UC-03](uc-03-detect-and-reconcile-drift.md)) that the restored store agrees with the markdown, and resumes work. Guaranteed on success: every identifier and edge that existed at export time exists now, with no renumbering and no lost relationships — the substrate half of [KR-02.4](../../business/04b-objectives.md#obj-02--the-architectural-substrate-is-trustworthy-enough-that-agents-depend-on-it) (same input, same persisted record) and the reason a lost database is an inconvenience rather than an incident.
+
+**Alternate paths.**
+
+- **A store already exists** → the restore is destructive and overwrites it ([§Snapshot group](../../architecture/interfaces/cli-clew.md#snapshot-group)); Ava exports the current state first if it holds anything the snapshot does not, then re-initialises (`clew init --force`, [§Bootstrap](../../architecture/interfaces/cli-clew.md#bootstrap-group--clew-init)) and restores.
+- **No store exists yet** (`not-initialised`) → initialise first, then restore; the restore sets the sequences, so no separate seeding step is needed.
+- **Snapshot absent or partial** (never exported, or a partial commit landed) → there is nothing authoritative to restore from; the recovery path is the brownfield adoption route (`clew import md`, planned use case), which reconstructs records from the markdown headings and re-advances the sequences. Relationships not recoverable from prose are re-linked deliberately ([UC-04](uc-04-link-artefacts-with-typed-relationship.md)).
+- **Snapshot is internally inconsistent** — a bad merge left an edge whose endpoint record is missing, or a duplicate business identifier → the restore must fail loudly with the offending records named, never import a graph that write-time validation would have refused. Whether v1 fails atomically, imports the valid subset with a report, or offers a repair path is undecided: [OI-0086](../../../project-control/open-items/open-items.md).
+- **Snapshot is older than the markdown** (a teammate committed prose edits without the accompanying store writes, or the export was skipped) → the restore succeeds and the gap surfaces as drift on the next scan, where it is triaged as a [UC-03](uc-03-detect-and-reconcile-drift.md) finding: structural intent in prose is re-applied through the write path, never absorbed by re-hashing.
+- **Verification variant (not a failure)** → export, rebuild into a scratch store, and re-export to prove the two exports are byte-identical. This is how [KR-02.4](../../business/04b-objectives.md#obj-02--the-architectural-substrate-is-trustworthy-enough-that-agents-depend-on-it)'s determinism target is actually measured, and it belongs in the dogfood loop rather than in a recovery emergency.
+
+**Related.** Value stream: [VS-4.1 Confirm Snapshot Is Current](../../business/04a-value-streams.md#vs-41--confirm-snapshot-is-current) / [VS-4.2](../../business/04a-value-streams.md#vs-42--materialise-self-contained-views) · Epic: [E-01](../../plans/delivery-roadmap.md#e-01--trustworthy-artefact-persistence), grounds PRD-0001 via `Covers: UC-05` · Frequency: rare per person, but load-bearing — it is the reason the database can be gitignored at all · Siblings: [UC-01](uc-01-persist-artefact-with-write-time-integrity.md) · [UC-02](uc-02-refactor-artefact-with-foreseen-impact.md) · [UC-03](uc-03-detect-and-reconcile-drift.md) · [UC-04](uc-04-link-artefacts-with-typed-relationship.md).
