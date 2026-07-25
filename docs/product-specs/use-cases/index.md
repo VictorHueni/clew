@@ -20,9 +20,15 @@ Methodology (kit-only): `spec-use-case/references/methodology.md` — Cockburn t
 |---|---|---|---|---|---|---|
 | [UC-01](uc-01-persist-artefact-with-write-time-integrity.md) | Persist a new artefact with write-time integrity | 🌊 | system | [P-01](../../business/01a-personas.md#p-01--ava-the-agent-first-product-engineer) | C2.1.F02–F03 · C2.2.F01–F04 · C2.3.F01–F03 · C4.1.F01/F03 · C5.4.F01 | ⬜ |
 
+### C4.1 · Write-time reference validation (`reference-validation`)
+
+| ID | Use case (goal) | Level | Scope | Primary actor | Realises (FBS) | Status |
+|---|---|---|---|---|---|---|
+| [UC-02](uc-02-refactor-artefact-with-foreseen-impact.md) | Refactor an artefact with foreseen impact | 🌊 | system | [P-01](../../business/01a-personas.md#p-01--ava-the-agent-first-product-engineer) | C4.1.F01–F03 · C3.2.F03 · C3.1.F02 · C2.2.F03–F04 · C2.3.F01–F02 · C2.1.F02 · C2.4.F02/F04 · C4.2.F01 | ⬜ |
+
 ### Planned (not yet authored)
 
-Queued per the [pre-PRD use-case prioritisation](../../plans/delivery-roadmap.md): UC-02 Refactor an artefact with foreseen impact (VS-3.2) · UC-03 Detect and reconcile drift after out-of-band edits (VS-2.4) · UC-04 Link two artefacts with a typed, validated relationship (VS-1.4) · UC-05 Rebuild the store deterministically from snapshot (VS-4.1) · UC-06+ with E-02's PRD (query, context) · brownfield adoption at dogfood start.
+Queued per the [pre-PRD use-case prioritisation](../../plans/delivery-roadmap.md): UC-03 Detect and reconcile drift after out-of-band edits (VS-2.4) · UC-04 Link two artefacts with a typed, validated relationship (VS-1.4) · UC-05 Rebuild the store deterministically from snapshot (VS-4.1) · UC-06+ with E-02's PRD (query, context) · brownfield adoption at dogfood start.
 
 ## Actor / use-case overview (optional)
 
@@ -30,5 +36,7 @@ Queued per the [pre-PRD use-case prioritisation](../../plans/delivery-roadmap.md
 flowchart LR
   ava["P-01 Ava (agent as executor)"]
   uc1(["UC-01 Persist a new artefact with write-time integrity"])
+  uc2(["UC-02 Refactor an artefact with foreseen impact"])
   ava --> uc1
+  ava --> uc2
 ```
