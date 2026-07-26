@@ -69,8 +69,8 @@ Ava decides two persisted artefacts stand in a typed relationship — an epic gr
   - **4b1.** The rejection names expected vs actual; Ava decides whether the verb, the direction, or an endpoint is wrong; correct and resume at 2.
 - **4c.** The verb's cardinality is already saturated (`cardinality-violation`, [§7](../../architecture/interfaces/cli-clew.md#7-error-contract) — e.g. `SPECIFIES` is 1:1 and the epic already has a PRD):
   - **4c1.** The rejection names the existing edge. If the intent is *replacement*, that is a refactor — re-pointing via [UC-02](uc-02-refactor-artefact-with-foreseen-impact.md) with its impact preview — not a second link.
-- **5a.** An identical edge already exists:
-  - **5a1.** Behaviour is an open contract decision — idempotent no-op vs `duplicate-edge` error ([OI-0085](../../../project-control/open-items/open-items.md), to be decided in PRD-0001 and recorded in the contract). Either way the graph ends in the same state; only the exit signal differs.
+- **5a.** An identical edge already exists (same source, verb, target):
+  - **5a1.** The re-assertion is an **idempotent no-op**: no second edge is written, the invocation succeeds, and the no-op is noted on the human-readable channel ([§2 Relationship group](../../architecture/interfaces/cli-clew.md#relationship-group--clew-link)). Bulk wiring scripts and agent retries are therefore safe to re-run — the deciding factor over a `duplicate-edge` error, since the graph ends in the same state either way and the caller is usually a script ([PRD-0001 §8-D2](../prds/prd-0001-trustworthy-artefact-persistence.md#8--open-questions), closing [OI-0085](../../../project-control/open-items/open-items.md)).
 - **5b.** The edge is the agent's own *inference*, not Ava's direction (the agent noticed a plausible connection while reading):
   - **5b1.** It must **not** be linked as a fact — authored means operator-directed. In v1 the agent surfaces the suggestion to Ava; if she confirms, it *becomes* stated and proceeds at 2. The quarantined-proposal lifecycle (`--propose`, review) is the reserved E-05 surface for exactly this ([ADR-0016](../../architecture/decisions/adr-0016-two-speed-integrity-edge-property-bag.md)); until it ships, unconfirmed inferences stay in prose.
 
@@ -78,7 +78,8 @@ Ava decides two persisted artefacts stand in a typed relationship — an epic gr
 
 - **Value-stream stages:** [VS-1.3](../../business/04a-value-streams.md#vs-13--draft-artefact-content) (relationships identified) → [VS-1.4](../../business/04a-value-streams.md#vs-14--persist-with-stable-id) (validated at persist); re-wiring is [VS-3.3](../../business/04a-value-streams.md#vs-33--execute-change-with-integrity) territory.
 - **Epic / PRD:** [E-01](../../plans/delivery-roadmap.md#e-01--trustworthy-artefact-persistence); grounds PRD-0001 stories via `Covers: UC-04`.
-- **Open decisions touching this contract:** [OI-0074](../../../project-control/open-items/open-items.md) (verb-set ratification — the allowed table is pre-ratification) · [OI-0085](../../../project-control/open-items/open-items.md) (duplicate-edge semantics).
+- **Open decisions touching this contract:** [OI-0074](../../../project-control/open-items/open-items.md) (verb-set ratification — the allowed table is still pre-ratification; ratification lands with [E-03](../../plans/delivery-roadmap.md#e-03--core-methodology-schema-coverage) and must confirm or amend the recorded `validated`/`stated` default for a direct link).
+- **Decided (2026-07-26):** [OI-0085](../../../project-control/open-items/open-items.md) — duplicate-edge semantics resolved to an **idempotent no-op** (extension 5a1 above); [PRD-0001 §8-D2](../prds/prd-0001-trustworthy-artefact-persistence.md#8--open-questions).
 - **Frequency:** constant — every persist with references runs steps 3–5 implicitly; standalone wiring sessions (epic↔functionality, PRD↔epic) run it in bulk.
 - **Siblings:** [UC-01](uc-01-persist-artefact-with-write-time-integrity.md) · [UC-02](uc-02-refactor-artefact-with-foreseen-impact.md) · [UC-03](uc-03-detect-and-reconcile-drift.md) · UC-05 rebuild (planned).
 
