@@ -31,21 +31,30 @@ flowchart TD
 
     QAT["quality-attribute · QA-XXNN"]:::ext
     UC["use-case · UC-NN"]:::ext
-    PRD["PRD-NNNN"]:::ext
+    PRD["PRD-NNNN · US-NN"]:::ext
     PLAN["implementation-plan · Plan-NNNN"]:::ext
 
     subgraph QA["Quality Assurance"]
         TS["test-strategy · TS-NN"]:::qa
         TSC["test-scenario (planned)"]:::planned
+        TC["test-case (planned)"]:::planned
         TP["test-plan (planned)"]:::planned
     end
 
     TS -.->|"scopes"| TP
     QAT -->|"defines tests for"| TS
     UC -.->|"realises"| TSC
-    PRD -.->|"is oracle for"| TSC
+    TSC -.->|"expands into"| TC
+    PRD -.->|"is oracle for"| TC
     PLAN -.->|"verified by"| TP
 ```
+
+A user story is verified directly by its own test case (its acceptance criteria *are* the oracle) — it
+does not need a use case in between. A use case's flows still go through a test scenario first, which
+then expands into one or more test cases. Both paths converge on `test_case`; the concrete ID scheme
+(`UC-NN.TC-NN` for the use-case path, `PRD-NNNN.US-NN.TC-NN` for the direct user-story path) is a kit
+`qa-test-scenario` design detail, not a clew structural fact — a story that escalates to a use case
+(`Covers:` set) is tested via the use case, not both.
 
 ## Artefacts in this package
 
@@ -64,7 +73,7 @@ flowchart TD
 
 | Planned skill | Mints | What it will add | Kit issue |
 | :-- | :-- | :-- | :-- |
-| `qa-test-scenario` | — | *Realises* a `UC-NN`: its flows become test scenarios and test cases, with PRD acceptance criteria as the oracle | not yet filed |
+| `qa-test-scenario` | — | Mints `test_scenario` and `test_case`. A `UC-NN`'s flows *realise* scenarios, which expand into cases; a `PRD-NNNN.US-NN` without a `UC-NN` (no escalation) is the *oracle* for its own case directly | not yet filed |
 | `qa-test-plan` · `qa-acceptance-test` · `qa-eval-harness` | — | Executable test plans + harnesses verifying an `implementation_plan`, plus run-result logging | not yet filed |
 
 ## Boundary relationships
@@ -73,7 +82,8 @@ flowchart TD
 | :-- | :-- | :-- | :-- | :-- |
 | defines tests for | quality_attribute → test_strategy | soft | Product Specs | The QAs are what the strategy's mapping table verifies — **active** |
 | realises | use_case → test_scenario | soft | Product Specs | Use-case flows become test scenarios — planned, inert until `qa-test-scenario` ships |
-| is oracle for | prd → test_scenario | soft | Product Specs | PRD acceptance criteria are the pass/fail oracle — planned, inert until `qa-test-scenario` ships |
+| expands into | test_scenario → test_case | soft | — *(intra-package)* | A scenario expands into one or more concrete cases — planned, inert until `qa-test-scenario` ships |
+| is oracle for | user_story → test_case | soft | Product Specs | The story's own acceptance criteria are the pass/fail oracle for its test case — used when the story has not escalated to a use case (no `Covers:` UC); planned, inert until `qa-test-scenario` ships |
 | verified by | implementation_plan → test_plan | soft | Product Specs | Increments are checked against the plan — planned, inert until `qa-test-plan` ships |
 
 > **Kit tracking.** `qa-test-strategy` (`TS-NN`) is active, tracked at [kit #8](https://github.com/VictorHueni/homemade-claude-kit/issues/8); the `qa-test-scenario` / `qa-test-plan` / `qa-acceptance-test` / `qa-eval-harness` family remains reserved (named in the metamodel rule, no issues filed yet).
