@@ -14,8 +14,8 @@ review_interval: 180d
 The **validate / test layer**, sitting between implementation plans and deploy/ops. It produces the
 *tests* that verify the `QA-XXNN` quality requirements the Product Specs package *defines* — the two
 are distinct: `spec-quality-attributes` states the bar; `qa-*` proves the system meets it.
-`test_strategy` (`TS-NN`) is the first artefact to ship; `test_scenario`/`test_plan`/acceptance/eval
-remain **planned** — see below.
+`test_strategy` (`TS-NN`) is the first artefact to ship; `test_scenario`/`test_plan`/`test_case`/
+acceptance-test remain **planned** — see below.
 
 ## Zoom
 
@@ -78,7 +78,8 @@ not both.
 | Planned skill | Mints | What it will add | Kit issue |
 | :-- | :-- | :-- | :-- |
 | `qa-test-scenario` | — | Mints `test_scenario` and `test_case`. A `UC-NN`'s flows *realise* scenarios, which expand into cases; a `PRD-NNNN.US-NN` without a `UC-NN` (no escalation) is the *oracle* for its own case directly | not yet filed |
-| `qa-test-plan` · `qa-acceptance-test` · `qa-eval-harness` | — | Mints `test_plan`, scoped by `test_strategy` and in turn scoping which `test_scenario`s fall within it (ISTQB/ISO 29119-3 strategy→plan→scenario→case chain); execution harnesses verifying an `implementation_plan`, plus run-result logging | not yet filed |
+| `qa-test-plan` | — | Mints `test_plan`, scoped by `test_strategy` and in turn scoping which `test_scenario`s fall within it (ISTQB/ISO 29119-3 strategy→plan→scenario→case chain) | not yet filed |
+| `qa-acceptance-test` | — | Executes the scoped `test_case`s against an `implementation_plan`, logs run results, and files a bug on failure. **Absorbs the formerly separate, now-dropped `qa-eval-harness`** — "eval harness" collided with the unrelated agent-evaluation sense of "eval" used elsewhere (see [agent.md](agent.md)'s Planned additions); this skill was always the one actually described as running tests and logging results, so the name it keeps is the accurate one | not yet filed |
 
 ## Boundary relationships
 
@@ -91,7 +92,7 @@ not both.
 | is oracle for | user_story → test_case | soft | Product Specs | The story's own acceptance criteria are the pass/fail oracle for its test case — used when the story has not escalated to a use case (no `Covers:` UC); planned, inert until `qa-test-scenario` ships |
 | verified by | implementation_plan → test_plan | soft | Product Specs | Increments are checked against the plan — planned, inert until `qa-test-plan` ships |
 
-> **Kit tracking.** `qa-test-strategy` (`TS-NN`) is active, tracked at [kit #8](https://github.com/VictorHueni/homemade-claude-kit/issues/8); the `qa-test-scenario` / `qa-test-plan` / `qa-acceptance-test` / `qa-eval-harness` family remains reserved (named in the metamodel rule, no issues filed yet).
+> **Kit tracking.** `qa-test-strategy` (`TS-NN`) is active, tracked at [kit #8](https://github.com/VictorHueni/homemade-claude-kit/issues/8); the `qa-test-scenario` / `qa-test-plan` / `qa-acceptance-test` family remains reserved (named in the metamodel rule, no issues filed yet).
 
 ---
 
