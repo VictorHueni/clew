@@ -143,6 +143,7 @@ flowchart TD
     IDX -.->|"graduates to"| S0
     S9 -.->|"defines tests for"| TS
     TS -.->|"scopes"| TP
+    TP -.->|"scopes"| TSC
     S9_5 -.->|"realises"| TSC
     TSC -.->|"expands into"| TC
     S10 -.->|"is oracle for"| TC
