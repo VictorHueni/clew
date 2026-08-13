@@ -56,7 +56,7 @@ The whole metamodel as one build-order graph (overview, all packages at once) li
 | **Product Specs** | `spec-` | FBS, quality attributes, use cases, PRDs | [product-specs.md](packages/product-specs.md) |
 | **Planning** | `plan-` | Delivery roadmap (epics), implementation plans | [planning.md](packages/planning.md) |
 | **Architecture** | `arch-` | ADRs, service & CLI contracts (+ C4/arc42/UML diagrams) | [architecture.md](packages/architecture.md) |
-| **Quality Assurance** | `qa-` | Test strategy (active) — scenarios, plans still **reserved** | [quality-assurance.md](packages/quality-assurance.md) |
+| **Quality Assurance** | `qa-` | Test strategy, scenarios, cases (active) — test plans still **reserved** | [quality-assurance.md](packages/quality-assurance.md) |
 | **Operations** | `ops-` | Runbooks, bug RCAs — post-ship; mints no IDs | [operations.md](packages/operations.md) |
 
 > **Packages map 1:1 to kit prefixes** (`discovery-`, `business-`, `domain-`, `spec-`, `plan-`,

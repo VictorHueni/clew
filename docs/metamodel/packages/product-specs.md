@@ -90,6 +90,8 @@ flowchart TD
 | `MAPS_TO` | cli_command → fbs_functionality | N:M | hard | Architecture | CLI commands map to functionalities |
 | realises | use_case → test_scenario | N:M | soft | Quality Assurance | A use case's flows become test scenarios |
 | defines tests for | quality_attribute → test_strategy | N:M | soft | Quality Assurance | QAs are what the tests verify |
+| is oracle for | user_story → test_case | N:M | soft | Quality Assurance | A story's own acceptance criteria are the pass/fail oracle for its test case when it hasn't escalated to a use case |
+| defines tests for | quality_attribute → test_case | N:M | soft | Quality Assurance | A QA row anchors its own tabular test case directly, no scenario tier |
 | `covers` ⚠ | user_story → use_case | N:M | soft | — *(intra-package)* | ⚠ proposed, not yet in the [catalogue](../relationships.md) — story optionally covers a use case; a declared absence when `use_case` is unenabled ([ADR-0015](../../architecture/decisions/adr-0015-opt-in-layer-packages.md)); joins OI-0074's ratification set ([ADR-0017](../../architecture/decisions/adr-0017-multi-artefact-file-contract.md) D1) |
 
 ---
