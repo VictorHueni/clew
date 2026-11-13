@@ -54,7 +54,7 @@ The whole metamodel as one build-order graph (overview, all packages at once) li
 | **Business Architecture** | `business-` | Vision, personas, capability map, value streams, objectives, processes, models, competitive landscape | [business-architecture.md](packages/business-architecture.md) |
 | **Domain** | `domain-` | Bounded contexts, glossary, domain model | [domain.md](packages/domain.md) |
 | **Product Specs** | `spec-` | FBS, quality attributes, use cases, PRDs | [product-specs.md](packages/product-specs.md) |
-| **Planning** | `plan-` | Delivery roadmap (epics), implementation plans | [planning.md](packages/planning.md) |
+| **Planning** | `plan-` | Delivery roadmap (epics), slice design sheets, implementation plans | [planning.md](packages/planning.md) |
 | **Architecture** | `arch-` | ADRs, service & CLI contracts (+ C4/arc42/UML diagrams) | [architecture.md](packages/architecture.md) |
 | **Quality Assurance** | `qa-` | Test strategy (active) — scenarios, plans still **reserved** | [quality-assurance.md](packages/quality-assurance.md) |
 | **Operations** | `ops-` | Runbooks, bug RCAs — post-ship; mints no IDs | [operations.md](packages/operations.md) |
