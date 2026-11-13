@@ -30,7 +30,7 @@ clew manages a complete **strategic-architecture documentation system** across f
 
 ### Artefact layers and build order
 
-19 artefacts grouped into packages by kit prefix — cross-cutting **Discovery**, **Business Architecture** (Step 0 vision through Step 6, plus competitive landscape), **Domain**, **Product Specs** (Steps 7 · 9 · 9.5 · 10), **Planning** (Steps 8 · 11 — delivery roadmap + implementation plans, split out of `spec-` per [ADR-0009](docs/architecture/decisions/adr-0009-plan-package-split-from-product-specs.md)), and **Architecture** (ADR + service/CLI contracts). This is the build-order view; **Operations** stays out of it entirely (post-ship, mints no IDs, no numbered step) — full reference in [`docs/metamodel/`](docs/metamodel/). **Quality Assurance** is shown too, off to the side: it isn't a numbered build-order step either (it's the post-ship validate/test layer), but its `test_strategy` artefact is active, so it's drawn here for completeness rather than staying doc-only. Solid arrows = hard dependency; dashed arrows = supporting enrichment. Each edge is named with its relationship: `UPPERCASE` is the canonical typed relationship clew stores in `artefact_references.relationship` and validates against the `ALLOWED_RELATIONSHIPS` registry (see the [domain model §Relationship registry](docs/domain/07b-models/artefact-store.md#relationship-registry)); lowercase names are softer/advisory links the registry does not type, or read in the build-order (prerequisite→dependent) direction.
+20 artefacts grouped into packages by kit prefix — cross-cutting **Discovery**, **Business Architecture** (Step 0 vision through Step 6, plus competitive landscape), **Domain**, **Product Specs** (Steps 7 · 9 · 9.5 · 10), **Planning** (Steps 8 · 10.5 · 11 — delivery roadmap, slice design sheets + implementation plans, split out of `spec-` per [ADR-0009](docs/architecture/decisions/adr-0009-plan-package-split-from-product-specs.md)), and **Architecture** (ADR + service/CLI contracts). This is the build-order view; **Operations** stays out of it entirely (post-ship, mints no IDs, no numbered step) — full reference in [`docs/metamodel/`](docs/metamodel/). **Quality Assurance** is shown too, off to the side: it isn't a numbered build-order step either (it's the post-ship validate/test layer), but its `test_strategy` artefact is active, so it's drawn here for completeness rather than staying doc-only. Solid arrows = hard dependency; dashed arrows = supporting enrichment. Each edge is named with its relationship: `UPPERCASE` is the canonical typed relationship clew stores in `artefact_references.relationship` and validates against the `ALLOWED_RELATIONSHIPS` registry (see the [domain model §Relationship registry](docs/domain/07b-models/artefact-store.md#relationship-registry)); lowercase names are softer/advisory links the registry does not type, or read in the build-order (prerequisite→dependent) direction.
 
 ```mermaid
 flowchart TD
@@ -74,8 +74,9 @@ flowchart TD
         S10["10 · spec-prd · PRD-NNNN"]:::specs
     end
 
-    subgraph PLAN["Planning: Steps 8 · 11"]
+    subgraph PLAN["Planning: Steps 8 · 10.5 · 11"]
         S8["8 · plan-delivery-roadmap · E-NN"]:::delivery
+        S10_5["10.5 · plan-slice-design · slice folder"]:::delivery
         S11["11 · plan-implementation · Plan-NNNN"]:::delivery
     end
 
@@ -129,6 +130,8 @@ flowchart TD
     S7 -.->|"realised by"| S9_5
     S9_5 -->|"GROUNDS"| S10
     S10 -->|"DETAILS"| S11
+    S10 -.->|"designed in"| S10_5
+    S10_5 -.->|"cited by"| S11
     ADR -.->|"GOVERNS"| S7c
     ADR -.->|"DECIDES"| S8_5
     ADR -.->|"DECIDES"| S9

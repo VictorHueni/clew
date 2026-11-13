@@ -34,6 +34,7 @@ flowchart TD
     DM["domain-model · AGG/EVT"]:::ext
     EPIC["epic · E-NN"]:::ext
     IPLAN["implementation-plan · Plan-NNNN"]:::ext
+    SDS["slice-design-sheet"]:::ext
 
     subgraph PS["Product Specs"]
         FBS["fbs · C-N.M.FXX"]:::spec
@@ -54,6 +55,7 @@ flowchart TD
     EPIC -->|"GROUPS"| FBS
     EPIC -->|"SPECIFIES"| PRD
     PRD -->|"DETAILS"| IPLAN
+    PRD -.->|"designed in"| SDS
 ```
 
 > User stories (`PRD-NNNN.US-NN`) are drawn inside the prd node — like `KR-NN.M` under objective on the
@@ -84,6 +86,7 @@ flowchart TD
 | `GROUPS` | epic → fbs_functionality | 1:N | hard | Planning | Epic groups FBS functionalities |
 | `SPECIFIES` | epic → prd | 1:1 | hard | Planning | One PRD per epic |
 | `DETAILS` | prd → implementation_plan | 1:1 | hard | Planning | One implementation plan per PRD |
+| designed in | prd → slice_design | 1:N | soft | Planning | A slice design sheet follows the specification of one slice of a PRD |
 | `BECOMES` | fbs_functionality → aggregate | N:M | hard | Domain | Functionalities become domain aggregates |
 | `REFERENCES_DM` | prd → aggregate | N:M | soft | Domain | PRD references AGG/EVT IDs |
 | `DECIDES` | adr → quality_attribute / prd | N:M | soft | Architecture | ADR decisions inform QAs and PRDs |
